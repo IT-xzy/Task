@@ -1,0 +1,287 @@
+//公共样式区
+
+//蓝色
+$blue1: #29bde0;
+//淡蓝色
+$blue2: #b9e9f5;
+//淡淡蓝色
+$blue3: #69d1e9;
+//黄色
+$yellow1: #f5c97b;
+//按钮黄色
+$yellow2: #fbb435;
+//绿色
+$green1: #83b09a;
+//导航绿色
+$green2: #29b078;
+//底部绿色
+$green3: #26a26f;
+//按钮红色
+$red: #f66f6f;
+//白色
+$white: #fff;
+//浅灰色
+$gray1: #f0f0f0;
+//中灰色
+$gray2: #9a9a9a;
+//深灰色
+$gray3: #8c8c8c;
+//淡灰色
+$gray4: #ccc;
+//隐藏菜单按钮灰色
+$gray5: #888;
+//灰色
+$gray6: #a1a1a1;
+
+//弹性布局
+@mixin flex-center{
+  display: flex;
+  align-items: center;
+}
+@mixin df {display: flex}
+@mixin dn {display: none}
+@mixin jc-c {justify-content: center;}
+@mixin jc-sa {justify-content: space-around;}
+@mixin jc-sb {justify-content: space-between;}
+@mixin jc-fe {justify-content: flex-end;}
+@mixin fw-w {flex-wrap: wrap;}
+@mixin jc-fs {justify-content: flex-start;}
+/*去除默认样式*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*媒体查询宽度 <768px*/
+@mixin xs {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+/*媒体查询宽度 768px-992px*/
+@mixin sm {
+  @media only screen and (min-width: 769px)and (max-width: 992px) {
+    @content;
+  }
+}
+/*媒体查询宽度 992px-1200px*/
+@mixin md {
+  @media only screen and (min-width: 993px)and (max-width: 1200px) {
+    @content;
+  }
+}
+/*媒体查询宽度 >1200px*/
+@mixin lg {
+  @media only screen and (min-width: 1201px) {
+    @content;
+  }
+}
+/*媒体查询宽度 >768px*/
+@mixin sm-lg {
+  @media only screen and (min-width: 769px) {
+    @content;
+  }
+}
+/*媒体查询宽度 <992px*/
+@mixin xs-md {
+  @media only screen and (max-width: 992px) {
+    @content;
+  }
+}
+/*媒体查询宽度 >992px*/
+@mixin md-lg {
+  @media only screen and (min-width: 993px) {
+    @content;
+  }
+}
+
+//顶部
+@mixin header{
+  header {
+    height: 2rem;
+    color: $green2;
+    padding: {
+      left: .5rem;
+      right: .5rem;
+    }
+    @include flex-center;
+    @include jc-sb;
+    div {
+      img {
+        height: 1.5rem;
+      }
+    }
+    @include sm-lg {
+      padding: 0 10vw;
+    }
+  }
+}
+
+//导航栏
+@mixin nav {
+  nav {
+    width: 100%;
+    background-color: $green2;
+    @include flex-center;
+    @include jc-fe;
+    /*宽度小于768px*/
+    @include xs {
+      @include flex-center;
+      @include fw-w;
+      .nav-btn {
+        margin: .38rem;
+        &:focus ~ .nav-menu {
+          @include df;
+        }
+      }
+      .nav-menu {
+        height: 16.1rem;
+        @include dn;
+        @include fw-w;
+        width: 100%;
+        a {
+          width: 100%;
+        }
+        &:hover {
+          @include df;
+        }
+      }
+    }
+    /*宽度大于768px*/
+    @include sm-lg {
+      @include flex-center;
+      @include jc-fe;
+      .nav-btn {
+        @include dn;
+      }
+      .nav-menu {
+        padding: 0 9vw;
+        height: 4rem;
+        width: 100%;
+        @include df;
+        @include jc-fe;
+        a {
+          width: 4rem;
+        }
+      }
+    }
+    /*按钮属性*/
+    .nav-btn {
+      padding: 5px 6px;
+      background: {
+        color: transparent;
+      }
+      border: 1px solid $white;
+      border-radius: 5px;
+      outline: none;
+      span {
+        display: block;
+        background-color: $gray5;
+        width: 22px;
+        height: 4px;
+        margin-top: 4px;
+      }
+    }
+    a {
+      line-height: 4rem;
+      color: $white;
+      text-align: center;
+      text-decoration: none;
+      &:hover {
+        border: {
+          bottom: 2px solid $white;
+        }
+      }
+    }
+  }
+}
+
+@mixin h4 {
+  h4 {
+    width: 100%;
+    text-align: center;
+    font-weight: normal;
+    font-size: 18px;
+    margin: 1rem 0;
+  }
+}
+
+/*底部*/
+@mixin bottom {
+  footer {
+    width: 100%;
+    height: auto;
+    background-color: $green3;
+    color: $white;
+    div {
+      .bottom-all {
+        margin-left: .5rem;
+        div {
+          margin: {
+            top: 1rem;
+            bottom: 1rem;
+          }
+          a {
+            cursor: pointer;
+            padding-right: 3px;
+            text-decoration: none;
+            color: $white;
+            &:hover {
+              border-bottom: 1px solid #fff;
+            }
+          }
+        }
+      }
+      .bottom-left {
+        margin-top: 1rem;
+        .bottom-border {
+          border: {
+            right: 1px solid $white;
+          }
+        }
+      }
+    }
+    .bottom-end {
+      text-align: center;
+      border-top: .8px solid $white;
+    }
+    @include sm-lg {
+      .bot {
+        @include df;
+        @include jc-sb;
+        padding: {
+          left: 10vw;
+          right: 10vw;
+        }
+        @include df;
+        .bottom-all {
+          display: flex;
+          flex-wrap: wrap;
+          p {
+            width: 100%;
+          }
+          div {
+            width: 100%;
+          }
+        }
+        .bottom-left {
+          margin: {
+            top: 0;
+            left: 0;
+          }
+          a {
+            height: 1rem;
+            line-height: 1rem;
+          }
+        }
+        .bottom-right {
+          @include df;
+          @include jc-fe;
+          p {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}

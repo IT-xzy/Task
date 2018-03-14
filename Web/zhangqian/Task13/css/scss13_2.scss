@@ -1,0 +1,147 @@
+@import "common";
+
+body {
+  background-color: $blue1;
+}
+/*导航栏*/
+header {
+  font-size: 1.5rem;
+  color: $white;
+  @include header;
+  img {
+    max-height: 1.5rem;
+    margin: {
+      left: .5rem;
+      right: .5rem;
+    }
+  }
+}
+
+main {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 3rem;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  .vote {
+    width: 100%;
+    height: 2rem;
+    background-color: $blue2;
+    @include flex-center;
+    @include jc-sb;
+    p {
+      margin-left: .5rem;
+    }
+    .player {
+      height: 1.5rem;
+      width: 1.5rem;
+      margin-right: .5rem;
+      border: none;
+      outline: none;
+      background: {
+        image: url(../img/p1.3.png);
+        color: transparent;
+        size: 1.5rem 1.5rem;
+        repeat: no-repeat;
+      }
+    }
+  }
+  .explain {
+    color: $white;
+    padding: {
+      top: .5rem;
+      bottom: .5rem;
+      left: 1.2rem;
+    }
+    span {
+      border: {
+        top: .7em;
+        right: .4em;
+        left: .4em;
+        color: $blue2 transparent transparent transparent;
+        style: solid dashed dashed;
+      }
+      top: 2rem;
+      position: absolute;
+    }
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    @include jc-sa;
+    .row {
+      display: flex;
+      @include jc-c;
+      flex-wrap: wrap;
+      width: 30vw;
+      height: 30vw;
+      .content {
+        @include flex-center;
+        @include jc-c;
+        background-color: $white;
+        width: 23vw;
+        height: 23vw;
+        .status {
+          height: 16vw;
+          width: 22vw;
+          background-color: $yellow1;
+          font-size: 6vw;
+          text-align: center;
+          line-height: 16vw;
+        }
+        .num {
+          height: 6vw;
+          width: 22vw;
+          font-size: 4vw;
+          background-color: $green;
+          text-align: center;
+          line-height: 6vw;
+        }
+      }
+      .signs {
+        width: 23vw;
+        display: flex;
+        @include jc-sb;
+        display: none;
+        img {
+          background-color: $white;
+          height: 5vw;
+          width: 5vw;
+          &:hover{
+            cursor: pointer;
+          }
+        }
+      }
+      &:hover  .signs {
+        display: flex;
+      }
+    }
+  }
+}
+
+footer {
+  height: 3rem;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @include flex-center;
+  @include jc-c;
+  a {
+    width: 80%;
+    height: 2rem;
+    background-color: $yellow2;
+    text-decoration: none;
+    border: none;
+    color: $white;
+    outline: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+  }
+}

@@ -1,0 +1,222 @@
+
+.header {
+  height: 3rem;
+  background-color: #5fc0cd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  display: flex;
+  .header-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    .btn {
+      border: none;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 1.4rem;
+      outline: none;
+    }
+    .btn-left {
+      color: #fff;
+      margin-right: -.1rem;
+      background-color: #53a8b4;
+    }
+    .btn-right {
+      color: #5fc0cd;
+      margin-left: -.1rem;
+      background-color: #fff;
+    }
+    img {
+      transform: scale(0.5);
+    }
+  }
+  .header-left {
+    justify-content: flex-end;
+  }
+  .header-right {
+    justify-content: space-between;
+  }
+}
+
+main {
+  position: absolute;
+  top: 3rem;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  .group {
+    display: flex;
+    .group-dropdown {
+      flex: 1;
+      .group-btn {
+        width: 100%;
+        height: 2rem;
+        margin-top: .5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: none;
+        outline: none;
+        background-color: #fff;
+        cursor: pointer;
+        color: #ccc;
+        .arrow {
+          width: 0;
+          height: 0;
+          border-top: 4px dashed;
+          border-left: 4px solid transparent;
+          border-right: 4px solid transparent;
+        }
+      }
+      .dropdown {
+        position: relative;
+        display: none;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        background-color: #fff;
+        z-index: 11;
+        ul {
+          margin: 0;
+          text-align: center;
+          list-style: none;
+          padding-left: 0;
+          li {
+            cursor: pointer;
+            &:hover {
+              background-color: #e6e6e6;
+            }
+          }
+        }
+      }
+      .group-left {
+        border-right: 1px solid #eee;
+        &:hover, &:focus {
+          background-color: #e6e6e6;
+        }
+        &:focus~.dropdown-left {
+          display: block;
+        }
+      }
+      .group-middle {
+        border-right: 1px solid #eee;
+        &:hover, &:focus {
+          background-color: #e6e6e6;
+        }
+        &:focus~.dropdown-middle {
+          display: block;
+        }
+      }
+      .group-right {
+        &:hover, &:focus {
+          background-color: #e6e6e6;
+        }
+        &:focus~.dropdown-right {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .panel {
+    width: 100%;
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    z-index: 1;
+    .panel-content {
+      border-top: 1px solid #eee;
+      .p-content {
+        display: flex;
+        align-items: center;
+        img {
+          max-height: 1rem;
+        }
+      }
+      .p-title {
+        p {
+          color: #ccc;
+          margin: 0;
+          padding-left: .5rem;
+        }
+        img {
+          padding-left: .5rem;
+        }
+      }
+      .p-date {
+        justify-content: space-between;
+        padding-left: 2rem;
+        padding-right: .5rem;
+        p {
+          margin: .5rem 0;
+        }
+        .p-red {
+          display: flex;
+          align-items: center;
+          color: #ff0000;
+          img {
+            padding-left: .5rem;
+            max-height: 1rem;
+          }
+        }
+      }
+      .p-address {
+        p {
+          color: #ccc;
+          margin: 0;
+          padding-left: .5rem;
+        }
+        img {
+          padding-left: .5rem;
+        }
+      }
+
+    }
+  }
+
+}
+
+footer {
+  height: 3rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 9;
+  .footer-btn {
+    cursor: pointer;
+    text-align: center;
+    p {
+      margin: 0;
+    }
+    .footer-img-middle {
+      max-height: 2.5rem;
+    }
+  }
+  .footer-left {
+    img {
+      max-height: 1.5rem;
+    }
+    p {
+      color: #53a8b4;
+    }
+  }
+  .footer-right {
+    text-decoration: none;
+    outline: none;
+    img {
+      max-height: 1.5rem;
+    }
+    p {
+      color: #8c8c8c;
+    }
+  }
+}

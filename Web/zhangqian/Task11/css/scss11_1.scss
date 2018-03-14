@@ -1,0 +1,106 @@
+$backgroundColor: #5fc0cd;
+$fontColor: #fff;
+
+@mixin case {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+}
+
+*{
+  margin: 0;
+  a{
+    text-decoration: none;
+  }
+}
+body{
+  background-color: #eff0f4;
+}
+/*
+导航栏
+*/
+header{
+  display: flex;
+  justify-content: space-between;
+  background-color: $backgroundColor;
+  color: $fontColor;
+  align-items: center;
+  line-height: 60px;
+  font-size: 1.5rem;
+  a{
+    color: $fontColor;
+    margin: 0 30px;
+    cursor: pointer;
+  }
+}
+/*
+输入框
+*/
+.mobile {
+  @include case;
+  margin-top: 15px;
+  background-color: #fff;
+  .item {
+    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    img{
+      max-width: 20%;
+      height:  auto;
+      margin: 0 5%;
+      display: block;
+    }
+    .input {
+      width:65%;
+      padding-left: 5%;
+      border-left: 1px solid #eaedee;
+      input {
+        font-size: 1.3rem;
+        width: 100%;
+        height: 3rem;
+        border: none;
+        outline: none;
+        &::-webkit-input-placeholder {
+          color: #eaedee;
+          font-size: 1.3rem;
+        }
+      }
+    }
+  }
+}
+//密码输入框
+.code {
+  @extend .mobile
+}
+/*
+登陆按钮
+*/
+.login {
+  @include case;
+  width: 100%;
+  background-color: $backgroundColor;
+  margin-top: 20px;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  p{
+    color: $fontColor;
+    font-size: 1.5rem;
+  }
+}
+/*
+忘记密码
+*/
+.forget {
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+
+  a {
+    margin-right: 10px;
+    color: $backgroundColor;
+    text-decoration: none;
+  }
+}

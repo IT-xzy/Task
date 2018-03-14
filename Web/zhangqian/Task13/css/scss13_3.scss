@@ -1,0 +1,134 @@
+@import "common";
+
+/*导航栏*/
+header {
+  font-size: 1.5rem;
+  color: $white;
+  z-index: 88;
+  @include header;
+  img {
+    cursor: pointer;
+    max-height: 1rem;
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+}
+
+main {
+  height: auto;
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-top: 1px solid $white;
+  padding-bottom: 3rem;
+  .main-blue {
+    padding: {
+      left: 12%;
+      right: 12%;
+      bottom: .5rem;
+    }
+    background-color: $blue1;
+    .main-img {
+      height: 8rem;
+      text-align: center;
+      background: {
+        image: url("../img/p2.3.png");
+        repeat: no-repeat;
+        size: 12rem;
+        position: center;
+      }
+      img {
+        height: 5rem;
+        transform: scale(0.8);
+      }
+      p {
+        color: $white;
+        font-size: 1.5rem;
+      }
+    }
+    .main-content {
+      margin-bottom: .5rem;
+      color: $yellow2;
+    }
+    ul {
+      li {
+        color: $white;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .li-num {
+      p {
+        width: 33%;
+      }
+    }
+    }
+  }
+  .main-detail {
+    border-bottom: 1px solid $gray4;
+    background-color: $white;
+    padding: {
+      left: 12%;
+      right: 12%;
+      bottom: .5rem;
+    }
+    .detail-time {
+      margin-bottom: .5rem;
+      @include flex-center;
+      @include jc-sb;
+      .detail-time-p1 {
+        font-size: 20px;
+      }
+      .detail-time-p2 {
+        color: $gray4;
+        font-size: 14px;
+      }
+    }
+    .detail-log {
+      color: $gray3;
+      font-size: 14px;
+    }
+  }
+}
+footer {
+  .footer-btn {
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    @include flex-center;
+    @include jc-sa;
+    a {
+      .footer-btn-all{
+        height: 2rem;
+        width: 40vw;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.3rem;
+        color: $white;
+        outline: none;
+        cursor: pointer;
+      }
+      .footer-btn-left {
+        background-color: $red;
+      }
+      .footer-btn-right {
+        background-color: $yellow2;
+      }
+    }
+  }
+  .footer {
+    height: 3rem;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    opacity: 0.5;
+    background-color: rgba(153,223,240,1);
+    z-index: 9;
+  }
+}
