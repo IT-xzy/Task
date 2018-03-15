@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dong.dao.StudentDao">
+    <!--设置model类和数据库中表的字段一一对应，注意数据库字段和model类中的字段名称一致！-->
+    <resultMap id="BaseResultMap" type="com.dong.model.Student">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="student_id" property="studentId" jdbcType="INTEGER" />
+        <result column="student_name" property="studentName" jdbcType="VARCHAR" />
+        <result column="student_password" property="studentPassword" jdbcType="VARCHAR" />
+        <result column="student_email" property="studentEmail" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!--&lt;!&ndash; 按照id查找 &ndash;&gt;-->
+    <!--<select id="selectStudentById" parameterType="int" resultMap="BaseResultMap">-->
+        <!--SELECT * FROM student WHERE id = #{id}-->
+    <!--</select>-->
+
+
+        <!--&lt;!&ndash;按照学号查找 &ndash;&gt;-->
+    <!--<select id="selectStudentByStudentId" parameterType="int" resultMap="BaseResultMap">-->
+        <!--SELECT * FROM student WHERE student_id = #{studentId}-->
+    <!--</select>-->
+
+
+
+    <!--&lt;!&ndash;按照姓名查找 &ndash;&gt;-->
+    <!--<select id="selectStudentByStudentName" parameterType="String" resultMap="BaseResultMap">-->
+        <!--SELECT * FROM student WHERE student_name = #{studentName}-->
+    <!--</select>-->
+
+
+
+
+
+    <!--&lt;!&ndash;向表中增加數據&ndash;&gt;-->
+    <!--<select id="insertStudent" parameterType="com.dong.model.Student">-->
+    <!--INSERT into student(student_id,student_name,student_password,student_email) VALUES(#{studentId},#{studentName},#{studentPassword},#{studentEmail})-->
+    <!--</select>-->
+
+
+
+    <!--&lt;!&ndash;删除表中数据&ndash;&gt;-->
+    <!--<delete id="deleteStudentById" parameterType="int">-->
+        <!--DELETE FROM student WHERE id = #{id}-->
+    <!--</delete>-->
+
+
+
+
+    <!--&lt;!&ndash;更新表中数据（改）&ndash;&gt;-->
+    <!--<update id="updateStudent" parameterType="com.dong.model.Student">-->
+        <!--UPDATE student SET student_id=#{studentId},student_name=#{studentName},student_password=#{studentPassword},student_email=#{studentEmail} WHERE id=#{id}-->
+    <!--</update>-->
+
+
+
+
+
+
+
+
+</mapper>
