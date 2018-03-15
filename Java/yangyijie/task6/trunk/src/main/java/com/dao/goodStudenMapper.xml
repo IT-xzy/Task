@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.GoodStudentDao">
+    <!--使用了自动转换驼峰之后单表查询的map就可以省略了-->
+    <!--<resultMap id="GoodStudentMap" type="com.bean.GoodStudent">-->
+        <!--<result column="create_at" property="createAt" />-->
+        <!--<result column="update_at" property="updateAt" />-->
+    <!--</resultMap>-->
+    <!--查询所有记录-->
+<select id="selectAll" resultType="GoodStudent">
+        SELECT * FROM good_student
+</select>
+    <!--查询在学学生总数-->
+    <select id="count" resultType="int">
+        SELECT count(*) FROM student
+
+    </select>
+    <!--查询优秀学生(就业学生)总数-->
+    <select id="countGood" resultType="int">
+        SELECT COUNT(*) FROM good_student
+    </select>
+</mapper>
