@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="db.properties"/>
+<typeAliases>
+   <!-- 为单个字符取别名
+    <typeAlias alias="Student" type="com.mybatis.bean.Student"/>
+    为整个包取别名,将com.mybatis.bean去掉,整个包下的类都可以直接使用类名-->
+    <package name="com.mybatis.bean"/>
+</typeAliases>
+
+<environments default="development">
+    <environment id="development">
+        <transactionManager type="JDBC"/>
+        <dataSource type="POOLED">
+            <property name="driver" value="${driver}"/>
+            <property name="url" value="${url}"/>
+            <property name="username" value="${user}"/>
+            <property name="password" value="${password}"/>
+        </dataSource>
+    </environment>
+</environments>
+
+<mappers>
+    <mapper resource="com/mybatis/DAO/daomapper.xml"/>
+    <mapper resource="com/mybatis/mapper/mapper.xml"/>
+</mappers>
+</configuration>

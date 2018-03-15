@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="true">
+<!--单例实现-->
+<bean id="imp1" class="com.myspring.ioc.scope.BeanImp" scope="singleton" init-method="init" destroy-method="close" />
+<!--多例实现-->
+<bean id="imp1more" class="com.myspring.ioc.scope.BeanImp" scope="prototype" init-method="init" destroy-method="close" />
+</beans>

@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+    <!--<context:component-scan base-package="com.myspring.di.context"/>-->
+    <context:property-placeholder location="druid.properties" system-properties-mode="NEVER"/>
+    <bean id="druid" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/task1?useSSL=false"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="${initalSize}"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定mybatis的全局配置文件的路径 -->
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <!-- 数据源 -->
+        <property name="dataSource" ref="druid"/>
+    </bean>
+    <!-- 配置StudentDao -->
+      <bean id="studentDao" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+        <!-- 依赖注入SqlSessionFactory -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+          <property name="mapperInterface" value="com.myspring.di.context.StudentMapper"/>
+    </bean>
+
+</beans>
