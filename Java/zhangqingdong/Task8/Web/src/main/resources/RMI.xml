@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--注解配置-->
+    <context:annotation-config/>
+
+    <!--扫描配置-->
+    <context:component-scan base-package="cn.summerwaves.*">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--远程服务设置-->
+    <bean id="userService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://127.0.0.1:2223/userService" />
+        <property name="serviceInterface"
+                  value="cn.summerwaves.service.IUserService" />
+    </bean>
+
+    <!--远程服务设置-->
+    <bean id="userService2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://127.0.0.1:2222/userService" />
+        <property name="serviceInterface"
+                  value="cn.summerwaves.service.IUserService" />
+    </bean>
+
+</beans>

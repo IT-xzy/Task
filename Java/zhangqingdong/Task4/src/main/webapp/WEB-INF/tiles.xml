@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="base" template="/WEB-INF/jsp/layout/layout.jsp">
+        <put-attribute name="footer" value="/WEB-INF/jsp/layout/foot.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/layout/head.jsp"/>
+        <put-attribute name="menuLeft" value="/WEB-INF/jsp/layout/menuLeft.jsp"/>
+        <put-attribute name="menuRight" value="/WEB-INF/jsp/layout/menuRight.jsp"/>
+        <put-attribute name="body" value=""/>
+    </definition>
+    <definition name="myView" extends="base">
+    <put-attribute name="body" value="/WEB-INF/jsp/layout/index.jsp"/>
+    </definition>
+    <definition name="base2" template="/WEB-INF/jsp/component/layout.jsp">
+        <put-attribute name="header" value=""/>
+        <put-attribute name="footer" value=""/>
+        <put-attribute name="body" value=""/>
+    </definition>
+    <definition name="t10" extends="base2">
+        <put-attribute name="header" value="/WEB-INF/jsp/component/head.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/t10.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/component/foot.jsp"/>
+    </definition>
+    <definition name="t11" extends="base2">
+        <put-attribute name="body" value="/WEB-INF/jsp/t11.jsp"/>
+    </definition>
+</tiles-definitions>

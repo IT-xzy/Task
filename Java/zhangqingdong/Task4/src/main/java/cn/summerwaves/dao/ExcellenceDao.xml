@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.summerwaves.dao.ExcellenceDao">
+    <select id="selectExcellenceByName"  resultMap="excellenceMap">
+        SELECT * FROM excellence ORDER BY RAND() LIMIT 4;
+    </select>
+
+
+    <resultMap id="excellenceMap" type="cn.summerwaves.model.Excellence">
+        <result property="name" column="name"/>
+        <result property="position" column="position"/>
+        <result property="introduction" column="introduction"/>
+        <result property="photograph" column="photograph"/>
+    </resultMap>
+</mapper>

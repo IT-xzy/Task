@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.summerwaves.dao.StudentDao">
+    <insert id="insertStudent" parameterType="cn.summerwaves.model.Student" useGeneratedKeys="true" keyProperty="id" >
+        insert into student(name,QQ,type,appointment,school,number,link,oath,supportSenior,referrer,source)
+          values(#{name},#{QQ},#{type},#{appointment},#{school},#{number},#{link},#{oath},#{supportSenior},#{referrer},#{source})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM student WHERE ID = #{id}
+    </delete>
+
+
+
+    <update id="updateStudent" parameterType="cn.summerwaves.model.Student" >
+        UPDATE student
+        <set>
+            <if test="QQ != null">QQ=#{QQ},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="appointment != null">appointment=#{appointment},</if>
+            <if test="school != null">school=#{school},</if>
+            <if test="number != null">number=#{number},</if>
+            <if test="link != null">link=#{link},</if>
+            <if test="oath != null">oath=#{oath},</if>
+            <if test="supportSenior != null">supportSenior=#{supportSenior},</if>
+            <if test="referrer != null">referrer=#{referrer},</if>
+            <if test="source != null">source=#{source}</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+
+</mapper>
