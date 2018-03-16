@@ -1,0 +1,249 @@
+html {
+	font-size: 625%;
+
+	@media only screen and (min-width: 768px) and (max-width: 991px) {
+		font-size: 478%;
+	}
+	@media only screen and (max-width: 767px) {
+		font-size: 312%;
+	}
+}
+body {
+	padding: 0;
+	margin: 0;
+}
+
+
+
+@mixin Flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin Button {
+	width: 3rem;
+	box-sizing: border-box;
+	border: 2px solid #5FC0CD;
+	border-radius: 10px;
+}
+@mixin A-link {
+	width: 100%;
+	padding: .28rem 0;
+	font-size: .34rem;
+	text-decoration: none;
+}
+@mixin right-font {
+	font-size: .32rem;
+	color: #333;
+}
+@mixin Flex-center {
+	display: flex;
+	align-items: center;
+}
+@mixin line-height {
+	height: .32rem;
+	line-height: .32rem;
+}
+@mixin position {
+	width: 100%;
+	position: fixed;
+	z-index: 999;
+}
+@mixin border-right ($width, $style, $color) {
+	box-sizing: border-box;
+	border-right-width: $width;
+	border-right-style: $style;
+	border-right-color: $color;
+}
+@mixin border-bottom ($width, $style, $color) {
+	box-sizing: border-box;
+	border-bottom-width: $width;
+	border-bottom-style: $style;
+	border-bottom-color: $color;
+}
+@mixin border-left ($width, $style, $color) {
+	box-sizing: border-box;
+	border-left-width: $width;
+	border-left-style: $style;
+	border-left-color: $color;
+}
+
+$white: #FFF;
+$gap: .3rem;
+
+
+
+
+
+.header-box {
+	@include position;
+	top: 0;
+}
+.header {
+	width: 100%;
+	font-size: .36rem;
+	color: $white;
+	background-color:#5FC0CD;
+	padding: .26rem 0;
+	text-align: center;
+}
+.back {
+	width: 20%;
+	height: .35rem;
+	background-image: url(images/01.png);
+	background-repeat: no-repeat;
+	background-size: .2rem .35rem;
+	background-position: $gap center;
+	margin-top: -.64rem;
+}
+
+
+
+.banner {
+	width: 100%;
+	@include Flex-center;
+	justify-content: flex-start;
+	height: 3.26rem;
+	background-image: url(images/05.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin-top: .98rem;
+}
+.banner-icon {
+	width: 1.69rem;
+	height: 1.68rem;
+	background-image: url(images/02.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin-left: $gap;
+	margin-right: $gap;
+}
+.banner-about {
+	width: 1.9rem;
+	height: .8rem;
+}
+.banner-name {
+	width: 1.9rem;
+	height: .4rem;
+	font-size: .36rem;
+	color: $white;
+	line-height: .4rem;
+}
+#year {
+	font-size: .28rem;
+	color: $white;
+}
+.banner-address {
+	width: 1.9rem;
+	height: .4rem;
+	font-size: .24rem;
+	color: $white;
+	line-height: .4rem;
+	text-align: right;
+	background-image: url(images/03.png);
+	background-repeat: no-repeat;
+	background-size: .18rem .23rem;
+	background-position: .04rem center;
+}
+
+.skill-box {
+	width: 100%;
+	@include Flex-center;
+	@include border-bottom (1px, solid, #EEF0F1);
+	justify-content: left;
+	padding: .2rem 0;
+}
+.skill {
+	width: 1.86rem;
+	@include line-height;
+	@include right-font;
+	@include border-left (2px, solid, #68C3D0);
+	text-align: center;
+	margin-left: $gap;
+}
+.star-box {
+	width: 100%;
+	@include Flex-center;
+	@include border-bottom (1px, solid, #EEF0F1);
+	justify-content: left;
+	padding: .2rem 0 .2rem .46rem;
+}
+.star {
+	width: .24rem;
+	height: .23rem;
+	background-image: url(images/04.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 0 .1rem;
+}
+.left {
+	width: 1.86rem;
+	@include line-height;
+	@include border-right (1px, solid, #9F9F9F);
+	text-align: center;
+	font-size: .32rem;
+	color: #9F9F9F;
+	margin: 0 $gap;
+}
+.right {
+	@include right-font;
+}
+.star-right {
+	@include line-height;
+	@include right-font;
+	@include border-right (1px, solid, #9F9F9F);
+	text-align: center;
+	padding-right: .2rem;
+	margin-right: .1rem;
+}
+.prize {
+	font-size: .32rem;
+	color: red;
+}
+
+.exprience-box {
+	width: 100%;
+	@include Flex-center;
+	@include border-bottom (1px, solid, #EEF0F1);
+	justify-content: left;
+	min-height: 1rem; _height: 1rem;
+	padding: $gap 0;
+	margin-bottom: 1.3rem;
+}
+.exprience {
+	width: 60%;
+	@include right-font;
+	@include Flex-center;
+	justify-content: left;
+	min-height: 1rem; _height: 1rem;
+}
+
+
+.footer {
+	@include position;
+	height: 1.3rem;
+	background-color: $white;
+	bottom: 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: flex-start;
+}
+.message {
+	@include Button;
+
+		a {
+		color: #5FC0CD;
+		@include A-link;
+		@include Flex;
+	}
+} 
+.call {
+	@include Button;
+	background-color: #5FC0CD;
+
+		a {
+		color: #FFF;
+		@include A-link;
+		@include Flex;
+	}
+}

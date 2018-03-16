@@ -1,0 +1,230 @@
+html {
+	font-size: 625%;
+}
+body {
+	padding: 0;
+	margin: 0;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	html {
+		font-size: 478%;
+	}
+}
+@media only screen and (max-width: 767px) {
+	html {
+		font-size: 312%;
+	}
+}
+
+
+
+@mixin position {
+	width: 100%;
+	position: fixed;
+	z-index: 999;
+}
+@mixin flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@mixin border-right ($width, $style, $color) {
+	box-sizing: border-box;
+	border-right-width: $width;
+	border-right-style: $style;
+	border-right-color: $color;
+}
+@mixin border-bottom ($width, $style, $color) {
+	box-sizing: border-box;
+	border-bottom-width: $width;
+	border-bottom-style: $style;
+	border-bottom-color: $color;
+}
+@mixin bottom-text {
+	height: 1rem;
+	text-align: center;
+	font-size: .2rem;
+}
+@mixin bottom-icon {
+	height: .4rem;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-top: .14rem;
+}
+$white: #fff;
+$blue: #5FC0CD;
+$gray: #999;
+$gray-1: #F1F3F4;
+$black: #333;
+
+
+
+
+
+.header-box {
+	@include position;
+	top: 0;
+}
+.header {
+	@include flex;
+	width: 100%;
+	background-color: $blue;
+	padding: .1rem 0;
+}
+.new-btn{
+	color: $blue;
+	background-color: $white;
+	font-size: .34rem;
+	border: none;
+	border-radius: .05rem;
+}
+.new-btn:nth-child(2){    
+    margin-left:-.1rem;
+}
+.new-btn:focus{
+	color: $white;
+	background-color: #55a8b3;
+	outline:none;
+}
+
+
+.header-icon {
+	width: .42rem;
+	height: .44rem;
+	background-image: url(images/06.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	float: right;
+	margin-right: .3rem;
+	margin-top: -.56rem;
+}
+
+
+.choose-box {
+	width: 100%;
+	display: flex;
+	background-color: $white;
+}
+.choose {
+	width: 33.33%;
+	background-color: $white;
+	@include border-bottom (1px, solid, #E7EBEC);
+	font-size: .28rem;
+	padding: .2rem 0;
+}
+.select-box {
+	width: 100%;
+	padding-left: 30%;
+	margin: 0;
+	appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+	border: none;
+	@include border-right (1px, solid, #E7EBEC);
+	background-image: url(images/07.png);
+	background-repeat: no-repeat;
+	background-size: .13rem .08rem;
+	background-position: 94% center;
+	font-size: .28rem;
+	color: $gray;
+	outline: none;
+}
+
+
+.main-box {
+	width: 100%;
+	margin: 1.48rem 0 1rem 0;
+}
+
+
+.main {
+	width: 100%;
+	padding: .26rem 0;
+	@include border-bottom (1px, solid, #E7EBEC);
+}
+.date {
+	width: auto;
+	height: .34rem;
+	font-size: .26rem;
+	color: $gray;
+	background-image: url(images/09.png);
+	background-repeat: no-repeat;
+	background-size: .24rem .24rem;
+	background-position: .3rem center;
+	padding-left: .6rem;
+}
+.prize-box {
+	width: auto;
+	font-size: .28rem;
+	color: $black;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: .6rem;
+	margin: .1rem 0;
+}
+.prize-box-text {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.prize {
+	width: 2.4rem;
+	height: .36rem;
+	line-height: .38rem;
+	font-size: .36rem;
+	color: red;
+	background-image: url(images/08.jpg);
+	background-repeat: no-repeat;
+	background-size: .2rem .33rem;
+	background-position: 92% center; 
+}
+.address {
+	width: auto;
+	height: .34rem;
+	font-size: .26rem;
+	color: $gray;
+	padding-left: .6rem;
+	background-image: url(images/10.png);
+	background-repeat: no-repeat;
+	background-size: .19rem .23rem;
+	background-position: .32rem center;
+}
+
+
+
+
+.footer {
+	width: 100%;
+	height: 1rem;
+	background-color: #F8FAFB;
+	display: flex;
+	justify-content: space-around;
+	@include position;
+	bottom: 0;
+}
+.left-icon {
+	width: .46rem;
+	@include bottom-icon;
+	background-image: url(images/11.png);
+}
+.mid-icon {
+	width: .94rem;
+	height: .94rem;
+	background-image: url(images/12.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+.right-icon {
+	width: .42rem;
+	@include bottom-icon;
+	background-image: url(images/13.png);
+}
+.left {
+	@include bottom-text;
+	color: $blue;
+}
+.right {
+	@include bottom-text;
+	color: $gray;
+}
