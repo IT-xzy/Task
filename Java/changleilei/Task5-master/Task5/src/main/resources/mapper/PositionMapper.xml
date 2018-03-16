@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.PositionMapper">
+    <resultMap id="BaseResultMap" type="com.jnshu.model.Position">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+        <result column="Introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="threshold" jdbcType="VARCHAR" property="threshold"/>
+        <result column="difficulty" jdbcType="VARCHAR" property="difficulty"/>
+        <result column="Growth" jdbcType="VARCHAR" property="growth"/>
+        <result column="scarcity" jdbcType="VARCHAR" property="scarcity"/>
+        <result column="Experienceone" jdbcType="VARCHAR" property="experienceone"/>
+        <result column="Payone" jdbcType="VARCHAR" property="payone"/>
+        <result column="Experiencetwo" jdbcType="VARCHAR" property="experiencetwo"/>
+        <result column="Paytwo" jdbcType="VARCHAR" property="paytwo"/>
+        <result column="Experiencethree" jdbcType="VARCHAR" property="experiencethree"/>
+        <result column="Paythree" jdbcType="VARCHAR" property="paythree"/>
+        <result column="partner" jdbcType="VARCHAR" property="partner"/>
+        <result column="prompt" jdbcType="VARCHAR" property="prompt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, position, Introduction, threshold, difficulty, Growth, scarcity, Experienceone, 
+    Payone, Experiencetwo, Paytwo, Experiencethree, Paythree, partner, prompt
+  </sql>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from position
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.jnshu.model.Position">
+    insert into position (id, position, Introduction, 
+      threshold, difficulty, Growth, 
+      scarcity, Experienceone, Payone, 
+      Experiencetwo, Paytwo, Experiencethree, 
+      Paythree, partner, prompt
+      )
+    values (#{id,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{threshold,jdbcType=VARCHAR}, #{difficulty,jdbcType=VARCHAR}, #{growth,jdbcType=VARCHAR}, 
+      #{scarcity,jdbcType=VARCHAR}, #{experienceone,jdbcType=VARCHAR}, #{payone,jdbcType=VARCHAR}, 
+      #{experiencetwo,jdbcType=VARCHAR}, #{paytwo,jdbcType=VARCHAR}, #{experiencethree,jdbcType=VARCHAR}, 
+      #{paythree,jdbcType=VARCHAR}, #{partner,jdbcType=VARCHAR}, #{prompt,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.jnshu.model.Position">
+        insert into position
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="position != null">
+                position,
+            </if>
+            <if test="introduction != null">
+                Introduction,
+            </if>
+            <if test="threshold != null">
+                threshold,
+            </if>
+            <if test="difficulty != null">
+                difficulty,
+            </if>
+            <if test="growth != null">
+                Growth,
+            </if>
+            <if test="scarcity != null">
+                scarcity,
+            </if>
+            <if test="experienceone != null">
+                Experienceone,
+            </if>
+            <if test="payone != null">
+                Payone,
+            </if>
+            <if test="experiencetwo != null">
+                Experiencetwo,
+            </if>
+            <if test="paytwo != null">
+                Paytwo,
+            </if>
+            <if test="experiencethree != null">
+                Experiencethree,
+            </if>
+            <if test="paythree != null">
+                Paythree,
+            </if>
+            <if test="partner != null">
+                partner,
+            </if>
+            <if test="prompt != null">
+                prompt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="threshold != null">
+                #{threshold,jdbcType=VARCHAR},
+            </if>
+            <if test="difficulty != null">
+                #{difficulty,jdbcType=VARCHAR},
+            </if>
+            <if test="growth != null">
+                #{growth,jdbcType=VARCHAR},
+            </if>
+            <if test="scarcity != null">
+                #{scarcity,jdbcType=VARCHAR},
+            </if>
+            <if test="experienceone != null">
+                #{experienceone,jdbcType=VARCHAR},
+            </if>
+            <if test="payone != null">
+                #{payone,jdbcType=VARCHAR},
+            </if>
+            <if test="experiencetwo != null">
+                #{experiencetwo,jdbcType=VARCHAR},
+            </if>
+            <if test="paytwo != null">
+                #{paytwo,jdbcType=VARCHAR},
+            </if>
+            <if test="experiencethree != null">
+                #{experiencethree,jdbcType=VARCHAR},
+            </if>
+            <if test="paythree != null">
+                #{paythree,jdbcType=VARCHAR},
+            </if>
+            <if test="partner != null">
+                #{partner,jdbcType=VARCHAR},
+            </if>
+            <if test="prompt != null">
+                #{prompt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByIdSelective" parameterType="com.jnshu.model.Position">
+        update position
+        <set>
+            <if test="position != null">
+                position = #{position,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                Introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="threshold != null">
+                threshold = #{threshold,jdbcType=VARCHAR},
+            </if>
+            <if test="difficulty != null">
+                difficulty = #{difficulty,jdbcType=VARCHAR},
+            </if>
+            <if test="growth != null">
+                Growth = #{growth,jdbcType=VARCHAR},
+            </if>
+            <if test="scarcity != null">
+                scarcity = #{scarcity,jdbcType=VARCHAR},
+            </if>
+            <if test="experienceone != null">
+                Experienceone = #{experienceone,jdbcType=VARCHAR},
+            </if>
+            <if test="payone != null">
+                Payone = #{payone,jdbcType=VARCHAR},
+            </if>
+            <if test="experiencetwo != null">
+                Experiencetwo = #{experiencetwo,jdbcType=VARCHAR},
+            </if>
+            <if test="paytwo != null">
+                Paytwo = #{paytwo,jdbcType=VARCHAR},
+            </if>
+            <if test="experiencethree != null">
+                Experiencethree = #{experiencethree,jdbcType=VARCHAR},
+            </if>
+            <if test="paythree != null">
+                Paythree = #{paythree,jdbcType=VARCHAR},
+            </if>
+            <if test="partner != null">
+                partner = #{partner,jdbcType=VARCHAR},
+            </if>
+            <if test="prompt != null">
+                prompt = #{prompt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateById" parameterType="com.jnshu.model.Position">
+    update position
+    set position = #{position,jdbcType=VARCHAR},
+      Introduction = #{introduction,jdbcType=VARCHAR},
+      threshold = #{threshold,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      Growth = #{growth,jdbcType=VARCHAR},
+      scarcity = #{scarcity,jdbcType=VARCHAR},
+      Experienceone = #{experienceone,jdbcType=VARCHAR},
+      Payone = #{payone,jdbcType=VARCHAR},
+      Experiencetwo = #{experiencetwo,jdbcType=VARCHAR},
+      Paytwo = #{paytwo,jdbcType=VARCHAR},
+      Experiencethree = #{experiencethree,jdbcType=VARCHAR},
+      Paythree = #{paythree,jdbcType=VARCHAR},
+      partner = #{partner,jdbcType=VARCHAR},
+      prompt = #{prompt,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="getAllPosition" resultType="com.jnshu.model.Position">
+    select * from position
+  </select>
+</mapper>
