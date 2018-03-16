@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!--此处定义模板-->
+    <definition name="base.definition" template="/WEB-INF/jsp/templet.jsp">
+        <!--此处定义标题-->
+        <put-attribute name="title" value=""/>
+        <!--此处定义头部文件-->
+        <put-attribute name="header" value="/WEB-INF/jsp/head.jsp"/>
+        <!--此处定义左边文件-->
+        <put-attribute name="left" value="/WEB-INF/jsp/left.jsp"/>
+        <!--此处定义主体-->
+        <put-attribute name="body" value=""/>
+        <!--此处定义右边文件-->
+        <put-attribute name="right" value="/WEB-INF/jsp/right.jsp"/>
+        <!--此处定义底部文件-->
+        <put-attribute name="footer" value="/WEB-INF/jsp/foot.jsp"/>
+    </definition>
+    <definition name="CustomerForm" extends="base.definition">
+        <put-attribute name="title" value="登录"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/CustomerForm.jsp"/>
+    </definition>
+    <definition name="CustomerDetail" extends="base.definition">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/CustomerDetail.jsp"/>
+    </definition>
+</tiles-definitions>
