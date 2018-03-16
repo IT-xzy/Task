@@ -1,0 +1,193 @@
+/*reset*/
+html{
+  font-size:62.5%;
+  @media (min-width: 480px){
+    font-size: 80%;
+  }
+  @media (min-width: 640px){
+    font-size: 100%;
+  }
+  @media (min-width: 720px){
+    font-size: 125%;
+  }
+}
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+ }
+body{
+  padding-top: 8.4rem;
+  padding-bottom: 5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  min-width: 320px;
+}
+ul,
+li {
+  list-style: none;
+}
+a{
+  cursor: pointer;
+  text-decoration: none;
+}
+@mixin fixed{
+  position: fixed;
+  max-width: 720px;
+  margin: 0 auto;
+  right: 0;
+  left: 0;
+}
+@mixin flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin button{
+  color: #fff;
+  border-radius: .5rem;
+  background: #55a8b3;
+}
+@mixin pressbutton{
+  color: #5fc0cd;
+  border-radius: .5rem;
+  background: #fff;
+}
+@mixin verticle-center{
+  position: absolute;
+  top:50%;
+  right: 1.3rem;
+  transform: translate(0,-50%);
+}
+$font-color:#999999;
+$border-color:#e7eaec;
+/*layout*/
+/*header*/
+header{
+  @include fixed;
+  top: 0;
+  z-index: 1;
+
+  >.navigation{
+    position: relative;
+    @include flex-center;
+    height: 4.2rem;
+    width: 100%;
+    background: #5fc0cd;
+
+    >.button-group{
+      @include button;
+
+      >a{
+        display: inline-block;
+        padding: .6rem .9rem;
+        font-size: 1.7rem;
+        color: #fff;
+        &:hover{  @include pressbutton;  }
+        &:hover~ .active{  @include button;  }
+      }
+
+      >.active{  @include pressbutton;  }
+    }
+
+    >.locale{
+      @include verticle-center;
+      width: 2.2rem;
+      height:auto;
+    }
+  }
+
+  >.dropdown{
+    display: flex;
+    height: 4.2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e7eaec;
+    background: #fff;
+
+    >select{
+      flex: 1;
+      padding-left: 8%;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      padding-right: 2rem;
+      font-size: 1.4rem;
+      color: $font-color;
+      outline: none;
+      border: 0;
+      border-right: 1px solid $border-color;
+      background: {
+        image: url("../images/trangle.png");
+        repeat: no-repeat;
+        position: 94% center;
+        size: .8rem auto;
+      };
+      &:last-child{  border: none;  }
+    }
+  }
+}
+/*main*/
+main{
+  .content-wrap{
+    position: relative;
+    z-index: 0;
+    padding: 1rem 1.3rem;
+    border-bottom: 1px solid $border-color;
+    img{  vertical-align: middle;  }
+
+    >.around-content{
+      font-size: 1.3rem;
+      color: $font-color;
+
+      >.icon{
+        height: 1.2rem;
+        width: auto;
+      }
+    }
+
+    >.center-content{
+      font-size: 1.4rem;
+      margin: {
+        top:.6rem;
+        bottom: .6rem;
+        left: 1.8rem;
+      };
+    }
+
+    >.price{
+      @include verticle-center;
+      font-size: 1.5rem;
+      color: #e63b0e;
+
+      >a >img{
+        width: 1rem;
+        height: auto;
+      }
+    }
+  }
+}
+/*footer*/
+footer{
+  @include fixed;
+  bottom: 0;
+  height: 5rem;
+  border-top: 1px solid $border-color;
+  background: #f8fafb;
+  .footer-content{
+    @include flex-center;
+    img{  max-width: 100%;  }
+
+    >.button-around{
+      width: 2.4rem;
+      text-align: center;
+      font-size: 1rem;
+      p{  color: $font-color;  }
+      .blue{  color:#5fc0cd;  }
+    }
+
+    >.button-center{
+      margin: 0 5rem;
+      width: 4.8rem;
+      height: auto;
+    }
+  }
+}

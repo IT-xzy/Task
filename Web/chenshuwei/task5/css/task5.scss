@@ -1,0 +1,171 @@
+/*reset*/
+html{
+  font-size: 10px;
+  @media (min-width: 480px) {
+    font-size: 15px;
+  }
+  @media (min-width: 640px) {
+    font-size: 18px;
+  }
+  @media (min-width: 720px) {
+    font-size: 20px;
+  }
+}
+body{
+  margin: 0 auto;
+  max-width: 720px;
+  min-width: 320px;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,
+li {  list-style: none;  }
+$bgcolor:#5fc0cd;
+$color:#fff;
+$fontsize:1rem;
+@mixin button($bgcolor:#5fc0cd){
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #5fc0cd;
+  border-radius: 5px;
+  color: $bgcolor;
+}
+@mixin fixed{
+  position: fixed;
+  width: 100%;
+  max-width: 720px;
+  min-width: 320px;
+}
+/*layout*/
+/*header*/
+header{
+  @include fixed;
+  $fontsize:1.8rem;
+  top: 0;
+  background: $bgcolor;
+  padding: 0 1.2rem;
+  line-height: 3.9rem;
+  color: $color;
+
+  >a{
+    float: left;
+    line-height: 3.9rem;
+    .return{
+      width: 1.2rem;
+      height: auto;
+      vertical-align: middle;
+    }
+  }
+
+  > h4{
+    text-align: center;
+    font-size: $fontsize;
+    font-weight: normal;
+    padding: 0 2.4rem;
+  }
+}
+/*main*/
+main{
+  margin: {
+    top:3.2rem;
+    bottom: 7rem;
+  };
+
+  >.main-head{
+    display: flex;
+    align-items: center;
+    height: 13rem;
+    font-size: 1.3rem;
+    color: $color;
+    background: {
+      image: url("../images/beijing.png");
+      size: 100%;
+    };
+
+    >.center-img{
+      width: 7rem;
+      height: auto;
+      margin: 0 15px;
+    }
+    >.name >p{
+      margin-bottom: 1rem;
+      >span{  font-size: 1.2rem;  }
+    }
+    >.name >span{
+      font-size: $fontsize;
+      line-height: 1.3rem;
+
+       >img{
+         width: 1rem;
+         height: auto;
+         vertical-align: middle;
+       }
+     }
+  }
+
+  >.list >.list-head{
+    padding: 1.2rem ;
+    border-bottom: 1px solid #e1e5e7;
+
+    >p{
+      font-size: 1.2rem;
+      padding-left: 1rem;
+      border-left: 2px solid $bgcolor;
+    }
+  }
+
+  >.list>ul{
+      padding-left: 1.2rem;
+
+      >li{
+        display: flex;
+        align-items: center;
+        padding: 1.2rem;
+        border-bottom: 1px solid #e1e5e7;
+        font-size: $fontsize;
+        img{
+          width: $fontsize;
+          height: auto;
+        }
+
+        >.list-title{
+          flex: 0 0 auto;
+          padding-right: $fontsize;
+          border-right: 1px solid #e1e5e7;
+          color: #999999;
+        }
+
+        >.list-content{
+          padding-left: $fontsize;
+          color: #333;
+        }
+
+        >.list-important{
+          padding-left: $fontsize;
+          color: #e26163;
+          font-weight: bold;
+        }
+      }
+    }
+}
+footer{
+  @include fixed;
+  bottom: 0;
+  height: 7rem;
+  display: flex;
+  padding: 1.6rem 1.2rem;
+  background: #fff;
+
+  >.button-left{  @include button;  }
+
+  >.button-right{
+    @include  button($bgcolor:#fff);
+    margin-left: 1rem;
+    background: $bgcolor;
+  }
+}
