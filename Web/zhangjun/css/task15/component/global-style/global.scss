@@ -1,0 +1,98 @@
+@charset "UTF-8";
+// 公共变量
+$base-color: #29b078;
+$bg-color: #fafafa;
+$font-color: #999;
+$border-color: #e2e2e2;
+// 公共混合器
+@mixin fixed {
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+}
+@mixin middle {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+@mixin center {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+@mixin middle-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+@mixin bgimage($url,$repeat:no-repeat) {
+	background: {
+		image: url($url);
+		repeat: $repeat;
+	}
+}
+/* 公共样式 begin */
+html {
+	font-size: 625%;
+	box-sizing: border-box;
+}
+body {
+	font-size: .14rem;
+	font-family: "Microsoft YaHei";
+	background-color: $bg-color;
+}
+.container {
+	padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.text-center {
+	text-align: center;
+}
+button {
+	border: none;	
+	outline: none;
+}
+a:hover {
+	text-decoration: none;
+}
+.text-center {
+	text-align: center;
+}
+.title {
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+}
+.title h3 {
+	color: #000;
+	font-size: .2rem;
+}
+.clearfix:after {
+	content:".";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}  
+.clearfix {
+	zoom: 1;
+}
+@media screen and (min-width: 768px) {
+	.container {
+	    width: 750px;
+	}	
+}
+@media screen and (min-width: 992px) {
+	.container {
+    	width: 970px;
+	}
+}
+@media screen and (min-width: 1200px) {
+	.container {
+	    width: 1170px;
+	}	
+}
+/* 公共样式 end */

@@ -1,0 +1,98 @@
+@charset "UTF-8";
+// 公共变量
+$font-size: .16rem;
+// 公共混合器
+@mixin bgimage($url,$repeat:no-repeat) {
+	background: {
+		image: url($url);
+		repeat: $repeat;
+	}
+}
+/* 公共样式 */
+html {
+	font-size: 625%;
+}
+body {
+	font-family: "Microsoft YaHei";
+}
+button {
+	border: none;
+	outline: none;
+}
+.wrap {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: $font-size;
+	@include bgimage("../images/background.jpg");
+	background-size: 100% 100%;
+	/* 登录框 */
+	.login {
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		width: 4rem;
+		height: 2.5rem;
+		z-index: 100;
+		border-radius: 5px;
+		background-color: rgba(185,190,199,.7);
+		-webkit-transform: translate(-50%,-50%);
+		-moz-transform: translate(-50%,-50%);
+		-o-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50%);
+		h2 {
+			padding-top: .2rem;
+			padding-bottom: .2rem;
+			font-size: .24rem;
+			text-align: center;
+		}
+		.input-box {
+			margin: 0 auto;
+			width: 3.5rem;
+			input {
+				padding-left: .5rem;
+				width: 100%;
+				height: .4rem;
+				box-sizing: border-box;
+				font-size: $font-size;
+				background-position: 10px;
+				border: 0;
+				border-radius: 5px;
+			}
+			.user {
+				margin-bottom: .1rem;
+				@include bgimage("../images/user.png");
+				&:focus {
+					@include bgimage("../images/user-1.png");
+				}
+			}
+			.password {
+				@include bgimage("../images/password.png");
+				&:focus {
+					@include bgimage("../images/password-1.png");
+				}
+			}
+		}
+		.login-mess {
+			height: .2rem;
+			padding-top: .1rem;
+			padding-bottom: .1rem;
+			text-align: center;
+			color: #f00;
+		}
+		.login-btn {
+			display: block;
+			margin: 0 auto;
+			width: 3.5rem;
+			height: .4rem;
+			color: #fff;
+			background-color: #5bc0de;
+			border-radius: 5px;
+			&:hover {
+				color: #000;
+			}
+		}
+	}
+}

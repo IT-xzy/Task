@@ -1,0 +1,318 @@
+html {
+	font-size: 625%;
+	box-sizing: border-box;
+}
+button {
+	outline: none !important;
+}
+.inline-block {
+	display: inline-block;
+}
+/* 头部联系方式 */
+.hd-contact {
+	height: .4rem;
+	line-height: .4rem;
+	color: #fff;
+	background-color: #1d7ad9;
+}
+/* 右上角按钮 */
+.hd-contact .login-btn {
+	padding: 0;
+	margin-left: -.04rem;
+	width: .5rem;
+	border: 0;
+	border-left: 1px solid #fff;
+	background-color: #1d7ad9;
+}
+.hd-contact .login-btn:last-child {
+	border-right: 1px solid #fff;
+}
+.hd-contact .login-btn:hover {
+	width: .8rem;
+	color: #000;
+	background-color: #fff;
+}
+/* 导航栏 */
+.navbar .navbar-btn {
+	margin: .2rem 0 .2rem .4rem;
+}
+.navbar .navbar-btn:hover,
+.navbar .navbar-btn:focus {
+	color: #fff;
+	background-color: #1d7ad9;
+}
+@media screen and (max-width: 768px) {
+	.navbar .navbar-btn {
+		margin: 0;
+		width: 100%;
+	}
+	.navbar .navbar-nav li {
+		padding: .1rem;
+	}
+}
+/* 取消导航栏默认的圆角 */
+@media (min-width: 768px) {
+	.navbar {
+    	border-radius: 0;
+	}
+}
+/* 进度条 */
+.line-bar {
+	width: 50%;
+	height: 1.2rem;
+}
+.line-bar ul {
+	height: 1.2rem;
+	font-size: 0;      /* 为了消除inline-block间距问题 */
+}
+.line-bar ul li {
+	position: relative;
+	padding: 0;
+	width: 25%;
+	height: 1.2rem;
+	font-size: .14rem;
+}
+.line-bar ul li span {
+	position: absolute;
+	display: block;
+	cursor: pointer;	
+}
+.line-bar .line {
+	top: 50%;
+	transform: translateY(-50%);
+	height: .05rem;
+	width: 100%;	
+	background-color: #ccc;
+}
+.line-bar li:first-child .line {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;	
+}
+.line-bar li:last-child .line {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;	
+}
+.line-bar .round {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);	
+	width: .2rem;
+	height: .2rem;
+	border-radius: 50%;
+	background-color: #ccc;
+}
+.line-bar .step {
+	top: 60%;
+	width: 100%;
+	text-align: center;
+}
+.line-bar li:first-child .line,
+.line-bar li:first-child .round {
+	color: #fff;
+	background-color: #ff7f02;
+}
+.line-bar li:first-child .step {
+	color: #ff7f02;
+}
+@media screen and (max-width: 992px) {
+	.line-bar {
+		width: 100%;
+	}
+}
+/* 表单标题 */
+.title > div {
+	padding-left: 0;
+}
+.title h3 {
+	padding-left: .1rem;
+	font-size: .18rem;
+	border-left: 3px solid #1d7ad9;
+}
+/* 选择箱型板块 */
+.carton,
+.size,
+.material,
+.bottom-btn {
+	border: 1px solid #e8e8e8;	
+}
+.carton {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.carton > div:first-child,
+.size > div:first-child,
+.material > div:first-child {
+	background-color: #f3f3f3;
+}
+/* 小标题公共样式 */
+.icon,
+.carton h4,
+.size h4,
+.material h4 {
+	display: inline-block;
+	font-size: .16rem;
+	color: #1d7ad9;
+}
+/* 小图标公共样式 */
+.icon {
+	width: .26rem;
+	height: .25rem;
+	vertical-align: middle;
+}
+.carton .icon {
+	background: url(../image/box.png) no-repeat;
+}
+.wrap {
+	padding: .4rem;
+	background-color: #fbfcff;
+}
+@media (max-width: 768px) {
+	.box {
+	    display: flex;
+	    align-items: center;
+	    flex-direction: column;
+	    text-align: center;
+	}
+	.box input[type="radio"] + label {
+		margin-left: 0;
+	}
+	.select-btn {
+		margin-top: .1rem;
+	}
+}
+/* 修改单选框样式 */
+input[type="radio"] {
+	display: none;     /*取消默认样式*/
+}
+input[type="radio"] + label {
+	position: relative;
+	margin-left: .5rem;
+	padding-left: .3rem;
+	padding-top: .1rem;
+	line-height: .2rem;
+	color: #333;
+	font-weight: normal;
+}
+label {      /*这个样式实际上和bootstrap内置的label样式一样*/
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: .05rem;
+	font-weight: 700;
+}
+input[type="radio"] + label::before {   /*外部圆圈,在label之前插入一个圆圈*/
+	content: "";
+	width: .2rem;
+	height: .2rem;
+	border-radius: 50%;
+	border: 1px solid #cecece;
+	position: absolute;
+	left: 0;
+}
+input[type="radio"]:checked + label::before {
+	background-color: #1d7ad9;
+}
+input[type="radio"]:checked + label::after {   /*内部圆圈，在label之后插入一个圆圈，利用绝对定位定到外部圆圈的中心，并且只有在选中状态才会出现内部圆圈*/
+	content: "";
+	top: .17rem;
+	left: .07rem;
+	background-color: #fff;
+	width: .06rem;
+	height: .06rem;
+	border-radius: 50%;
+	position: absolute;
+	vertical-align: middle;
+}
+/* 下拉选项框 */
+.select-btn {
+    /*复写Chrome和Firefox里面的边框*/
+    border: 1px solid #e8e8e8;
+    /*清除默认样式*/
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+	/*在选择框的最右侧中间显示小箭头图片*/
+    background: url("../image/triangle.png") no-repeat .8rem center;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+  	padding: .08rem .4rem .08rem .1rem;
+ }
+ 	/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+.select-btn::-ms-expand { 
+	display: none; 
+}
+/* 确认尺寸板块 */
+.size .icon {
+	background: url(../image/ruler.png) no-repeat;
+}
+input[type="text"] {
+	width: .7rem;
+	margin-top: .05rem;
+}
+.size label {
+	font-weight: normal;
+}
+.size .select-btn {
+	margin-top: .15rem;
+}
+/* 选择板块板块 */
+.material .icon {
+	background: url(../image/scissors.png) no-repeat;
+}
+/* 底部按钮 */
+.bottom-btn {
+	margin-bottom: .5rem;
+}
+.bottom-btn .wrap {
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	background-color: #fff;
+}
+.bottom-btn button {
+	padding: .1rem .5rem;
+	color: #fff;
+	background-color: #e15053;
+}
+/* 底部 */
+.ft {
+	color: #999;
+	background-color: #f9f9f9;
+}
+.ft .container {
+	padding-top: .3rem;
+	padding-bottom: .3rem;
+}
+.ft .ft-left span {
+	padding-left: .1rem;
+	padding-right: .1rem;
+}
+.ft .ft-left a,
+.ft .ft-center a {
+	color: #999;
+}
+.ft .ft-left a:hover,
+.ft .ft-center a:hover {
+	color: #1d7ad9;
+	text-decoration: none;
+}
+.ft .ft-center div a {
+	display: inline-block;
+
+	margin-right: .3rem;
+}
+.ft .ft-center div:last-child a {
+	margin-top: .1rem;
+	margin-bottom: .1rem;
+}
+.ft .ft-left div {
+	padding-top: .6rem;
+}
+.ft .tel p {
+	margin-bottom: .15rem;
+}
+.ft .ft-bottom {
+	color: #fff;
+	background-color: #1d7ad9;
+}
+.ft .ft-bottom p {
+	margin: 0;
+	word-wrap: break-word;
+}

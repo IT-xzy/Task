@@ -1,0 +1,228 @@
+@charset "UTF-8";
+// 公共变量 
+$bg-color: #29bde0;
+$font-color: #000;
+$btn-color: #fbb435;
+$font-size: .2rem;
+$grid-color: #f5c97b;
+// 公共混合器
+@mixin fixed {
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+}
+@mixin middle {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+@mixin center {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+@mixin middle-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+@mixin bgimage($url,$repeat:no-repeat) {
+	background: {
+		image: url($url);
+		repeat: $repeat;
+	}
+}
+@mixin icon($url, $repeat:no-repeat, $color:#fff, $size:100%, $position:center center) {
+	background: {
+		image: url($url);
+		repeat: $repeat;
+		color:$color;
+		size:$size;
+		position:$position;
+	}
+}
+/* 公共样式 */
+html {
+	font-size: 625%;
+}
+body {
+	font-size: .16rem;
+	background-color: $bg-color;
+}
+button {
+	border: none;	
+	outline: none;
+}
+/* 取消链接底下的样式 */
+a,
+a:hover {
+	text-decoration: none;
+}
+.text-center {
+	text-align: center;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.hd-menu, 
+.menu-btn, 
+.ft {
+	background-color: $bg-color;
+}
+/* 头部 */
+.hd {
+	// 头部菜单
+	.hd-menu button,
+	.hd-menu h1,
+	.hd-menu a {
+		display: block;
+		position: absolute;
+	}
+	.hd-menu {
+		@include fixed;
+		top: 0;
+		height: .5rem;
+		.menu-btn {
+			@include middle;
+			left: .1rem;
+			width: .2rem;
+			height: .2rem;
+			@include bgimage("../images/menu2@1x.png");
+		}
+		h1 {
+			@include middle-center;
+			font-size: $font-size;
+			color: #fff;
+			font-weight: normal;
+		}
+		.close-btn {
+			@include middle;
+			right: .1rem;
+			width: .18rem;
+			height: .18rem;
+			@include bgimage("../images/close@1x.png");
+		}
+	}
+	// 头部提示栏
+	.hd-tips {
+		margin-top: .5rem;
+		height: .5rem;
+		line-height: .5rem;
+		background-color: #b9e9f5;
+		span {
+			padding-left: .2rem;
+		}
+		.play-btn {
+			margin-top: .05rem;
+			margin-right: .1rem;
+			width: .4rem;
+			height: .4rem;
+			border-radius: 50%;
+			background: url(../images/play@1x.png) 65% center/50% 50% no-repeat;
+			background-color: $btn-color;
+		}
+	}
+	// 下三角形
+	.triangle-down {
+		margin-left: 6%;
+		width: 0;
+		height: 0;
+		border-top: .1rem solid #b9e9f5;
+		border-left: .06rem solid transparent;
+		border-right: .06rem solid transparent;
+	}
+	// 信息显示
+	.hd-message {
+		padding: .10rem 10% .10rem 6%;
+		color: #fff;
+		background-color: $bg-color;
+	}
+}
+/* 投票界面 */
+.vote-wrap, 
+.row, 
+.skill {
+	display: flex;
+}
+.vote-wrap {
+	flex-direction: column;
+	padding: .2rem .2rem 1rem;
+	.row {
+		justify-content: space-between;
+		.box {
+			.grid {
+				width: 20vw;
+				height: 20vw;
+				border: .04rem solid #fff;
+				background-color: $grid-color;
+				.role,
+				.number {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+				.role {
+					height: 80%;
+					font-size: .2rem;
+					white-space: nowrap;
+				}
+				.number {
+					height: 20%;
+					font-size: .16rem;
+					color: #fff;
+					background-color: #83b09a;	
+				}
+			}
+			// 角色技能
+			.skill {
+				justify-content: space-between;
+				// 隐藏技能栏
+				visibility: hidden;
+				.icon1, 
+				.icon2, 
+				.icon3, 
+				.icon4 {
+					margin-top: .1rem;
+					margin-bottom: .1rem;
+					width: 4.5vw;
+					height: 4.5vw;
+				}
+				.icon1 {
+					@include icon("../images/icon1.png");
+				}
+				.icon2 {
+					@include icon("../images/icon2.png");
+				}
+				.icon3 {
+					@include icon("../images/icon3.png");
+				}
+				.icon4 {
+					@include icon("../images/icon4.png");
+				}
+			}
+		}
+		// 鼠标滑过角色显示技能条
+		.box:hover .skill {
+			visibility: visible;
+		}
+	}
+}
+/* 底部 */
+.ft {
+	@include fixed;
+	bottom: 0;
+	.btn {
+		display: block;
+		margin: .2rem .3rem;
+		padding: 0.2rem;
+		font-size: .2rem;
+		color: #fff;
+		background-color: $btn-color;
+	}
+}
+
+

@@ -1,0 +1,176 @@
+@charset "UTF-8";
+html {
+	font-size: 625%;
+}
+$base-color: #fff;
+$bg-color: #5fc0cd;
+$base-size: .2rem;
+$gray-color: #e1e5e7;
+@mixin fixed {
+	position: fixed;
+	left: 0;
+	right: 0;
+}
+@mixin hd-height {
+	height: .5rem;
+	line-height: .5rem;
+}
+@mixin btn-style {
+	border: 0;
+	outline: none;
+}
+@mixin bd-height {
+	height: .15rem;
+	line-height: .15rem;
+}
+@mixin border($width, $color) {
+	border: {
+		width: $width;
+		style: solid;
+		color: $color;
+	}
+}
+/* 头部 */
+header {
+	@include fixed;
+	top: 0;
+	padding: 0 .1rem;
+	@include hd-height;
+	color: $base-color;
+	background-color: $bg-color;
+	.back-btn {
+		float: left;
+		@include hd-height;
+		font-size: $base-size;
+		color: $base-color;
+		background-color: $bg-color;
+		@include btn-style;
+	}
+	h2 {
+		text-align: center;
+		font-size: $base-size;
+	}
+}
+/* 底部按钮 */
+footer {
+	@include fixed;
+	bottom: 0;
+	margin-bottom: .2rem;
+	.wrap {
+		display: flex;
+		margin: 0 .1rem;
+		button {
+			flex: 1 1 0px;
+			padding: .1rem;
+			font-size: $base-size;
+			white-space: nowrap;
+			@include border(1px, $bg-color);
+			border-radius: .05rem;
+		}
+		.left-btn {
+			margin-right: .1rem;
+			color: $bg-color;
+			background-color: $base-color;
+		}
+		.right-btn {
+			color: $base-color;
+			background-color: $bg-color;
+		}
+	}
+}
+.main {
+	margin-bottom: 1rem;
+	/* 个人简介 */
+	.head {
+		position: relative;
+		height: 2rem;
+		margin-top: .5rem;
+		background: url(../image/background@1x.png) 0 0/cover no-repeat;
+		.head-wrap {
+			margin-left: .2rem;
+			.head-left, .head-right {
+				display: inline-block;
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			.head-left {
+				width: .8rem;
+				height: .8rem;
+				border-radius: 50%;
+				background: url(../image/head@1x.png) 0 0/cover no-repeat;
+				background-color: #efefef;
+			}
+			.head-right {
+				padding-left: 1rem;
+				font-size: $base-size;
+				color: $base-color;
+			}
+			.head-right p:last-child {
+				padding-left: .15rem;
+				margin-top: .1rem;
+				@include bd-height;
+				font-size: .1rem;
+				background: url(../image/icon1@1x.png) 0 center no-repeat;
+			}
+		}
+	}
+	/* 详细情况栏 */
+	.content {
+		font-size: .15rem;
+		.title {
+			padding: .1rem;
+			@include bd-height;
+			@include border(1px, $gray-color);
+			h3 {
+				padding-left: .1rem;
+				font-size: .18rem;
+				border-left: 2px solid $bg-color;
+			}
+		}
+		.box {
+			li {
+				position: relative;
+				padding: .1rem;
+				/* 列表下边线左右各空一段距离 */
+				margin: 0 .1rem;
+				border-bottom: 1px solid $gray-color;
+				div {
+					display: inline-block;
+				}
+				.left {
+					position: absolute;
+					padding-right: .2rem;
+					top: 50%;                      
+					transform: translateY(-50%);
+					color: #999;
+					border-right: 1px solid $gray-color;
+				}
+				.right {
+					margin-left: 1rem;
+				}
+			}
+			/* 选择类名为.box下的倒数第二个li标签下类名为.right的元素 */
+			li:nth-last-child(2) .right {
+				color: red;
+			}
+			/* 选择类名为.box下的第一个li标签下的div标签 */
+			li:first-child {
+				div {
+	 				padding-left: .15rem;
+					color: #000;
+					background: url(../image/icon2@1x.png) 0 center no-repeat;
+				}
+				.left {
+					/* 取消右边的线 */
+					border-right: none;   
+				}
+				.right {
+					margin-left: .6rem;
+				}
+			}
+		}
+	}
+
+}
+
