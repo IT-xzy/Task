@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!-- 会自动注册RequestMappingHandlerMapping与RequestMappingHandlerAdapter两个Bean,
+    这是Spring MVC为@Controller分发请求所必需的 使用该注解后的spring-mvc.xml:
+     spring 可以自动去扫描 base-package下面的包或子包下面的Java文件，如果扫描到有Spring的相关
+    注解的类，则把这些类注册为Spring的bean -->
+    <mvc:annotation-driven/>
+    <!-- 注解扫描包 -->
+    <!--控制器的扫描必须在spring-mvc.xml中，否则web.xml中的DispatcherServlet拦截器将无法访问到相应的控制器-->
+    <context:component-scan base-package="com.student.controller"/>
+
+    <!--使用aspect注解的aop-->
+    <aop:aspectj-autoproxy/>
+
+
+
+    <!-- springMVC最常用的视图解析器-->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+        <property name="order" value="10"/>
+        <!--设置优先级，一般设为10最小，原因自己查-->
+    </bean>
+
+</beans>
