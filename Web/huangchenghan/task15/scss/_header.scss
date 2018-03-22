@@ -1,0 +1,121 @@
+header{
+    overflow: hidden;
+    .top {
+        height: 4rem;
+        color: $green1;
+        @include flex-center;
+        justify-content: space-between;
+        .tel {
+            height: 100%;
+            @include flex-center;
+            justify-content: flex-start;
+        }
+        .contact {
+            height: 100%;
+            @include flex-center;
+            .wechat {
+                @include icon;
+                background-position: 0 0;
+            }
+            .qq {
+                @include icon;
+                background-position: -31px 0;
+            }
+            .sina {
+                @include icon;
+                background-position: -62px 0;
+            }
+        }
+    }
+    .nav {
+        position: relative;
+        overflow: hidden;
+        background: $green1;
+        .items {
+            float: right;            
+            li{
+                display: inline-block;
+                box-sizing: border-box;
+                height: 8rem;
+                border-bottom: .3rem solid transparent;
+                @media screen and ($maxw: $sm) {
+                    display: none;
+                }
+                &:hover {
+                    border-bottom: .3rem solid #fff;
+                }
+                a{
+                    @include flex-center;
+                    flex-flow: row;
+                    width: 7rem;
+                    height: 100%;
+                    font-size: 16px;
+                    color: #fff;
+                }
+            }
+        }
+        .btn {
+            display: none;
+            float: right;
+            box-sizing: border-box;
+            width: 40px;
+            height: 34px;
+            padding: 9px 10px;
+            border: none;
+            background: $green1;
+            @media screen and ($maxw: $sm) {
+                display: block;
+                margin: 20px 2%;
+            }
+            &:focus + .hidden {
+                display: block;
+            }
+            &:hover + .hidden {
+                display: block;
+            }
+            &:active + .hidden {
+                display: block;
+            }
+            span{
+                display: block;
+                width: 22px;
+                border-top: 2px solid #FFF;
+                &:nth-child(2) {
+                    margin: 4px 0;
+                }
+            }
+        }
+        .hidden {
+            display: none;
+            margin: -15px -10%;
+            font-size: 16px;
+            text-align: center;
+            p{
+                margin: 15px 0;
+                padding-bottom: 15px;
+                border-bottom: .1rem solid transparent;
+                &:hover {
+                    border-bottom: .3rem solid #fff;
+                }
+                a{
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                    color: #fff;
+                }
+                .checked {
+                    padding-top: 20px;
+                    border-top: .1rem solid #FFF;                    
+                }
+            }
+            .check {
+                border-bottom: .3rem solid #fff;
+            }
+        }
+    }
+    .banner {
+        img{
+            width: 100%;
+        }
+    }
+}
