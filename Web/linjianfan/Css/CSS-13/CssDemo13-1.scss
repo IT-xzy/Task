@@ -1,0 +1,214 @@
+@import "public.scss";
+
+body {
+	background-color: #f0f0f0;
+}
+
+
+
+
+@mixin blue-box {
+	width: 100%;
+	background-color: $blue;
+}
+@mixin flex-between {
+	display: flex;
+	justify-content: between;
+	align-items: center;
+}
+@mixin box-shadow {
+	box-shadow: 0 0 .06rem $gray-topic;
+}
+@mixin left-icon {
+	width: .4rem;
+	height: .4rem;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+$blue: #29bde0;
+$white: #fff;
+$orange: #fbb435;
+$gray-topic: #9a9a9a;
+$gray-text: #787878;
+$arrow-topic-color: #e7e7e7;
+
+
+
+.header {
+	font-size: .28rem;
+	width: 100%;
+	background-color: $blue;
+	padding: .24rem 0 .14rem .2rem;
+	position: fixed;
+	top: 0;
+	z-index: 997;
+}
+.header-left {
+	width: .39rem;
+	height: .4rem;
+}
+.img-responsive {
+	max-width: 100%;
+	max-height: 100%;
+}
+.arrow {
+	width: .28rem;
+	height: .55rem;
+	background-image: url(images/02.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: absolute;
+	right: .54rem;
+	top: 4.9rem;
+}
+
+
+.main {
+	width: auto;
+	padding: .24rem .34rem 0 .34rem;
+	margin-top: .7rem;
+}
+.main-last-game {
+	width: auto;
+	background-color: $white;
+	@include box-shadow;
+	background-image: url(images/01.png);
+	background-repeat: no-repeat;
+	background-size: .24rem .4rem;
+	background-position: 96% center;
+
+	a {
+		width: auto;
+		@include flex;
+		font-size: .34rem;
+		color: $gray-topic;
+		padding: .3rem 0;
+	}
+}
+.main-game {
+	width: auto;
+	margin-top: .2rem;
+	background-color: $white;
+	@include box-shadow;
+}
+.game-topic {
+	width: auto;
+	font-size: .37rem;
+	color: $orange;
+	@include border-bottom (1px, solid, $orange);
+	@include flex;
+	padding: .14rem;
+}
+.game-content {
+	width: auto;
+	padding: .2rem .3rem 0 .3rem;
+}
+.servion {
+	width: auto;
+	background-color: $blue;
+
+	a {
+		width: auto;
+		@include flex;
+		font-size: .32rem;
+		color: $white;
+		padding: .3rem 0;
+
+	}
+}
+.data {
+	width: auto;
+	color: $gray-text;
+	padding: .2rem 0;
+	font-size: .24rem;
+	text-align: center;
+}
+
+
+.point-box {
+	width: auto;
+	@include flex;
+	padding-bottom: .2rem;
+}
+.point {
+	width: .16rem;
+	height: .16rem;
+	border-radius: 50%;
+	@include box-shadow;
+	background-color: $gray-topic;
+	margin: 0 .06rem;
+}
+.point:nth-child(1) {
+	background-color: $blue;
+}
+
+
+
+.left-side {
+	width: 80vw;
+	height: 100vh;
+	background-color: $white;
+	position: fixed;
+	top: 0;
+	left: -80vw;
+	z-index: 999;
+}
+.left {
+	width: 100%;
+	background-color: $blue;
+	display: flex;
+	justify-content: space-between;
+	@include border-bottom (1px, solid, $white);
+	font-size: .34rem;
+	color: $white;
+	padding: .2rem;
+}
+.left-icon-A {
+	@include left-icon;
+	background-image: url(images/14.png);
+}
+.left-icon-B {
+	@include left-icon;
+	background-image: url(images/15.png);
+}
+.left-icon-C {
+	@include left-icon;
+	background-image: url(images/16.png);
+}
+.left-icon-D {
+	@include left-icon;
+	background-image: url(images/17.png);
+}
+.left-arrow {
+	width: .24rem;
+	height: .4rem;
+	background-image: url(images/01.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.close {
+	width: .36rem;
+	height: .36rem;
+}
+.open {
+	width: .39rem;
+	height: .4rem;
+	font-size: .28rem;
+	position: fixed;
+	top: .24rem;
+	left: .2rem;
+	z-index: 999;
+}
+
+
+
+#toggle-trigger {
+	display: none;
+}
+#toggle-trigger ~ :not(checked) ~ .left-side {
+	left: 0;
+}
+#toggle-trigger:checked ~ .left-side {
+	transform: translateX(80vw)
+}
