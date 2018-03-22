@@ -1,0 +1,587 @@
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+a,
+abbr,
+address,
+cite,
+code,
+font,
+img,
+ol,
+ul,
+li,
+form,
+label,
+table,
+caption,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+/* remember to define focus styles! */
+:focus {
+  outline: 0;
+}
+/* remember to highlight inserts somehow! */
+ins {
+  text-decoration: none;
+}
+del {
+  text-decoration: line-through;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  background: #f0f0f0;
+  height: 100%;
+  width: 100%;
+}
+.header1,
+.header2-1 {
+  width: 100%;
+  height: auto;
+  color: #ffffff;
+  background: #29bde0;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+.header1 div button,
+.header2-1 div button {
+  padding: 0;
+  margin: 20px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+.header1 div button img,
+.header2-1 div button img {
+  height: 20px;
+  width: 20px;
+}
+.header1 div button:hover + ul,
+.header2-1 div button:hover + ul {
+  display: block;
+}
+.header1 div button:focus + ul,
+.header2-1 div button:focus + ul {
+  display: block;
+}
+.header1 div ul,
+.header2-1 div ul {
+  position: absolute;
+  display: none;
+  padding: 0;
+  margin: 0;
+  width: 30%;
+  left: 20px;
+  top: 40px;
+  z-index: 1;
+  background: #f0f0f0;
+}
+.header1 div ul:hover,
+.header2-1 div ul:hover {
+  display: block;
+}
+.header1 div ul li,
+.header2-1 div ul li {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #29bde0;
+}
+.header1 div ul li a,
+.header2-1 div ul li a {
+  text-decoration: none;
+  color: #000000;
+  display: flex;
+  width: 100%;
+  padding: 10px 0;
+  justify-content: center;
+  align-items: center;
+  background: #f0f0f0;
+}
+.main1 {
+  background: #f0f0f0;
+  position: relative;
+  top: 63px;
+  padding: 30px 5%;
+}
+.main1 .triangle {
+  border-left: 20px solid #FBB435;
+  border-right: 1px transparent;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  position: fixed;
+  right: 8%;
+  top: 50%;
+}
+.main1 div.last-game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9a9a9a;
+  background: #ffffff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.main1 div.last-game a {
+  text-decoration: none;
+  color: #9a9a9a;
+  display: flex;
+  width: 100%;
+  padding: 20px 0;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+}
+.main1 .arrow {
+  position: absolute;
+  right: 10%;
+  top: 50px;
+}
+.main1 div.game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fbb435;
+  background: #ffffff;
+  width: 100%;
+  margin: 20px 0 0 0;
+  padding: 24px 0 24px 0;
+  border-bottom: 1px solid #FBB435;
+}
+.main1 div.inside {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #ffffff;
+  width: 100%;
+  margin: 0 0 0 0;
+  padding: 20px 0;
+  display: block !important;
+}
+.main1 div.inside div.version {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #29bde0;
+  width: 80%;
+  margin: 0 auto 20px;
+  padding: 0;
+}
+.main1 div.inside div.version a {
+  text-decoration: none;
+  color: #ffffff;
+  display: flex;
+  width: 100%;
+  padding: 20px 0;
+  justify-content: center;
+  align-items: center;
+  background: #69d1e9;
+}
+.main1 div.inside div.player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #979797;
+  background: #ffffff;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 20px 0;
+}
+.main1 div.inside div.main-buttom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #ffffff;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding: 10% 0;
+}
+.main1 div.inside div.main-buttom div.circle {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: inline-block;
+  margin: 0 10px;
+}
+.main1 div.inside div.main-buttom div.circle:hover {
+  background: #29bde0;
+}
+.header2 {
+  width: 100%;
+  height: 124px;
+  color: #ffffff;
+  background: #29bde0;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+.header2 .header2-1 button {
+  float: left;
+}
+.header2 .header2-1 .vote {
+  text-align: center;
+  padding: 30px;
+  line-height: 0;
+  font-size: 20px;
+}
+.header2 .header2-1 .close {
+  float: right;
+  padding: 20px;
+}
+.header2 .header2-1 .close img {
+  height: 20px;
+  width: 20px;
+}
+.header2 .header2-2 {
+  background: #b9e9f5;
+  height: 60px;
+  top: 64px;
+  position: fixed;
+  width: 100%;
+}
+.header2 .header2-2 img {
+  padding: 15px;
+  float: right;
+  width: 30px;
+}
+.header2 .header2-2 .suggest {
+  line-height: 0;
+  padding: 30px 0 30px 50px;
+  font-size: 15px;
+  color: #000000;
+}
+.header2 .header2-2 .triangle2 {
+  border-top: 10px solid #b9e9f5;
+  border-right: 5px solid transparent;
+  border-bottom: 0;
+  border-left: 5px solid transparent;
+  position: fixed;
+  top: 124px;
+  left: 3rem;
+  z-index: 666;
+}
+.main2 {
+  background: #29bde0;
+  position: relative;
+  top: 124px;
+  position: absolute;
+  width: 100%;
+  padding-bottom: 160px;
+}
+.main2 .click {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #29bde0;
+  width: auto;
+  margin: 0;
+  padding: 20px 0 20px 45px;
+  display: block!important;
+}
+.role {
+  width: 25%;
+  padding: 0;
+  float: left;
+  margin: 4%;
+}
+.role:hover .child {
+  visibility: visible;
+}
+.child {
+  visibility: hidden;
+  width: 100%;
+  padding: 20% 0;
+}
+.hover1 {
+  background: url(../img/hover.png) 2%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  margin-right: 1%;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.hover2 {
+  background: url(../img/hover.png) 34%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  margin-right: 1%;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.hover3 {
+  background: url(../img/hover.png) 67%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  margin-right: 1%;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.hover4 {
+  background: url(../img/hover.png) 99%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.div8 {
+  width: 100%;
+  padding: 40% 0;
+  background: #f5c97b;
+  line-height: 0;
+  font-size: 16px;
+  font-family: 微软雅黑;
+}
+.div9 {
+  width: 100%;
+  padding: 10% 0;
+  background: #83b09a;
+  line-height: 0;
+  color: #FFFFFF;
+}
+.button2 {
+  width: 100%;
+  padding: 0;
+  border: .25rem solid #fff;
+}
+.footer2 {
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  background: #29bde0;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer2 a {
+  background-color: #fbb435;
+  width: 80%;
+  padding: 2% 0;
+  font-size: 150%;
+  color: #fff;
+  text-align: center;
+  text-decoration: none !important;
+}
+.footer1 {
+  position: fixed;
+  bottom: 0;
+  height: 100px;
+  background: transparent;
+  z-index: 1;
+  width: 100%;
+}
+.header3 {
+  width: 100%;
+  height: auto;
+  color: #ffffff;
+  background: #29bde0;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+.header3 .header3-1 {
+  width: 100%;
+  height: 80px;
+  color: #ffffff;
+  background: #29bde0;
+  position: fixed;
+  top: 0;
+  text-align: center;
+  border-bottom: 1px solid #daddcd;
+}
+.header3 .header3-1 .a2 {
+  float: left;
+  margin: 1rem;
+  background: url("../img/回到首页.png") no-repeat;
+  background-size: contain;
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.header3 .header3-1 .a3 {
+  float: right;
+  margin: 1rem;
+  background: url("../img/提示.png") no-repeat;
+  background-size: contain;
+  height: 2rem;
+  width: 2rem;
+}
+.header3 .header3-1 h2 {
+  font-size: 1.5rem;
+  line-height: 0;
+  padding-top: 30px;
+}
+.header3-2 {
+  width: 100%;
+  height: auto;
+  color: #ffffff;
+  background: #29bde0;
+  position: absolute;
+  top: 81px;
+}
+.header3-2 .header-part2 {
+  padding: 50px 10%;
+}
+.header3-2 .header-div1 {
+  background: url("../img/卧底胜利.png") no-repeat;
+  width: 15rem;
+  height: 10rem;
+  margin: 0 auto;
+  background-size: contain;
+}
+.header3-2 .header-div2 {
+  max-width: 72.5rem;
+  margin: 0 auto;
+  color: #ffc865;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-family: "微软雅黑";
+  padding-bottom: 2rem;
+}
+.header3-2 .header-div3 {
+  max-width: 72.5rem;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  color: #fff;
+}
+.header3-2 .ul1 {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 72.5rem;
+  font-size: 1.2rem;
+  color: #fff;
+  z-index: 666;
+}
+.ul2 {
+  color: #a6a6a6;
+  border-bottom: 0.1rem solid;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  list-style: none;
+  padding-left: 10%;
+  margin: 0;
+  background: #fff;
+}
+.ul2 li:first-child {
+  font-size: 20px;
+}
+.ul2 li {
+  padding: 5px 0;
+  font-family: sans-serif;
+}
+.footer-div0 {
+  position: fixed;
+  bottom: 0;
+  height: 4rem;
+  width: 100%;
+  background: #29bde0;
+  opacity: 0.3;
+}
+.footer-button1 {
+  position: fixed;
+  background: #f66f6f;
+  color: #fff;
+  width: 40%;
+  height: 3rem;
+  margin: 0.5rem;
+  opacity: 1;
+  bottom: 0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: .5rem;
+  font-size: 1.4rem;
+}
+.footer-button2 {
+  position: fixed;
+  background: #fbb435;
+  color: #fff;
+  width: 40%;
+  height: 3rem;
+  margin: 0.5rem;
+  opacity: 1;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: .5rem;
+  font-size: 1.4rem;
+}
+@media screen and (min-width: 1024px) {
+  .header3-2 {
+    text-align: center;
+  }
+  .header3-2 .ul2 {
+    padding-left: 0;
+  }
+}

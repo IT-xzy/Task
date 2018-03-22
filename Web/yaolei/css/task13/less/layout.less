@@ -1,0 +1,83 @@
+@import "framework.less";
+@base1: #29bde0;
+@base2: #f0f0f0;
+@base3: #ffffff;
+@base4: #69D1E9;
+.header(@wid;@hei;@col;@bg) {
+  width:@wid;
+  height: @hei;
+  color:@col;
+  background: @bg;
+}
+.main(@bg;@top) {
+  background: @bg;
+  position: relative;
+  top: @top;
+}
+.footer(@hei;@bg;@wid) {
+  position: fixed;
+  bottom: 0;
+  height: @hei;
+  background: @bg;
+  z-index:1;
+  width: @wid;
+}
+html {
+  height: 100%;
+  width :100%;
+}
+.body(@bg-col) {
+  background: @bg-col;
+  height: 100%;
+  width: 100%;
+}
+body {
+  .body(#f0f0f0;);
+}
+.header1,.header2-1 {
+  .header(100%;auto;@base3;@base1;);
+  position: fixed;
+  top:0;
+  z-index: 1;}
+.header2 {
+  .header(100%; 124px; @base3; @base1);
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  .header2-2 {
+    background:#b9e9f5;
+    height: 60px;
+    top: 64px;
+    position: fixed;
+    width: 100%;}
+  .header3 {
+    .header(100%; auto; @base3; @base1);
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    .header3-1 {
+      .header(100%;80px;@base3;@base1);
+      position: fixed;
+      top: 0;
+      text-align: center;
+      border-bottom:1px solid #daddcd;}}}
+.header3-2 {
+  .header(100%;auto;@base3;@base1);
+  position: absolute;
+  top: 81px;}
+.main1 {
+  .main(@base2;63px);
+  padding: 30px 5%;}
+.main2 {
+  .main(@base1;124px);
+  position: absolute;
+  width: 100%;
+  padding-bottom: 160px;}
+.footer2 {
+  .footer(100px;@base1;100%;);
+  display: flex;
+  justify-content: center;
+  align-items: center;}
+.footer1 {
+  .footer(100px;transparent;100%;)
+}

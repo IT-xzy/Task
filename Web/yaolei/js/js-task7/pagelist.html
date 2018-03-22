@@ -1,0 +1,27 @@
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li>
+            <a>去第</a>
+            <a style="height: 34px;"><input type="text" ng-model="kun" style="width: 30px;position: absolute;left: 3px;top: 2px;"></a>
+            <a>页</a>
+        </li>
+        <li>
+            <a>每页显示</a>
+            <a style="height: 34px;"><input type="number" ng-model="listNumber" style="width: 30px;position: absolute;left: 3px;top: 2px;"></a>
+            <a>条</a>
+        <li>
+        <a aria-label="Previous" ng-click="turnLeft()">
+            <span aria-hidden="true" style="cursor: pointer">&laquo;</span>
+        </a>
+    </li>
+        <li style="cursor: pointer"><a ng-click="firstPage()" style="cursor: pointer">首页</a></li>
+        <li ng-repeat="x in pageList" ng-click="goPageList(x)" style="cursor: pointer"><a>{{x}}</a></li>
+        <li><a ng-click="finalPage()" style="cursor: pointer">末页</a></li>
+        <li>
+            <a aria-label="Next" ng-click="turnRight()">
+                <span aria-hidden="true" style="cursor: pointer">&raquo;</span>
+            </a>
+        </li>
+        <li><a ng-click="go()">确定</a></li>
+    </ul>
+</nav>

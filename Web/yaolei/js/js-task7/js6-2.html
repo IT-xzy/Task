@@ -1,0 +1,85 @@
+<div ui-view="" >
+    <div ng-controller="formList">
+        <div class="top">
+            <div class="main-cotent">
+                <span class="standard2">发布时间</span>
+                <div class="standard1">
+                    <div class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="" ng-model="dat1" is-open="popup1.opened" ng-required="true" close-text="关闭"
+                               clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="standard2">-</div>
+                <div class="standard1">
+                    <div class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="" ng-model="dat2" is-open="popup2.opened" ng-required="true" close-text="关闭"
+                               clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <span class="standard2">类型</span>
+                <div class="standard1">
+                    <form>
+                        <select ng-model="myVar" ng-options="x.site for x in lists">
+                        </select>
+                    </form>
+                </div>
+            </div>
+            <div class="main-cotent">
+                <span class="standard2">状态</span>
+                <div class="standard1">
+                    <form>
+                        <select ng-model="statue" ng-options="y.site for y in lists2">
+                        </select>
+                    </form></div>
+                <div class="standard2"></div>
+                <div class="standard1 standard3"></div>
+                <span class="standard2 "></span>
+                <button type="button" class="standard1 clear" ng-click="clear()">清空</button>
+                <button type="button" class="standard1 search" ng-click="search()">搜索</button>
+            </div>
+        </div>
+        <div class="all">
+            <div  class="ID" ui-sref="houtai.js6-2.js6-3" style="float: right;"><button class="btn btn-primary">新增</button></div>
+            <div class="article">Article列表
+            </div>
+            <div class="top-1">
+                <div class="main-list">
+                    <div class="ID">ID</div>
+                    <div class="ID">名称</div>
+                    <div class="ID">类型</div>
+                    <div class="ID">发布时间</div>
+                    <div class="ID">修改时间</div>
+                    <div class="ID">发布者</div>
+                    <div class="ID">状态</div>
+                    <div class="ID">操作</div>
+                </div>
+            </div>
+            <div>
+                <div class="top-1">
+                    <div class="main-list" ng-repeat="x in sites">
+                        <div class="ID">{{$index+1}}</div>
+                        <div class="ID">{{x.title}}</div>
+                        <div class="ID">{{x.type|type}}</div>
+                        <div class="ID">{{x.createAt|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                        <div class="ID">{{x.updateAt|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                        <div class="ID">{{x.author}}</div>
+                        <div class="ID">{{x.status|status}}</div>
+                        <div class="ID ID-last">
+                            <a ng-click="operation(x)" style="cursor: pointer">{{x.status|online}}</a>
+                            <a ng-click="edit(x)" style="cursor: pointer">编辑</a>
+                            <a ng-click="delete(x)" style="cursor: pointer">删除</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--此处分页-->
+            <paging></paging>
+        </div>
+    </div>
+</div>
