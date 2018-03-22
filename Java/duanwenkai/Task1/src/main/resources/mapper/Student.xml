@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.StudentDao">
+
+    <select id="selectById" parameterType="int" resultMap="Student">
+        select * from student where stu_id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <resultMap id="Student" type="com.entity.Student">
+        <id column="stu_id" jdbcType="INTEGER" property="id" />
+        <result column="create_at" jdbcType="BIGINT" property="createTime" />
+        <result column="update_at" jdbcType="BIGINT" property="updateTime" />
+        <result column="stu_name" jdbcType="VARCHAR" property="stuName" />
+        <result column="QQ" jdbcType="VARCHAR" property="QQ" />
+        <result column="lesson_type" jdbcType="INTEGER" property="lessonType" />
+        <result column="admission_time" jdbcType="BIGINT" property="admissionTime" />
+        <result column="graduated_school" jdbcType="VARCHAR" property="graduatedSchool" />
+        <result column="student_number" jdbcType="VARCHAR" property="stuNumber" />
+        <result column="diary_link" jdbcType="VARCHAR" property="diaryLink" />
+        <result column="wish" jdbcType="VARCHAR" property="wish" />
+        <result column="brother_id" jdbcType="INTEGER" property="brotherId" />
+        <result column="hear_from" jdbcType="VARCHAR" property="heardFrom" />
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="Student">
+        insert into student
+        (create_at, update_at, stu_name, QQ, lesson_type, admission_time, graduated_school, student_number, diary_link, wish, brother_id, hear_from)
+        values (#{createTime},#{createTime},#{stuName},#{QQ},#{lessonType},#{admissionTime},#{graduatedSchool},#{stuNumber},#{diaryLink},#{wish},#{brotherId},#{heardFrom})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from student where stu_id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteAll">
+        delete from student
+    </delete>
+
+    <!--表设计中每个字段都是非空设计，这里有必要进行if判断吗-->
+
+    <update id="update" parameterType="Student">
+        update student
+        <set>
+            <if test="createTime != null">
+                create_at = #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_at = #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="stuName != null">
+                stu_name = #{stuName,jdbcType=VARCHAR},
+            </if>
+            <if test="QQ != null">
+                QQ = #{QQ,jdbcType=VARCHAR},
+            </if>
+            <if test="lessonType != null">
+                lesson_type = #{lessonType,jdbcType=INTEGER},
+            </if>
+            <if test="admissionTime != null">
+                admission_time = #{admissionTime,jdbcType=BIGINT},
+            </if>
+            <if test="graduatedSchool != null">
+                graduated_school = #{graduatedSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="stuNumber != null">
+                student_number = #{stuNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="diaryLink != null">
+                diary_link = #{diaryLink,jdbcType=VARCHAR},
+            </if>
+            <if test="wish != null">
+                wish = #{wish,jdbcType=VARCHAR},
+            </if>
+            <if test="brotherId != null">
+                brother_id = #{brotherId,jdbcType=INTEGER},
+            </if>
+            <if test="heardFrom != null">
+                hear_from = #{heardFrom,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where stu_id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--根据学员ID信息查找-->
+
+    <!--<update id="updates" parameterType="Student">
+        update student
+        set create_at = #{createTime,jdbcType=BIGINT},
+        update_at = #{updateTime,jdbcType=BIGINT}
+
+    </update>-->
+
+
+    <!--根据学员姓名模糊查询-->
+    <select id="selectByName" parameterType="string" resultMap="Student">
+        select * from student where stu_name like concat('%',#{0},'%')
+    </select>
+
+    <select id="selectAll" resultMap="Student">
+        select * from student
+    </select>
+
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(*) from student
+    </select>
+</mapper>
