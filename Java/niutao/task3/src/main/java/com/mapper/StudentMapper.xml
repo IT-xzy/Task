@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.StudentMapper">
+    <!-- 根据id获取学员信息 -->
+    <select id="findStudentById" parameterType="int" resultType="com.pojo.Student">
+        select * from student where id = #{id}
+    </select>
+    <!--获取所有学员信息-->
+    <select id="list" resultType="com.pojo.Student">
+        select * from student
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+    <!-- 添加学员信息 -->
+    <insert id="insertStuden" parameterType="com.pojo.Student" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into student(name,qq,class_id,graduate_school,oline_number,link,wish,brother_id)
+        values(#{name},#{qq},#{class_id},#{graduate_school},#{oline_number},#{link},#{wish},#{brother_id})
+    </insert>
+    <!-- 根据id删除信息 -->
+    <delete id="deleteStudent" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
+    <!--修改信息-->
+    <update id="updateStudent" parameterType="com.pojo.Student">
+        update student set
+            name=#{name},
+            qq=#{qq},
+            graduate_school=#{graduate_school},
+            oline_number=#{oline_number},
+            link=#{link},
+            wish=#{wish},
+            brother_id=#{brother_id}
+        where id = #{id}
+    </update>
+
+    <!--获取总数-->
+    <select id="total" resultType="int">
+        select count(*) from student
+    </select>
+
+    <!--实验-->
+    <!--<select id="s1" parameterType="int" resultType="hashmap">-->
+        <!--SELECT * FROM class WHERE id = #{id}-->
+    <!--</select>-->
+
+
+</mapper>
