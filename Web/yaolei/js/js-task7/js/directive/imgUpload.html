@@ -1,0 +1,92 @@
+<style>
+    .imgUploadDirective {
+        padding: 0;
+    }
+
+    .imgUploadDirective img {
+        width: 300px;
+    }
+
+    .imgUploadDirective .upBtn {
+        position: relative;
+    }
+
+    .imgUploadDirective .upBtn input {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        opacity: 0;
+    }
+
+    /*文件信息*/
+    .fileInfoPanel {
+    }
+
+    .fileInfoPanel th {
+        text-align: center;
+    }
+
+    .fileInfoPanel td {
+        text-align: center;
+    }
+
+    .fileInfoPanel td:first-child {
+        width: 40%;
+        word-break: break-all;
+        word-wrap: break-word;
+    }
+
+    .fileInfoPanel progress {
+        width: 50px;
+    }
+    /*.rows{*/
+        /*padding: 0px;*/
+    /*}*/
+</style>
+
+<div class="imgUploadDirective">
+    <div class="row">
+        <div class="col-sm-12">
+            <label class="btn upBtn" ng-class="{'btn-success':!isLoading,'btn-default':isLoading}"  >
+                {{btnTitle||"图片上传"}}
+                <input ng-disabled="isLoading" type="file">
+            </label>
+        </div>
+        <div class="col-sm-12">
+            <img ng-src="{{src}}" style="margin-top: 10px;">
+        </div>
+        <div class="col-sm-12">
+            <table width="100%" class="table fileInfoPanel">
+                <thead>
+                <tr>
+                    <th>图片名</th>
+                    <th>大小</th>
+                    <th>进度</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-if="file">
+                    <td ng-bind="file.name"></td>
+                    <!--limitTo 截取4位  带小数点-->
+                    <td ng-cloak>{{file.size&&((file.size/1024/1024|limitTo:4)+"mb")}}</td>
+                    <td>
+                        <progress ng-value="progress.value" max="{{progress.max}}"></progress>
+                    </td>
+                    <td ng-bind="loadInfo"></td>
+                    <td>
+                        <!--没有选择文件，时禁用-->
+                        <button ng-click="ways.upFile()" ng-disabled="!file||isLoading" class="btn btn-success">上传
+                        </button>
+                        <button ng-click="ways.cancelUp()" ng-disabled="!isLoading" class="btn btn-warning">取消</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,975 @@
+@import "framework.less";
+@base1: #fafafa;
+@base2: #29b078;
+@base3: #999;
+@base4: #fff;
+@base5: #d6d6d6;
+* {
+  box-sizing: border-box;
+  font-family: 微软雅黑 !important;
+}
+body {
+  background: @base1;
+
+}
+a {
+  text-decoration: none;
+}
+.row {
+  overflow: hidden;
+}
+.button(@bg-poi) {
+  background: url("../img/顶部雪碧图.png") @bg-poi no-repeat;
+  background-size: cover;
+  width: 2em;
+  height: 2em;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  margin-right: 1rem;
+  padding: 0;
+}
+.button-nav(@wid,@hei) {
+  width: @wid;
+  height: @hei;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  background: @base2;
+  line-height:0 ;
+  color: @base4;
+}
+.button-mid {
+  background: @base4;
+  border: 1px solid #eeeded;
+  cursor: pointer;
+  outline: none;
+  color: @base3;
+  font-size: 1rem;
+}
+.button-company (@bg-poi){
+  background: url("../img/战略合作企业.png") @bg-poi no-repeat;
+  background-size: cover;
+  width:100%;
+  padding: 0 0 80% 0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+.row4-1 {
+  color: @base3;
+  font-size: 14px;
+  width: 170px;
+  margin: 0 auto;
+}
+
+.row4-gaoxiao {
+  height: 3rem;
+  text-align: center;
+  b {
+    font-size: 18px;
+  }
+}
+.table-size {
+  position: relative;
+  margin-bottom: 2rem;
+}
+.man-number0 {
+  border-left: 1px dashed @base3;
+  font-size: 18px;
+  padding-left: 5rem;
+}
+.bg-img img {
+  width: 100%;
+}
+.man-number1 {
+  color: @base2;
+}
+.man-number2 {
+  color: @base3;
+  padding: 1rem 0;
+}
+.circle1 {
+  border-radius: 50%;
+  border: 1px solid @base3;
+  line-height: 0;
+  padding: 2rem;
+  color: @base2;
+  background: @base4;
+  width: 0;
+  height: 0;
+  display: flex;
+  justify-content: center;
+}
+.circle2 {
+  width: .65rem;
+  border-radius: 50%;
+  border: 1px solid #F3A846;
+  line-height: 0;
+  text-align: center;
+  padding: .25rem 0;
+  color: #29b078;
+  display: inline-block;
+}
+.header {
+    overflow: hidden;
+  background: @base4;
+  .header-1 {
+    width: 62.5%;
+    margin: 0 auto;
+    overflow: hidden;
+    background-color: @base4;
+    div + div {
+      float: right;
+    }
+    .top1 {
+      color: @base2;
+      display: flex;
+      align-items: center;
+      padding: .5rem 0;
+    }
+    .topright {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: .33rem 0;
+      .button1 {
+        .button(0 0;);
+      }
+      .button2 {
+        .button(50% 0;);
+      }
+      .button3 {
+        .button(100% 0;);
+      }
+    }
+  }
+}
+//此处轮播图
+#frame {
+  position: relative;
+  padding-bottom: 30%;
+  overflow: hidden;
+}
+#photos img {
+  float: left;
+  width: 33.33%;
+  height:auto;
+  display: block;
+}
+#photos {
+  position: absolute;
+  width:calc(100%*3);
+  animation-direction:normal;
+}
+.play {
+  animation: ma 12s ease infinite normal;
+}
+@keyframes ma {
+  0%, 30% {
+    left: 0;
+  }
+
+  33%, 60% {
+    left: -100%;
+  }
+  63%, 100% {
+    left: -200%;
+  }
+}
+.num {
+  position: absolute;
+  display: inline-block;
+  bottom: 10px;
+  padding: .3%;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  left: 49%;
+  z-index: 999;
+  border: 1px solid @base4;
+  &:focus {
+    background-color: @base4;
+  }
+}
+.num:hover,#photos:hover {
+  animation-play-state: paused;
+}
+.num:nth-child(2){
+  left:50%}
+.num:nth-child(3){left: 51%}
+#a1:focus + #photos{
+  animation: ma1 .5s ease-out forwards;
+}
+#a2:focus + #photos{
+  animation: ma2 .5s ease-out forwards;
+}
+#a3:focus + #photos{
+  animation: ma3 .5s ease-out forwards;
+}
+
+
+
+
+
+
+
+//轮播图结束
+
+.row2 {
+
+  background-color: @base2;
+  overflow: hidden;
+  div + div {
+    float: right;
+    margin-right: 18.75%;
+    div + div {
+      margin-right: -20px;
+    }
+  }
+  .logo {
+    float: left;
+    padding: 22px 0;
+  }
+    .row2-button1 {
+      .button-nav(100px,100px);
+      &:hover {
+        border-bottom: 3px solid @base1;
+        border-top: 3px solid @base2;
+      }
+    }
+    .row2-button2 {
+      .button-nav(100px,100px);
+      &:hover {
+        border-bottom: 3px solid @base1;
+        border-top: 3px solid @base2;
+      }
+    }
+    .row2-button3 {
+      .button-nav(100px,100px);
+      &:hover {
+        border-bottom: 3px solid @base1;
+        border-top: 3px solid @base2;
+      }
+    }
+    .row2-button4 {
+      .button-nav(100px,100px);
+      &:hover {
+        border-bottom: 3px solid @base1;
+        border-top: 3px solid @base2;
+      }
+    }
+  }
+.row4-div1 {
+  width:100%;
+  display: flex;
+  height: 4rem;
+  .row4-rocket {
+    height: 3rem;
+    margin:0 auto;
+  }
+}
+.row10 {
+  font-size: 18px;
+  margin: 5rem auto 3rem auto;
+  text-align: center;
+}
+.how-to-learn {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  .row7-mid {
+    padding: 0 1rem;
+    color: @base3;
+    font-size: 14px;
+  }
+  .page2-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+.row-9 {
+  padding: 0 1em;
+  box-sizing: border-box;
+  .row9-button {
+    .button-mid;
+    .row9-button-img {
+      font-size: 18px;
+      margin: 1em auto 2em;
+      display: block;
+    }
+  }
+  div {
+    font-size: 18px;
+    line-height: 26px;
+    color: #000;
+    & + div {
+      font-size: 16px;
+      line-height: 26px;
+      font-family: 微软雅黑;
+      margin: 1.5rem 1rem 2rem;
+      text-align: start;
+      color: @base3;
+    }
+  }
+}
+main {
+  .row;
+  width: 62.5%;
+  margin: 0 auto;
+  .main-body {
+    .row;
+
+  }
+  .four-shapes {
+    text-align: center;
+    margin-top: 24px;
+  }
+  .row10-1 {
+    font-size: 1.8rem;
+    margin: 5rem auto 1rem auto;
+    text-align: center;
+    strong {
+      font-size: 18px;
+    }
+  }
+  button.row11-button1 {
+    .button-company(1.5% 0);
+    &:hover {
+      box-shadow: 2px 2px 20px #d6d6d6;
+    }
+  }
+  button.row11-button2 {
+    .button-company(25.5% 0);
+    &:hover {
+      box-shadow: 2px 2px 20px #d6d6d6;
+    }
+  }
+  button.row11-button3 {
+    .button-company(50% 0);
+    &:hover {
+      box-shadow: 2px 2px 20px #d6d6d6;
+    }
+  }
+  button.row11-button4 {
+    .button-company(75% 0);
+    &:hover {
+      box-shadow: 2px 2px 20px #d6d6d6;
+    }
+  }
+  button.row11-button5 {
+    .button-company(99% 0);
+    &:hover {
+    box-shadow: 2px 2px 20px #d6d6d6;
+  }
+  }
+}
+footer {
+  .footer-left {
+    height: 9rem;
+    display: inline-block;
+  }
+    .a1 {
+      color: @base4 !important;
+      text-decoration: none;
+
+    .JNS {
+      padding: 1rem 0;
+      a {
+        line-height: 20px;
+      }
+    }
+  }
+  .weixin-text {
+    padding-top: 1rem;
+    color: @base4;
+  }
+  .weixin-img {
+    font-size: 1rem;
+    height: 9rem;
+  }
+}
+.row-13 {
+  a {
+    color: @base3 !important;
+  }
+}
+.Official-website {
+  font-family: 微软雅黑;
+  background: @base2;
+  color: @base4 !important;
+  a {
+    color: @base4 !important;
+  }
+}
+.copyright {
+  text-align: center;
+  color: @base4;
+  background: @base2;
+  border-top: 1px solid #32c086;
+}
+.row12 {
+  text-align: center;
+}
+.row13-div {
+  width: 10%;
+  float: left;
+  a {
+    color: #000;
+    &:hover {
+      border-bottom: 1px solid @base2;
+    }
+  }
+}
+//页面2
+.company {
+  color: #29b078 !important;
+  font-size: 14px;
+}
+.bg-img {
+  width:100%;
+  overflow: hidden;
+}
+.list-main {
+  border:1px solid #ededed;
+  background: #ffffff;
+  padding:0 !important;
+  margin-top: 1rem;
+  .list {
+    padding: 1rem 0;
+    width: 90px;
+    margin: 0 auto;
+    font-family: 微软雅黑;
+  }
+  .list-top {
+    font-size: 14px;
+    width: 80px;
+    margin: 0 auto;
+    font-family: 微软雅黑;
+    border-bottom: 1px solid #ededed;
+    padding: .5rem 0;
+  }
+}
+.main-left-top {
+  padding: 4.5rem 4.5rem 1rem 4.5rem;
+  border: 1px solid #ededed;
+  background: #fff;
+  align-items: center;
+  font-family: 微软雅黑;
+  &:first-child {
+    float: left;
+  }
+  .tudouwang {
+    width: 6rem;
+  }
+}
+.row1 {
+  color: @base3;
+  padding-left: 2rem;
+  margin-bottom: 15rem !important;
+}
+.main-right {
+  float: left;
+  padding: 4.5rem;
+  border: 1px solid #ededed;
+  background: #fff;
+  align-items: center;
+  font-family: 微软雅黑;
+  p {
+    line-height: 30px;
+    font-size: 14px;
+    text-indent: 30px;
+  }
+}
+//页面3
+.job-row3 {
+  margin:1rem 0;
+}
+.job-top {
+  color: #29b078 !important;
+}
+.job-select {
+  display: flex;
+  border-top:1px solid #d0d6d9;
+  border-bottom:1px solid #edf1f2;
+  padding: 1rem 0;
+  .side {
+    color: #999;
+  }
+  .job-type {
+    margin: 0 0.5rem;
+    color: #000 !important;
+    text-decoration: none;
+  }
+  .job-type:hover {
+    background: #29b078;
+    color: #FFFFFF !important;
+    text-decoration: none;
+  }
+}
+.star {
+  background: url("../img/红五角.png") no-repeat center;
+  background-size: cover;
+  height: 1rem;
+  width: 1rem;
+  margin-left:1rem;
+  font-size: 12px;
+}
+.qianduan-top {
+  font-family: 微软雅黑;
+  display: flex;
+  align-items: center;
+  padding:2rem 0;
+  border-bottom:1px solid #d0d6d9;
+}
+table {
+  width: 100%;
+  background: @base4;
+  border-collapse: collapse;
+  color: @base3;
+}
+
+.div1 {
+  .table-head {
+    display: flex;
+    align-items: center;
+  }
+  .web-img {
+    background: url("../img/职业头像.png") no-repeat center;
+    background-size: cover;
+    padding: 20%;
+    margin:5% 3%;
+    height:0;
+    width: 0;
+  }
+  .pay {
+    float: right;
+  }
+  .table-p {
+    text-indent: 0;
+    word-break: break-all;
+  }
+  .danteng {
+    display: flex;
+    align-items: center;
+  }
+}
+.newbutton {
+margin-right: -20px;
+}
+.divhover {
+  animation: myfirst 4s alternate;
+  visibility: hidden;
+  position: absolute !important;
+  background: #3d3d3d;
+  color: #FFFFFF;
+  line-height: 22px;
+  height: 100%;
+  padding:30% 15%;
+  opacity: .76;
+  animation-iteration-count: infinite;
+}
+/*@keyframes myfirst {
+  0% {opacity: 0;}
+  25% {opacity: .18;}
+  50% {opacity: .36;}
+  75% {opacity: .54;}
+  100% {opacity: .76;}
+}*/
+.div1:hover .divhover {
+  visibility: visible;
+}
+.div1 {
+  padding:0 15px;
+}
+.ios {
+  text-align: center;
+  padding-bottom: 10%;
+}
+.size {
+  margin:3rem 0;
+}
+td {
+  border: #eeeded solid thin;
+  padding: 3% !important;
+  font-size: 12px;
+}
+.row-top {
+  margin-top: 10rem;
+}
+
+
+
+
+
+
+@media screen and (min-width: 1400px) {
+  .how-to-learn {
+    height: 128px;
+  }
+  main {
+    width:62.5%;
+  }
+  .divhover {
+    font-size: 14px;
+  }
+  h4 {
+    font-size: 16px;
+  }
+  h4 + p {
+    font-size: 14px;
+  }
+  .col-sm-6 {
+    width:50% !important;
+  }
+  .how-to-learn {
+    height: 128px;
+  }
+  .newbutton {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      font-size: 16px;
+    }
+  }
+  .friendly-link {
+    background: #fff;
+    margin-top: 8rem;
+    padding-bottom: 1rem;
+    .row12 {
+      text-align: center;
+      font-size: 18px;
+      padding-bottom: 2rem;
+      padding-top: 1rem;
+    }
+  }
+  .row12 {
+    font-size: 18px;
+    padding-bottom: 2rem;
+    padding-top: 1rem;
+  }
+  .link-list {
+    padding-left: 15px;
+    font-size: 14px;
+    line-height: 26px;
+    width: 62.5% !important;
+    margin: 0 auto;
+  }
+  .footer {
+    width: 62.5%;
+    margin: auto;
+    padding-left: 15px;
+    .row-16 {
+      padding-top: 1rem;
+    }
+    .weixin-text {
+      text-align: center;
+    }
+    .weixin-img {
+      text-align: center;
+    }
+    .JNS {
+      font-size: 16px;
+      color: @base1 !important;
+      padding: 2em 0 2rem 0;
+    }
+  }
+
+  .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-9 {
+    float: left;
+    position: relative;
+    padding-bottom: 1px;
+  }
+  .col-lg-offset-2 {
+    padding-left: 18.75%;
+  }
+  .col-lg-2 {
+    width: 20%;
+  }
+  .col-lg-3 {
+    width: 25% !important;
+  }
+  .col-lg-4 {
+    width: 33.33%;
+  }
+  .col-lg-9 {
+    width: 75%;
+  }
+  .col-lg-12 {
+    width: 100%;
+  }
+  .page2-button {
+    display: none;
+  }
+  .divhover {
+    font-size: 14px;
+  }
+  .newbutton {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      font-size: 16px;
+    }
+  }
+    .friendly-link {
+      background: #fff;
+      margin-top: 8rem;
+      padding-bottom: 1rem;
+      .row12 {
+        text-align: center;
+        font-size: 18px;
+        padding-bottom: 2rem;
+        padding-top: 1rem;
+      }
+    }
+    .row12 {
+      font-size: 18px;
+      padding-bottom: 2rem;
+      padding-top: 1rem;
+    }
+    .link-list {
+      padding-left: 15px;
+      font-size: 14px;
+      line-height: 26px;
+      width: 62.5% !important;
+      margin: 0 auto;
+    }
+    .footer {
+      width: 62.5%;
+      margin: auto;
+      padding-left: 15px;
+      .row-16 {
+        padding-top: 1rem;
+      }
+      .weixin-text {
+        text-align: center;
+      }
+      .weixin-img {
+        text-align: center;
+      }
+      .JNS {
+        font-size: 16px;
+        color: @base1 !important;
+        padding: 2em 0 2rem 0;
+      }
+    }
+
+    .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-9 {
+      float: left;
+      position: relative;
+      padding-bottom: 1px;
+    }
+    .col-lg-offset-2 {
+      padding-left: 18.75%;
+    }
+    .col-lg-2 {
+      width: 20%;
+    }
+    .col-lg-3 {
+      width: 25% !important;
+    }
+    .col-lg-4 {
+      width: 33.33% !important;
+    }
+    .col-lg-9 {
+      width: 75%;
+    }
+    .col-lg-12 {
+      width: 100%;
+    }
+  }
+@media screen and (min-width: 768px) and (max-width: 1399px){
+  .divhover {
+    font-size: 12px;
+  }
+  .page2-button {
+    display: none;
+  }
+  .header-1 {
+    width: 90% !important;
+  }
+  .logo {
+    padding-left: 5% !important;
+  }
+  .row1 {
+    padding-left: 0;
+  }
+  .top1 {
+    float: left;
+  }
+  .row2 div + div {
+    margin-right: 5%;
+  }
+  main {
+    width: 90%;
+  }
+  .col-sm-6 {
+    width:50%;
+    float: left;
+    padding:5%;
+  }
+  .row6 {
+    padding-left: 20%;
+  }
+  .row11-main {
+    padding: 5rem;
+  }
+  .man-number0 {
+    font-size: 16px;
+    margin: 1rem 33%;
+  }
+  .footer {
+    padding-left:10%;
+  }
+}
+@media screen and (max-width: 767px) {
+    body {
+      font-size: 80%;
+    }
+    .divhover {
+      font-size: 12px;
+    }
+    .Official-website .footer {
+      padding-left: 10%;
+    }
+    .how-to-learn {
+      height: 110px;
+    .div1 {
+      padding: 0;
+    }
+    .divhover {
+      height: auto;
+      padding: 17% 15%;
+    }
+
+    }
+    main {
+      width:90%;
+      .row4-div1 {
+        margin-top: 1rem;
+      }
+      .man-number0 {
+        margin: 1rem auto;
+        padding-left: 3rem;
+        width: 60%;
+      }
+      .row-9 {
+        padding: 1em 0;
+      }
+    }
+    .header {
+      .header-1 {
+        margin: 0;
+        width: 100%;
+        .top1 {
+          font-size: 14px;
+        }
+        .topright {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .page2-button {
+      float: right;
+      background: url("../img/下拉菜单.png") no-repeat 0 0 transparent;
+      width: 20px;
+      height: 20px;
+      position: relative;
+      margin: 20px;
+      background-size: cover;
+      cursor: pointer;
+      outline: none;
+      border: 0;
+    }
+
+    div .page2-button:focus + .newbutton {
+      position: static;
+      display: block;
+    }
+    .newbutton:hover {
+      display: block;
+    }
+
+    .newbutton {
+      z-index: 1;
+      display: none;
+    }
+
+
+    .logo {
+      float: left;
+    }
+
+    .top1 {
+      float: left;
+      margin-left: 1rem;
+    }
+
+    .row2-button1 {
+      width: 100%;
+      border-top: 1px solid;
+    }
+
+    .row2-button2 {
+      width: 100%;
+    }
+
+    .row2-button3 {
+      width: 100%;
+    }
+
+    .row2-button4 {
+      width: 100%;
+    }
+
+    .row2 div + div {
+      margin-right: 0 !important;
+      width: 100% !important;
+      .row2-button1 {
+        width:100%;
+        border-top:1px solid @base4;
+      }
+      .row2-button2 {
+        width:100%;
+      }
+      .row2-button3 {
+        width:100%;
+      }
+      .row2-button4 {
+        width:100%;
+      }
+    }
+    .row-top {
+      margin-top: 2rem;
+    }
+    .row13-div {
+      width: 20%;
+      a {
+        font-size: 12px;
+      }
+    }
+    .row2 div + div {
+      float: none;
+    }
+    .row2 .logo {
+      padding: 10px;
+    }
+.bg-img img {
+  width: 100%;
+}
+.row1 {
+  padding-left: 0;
+}
+  .tudouwang {
+    width: 100% !important;
+  }
+  .main-left-top {
+    padding: 1rem;
+  }
+  .main-right {
+    padding: 1rem;
+  }
+      .row2 div + div {
+        margin-right: 100%;
+  }}

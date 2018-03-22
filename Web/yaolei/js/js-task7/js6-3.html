@@ -1,0 +1,106 @@
+<div class="all"  ng-controller="AppController">
+    <div class="article"  style="position:absolute;top:0">{{newArticle}}</div>
+    <div class="new-list">
+        <img-upload ajax-ads="ajaxAds" img-src="" btn-title="上传" ng-disabled="" img-src="params.img"></img-upload>
+        <div class="bar">
+            <div class="bar-1">标题名称</div>
+            <div class="box">
+                <input ng-model="title" type="text">
+            </div>
+        </div>
+        <div class="bar">
+            <div class="bar-1">类型</div>
+            <div class="box box-1" style="display: flex;">
+                <form>
+                    <select ng-model="select" ng-options="x.site for x in sites"></select>
+                </form>
+                <form>
+                    <select ng-model="$parent.selected" ng-if="select.id === 3" ng-options="y.site for y in sites2" style="margin-left: 20%"></select>
+                </form>
+            </div>
+        </div>
+        <div class="bar">
+            <div class="bar-1">说明</div>
+            <div class="box">
+                <div id="div1"></div>
+            </div>
+        </div>
+        <div class="bar">
+            <div class="bar-1">跳转链接</div>
+            <div class="box">
+                <input ng-model="link" ng-change="linkList()" type="text" style="position:relative;top: 0;width: 100%;">
+            </div>
+            <p style="font-size:12px; color: red;position:absolute;left: 15%;bottom:-1rem;">{{error}}</p>
+        </div>
+        <img-upload ajax-ads="" img-src="" btn-title="上传" ng-disabled="" img-src="params.img"></img-upload>
+        <!--<div class="bar">-->
+            <!--<div class="bar-1">配图</div>-->
+            <!--<div class="box box-1">-->
+                <!--<label for="img" class="btn btn-primary btn-noBs">选择文件</label>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter" class="ng-scope">-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-3">-->
+                    <!--<div ng-show="uploader.isHTML5" class=""></div>-->
+                    <!--<input type="file" ng-model="png" nv-file-select="" uploader="uploader" id="img" style="position:relative;top: 0;display: none;">-->
+                <!--</div>-->
+                <!--<div class="col-md-9" style="margin-bottom: 40px">-->
+                    <!--<p class="ng-binding"></p>-->
+                    <!--<table class="table">-->
+                        <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th width="40%">图片名字</th>-->
+                            <!--<th ng-show="uploader.isHTML5" class="">大小</th>-->
+                            <!--<th ng-show="uploader.isHTML5" class="">进度</th>-->
+                            <!--<th>状态</th>-->
+                            <!--<th>操作</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr ng-repeat="item in uploader.queue">-->
+                            <!--<td style="word-break: break-all"><strong>{{ item.file.name }}</strong></td>-->
+                            <!--<div>-->
+                                <!--<label>-->
+                                    <!--<img ng-src="{{m}}" width="100" height=""/>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>-->
+                            <!--<td ng-show="uploader.isHTML5" width="100%">-->
+                                <!--<div class="progress" style="margin-bottom: 0;">-->
+                                    <!--<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>-->
+                                <!--</div>-->
+                            <!--</td>-->
+                            <!--<td class="text-center">-->
+                                <!--<span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>-->
+                                <!--<span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>-->
+                                <!--<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>-->
+                            <!--</td>-->
+                            <!--<td nowrap>-->
+                                <!--<button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">-->
+                                    <!--<span class="glyphicon glyphicon-upload"></span> 上传-->
+                                <!--</button>-->
+                                <!--<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">-->
+                                    <!--<span class="glyphicon glyphicon-ban-circle"></span> 取消-->
+                                <!--</button>-->
+                                <!--<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove();img_del()" >-->
+                                    <!--<span class="glyphicon glyphicon-trash"></span> 移除-->
+                                <!--</button>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="bar">
+            <div class="bar-1"></div>
+            <div class="box box-1">
+                <button type="button" class="bottom-button" ng-click="submit(2)" ng-disabled="!title || select.id===4  || test !== true || m===defined||null || (selected.id===7&&select.id===3)">立即上线</button>
+                <button type="button" class="bottom-button" ng-click="submit(1)" ng-disabled="!title || select.id===4  || test !== true || m===defined||null || (selected.id===7&&select.id===3)">存为草稿</button>
+                <button type="button" class="bottom-button-right" ui-sref="houtai.js6-2">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+i
