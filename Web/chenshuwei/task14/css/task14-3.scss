@@ -1,0 +1,123 @@
+@charset "UTF-8";
+@import "common.css";
+$Colorgreen:#29b078;
+$fontColor:#999999;
+$fontSize:14px;
+$fontSizeMin:12px;
+@mixin box-wrap{
+  border-radius: 3px;
+  border: 1px solid #ededed;
+  background: #fff;
+}
+p{
+  color: $fontColor;
+  font-size: 14px;
+}
+
+.content{
+/*img-area*/
+  >.img-area{
+    width: 100%;
+  }
+/*title*/
+  >.contianer>.row{
+
+    >h5{
+      padding: 30px 0;
+
+      >span{
+        color: $Colorgreen;
+      }
+    }
+  }
+
+  >.contianer>.row{
+
+    /*侧栏*/
+    >.col-1{
+      float: left;
+      width: 25%;
+      padding: 0 15px;
+      @media (max-width: 990px) {
+      width: 100%;
+    }
+/*enterprise-list*/
+      >.enterprise-list{
+        @include box-wrap;
+        >h5{
+          padding: 20px 0;
+          text-align: center;
+          border-bottom: 1px solid #e6e6e6;
+        }
+        >ul>li{
+          width: 78px;
+          margin: 30px auto;
+
+          >a{
+            color: $Colorgreen;
+            font-size: $fontSizeMin;
+            &:hover{
+              color: #ff650e;
+            }
+            &:hover>span{
+              background: #ff650e;
+            }
+            >span{
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              border: 1px solid #ff650e;
+            }
+          }
+        }
+      }
+    }
+    /*主体内容*/
+    >.col-3{
+      float: left;
+      width: 75%;
+      padding: 0 15px;
+      @media (max-width: 990px) {
+      width: 100%;
+      }
+      /*text-area*/
+      >.text-area{
+        @include box-wrap;
+        :after{
+          display: table;
+          content: " ";
+          clear: both;
+        }
+        >.text-title{
+          padding: 15px;
+          border-bottom: 1px solid #e6e6e6;
+          text-align: center;
+
+          >img{
+            margin-right: 10px;
+            @media (min-width: 640px) {
+              float: left;
+            }
+          }
+
+          >p{
+            padding-top: 30px;
+            line-height: 25px;
+            text-align: left;
+          }
+        }
+        >.text-main{
+          padding: 30px 8% 8% 10%;
+          >p{
+            margin-bottom: 40px;
+            text-indent: 28px;
+            line-height: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+.footer{
+  margin-top: 100px;
+}
