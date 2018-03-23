@@ -1,0 +1,63 @@
+<div class="row option-list">
+    <div class="col-xs-12 col-sm-12 col-md-4 option-single">
+        <div class="option-text" >发布时间</div>
+        <input type="text" class="option-content">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 option-single">
+        <div class="option-text" >--</div>
+        <input type="text" class="option-content">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 option-single">
+        <div class="option-text" >类型</div>
+        <input type="text" class="option-content">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 option-single">
+        <div class="option-text" >状态</div>
+        <input type="text" class="option-content">
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 option-btn">
+        <div class="clear-btn">清除</div>
+        <div class="seek-btn">搜索</div>
+    </div>
+</div>
+<div class="show-list">
+    <div class="show-header">
+        <div class="show-title"></div>
+        <div class="header-add">+新增</div>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>名称</th>
+        <th>类型</th>
+        <th>发布时间</th>
+        <th>修改时间</th>
+        <th>发布者</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="x in articleList | orderBy:'updateAt '">
+        <td>{{$index+1}}</td>
+        <td>{{x.title}}</td>
+        <td>{{x.type | typesFilter }}</td>
+        <td>{{x.createAt | date:"yyyy-MM-dd "}}</td>
+        <td>{{x.updateAt | date:"yyyy-MM-dd"}}</td>
+        <td>{{x.author}}</td>
+        <td>{{x.status | stateFilter}}</td>
+        <td>
+            <table>
+                <tr>
+                    <td ng-click="statuses(x.id,x.status)"><a href="">{{x.status | putAwayFilter}}</a>
+                    </td>
+                    <td class="tdMargin"><a href="" ng-click="compile(x.id )">编辑</a></td>
+                    <td ng-click="delete(x.id)"><a href="">删除</a></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>

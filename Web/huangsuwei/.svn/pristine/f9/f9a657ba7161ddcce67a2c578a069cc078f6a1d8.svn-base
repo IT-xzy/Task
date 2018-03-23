@@ -1,0 +1,43 @@
+<div class="background">
+    <div class="enter-window">
+        <div class="enter-text">后台登录</div>
+        <form name="myForm">
+            <input
+                    type="text"
+                    class="enter-name"
+                    placeholder="帐号"
+                    name="name"
+                    ng-model="params.name"
+                    required="required"
+                    ng-maxlength="12"
+                    ng-minlength="4">
+            <div class="hint-box">
+
+                <span ng-show="myForm.name.$dirty">
+                    <span class="hint" ng-show="myForm.name.$error.required">必须填帐号</span>
+                    <span class="hint" ng-show="myForm.name.$error.maxlength">帐号必须小于12位</span>
+                    <span class="hint" ng-show="myForm.name.$error.minlength">帐号必须大于4位</span>
+                </span>
+            </div>
+            <input
+                    type="password"
+                    class="enter-code"
+                    placeholder="密码"
+                    name="psd"
+                    ng-model="params.pwd"
+                    required="required"
+                    ng-maxlength="12"
+                    ng-minlength="5">
+            <div class="hint-box">
+                <span ng-show="myForm.psd.$dirty">
+                    <span class="hint" ng-show="myForm.psd.$error.required">必须填帐号</span>
+                    <span class="hint" ng-show="myForm.psd.$error.maxlength">密码必须小于12位</span>
+                    <span class="hint" ng-show="myForm.psd.$error.minlength">密码必须大于5位</span>
+                </span>
+            </div>
+            <input type="submit" ng-disabled="myForm.name.$pristine||myForm.psd.$pristine||myForm.name.$error.maxlength||myForm.name.$error.minlength||myForm.psd.$error.maxlength||myForm.psd.$error.minlength" class="enter-btn"  ng-click="ccc()" value="登录">
+       </form>
+
+
+    </div>
+</div>
