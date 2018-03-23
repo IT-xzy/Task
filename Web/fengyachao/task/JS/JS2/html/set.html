@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>JS-Task2-2</title>
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <link rel="stylesheet" href="../css/task.css">
+    <link rel="stylesheet" href="../css/task2-2.css">
+</head>
+<body>
+<header>
+    <input type="button" class="header-left" onclick="home()">
+    <p>参数设置</p>
+    <input type="button" class="header-right">
+</header>
+<main>
+    <div class="role">
+        <div class="role-left">
+            <p>玩 家 配 比</p>
+        </div>
+        <div class="role-right">
+            <div class="view">
+                <div class="view-left">
+                    <div>
+                        杀 手
+                        <span id="kill"></span>
+                         人
+                    </div>
+                    <div>
+                        平 民
+                        <span id="civilian"></span>
+                         人
+                    </div>
+                </div>
+                <div class="view-right" id="per"></div>
+            </div>
+            <div class="setting">
+                <input type="button" value="点击设置" onclick="set()">
+                <img src="../images/set.png">
+            </div>
+        </div>
+    </div>
+    <div class="keyword">
+        <input type="text" placeholder="水民词组">
+        <input type="text" placeholder="幽灵词组">
+    </div>
+    <div class="people">
+        <table width="90%" border="0" align="center" cellpadding="1">
+            <tr>
+                <td width="672" valign="middle">
+                    <div>
+                        <p>玩 家 人 数</p>
+                        <input name="C_Rejection" id="C_Rejection" type="text" class="in-num" value="4"/>
+                        <p> 人</p>
+                    </div>
+                    <p class="set-num">(玩家人数为4-18人)</p>
+                    <div class="progress">
+                        <input type="button" value="-" class="minus"/>
+                        <div id="slider2"></div>
+                        <input type="button" value="+" class="add"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="footer">
+        <input type="button" value="去发牌" onclick="star()">
+    </div>
+    <div class="shadow" id="shade"></div>
+    <div class="dialog" id="circle">
+        <p>请输入正确的玩家数量</p>
+        <div>
+            <button onclick="enter()">确认</button>
+            <button onclick="cancel()">取消</button>
+        </div>
+    </div>
+</main>
+<script src="../js/jquery-1.10.2.js"></script>
+<script src="../js/jquery-ui.js"></script>
+<script src="../js/task.js"></script>
+<script src="../js/set.js"></script>
+</body>
+</html>
