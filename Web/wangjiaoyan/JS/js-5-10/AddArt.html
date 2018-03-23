@@ -1,0 +1,139 @@
+<div class="newArt" ng-controller="AddCtr">
+   <div class="ArtCot">
+       <div class="addArt">
+           {{title}}
+       </div>
+
+       <form class="content" name="myform" >
+           <div class="col-md-3">标题名称</div>
+           <div class="col-md-8">
+               <input class="form-control" type="text" ng-model="param.title" required>
+           </div>
+
+           <div class="col-md-3 align">类型</div>
+           <div class="col-md-8">
+               <select class="form-control" ng-model="param.type" required>
+                   <option value="">请选择</option>
+                   <option value="{{x.type}}" ng-repeat="x in typeLists" ng-selected="x.type==param.type">
+                       {{x.name}}
+                   </option>
+               </select>
+               <select class="form-control" ng-model="param.industry" ng-if="param.type==3"
+                       ng-options="x.type as x.name for x in industry" required>
+               <!--<option value="">请选择</option>-->
+               <!--<option value="{{x.type}}" ng-repeat="x in industry" ng-selected="param.industry">-->
+                   <!--{{x.name}}-->
+               <!--</option>-->
+                </select>
+           </div>
+
+           <div class="col-md-3 align">说明</div>
+           <div class="col-md-8" id="div1"></div>
+
+           <div class="col-md-3">跳转链接</div>
+           <div class="col-md-8">
+               <input class="form-control" type="text" ng-model="param.url" required>
+           </div>
+           <div class="col-md-3 align">配图</div>
+           <div class="col-md-8">
+               <div class="form-group">
+               <label class="btn btn-primary" for="file2">选择文件</label>
+               <input id="file2" style="display: none" type="file" nv-file-select uploader="uploader" multiple>
+
+               <img alt="配图预览" ng-src="{{imageSrc1}}" class="img-responsive">
+
+                   <table class="table" >
+                       <thead>
+                       <tr><th>图片名</th>
+                           <th>文件大小</th>
+                           <th>进度</th>
+                           <th>操作</th>
+                           <th>操作</th>
+                       </tr></thead>
+                       <tbody>
+                       <tr ng-repeat="item in uploader.queue">
+                           <td><strong>{{ item.file.name }}</strong></td>
+                           <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                           <td ng-show="uploader.isHTML5">
+                               <div class="progress" style="margin-bottom: 0;">
+                                   <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                               </div>
+                           </td>
+
+                           <td class="text-center">
+                               <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                               <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                               <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                           </td>
+
+                           <td nowrap>
+                               <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                   <span class="glyphicon glyphicon-upload"></span> 上传
+                               </button>
+                               <button type="button" class="btn btn-warning btn-xs" ng-click="item.remove()" ng-disabled="item.isUploading">
+                                   <span class="glyphicon glyphicon-ban-circle"></span> 删除
+                               </button>
+
+                           </td>
+                       </tr>
+                       </tbody>
+                   </table>
+
+           </div>
+               <button type="button" class="btn btn-success" ng-click="pubArticle()"  ng-disabled="!myform.$valid || imageSrc1==undefined " disabled="disabled">立即上线
+               </button>
+               <button type="button" class="btn btn-success" ng-click="saveArticle() "  ng-disabled="!myform.$valid || imageSrc1==undefined" disabled="disabled">存为草稿
+               </button>
+               <button class="btn btn-default pos" ng-click="cancle()">取消</button>
+           </div>
+        </form>
+   </div>
+</div>
+<script>
+    var E = window.wangEditor;
+    var editor = new E('#div1');
+    editor.customConfig.uploadFileName = 'file';
+    editor.customConfig.uploadImgServer = '/carrots-admin-ajax/a/u/img/task';
+    editor.customConfig.uploadImgHooks = {
+        success: function (xhr, editor, result) {
+            // 图片上传并返回结果，图片插入成功之后触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+            console.log(result);
+        },
+        fail: function (xhr, editor, result) {
+            // 图片上传并返回结果，但图片插入错误时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象，result 是服务器端返回的结果
+            alert(result);
+        },
+        error: function (xhr, editor) {
+            // 图片上传出错时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+            alert('出错了');
+        },
+        timeout: function (xhr, editor) {
+            // 图片上传超时时触发
+            // xhr 是 XMLHttpRequst 对象，editor 是编辑器对象
+            alert('超时了')
+        },
+
+        // 如果服务器端返回的不是 {errno:0, data: [...]} 这种格式，可使用该配置
+        // （但是，服务器端返回的必须是一个 JSON 格式字符串！！！否则会报错）
+        customInsert: function (insertImg, result, editor) {
+            // 图片上传并返回结果，自定义插入图片的事件（而不是编辑器自动插入图片！！！）
+            // insertImg 是插入图片的函数，editor 是编辑器对象，result 是服务器端返回的结果
+
+            // 举例：假如上传图片成功后，服务器端返回的是 {url:'....'} 这种格式，即可这样插入图片：
+            var url = result.data.url;
+            insertImg(url);
+
+            // result 必须是一个 JSON 格式字符串！！！否则报错
+        }
+
+    };
+
+
+
+    editor.create();
+
+
+</script>

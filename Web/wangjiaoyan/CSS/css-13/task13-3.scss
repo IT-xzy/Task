@@ -1,0 +1,112 @@
+$blue:#29bde0;
+$yellow:#ffc865;
+$brilyellow:#fbb435;
+$gray:#f0f0f0;
+$darkgray:#d0d0d0;
+$darkengray:#9a9a9a;
+@mixin border{
+  margin: 1rem 2rem;
+  border: 1px solid $darkgray;
+  background-color: #fff;
+}
+
+
+.list{
+  display: inline-block;
+  margin-left: 10%;
+  margin-right: 40%;
+}
+.tab-bar{
+  height: 4rem;
+  line-height: 4rem;
+  background-color: $blue;
+}
+.left-small{
+  border-right: none;
+}
+.tab-bar .menu-icon{
+  height: 3.5rem;
+}
+.tab-bar .menu-icon span::after{
+  width: 2rem;
+  box-shadow: 0 0 0 2px #fff, 0 8px 0 2px #fff, 0 17px 0 2px #fff;
+}
+.left-off-canvas-menu{
+  background-color: #fff;
+  box-shadow: -2px 2px 2px $gray inset;
+}
+ul.off-canvas-list li a {
+  border-bottom: 1px solid $darkgray;
+  font-size: 1.5rem;
+  color: $blue;
+  &:hover{
+    background-color: $gray;
+  }
+}
+img{
+   height: 2rem;
+ }
+main{
+  background-color: $gray;
+  overflow: hidden;
+  font-size: 2rem;
+  text-align: center;
+  .main-top{
+    height: 6rem;
+    @include border;
+    line-height: 6rem;
+    color: $darkengray;
+    .back{
+    float: right;
+    height: 3rem;
+    margin: 1.5rem 1rem;
+  }
+  }
+  .main-middle{
+    position: relative;
+    @include  border;
+    h1{
+      margin: 2rem 0;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $yellow;
+      font-size: 2rem;
+      color: $yellow;
+    }
+    p{
+      font-size: 1.5rem;
+      color: $darkengray;
+    }
+      .versions{
+        height: 6rem;
+        margin:2rem 3rem;
+        color: #fff;
+        line-height: 6rem;
+        background-color: $blue;
+      }
+
+    .circle{
+     display: inline-block;
+     width: 1.3rem;
+     height: 1.3rem;
+     border-radius: 50%;
+     background-color: $gray;
+     &:hover{
+       background-color: $blue;
+       cursor: pointer;
+     }
+  }
+    &::after{
+      position: absolute;
+      top:44%;
+      right: 0;
+      content: "";
+      width: 0;
+      height: 0;
+      border-top: 2.5rem solid transparent;
+      border-bottom: 2.5rem solid transparent;
+      border-left: 2rem solid $brilyellow;
+    }
+  }
+
+}
+

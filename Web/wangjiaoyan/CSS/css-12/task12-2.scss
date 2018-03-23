@@ -1,0 +1,132 @@
+$blue:#5fc0cd;
+$darkbule:#55a8b3;
+$white:#fff;
+$gray:#e1e5e7;
+$darkgrey:#999999;
+$lightgrey:#f8fafb;
+@mixin button($color,$background-color){
+  width: 7rem;
+  height: 4rem;
+  border: none;
+  border-radius: .5rem;
+  outline: none;
+  background-color: $background-color;
+  color: $color;
+  font-size: 1.8rem;
+}
+@mixin display($align-items,$justify-content){
+  display: flex;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+@mixin chunk($width,$height,$background-color){
+  width: $width;
+  height: $height;
+  background-color: $background-color;
+}
+
+body{
+  min-width: 320px;
+  max-width: 780px;
+  margin: auto;
+  font-size: 62.5%;
+}
+img{
+  transform: scale(0.6);
+}
+header{
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  @include display(center,none);
+  @extend body;
+  @include chunk(100%,5rem,$blue);
+  .but-group{
+    margin: auto;
+    background-color: $darkbule;
+    border-radius: .5rem;
+    .employer{
+      @include button(#fff,$darkbule)
+    }
+    .nurse{
+     @include button($blue,#fff)
+    }
+  }
+}
+main{
+  margin: 5rem 0 8rem 0;
+  .select-group{
+    @include display(center,space-around);
+    border-bottom: 1px solid $gray;
+    select{
+      padding: 1rem 5% 1rem 1%;
+      font-size: 1.6rem;
+      color: $darkgrey;
+      text-align: center;
+      outline: none;
+      border:{
+        right: 1px solid $gray;
+        top: none;
+        left: none;
+        bottom: none;
+      }
+    }
+    .select1{
+        border-right: none;
+      }
+  }
+  ul{
+    list-style: none;
+    padding-left: 0;
+  }
+  li{
+    @include display(center,space-between);
+    padding: 1rem;
+    font-size: 1.3rem;
+    color: $darkgrey;
+    border-bottom: .1rem solid $gray;
+    .date{
+      min-width: 5rem;
+    }
+    p{
+      padding: .5rem 6rem .5rem 2rem;
+      margin: 0;
+      font-size: 1.5rem;
+      color: #000;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+    .cost{
+      font-size: 1.7rem;
+      color: red;
+      white-space: nowrap;
+    }
+  }
+}
+footer{
+  position: fixed;
+  bottom: 0;
+  @extend body;
+  @include display(center,space-around);
+  @include chunk(100%,6rem,$lightgrey);
+  .home-page{
+    text-align: center;
+    font-size: 1.2rem;
+    color: $blue;
+  }
+  .mine{
+    @extend .home-page;
+    color: $darkgrey;
+  }
+  .write{
+    padding: .8rem;
+    background-color: $blue;
+    border-radius: 50%;
+  }
+}
+
+
+
+
+
