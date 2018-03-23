@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?><!--xml的版本：1.0 和 编码：utf-8,必须在第一行-->
+<!--！DOCTYPE，一个文档类型标记是一种标准通用标记语言的文档类型声明，
+    它的目的是要告诉标准通用标记语言解析器，
+    它应该使用什么样的文档类型定义（DTD）来解析文档-->
+<!--XML 标签没有被预定义,需要自行定义标签,属性名必须加引号-->
+<!--DOCTYPE 根元素名 PUBLIC "DTD的名称" "外部DTD文件的URI"-->
+<!--标准（-未注册，+注册）//作者//类型和版本//语言-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--dataSource-->
+    <properties resource="mysql.properties"/>
+
+    <settings>
+        <!--全局性设置懒加载。如果设为‘false’，则所有相关联的都会被初始化加载,默认值为false-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--当设置为‘true’的时候，懒加载的对象可能被任何懒属性全部加载。否则，每个属性都按需加载。默认值为true-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <typeAliases>
+        <!--实体类的别名-->
+        <typeAlias type="com.mybatis.itschool.student.Student" alias="Student"/>
+        <typeAlias type="com.mybatis.itschool.DAO.StudentDAO" alias="StudentDAO"/>
+    </typeAliases>
+<!--
+    <plugins>
+        <plugin interceptor="com.chrhc.mybatis.autodate.interceptor.AutoDateInterceptor">
+            <property name="createDateColumn" value="create_at"/>
+            <property name="updateDateColumn" value="update_at"/>
+        </plugin>
+    </plugins>
+-->
+    <!--环境配置-->
+    <!--默认的环境ID，自己命名，保证匹配一个环境ID，development：开发模式 work：工作模式-->
+    <environments default="development">
+        <!--每个enviromnent元素定义的环境ID-->
+        <environment id="development">
+            <!--事物管理器配置 JDBC|MANAGED-->
+            <transactionManager type="JDBC"></transactionManager>
+            <!--数据源的配置：type=UNPOOLED|POOLED|JNDI-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <!--
+                <property name="poolMaximumActiveConnections" value="30"/>
+                <property name="poolMaximumIdleConnections" value="20"/>
+                <property name="poolMaximumCheckoutTime" value="20000"/>
+                -->
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--mapper映射文件配置-->
+        <mapper resource="mapper/StudentMapper.xml"/>
+    </mappers>
+</configuration>
