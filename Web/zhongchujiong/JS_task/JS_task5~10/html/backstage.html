@@ -1,0 +1,52 @@
+<div class="main container-fluid">
+    <nav class="row navbar-default" role="navigation">
+        <div class="navbar-header navColor">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand nav-left text-center">萝卜少后台管理系统</div>
+        </div>
+        <div class="system-btn">
+            <div class="admin pull-right" ng-click="logout()">
+                <i class="iconfont escColor">&#xe605;</i>
+            </div>
+            <div class="shu pull-right">|</div>
+            <div class="logOut pull-right" ui-sref=".ArticleRedact">
+                <a href="">admin</a>
+            </div>
+            <div class="shu pull-right">|</div>
+        </div>
+    </nav>
+    <div class="row main">
+        <div class="navAbLeft navColor nav-left collapse navbar-collapse" id="example-navbar-collapse">
+                <div class="nav navColor bb">
+                    <div class="navList" ng-click="hideToggle()">
+                        <i class="iconfont iconMargin">&#xe678;</i>信息管理
+                        <i ng-show="!hideOne" class="iconfont iconArrow">&#xe623;</i>
+                        <i ng-hide="!hideOne" class="iconfont iconArrow">&#xe624;</i>
+                    </div>
+                    <div class="text-center" ng-show="hideOne">
+                        <div class="panel-body sList" ui-sref="backstage.Company" ng-class="{hideClass:state.includes('backstage.Company')}">公司列表</div>
+                        <div class="panel-body sList" ui-sref="backstage.Position" ng-class="{hideClass:state.includes('backstage.Position')}">职位列表</div>
+                    </div>
+                    <div class="navList navColor panel-default" ng-click="hiToggle()">
+                        <i class="iconfont iconMargin">&#xe678;</i>Article管理
+                        <i ng-show="!hideTwo" class="iconfont iconArrow">&#xe623;</i>
+                        <i ng-hide="!hideTwo" class="iconfont iconArrow">&#xe624;</i>
+                    </div>
+                    <div class="text-center" ng-show="hideTwo">
+                        <div class="panel-body sList" ui-sref=".ArticleList({page:1,size:10})" ng-class="{hideClass:state.includes('backstage.ArticleList')}">Article列表</div>
+                    </div>
+                </div>
+            </div>
+        <div class="navAbRight">
+            <div ui-view>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+@charset "UTF-8";             //表明这个CSS文件是UTF-8编码的
+
+
+//全局属性
+*{
+  box-sizing: border-box;
+}
+
+//变量
+@navColor: #232325;
+
+//nav部分
+.bb{
+  margin-right:-15px;
+  margin-left:-15px;
+  color:#fff;
+  cursor:pointer;
+}
+.navList{
+  padding-left:20px;
+  line-height:55px;
+  cursor:pointer;
+  border-bottom:1px solid #999;
+}
+
+.iconMargin{
+  margin:0 15px;
+}
+.nav-left{
+  color:#fff!important;
+}
+@media (min-width: 768px) {
+  .nav-left{
+    float:left;
+    width:250px;
+    line-height: 25px;
+  }
+}
+.sysbtnWH{
+  height:100%;
+  width: 80px;
+}
+.navCenter{
+  text-align: center;
+  line-height: 50px;
+}
+.system-btn{
+  height:50px;
+  background: #fff;
+}
+.admin,
+.logOut{
+  .sysbtnWH;
+  .navCenter;
+  cursor:pointer;
+}
+.admin:hover,
+.logOut:hover,
+.navList:hover,
+.sList:hover{
+  background: #999/*#feae45*/;
+}
+.navColor{
+  background:@navColor;
+}
+
+.iconArrow{
+  float:right;
+  margin-right:45px;
+}
+@font-face {
+  font-family: 'iconfont';  /* project id 542341 */
+  src: url('//at.alicdn.com/t/font_542341_740itp1a511kmx6r.eot');
+  src: url('//at.alicdn.com/t/font_542341_740itp1a511kmx6r.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_542341_740itp1a511kmx6r.woff') format('woff'),
+  url('//at.alicdn.com/t/font_542341_740itp1a511kmx6r.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_542341_740itp1a511kmx6r.svg#iconfont') format('svg');
+}
+
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
+.shu{
+  display: inline-block;
+  line-height:50px;
+  font-size:15px;
+  color:#eee;
+}
+.escColor{
+  color:orange;
+}
+
+.hideClass{
+  background: #999;
+}
+.main{
+  overflow: hidden;
+}
+@media(max-width: 768px){
+  .marginTop{
+    margin-top:8px;
+  }
+}
+@media(min-width: 768px){
+  .navAbLeft{
+    padding-top:30px;
+    padding-bottom:3000px!important;        //不加important不会生效，因为被bootstrap的nav的覆盖了。
+    margin-bottom:-3000px!important;
+  }
+  .navAbRight{
+    //margin-left:250px;
+    overflow: hidden;
+    min-height: 96vh;    //最小高度，在没有内容时也能撑开页面，不让左边的侧边栏出问题。
+  }
+}
+
+
+
