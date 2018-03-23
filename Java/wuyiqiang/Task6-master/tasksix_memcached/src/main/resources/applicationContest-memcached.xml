@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 加载资源文件  其中包含变量信息，必须在Spring配置文件的最前面加载，即第一个加载-->
+    <!--<context:property-placeholder location="classpath:cache/memcached.properties"  ignore-unresolvable="true"/>-->
+
+    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="location" value="classpath:cache/memcached.properties"/>-->
+    <!--</bean>-->
+
+    <bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder"
+          p:connectionPoolSize="${memcached.connectionPoolSize}"><!--nio连接池大小，默认为1-->
+        <constructor-arg>
+            <list>
+                <!--memcached节点列表，可以在此配置多个服务器地址-->
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg>
+                        <value>${memcached.server1.host}</value>
+                    </constructor-arg>
+                    <constructor-arg>
+                        <value>${memcached.server1.port}</value>
+                    </constructor-arg>
+                </bean>
+                <!--<bean class="java.net.InetSocketAddress">-->
+                    <!--<constructor-arg>-->
+                        <!--<value>${memcached.server2.host}</value>-->
+                    <!--</constructor-arg>-->
+                    <!--<constructor-arg>-->
+                        <!--<value>${memcached.server2.port}</value>-->
+                    <!--</constructor-arg>-->
+                <!--</bean>-->
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <!-- 与servers对应的节点的权重，权重越高，连接数越多 -->
+                <value>${memcached.server1.weight}</value>
+                <!--<value>${memcached.server2.weight}</value>-->
+            </list>
+        </constructor-arg>
+        <!--<property name="connectionPoolSize" value="2"></property>-->
+        <!--协议工厂，net.rubyeye.xmemcached.command.BinaryCommandFactory,TextCommandFactory(默认),KestrelCommandFactory-->
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>
+        </property>
+        <!--分布策略，一致性哈希net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator或者ArraySessionLocator(默认)-->
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>
+        </property>
+        <!--序列化转换器，默认使用net.rubyeye.xmemcached.transcoders.SerializingTranscoder，更多选项参见javadoc-->
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+    </bean>
+
+    <bean id="memcachedClient" factory-bean="memcachedClientBuilder" factory-method="build" destroy-method="shutdown"/>
+
+</beans>

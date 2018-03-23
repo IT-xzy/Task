@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myitschool.DAO.StudentDAO">
+
+    <resultMap id="all" type="com.myitschool.student.Student">
+        <result column="na" property="name" jdbcType="VARCHAR"/>
+        <result column="create_at" property="createAt" jdbcType="BIGINT"/>
+        <result column="update_at" property="updateAt" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <select id="allStudent" resultMap="all">
+        SELECT * FROM student
+    </select>
+
+    <select id="selectStudent" parameterType="int" resultMap="all">
+        SELECT * FROM student WHERE id = #{id}
+    </select>
+
+    <insert id="insertStudent" parameterType="com.myitschool.student.Student">
+        INSERT IGNORE INTO student(na, qq, type, stime, graschool, classnum, link, mentor, conbrother, hknow, create_at, update_at)
+        VALUES(#{name}, #{qq}, #{type}, #{stime}, #{graschool}, #{classnum}, #{link}, #{mentor}, #{conbrother}, #{hknow}, unix_timestamp(now()), unix_timestamp(now()))
+    </insert>
+
+    <update id="updateStudent" parameterType="com.myitschool.student.Student">
+        <!--
+        UPDATE student SET na=#{name}, update_at=unix_timestamp(now()) WHERE id=#{id};
+        -->
+        UPDATE student
+        <set>
+            <if test="name != null">na=#{name},</if>
+            <if test="qq != null">qq=#{qq},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="stime != null">stime=#{stime},</if>
+            <if test="graschool != null">graschool=#{graschool},</if>
+            <if test="classnum != null">classnum=#{classnum},</if>
+            <if test="link != null">link=#{link},</if>
+            <if test="mentor != null">mentor=#{mentor},</if>
+            <if test="conbrother != null">conbrother=#{conbrother},</if>
+            <if test="hknow != null">hknow=#{hknow},</if>
+            <!--
+            <if test="true">update_at=unix_timestamp(now())</if>
+            -->
+            update_at=unix_timestamp(now())
+        </set>
+        WHERE id = #{id} and
+        ''!=#{name} and
+        ''!=#{qq} and
+        ''!=#{type} and
+        ''!=#{stime} and
+        ''!=#{graschool} and
+        ''!=#{classnum} and
+        ''!=#{link} and
+        ''!=#{mentor} and
+        ''!=#{conbrother} and
+        ''!=#{hknow}
+    </update>
+
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM student WHERE id = #{id}
+    </delete>
+</mapper>

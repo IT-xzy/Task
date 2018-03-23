@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+  <!--welcome pages-->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>WEB-INF/conf/log4j.properties</param-value>
+  </context-param>
+
+  <!-- 设置根目录
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>webapp.root</param-value>
+  </context-param>
+  -->
+
+  <!-- 3000表示 开一条watchdog线程每60秒扫描一下配置文件的变化;这样便于日志存放位置的改变 -->
+  <context-param>
+    <param-name>log4jRefreshInterval</param-name>
+    <param-value>3000</param-value>
+  </context-param>
+
+  <!-- 加载Spring框架中的log4j监听器Log4jConfigListener -->
+  <listener>
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+  </listener>
+
+  <!-- 如果是监听多个文件，可用‘，’隔开 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml, classpath:applicationContext-redis.xml</param-value>
+  </context-param>
+
+  <!-- 该监听器将在Web容器启动时激活Spring -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- 处理由JavaBeans,Introspector的使用而引起的缓冲泄露,建议配置此监听器 -->
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+
+  <!--配置springmvc DispatcherServlet-->
+  <servlet>
+    <servlet-name>springMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring/spring-mvc.xml</param-value>
+    </init-param>
+
+    <load-on-startup>1</load-on-startup>
+    <async-supported>true</async-supported>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--spring mvc对put支持的并不好，put请求时不会解析请求体中的参数-->
+  <!--<filter>-->
+    <!--<filter-name>httpPutFormFilter</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>httpPutFormFilter</filter-name>-->
+    <!--<servlet-name>springMVC</servlet-name>-->
+  <!--</filter-mapping>-->
+</web-app>
