@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+  <display-name>SpringMVCDemo Web Application</display-name>
+
+    <!-- 关联spring的配置文件applicationContext-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!-- spring mvc核心：调度servlet -->
+  <servlet>
+      <!--控制器的名称-->
+    <servlet-name>mvc-dispatcher</servlet-name>
+      <!--控制器对应的java类-->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <!-- 初始化控制器参数 -->
+      <init-param>
+          <!--参数名称_Springmvc配置文件的路径-->
+          <param-name>contextConfigLocation</param-name>
+          <!--使用classpath：mvc-dispatcher-servlet.xml会去classpath 的默认位置 resource中寻找-->
+          <!--如果不配置默认地址为WEB-INF/mvc-dispatcher-servlet.xml-->
+          <param-value>WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+      </init-param>
+      <!--在服务器启动时立即加载控制器数字越小越早-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+
+    <!--tiles-->
+    <servlet>
+        <servlet-name>Tiles Dispatch Servlet</servlet-name>
+        <servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Tiles Dispatch Servlet</servlet-name>
+        <url-pattern>*.tiles</url-pattern>
+    </servlet-mapping>
+
+    <!--控制器映射声明-->
+  <servlet-mapping>
+      <!--要加载的的控制器的名称-->
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <!--监听当前域的所有请求-->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+    <!--过滤器-->
+    <!--防止中文乱码的配置-->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--这条的必要性没有搞清楚-->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j.properties</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+
+    <!--tage-->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/datetag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+
+</web-app>
