@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>设置</title>
+</head>
+<body>
+    <div class="mainCenter bdColorHui">
+        <header>
+            <div class="headerLeft headerSetLeft" onclick="jumpIndex()"></div>
+            <span>参数设置</span>
+            <div class="headerRight headerSetRight"></div>
+        </header>
+        <div class="matching">
+            <div class="player">
+                <span>玩<br>家<br>配<br>对</span>
+            </div>
+            <div class="matchContent">
+                <ul>
+                    <li id="p1"></li>
+                    <li id="p2"></li>
+                    <li id="p3"></li>
+                    <li id="p4"></li>
+                    <li id="p5"></li>
+                    <li id="p6"></li>
+                    <li id="p7"></li>
+                    <li id="p8"></li>
+                    <li id="p9"></li>
+                    <li id="p10"></li>
+                    <li id="p11"></li>
+                    <li id="p12"></li>
+                    <li id="p13"></li>
+                    <li id="p14"></li>
+                    <li id="p15"></li>
+                    <li id="p16"></li>
+                    <li id="p17"></li>
+                    <li id="p18"></li>
+                </ul>
+            </div>
+            <div class="clickSet" onclick="clickSet()">
+                <span>点击设置</span><span class="penImg"></span>
+            </div>
+        </div>
+        <div class="wordGroup">
+            <form action="">
+                <input type="text" placeholder="水民词组">
+                <input type="text" placeholder="幽灵词组">
+            </form>
+        </div>
+
+        <div class="nubmerSet">
+            <div class="playerNub">
+                玩家人数<input type="text" onchange="inputChange()" value='6' id="shuRuPlayer">人
+            </div>
+            <div class="nubSetting">
+                <div class="nubCut" onclick="nubCut()"></div>
+                <input id="nubCenter" onmouseup="lighton()" ontouchmove="lighton()" value="6" type="range" step="1" min="6" max="18" name="range">
+                <div class="nubAdd" onclick="nubAdd()"></div>
+            </div>
+        </div>
+        <button class="deal" onclick="lookStatus()">去发牌</button>
+    </div>
+
+<script src="js/jquery.js"></script>
+<script src="javascript-state-machine/lib/state-machine.js"></script>
+<script src="js/setting.js"></script>
+</body>
+</html>
