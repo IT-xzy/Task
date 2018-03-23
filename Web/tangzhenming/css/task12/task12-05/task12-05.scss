@@ -1,0 +1,158 @@
+$blue: #5fc0cd;
+$white: #fff;
+$red: #e26163;
+$grey: #e1e5e7;
+$gray: #999;
+
+html {
+	font-size: 62.5%;
+}
+body {
+	margin: 0;
+}
+
+/* HEADER */
+.header-box {
+    font-size: 1.8rem;
+	color: $white;
+	background: {
+		color: $blue;
+	}
+	display: flex;
+	align: {
+		items:center;
+	}
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    padding: 1rem 0;
+    & span {
+        position: absolute;
+        width: 100%;
+    }
+    & img {
+        height: 1.8rem;
+        margin:{
+            left: 1rem;
+        }
+    }
+    & a {
+        line-height: 0;
+    }
+}
+
+/* MAIN */
+.main {
+    position: absolute;
+    width: 100%;
+    top: 3.8rem;
+    bottom: 6rem;
+    overflow: auto;
+}
+
+.banner {
+    background: {
+        image: url(images/护工背景.png);
+        repeat: no-repeat;
+        size: 100%;
+    }
+    display: flex;
+    align: {
+        items: center;
+    }
+    color: $white;
+    font-size: 1.8rem;
+    padding: 2rem 0;
+    & .avatar {
+        height: 6rem;
+        padding: 0 2rem;
+    }
+    & .address {
+        display: flex;
+        align: {
+            items: center;
+        }
+        font-size: 1.2rem;
+        padding-top: 1rem;
+        & img {
+            margin-right: .5rem;
+            height: 1.2rem;
+        }
+    }
+    & p {
+        margin: 0;
+    }
+}
+
+.line {
+    border-bottom: 1px solid $grey;
+    padding: 1rem 0rem 1rem 1rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: 1.2rem;
+    & span {
+        position: absolute;
+        color: $gray;
+        border-right: 1px solid $grey;
+        padding-right: 1rem;
+    }
+    & p {
+        margin: 0 0 0 6rem;
+    }
+    & .nomeal {
+        color: black;
+        margin: 0 1rem;
+    }
+    & .home {
+        @extend .nomeal;
+        border-right: 1px solid $grey;
+        padding-right: 1rem;
+    }
+    & .star {
+        height: 1rem;
+    }
+    & .skill {
+        color: black;
+        font-size: 1.6rem;
+        border-left: 2px solid $blue;
+        padding-left: 1rem;
+    }
+    & .price {
+        color: $red;
+    }
+}
+.firstline {
+    margin-left: 0;
+    padding: 2rem 1rem;
+}
+.lastline {
+    margin-left: 0;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* FOOTER */
+.footer-box {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    & .comments,.contact {
+        border: 1px solid $blue;
+        border-radius: .5rem;
+        font-size: 1.8rem;
+        text-align: center;
+        width: 100%;
+        margin: 1rem;
+        padding: 1rem 2rem;
+    }
+    & .comments {
+        color: $blue;
+    }
+    & .contact {
+        color: white;
+        background: $blue;
+    } 
+}

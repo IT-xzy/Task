@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+/**
+ * Authors      TZMMichael (15977536060@163.com)
+ * Date         2017-12-13 14:02:02
+ * Site         https://github.com/TZMMichael
+ * Updated      
+ * Updated by   TZMMichael 
+ */
+
+
+@import './task13.mixin.scss';
+
+body{
+	background-color:$blue;
+}
+
+/* HEADER */
+.header{
+	background-color:$blue;
+	color:$white;
+	font-size:1.8rem;
+	padding:1rem 0;
+	& img{
+		height: 1.4rem;
+		margin:0 1rem;
+	}
+}
+
+/* PLAYER */
+.player{
+    position: absolute;
+    top: 3.7rem;
+    width: 100%;
+	font-size: 1.4rem;
+    background-color: #b9e9f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+	& img{
+		height: 1.8rem;
+        padding: 0 0.8rem;
+	}
+    & p{
+        padding: 0 1.6rem;
+    }
+    & a{
+    	line-height: 0;//去掉基线部分存在的那小段空白导致的不能绝对居中问题
+    }
+}
+
+/* MID */
+.mid{
+    position: absolute;
+    top: 7rem;
+	font-size: 1.2rem;
+    color: white;
+    padding-left: 1.5rem;
+    & .triangle{
+    	width: 0;
+	    height: 0;
+	    border-left: 5px solid transparent;
+	    border-right: 5px solid transparent;
+	    border-top: 10px solid #b9e9f5;
+	    margin-left: 10px;
+    }
+    & p{
+    	padding-left: 0.8rem;
+    }
+}
+
+/* MAIN */
+.main{
+	top:11rem;
+	bottom: 8rem;
+	& .main-line{
+		display: flex;
+    	justify-content: space-evenly;
+	}
+    & .main-box{
+    	& .square{
+    		border: 2px solid white;
+        	text-align: center;
+        	cursor: pointer;
+        	& .identification{
+        		background-color: #f5c97b;
+        		padding: 1.6rem 0;
+        		font-size: 1.4rem;
+        	}
+        	& .num{
+        		background: #83b09a;
+        		color: white;
+        	}
+    	}
+    	&:hover{
+    		.choose{
+    			visibility: visible;
+    		}
+    	}
+    	& .choose{
+    		display: flex;
+        	align-items: center;
+        	justify-content: space-between;
+        	padding: 0.5rem 0;
+        	visibility: hidden;
+    		& img{
+    			height: .8rem;
+    			transform: scale(.8,.8);
+    		}
+    		//以后回顾的时候看一下这个部分，关于图片的缩放、水平垂直居中相关的问题。注意相关的属性值有：width\line-height\text-align\flex align\(父元素),height\transform\
+    		& a{
+    			background-color:$white;
+    			width: 1.5rem;
+        		background-color: #fff;
+        		text-align: center;
+        		line-height: 1.5rem;
+        		margin: 0.1rem;
+    		}
+    	}
+    }
+}
+
+
+/* FOOTER */
+.footer{
+	text-align: center;
+    //line-height: 0; 也可以实现视觉上的居中，但我个人认为不是最佳方案，还比不上上下等边距
+    background: $blue;
+    padding: 3rem 0;
+    & a{
+        text-decoration: none;
+        color: white;
+    }
+    & div{
+    	font-size: 2.2rem;
+    	background: $orange;
+        padding: 1rem 0;
+        margin: 0 5rem;
+    }
+}

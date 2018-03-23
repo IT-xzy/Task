@@ -1,0 +1,81 @@
+@charset "UTF-8";
+@import './mixin.scss';
+
+html{
+    line-height: 1.4;
+}
+// header
+.header {
+    background: $blue;
+    color: white;
+    font-size: 2rem;
+    & img {
+        line-height: 1rem;
+        transform: scale(.5, .5);
+        padding: 0 .5rem;
+    }
+}
+
+// main
+.main {
+    top: 4rem;
+    bottom: 5.9rem;
+    font-size: 1.4rem;
+    background: $grey;
+    & .victory {
+        padding: 0 2rem;
+        border-top: 1px solid #74d4eb;
+        background: $blue;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        & img {
+            width: 200px;
+            align-self: center;
+        }
+        & h2 {
+            color: #ffc865;
+        }
+    }
+    & .content {
+        & .box {
+            padding: 0 2rem;
+            border-bottom: 1px solid #dddddd;
+            & .line {
+                display: flex;
+                justify-content: space-between;
+                & .time {
+                    color: $gray;
+                }
+            }
+            & .night {
+                color: $gray;
+            }
+            & .daytime {
+                @extend .night;
+            }
+        }
+    }
+}
+
+// footer
+.footer {
+    background: rgba(119, 190, 206, .5);
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0;
+    & button {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2rem;
+        padding: 1rem;
+        border-radius: .5rem;
+    }
+    & .left {
+        background: #f66f6f;
+    }
+    & .right {
+        background: #fbb435;
+    }
+}
