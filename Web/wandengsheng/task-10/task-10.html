@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>task-10</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .head{
+            background-color: #1d7ad9;
+        }
+        .tel{
+            display: inline-block;
+            padding-top: 12px;
+            margin-left: 220px;
+            color: #FFFFFF;
+        }
+        .box{
+            display: inline-block;
+            float: right;
+            line-height: 42px;
+
+            margin-right: 300px;
+
+
+        }
+        .register{
+            display: inline-block;
+            text-align: center;
+            line-height: 42px;
+            width: 80px;
+            background-color: #FFFFFF;
+        }
+        .entry{
+            display: inline-block;
+            /*!*position: relative;*!   这里的属性用于去掉右边框*/
+            /*left: 4px;*/
+            text-align: center;
+
+            line-height: 42px;
+            width: 40px;
+            color: #FFFFFF;
+            border-left: 1px solid #FFFFFF;
+        }
+        .entry:hover{
+            text-align: center;
+            width: 80px;
+            color: #222222;
+            background-color: #FFFFFF;
+        }
+        .entry:hover+.register{
+            width: 40px;
+            background-color: #1d7ad9;
+            color: #FFFFFF;
+
+        }
+
+
+        .main1{
+            float: right;
+            margin-right: 210px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+
+        }
+        .main1>button{
+            margin: 0 10px;
+        }
+        .main1>.btnone{
+            background-color:  #1d7ad9;
+            color: #FFFFFF;
+        }
+        .main1>button:hover{
+            background-color:  #1d7ad9;
+            color: #FFFFFF;
+        }
+
+        .main{
+            height: 94px;
+            background-color: #f9f9f9;
+
+        }
+        .graph{
+            float: right;
+            margin-top: 40px;
+        }
+        .graph>span{
+            display: inline-block;
+            float: right;
+            text-align: center;
+            width: 150px;
+            height: 5px;
+            background-color: #cccccc;
+
+        }
+        .rectangle2{
+            margin-right: -4px;
+        }
+        .graph>span>span{
+            display: inline-block;
+            position: relative;
+            top: -6px;
+            text-align: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #cccccc;
+            color: #FFFFFF;
+        }
+        .graph>.rectangle1>.round1{
+            background-color: #ff7f02;
+        }
+        .graph>.rectangle1{
+            background-color: #ff7f02;
+        }
+        .text1{
+            color: #ff7f02;
+            font-size: 1.8rem;
+
+        }
+        .rectangle2>p{
+            color: #cccccc;
+            font-size: 1.8rem;
+        }
+
+        .rectangle2:hover{
+            background-color: #ff7f02;
+        }
+
+        .rectangle2:hover span.round{
+            background-color: #ff7f02;
+        }
+        .rectangle2:hover p.text{
+            color: #ff7f02;
+
+        }
+        .bottom{
+            height: 100px;
+            margin-bottom: 50px;
+        }
+        .explain{
+            font-size: 2rem;
+            border-left: 2px solid #1d7ad9;
+        }
+        .genre{
+            line-height: 50px;
+            font-size: 2rem;
+            color: #1d7ad9;
+            background-color: #f4f4f4;
+        }
+        .boxtwo{
+            vertical-align: middle;
+            margin-bottom: 3px;
+        }
+        .boxtype{
+            height: 130px;
+            background-color: #fbfcff;
+            border: 1px solid #f4f4f4;
+
+        }
+
+
+
+        .dropdown-menu{
+            max-width: 100%;
+
+        }
+
+        .dropdown1{
+            position: relative;
+            margin-top: -40px;
+            margin-left: 80%;
+
+        }
+        .btn{
+            background-color: #fbfcff;
+        }
+        .radio1{
+            padding-top: 54.5px;
+        }
+
+
+        .bore{
+            padding: 25px 0;
+            font-size: 1.7rem;
+            color:#cccccc ;
+
+        }
+        label{
+            font-size: 1.7rem;
+            color:#cccccc ;
+        }
+        .form-control2{
+            width: 5%;
+        }
+
+        bore1{
+            display: inline-block;
+        }
+        .borebox{
+            height: 152px;
+            background-color: #fbfcff;
+        }
+        .dropdown2{
+            position: relative;
+            margin-left: 80%;
+            bottom: 110px;
+        }
+        .bigbutton{
+            height: 400px;
+            background-color: #FFFFFF;
+            border: 1px solid #f4f4f4;
+            border-top: none;
+            text-align: center;
+
+        }
+        .bigbutton1{
+            /*display: block;*/
+            height: 60px;
+            width: 20%;
+            margin-top: 185px;
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            background-color: #e15053;
+            border-radius: 10px;
+            border: none;
+
+        }
+        .foottop{
+            height: 150px;
+            background-color: #f4f4f4;
+        }
+
+        .wetchat{
+            position:relative;
+            left: 150px;
+            bottom: 100px;
+
+        }
+        .mainone2{
+            margin-top: 0px;
+        }
+        .leftone,.mainone,.rightnone{
+            margin-top: 40px;
+        }
+        .rightnone{
+            height: 100px;
+        }
+        .foot{
+            text-align: center;
+            padding: 5px 0;
+            color:#FFFFFF;
+            font-size: 1.6rem;
+            background-color: #1d7ad9;
+        }
+        a{
+            color: #222222;
+            text-decoration: none;
+        }
+        a:hover{
+            text-decoration: none;
+        }
+
+
+
+
+    </style>
+</head>
+<body>
+<div class="head">
+    <p class="tel">热线电话：010-594-78634</p>
+    <div class="box">
+        <span class="entry">登录</span>
+        <span class="register">注册</span>
+    </div>
+</div>
+<div class="main">
+    <div class="main1">
+        <button type="button" class="btn btn-default btnone">首页</button>
+        <button type="button" class="btn btn-default">在线定制</button>
+        <button type="button" class="btn btn-default">标准箱</button>
+        <button type="button" class="btn btn-default">品质保障</button>
+    </div>
+
+
+</div>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column bottom">
+            <div class="graph">
+                <span class="rectangle2">
+                    <span class="round">4</span>
+                    <p class="text">4.确认下单</p>
+                </span>
+                <span class="rectangle2">
+                    <span class="round">3</span>
+                    <p class="text">3.上传附件</p>
+                </span>
+                <span class="rectangle2">
+                    <span class="round">2</span>
+                    <p class="text">2.选择数量</p>
+
+                </span>
+                <span class="rectangle1">
+                    <span class="round1">1</span>
+                    <p class="text1">1.定制纸箱</p>
+
+
+                </span>
+
+            </div>
+        </div>
+        <div class="col-md-12 column explain">
+            <div class="explain1"><b>请按照以下步骤来定制您的纸箱</b></div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+                <div class="col-md-12 column genre">
+                    <img class="boxtwo" src="task-10/box.png">
+                    选择箱型
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column boxtype">
+                    <div class="radio1">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"  value="option1"> 飞机盒
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"  value="option2"> 对口箱
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"  value="option3"> 天地盖
+                        </label>
+                    </div>
+
+                    <div class="dropdown1">
+                        <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            查看详情
+                            <img src="task-10/boxone.png">
+
+                        </button>
+                        <ul class="dropdown-menu drop1" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">查看详情</a></li>
+                            <li><a href="#">查看详情</a></li>
+                            <li><a href="#">查看详情</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column genre">
+                    <img class="boxtwo" src="task-10/121.png">
+                    确定尺寸
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column borebox">
+
+
+                    <div class="bore">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"  value="option1"> 内径
+                        </label>
+                        <span class="bore1">
+                            <span>长</span>
+                            <input type="email" class="form-control2" >
+                            <span>mm</span>
+                        </span>
+                        <span class="bore2">
+                            <span>宽</span>
+                            <input type="email" class="form-control2" >
+                            <span>mm</span>
+                        </span>
+                        <span class="bore3">
+                            <span>高</span>
+                            <input type="email" class="form-control2" >
+                            <span>mm</span>
+                        </span>
+                    </div>
+                    <div class="bore">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions"  value="option1"> 内径
+                        </label>
+                        <span class="bore1">
+                            <span>长</span>
+                            <input type="email" class="form-control2" >
+                            <span>mm</span>
+                        </span>
+                        <span class="bore2">
+                            <span>宽</span>
+                            <input type="email" class="form-control2" >
+                            <span>mm</span>
+                        </span>
+                        <span class="bore3">
+                            <span>高</span>
+                            <input type="email" class="form-control2" >
+                            <span>mm</span>
+                        </span>
+                    </div>
+
+                    <div class="dropdown2">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            查看详情
+                            <img src="task-10/boxone.png">
+
+                        </button>
+                        <ul class="dropdown-menu drop2" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">查看详情</a></li>
+                            <li><a href="#">查看详情</a></li>
+                            <li><a href="#">查看详情</a></li>
+
+                        </ul>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column genre">
+                    <img class="boxtwo" src="task-10/333.png">
+                    选择材质
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column boxtype">
+                    <div class="radio1">
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 三层A瓦优质
+
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 三层A瓦优质
+
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 三层A瓦优质
+
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option3"> 三层A瓦优质
+
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option3"> 三层A瓦优质
+
+                        </label>
+                    </div>
+
+                    <div class="dropdown1">
+                        <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            查看详情
+                            <!--<span class="caret"></span>-->
+                            <img src="task-10/boxone.png">
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">查看详情</a></li>
+                            <li><a href="#">查看详情</a></li>
+                            <li><a href="#">查看详情</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-12 column bigbutton">
+                    <button class="bigbutton1">下一步</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix foottop">
+        <div class="col-md-4 column">
+            <div class="leftone">
+                <div>51包装网——纸箱包装首选服务平台</div>
+
+            </div>
+        </div>
+        <div class="col-md-4 column">
+            <div class="mainone">
+                <a>关于我们</a>
+                <a>配送流程</a>
+                <a>联系我们</a>
+                <p class="mainone2">
+                    <a>下单指南</a>
+                    <a>媒体介绍</a>
+                </p>
+
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="rightnone">
+                <p>TEL:4000-0000-000</p>
+                <p>企业QQ：123456789</p>
+                <p>微信号：XXXXXX</p>
+                <img class="wetchat"src="task-10/qrcode.png">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="foot">
+    北京五一包装科技有限公司Copyright ©2015 51baozhuang.com015 All rights reserved. 京icp备99999999-1
+</div>
+</body>
+</html>
