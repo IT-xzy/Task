@@ -1,0 +1,158 @@
+@import "./module/reset.less";
+@import "./module/color.less";
+@import "./module/header_3.less";
+
+body {
+	background: @gray01;
+}
+main {
+	padding: 1rem 1rem 10rem;
+	background: @gray01; 
+	.day {
+		padding: 2rem;
+		margin-bottom: 1rem;
+		border: 1px solid @gray03;
+		text-align: center;
+		font-size: 3.6rem;
+		color: @baseColor;
+		background: url(../image/book/icon_03.png) no-repeat @white right / contain;
+		background-origin: content-box;
+	}
+	.menu {
+		display: inline-block;
+		padding: 2rem 1rem;
+		margin-bottom: 1rem;
+		border: 1px solid @gray03;
+		width: 100%;
+		background: @white;
+		.step {
+			position: relative;
+			float: right;
+			margin: 1rem;
+			padding: .5rem;
+			width: 80%;
+			font-size: 3.2rem;
+			text-align: center;
+			background: @baseColor;
+			color: @white;
+			&::after {
+				content: "";
+				position: absolute;
+				top: calc(~"50% - .7rem");
+				left: -1.4rem;
+				border-top: .7rem solid transparent;
+				border-right: 1.5rem solid @baseColor;
+				border-bottom: .7rem solid transparent;
+			}
+		}
+		.hint {
+			float: right;
+			padding-right: calc(~"80% - 35rem");
+			font-size: 2.4rem;
+		}
+		.done {
+			background: @darkGreen;
+			&::after {
+				border-right: 1.5rem solid @darkGreen;
+			}
+		}
+		.moon {
+			position: relative;
+			left: 5%;
+			top: 1.2rem;
+			border: 1px solid @gray03;
+			border-radius: 50%;
+			padding: .5rem;
+			margin: 1rem;
+			width: 3rem;
+			height: 3rem;
+			background: url(../image/book/icon_01.png) no-repeat @white center / contain;
+			background-origin: content-box;
+			&::after {
+				content: "";
+				position: absolute;
+				border-left: 1px solid @gray03;
+				left: 50%;
+				top: 2.8rem;
+				height: 5rem;
+			}
+		}
+		.sun {
+			.moon;
+			top: 4rem;
+			background: url(../image/book/icon_02.png) no-repeat @white center / contain;
+			background-origin: content-box;
+			&::after {
+				content: "";
+				position: absolute;
+				border-left: 1px solid @gray03;
+				left: 50%;
+				top: 2.8rem;
+				height: 15rem;
+			}
+		}
+	}
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: fadeout(@baseColor, 50%);
+	padding: 2rem 10%;
+	#end {
+		float: left;
+		border-radius: 2rem;
+		padding: 2rem 0;
+		width: 40%;
+		font-size: 3.2rem;
+		text-align: center;
+		color: @white;
+		background: @orange;
+	}
+	#journal {
+		#end;
+		float: right;
+	}
+}
+@media screen and (max-width: 768px) {
+	main {
+		.day {
+			padding: 1rem;
+			font-size: 1.8rem;
+		}
+		.menu {
+			.step {
+				font-size: 1.6rem;
+			}
+			.hint {
+				padding-right: calc(~"80% - 17rem");
+				font-size: 1.2rem;
+			}
+			.moon {
+				top: 0;
+				left: -1rem;
+				&::after {
+					height: 2rem;
+				}
+			}
+			.sun {
+				.moon;
+				top: 1rem;
+				&::after {
+					height: 10rem;
+				}
+			}
+		}
+	}
+	footer {
+		padding: 1rem 10%;
+		#end {
+			border-radius: 1rem;
+			padding: 1rem 0;
+			font-size: 1.6rem;
+		}
+		#journal {
+			#end;
+		}
+	}
+}

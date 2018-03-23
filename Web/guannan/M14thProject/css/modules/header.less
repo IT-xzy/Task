@@ -1,0 +1,56 @@
+@import "cssreset.less";
+@import "color.less";
+@import "common.less";
+
+.contact {
+	padding: 0 calc(~"50% - 60rem");
+	height: 4rem;
+	background: @white;
+	.contact-icon {
+		.ps-r;
+		.fl-r;
+		.v-m;
+		.bg-spr;
+		margin-left: 1.6rem;
+		width: 2.5rem;
+		height: 2.4rem;
+	}
+	.icon-01 { .bg-ps(-10px, -153px); }
+	.icon-02 { .bg-ps(-55px, -153px); }
+	.icon-03 { .bg-ps(-100px, -153px); }
+	.hotline {
+		.fs14;
+		line-height: 4rem;
+		color: @darkGreen;
+	}
+	.login,
+	.logon { .dp-n; }
+}
+@media screen and (max-width: 1199px) {
+	.contact {
+		.ta-r;
+		padding: .9rem 0;
+		height: 3rem;
+		font-size: 0;
+		.hotline,
+		.contact-icon { .dp-n; }
+		.logon {
+			.dp-ib;
+			.fs16;
+			.lh16;
+			margin-right: 1rem;
+			color: @black;
+		}
+		.login {
+			.logon;
+			margin: 0;
+			border-right: solid 1px @darkGreen;
+		}
+		.logon:link,
+		.login:link,
+		.logon:hover,
+		.login:hover {
+			color: @black;
+		}
+	}
+}

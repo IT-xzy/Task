@@ -1,0 +1,203 @@
+@baseColor: #5fc0cd;
+@baseFontsize: 1.7rem;
+@white: #fff;
+@lineColor: #e1e5e7;
+@unselectColor: #55a8b3;
+
+.fixedTop {
+	position: fixed;
+	top: 0;
+	padding: 1rem 1.8rem;
+	width: 100%;
+	text-align: center;
+}
+.fixedBot {
+	.fixedTop;
+	top: auto;
+	bottom: 0;
+}
+.ellipsis {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+header {
+	.fixedTop;
+	box-sizing: border-box;
+	font-size: 0;
+	background-color: @baseColor;
+	.location {
+		float: right;
+		margin: (3.6rem - 2.2rem) / 2 0;
+		width: 2.1rem;
+		height: 2.2rem;
+		background: url(../images/tab_04.png) no-repeat;
+		background-size: cover;
+	}
+	.navbar-user {
+		display: inline-block;
+		border-radius: .5rem;
+		width: 14.4rem;
+		height: 3.6rem;
+		background-color: @unselectColor;
+		z-index: 0;
+		.top-button {
+			float: left;
+			padding: 0;
+			border-radius: .5rem;
+			width: 7.2rem;
+			height: 3.6rem;
+			font-size: @baseFontsize;
+			text-align: center;
+			color: @white;
+			background-color: @unselectColor;
+			z-index: 1;
+			&:hover {
+				background-color: @white;
+				color: @baseColor;
+			}
+			&:focus {
+				background-color: @white;
+				color: @baseColor;
+			}
+		}
+	}
+	> div {
+		.location;
+		float: left;
+		background: none;
+	}
+}
+
+main {
+	margin-top: 9.6rem;
+	.select-3 {
+		position: fixed;
+		top: 5.6rem;
+		width: 100%;
+		height: 4rem;
+		.btn-group {
+			height: 4rem;
+			.btn {
+				height: 4rem;
+				border-style: none;
+				border-bottom: solid 1px @lineColor;
+				border-radius: 0;
+				color: #999;
+				&:hover,
+				&:focus {
+					border-style: none;
+				}
+				.caret {
+					float: right;
+					margin: .8rem 0;
+				}
+				.split-line {
+					position: absolute;
+					top: 50%;
+					right: 0;
+					transform: translateY(-50%);
+					width: 1px;
+					height: 100%;
+					background-image: linear-gradient(to top, #fff, #e1e5e7, #fff);
+				}
+			}
+			.dropdown-menu {
+				width: 100%;
+				text-align: center;
+			}
+		}
+	}
+	.line{
+		height: 9rem;
+		border-bottom: solid 1px @lineColor;
+		.line-left {
+			float: left;
+			padding-left: 1.5rem;
+			width: 60%;
+			text-align: left;
+			.line-left-top {
+				padding: .5rem 0 .5rem 2.5rem;
+				font-size: 1.3rem;
+				background: url(../images/tab_03.png) no-repeat;
+				background-position: 0 50%;
+				background-size: auto 1.6rem;
+				color: #999;
+				.ellipsis;
+			}
+			.line-left-mid {
+				padding: .5rem 0 .5rem 2.5rem;
+				font-size: 1.4rem;
+				.ellipsis;
+			}
+			.line-left-bot {
+				.line-left-top;
+				background: url(../images/tab_02.png) no-repeat;
+			}
+		}
+		.line-right {
+			float: right;
+			padding-right: 4rem;
+			width: 40%;
+			height: 100%;
+			text-align: right;
+			font-size: 1.8rem;
+			border-style: none;
+			outline-style: none;
+			background: url(../images/tab_06.png) no-repeat;
+			background-position: calc(100% - 2rem) 50%;
+			background-size: auto 1.8rem;
+			color: #e63b0e;
+			.ellipsis;
+		}
+	}
+}
+
+footer {
+	.fixedBot;
+	padding: 0 20%;
+	height: 5.5rem;
+	text-align: center;
+	border-top: solid #e2eaec 1px;
+	background-color: #f8fafb;
+	.bot-left {
+		float: left;
+		width: 4.6rem;
+		height: 100%;
+		font-size: 1.2rem;
+		color: @baseColor;
+		> button {
+			width: 100%;
+			height: 4rem;
+			transform: scale(.5, .5);
+			background: url(../images/css_sprites.png) no-repeat -2rem -15.4rem;
+		}
+	}
+	.bot-right {
+		.bot-left;
+		float: right;
+		color: #999; 
+		> button {
+			width: 4.2rem;
+			height: 4.1rem;
+			background: url(../images/css_sprites.png) no-repeat -23.6rem -2rem;
+			transform: scale(.5, .5);
+		}
+	}
+	> div > p {
+		position: relative;
+		bottom: 1rem;
+		margin: 0;
+		padding: 0;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+	.bot-mid-button {
+		width: 5.5rem;
+		height: 5.5rem;
+		background: url(../images/button.png) no-repeat;
+		background-size: cover;
+	}
+}

@@ -1,0 +1,181 @@
+@import "./module/reset.less";
+@import "./module/color.less";
+@import "./module/header_1.less";
+@import "./module/sidemenu.less";
+
+body {
+	background: @gray01;
+}
+main {
+	padding: 2.5rem 10%;
+	background: @gray01;
+	//上一次游戏按钮
+	#lastPlay {
+		border: 1px solid @gray02;
+		width: 100%;
+		padding: 3.8rem 5%;
+		font-size: 3.5rem;
+		line-height: 1;
+		text-align: center;
+		color: @gray03;
+		background: @white;
+		> img {
+			float: right;
+			height: 3.5rem;
+		}
+	}
+	//内容wrap
+	#wrap {
+		position: relative;
+		margin-top: 2.5rem;
+		border: 1px solid @gray02;
+		background: @white;
+		//标题
+		#gameType {
+			border-bottom: 2px solid @orange;
+			padding: 2.5rem 0;
+			font-size: 3.5rem;
+			line-height: 1;
+			text-align: center;
+			color: @orange;
+		}
+		//轮播框架
+		#gameMenu {
+			position: relative;
+			//游戏目录占位块
+			.gamePageHidden {
+				opacity: 0;
+				padding: 2.5rem 10%;
+				z-index: -999999;
+				.versionButton {
+					padding: 3.8rem 0;
+					width: 100%;
+					font-size: 3.2rem;
+					line-height: 1;
+					text-align: center;
+					background: @baseColor;
+					color: @white;
+				}
+				.userNumber {
+					padding: 2.5rem 0;
+					font-size: 2.5rem;
+					line-height: 1;
+					text-align: center;
+					color: @gray04;
+					cursor: default;
+				}
+			}
+			//游戏目录
+			.gamePage {
+				position: absolute;
+				top: 0;
+				left: 0;
+				padding: 2.5rem 10%;
+				width: 100%;
+				background: @white;
+				transition: all .5s cubic-bezier(.49,.99,.52,.01);
+				//版本按钮
+				.versionButton {
+					.gamePageHidden.versionButton;
+				}
+				//用户数统计行
+				.userNumber {
+					.gamePageHidden.userNumber;
+				}
+			}
+		}
+		//轮播右转按钮
+		#flipRight {
+			position: absolute;
+			top: 46%;
+			right: 2%;
+			width: 2.8rem;
+			height: 5.5rem;
+			background: url(../image/home/icon_03.png) no-repeat right / contain;
+			z-index: 999999;
+			cursor: pointer;
+		}
+		//轮播左转按钮
+		#flipLeft {
+			#flipRight;
+			left: 2%;
+			background: url(../image/home/icon_04.png) no-repeat left / contain;
+		}
+		//轮播指示器
+		#indicator {
+			position: absolute;
+			bottom: 2%;
+			left: calc(~"50% - 4.3rem");
+			cursor: default;
+			//指示器圆点
+			.indicatorDot {
+				padding: 0!important;
+				border-radius: 50%;
+				border: 1px solid @baseColor;
+				width: 2rem;
+				height: 2rem;
+				background: @white;
+				cursor: pointer;
+			}
+			//激活class标签
+			.active {
+				background: @baseColor;
+			}
+		}
+	}
+}
+
+
+//媒体查询
+@media screen and (max-width: 768px) {
+	main {
+		padding: 1.5rem 3.5rem;
+		#lastPlay {
+			padding: 2rem 5%;
+			font-size: 2rem;
+			> img {
+				height: 2rem;
+			}
+		}
+		#wrap {
+			margin-top: 1.5rem;
+			#gameType {
+				padding: 1.5rem;
+				font-size: 2rem;
+			}
+			#gameMenu {
+				.gamePageHidden {
+					padding: 1.5rem 10%;
+					.versionButton {
+						padding: 2rem;
+						font-size: 1.8rem;
+					}
+					.userNumber {
+						padding: 1.4rem 0;
+						font-size: 1.4rem;
+					}
+				}
+				.gamePage {
+					padding: 1.5rem 10%;
+					.versionButton {
+						.gamePageHidden.versionButton;
+					}
+					.userNumber {
+						.gamePageHidden.userNumber;
+					}
+				}
+			}
+			#flipLeft,
+			#flipRight {
+				height: 2.75rem;
+			}
+			#indicator {
+				left: calc(~"50% - 2.3rem");
+				.indicatorDot {
+					width: 1rem;
+					height: 1rem;
+				}
+			}
+		}
+	}
+}

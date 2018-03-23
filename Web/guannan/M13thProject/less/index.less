@@ -1,0 +1,127 @@
+/*PAGE COMMON CSS START*/
+	/*spacing*/
+	@per5: 5%;
+	@per10: 10%;
+	@sp10: 1rem;
+	@sp15: 1.5rem;
+	@sp20: 2rem;
+	@sp25: 2.5rem;
+	@sp30: 3rem;
+	@sp50: 5rem;
+
+	/*theme*/
+	@baseColor: #69d1ea;
+	@lightBlue: #b9e9f5;
+	@white: #fff;
+	@gray: #f0f0f0;
+	@darkGray: #9a9a9a;
+	@black: #000;
+	@orange: #fbb436;
+	@lightOrange: #f4c97b;
+	@darkGreen: #83b09b;
+
+	/*background*/
+	.bg-spr { background: url(../images/sprites.png) no-repeat; }
+
+	/*transition*/
+	.ts { transition: all .3s ease-out; }
+
+	/*scale*/
+	.sc(@x, @y) { transform: scale(@x, @y) }
+/*PAGE COMMON CSS END*/
+
+
+/*index.less START*/
+body {
+	background: @gray;
+}
+header {
+	padding: @sp20 @per5;
+	background: @baseColor;
+	> a {/*sprites size: 92 x 932*/
+		.bg-spr;
+		width: 17px;
+		height: 13.5px;
+		background-size: 46px auto;
+		background-position: -10px -10px;
+	}
+}
+main {
+	padding: 0 @per5;
+	> a {
+		.ts;
+		padding: @sp30 @per5;
+		border: 1px solid @darkGray;
+		background: @white;
+		color: @darkGray;
+		> p {
+			.bg-spr;
+			.ts;
+			width: 12px;
+			height: 20px;
+			background-size: 46px auto;
+			background-position: -10px -261.5px;
+		}
+		&:hover {
+			background: #333;
+		}
+		&:hover > p {
+			.sc(1.5, 1.5);
+		}
+	}
+	> div {/*#1*/
+		border: 1px solid @darkGray;
+		background: @white;
+		> p {
+			padding: @sp25 0;
+			border-bottom: 2px solid @lightOrange;
+			color: @orange;
+		}
+		> div {/*#2*/
+			padding: @sp25 @per10 0;
+			> a {
+				.ts;
+				padding: @sp30 0;
+				background: @baseColor;
+				color: @white;
+				&:hover {
+					box-shadow: 0 0 5px 2px rgba(0, 0, 0, .35);
+					background: saturate(@baseColor, 20%);
+				}
+			}
+			#flip {
+				.bg-spr;
+				top: 45%;
+				left: 100%;
+				margin-left: -2rem;
+				width: 14px;
+				height: 27px;
+				background-size: 46px auto;
+				background-position: -10px -428.5px;
+				&:hover {
+					.sc(1.5, 1.5);
+					box-shadow: none;
+				}
+			}
+			> p {
+				padding: @sp20 0;
+				color: @darkGray;
+			}
+			> div {/*#3*/
+				height: @sp10;
+				margin: -@sp10 0 @sp10;
+				> a {
+					.ts;
+					width: @sp10;
+					height: @sp10;
+					border-radius: 50%;
+					background: @gray;
+					&:hover {
+						background: @baseColor;
+					}
+				}
+			}
+		}
+	}
+}
+/*index.less END*/

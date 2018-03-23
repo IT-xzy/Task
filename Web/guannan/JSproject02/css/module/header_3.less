@@ -1,0 +1,50 @@
+@import "./reset.less";
+@import "./color.less";
+
+
+header {
+	padding: 2rem;
+	font-size: 3rem;
+	text-align: center;
+	color: @white;
+	background: @baseColor;
+	#title {
+		display: inline-block;
+	}
+	#back {
+		float: left;
+		width: 2.5rem;
+		height: 4.1rem;
+		background: url(../image/module/header_3/icon_01.png) no-repeat left / contain;
+		cursor: pointer;
+		transition: all .5s ease-in-out;
+		&:hover {
+			transform: translateX(-50%);
+		}
+	}
+	#close {
+		float: right;
+		width: 3.6rem;
+		height: 3.6rem;
+		background: url(../image/module/header_3/icon_02.png) no-repeat right / contain;
+		cursor: pointer;
+		transition: all .5s ease-in-out;
+		&:hover {
+			transform: scale(1.2);
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	header {
+		padding: 1.5rem 2rem;
+		font-size: 1.6rem;
+		#back {
+			width: 1.2rem;
+			height: 2rem;
+		}
+		#close {
+			width: 1.8rem;
+			height: 1.8rem;
+		}
+	}
+}
