@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //单行注释
+    document.write("are you ok ?")
+    //一个小弹窗，显示内容为1
+    alert(1)
+    /*
+    多行注释
+     */
+    var a =10;
+    document.write("变量a的值"+a)
+</script>
+<br>
+<br>
+<script>
+    x = 10;
+    console.log("x="+x);
+    document.write("没有用var声明的变量x的值:"+x);
+    console.log("end");
+</script>
+<br>
+<br>
+<span>输入账号 :</span>
+<input id="name" name="name" onkeyup="check()" type="text">
+<span id="checkResult"></span>
+
+<script>
+    var xmlhttp;
+    function check(){
+        var name = document.getElementById("name").value;
+        var url = "www.baidu.com"+name;
+
+        xmlhttp =new XMLHttpRequest();
+        xmlhttp.onreadystatechange=checkResult; //响应函数
+        xmlhttp.open("GET",url,true);   //设置访问的页面
+        xmlhttp.send(null);  //执行访问
+    }
+
+    function checkResult(){
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            alert("响应正常")
+            document.getElementById('checkResult').innerHTML=xmlhttp.responseText;
+    }
+</script>
+</body>
+</html>
