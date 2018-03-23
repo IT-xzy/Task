@@ -1,0 +1,113 @@
+@charset "UTF-8";
+@import './mixin.scss';
+
+html {
+    background-color: #f0f0f0;
+}
+body {
+    font-size: 1.4rem;
+}
+
+// header
+.header {
+    background-color: $blue;
+    color: $white;
+    font-size: 1.8rem;
+    padding: 1rem 0;
+    & img {
+        height: 2rem;
+        margin: 0 1rem;
+    }
+    & a {
+        line-height: 0rem;
+    }
+}
+
+// main
+.main {
+    top: 4rem;
+    bottom: 5rem;
+    & .container {
+        margin: .6rem;
+        & .day {
+            color: $blue;
+            background-color: $white;
+            text-align: center;
+            padding: .6rem;
+            margin-bottom: .6rem;
+        }
+        & .option {
+            color: $white;
+            background-color: $white;
+            padding: 1rem 2rem;
+            & .line {
+                padding: 0 3rem;
+                border-left: 1px solid $gray;
+            }
+            & .kill {
+                text-align: center;
+                background-color: $blue;
+                padding: .6em 0;
+                margin: .6rem 0;
+                position: relative;
+                cursor: pointer;
+                &::before {
+                    position: absolute;
+                    content: '';
+                    left: -4.1rem;
+                    top: -.1rem;
+                    width: 2rem;
+                    height: 2rem;
+                    border: 1px solid $gray;
+                    border-radius: 50%;
+                    background: $white url(../images/moon.png) 50%/50% no-repeat;
+                    z-index: 1;
+                }
+                & .triangle {
+                    width: 0;
+                    height: 0;
+                    border-top: 5px solid transparent;
+                    border-right: 10px solid $blue;
+                    border-bottom: 5px solid transparent;
+                    position: absolute;
+                    left: -.8rem;
+                    top: .8rem;
+                }
+            }
+            & .testament {
+                @extend .kill;
+                &::before {
+                    background: $white url(../images/sun.png) 50%/68% no-repeat;
+                }
+            }
+            & .talk ,.vote {
+                @extend .kill;
+                &::before {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+//footer
+.footer {
+    text-align: center;
+    background-color: rgba($color: #29bde0, $alpha: 0.3);
+    display: flex;
+    justify-content: space-around;
+    & a {
+        text-decoration: none;
+    }
+    & button {
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        background-color: #fbb435;
+        padding: .6rem 2rem;
+        margin: 1rem;
+        font-size: 2rem;
+        border-radius: .6rem;
+        outline: none;
+    }
+}

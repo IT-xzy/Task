@@ -1,0 +1,187 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors 汤镇铭Michael (15977536060@163.com)
+ * @date    2017-11-11 19:15:55
+ * @version $Id$
+ */
+*{
+	margin: 0rem;
+	padding: 0rem;
+	font-size: 62.5%;
+}
+html{
+	height: 100%;/*设置html和body的height为100%,让它们占满屏幕*/
+}
+body{
+	display: flex;
+	min-height: 100%;/*因为页面的内容可能会超过100%，
+	所以设置min-height，不超过100%的时候，div会在底部固定，
+	超过的时候，div就会随着内容往后，排在最后内容的后面*/
+	flex-direction: column;
+}
+
+
+
+
+header{
+	background-color: #5fc0cd;
+	color: white;
+	padding: 1.2rem 0rem;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	text-align: center;
+}
+header .zhuye{
+	/*float: left;*/
+	width: 10rem;
+	margin: 0 auto;
+	font-size: 2rem;
+}
+.img_return{
+	float: left;
+	height: 2rem;
+	margin-left: 1rem;
+}
+
+
+main{
+	flex-grow: 1;/*存在剩余空间，放大。*/
+	/*flex: 1;这个为简写，省略掉后面的flex-shrink和flex-basis*/
+	margin-top: 4.6rem;
+	overflow: auto;
+	position: absolute;
+	width: 100%;
+	top: 0px;
+	bottom: 100px;
+}
+main .main_top{
+	background-image: url(images/护工背景.png);
+	background-repeat: no-repeat;
+	background-size: cover/*100% auto/contain复习的时候可以试试看用这个回是什么效果*/;
+}
+.main_top{
+	display: flex;
+	align-items: center; /*复习时在这里理解好这个align-items，尝试换不同的值*/
+}
+.main_top_right{
+	font-size: 2rem;
+	color: white;
+}
+.position{
+	font-size: 1rem;
+	margin-top: 1rem;
+}
+.img_position{
+	height: 1rem;
+}
+
+.img_touxiang{
+	height: 6rem;
+	margin: 4rem 2rem;
+}
+
+
+.main_bottom{
+	position: relative;
+}
+.skill{
+	border-bottom: 1px solid #e1e5e7;
+}
+.skill .jineng{
+	border-left: 2px solid #5fc0cd;
+	margin: 1.2rem;
+	padding-left: 1rem;
+	font-size: 1.4rem;
+}
+.zhujia, .buhancan{
+	font-size: 1.4rem;
+	padding-left: 1rem;
+}
+.zhujia{
+	border-right: 1px solid #e1e5e7;
+	padding-right: 1rem;
+}
+.star{
+	height: 1.4rem;
+	padding-left: 1rem;
+}
+.line{
+	display: flex;
+	border-bottom: 1px solid #e1e5e7;
+	/*align-items: center;*/
+	padding: 1rem 0rem 1rem 1rem;
+	/*font-size: 1.4rem;*/
+	margin-left: 1rem;
+	align-items: center;
+	margin-right: 1rem;
+}
+.xiangmu{
+	font-size: 1.4rem;
+	color: #999999;
+	border-right: 1px solid #e1e5e7;
+	padding-right: 1rem;
+	/*margin-right: 1rem;*/
+	/*width: 180px;*/
+	position: absolute;
+}
+.neirong_price{
+	color: red;
+}
+/*#ziwojieshao{
+	display: flex;
+	flex-basis: 92px;
+	align-items: center;
+	border-right: 1px solid #e1e5e7;
+	position: absolute; 让它脱离文档流，别再动来动去了！！！由此得出，万一其他栏目字数也多呢？
+	干脆所有栏目都脱离开文档流算了！然后再对.neirong进行F12调开！
+}*/
+.neirong{
+	margin-left: 8rem;
+	font-size: 1.4rem;
+	margin-right: 10px;
+}
+/*footer div{
+	border: 1px solid #5fc0cd;
+	border-radius: 0.5rem;
+	margin: 2rem;
+	padding: 2rem 12%;
+	font-size: 2rem;
+	position: fixed;
+	bottom: 0rem;
+}
+footer .comments{
+	color: #5fc0cd;
+	left: 2rem;
+}
+footer .contact{
+	color: white;
+	background-color: #5fc0cd;
+	right: 2rem;
+}*/
+footer{
+	display: flex;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;/*让DIV正常显示的关键*/
+}
+.comments, .contact{
+	border: 1px solid #5fc0cd;
+	border-radius: 0.5rem;
+	font-size: 2rem;
+	margin: 2rem 1rem;
+	flex: 1;/*div大小适配的关键*/
+	text-align: center;
+}
+.comments{
+	color: #5fc0cd;
+	padding: 1rem 2rem;
+}
+.contact{
+	color: white;
+	background-color: #5fc0cd;
+	padding: 1rem 2rem;
+}
+

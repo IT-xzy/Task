@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="color">
+    <h5>你好</h5>
+</div>
+
+<form>
+
+    <input type="text" name="name" id="nn"/>
+    <input type="button" name="button" value="获取" onclick="col()"/>
+</form>
+
+<script>
+
+
+    function col() {
+        var x = document.getElementById("color");
+        x.style.color = "red";
+    }
+
+
+    function showColor() {
+        return this.color;
+    }
+
+    function Car(sColor, iDoors, iMpg) {
+        this.color = sColor;
+        this.doors = iDoors;
+        this.mpg = iMpg;
+        this.showColor = showColor;
+    }
+
+    var oCar1 = new Car("red", 4, 23);
+
+    console.log(oCar1.color);
+</script>
+</body>
+</html>

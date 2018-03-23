@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/aaa.css">
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="../js/angular.min.js"></script>
+    <script src="../js/angular-ui-router.js"></script>
+    <script src="../js/articele.js"></script>
+</head>
+<body>
+<div class="panel panel-default ">
+    <div class="panel-heading">
+        <strong>Article列表</strong>
+        <button type="button" class="btn btn-xs btn-success pull-right margin-left-10">
+            +新增
+        </button>
+
+    </div>
+    <div class="panel-body table-responsive">
+        <table class="table table-striped add-table-border">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>类型</th>
+                <th>发布时间</th>
+                <th>修改时间</th>
+                <th>发布者</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- ngRepeat: item in vm.articleList track by $index -->
+            <tr >
+
+            <tr >
+
+            </tbody>
+        </table>
+    </div>
+    <!-- ngIf: vm.total -->
+    <ul class="pagination pull-right"  total="48">
+
+        <li class="pull-left paginationCenter">
+            每页显示
+            <input type="text" class="paginationGo text-center">
+            条
+        </li>
+
+        <li><a disabled="disabled">首页</a></li>
+        <li><!-- ngIf: isHavePrePage() --></li>
+
+        <!-- ngRepeat: li in pageList track by $index -->
+        <li class=" active">
+            <a class="" disabled="disabled"> 1 </a>
+        </li><!-- end ngRepeat: li in pageList track by $index -->
+        <li>
+            <a class=""> 2 </a>
+        </li><!-- end ngRepeat: li in pageList track by $index -->
+        <li>
+            <a class=""> 3 </a>
+        </li><!-- end ngRepeat: li in pageList track by $index -->
+        <li>
+            <a class=""> 4 </a>
+        </li><!-- end ngRepeat: li in pageList track by $index -->
+        <li>
+            <a class=""> 5 </a>
+        </li><!-- end ngRepeat: li in pageList track by $index -->
+
+        <li><!-- ngIf: isHaveNextPage() -->
+            <a> &gt;</a>
+            <!-- end ngIf: isHaveNextPage() -->
+        </li>
+        <li><a>末页</a></li>
+        <li>
+            去第
+            <input type="text">
+            页
+            <a class="pull-right">确定</a>
+        </li>
+    </ul><!-- end  -->
+</div>
+</body>
+<script src="../js/bootstrap.min.js"></script>
+</html>

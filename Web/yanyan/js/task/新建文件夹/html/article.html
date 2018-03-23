@@ -1,0 +1,88 @@
+<div ng-controller="articleCtrl">
+    <div class="search-box clear-fix">
+        <div class="row">
+            <label class="col-lg-1 col-xs-12 option">发布时间</label>
+            <input class="col-lg-3 col-xs-12 line" type="text" id="date1" ng-model="params.startAt">
+            <label class="col-lg-1 col-xs-12 option">—</label>
+            <input class="col-lg-3 col-xs-12 line" type="text" id="date2" ng-model="params.endAt">
+            <label class="col-lg-1 col-xs-12 option">
+                类　　型
+            </label>
+            <select ng-model="params.type" class="col-lg-3 col-xs-12 line">
+                <option value="">全部</option>
+                <!--<option ng-repeat="x in types" value="{{x.type}}">{{x.name}}</option>-->
+                <option value="{{key}}" ng-repeat="(key,value) in types">{{value}}</option>
+            </select>
+            <label class="col-lg-1 col-xs-12 option">
+                状　　态
+            </label>
+            <select ng-model="params.status" class="col-lg-3 col-xs-12 line">
+                <!--<option ng-repeat="x in statusAll" value="{{x.num}}">{{x.status}}</option>-->
+                <option value="">全部</option>
+                <option value="{{key}}" ng-repeat="(key,value) in Status">{{value}}</option>
+            </select>
+        </div>
+        <button class="green-btn" ng-click="search(params.type,params.status,params.startAt,params.endAt)">搜索</button>
+        <button class="red-btn" ng-click="search()">清空</button>
+    </div>
+
+    <div class="article-list clear-fix">
+        <div class="list-top">
+            <label>Article列表</label>
+            <button ui-sref="main.articleDetail()">+新增</button>
+        </div>
+
+        <div class="list-detail clear-fix">
+            <table class="table">
+                <tr class="article-tr">
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="x in myList" class="article-tr">
+                    <td>{{x.id}}</td>
+                    <td>{{x.title}}</td>
+                    <td>{{x.type|ChangeType}}</td>
+                    <td>{{x.createAt|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td>{{x.updateAt|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td>{{x.author}}</td>
+                    <td>
+                        {{x.status|ChangeStatus}}
+                    </td>
+                    <td>
+                        <a ng-if="x.status==1" ng-click="upDown(x.id,2,'确定上线吗？','上线成功')">{{x.status|ChangeLine}}</a>
+                        <a ng-if="x.status==2" ng-click="upDown(x.id,1,'确定下线吗？','下线成功')">{{x.status|ChangeLine}}</a>
+                        <a ui-sref="main.articleDetail({id:x.id})">编辑</a>
+                        <a ng-click="delete(x.id)">删除</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="pages">
+            <span class="total" ng-model="total">共{{total}}条</span>
+            <span class="total" ng-model="total">共{{allPage}}页</span>
+
+            <span>每页显示</span>
+            <input onkeyup="value=value.replace(/\D|^0/g,'')" type="text" class="each-page" ng-model="params.size">
+            <span>条</span>
+
+            <button class="buttons" ng-disabled="params.page==1" ng-click="flip(1)">首页</button>
+            <button class="buttons" ng-disabled="params.page==1" ng-click="flip(params.page-1)">上一页</button>
+            <button class="buttons" ng-disabled="params.page==allPage" ng-click="flip(params.page-0+1)">下一页</button>
+            <button class="buttons" ng-disabled="params.page==allPage" ng-click="flip(allPage)">末页</button>
+
+            <span>去第</span>
+            <input onkeyup="value=value.replace(/\D|^0/g,'')" type="text" class="each-page" ng-model="params.page">
+            <span>页</span>
+
+            <button class="buttons" ng-click="sure()">确定</button>
+        </div>
+
+    </div>
+</div>

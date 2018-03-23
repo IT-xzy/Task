@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>无标题文档</title>
+
+    <style>
+
+        .ca{background-color:red; padding:20px;}
+
+        .js{ border:1px solid #00F; padding:10px;}
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="ca">
+
+    sss
+
+</div>
+
+<div class="js" id="as">
+
+</div>
+
+<div class="bd">
+
+</div>
+
+<div class="ca">
+
+</div>
+
+</body>
+
+</html>
+
+<script>
+
+    function getElementsClass(classnames){
+        var classobj= new Array();//定义数组
+
+        var classint=0;//定义数组的下标
+
+        var tags=document.getElementsByTagName("*");//获取HTML的所有标签
+
+        for(var i in tags){//对标签进行遍历
+
+            if(tags[i].nodeType==1){//判断节点类型
+
+                if(tags[i].getAttribute("class") == classnames)//判断和需要CLASS名字相同的，并组成一个数组
+
+                {
+
+                    classobj[classint]=tags[i];
+
+                    classint++;
+
+                }
+
+            }
+
+        }
+
+        return classobj;//返回组成的数组
+
+    }
+
+
+    //以下就是测试了
+
+    var a=getElementsClass("ca");
+
+    a[0].onclick=function(){alert("我们来了");}
+
+    a[1].innerHTML='我们来了';
+
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人员分配</title>
+    <link rel="stylesheet" href="css/match.css">
+
+</head>
+<body>
+<header class=" g-top">
+    <div class="g-fleft">
+        <a href="home.html"><img class="s-img1" src="img/back.png"></a>
+    </div>
+    <div class=" m-header">参数设置</div>
+    <div class="g-fright">
+        <img class="s-img2" src="img/help.png">
+    </div>
+</header>
+<main class="g-main">
+<div class="m-num m-mun1">
+    <div class="m-match-word g-inlineb">玩家配比</div>
+    <div  class="main-right">
+        <div class="abnum" id="abmun1"></div>
+        <div class="click" id="change">点击设置<img src="img/pen.png"></div>
+    </div>
+
+</div>
+<div class="m-word">
+    <input class="m-word-icon" id="farmer" placeholder="水民词组" onkeydown='if(event.keyCode==8){this.value=""}'/>
+    <input class="m-word-icon" id="ghost" placeholder="幽灵词组" onkeydown='if(event.keyCode==8){this.value=""}'>
+</div>
+<div class="m-num ">
+    <div  class="u-padding">
+        玩家人数
+        <input type="text"  class="slider-num" id="num" min="6" max="18" value="6" onblur="num_change()">
+        人
+    </div>
+    <div class="s-pad">
+        <button class="minus g-inlineb" onclick="minus_id()"></button>
+        <input type="range" class="slider_icon" id="icon" min="6" max="18" value="6" onchange="icon_change()">
+        <button class="plus " onclick="plus_id()"></button>
+    </div>
+</div>
+
+    <button class="m-footer" onclick="footer()">去发牌</button>
+
+</main>
+
+</body>
+<script src="js/bootbox.min.js" ></script>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/match.js"></script>
+</html>

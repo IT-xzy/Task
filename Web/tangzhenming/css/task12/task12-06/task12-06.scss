@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+/* Authors      TZMMichael (15977536060@163.com)
+ * Date         2017-12-11 10:49:14
+ * Site         https://github.com/TZMMichael
+ * Updated      
+ * Updated by   TZMMichael
+ * 
+ */
+
+$blue: #5fc0cd;
+$white: #fff;
+$gray: #999;
+$grey: #e1e5e7;
+$red: #e63b0e;
+
+html{
+	font-size:62.5%;
+}
+body{
+	margin: 0;
+}
+
+/* HEADER */
+.header{
+	background-color:$blue;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+    position: fixed;
+    padding: 1rem 0;
+    width: 100%;
+    z-index: 1;
+	& .header-btn{
+		display: flex;
+		font-size: 1.8rem;
+		& .btn-left{
+			background-color:#55a8b3;
+			color: $white;
+            padding: .5rem 1rem;
+            border-radius: 0.3rem;
+            cursor: pointer;
+            &:hover{
+                @extend .btn-right;
+            }
+		}
+		& .btn-right{
+			background-color:$white;
+			color: $blue;
+            padding: .5rem 1rem;
+            border-radius: 0.3rem;
+            margin-left: -0.4rem;
+            cursor: pointer;
+		}
+	}
+    & img{
+        position:absolute;
+        right: 1rem;
+        height: 1.8rem;
+        cursor: pointer;
+    }
+}
+
+/* NAV */
+.nav{
+    position: fixed;
+    width: 100%;
+    top: 5rem;
+    z-index: 1;
+    background: $white;
+    & form{
+        display: flex;
+        justify-content: space-around;
+        border-bottom:1px solid $grey;
+        & select{
+            outline: none;
+            border: none;
+            margin: 0.5rem 0;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background:url(images/下拉小三角.png) no-repeat;
+            background-size: .7rem .5rem;
+            background-position: 86%;
+            padding-left:1rem;
+            border-right: 1px solid $grey;
+            width: 100%;
+            color: $gray;
+        }
+        & .situation{
+            border: none;
+        }
+    }
+}
+
+/* MAIN */
+.main{
+    position: absolute;
+    width: 100%;
+    top: 7.5rem;
+    bottom: 5.95rem;
+    overflow: auto;
+}
+.mian-box{
+    border-bottom: 1px solid $grey;
+    & .line{
+        display: flex;
+        align-items: center;
+        color: $grey;
+        position:relative;
+        & img{
+            height: 1rem;
+            position:absolute;
+            left: .5rem;
+        }
+        & p{
+            margin: 0.5rem 2rem;
+        }
+    }
+    & .line-mid{
+        display: flex;
+        align-items: center;
+        position:relative;
+        & .price{
+            color: $red;
+            font-size: 1.4rem;
+            margin:0;
+            position:absolute;
+            right: 4rem;
+        }
+        & img{
+            height: 1.2rem;
+            position:absolute;
+            right: 2rem;
+            cursor: pointer;
+        }
+        & strong{
+            margin-left: 2rem;
+        }
+    }
+}
+
+/* FOOTER */
+.footer{
+    background-color:$grey;
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    & .footer-left{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        justify-content: space-between;
+        height: 4rem;
+        color: $blue;
+        cursor: pointer;
+        & img{
+            height: 2rem;
+        }
+    }
+    & .footer-right{
+        @extend .footer-left;
+        color: $gray;
+    }
+    & .circle{
+        height: 4rem;
+        width: 4rem;
+        background-color: $blue;
+        border-radius:50%;
+        position: relative;
+        cursor: pointer;
+        & img{
+            height: 2rem;
+            position: absolute;
+            left: 28%;
+            top: 22%;
+        }
+    }
+}

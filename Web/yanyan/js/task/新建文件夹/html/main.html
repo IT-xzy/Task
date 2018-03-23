@@ -1,0 +1,62 @@
+<div ng-controller="mainCtrl">
+    <nav class="navbar navbar-default no-margin" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="sr-only">点击</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="system">
+                <b>喝我水后台管理系统</b>
+            </div>
+        </div>
+        <div class="top-bar">
+            <div class="close-admin">
+                <span class="my-close">admin</span>
+                <span class="glyphicon glyphicon-off my-close"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-------------左侧列表------------>
+    <div class="box-main">
+        <div class="navbar-collapse collapse item" id="example-navbar-collapse">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default panel-cover">
+                    <div data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne"
+                         class="my-panel"
+                         ng-class="{'active1':state.includes('main.company')||state.includes('main.job')}">
+                        <span class="glyphicon glyphicon-pencil pencil"></span>
+                        <span>信息管理</span>
+                        <span class="glyphicon glyphicon-chevron-left chevron-left"></span>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse my-dropdown">
+                        <div ng-class="{'active2':state.includes('main.company')}" class="list" ui-sref=".company">
+                            公司列表
+                        </div>
+                        <div ng-class="{'active2':state.includes('main.job')}" class="list" ui-sref=".job">
+                            职位列表
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default panel-cover">
+                    <div data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo"
+                         class="my-panel" ng-class="{'active1':state.includes('main.article')}">
+                        <span class="glyphicon glyphicon-pencil pencil"></span>
+                        <span>Article管理</span>
+                        <span class="glyphicon glyphicon-chevron-left chevron-left"></span>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse my-dropdown">
+                        <div ng-class="{'active2':state.includes('main.article')}" class="list" ui-sref=".article">
+                            Article列表
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-------------左侧列表------------>
+    <div ui-view="" class="detail-box clear-fix"><h1>welcome</h1></div>
+</div>

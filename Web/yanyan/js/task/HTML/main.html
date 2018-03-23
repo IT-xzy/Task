@@ -1,0 +1,88 @@
+<div ng-controller="manageCtrl">
+
+    <div class="padding0">
+        <div class="bac-fdbb6b">
+            <div class="tittle-style">
+                喝我水后台管理系统
+            </div>
+            <button type="button" class="navbar-toggle navbar-toggle-button btnl" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="ulBox">
+            <ul class="breadcrumb flaot-right">
+                <li>
+                    <a>admin</a>
+                </li>
+                <li ng-click="quit()" class="active last">
+                    <a><span class="glyphicon glyphicon-off"></span></a>
+                </li>
+            </ul>
+            <div style="clear: both"></div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <div class="main-content">
+        <div class="main-left">
+            <nav class="navbar navbar-default" role="navigation">
+                <div>
+                    <div class="collapse navbar-collapse row" id="example-navbar-collapse">
+                        <ul class="nav navbar-nav lit side">
+                            <li class="nav-first-level ng-scope"
+                                ng-class="{'active':state.includes('main.companylist')}">
+                                <a class="dropdown-toggle hero" data-toggle="dropdown" style="color: #fff"
+                                   ng-class="{'active':state.includes('main.companylist')}">
+                                    <span class="icon1 glyphicon glyphicon-pencil"
+                                          style="color: white;left: -34px;"></span>
+                                    信息管理
+                                </a>
+                                <ul class="dropdown-menu changers" style="text-align: center">
+                                    <li ng-class="{'active':state.includes('main.companylist')}"><a
+                                            style="color: white;padding-left: 4rem;" class="lister "
+                                            ui-sref=".companylist">公司列表</a></li>
+                                </ul>
+                                <ul class="dropdown-menu changers" style="text-align: center">
+                                    <li ng-class="{'active':state.includes('main.positionlist')}"><a
+                                            style="color: white;padding-left: 4rem;" class="lister"
+                                            ui-sref=".positionlist">职位列表</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-first-level ng-scope" ng-class="{'active':state.includes('main.article')}">
+                                <a class="dropdown-toggle hero" data-toggle="dropdown" style="color: #fff">
+                                    <span class="icon1 glyphicon glyphicon-pencil"
+                                          style="color: white;left: -3rem;"></span>
+                                    Article管理
+                                </a>
+                                <ul class="dropdown-menu changers" style="text-align: center">
+                                    <li ng-class="{'active':state.includes('main.article')}"><a
+                                            style="color: white;padding-left: 4rem;" ui-sref=".article" class="lister ">Article列表</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-first-level ng-scope" ng-class="{'active':state.includes('main.welcome')}">
+                                <a class="dropdown-toggle hero" data-toggle="dropdown" style="color: #fff">
+                                    <span class="icon1 glyphicon glyphicon-pencil"
+                                          style="color: white;left: -35px;"></span>
+                                    后台管理
+                                </a>
+                                <ul class="dropdown-menu changers" style="text-align: center">
+                                    <li ng-class="{'active':state.includes('main.welcome')}"><a
+                                            style="color: white;padding-left: 4rem;" ui-sref=".welcome" class="lister ">欢迎</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="main-right" ui-view="">
+
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+</div>

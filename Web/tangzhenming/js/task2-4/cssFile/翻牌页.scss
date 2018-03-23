@@ -1,0 +1,106 @@
+@charset "UTF-8";
+@import './mixin.scss';
+
+html {
+    background-color: $blue;
+}
+// header
+.header {
+    background-color: $blue;
+    color: $white;
+    font-size: 1.8rem;
+    padding: 1rem 0;
+    & img {
+        height: 2rem;
+        margin: 0 1rem;
+    }
+    & a {
+        line-height: 0rem;
+    }
+}
+
+// main
+.main {
+    background: $blue;
+    border-top: 1px solid #74d4eb;
+    top: 4rem;
+    bottom: 7rem;
+    & .container {
+        background: #ffedc5;
+        margin: 3rem;
+        border: .3rem solid $white;
+        position: relative;
+        & .image1 {
+            padding: 6.46rem 0;
+            text-align: center;
+            & img {
+                width: 15rem;
+            }
+        }
+        & .image2 {
+            display: none;
+            padding: 2rem 0;
+            text-align: center;
+            & img {
+                width: 12rem;
+            }
+            & .id {
+                font-weight: bolder;
+                font-size: 2rem;
+                color: $blue;
+                margin: 1rem 0;
+            }
+            & .word {
+                @extend .id;
+                color: #f56b81;
+                border-bottom: 1px solid $white;
+                padding-bottom: 2rem;
+            }
+            & .tips {
+                font-weight: bold;
+                font-size: 1.6rem;
+                color: $orange;
+                text-align: left;
+                margin: 0 1rem;
+            }
+        }
+        & .circle {
+             width: 3rem;
+             height: 3rem;
+             border-radius: 50%;
+             border: .2rem solid #ffedc5;
+             background: $white;
+             position: absolute;
+            //  top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             & .num {
+                 font-size: 2rem;
+                 font-weight: bold;
+                 position: absolute;
+                 color: #f56b81;
+                 top: 50%;
+                 left: 50%;
+                 transform: translate(-50%, -50%);
+             }
+        }
+    }
+}
+
+// footer
+.footer {
+    background: $blue;
+    & .watch {
+        background: $orange;
+        border: none;
+        color: $white;
+        font-size: 2.6rem;
+        margin: 2rem 8%;
+        padding: 1rem;
+        width: 84%;
+        cursor: pointer;
+    }
+    & .watch2 {
+        display: none;
+    }
+}
