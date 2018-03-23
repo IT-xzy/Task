@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiuzhenyuan.dao.GraduateDao">
+
+    <select id="findGraduates" resultMap="LazyLoadingResultMap">
+        SELECT * FROM tb_graduates
+    </select>
+    
+    <resultMap id="LazyLoadingResultMap" type="com.xiuzhenyuan.bean.Graduate">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="avatar" column="avatar"/>
+        <result property="message" column="message"/>
+        <association property="student" javaType="com.xiuzhenyuan.bean.Student"
+            select="com.xiuzhenyuan.dao.StudentDao.findById" column="student_id">
+        </association>
+    </resultMap>
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) FROM tb_graduates
+    </select>
+
+</mapper>

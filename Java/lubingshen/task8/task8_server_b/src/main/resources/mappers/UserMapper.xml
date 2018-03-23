@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptteng.dao.UserDAO">
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) FROM tb_user
+    </select>
+
+    <!--该接口已经被关闭-->
+    <!--<select id="findById" parameterType="java.lang.Long" resultType="User">
+        SELECT * FROM tb_user WHERE id = #{id}
+    </select>-->
+
+    <!--注意：这里的三个接口其实可以返回一个Login对象用来做登录判断就行了，我懒得做了-->
+    <select id="findByCellphone" parameterType="java.lang.String" resultType="User">
+        SELECT * FROM tb_user WHERE cellphone = #{cellphone}
+    </select>
+
+    <select id="findByMail" parameterType="java.lang.String" resultType="User">
+        SELECT * FROM tb_user WHERE mail = #{mail}
+    </select>
+
+    <select id="findByName" parameterType="java.lang.String" resultType="User">
+        SELECT * FROM tb_user WHERE user_name = #{userName}
+    </select>
+
+
+    <!--这里我就不写动态sql插入了，需要自定义片段-->
+    <insert id="insertUser" parameterType="User">
+        INSERT INTO tb_user(user_name,user_key,create_at,cellphone,mail)
+        VALUE (#{userName},#{userKey},#{createAt},#{cellphone},#{mail})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="modifyLoginTime" parameterType="User">
+        UPDATE tb_user SET login_at=#{loginAt} WHERE user_name = #{userName}
+    </update>
+
+    <update id="addStudentId" parameterType="User">
+        UPDATE tb_user SET student_id=#{studentId} WHERE user_name = #{userName}
+    </update>
+
+    <select id="findStudentByName" parameterType="java.lang.String" resultMap="UserAndStudent">
+        SELECT * FROM tb_user WHERE user_name = #{userName}
+    </select>
+
+    <resultMap id="UserAndStudent" type="com.ptteng.pojo.model.User">
+        <id property="userName" column="user_name"/>
+        <result property="id" column="id"/>
+        <result property="userKey" column="user_key"/>
+        <result property="cellphone" column="cellphone"/>
+        <result property="mail" column="mail"/>
+        <result property="studentId" column="student_id"/>
+        <result property="loginAt" column="login_at"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+        <association property="student" javaType="com.ptteng.pojo.model.Student"
+                     select="com.ptteng.dao.StudentDAO.findById" column="student_id">
+        </association>
+    </resultMap>
+
+
+</mapper>
