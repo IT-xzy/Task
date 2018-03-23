@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/sca
+                           http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置文件拆分，读取其他的配置文件-->
+    <import resource="applicationContext_*.xml"/>
+
+    <context:component-scan base-package="com.main"/>
+    <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.model"/>
+    <context:component-scan base-package="com.util"/>
+
+
+    <!--数据库连接配置-->
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:mysql://localhost:3306/task4?characterEncoding=UTF-8</value>
+        </property>
+        <property name="username">
+            <!--root-->
+            <value>root</value>
+        </property>
+        <property name="password">
+            <!--MyNewPass4!-->
+            <value>root</value>
+        </property>
+    </bean>
+    <!--创建session工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--定位数据库配置文件-->
+        <property name="dataSource" ref="datasource"/>
+        <property name="mapperLocations" value="classpath:com/mapper/*.xml"/>
+    </bean>
+
+    <!--mybatis自动扫描包下的映射-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mapper"/>
+    </bean>
+
+    <sca:service name="StudentService" type="com.service.StudentService" target="studentService"/>
+
+    <bean id="studentService" class="com.service.imp.StudentServiceImp"/>
+
+</beans>
+
+
