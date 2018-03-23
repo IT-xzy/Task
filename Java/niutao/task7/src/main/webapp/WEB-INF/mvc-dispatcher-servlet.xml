@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+        <!-- 配置包扫描器 将有@Controller,@Service,@repository,@Component等注解的类成为spring 的bean-->
+        <context:component-scan base-package="com.controller"/>
+        <context:component-scan base-package="com.service"/>
+        <context:component-scan base-package="com.pojo"/>
+        <context:component-scan base-package="com.util"/>
+
+        <!--AOP相关-->
+        <aop:aspectj-autoproxy proxy-target-class="true">
+        </aop:aspectj-autoproxy>
+
+
+    <!--自动注册基于注解风格的处理器需要的DefaultAnnotationHandlerMapping、AnnotationMethodHandlerAdapter
+
+  支持Spring3的ConversionService自动注册
+
+  支持JSR-303验证框架的自动探测并注册（只需把JSR-303实现放置到classpath）
+
+  自动注册相应的HttpMessageConverter（用于支持@RequestBody  和 @ResponseBody）（如XML输入输出转换
+  -->
+        <mvc:annotation-driven/>
+
+        <!--当在web.xml 中DispatcherServlet使用<url-pattern>/</url-pattern> 映射时，
+        能映射静态资源（当Spring Web MVC框架没有处理请求对应的控制器时（如一些静态资源），
+        转交给默认的Servlet来响应静态文件，否则报404找不到资源错误，）。
+        -->
+        <mvc:default-servlet-handler/>
+
+        <!--拦截器-->
+            <mvc:interceptors>
+                <mvc:interceptor>
+                    <mvc:mapping path="/u/t10"/>
+                    <bean class="com.interceptor.AuthorizationInterceptor"/>
+                </mvc:interceptor>
+                <mvc:interceptor>
+                    <mvc:mapping path="/u/**"/>
+                    <bean class="com.interceptor.AuthorizationInterceptor"/>
+                </mvc:interceptor>
+            </mvc:interceptors>
+
+
+        <!-- 视图解析器 配置视图页面的位置，前缀，后缀-->
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="prefix" value="/WEB-INF/jsp/common/"/>
+            <property name="suffix" value=".jsp"/>
+        </bean>
+
+    <!-- tiles整合 start-->
+    <bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1">
+    </bean>
+
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!-- tiles整合 end-->
+
+    <!--文件上传-->
+    <!--增加了一个类型为CommonsMultipartResolver类型的解析器，各属性的意义：-->
+
+    <!--defaultEncoding：默认编码格式-->
+
+    <!--maxUploadSize：上传文件最大限制（字节byte）-->
+
+    <!--maxInMemorySize：缓冲区大小-->
+
+    <!--当Spring的前置中心控制器检查到客户端发送了一个多分部请求，-->
+    <!--定义在上下文中的解析器将被激活并接手处理。解析器将当前的HttpServletRequest包装成一个支持多部分文件上传的MultipartHttpServletRequest对象。-->
+    <!--在控制器中可以获得上传的文件信息。-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8" />
+        <property name="maxUploadSize" value="10485760000" />
+        <property name="maxInMemorySize" value="40960" />
+    </bean>
+</beans>

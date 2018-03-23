@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--配置文件拆分，读取其他的配置文件-->
+    <import resource="applicationContext_*.xml"/>
+
+    <context:component-scan base-package="com.controller"/>
+    <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.pojo"/>
+    <context:component-scan base-package="com.util"/>
+    <!--配置缓存memcached配置，没有配置memcached pool-->
+    <!--通过XmemcachedClientBuilder的工厂方法方式来创建MemcachedClient-->
+    <bean name="memcachedClientBuilder"
+          class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+        <constructor-arg>
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg>
+                        <value>localhost</value>
+                    </constructor-arg>
+                    <constructor-arg>
+                        <value>11211</value>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>1</value>
+            </list>
+        </constructor-arg>
+        <!-- nio连接池大小，默认为1 -->
+        <property name="connectionPoolSize" value="2"></property>
+        <!-- 协议工厂 -->
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory"></bean>
+        </property>
+        <!-- 分布策略 -->
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean>
+        </property>
+        <!-- 序列化转化器 -->
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+        </property>
+        <!-- 是否启用failure模式 -->
+        <property name="failureMode" value="false"/>
+    </bean>
+    <!-- 把MemcachedClient配置为Spring的Bean,并且指定factory-method和destroy-method方法 -->
+    <bean name="memcachedClient" factory-bean="memcachedClientBuilder"
+          factory-method="build" destroy-method="shutdown"/>
+
+
+
+    <!--数据库连接配置-->
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:mysql://localhost:3306/task4?characterEncoding=UTF-8</value>
+        </property>
+        <property name="username">
+            <!--root-->
+            <value>root</value>
+        </property>
+        <property name="password">
+            <!--MyNewPass4!-->
+            <value>root</value>
+        </property>
+    </bean>
+    <!--创建session工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--定位数据库配置文件-->
+        <property name="dataSource" ref="datasource"/>
+        <property name="mapperLocations" value="classpath:com/mapper/*.xml"/>
+    </bean>
+    <!--mybatis自动扫描包下的映射-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mapper" />
+    </bean>
+
+</beans>
+
+
