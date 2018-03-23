@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="../js/angular-ui-router.js"></script>
+</head>
+<body>
+<div ng-controller="SortCtrl">
+    <style>
+        .data-item {
+            float: left;
+            width: 20px;
+            background-color: #c0c0c0;
+            border: 1px solid #080808;
+        }
+    </style>
+    <button ng-click="sort()">Sort</button>
+    <div>
+        <div ng-repeat="item in arr track by $index" class="data-item" ng-style="{'height': item*5+'px'}"></div>
+    </div>
+</div>
+</body>
+<script>
+    var App = angular.module('App', []);
+    $scope.arr = [2, 4, 5, 63, 4, 5, 55, 2, 4, 43];
+
+    $scope.sort = function () {
+        if (!sort($scope.arr)) {
+            $timeout(function() {
+                $scope.sort();
+            }, 500);
+        }
+    };
+
+    function sort(array) {
+        // 喵的，写到这个才发现yield是多么好啊
+        for (var i = 0; i < array.length; i++) {
+            for (var j = array.length; j > 0; j--) {
+                if (array[j] < array[j - 1]) {
+                    var temp = array[j - 1];
+                    array[j - 1] = array[j];
+                    array[j] = temp;
+
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+</script>
+</html>

@@ -1,0 +1,85 @@
+<div>
+    <div class="wrapper">
+        <header class="navbar  navbar-static-top topbar">
+            <div class="navbar-header">
+                <div href="" class="topbar-brand">萝卜多后台管理系统</div>
+            </div>
+            <div class="b-fff">
+                <ul class="nav navbar-top-links navbar-right ">
+                    <li class="dropdown pull-right">
+                        <span class="">|</span>
+                        <b class="dropdown-name"><span class="">admin</span></b>
+                        <span class="">|</span>
+                        <a class="dropdown-toggle dropdown-close" data-ng-click="quit()" style="cursor: pointer">
+                            <span class="glyphicon glyphicon-off"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <!--导航-->
+        <nav class="sidebar">
+            <div class="  top-left">
+                <div class="panel panel-default border-radius-z">
+                    <div data-toggle="collapse" data-target="#collapse1" class="Accordion "
+                         ng-class="{'active':state.includes('backStage.companyList')||state.includes('backStage.positionList')}">
+                        <span class="glyphicon glyphicon-pencil pencil pencil-left"></span>
+                        <span>信息管理</span>
+                        <span class="glyphicon glyphicon-chevron-left chevron-right"
+                        ng-if="!(state.includes('backStage.companyList')||state.includes('backStage.positionList'))"></span>
+                        <span class="glyphicon glyphicon-chevron-down chevron-right hidden-none"
+                              ng-if="!(state.includes('backStage.companyList')||state.includes('backStage.positionList'))"></span>
+
+                        <span class="glyphicon glyphicon-chevron-left chevron-right hidden-none"
+                              ng-if="state.includes('backStage.companyList')||state.includes('backStage.positionList')"></span>
+                        <span class="glyphicon glyphicon-chevron-down chevron-right "
+                              ng-if="state.includes('backStage.companyList')||state.includes('backStage.positionList')"></span>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse "
+                         ng-class="{'in':state.includes('backStage.companyList')||state.includes('backStage.positionList')}">
+                        <div ui-sref="backStage.companyList"
+                             ng-class="{'active':state.includes('backStage.companyList')}">公司列表
+                        </div>
+                        <div ui-sref="backStage.positionList"
+                             ng-class="{'active':state.includes('backStage.positionList')}">职位列表
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default border-radius-z">
+                    <div data-toggle="collapse" data-target="#collapse2" class="Accordion "
+                         ng-class="{'active':state.includes('backStage.article')||state.includes('backStage.addArticle')}">
+                        <span class="glyphicon glyphicon-pencil pencil pencil-left"></span>
+                        <span>Article管理</span>
+                        <span class="glyphicon glyphicon-chevron-left chevron-right"
+                              ng-if="!(state.includes('backStage.article')||state.includes('backStage.addArticle'))"></span>
+                        <span class="glyphicon glyphicon-chevron-down chevron-right hidden-none"
+                              ng-if="!(state.includes('backStage.article')||state.includes('backStage.addArticle'))"></span>
+
+                        <span class="glyphicon glyphicon-chevron-left chevron-right hidden-none"
+                              ng-if="state.includes('backStage.article')||state.includes('backStage.addArticle')"></span>
+                        <span class="glyphicon glyphicon-chevron-down chevron-right "
+                              ng-if="state.includes('backStage.article')||state.includes('backStage.addArticle')"></span>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse "
+                         ng-class="{'in':state.includes('backStage.article')||state.includes('backStage.addArticle')}">
+                        <div ui-sref="backStage.article"
+                             ng-class="{'active':state.includes('backStage.article')||state.includes('backStage.addArticle')}">
+                            Article列表
+                        </div>
+                        <!--<li ui-sref=".addArticle">-->
+                        <!--Article信息-->
+                        <!--</li>-->
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <main class="page-wrapper">
+            <div class="" ui-view="">
+                welcome
+            </div>
+        </main>
+    </div>
+</div>
+
+

@@ -1,0 +1,122 @@
+$white: #fff;
+$blue: rgb(95, 192, 205);
+$gray: #f0f0f0;
+@mixin height($height:50px) {
+  height: $height;
+}
+
+@mixin width($width:100%) {
+  width: $width;
+}
+
+@mixin font-width($crude:600) {
+  font-weight: $crude;
+}
+
+@mixin float($float:right){
+  float: $float;
+}
+
+@mixin margin-top($mtop:10px){
+  margin-top:$mtop;
+}
+
+@mixin margin-right($mright:10px){
+  margin-right:$mright;
+}
+
+@mixin margin-left($mleft:10px){
+  margin-left:$mleft;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  @include width;
+  @include height(100%);
+
+}
+
+body {
+  background-color: $gray;
+
+}
+
+header {
+  @include height;
+  line-height: (10px*5);
+  color: $white;
+  background-color: $blue;
+}
+
+.main-max {
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+.register {
+  @include margin-left;
+  @include float(left);
+  left: 0;
+}
+
+.close {
+  @include margin-right;
+  @include float();
+}
+
+.logintop {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  @include font-width;
+}
+
+.phone {
+  @include margin-top;
+  background-color: $white;
+  img {
+    @include width(65px);
+    @include height;
+    vertical-align: middle;
+  }
+  input {
+    @include height;
+    position: absolute;
+    padding: 0;
+    border: none;
+    outline: none;
+  }
+}
+
+.password {
+  @extend .phone;
+}
+
+button {
+  @include width;
+  @include height;
+  color: $white;
+  background-color: $blue;
+  @include margin-top;
+  border: none;
+  @include font-width;
+  font-size: 16px;
+
+}
+
+.forget {
+  color: $blue;
+  @include float();
+  @include margin-top;
+  @include margin-right;
+  @include font-width;
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
+

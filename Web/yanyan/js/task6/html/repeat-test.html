@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <script src="../js/jquery-3.2.1.js"></script>
+    <script src="../js/angular-ui-router.js"></script>
+
+</head>
+<body ng-controller="EditCtrl">
+
+<form role="form" name="editForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row  panel panel-default panel-body">
+                <div class="col-md-offset-1 panel panel-default">
+                    <label>{{'Details'}}</label>
+                    <input type="button" class="btn btn-info" value="增加" ng-click="BDetailsAdd()">
+                    <input type="button" class="btn btn-danger" value="打印信息" ng-click="printInfo()">
+                </div>
+                <div class="vBaggages" ng-repeat="vba in showVBs">
+                    <div class="form-group col-md-2 col-md-offset-1">
+                        <input type="button" class="btn btn-info" value="删" ng-click="BDetailsDel($index)">
+                        <input type="text" class="form-control pull-right" ng-model="vba.Tag"
+                               placeholder="Tag" style="width:70%">
+                    </div>
+                    <div class="form-group col-md-2 col-md-offset-1">
+                        <input type="text" class="form-control pull-right" ng-model="vba.NO"
+                               placeholder="No.">
+                    </div>
+                    <div class="form-group col-md-5 col-md-offset-1">
+                        <input type="text" class="form-control pull-right" ng-model="vba.remarks"
+                               placeholder="Remarks">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+
+<script>
+    var App = angular.module('App', []);
+    App.controller('EditCtrl', ['$scope', function ($scope) {
+        $scope.printInfo = function () {
+            for (var i = 0; i < $scope.showVBs.length; i++) {
+                console.log($scope.showVBs[i]);
+            }
+        };
+
+        $scope.showVBs = [{
+            "Tag": "Tag1",
+            "NO": "No1",
+            "remarks": "remarks1"
+        }, {
+            "Tag": "Tag2",
+            "NO": "No2",
+            "remarks": "remarks2"
+        }];
+        $scope.BDetailsAdd = function () {
+            $scope.showVBs.push({});
+        };
+        $scope.BDetailsDel = function (Count) {
+            $scope.showVBs.splice(Count, 1);
+        };
+    }]);
+</script>
+
+
+</html>
