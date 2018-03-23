@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+
+
+        .head{
+            line-height: 40px;
+            width: 80%;
+            margin: auto;
+            color: #29b078;
+            font-size: 12px;
+        }
+        .wechat,.qq,.webo{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid #29b078;
+            margin-top: 5px;
+        }
+        .wechat1,.qq1,.webo1{
+            padding-left: 6px;
+            padding-bottom: 12px;
+        }
+
+        .jnshu{
+            margin-top: 15px;
+            margin-left: 100px;
+        }
+
+        .tel{
+            display: inline-block;
+
+        }
+        .ted{
+            display: inline-block;
+            float: right;
+        }
+        .main{
+            height: 100px;
+            background-color: #29b078;
+        }
+        .page{
+            display: inline-block;
+            float: right;
+            height: 100px;
+            font-size: 1.8rem;
+            margin-right: -80px;
+
+
+        }
+        .page1,.page2,.page3,.page4{
+            display: inline-block;
+            line-height: 98px;
+            padding: 0 15px;
+            color: #FFFFFF;
+
+        }
+
+
+        .page>a:hover{
+            text-decoration: none;
+            border-bottom: 2px solid #FFFFFF;
+            color: #FFFFFF;
+        }
+
+        .homepage{
+            font-size: 1.8rem;
+
+        }
+        .occupation{
+            font-size: 1.8rem;
+            color: #29b078;
+        }
+        .homepage1{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #edf1f2;
+        }
+        .mean{
+            margin-right: 25px;
+        }
+        .mean1{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #edf1f2;
+        }
+        .web{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #d0d6d9;
+            font-size: 1.8rem;
+        }
+        .mean{
+            color: #333333;
+        }
+        .meangray{
+            color: #999999;
+        }
+        .meangreen{
+            background-color: #29b078;
+            color: #FFFFFF;
+        }
+        a:hover {
+            background-color: #29b078;
+            color: #FFFFFF;
+
+
+
+        }
+        .meangray:hover{
+            color: #999999;
+        }
+
+
+        .describe,.level,.hard,.cycle,.demand,.date,.money,.ing,.propt{
+            margin-left: 5px;
+            font-size: 1rem;
+        }
+
+
+        .people{
+            margin-top: 10px;
+        }
+        .border{
+            border: 1px solid  #edf1f2;
+
+
+        }
+        .border1{
+            border-top: 1px solid  #edf1f2;
+            border-bottom: 1px solid  #edf1f2;
+            padding: -10px;
+        }
+        .borderright{
+            border-right: 1px solid  #edf1f2;
+        }
+        .border2{
+            border-top: 1px solid  #edf1f2;
+            border-bottom: 1px solid  #edf1f2;
+        }
+        .border3{
+            border-left: 1px solid  #edf1f2;
+
+        }
+        .topbottom{
+            border-top: 1px solid  #edf1f2;
+            border-bottom: 1px solid  #edf1f2;
+
+        }
+        .border4{
+            border-top: 1px solid  #edf1f2;
+            border-bottom: 1px solid  #edf1f2;
+        }
+        span{
+            display: inline-block;
+            margin-top: 8px;
+            margin-bottom: 8px;
+
+        }
+        .star{
+            margin-left: 10px;
+        }
+        .describe{
+            text-align: left;
+            font-size: 1.3rem;
+            width: 160px;
+            padding-right: 5px;
+            margin: 0;
+        }
+        .level,.hard,.cycle,.demand,.money,.propt{
+            color: #999999;
+        }
+        .cycle1,.demand1,.ing1{
+            color: #f01400;
+            font-size: 1rem;
+        }
+        .cycle2,.demand2,.ing2{
+            color: #333333;
+            font-size: 1rem;
+        }
+        .money2{
+            color: #333333;
+            font-size: 1rem;
+            margin-left: 80px;
+        }
+        .money3{
+            color: #333333;
+            font-size: 1rem;
+            margin-left: 82px;
+        }
+        .none{
+            position: absolute;
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(51,51,51,0.9);
+            z-index: 1000;
+
+
+        }
+        .border:hover .none{
+            display:block ;
+        }
+        .text1{
+            color: #FFFFFF;
+            text-align: center;
+            margin: 20px;
+
+        }
+        .text{
+            width: 70%;
+            height: 70%;
+            margin: auto;
+            color: #FFFFFF;
+            font-size: 1.8rem;
+        }
+        .java{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+            font-size: 1.8rem;
+            border-bottom: 1px solid #d0d6d9;
+        }
+        .twoline{
+            margin-top: 50px;
+        }
+        .operation{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 50px;
+            font-size: 1.8rem;
+            border-bottom: 1px solid #d0d6d9;
+        }
+        .foot{
+            height: 170px;
+            text-align: left;
+            margin-top: 50px;
+            background-color: #29b078;
+
+
+        }
+        span{
+            display: inline-block;
+        }
+        .top{
+            padding-top: 20px;
+
+        }
+        .top1,.top2,.top3,.main2,.bottom1,.bottom2{
+            color: #FFFFFF;
+        }
+        .main2{
+            margin-top: 40px;
+        }
+        .top3,.main3{
+            text-align: center;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="head">
+    <div class="tel">客服电话：110-741101</div>
+    <div class="ted">
+        <span class="wechat"><img class="wechat1" src=task8-1/page1.png> </span>
+        <span class="qq"><img class="qq1" src=task8-1/page2.png> </span>
+        <span class="webo"><img class="webo1" src=task8-1/page3.png> </span>
+    </div>
+</div>
+<div class="main">
+    <img class="jnshu" src="task8-1/jnshu.png">
+    <div class="page">
+        <a class="page1" href=task8-1.html>首页</a>
+        <a class="page2">职业</a>
+        <a class="page3" href=task8-3.html>推荐</a>
+        <a class="page4">关于</a>
+    </div>
+</div>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column homepage1">
+            <span class="homepage">首页</span>
+            &gt;
+            <span class="occupation">职业</span>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column mean1">
+            <a class="mean meangray">方向:</a>
+            <a class="mean meangreen">全部</a>
+            <a class="mean">前端开发</a>
+            <a class="mean">后端开发</a>
+            <a class="mean">移动开发</a>
+            <a class="mean">整站开发</a>
+            <a class="mean">运营维护</a>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column web">
+            前端开发方向
+        </div>
+    </div>
+    <div class="row clearfix">
+
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column java">后端开发方向
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row clearfix twoline">
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">1
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column operation">运维方向
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column operation">运维方向
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+            <div class="col-md-12 column border">
+                <div class="row clearfix">
+                    <div class="none">
+                        <h3 class="text1">ios工程师</h3>
+                        <p class="text">
+                            iOS是由苹果公司开发的移动操作统，iOS与苹果的Mac OS X操作系统一样，也是以Darwin为基础的，因此同样属 于类Unix的商业操作系统。国内iOS开 发起步相对较晚，人才培养机制更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。国内 iOS开发起步相对较晚，人才培养机制 更是远远跟不上市场发展速度。有限的iOS开发人才成了国内企业必争的资源。
+                        </p>
+                    </div>
+                    <div class="col-md-6 column">
+                        <div class="people">
+                            <img src="task8-2/people5.png">
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 column">
+                        <h4>Web前端工程师</h4>
+                        <span class="describe">Web前端开发工程师，主要职责是利用（X）HTML/CSS/JavaScript/flash等各种Web技术进行产品的开发。</span>
+                    </div>
+                </div>
+                <div class="row clearfix border1">
+                    <div class="col-md-6 column borderright">
+                        <span class="level">门槛</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                    <div class="col-md-6 column">
+                        <span class="hard">难易程度</span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                        <span class="star">
+                        <img src="task8-2/star2.png">
+                    </span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="cycle">成长周期</span>
+                        <span class="cycle1">1-3</span>
+                        <span class="cycle2">年</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column border2">
+                        <span class="demand">稀缺程度</span>
+                        <span class="demand1">345</span>
+                        <span class="demand2">家公司需要</span>
+
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">0-1年</span>
+                        <span class="money3">5k-10k/月</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                        <span class="money">薪资待遇</span>
+                    </div>
+                    <div class="col-md-8 column border3 topbottom">
+                        <span class="date">1-3年</span>
+                        <span class="money2">10k-20k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-4 column">
+                    </div>
+                    <div class="col-md-8 column border3">
+                        <span class="date">3-5年</span>
+                        <span class="money2">20k-50k/月</span>
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12  border4">
+                        <span class="ing">有</span>
+                        <span class="ing1">286</span>
+                        <span class="ing2">人正在学</span>
+
+                    </div>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12 column">
+                        <span class="propt">提示：在你学习之前你应该已经掌握xxxxx、xx等语言基础</span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-4 column">1
+        </div>
+        <div class="col-md-4 column">1
+        </div>
+    </div>
+</div>
+<div class="foot">
+    <div class="container">
+        <div class="row clearfix top">
+            <a class="col-md-4 column top1">技能树——改变你我
+            </a>
+            <a class="col-md-4 column top2">旗下网站
+            </a>
+            <a class="col-md-4 column top3">微信公众平台
+            </a>
+        </div>
+        <div class="row clearfix main">
+            <div class="col-md-4 column main1">
+            </div>
+            <a class="col-md-4 column main2">草船云孵化器 最强IT特训营
+            </a>
+            <div class="col-md-4 column main3"><img src="task8-1/weixin.png">
+            </div>
+        </div>
+        <div class="row clearfix bottom">
+            <a class="col-md-4 column bottom1">关于我们联系我们合作企业
+            </a>
+            <a class="col-md-4 column bottom2">葡萄藤轻游戏 桌游精灵
+            </a>
+            <div class="col-md-4 column bottom3">
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+</div>
+
+</body>
+</html>
