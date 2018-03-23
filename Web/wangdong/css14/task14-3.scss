@@ -1,0 +1,293 @@
+$font1:1rem;
+$fontb:1.5rem;
+%bb{border-bottom: 1px solid #ccc}
+$precorlor:#29b078;
+$colorw:#fff;
+$colorgry:#ccc;
+$colorb:#000;
+$por:relative;
+$poa:absolute;
+$hundred:100%;
+%disc{
+  display: flex;
+  align-items: center;
+}
+%discs{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+%discc{display: flex;
+  align-items: center;
+  justify-content: center;}
+$height80:80px;
+$height50:50px;
+$prefontw:900;
+%flr{float: right}
+%fll{float: left}
+
+
+.homepage{
+  height: $height80;
+  width: $hundred;
+  line-height: $height80;
+  font-size: $fontb;
+@extend %bb;
+}
+.page1{
+  color: $colorb;
+  text-decoration: none;
+}
+.job2{
+  color: $precorlor;
+}
+
+.direction1{
+  display:inline-block;
+
+}
+
+.li1{
+ @extend %fll;
+  margin: 15px 10px;
+  list-style-type:none;
+}
+.a1{
+  color:$colorb;
+  font-size: $font1;
+  text-decoration:none
+
+}
+.a1:hover{
+  background: $precorlor;
+  color: $colorw;
+  text-decoration:none
+}
+.all0{
+  width: $hundred;
+@extend %bb
+}
+
+.direction{
+  display: flex;
+  flex-wrap: wrap;
+  font-size: $fontb;
+@extend %bb
+
+}
+.front{
+  height: $height80;
+  line-height: $height80;
+  width: $hundred;
+  font-size: $fontb;
+  font-weight:$prefontw;
+@extend %bb
+}
+.box00{
+  width: $hundred;
+  height: 40px;
+}
+.md{
+  position: relative;
+}
+.trans{
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 15;
+  background: #000;
+  color: #fff;
+  -webkit-transition: width 1s, height 1s, -webkit-transform 1s;
+  transition: width 1s, height 1s, transform 1s;
+}
+.md:hover .trans{
+  opacity:0.6;
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+.headi{
+  margin: 100px 20px 0 20px ;
+  font-size: 1rem;
+  text-align: center;
+}
+.headi1{
+  margin: 50px 50px 0 50px ;
+  text-align: center;
+  font-size: 1rem;
+}
+.first{
+  border: 1px solid #ccc;
+  display: flex;
+  width: $hundred;
+  position: relative;
+}
+.photo{
+
+  margin: 10px ;
+  display: block;
+  max-width: $hundred;
+  height: auto;
+
+}
+.head1{
+  float: left;
+  vertical-align: middle;
+  display: block;
+  max-width: $hundred;
+  width: 110px;
+  height: 110px;
+}
+.img-responsive{
+  vertical-align: middle;
+  display: block;
+  max-width: $hundred;
+  width: auto;
+  height: auto;
+  float: left;
+}
+.web{
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 10px 0;
+  margin-left: 5px;
+}
+.web1{
+  font-size: 1rem;
+
+}
+.sill{
+  width: $hundred;
+  height: $height50;
+  border: 1px solid #ccc;
+  border-top: none;
+  line-height: $height50;
+  display: flex;
+  flex-wrap: wrap;
+}
+.sill2{
+  width: 50%;
+  border-right: 1px solid #ccc;
+}
+.sill1{
+  margin-left: 10px;
+  color: #ccc;
+}
+.red{
+  width: 15px;
+  margin-left: 10px ;
+}
+.sill10{
+  //margin-left: 5px;
+  color: #FF3300;
+}
+.pay{
+  height: 150px;
+  width: $hundred;
+  display: flex;
+  border: 1px solid #ccc;
+  border-top: none
+}
+.pay1{
+  width: 40%;
+  line-height: 150px;
+  border-right: 1px solid #ccc;
+  text-align: center;
+  color: #ccc;
+}
+.pay2{
+  width: 60%;
+}
+.pay20{
+  height:$height50;
+  @extend %bb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pay21{
+  height:$height50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pay201{
+  margin-left: 10px;
+}
+.pay202{
+  margin-right: 5px;
+}
+.num1{
+  width:$hundred;
+  height: $height50;
+  line-height: $height50;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.num12{
+  font-size: 1.5rem;
+  font-weight: $prefontw;
+  margin-left: 10px;
+}
+.num13{
+  font-size: 1.5rem;
+  font-weight: $prefontw;
+  color: #FF3300;
+}
+.num14{
+  font-size: 1.5rem;
+  font-weight: $prefontw;
+}
+.warn{
+  height: $height50;
+  width:$hundred;
+  line-height: $height50;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.warn0{
+  margin: 0 10px;
+}
+
+
+
+
+@media screen and (max-width: 780px){
+
+  .nav>li>a {
+
+    height: 70px;
+
+  }
+}
+@media screen and (max-width: 375px){
+
+  .sill{
+    display: flex;
+    align-items: center;
+  }
+.web1{
+  font-size: .8rem;
+}
+  .contai {
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .sill1{
+    margin-left: 0;
+  }
+  .contaih {
+    margin: 0 15px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .head1 {
+    width: 97px;
+    height: 97px;
+  }
+}

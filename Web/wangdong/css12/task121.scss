@@ -1,0 +1,171 @@
+$hdcolor:#5fc0cd;
+$headerheight:60px;
+$maxwidth:780px;
+$minwidth:320px;
+%mar0a{margin:0 auto;}
+$hundred:100%;
+%fll{float:left;}
+%flr{float: right;}
+%discc{display: flex;
+  align-items: center;
+  justify-content: center;}
+$hdfont:2rem;
+$colorw:#ffffff;
+$por:relative;
+$poa:absolute;
+%disc{
+  display: flex;
+  align-items: center;
+}
+%marli{
+  margin: 10px 18px;
+  list-style: none;
+}
+%bb{border-bottom: 1px solid #999999}
+$colorgry:#999999;
+%br{border-right:1px solid #999999;
+}
+%marmsg{margin: 0 20px 0 10px;
+}
+@mixin fixed($top,$bottom){
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  z-index: 1;}
+%mm{
+  max-width: $maxwidth;
+  min-width: $minwidth;
+}
+@mixin por($left,$right,$bk,$cor){
+  height: 45px;
+  width: 45%;
+  background:$bk;
+  border: solid 2px #5fc0cd;
+  border-radius: 6%;
+ @extend %discc;
+  position: absolute;
+  left: $left;
+  right: $right;
+  color: $cor;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+
+
+body{
+@extend %mm;
+@extend %mar0a
+}
+.header{
+  @extend%discc;
+background:$hdcolor;
+  height: $headerheight;
+  width: $hundred;
+  position: $por;
+  @include fixed(0,auto);
+}
+.back{
+
+  position:$poa;
+  left: 15px;
+  width: 18px;
+  top: 15px;
+}
+.enter{
+color: $colorw;
+  font-size: $hdfont;
+  text-decoration: none;
+}
+
+.card{
+  background: url("images/bjt3.png");
+  background-size: cover;
+  width: $hundred;
+  height: 190px;
+  @extend %disc;
+  padding-top: $headerheight;
+}
+.information{
+  height: 100px;
+  @extend %disc;
+  width: $hundred;
+}
+.head{
+  height: 80px;
+  margin: 0 18px;
+}
+.name{
+  font: $hdfont;
+  color: $colorw;
+}
+.location{
+  width: 14px;
+}
+.local{
+  font-size: .1rem;
+  color: $colorw;
+}
+.ul{
+  padding: 0;
+ @extend %bb;
+}
+.skill{
+ @extend %marli;
+  padding-left: 9px;
+  border-left: 2px solid #5fc0cd;
+
+}
+.stay{
+  @extend %bb;
+  padding-bottom: 10px;
+  list-style: none;
+}
+.star{
+  width: 18px;
+  margin: -2px 10px;
+}
+.uls{
+  padding:0 5px;
+}
+.limit{
+white-space: nowrap;
+@extend %br;
+  padding-right: 25px;
+@extend %marmsg;
+  color: $colorgry;
+}
+.pay{color: #FF3300}
+.last{
+  @extend %bb;
+  padding-bottom: 10px;
+  list-style: none;
+  @extend %disc;
+  justify-content: space-between;
+}
+.empty{
+  height: $headerheight;
+  width: $hundred;
+}
+.footer{
+  height: $headerheight;
+  width: $hundred;
+  @include fixed(auto,0);
+  background: $colorw;
+}
+.call{
+  @include por(3%,auto,$colorw,$hdcolor);
+
+}
+.leaveword{
+  @include por(auto,3%,$hdcolor,$colorw);
+}
+
+
+
+
+

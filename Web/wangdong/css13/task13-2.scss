@@ -1,0 +1,196 @@
+$precorlor:#29bde0;
+$prefont:2rem;
+$headerheight:4rem;
+$colorw:#fff;
+$colorgry:#ccc;
+$coloryellow:#f5c97b;
+$brr:50%;
+$maxwidth:780px;
+$minwidth:320px;
+%mar0a{margin:0 auto;}
+%maricon{margin:0 10px;}
+$por:relative;
+$poa:absolute;
+$hundred:100%;
+$footerfont:1rem;
+$tenpx:10px;
+%ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+%disc{
+  display: flex;
+  align-items: center;
+}
+%discs{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+%discc{display: flex;
+  align-items: center;
+  justify-content: center;}
+%bb{border-bottom: 1px solid #ccc}
+@mixin fixed($top,$bottom){
+  width: $hundred;
+  height: $headerheight;
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  z-index: 1;
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  background: $precorlor;
+}
+%mmm{
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  margin: 0 auto;
+}
+$borderr:6%;
+%linenone{text-decoration: none}
+
+body{
+@extend %mmm
+}
+
+header{
+ @include fixed(0,auto);
+  @extend %discs;
+}
+.head{
+  font-size: $prefont;
+  color: $colorw;
+}
+.paper {
+  width: 40px; height: 41px;
+  background: url('images/css_sprites.png') -381px -74px;
+  position: $poa;
+  left: $tenpx;
+}
+.close {
+  width: 38px;
+  height: 38px;
+  background: url(images/css_sprites.png) -381px -211px;
+  position: $poa;
+  right: $tenpx;
+}
+main{
+  background:$precorlor;
+  margin-top: $headerheight;
+}
+
+.vote{
+  height: $headerheight;
+  background: #b9e9f5;
+  position: $por;
+}
+.point:before,.point:after{
+  width:0;
+  height:0;
+  border: 5px transparent solid;
+  position:$poa;
+  top:$headerheight;
+  content:""
+}
+.point:before{
+  border-width:$tenpx;
+  border-top-color: #b9e9f5;
+  left:45px;
+}
+.sentence{
+  line-height: $headerheight;
+  font-size: 1rem;
+  margin-left: 1rem;
+  //z-index: 1;
+}
+.botton {
+  background: url(images/paly.png);
+  height: 3.5rem;
+  border-radius: $brr;
+  background-size:83%;
+  border: none;
+  outline: none;
+  float: right;
+  margin: 6px $tenpx;
+  background-repeat: no-repeat;
+  background-position: 7px 0;
+}
+.point{
+  height: $headerheight;
+  background: #29bde0;
+  line-height: $headerheight;
+  color: $colorw;
+  margin: 3px 48px;
+}
+.line{
+  width: $hundred;
+  @extend %discs;
+  background: $precorlor;
+}
+.box{
+  width: 22%;
+ padding: 10% 0;
+  background: $coloryellow;
+  margin: 5%;
+  border: 1vh solid $colorw;
+  position: $por;
+ @extend %discc;
+
+}
+.sailor{
+  font-size: 3vw;
+  position: $poa;
+}
+.num{
+  width:$hundred;
+  background: #83b09a;
+  position:$poa;
+  bottom: 0;
+  font-size: 1vw;
+  color:$colorw;
+  text-align: center;
+}
+.four{
+  width: $hundred;
+  height: 3vw;
+ @extend %discc;
+  position: $poa;
+  bottom: -30%;
+}
+.box:hover .pic{
+  display:block ;
+}
+.a1{
+  width: 25%;
+  margin: 10% 3% 0 3%;
+}
+.pic{
+  width: $hundred;
+  display: none;
+}
+footer{
+@include fixed(auto,0);
+@extend %discc;
+height: 120px;
+
+}
+.button{
+  width: 60%;
+  height: $headerheight;
+  background: #fbb435;
+  //line-height: $headerheight;
+  text-align: center;
+  font-size: 1.5rem;
+  color: $colorw;
+}
+.height{
+  height: 150px;
+  width: $hundred;
+  background: $precorlor;
+}
+button:hover, button:focus, .button:hover, .button:focus {
+  background-color: #b9e9f5;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <script src="../angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular-ui-router/1.0.3/angular-ui-router.js"></script>
+    <!--<script src="App.js"></script>-->
+<script>
+    var myApp = angular.module("myApp", ['ui.router']);
+
+    myApp.config(function ($stateProvider, $urlRouterProvider) {
+
+        $urlRouterProvider.when("", "/home");
+
+        $stateProvider
+                .state("home", {
+                    url: "/home",
+                    views:{
+                      'up':{
+                          templateUrl: "PageTab.html"
+                      } ,
+
+                        'down':{templateUrl: "down.html"}
+                    },
+
+                })
+                .state("home.Page1", {
+                    url:"/Page1",
+                    templateUrl: "Page1.html"
+                })
+                .state("home.Page2", {
+                    url:"/Page2",
+                    templateUrl: "Page2.html"
+                })
+                .state("home.Page3", {
+                    url:"/Page3",
+                    templateUrl: "Page3.html"
+                });
+    });
+</script>
+</head>
+<body data-ng-app="myApp">
+<h1>ui-router多视图和路由嵌套演示</h1>
+<!--<div ui-view="home"></div>-->
+<div ui-view="up" style="background:#ccc"></div>
+<div ui-view="down" ></div>
+</body>
+<html>

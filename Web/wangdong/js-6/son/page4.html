@@ -1,0 +1,117 @@
+<!--<div id="ng-app"></div>-->
+<div id="ng-app" ng-controller="AppController" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+    <form name="myForm">
+
+        <div class="form-group">
+            <label class=" col-md-2 control-label">标题名称</label>
+            <div  class="col-md-8">
+                <input class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required"  type="text" name="params.title" ng-model="params.title" required>
+                <span style="color:red" ng-show="myForm.imgtitle.$dirty && myForm.imgtitle.$invalid"></span>
+                <span ng-show="myForm.imgtitle.$error.required">用户名是必须的</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">类型</label>
+            <div class="col-md-2">
+                <select ng-model="params.type" name="params.type" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                        ng-options="b.value as b.name for b in types"
+                        required>
+                </select>
+                <span style="color:red" ng-show="myForm.imgtype.$dirty && myForm.imgtype.$invalid"></span>
+                <span ng-show="myForm.imgtype.$error.required">用户名是必须的。</span> </div>
+<div class="col-md-2 ">
+    <select  ng-if="params.type==3" class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required" ng-model="params.industry"
+             ng-options="b.value as b.name for b in industrys" required>
+</select>
+</div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">说明</label>
+            <div class="col-md-8">
+                <div id="editor" >
+                </div>
+            </div>
+<br>
+
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2  control-label">跳转链接</label>
+            <div class="col-md-8 ">
+                <input type="text"  class="form-control ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                       name="params.url" ng-model="params.url" required>
+            </div>
+
+        </div>
+
+
+<div class=" form-group">
+
+            <label class="col-md-2 control-label word-spacing-25">配 图</label>
+
+            <div class="col-md-8" >
+            <label class="btn btn-primary" for="file2">选择文件</label>
+            <input id="file2" style="display: none" type="file" nv-file-select="" uploader="uploader" multiple>
+        </div>
+</div>
+        <div class="col-md-2"></div>
+        <div class="col-md-8" style="margin-bottom: 40px">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="50%">图片名</th>
+                    <th ng-show="uploader.isHTML5">大小</th>
+                    <th ng-show="uploader.isHTML5">进度</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in uploader.queue">
+                    <td><strong>{{ item.file.name }}</strong></td>
+                    <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                    <td ng-show="uploader.isHTML5">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar"
+                                 ng-style="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                                ng-disabled="item.isReady || item.isUploading || item.isSuccess"
+                        >
+                            <span class="glyphicon glyphicon-upload"></span> 上传
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> 删除
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <img id="portrait" src="{{params.img}}">
+        </div>
+
+            <div class="col-md-3"></div>
+            <div class="col-md-8">
+                <button type="button" class="btn btn-success btn-s" ng-click="ifonline()"
+                    ng-disabled="!myForm.$valid||params.img==undefined">
+
+                    <span class="glyphicon glyphicon-upload"></span> 立即上线
+                </button>
+                <button type="button" class="btn btn-warning btn-s" ng-click=" ifdraft()"
+                        ng-disabled="!myForm.$valid||params.img==undefined">
+                    <span class="glyphicon glyphicon-ban-circle"></span>存为草稿
+                </button>
+                <button type="button" class="btn btn-danger btn-s" ui-sref="page.page3" ng-click=" cancel()">
+                    <span class="glyphicon glyphicon-trash"></span> 取消
+                </button>
+            </div>
+
+    </form>
+</div>

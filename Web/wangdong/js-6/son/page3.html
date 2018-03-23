@@ -1,0 +1,116 @@
+
+<div ng-controller="pg3Controller" >
+
+    <div class="panel-body">
+        <div class="row pd-bottom-2">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label col-md-4">发布时间</label>
+                    <div class="col-md-8">
+                        <!--<input type="text" class="form-control ng-pristine ng-valid ng-touched" size="20" bs-datepicker="" autoclose="true" data-date-format="yyyy-MM-dd" data-date-type="number" data-max-date="" ng-model="vm.searchParams.startAt">-->
+                        <input type="text" class="form-control ng-pristine ng-valid ng-touched" uib-datepicker-popup="{{format}}" ng-model="dat"
+                               is-open="popup1.opened" ng-required="true" close-text="关闭"
+                               30              ng-click="start()"
+                               clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label col-md-4 text-center ">—</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control ng-pristine ng-valid ng-touched" uib-datepicker-popup="{{format}}" ng-model="enddat"
+                               is-open="popup2.opened" ng-required="true" close-text="关闭"
+                               30              ng-click="end()"           clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label col-md-4 word-spacing-25">类 型</label>
+                    <div class="col-md-8">
+                        <select class="form-control ng-pristine ng-valid ng-touched" ng-model="type">
+                            <option value="">全部</option>
+                            <option value="0">首页Banner</option>
+                            <option value="1">找职位Banner</option>
+                            <option value="2">找精英Banner</option>
+                            <option value="3">行业大图</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pd-bottom-2">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label col-md-4 word-spacing-25">状 态</label>
+                    <div class="col-md-8">
+                        <select class="form-control ng-pristine ng-untouched ng-valid" ng-model="status">
+                            <option value="">全部</option>
+                            <option value="2">上线</option>
+                            <option value="1">草稿</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pd-bottom-2">
+            <div class="col-md-4 pull-right text-right">
+                <div params="vm.searchParams" class="ng-isolate-scope">
+                    <button type="button" class="btn btn-danger" ng-click="clean()">清空</button>
+                    <button type="button" class="btn btn-success" ng-click="search()">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-heading">
+        <strong>Article列表</strong>
+        <button type="button" class="btn btn-xs btn-success pull-right margin-left-10" ui-sref="page.page4" >
+            +新增
+        </button>
+    </div>
+<div class="list" id="alllist">
+    <table >
+        <tr>
+        <th>ID</th>
+        <th>名称</th>
+            <th>图片</th>
+        <th>类型</th>
+        <th>发布时间</th>
+        <th>修改时间</th>
+        <th>发布者</th>
+        <th>状态</th>
+        <th></th>
+        <th>操作</th>
+        <th></th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="lis in abc">
+            <td>{{$index+1}}</td>
+            <td>{{lis.title}}</td>
+            <td ><img ng-src ={{lis.img}} class="tdimg"></td>
+            <td >{{lis.type |ChangeCode}}</td>
+            <td>{{lis.createAt|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+            <td>{{lis.updateAt|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+            <td>{{lis.author}}</td>
+            <td>{{lis.status|status}}</td>
+            <td><a href="" ng-click="changeline($index)">{{lis.status|restatus}}</a></td>
+            <td><a href="" ui-sref="page.page4({id:abc[$index].id})" ng-click="redact($index)">编辑</a></td>
+            <!--<td><a href ng-click="delete($index)">删除</a></td>-->
+            <td><a href=""  ng-click="delt($index)" id="delt" >删除</a></td>
+        </tr>
+    </table>
+    <!--{{list}}-->
+    <div>
+        <uib-pagination total-items="totalItems" ng-model="currentPage" force-ellipses="true" rotate="true"
+                        ng-change="page(currentPage)" max-size="maxSize" first-text="第一页"
+                        previous-text="上一页" next-text="下一页" last-text="最后页" boundary-links="true"
+                        boundary-link-numbers="false"></uib-pagination>
+    </div>
+    <pre>当前页：{{ currentPage}},总页数：{{totalPage}}</pre>
+    <pagination></pagination>
+</div>
+</div>
+
+
