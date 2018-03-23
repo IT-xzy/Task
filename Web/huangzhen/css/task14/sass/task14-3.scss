@@ -1,0 +1,97 @@
+@import "shared.scss";
+$border-color:#ededed;
+$color:#29b078;
+main {
+    padding-bottom: .5rem;
+    background-color: #fafafa;
+    .page3img {
+        width: 100%;
+    }
+    .content {
+        span {
+            color: $color;
+        }
+        @include container;
+        overflow: hidden;
+        .main-title {
+            margin: .2rem 0;
+            a {
+                color: unset;
+                text-decoration: none;
+            }
+        }
+        .main-left {
+            float: left;
+            width: 25%;
+            border: 1px solid #ededed;
+            background-color: #fff;
+            .partner-title {
+                border-bottom: 1px solid #ededed;
+                margin: 0;
+                font-size: .16rem;
+                padding: 10px 0;
+                text-align: center;
+            }
+            .ul-center {
+                text-align: center;
+                li {
+                    margin: .2rem 0;
+                }
+                .no {
+                    display: inline-block;
+                    list-style: none;
+                    text-align: left;
+                    padding: 0;
+                    .spot {
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        background-color: transparent;
+                        border-radius: 50%;
+                        border: 1px solid #ff650e;
+                    }
+                    li:hover .spot {
+                        background-color: #ff650e;
+                    }
+                }
+            }
+        }
+        @media screen and (max-width:767px) {
+            .main-left {
+                width: 100%;
+                margin-bottom: .1rem;
+                float: none;
+            }
+        }
+        .main-right {
+            color: #b5b5b5;
+            float: right;
+            width: 70%;
+            border: 1px solid #ededed;
+            background-color: #fff;
+            .right-title {
+                display: flex;
+                align-items: center;
+                border-bottom: 1px solid #ededed;
+                img{
+                    padding-left: .1rem;
+                }
+            }
+            .right-content {
+                text-indent: 32px;  
+            }
+            p {
+                margin: .3rem;
+            }
+        }
+        @media screen and (max-width:767px) {
+            .main-right {
+                width: 100%;
+                float: none;
+                .right-title {
+                    display: block;
+                }
+            }
+        }
+    }
+}

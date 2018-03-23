@@ -1,0 +1,149 @@
+@import "shared.scss";
+$border-bottom: 1px solid #ededed;
+main {
+    @include container;
+    .main-title {
+        padding: .2rem 0;
+        border-bottom: $border-bottom;
+        a {
+            color: unset;
+            text-decoration: none;
+        }
+        span{
+            color: #29b078;
+        }
+    }
+    ul {
+        display: flex;
+        flex-flow: wrap;
+        /* 单行显示，必要时拆行 */
+        list-style: none;
+        padding: .2rem 0;
+        margin-bottom: 0;
+        /* display: inline-flex; 错误用法*/
+        a {
+            text-decoration: none;
+            color: #000000;
+            margin: .1rem;
+        }
+    }
+    .classify>ul>li>a:hover{
+        color: #ffffff;
+        background: #29b078;
+    }
+    .a-checked{
+        color: #ffffff;
+        background: #29b078;
+    }
+    .job {
+        overflow: hidden;
+        .job-title {
+            padding: .1rem 0;
+            border-bottom: $border-bottom;
+        }
+        @media screen and (min-width: 768px) {
+            .job-table {
+                width: 44%;
+                margin-left:  3% !important;
+                margin-right:  3% !important;
+            }
+        }
+        @media screen and (min-width: 1024px) {
+            .job-table {
+                width: 31.3%;
+                margin-left:  1% !important;
+                margin-right:  1% !important;
+            }
+        }
+        .job-table {
+            float: left;
+            position: relative;
+            margin: .3rem 0;
+            border: $border-bottom;
+            box-sizing: border-box;
+            .table-header {
+                padding: .1rem;
+                display: flex;
+                align-items: center;
+                img {
+                    width: 1rem;
+                }
+                .table-header-right {
+                    padding-left: .1rem;
+                    p {
+                        word-break: break-all;
+                    }
+                }
+            }
+            .table-content {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+                @mixin content-mould {
+                    width: 50%;
+                    box-sizing: border-box;
+                    padding: .1rem;
+                    border-top: $border-bottom;
+                    word-spacing: .1rem;
+                }
+                .content-mould {
+                    @include content-mould;
+                    img {
+                        width: .2rem;
+                        vertical-align: middle;
+                    }
+                }
+                .content-mould-salaryleft {
+                    @include content-mould;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 40%;
+                }
+                .content-mould-salaryright {
+                    @include content-mould;
+                    padding: 0;
+                    border-top: 0;
+                    width: 60%;
+                    .content-mould-salaryitem {
+                        @include content-mould;
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+                .mould-borderright {
+                    border-right: $border-bottom;
+                }
+                .content-footer {
+                    @include content-mould;
+                    width: 100%;
+                }
+                .red {
+                    color: red;
+                }
+            }
+        }
+        .table-hover {
+            box-sizing: border-box;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, .8);
+            color: #ffffff;
+            word-break: break-all;
+            opacity: 0;
+            z-index: 99;
+            h4 {
+                padding: .3rem;
+                text-align: center;
+            }
+        }
+        .table-hover:hover {
+            opacity: 1;
+        }
+    }
+}

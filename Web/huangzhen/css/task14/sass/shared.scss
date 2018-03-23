@@ -1,0 +1,224 @@
+// 公共组件，页眉、导航条、关于、页脚
+
+$color: #fff;
+$background:#29b078;
+$font-size: .16rem;
+$margin: .1rem;
+html {
+    font-size: 625%;
+}
+
+body {
+    font-size: .16rem;
+}
+
+body,
+p,
+ul,h3,h4 {
+    margin: 0;
+    padding: 0;
+}
+
+// 响应式，仿照bootst
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+@mixin container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+header {
+    background: $color;
+    .header-link {
+        @include flex-between;
+        font-size: .12rem;
+        color: $background;
+        padding: $margin/2 0;
+        background: $color;
+        @include container;
+        strong {
+            @include flex-center;
+        }
+        .links {
+            word-spacing: .02rem;
+            img {
+                vertical-align: middle;
+            }
+        }
+    }
+    .navbar {
+        background: $background;
+        .navbar-header {
+            position: relative;
+            overflow: hidden;
+            @include container;
+            img {
+                padding: .1rem 0;
+                height: .4rem;
+            }
+            .menu {
+                float: right;
+                width: 30px;
+                height: 25px;
+                font-size: 0;
+                border: none;
+                padding: .2rem;
+                text-align: center;
+                background-color: transparent;
+                outline: 0;
+                cursor: pointer;
+                span {
+                    display: inline-block;
+                    margin: 3px 0;
+                    width: 20px;
+                    height: 2px;
+                    background-color: #ffffff;
+                } // 控件绝对定位隐藏
+                .menu-dropdown {
+                    position: absolute;
+                    top: .2rem;
+                    right: .1rem;
+                    display: block;
+                    width: 30px;
+                    height: 25px;
+                    cursor: pointer;
+                }
+            }
+            @media screen and (min-width:768px) {
+                .menu {
+                    display: none;
+                }
+            } // 复选框按钮隐藏
+            .menu-dropdown-control {
+                display: none;
+            }
+
+            @media screen and (max-width:768px) {
+                #nav-dropdown:checked~.lists {
+                    height: 260px;
+                }
+            }           
+            .lists {
+                float: right;
+                height: 0;
+                transition: height 1s;
+                word-spacing: .2rem;
+                .list {
+                    display: inline-block;
+                    text-align: center;
+                    text-decoration: none;
+                    color: $color;
+                    font-size: .18rem;
+                    padding: .19rem 0;
+                }
+                .list:hover {
+                    border-bottom: 3px solid $color;
+                }
+            }
+            @media screen and (max-width: 767px) {
+                .lists {
+                    float: unset;
+                }
+                .list {
+                    width: 100%;
+                    height: auto;
+                    border-bottom: 1px solid #29b078;
+                }
+            }
+        }
+    }
+}
+
+
+
+footer {
+    background: $background;
+    .aboutus {
+        @include container;
+        color: $color; 
+        padding:1px 15px 15px 15px;   
+    }
+    h4,.aboutus-content{
+        margin: .1rem 0;
+    }  
+    .aboutus-link{
+        margin-right: $margin;
+    }
+    .aboutus-link:hover{
+        border-bottom: 1px solid $color;
+    }
+    .link-border{
+        position: relative;
+    }
+    .link-border::before{
+        content: " ";
+        position: absolute;
+        height: 16px;
+        width: 3px;
+        left: -8px;
+        top: 3px;
+        background: $color;
+    }
+    .link-border::after{
+        content: " ";
+        position: absolute;
+        height: 16px;
+        width: 3px;
+        right: -8px;
+        top: 3px;
+        background: $color;
+    }
+
+    @media screen and (min-width:768px){
+        .aboutus{
+            display: flex;
+            justify-content: space-between;
+        }  
+        .aboutus-item{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            padding: $margin;
+        }    
+    }
+    .copyright {
+        padding: $margin/2 0;
+        text-align: center;
+        font-size: .12rem;
+        color: $color;
+        background: $background;
+        border-top: 1px solid $color;
+        span {
+            display: inline-block;
+        }
+    }
+}
