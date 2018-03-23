@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玩家配对</title>
+    <link rel="stylesheet" href="../css/player.css">
+</head>
+<body>
+<header>
+    <a class="icon-back" id="back"  href="#"></a>
+    参数设置
+    <a class="icon-help" id="help"  href="#"></a>
+</header>
+<main>
+    <div class="player-pair">
+        <p class="word-pair">玩家配比</p>
+        <div class="player-cont">
+            <div class="player-wrap">
+                <ul id="ul-player" class="player"></ul>
+            </div>
+            <input type="button" name="button" class="set" value="点击设置" onclick="set()">
+        </div>
+    </div>
+    <div class="phrase">
+        <div class="word-pray">水民词组</div>
+        <div class="word-pray">幽灵词组</div>
+    </div>
+    <div class="number-setting">
+        <div class="input">
+            <span>玩家人数</span>
+            <input type="text" class="player-num" id="player" value="4" max="18" min="4" onblur="number()">
+            <!--onblur是当对象失去焦点的时候执行的函数-->
+            <span>人</span>
+        </div><!--上面这部分是玩家人数方框的html-->
+        <div class="slider-setting">
+            <button class="btn-minus" id="btnMinus" onclick="minus()" ></button><!--减value的按钮-->
+            <input type="range" class="slider-block" id="slider" max="18" min="4" step="1" value="4" onchange="numberChange()">
+            <!--onchange是当对象发生变化时执行的函数-->
+            <button class="btn-add" id="btnAdd"  onclick="add()"></button><!--加value的按钮-->
+        </div>
+    </div>
+    <button class="begin" onclick="deal()">去发牌</button>
+</main>
+<script src="../js/player.js"></script>
+</body>
+</html>
