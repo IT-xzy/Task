@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--配置文件拆分，读取其他的配置文件-->
+    <import resource="applicationContext_*.xml"/>
+
+    <context:component-scan base-package="com.controller"/>
+    <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.model"/>
+    <context:component-scan base-package="com.util"/>
+
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="RemoteService"/>
+        <property name="service" ref="studentServiceImp"/>
+        <property name="serviceInterface" value="com.service.StudentService"/>
+        <!--注册表 默认端口1099-->
+        <property name="registryPort" value="1199"/>
+        <!--指定服务使用接口，如果不指定则为随机-->
+        <property name="servicePort" value="1199" />
+    </bean>
+
+    <!--数据库连接配置-->
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:mysql://localhost:3306/task4?characterEncoding=UTF-8</value>
+        </property>
+        <property name="username">
+            <!--root-->
+            <value>root</value>
+        </property>
+        <property name="password">
+            <!--MyNewPass4!-->
+            <value>MyNewPass4!</value>
+        </property>
+    </bean>
+    <!--创建session工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--定位数据库配置文件-->
+        <property name="dataSource" ref="datasource"/>
+        <property name="mapperLocations" value="classpath:com/mapper/*.xml"/>
+    </bean>
+
+    <!--mybatis自动扫描包下的映射-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.mapper" />
+    </bean>
+
+</beans>
+
+
