@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+<!--定义基础模板-->
+<definition name="template_base" template="/view/jnshu/jsp/template.jsp"/>
+<!--这里是继承模板页，并且将我们抽出来的头和尾放入其中。-->
+<definition name="*.page" extends="template_base" >
+    <put-attribute name="header" value="/view/jnshu/jsp/header.jsp"  />
+    <!--类似于前缀后缀,把返回的XXX.page,当作body嵌入其中-->
+    <put-attribute name="body" value="/view/jnshu/jsp/{1}.jsp" />
+    <put-attribute name="footer" value="/view/jnshu/jsp/footer.jsp"  />
+</definition>
+</tiles-definitions>
