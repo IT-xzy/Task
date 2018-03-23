@@ -1,0 +1,132 @@
+<div>
+    <div class="Search-box" >
+        <form class="form-horizontal" name="Article">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" form-group">
+                        <label class="control-label col-md-4">发布时间</label>
+                        <div class="col-md-8">
+                            <start-time></start-time>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" form-group">
+                        <label class="control-label col-md-4 text-center">—</label>
+                        <div class="col-md-8">
+                           <end-time></end-time>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" form-group">
+                        <label class="control-label col-md-4">类&emsp;型</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="arti.selectType">
+                                <option value="">全部</option>
+                                <option ng-repeat="(x,y) in arti.types" value="{{x}}" >{{y}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" form-group">
+                        <label class="control-label col-md-4">状&emsp;态</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="arti.selectStatus">
+                                <option value="">全部</option>
+                                <option ng-repeat="(x,y) in arti.status" value="{{x}}">{{y}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 pull-right text-right">
+                    <button class="btn btn-danger" ng-click="arti.cleanSeach()">清空</button>
+                    <button class="btn btn-success " ng-click="arti.seach()">搜索</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--表格元素-->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Artical列表
+                <button class="btn btn-success btn-xs pull-right"
+                        ui-sref="carrots.Artical-detail({id:'add'})"
+                        ng-click="arti.addList()">
+                    +新增
+                </button>
+            </h4>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped add-table-border">
+                <thead>
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in arti.articleList">
+                    <td>{{$index+1}}</td>
+                    <td>{{item.title}}</td>
+                    <td>{{item.type | showType}}</td>
+                    <td>
+                        <div>{{item.createAt| date:'yyyy-MM-dd'}}</div>
+                        <div>{{item.createAt| date:'HH:mm:ss'}}</div>
+                    </td>
+                    <td>
+                        <div>{{item.updateAt| date:'yyyy-MM-dd'}}</div>
+                        <div>{{item.updateAt| date:'HH:mm:ss'}}</div>
+                    </td>
+                    <td>{{item.author}}</td>
+                    <td>{{item.status| showStatus}}</td>
+                    <td>
+                        <a ng-click="arti.changeStatu(item)">{{item.status|changeStatus}}</a>
+                        <a  ng-click="arti.edit(item.id)" >编辑</a>
+                        <a ng-click="arti.deleteItem(item)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="paging">
+        <div class="pull-right jumpPage">
+            去第
+            <input type="text" class="form-control" ng-model="arti.page">
+            页
+            <button class="btn btn-default" ng-click="arti.changeDefault()">确定</button>
+        </div>
+        <ul uib-pagination
+            class="iconfont pull-right pagination-sm"
+            total-items="arti.bigTotalItems"
+            max-size="maxSize"
+            boundary-links="true"
+            force-ellipses="true"
+            first-text=首页
+            last-text=末页
+            previous-text=&#xe697;
+            next-text=&#xe6a7;
+            items-per-page="arti.items"
+            rotate="false"
+            ng-model="arti.currentPage"
+            ng-click="arti.pageChange()">
+        </ul>
+        <div class="pull-right Pageitems">
+            每页显示
+            <input type="text" class="form-control" ng-model="arti.size">
+            条
+        </div>
+    </div>
+</div>
