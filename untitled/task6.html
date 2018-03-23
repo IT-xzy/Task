@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task6</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            margin: 0;
+        }
+        .head{
+            position: fixed;
+            z-index: 1;
+            /*top: -80px;*/
+            width: 100%;
+            height: 90px;
+            background-color: #68CDD5;
+            font-size: 25px;
+
+        }
+        .none{
+            height: 170px;
+        }
+        .box1{
+
+            line-height: 60px;
+            width: 140px;
+            background-color: #55A8B3;
+            color: #ffffff;
+            border-radius: 10px;
+            text-align: center;
+            float: left;
+
+        }
+        .box2{
+            position: relative;
+            right: 6px;
+
+            height: 60px;
+            width: 140px;
+            background-color: #ffffff;
+            color: #68CDD5;
+            border-radius: 10px;
+            text-align: center;
+            float: right;
+
+        }
+        .box3{
+            position: absolute;
+            right: 1.5%;
+
+        }
+        .box4{
+            line-height: 60px;
+            width: 280px;
+            margin: 0 auto;
+            width: 280px;
+            padding-top: 15px;
+        }
+        button{
+            display: inline-block;
+            width: 100%;
+            height: 80px;
+            font-size: 30px;
+
+        }
+        ul{
+            width: 100%;
+        }
+
+        a{
+            font-size: 20px;
+
+
+
+        }
+
+        .area,.stay,.situation{
+            display: inline-block;
+            line-height: 80px;
+            width: 33.333%;
+            text-align: center;
+            font-size: 25px;
+            border:1px solid #999999;
+            border-right: none;
+            border-top: none;
+            border-bottom: none;
+
+        }
+        .select>.area{
+            border-left: none;
+        }
+        .select{
+            position: fixed;
+            top: 80px;
+            width: 100%;
+
+            border:1px solid #999999;
+            border-right: none;
+            border-top: none;
+            font-size: 0;
+
+            /*margin-top: 90px;*/
+        }
+        .date{
+
+            padding-left: 20px;
+            height:60px;
+
+        }
+        .date:after{
+            display: inline-block;
+            content:'';
+            height: 100%;
+            vertical-align: middle;
+        }
+        .date>img,.date>span{
+            display: inline-block;
+            vertical-align: middle;
+            color: #999999;
+        }
+        .time{
+            display: inline-block;
+            width: 90%;
+            line-height: 30px;
+            margin-left: 47px;
+            margin-bottom: 10px;
+        }
+        .time2{
+            display: inline;
+            float: right;
+            color: red;
+            font-size: 20px;
+
+        }
+
+
+        .city{
+            display: inline-block;
+            width: 99%;
+            line-height: 30px;
+            padding-left: 20px;
+            /*margin-left: 20px;*/
+            padding-bottom: 10px;
+            border: 1px solid #999999;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            color: #999999;
+
+        }
+        .foot{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            /*display: inline-block;*/
+            height: 180px;
+            font-size: 0;
+            background-color:#F8FAFB;
+
+        }
+        .homeimg{
+            display: inline-block;
+            width: 34%;
+            height: 180px;
+            font-size: 15px;
+            text-align: center;
+            margin-top: 60px;
+
+        }
+        .textimg{
+            display: inline-block;
+            width: 34%;
+            height: 180px;
+            /*line-height: 180px;*/
+            vertical-align: top;
+            text-align: center;
+            margin: 0 auto;
+
+        }
+        .textimg1{
+            display: inline-block;
+            height: 100px;
+            width: 100px;
+            margin: 0 auto;
+            line-height: 180px;
+            margin-top: 10px;
+            border-radius: 50%;
+            background-color: #68CDD5;
+            text-align: center;
+            margin-top: 40px;
+
+
+        }
+        .peopleimg{
+            display: inline-block;
+            font-size: 15px;
+            height: 180px;
+            margin-left: 160px;
+
+        }
+        .map{
+            display: inline-block;
+            padding-bottom: 80px;
+            padding-left: 5px;
+        }
+        .p1{
+            margin: 0 2px 0 5px;
+
+
+        }
+        .btn{
+            font-size: 20px;
+            border: none;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div class="head">
+
+    <div class="box4">
+        <div class="box1">找雇主</div>
+        <div class="box2">找护工</div>
+
+    </div>
+    <div class="box3">
+        <img src="task6/area.png">
+    </div>
+</div>
+<div class="select">
+    <div class="dropdown area">
+        <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            所在地
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">所在地</a></li>
+            <li><a href="#">所在地</a></li>
+            <li><a href="#">所在地</a></li>
+
+        </ul>
+    </div>
+    <div class="dropdown stay">
+        <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            食宿
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">食宿</a></li>
+            <li><a href="#">食宿</a></li>
+            <li><a href="#">食宿</a></li>
+        </ul>
+
+
+    </div>
+    <div class="dropdown situation">
+        <button class="btn btn-default dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            病人情况
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">病人情况</a></li>
+            <li><a href="#">病人情况</a></li>
+            <li><a href="#">病人情况</a></li>
+
+        </ul>
+    </div>
+    <span class=""></span>
+    <span class=""></span>
+    <span class=""></span>
+</div>
+<div class="none"></div>
+
+<div class="main">
+    <div class="plate">
+        <div class="date">
+            <img src="task6/calendar.png">&nbsp;<span>服务日期</span>
+        </div>
+        <div class="time">
+            <span class="time1">2017-7-5至2017-7-12</span>
+            <span class="time2">35元/小时&gt;</span>
+
+        </div>
+        <div class="city">
+            <img src="task6/shape.png">
+            北京.通州.果园
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="plate">
+        <div class="date">
+            <img src="task6/calendar.png">&nbsp;服务日期
+        </div>
+        <div class="time">
+            <span class="time1">2017-7-5至2017-7-12</span>
+            <span class="time2">35元/小时&gt;</span>
+
+        </div>
+        <div class="city">
+            <img src="task6/shape.png">
+            北京.通州.果园
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="plate">
+        <div class="date">
+            <img src="task6/calendar.png">&nbsp;服务日期
+        </div>
+        <div class="time">
+            <span class="time1">2017-7-5至2017-7-12</span>
+            <span class="time2">35元/小时&gt;</span>
+
+        </div>
+        <div class="city">
+            <img src="task6/shape.png">
+            北京.通州.果园
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="plate">
+        <div class="date">
+            <img src="task6/calendar.png">&nbsp;服务日期
+        </div>
+        <div class="time">
+            <span class="time1">2017-7-5至2017-7-12</span>
+            <span class="time2">35元/小时&gt;</span>
+
+        </div>
+        <div class="city">
+            <img src="task6/shape.png">
+            北京.通州.果园
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="plate">
+        <div class="date">
+            <img src="task6/calendar.png">&nbsp;服务日期
+        </div>
+        <div class="time">
+            <span class="time1">2017-7-5至2017-7-12</span>
+            <span class="time2">35元/小时&gt;</span>
+
+        </div>
+        <div class="city">
+            <img src="task6/shape.png">
+            北京.通州.果园
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="plate">
+        <div class="date">
+            <img src="task6/calendar.png">&nbsp;服务日期
+        </div>
+        <div class="time">
+            <span class="time1">2017-7-5至2017-7-12</span>
+            <span class="time2">35元/小时&gt;</span>
+
+        </div>
+        <div class="city">
+            <img src="task6/shape.png">
+            北京.通州.果园
+        </div>
+    </div>
+</div>
+<footer class="foot">
+    <div class="homeimg">
+        <img src="task6/house.png">
+        <div class="p2">首页</div>
+    </div>
+    <span class="textimg">
+        <div class="textimg1">
+                    <img class="map" src="task6/write1.png">
+        </div>
+    </span>
+    <div class="peopleimg">
+        <img src="task6/people.png">
+        <p class="p1">我的</p>
+    </div>
+</footer>
+</body>
+</html>
