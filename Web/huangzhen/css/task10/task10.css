@@ -1,0 +1,421 @@
+html {
+    font-size: 625%;
+}
+
+body {
+    font-size: .16rem;
+    margin: 0;
+}
+
+p,
+ul,
+.radio,
+.form-nomargin {
+    margin: 0;
+}
+
+header {
+    position: relative;
+    color: #fff;
+    background-color: #1d7ad9;
+}
+
+/* 页眉 登录条 */
+
+.phone {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* 这里的宽度是整个container容器的宽度，并不是页面的宽度 */
+
+@media screen and (max-width:400px) {
+    .phone {
+        display: none;
+    }
+}
+
+.float-right {
+    float: right;
+}
+
+.float-right>button {
+    height: .4rem;
+    border-radius: 0;
+    background-color: #1d7ad9;
+}
+
+.btn-left {
+    width: 56px;
+    border-left: 1px solid #fff;
+}
+
+.btn-left:hover,
+.btn-right:hover {
+    width: 100px;
+    border: 0px;
+    background-color: #fff;
+}
+
+/* 导航条 因为他的边距100%,所以想把这块放在页眉部分 */
+
+/* 无所谓的，放这里也一样 */
+
+.navbar-btn-margin {
+    margin: 30px 10px;
+    border: 0;
+    border-right: 1px solid #e6e6e6;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.navbar-btn-margin:hover {
+    color: #fff;
+    background-color: #1d7ad9;
+}
+
+/* 屏幕小于960px时的样式，媒体查询*/
+
+@media screen and (max-width: 767px) {
+    .navbar-btn-margin {
+        width: 100%;
+        margin: 0;
+        padding: .15rem;
+        border-radius: 0;
+        border-right: 0;
+    }
+}
+
+/* 流程图 */
+
+/* 这个大致思路知道。自己不会做！！！ */
+
+.m-crm {
+    display: flex;
+    justify-content: center;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+    font-size: .14rem;
+    color: #ccc;
+}
+
+.m-crm .wrap {
+    display: flex;
+    width: 100%;
+    padding: 0;
+}
+
+@media (min-width:768px) {
+    .m-crm {
+        justify-content: flex-end;
+    }
+    .m-crm .wrap {
+        display: flex;
+        width: 60%;
+    }
+}
+
+.m-crm>ul {
+    list-style: none;
+}
+
+.m-crm .u-ct {
+    width: 25%;
+    cursor: pointer;
+    text-align: center;
+}
+
+.m-crm .num {
+    display: flex;
+    align-items: center;
+    margin-bottom: .2rem;
+    color: #fff;
+}
+
+.u-ct .num span {
+    width: .2rem;
+    height: .2rem;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+.u-ct .num::before,
+.u-ct .num::after {
+    flex: auto;
+    content: "";
+    margin: 0 -.01rem;
+    height: .05rem;
+    background-color: #ccc;
+    border-radius: .03rem;
+}
+
+.m-crm .act {
+    color: #ff7f02;
+    z-index: 2;
+}
+
+.act .num span {
+    background-color: #ff7f02;
+}
+
+.act .num::before,
+.act .num::after {
+    background-color: #ff7f02;
+}
+
+.u-ct:hover {
+    color: #ff7f02;
+    z-index: 1;
+}
+
+.u-ct:hover span {
+    background-color: #ff7f02;
+}
+
+.u-ct:hover .num::before,
+.u-ct:hover .num::after {
+    background-color: #FF7E00;
+}
+
+/* 表单 */
+
+.form-border {
+    border: 1px solid #e7e7e7;
+}
+
+.tips {
+    padding-left: 5px;
+    border-left: 3px solid #1d7ad9;
+}
+
+.group-title {
+    color: #1d7ad9;
+    padding: .1rem;
+    background-color: #f2f2f2;
+}
+
+.group-select {
+    position: relative;
+    word-spacing: .3rem;
+    color: #8b8c8c;
+    padding: .3rem;
+    background-color: #fbfcff;
+}
+
+/* 前面的选择按钮颜色更改？？ */
+
+input[type="radio"] {
+    opacity: 0;
+}
+
+.box {
+    position: relative;
+    display: inline-block;
+    margin-right: 6px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #999;
+    border-radius: 50%;
+    background-color: #f8f9fb;
+}
+
+.dot {
+    opacity: 0;
+    content: " ";
+    position: absolute;
+    top: -.02rem;
+    left: -.02rem;
+    width: .18rem;
+    height: .18rem;
+    border: .05rem solid #1d7ad9;
+    border-radius: 50%;
+}
+
+input[type="radio"]:checked+.a .dot {
+    opacity: 1;
+}
+
+/* 确定尺寸  没做出来*/
+
+.type-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e8e8e8;
+    background-color: #fbfcff;
+}
+
+.type-box .type-item {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.type-item {
+    position: relative;
+}
+
+.outside,
+.inside {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0px;
+    width: 80%;
+}
+
+.outside .input-outer,
+.outside .input-inside,
+.inside .input-outer,
+.inside .input-inside {
+    display: inline-block;
+}
+
+.outside li,
+.inside li {
+    color: #999;
+    font-size: 18px;
+    display: inline-block;
+    list-style: none;
+    margin: 0 30px;
+}
+
+.outside li input,
+.inside li input {
+    height: 30px;
+    width: 70px;
+    border: 1px solid #999;
+}
+
+@media screen and (max-width: 999px) {
+    .outside,
+    .inside {
+        flex-direction: column;
+    }
+    .outside li,
+    .inside li {
+        margin: 10px 10px;
+    }
+}
+
+.a {
+    margin: 0;
+    font-weight: normal;
+}
+
+.ruler-width {
+    width: 80%;
+}
+
+/* 查看详情 */
+
+.select-style {
+    width: 1.2rem;
+    margin-top: .3rem;
+}
+
+.select-right {
+    margin: 0 .3rem;
+    margin-bottom: .3rem;
+}
+
+@media screen and (min-width:768px) {
+    .select-style {
+        position: absolute;
+        width: 1.2rem;
+        margin: 0;
+        top: 50%;
+        right: 2%;
+        transform: translateY(-50%);
+        -webkit-appearance: none;
+        background-image: url("./img/choices.png");
+        background-repeat: no-repeat;
+        background-size: .2rem .23rem;
+        background-position-x: .95rem;
+        background-position-y: .05rem;
+    }
+}
+
+/* 下一步 */
+
+.next {
+    text-align: center;
+    padding: 100px 0 50px 0;
+    border: 1px solid #ccc;
+}
+
+.btn-next {
+    font-size: .2rem;
+    color: #fff;
+    padding: 10px 30px;
+    background-color: #e15053;
+}
+
+/* 关于我们 */
+
+.aboutus {
+    color: #999;
+    padding: 50px 30px;
+    background: #f9f9f9;
+    margin-top: 50px;
+}
+
+.footer-left {
+    font-weight: bold;
+}
+
+.footer-right {
+    float: right;
+}
+
+/* 大屏时才出现边距！ */
+
+/* 大屏时才出现paddingleft */
+
+@media screen and (min-width:960px) {
+    .center {
+        padding-left: 50px;
+        word-spacing: .1rem;
+    }
+    .link-hover {
+        padding: .1rem;
+    }
+}
+
+/* 小屏时控制微信号靠左 */
+
+@media screen and (max-width:1000px) {
+    .footer-right {
+        float: none;
+        padding-left: 15px;
+    }
+    .footer-right>.float-right {
+        float: left;
+    }
+}
+
+.aboutus a {
+    color: #999;
+}
+
+.aboutus a:hover {
+    color: #1d7ad9;
+    text-decoration: none;
+}
+
+.float-left {
+    float: left;
+}
+
+/* 页脚 版权 */
+
+footer {
+    font-size: .12rem;
+    text-align: center;
+    background-color: #1d7ad9;
+    padding: .1rem 0;
+}
+
+footer>span {
+    color: #fff;
+    padding: .1rem;
+}
