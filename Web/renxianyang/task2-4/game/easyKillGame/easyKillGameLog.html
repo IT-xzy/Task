@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12" style="padding-top: 40px">
+
+            <div class="panel panel-default everyDay" ng-repeat="data in vm.domData track by $index"
+                 ng-click="vm.handle($event,$index)"
+            >
+                <div class="panel-heading todayIndex">
+                    第 <span ng-clock>{{$index+1}}</span> 天
+                </div>
+                <div class="panel-body">
+                    <ul class="options">
+                        <li ng-clock class="option day" ng-class="{true:'checked'}[data.kill.isChecked]">
+                            {{data.kill.content}}
+                            <p class="log">
+                                <!--这个必须是内部的-->
+                                {{data.kill.log}}
+                            </p>
+                        </li>
+                        <li ng-clock class="option night" ng-class="{true:'checked'}[data.speakByDie.isChecked]">
+                            {{data.speakByDie.content}}
+                        </li>
+                        <li ng-clock class="option" ng-class="{true:'checked'}[data.speakByLive.isChecked]">
+                            {{data.speakByLive.content}}
+                        </li>
+                        <li ng-clock class="option" ng-class="{true:'checked'}[data.vote.isChecked]">
+                            {{data.vote.content}}
+                            <p class="log">
+                                {{data.vote.log}}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

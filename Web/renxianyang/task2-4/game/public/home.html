@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row" style="padding: 0 15px">
+        <div class="col-xs-12 defaultStyleToWrap">
+            <!--上次游戏-->
+            <a  ng-href="{{'#!/'+deskGame.preGame.uiSref}}" class="preGame POSrel" ng-clock>上次游戏:{{deskGame.preGame.name}}
+                <span class="glyphicon glyphicon-chevron-right POSabs Ycenter" style="right: 10px"></span>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="homeCarousel" class="carousel defaultStyleToWrap">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#homeCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#homeCarousel" data-slide-to="1"></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <p class="gameListTitle"> 捉鬼游戏
+                        </p>
+                        <ul>
+                            <li ng-repeat="data in vm.games.ghostGame">
+                                <a class="perGame" ng-click="vm.setPreGame('捉鬼游戏'+data.gameName,data.uiSref)"
+                                   ui-sref="{{data.uiSref}}" ng-clock>{{data.gameName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item">
+                        <p class="gameListTitle"> 杀人游戏
+                        </p>
+                        <ul>
+                            <li ng-repeat="data in vm.games.killGame">
+                                <a class="perGame" ng-click="vm.setPreGame('杀人游戏'+data.gameName,data.uiSref)"
+                                   ui-sref="{{data.uiSref}}" ng-clock>{{data.gameName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 轮播（Carousel）导航 -->
+                <a class="carousel-control left glyphicon glyphicon-chevron-left Ycenter" href="/#homeCarousel"
+                   data-slide="prev">
+                </a>
+                <a class="carousel-control right glyphicon glyphicon-chevron-right Ycenter" href="/#homeCarousel"
+                   data-slide="next">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

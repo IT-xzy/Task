@@ -1,35 +1,57 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>首页</title>
+    <style>
+        html, body {
+            height: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #frame {
+            position: absolute;
+            width: 100vw;
+            left: 0;
+            top: 0;
+            height: 100vh;
+        }
+
+        .menuBar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            z-index: 999;
+            text-align: right;
+        }
+
+        .menuBar a {
+            display: inline-block;
+            line-height: 180px;
+            text-decoration: none;
+            color: #fff;
+            margin-right: 30px;
+        }
+
+        .menuBar a:hover {
+            color: #01DD06;
+        }
+    </style>
 </head>
 <body>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script>
-
-    //    setInterval(function () {
-    //        var xhr = new XMLHttpRequest();
-    //        xhr.open('post', '/carrots-admin-ajax/a/u/article');
-    //        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    //        xhr.send($.param({
-    //            title: '定时器',
-    //            type: '2',
-    //            status: '1',
-    //            img: 'https://www.daohangtx.com/Skins/mb/images/logo.png',
-    //            content: 'by定时器',
-    //            url: 'http://localhost:1002/#/app/home',
-    //            industry: ''
-    //        }));
-    //    }, 100)
-    var i = 4500;
-    setInterval(function () {
-        var xhr = new XMLHttpRequest();
-        i--;
-        xhr.open('delete', '/carrots-admin-ajax/a/u/article/' + i);
-        console.log(i);
-        xhr.send();
-    }, 100)
-</script>
+<div class="menuBar">
+    <a href="JavaScript:;">任先阳</a>
+    <a target="_blank" href="http://cmd.to/">cmd.to</a>
+    <a href="task1/index.html" target="_blank">task1</a>
+    <a href="task2-4/index.html" target="_blank">task2-4</a>
+    <a href="http://student.admin.carrots.ptteng.com/heijie/renxianyang/index.html" target="_blank">task5-10</a>
+    <a href="task11/index.html" target="_blank">task11</a>
+</div>
+<iframe src="http://cmd.to/" id="frame" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>
