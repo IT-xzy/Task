@@ -1,0 +1,163 @@
+@mixin sp-1($height:2.1rem,$width:2rem,$bg-x:0,$bg-y:0) {
+    height: $height;
+    width: $width;
+    background: url(sp-2.png) $bg-x $bg-y;
+}
+@mixin role($ft-z:5vw,$line-h:16vw,$bg-c:#F5C97B,$color:#000) {
+    font-size: $ft-z;
+    text-align: center;
+    line-height: $line-h;
+    background-color: $bg-c;
+    color: $color;
+}
+@mixin bg-pos($y:0) {
+    background-position: 0 $y;
+}
+%none {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+%fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+$bg-c: #29BDE0;
+html {
+    font-size: 62.5%;
+}
+body {
+    margin: 0;
+    padding-bottom: 10rem;
+    background-color: $bg-c;
+}
+p {
+    margin: 0;
+}
+header {
+    @extend %fixed;
+    padding-bottom: 1rem;
+    background-color: $bg-c;
+}
+.nav {
+    display: flex;
+    padding: 1rem;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $bg-c;
+    color: #fff;
+}
+.game-menu {
+    @include sp-1;
+}
+.game-quit {
+    @include sp-1(1.8rem,1.8rem,-96px);
+}
+.vote {
+    position: relative;
+    line-height: 4rem;
+    text-indent: 3rem;
+    font-size: 1.5rem;
+    color: #000;
+    background-color: #B9E9F5;
+}
+.broadcast {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    @include sp-1(3.2rem,3.2rem,-38px,-51px);
+    @extend %none;
+    overflow: hidden;
+}
+audio {
+    margin-left: -1rem;
+    opacity: 0;
+}
+.triangle {
+    height: 0;
+    width: 0;
+    margin-left: 3rem;
+    border: solid .5rem;
+    border-color: #B9E9F5 transparent transparent transparent;
+}
+.message {
+    font-size: 1.5rem;
+    text-indent: 3rem;
+    color: #fff;
+}
+main {
+    position: relative;
+    top: 13rem;
+    padding-bottom: 16vw;
+}
+.content {
+    display: flex;
+    padding-left: 3.5vw;
+    flex-wrap: wrap;
+}
+.role {
+    display: flex;
+    margin-bottom: 6vw;
+    justify-content: space-around;
+}
+.role-cont {
+    width: 21vw;
+    height: 21vw;
+    background-color: #f5c97b;
+    border: solid 0.5vw #fff;
+    z-index: 1;
+}
+.role-details {
+    @include role;
+}
+.role-number {
+    @include role(3vw,5vw,#83B09A,#fff);
+}
+.role-choose {
+    display: flex;
+    margin-top: 2vw;
+    justify-content: space-between;
+    visibility: hidden;
+}
+i {
+     display: inline-block;
+     width: 3.625vw;
+     height: 3.625vw;
+     margin: 0;
+     background: url(sp-1.png);
+     background-size: 3.625vw;
+ }
+.choose-one {
+    @include bg-pos;
+}
+.choose-two {
+    @include bg-pos(-4.35vw);
+}
+.choose-three {
+    @include bg-pos(-8.82vw);
+}
+.choose-four {
+    @include bg-pos(-13.4152vw);
+}
+.role-cont:hover .role-choose {
+    visibility: visible;
+}
+footer {
+    @extend %fixed;
+    bottom: 0;
+    padding: 2vw 0;
+    text-align: center;
+    background-color: $bg-c;
+}
+.btn-vote {
+    width: 70vw;
+    font-size: 7vw;
+    @extend %none;
+    background-color: #FBB435;
+    color: #fff;
+}
+
