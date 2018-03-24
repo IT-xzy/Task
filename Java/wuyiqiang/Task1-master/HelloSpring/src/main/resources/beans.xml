@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="springHelloWorld"
+          class="com.yiibai.tutorial.spring.helloworld.impl.SpringHelloWorld"></bean>
+
+    <bean id="strutsHelloWorld"
+          class="com.yiibai.tutorial.spring.helloworld.impl.StrutsHelloWorld"></bean>
+
+    <bean id="helloWorldService"
+          class="com.yiibai.tutorial.spring.helloworld.HelloWorldService">
+          <property name="helloWorld" ref="strutsHelloWorld"/>
+    </bean>
+</beans>
+
