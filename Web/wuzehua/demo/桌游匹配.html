@@ -1,0 +1,119 @@
+ <!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>玩家匹配</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+		<link rel="stylesheet" type="text/css" href="../css/player.css" />
+	</head>
+
+	<body>
+		<div class="container-fluid" style="padding: 0;">
+			<div class="coping">
+				<a href="桌游首页.html"><img src="../img/back.png" /></a>
+			</div>
+			<div class="player">
+				<div class="mate">
+					玩家配比
+				</div>
+				<div class="kill">
+					<span class="kill-2"><img src="../img/werewolf-spirit.png" />杀手<span id="kill"></span> 人</span>
+					<span class="kill-3"><img src="../img/werewolf-people.png" />水民<span id="people"></span> 人</span>
+				</div>
+				<div class="word">
+					<p><b>水民词组：</b><input type="text" placeholder="限输入10个字内" maxlength="10" id="folk" /></p>
+					<span></span>
+					<p><b>杀手词组：</b><input type="text" placeholder="限输入10个字内" maxlength="10" id="killer" /></p>
+					<span></span>
+				</div>
+				<div class="word-1">
+					<p>请输入玩家数量</p><input type="number" name="ipt" id="ipt" value="8" oninput='if(value.length>2)value=value.slice(0,1)' /> <span>玩家数量为4-18</span>
+				</div>
+				<div class="but">
+					<input type="button" name="" id="but" value="去发牌" />
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var kill = document.getElementById("kill");
+			var people = document.getElementById("people");
+			var ipt = document.getElementById("ipt");
+			var but = document.getElementById('but');
+			var folk = document.getElementById('folk');
+			var killer = document.getElementById('killer');
+			var token = ' ';
+			function test() {
+					token = ipt.value;
+					if(token >= 4 && token <= 5) {
+						kill.innerHTML = 1;
+						people.innerHTML = token - kill.innerHTML;
+					} else if(token >= 6 && token <= 8) {
+						kill.innerHTML = 2;
+						people.innerHTML = token - kill.innerHTML;
+					} else if(token >= 9 && token <= 11) {
+						kill.innerHTML = 3;
+						people.innerHTML = token - kill.innerHTML;
+					} else if(token >= 12 && token <= 15) {
+						kill.innerHTML = 4;
+						people.innerHTML = token - kill.innerHTML;
+					} else if(token >= 16 && token <= 18) {
+						kill.innerHTML = 5;
+						people.innerHTML = token - kill.innerHTML;
+					} else if(token < 4) {
+						kill.innerHTML = "";
+						people.innerHTML = "";
+						alert("您的输入有误，请按提示输入。")
+					} else if(token > 18) {
+						kill.innerHTML = "";
+						people.innerHTML = "";
+						alert("请输入4~18之间的数字")
+					} else if(token < 4) {
+						alert('请输入4~18的数字')
+					} else if(token > 18) {
+						alert('请输入4~18的数字')
+					}
+				}
+			
+			test();
+			ipt.onchange= test;
+			but.onclick = function() {
+				var folks = folk.value;
+				var killers = killer.value;
+				var res ={
+					"kill":kill.innerHTML,
+					"people":people.innerHTML
+				};
+				var reds = [];
+				for(var i = 0; i < kill.innerHTML; i++) {
+					reds.push('杀手')
+				}
+				for(var i = 0; i < people.innerHTML; i++) {
+					reds.push('水民')
+				}
+				reds.sort(function() {
+					return 0.5 - Math.random()
+				});
+				console.log(reds)
+				if(folks == "" && killers == "") {
+					confirm("请输入10字以内正确的词组")
+				} else if(token == " ") {
+					alert('请输入玩家数目');
+				} else if(folks == killers) {
+					confirm('亲，水民词组与杀手词组不能相同');
+				} else if(!window.localStorage) {
+					alert("浏览器不支持localstorage");
+				} else if(token >= 4 && token <= 18) {
+					localStorage.setItem("roles", reds);
+					localStorage.setItem("ipt_but", ipt.value);
+					localStorage.setItem("folk", folk.value);
+					localStorage.setItem('res', JSON.stringify(res));
+					localStorage.setItem("killer", killer.value);
+					window.location.href = "桌游翻牌.html";
+				}
+			}
+			
+		</script>
+	</body>
+
+</html>   
