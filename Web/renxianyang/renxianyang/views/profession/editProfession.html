@@ -1,0 +1,126 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 panel panel-default " style="padding: 0;margin-top: 20px;">
+            <div class="panel-heading">
+                职业详细信息
+            </div>
+            <div class="panel-body">
+                <form name="editForm" role='form' class="form form-horizontal">
+                    <div class="form-group col-sm-6">
+                        <label class="col-xs-4 control-label">职位名称</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" name="title" ng-model="vm.httpSend.name"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-xs-4 control-label">在招公司</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="vm.httpSend.companyName"
+                                    required
+                                    ng-options="data for data in [vm.httpSend.companyName]" disabled
+                            >
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-xs-4 control-label">工作经验</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="vm.httpSend.experience"
+                                    required
+                                    ng-options="data.type as data.name for data in vm.domData.experience"
+                            >
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-xs-4 control-label">学历要求</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="vm.httpSend.education"
+                                    required
+                                    ng-options="data.type as data.name for data in vm.domData.education"
+                            >
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-xs-4 control-label">薪 资</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="vm.httpSend.compensation"
+                                    required
+                                    ng-options="data.type as data.name for data in vm.domData.compensation"
+                            >
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label class="col-xs-4 control-label">职业分类</label>
+                        <div class="col-xs-4">
+                            <select class="form-control" ng-model="vm.httpSend.category"
+                                    required
+                                    ng-options="data.type as data.name for data in vm.domData.category"
+                            >
+                            </select>
+                        </div>
+                        <div class="col-xs-4">
+                            <select class="form-control" ng-model="vm.httpSend.subCategory"
+                                    required
+                                    ng-options="data.type as data.name for data in vm.domData.subCategory"
+                            >
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <label class="col-xs-2 control-label">公司福利</label>
+                        <div class="col-xs-10">
+                            <ul class="breadcrumb" style="line-height: 50px;">
+                                <li ng-repeat="self in vm.getTagsByCompanyId"><input type="checkbox"
+                                                                                     required
+                                                                                     ng-click="vm.ways.changeCheck($index,self.content.tag,self.isCheck)"
+                                                                                     ng-checked="self.isCheck"
+                                                                                     style="margin: 0;vertical-align: middle;">{{self.content.tag}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">职位描述</div>
+                            <div class="panel-body">
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 control-label">岗位职责</label>
+                                    <div class="col-xs-10">
+                                        <editor-tool ng-model='vm.httpSend.responsibility'></editor-tool>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 control-label">必备条件</label>
+                                    <div class="col-xs-10">
+                                        <editor-tool ng-model='vm.httpSend.requisite'></editor-tool>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-12">
+                                    <label class="col-xs-2 control-label">公司福利</label>
+                                    <div class="col-xs-10">
+                                        <editor-tool ng-model='vm.httpSend.boon'></editor-tool>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="col-xs-4 col-xs-offset-10">
+                            <input type="submit" value="保存" class="btn btn-success"
+                                   ng-disabled="editForm.$error.required"
+                                   ng-click="vm.ways.savaProfession()"
+                            />
+                            <input type="submit" value="取消" class="btn btn-default"
+                                   ng-click="vm.ways.cancel()"
+                            />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
