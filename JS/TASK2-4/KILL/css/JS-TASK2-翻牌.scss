@@ -1,0 +1,80 @@
+@import "JS-TASK2-base.scss";
+
+@import "JS-TASK2-header.scss";
+
+$color_3: (
+    num: #f56b81,
+    _pink: #ffedc5
+    );
+
+
+body {background-color: map-get($color, header);}
+main {
+    @include position(absolute, 50px, 0, null, 0);
+    @include box(100%, 100%, 40px, null, null);
+    max-width: 768px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.block {
+    position: relative;
+    @include box(70%, 70%, null, 3px solid map-get($color, white), 0 auto);
+    min-width: 234px;
+    max-width: 348px;
+    background: url(https://ZZsuper.github.io/JS/TASK2/icon/翻牌.png) no-repeat;
+    background: {
+        size: 50%;
+        position: 50% 50%;
+    };
+    background-color: map-get($color_3, _pink);
+}
+.number {
+    @include position(absolute, -24px, calc(50% - 20px), null, null);
+    @include box(40px, 40px, null, 3px solid map-get($color_3, _pink), null);
+    // border: 3px solid map-get($color, white);
+    // border-right: transparent;
+    // border-bottom: transparent;
+    border-radius: 50%;
+    // transform: rotate(45deg);
+    text-align: center;
+    font-size: 25px;
+    color: map-get($color_3, num);
+    outline: none;
+}
+.circle {
+    display: none;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 50px auto 0;
+    background-color: #fbb435;
+}
+.circle img {
+    position: relative;
+    top: 15px;
+    width: 66%;
+}
+.identity {
+    padding-top: 30px;
+    font-size: 30px;
+    color: map-get($color, header);
+    text-align: center;
+}
+.icon_king {
+    display: inline-block;
+    width:50%;
+    margin: 0 auto;
+
+}
+.check {
+    @include box(100%, null, 10px, 0, 20px 0);
+    min-width: 234px;
+    max-width: 348px;
+    font-size: 16px;
+    color: map-get($color, white);
+    background-color: map-get($color_2, yellow_btn);
+    outline: none;
+    cursor: pointer;
+}
