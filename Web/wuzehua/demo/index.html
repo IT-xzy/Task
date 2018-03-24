@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+</head>
+<body>
+<button id="storage" onclick="storage">点击</button>
+</body>
+<script>
+    var storage = document.getElementById('storage');
+    storage.onclick = function () {
+        if (!window.localStorage) {
+            alert("浏览器支持localstorage");   //首先你需要判断一下浏览器支不支持locaStorage存储。
+            return false;
+        } else {
+            var storage = window.localStorage;
+            //写入a字段
+            storage["a"] = 1;
+            //写入b字段
+            storage.b = 2;
+            //写入c字段
+            storage.setItem("c", 3);
+            console.log(typeof storage["a"]);     //a b c 这三个打印出来是字符串的形式  也就是 string
+            console.log(typeof storage["b"]);    //localStorage只支持string类型的存储。
+            console.log(typeof storage["c"]);
+
+            //第一种方法读取
+            var a = storage.a;
+            console.log(a);     //这三种打印读取的结果 分别是  1 2 3
+            //第二种方法读取
+            var b = storage["b"];
+            console.log(b);
+            //第三种方法读取
+            var c = storage.getItem("c");
+            console.log(c);
+
+            //将localStorage中的某个键值对删除
+            var storage = window.localStorage;
+            storage.a = 1;
+            storage.setItem("c", 3);
+            console.log(storage);
+            storage.removeItem("a");    //这里的removeItem 是删除的意思
+            console.log(storage.a);
+        }
+
+        //这里是locaStorage的键获取
+        var storage = window.localStorage;
+        storage.a = 1;
+        storage.setItem("c", 3);
+        for (var i = 0; i < storage.length; i++) {
+            var key = storage.key(i);
+            console.log(key);    //打印出来是a b c
+        }
+    }
+    //一般我们会将JSON存入localStorage中，但是在localStorage会自动将localStorage转换成为字符串形式
+</script>
+
+
+</html>

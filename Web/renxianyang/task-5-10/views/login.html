@@ -1,0 +1,44 @@
+<div style="background: url(images/login/login-bg.jpg) no-repeat ;background-size: 100% 100%;height: 100%;width: 100%;"
+     class="POSrel">
+    <form name="loginForm" class="form-horizontal col-xs-10 col-sm-5 col-md-4 col-lg-3 POSabs XYcenter" role="form"
+          ng-submit="vm.submit()"
+          style="background-color: ghostwhite;border-radius: 1vw;padding-top: 70px;padding-bottom: 40px;">
+        <div style="width: 70px;height: 70px;border-radius: 50%;overflow: hidden;top: -35px;" class="POSabs Xcenter">
+            <img src="images/login/login-logo.png" style="height: 100%;width: 100%;vertical-align: middle"
+                 alt="login-logo">
+        </div>
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-2 POSrel" style="line-height: 50px;">
+                <img src="images/login/login-user.png" class="POSabs Ycenter" style="margin-left: 15px;height: 20px;"
+                     alt="login-user">
+                <input type="text" class="form-control" style="padding-left: 45px;" id="loginName" placeholder="请输入用户名"
+                       name="name" ng-model="vm.ajaxSend.name" minlength="3"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-2 POSrel" style="line-height: 50px;">
+                <img src="images/login/login-pwd.png" class="POSabs Ycenter" style="margin-left: 15px;height: 20px;"
+                     alt="login-user">
+                <input type="password" class="form-control" style="padding-left: 45px;" id="loginPwd"
+                       placeholder="请输入密码"
+                       name="pwd" ng-model="vm.ajaxSend.pwd" minlength="6"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-2 col-xs-offset-2">
+                <input type="submit" value="登录" class="btn btn-success"
+                       style="background-image:linear-gradient(to right,#fd9f2a,rgba(253, 159, 42, 0.74),#fd9f2a);color: #fff"
+                       ng-disabled="loginForm.$error.minlength">
+            </div>
+            <div class="col-xs-5 col-xs-offset-1"
+                 style="font-size: 12px;height:32px;color: red;display: flex;align-items: center;flex-direction: column;justify-content: center;">
+                {{vm.errorInfo}}
+                <span ng-show="loginForm.name.$error.minlength">用户名最少3位!</span>
+                <span ng-show="loginForm.pwd.$error.minlength">密码最少6位!</span>
+            </div>
+        </div>
+    </form>
+</div>

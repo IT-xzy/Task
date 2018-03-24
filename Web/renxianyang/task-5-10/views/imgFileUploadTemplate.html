@@ -1,0 +1,92 @@
+<style>
+    .fileUploadBtnWrap {
+        width: 100px;
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+    }
+
+    .fileUploadBtnWrap .fileUploadBtn {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0;
+    }
+
+    progress.imgUpProgress {
+        width: 100%;
+        height: 10px;
+        background-color: orange;
+
+    }
+
+    progress.imgUpProgress::-webkit-progress-bar {
+        background-color: #d7d7d7;
+    }
+
+    progress.imgUpProgress::-webkit-progress-value {
+        background-color: orange;
+    }
+</style>
+<div class="form-group">
+    <label class="col-xs-2 control-label">选择配图</label>
+    <div class="col-xs-1">
+        <a href="javascript:void(0)"
+           class="fileUploadBtnWrap btn btn-success">选择文件
+            <input type="file" class="fileUploadBtn" accept="image/*"
+                   onchange="angular.element(this).scope().setFiles(event)">
+        </a>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-xs-9 col-xs-offset-2">
+        <table class="table table-responsive" ng-if="panel.infoPanel">
+            <thead>
+            <tr>
+                <th>文件名</th>
+                <th>文件大小</th>
+                <th>进度</th>
+                <th>状态</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="file in files track by $index">
+                <td width="30%" style="word-break: break-all;">
+                    {{file.name}}
+                </td>
+
+                <td>{{file.size/1024/1024|limitTo:4}}Mb</td>
+
+                <td class="text-center">
+                    <progress ng-clock value="{{progress.value}}"
+                              max="{{progress.max}}" class="imgUpProgress"></progress>
+                </td>
+                <td>
+                    {{panel.status}}
+                </td>
+                <td class="text-center">
+                    <input type="button" class="btn btn-success" id="uploadBtn"
+                           ng-disabled="panel.uploadBtn"
+                           ng-click="startUpload()"
+                           value="上传"
+                    />
+                    <input class="btn btn-danger" type="button" id="deleteBtn" value="取消"
+                           ng-disabled="panel.cancelBtn"
+                           ng-click="cancelUpload()"
+                    />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-xs-2 control-label">配图预览</label>
+    <div class="col-xs-9">
+        <img src="{{imgSrc}}" alt="配图加载失败">
+    </div>
+</div>

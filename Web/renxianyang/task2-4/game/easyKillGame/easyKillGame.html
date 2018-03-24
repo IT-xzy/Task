@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row" style="padding: 0 15px">
+        <div class="defaultStyleToWrap innerRow text-center col-xs-12">
+            杀手<input type="number"
+                     ng-disabled="vm.editBtn.flag" ng-model="vm.roles.kill"
+                     ng-blur="vm.checkValue()"
+                     class="numberInputStyle">人
+        </div>
+        <div class="defaultStyleToWrap innerRow text-center col-xs-12">
+            水民<input type="number" ng-disabled="vm.editBtn.flag" ng-model="vm.roles.men"
+                     ng-blur="vm.checkValue()"
+                     class="numberInputStyle">人
+        </div>
+        <div class="defaultStyleToWrap innerRow text-center col-xs-12">
+            <input type="button" class="btn" ng-click="vm.editBtn.flag=!vm.editBtn.flag"
+                   ng-class="{true:'btn-success',false:'btn-warning'}[vm.editBtn.flag]"
+                   ng-disabled="vm.editBtn.disabled"
+                   ng-value="vm.editBtn.flag?'编辑':'完成'">
+        </div>
+        <div style="padding: 20px 15px" class="defaultStyleToWrap innerRow text-center col-xs-12">
+            <blockquote class="text-left" style="line-height: 30px;">玩家人数
+                <input type="number" ng-model="vm.roles.all" class="numberInputStyle">
+            </blockquote>
+            <input type="range" ng-model="vm.roles.all" min="4" max="18">
+        </div>
+        <div class="defaultStyleToWrap innerRow text-center col-xs-12">
+            <input type="button" class="btn btn-info"
+                   ng-disabled="!vm.editBtn.flag"
+                   ng-click="vm.submit()"
+                   value="去发牌">
+        </div>
+    </div>
+</div>

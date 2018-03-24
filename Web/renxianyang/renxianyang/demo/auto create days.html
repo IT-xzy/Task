@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    ul, ol {
+        list-style: none;
+    }
+
+    ul li {
+        line-height: 40px;
+        margin-bottom: 50px;
+        box-shadow: 0 0 2px #333;
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    .past {
+        background: red;
+    }
+</style>
+<body>
+<div class="container ">
+    <div class="col-xs-12" id="daysWrap">
+        <div class="panel panel-default perDay">
+            <div class="panel-heading">
+                第 <span class="thisIndex">1</span>天
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li title="kill" class="POSrel">杀手杀人
+                        <span class="gameLog"></span>
+                    </li>
+                    <li title="speak1">亡灵发言</li>
+                    <li title="speak2">玩家依次发言</li>
+                    <li title="notKill">全民投票
+                        <span class="gameLog"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    ~function () {
+        var daysIndex = 1;
+        var daysWrap = $('#daysWrap');
+        var perDay = $('.perDay');
+        var targetClone = perDay.eq(0).clone(true);//后面用它做模板
+        //封装一个函数
+        var setClick = function () {
+            for (var i = 0; i < perDay.length; i++) {
+                perDay.eq(i).unbind('click');//先清除点击事件
+                perDay.eq(i).click(function (event) {
+                    var target = event.target;
+                    if (target.nodeName.toLowerCase() == 'li') {
+                        //主要的-------------------------------
+                        var _this = $(target);//把点击目标转为jq对象;
+                        var prevNode = _this.prev();//点击的上一个节点
+                        var _thisIndex = _this.index();//自身的下标
+                        var _thisTitle = _this.attr('title');
+                        var confirmInstance;
+                        var _thisClass = $(target).attr('class') || '';//点击目标的class
+                        var prevClass = _this.prev().attr('class') || '';//点击的上一个节点的class
+                        if (_thisClass.indexOf('past') != (-1)) {
+                            alert('请按步骤操作');
+                            return;
+                        } else if (prevClass.indexOf('past') == (-1) && _thisIndex != 0) {
+                            alert('请按步骤操作');
+                            return;
+                        } else {
+                            switch (_thisTitle) {
+                                case 'kill':
+                                    alert('点A杀人')
+                                    break;
+                                case 'speak1':
+                                    confirmInstance = confirm('ok?');
+                                    if (!confirmInstance) {
+                                        return;
+                                    }
+                                    break;
+                                case 'speak2':
+                                    confirmInstance = confirm('ok?');
+                                    if (!confirmInstance) {
+                                        return;
+                                    }
+                                    break;
+                                case 'notKill':
+                                    alert('点B投票')
+                                    break;
+
+                            }
+                            //最后变色
+                            _this.addClass('past');
+                            //生成新的一天
+                            if (_this.index() === ( _this.siblings().length + 1 - 1)) {
+                                var cloneNode = targetClone.clone(true);
+                                //修改
+                                cloneNode.find('.thisIndex').text(++daysIndex)
+                                daysWrap.append(cloneNode);
+                                perDay = $('.perDay');//重新取对象
+                                setClick();
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        setClick();
+    }()
+
+</script>
+</html>

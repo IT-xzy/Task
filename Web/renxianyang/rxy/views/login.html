@@ -1,0 +1,43 @@
+<div style="background: url(images/login/login-bg.jpg) no-repeat ;background-size: 100% 100%;height: 100%;width: 100%;min-width: 600px;"
+     class="POSrel">
+    <form class="form-horizontal col-xs-6 col-md-6 col-lg-5 POSabs XYcenter" role="form" novalidate
+          ng-submit="vm.submit()"
+          style="background-color: ghostwhite;border-radius: 1vw;padding-top: 70px;padding-bottom: 40px;">
+        <div style="width: 70px;height: 70px;border-radius: 50%;overflow: hidden;top: -35px;" class="POSabs Xcenter">
+            <img src="images/login/login-logo.png" style="height: 100%;width: 100%;vertical-align: middle"
+                 alt="login-logo">
+        </div>
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-2 POSrel" style="line-height: 50px;">
+                <img src="images/login/login-user.png" class="POSabs Ycenter" style="margin-left: 15px;height: 20px;"
+                     alt="login-user">
+                <input type="text" class="form-control" style="padding-left: 45px;" id="loginName" placeholder="请输入用户名"
+                       name="pwd" ng-model="vm.send.name"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-2 POSrel" style="line-height: 50px;">
+                <img src="images/login/login-pwd.png" class="POSabs Ycenter" style="margin-left: 15px;height: 20px;"
+                     alt="login-user">
+                <input type="password" class="form-control" style="padding-left: 45px;" id="loginPwd"
+                       placeholder="请输入密码"
+                       name="pwd" ng-model="vm.send.pwd"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-2  " id="loginError" style="color: red">
+                <!--不需要内容，登录失败显示，3s内自动消失-->
+                {{vm.errorInfo}}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-2 ">
+                <input type="submit" value="登录" class="btn btn-success"
+                       style="background-image:linear-gradient(to right,#fd9f2a,rgba(253, 159, 42, 0.74),#fd9f2a);color: #fff"
+                       ng-disabled="loginForm.name.$invalid||loginForm.pwd.$invalid">
+            </div>
+        </div>
+    </form>
+</div>
