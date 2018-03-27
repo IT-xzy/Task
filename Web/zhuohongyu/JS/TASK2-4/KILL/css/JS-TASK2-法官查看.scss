@@ -1,0 +1,203 @@
+@import "task13-base.scss";
+$w100: 100%;
+
+* {
+    border: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+body {
+    padding: 0;
+    background-color: map-get($color, blue);
+}
+header {
+    @include position(fixed, 0, null, null, 0);
+    z-index: 9999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: $w100;
+    padding: 10px;
+    border-bottom: 1px solid #b9e9f5; 
+    font-size: 20px;
+    color: map-get($color, white);
+    background-color: map-get($color, blue);
+}
+.icon-menu {
+    @include box(30px, 30px, null, null, 0 0 0 15px);
+    @include bg(200px, 0 -224px);
+    &:hover {cursor: pointer;}
+}
+.icon_back {
+    padding: 15px;
+    background: url(https://ZZsuper.github.io/JS/TASK2/icon/JS-TASK2.png) no-repeat;
+    background-size: 25px;
+    background-position: 2px -99px;
+    outline: none;
+    cursor: pointer;
+}
+.icon-× {
+    @include box(30px, 30px, null, 0, null);
+    margin-right: 15px;
+    @include bg(200px, 8px -176px);
+    &:hover {cursor: pointer;}
+}
+/*游戏提示*/
+.game-guide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: {
+        left: 30px;
+        right: 15px;
+    }
+    font-size: 14px;
+    background-color: map-get($color, blue-light);
+}
+/*倒三角形*/
+.tri-guide {
+    @include position(relative, -5px, null, null, null,);
+}
+main {
+    @include position(absolute, 50px, null, null, null);
+    width: 100%;
+    margin-bottom: 95px;
+}
+/*发言讨论结束，大家请投票*/
+
+.player {
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    background-color: map-get($color, bright-yellow);
+}
+.player-tri {
+    width: 26px;
+    height: 26px;
+    @include bg(200px, 6px 3px);
+}
+.triangle {
+    position: relative;
+    left: 45px;
+    display: inline-block;
+    margin: 0;
+    border: {
+        top: 7px solid map-get($color, blue-light);
+        left: 5px solid transparent;
+        right: 5px solid transparent;
+    }
+}
+.guide {
+    padding-left: 40px;
+    font-size: 14px;
+    color: map-get($color, blue-light);
+}
+
+/*游戏角色*/
+.form {
+    display: flex;
+    justify-content: space-between;
+    @include box(100%, 35vw, 0 30px, null, null);
+    max-height: 260px;
+    margin-bottom: 10px;
+}
+.user-operate {
+    width: 25vw;
+    height: 100%;
+    max-width: 260px;
+    max-height: 260px;
+    &:hover .option {
+        display: flex;
+        justify-content: space-between;
+        max-width: 200px;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+}
+.character {
+    position: relative;
+    @include box(25vw, 25vw, null, 2px solid map-get($color, white), null);
+    max-width: 200px;
+    max-height: 200px;
+    text-align: center;
+    background-color: map-get($color, dark-yellow);
+}
+
+%flex-center {
+   display: flex;
+   justify-content: center;
+   align-items: center; 
+}
+
+li {
+    &:nth-child(1) {
+        @extend %flex-center;
+        height: 80%;
+        font-size: 16px;
+    }
+    &:nth-child(2) {
+        @extend %flex-center;
+    }
+}
+.user-number {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20%;
+    font-size: 12px;
+    color: map-get($color, white);
+    background-color: map-get($color, num-bg);
+}
+@media (min-width: 550px) {
+    li {
+    &:nth-child(1) {
+        
+        font-size: 20px;
+    }
+}
+    .user-number {
+        font-size: 16px;
+    }
+}
+.option {display: none;}
+
+%w20-pt20 {
+    width: 20px;
+    padding-top: 20px;
+}
+
+.icon-knife {
+    @extend %w20-pt20;
+    @include bg(200px, 0 -37px);
+}
+.icon-look {
+    @extend %w20-pt20;
+    @include bg(200px, 0 -111px);
+}
+.icon-kill {
+    @extend %w20-pt20;
+    @include bg(200px, -1px -75px);
+}
+.icon-treat {
+    @extend %w20-pt20;
+    @include bg(200px, 2px -148px);
+}
+
+footer {
+    @include position(fixed, null, null, 0, 0);
+    width: 100%;
+    padding-bottom: 30px;
+    background-color: map-get($color, blue);
+}
+.footer-btn {
+    @extend %flex-center;
+    width: 100%;
+    height: 45px;
+    margin-top: 20px;
+    font-size: 20px;
+    color: map-get($color, white);
+    background-color: map-get($color, bright-yellow);
+    &:hover {cursor: pointer;}
+}

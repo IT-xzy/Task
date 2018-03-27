@@ -1,0 +1,38 @@
+<div class="container" style="border-top: 1px solid #fff;padding-top: 20px">
+    <div class="row">
+        <div class="col-xs-4" style="margin-bottom: 45px;"
+             ng-repeat="data in vm.data.domData track by $index">
+            <div class="inner POSrel" ng-click="vm.ways.choose($index)">
+                <div class="content POSabs Xleft Xright Ytop Ybottom"
+                     ng-class="{false:'isLive'}[data.isLive]"
+                >
+                    <div class="top POSrel">
+                        <span class="POSabs XYcenter"
+                              ng-clock>{{data.type}}</span>
+                    </div>
+                    <div class="bottom POSrel">
+                        <span class="POSabs XYcenter">{{$index+1}}号</span>
+                    </div>
+                    <!--简单-->
+                    <div class="imgTips POSabs Xcenter" ng-if="deskGame.preGame.uiSref ==='easyKillGame'"
+                         ng-show="vm.flag.isChoose===$index+1"
+                    >
+                        <img src="image/killer.png">
+                    </div>
+                    <!--普通版-->
+                    <div class="imgTips POSabs Xcenter" ng-if="deskGame.preGame.uiSref !='easyKillGame'"
+                    >
+                        <img src="image/killer.png">
+                        <img src="image/killer.png">
+                        <img src="image/killer.png">
+                        <img src="image/killer.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="button" class="fixedBottomBtn" ng-value="vm.submitInfo.btnText"
+           ng-click="vm.submitInfo.submit()"
+           ng-disabled="!vm.flag.isChoose"
+    >
+</div>

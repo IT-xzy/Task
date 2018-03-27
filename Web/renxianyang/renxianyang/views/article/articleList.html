@@ -1,0 +1,115 @@
+<div class="container-fluid" style="min-width: 700px">
+    <div class="row searchFormWrap panel panel-default">
+        <form class="form-horizontal searchForm panel-body" role='form'>
+            <div class="form-group">
+                <label class="col-xs-2 control-label" style="text-align: center;">修改时间</label>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" ng-model="vm.httpSend.startAt"
+                           uib-datepicker-popup="yyyy/MM/dd" is-open="vm.datepicker.startAtOpen"
+                           close-on-date-selection="true" datepicker-options="vm.datepicker.options"
+                           show-button-bar="true" close-text="关闭" clear-text="清空" current-text="选择今天"
+                           ng-focus="vm.datepicker.startAtOpen=true"
+                    />
+                </div>
+                <label class="col-xs-2 control-label" style="text-align: center;">-----</label>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" ng-model="vm.httpSend.endAt"
+                           uib-datepicker-popup="yyyy/MM/dd" is-open="vm.datepicker.endAtOpen"
+                           close-on-date-selection="true" datepicker-options="vm.datepicker.options"
+                           show-button-bar="true" close-text="关闭" clear-text="清空" current-text="选择今天"
+                           ng-focus="vm.datepicker.endAtOpen=true"
+                    />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label" style="text-align: center;">类型</label>
+                {{vm.httpSend.type}}
+                <div class="col-xs-4">
+                    <select class="form-control" ng-model="vm.httpSend.type"
+                            ng-options="data.type as data.name for data in vm.domData.type">
+                    </select>
+                </div>
+                <label class="col-xs-2 control-label" style="text-align: center;">状态</label>
+                <div class="col-xs-4">
+                    <select class="form-control" ng-model="vm.httpSend.status"
+                            ng-options="data.status as data.name for data in vm.domData.status">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-4 col-xs-offset-8 text-right">
+                    <input type="button" class="btn btn-danger" value="清空" ng-click="vm.ways.clearHistory()"/>
+                    <input type="button" class="btn btn-success" value="搜索" ng-click="vm.ways.getData()"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading POSrel">
+                <strong>Article列表</strong>
+                <span ng-click="vm.ways.addArticle()" class="btn-success btn POSabs Ycenter"
+                      style="right: 15px;height: 30px;line-height: 30px;width: 40px;padding: 0;">新增</span>
+            </div>
+            <table class="table table-responsive  text-center panel-body">
+                <thead>
+                <tr>
+                    <th width="4%" class="text-center"><strong>ID</strong></th>
+                    <th width="21%" class="text-center"><strong>名称</strong></th>
+                    <th width="10%" class="text-center"><strong>类型</strong></th>
+                    <th width="10%" class="text-center"><strong>发布时间</strong></th>
+                    <th width="10%" class="text-center"><strong>修改时间</strong></th>
+                    <th width="10%" class="text-center"><strong>发布者</strong></th>
+                    <th width="10%" class="text-center"><strong>状态</strong></th>
+                    <th width="25%" class="text-center"><strong>操作</strong></th>
+                </tr>
+                </thead>
+                <tbody ng-init="items1=[]" sv-root sv-part="items1">
+                {{items1}}
+                <tr ng-repeat="self in vm.ajaxData.data.articleList track by $index" sv-element="opts">
+                    <td ng-clock>{{$index+1}}</td>
+                    <td ng-clock>{{self.title}}</td>
+                    <td ng-clock>{{self.type |article:"type"}}</td>
+                    <td ng-clock>{{self.createAt | date:'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td ng-clock>{{self.updateAt | date:'yyyy/MM/dd HH:mm:ss'}}</td>
+                    <td ng-clock>{{self.author}}</td>
+                    <td ng-clock>{{self.status|article:"status"}}</td>
+                    <td ng-clock>
+                        <table width="100%">
+                            <tr>
+                                <td><a ui-sref="" ng-click="vm.ways.changeStatus(self.id,self.status)" ng-clock>{{self.status==1?'上线':'下线'}}</a>
+                                </td>
+                                <td><a ui-sref="dashboard.editArticle({id:self.id})">编辑</a></td>
+                                <td><a ui-sref="" ng-click="vm.ways.deleteItem(self.id)">删除</a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="POSrel panel-footer" style="height: 70px;">
+                <!--还可以使用 		overflow: hidden ==> 形成BFC BFC容器会把浮动元素的高度算上-->
+                <div class="POSabs Ycenter" style="left: 15px;">
+                    每页显示<input style="font-size: 12px" type="text" ng-model="vm.httpSend.size" number-width-auto
+                               class="numberWidthAuto form-control"/>条
+                </div>
+                <div class="POSabs Ycenter" style="right: 100px;">
+                    <uib-pagination total-items="vm.uibPage.total"
+                                    ng-model="vm.uibPage.page" max-size="5" items-per-page='vm.uibPage.size'
+                                    first-text="首页" previous-text="上一页" next-text="下一页" last-text="尾页"
+                                    ng-change="vm.uibPage.pageChange()" boundary-links="true" direction-links='true'
+                                    boundary-link-numbers="true"
+                                    ng-show="vm.uibPage.toggleFlag===false"></uib-pagination>
+                    <uib-pagination total-items="vm.uibPage.total"
+                                    ng-model="vm.uibPage.page" max-size="5" items-per-page='vm.uibPage.size'
+                                    ng-change="vm.uibPage.pageChange()" boundary-links="false" direction-links='false'
+                                    boundary-link-numbers="false"
+                                    ng-show="vm.uibPage.toggleFlag===true"></uib-pagination>
+                </div>
+                <input class="POSabs Ycenter btn-success btn" style="right: 15px;" type="button" value="确认"
+                       ng-click="vm.ways.getData()"/>
+
+            </div>
+        </div>
+    </div>
+</div>

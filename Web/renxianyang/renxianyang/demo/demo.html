@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .POSrel {
+            position: relative;
+        }
+
+        .POSabs {
+            position: absolute;
+        }
+
+        .POSfixed {
+            position: fixed;
+        }
+
+        .Ycenter {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .Xcenter {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .Xleft {
+            left: 0 !important;
+        }
+
+        .Xright {
+            right: 0 !important;
+        }
+
+        .Ytop {
+            top: 0;
+        }
+
+        .Ybottom {
+            bottom: 0;
+        }
+
+        .XYcenter {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .inner {
+            margin: auto;
+            width: 80%;
+            padding-bottom: 80%;
+            box-sizing: content-box;
+            border: 10px solid #222;
+            /*去除缝隙*/
+            background: #222;
+        }
+
+        .inner .content {
+            /*真正放内容的地方*/
+            text-align: center;
+        }
+
+        .inner .content .top {
+            height: 75%;
+            background: yellow;
+        }
+
+        .inner .content .bottom {
+            background: red;
+            height: 25%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="col-xs-4 ">
+        <div class="inner POSrel">
+            <div class="content POSabs Xleft Xright Ytop Ybottom">
+                <div class="top POSrel">
+                    <span class="POSabs XYcenter">1</span>
+
+                </div>
+                <div class="bottom POSrel">
+                    <span class="POSabs XYcenter">2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-4 ">
+        <div class="inner POSrel">
+            <div class="content POSabs Xleft Xright Ytop Ybottom">
+                <div class="top POSrel">
+                    <span class="POSabs XYcenter">1</span>
+
+                </div>
+                <div class="bottom POSrel">
+                    <span class="POSabs XYcenter">2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+@mixin bg-icon($height:2.5rem,$width:2.5rem,$number:123) {
+    height: $height;
+    width: $width;
+    background: url(#{$number}.png) no-repeat;
+    background-size: contain;
+}
+%fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+%flex {
+    display: flex;
+    align-items: center;
+}
+$bg-c: #29BDE0;
+html {
+    font-size: 62.5%;
+}
+body {
+    margin: 0;
+}
+header {
+    @extend %flex;
+    @extend %fixed;
+    padding: 0 1rem;
+    justify-content: space-between;
+    line-height: 4rem;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: $bg-c;
+}
+.icon-homepage {
+    @include bg-icon;
+}
+.icon-prompt {
+    @include bg-icon(2.5rem,2.5rem,222);
+}
+main {
+    padding-bottom: 7rem;
+    padding-top: 4rem;
+}
+.content-top {
+    border-top: solid .1rem #74D4EB;
+    background-color: $bg-c;
+}
+.game-results {
+    margin: 0 auto;
+    @include bg-icon(10rem,17.5rem,233);
+}
+.congratulation {
+    padding:0 2rem;
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    color: #FFC865;
+}
+.content-top pre {
+    padding: 0 2rem;
+    margin: 0;
+    border: none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: .1rem;
+    color: #fff;
+    background-color: $bg-c;
+}
+.game-details {
+    padding: 0 2rem;
+    border-bottom: solid .1rem #DDD;
+    p {
+        display: flex;
+        margin: 0;
+        padding: 1rem 0;
+        font-size: 1.5rem;
+        justify-content: space-between;
+    }
+    pre {
+        padding: 0;
+        margin: 0;
+        border: none;
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 1.3rem;
+        letter-spacing: .1rem;
+        color: #D6D6D6;
+        background-color: #fff;
+    }
+}
+span {
+    font-size: 1.1rem;
+    line-height: 2rem;
+    color: #DADADA;
+}
+footer {
+    @extend %flex;
+    @extend %fixed;
+    bottom: 0;
+    justify-content: space-around;
+    height: 7rem;
+    background-color: rgba(41, 189, 224, .5)
+}
+button {
+    width: 40vw;
+    height: 5rem;
+    border: none;
+    border-radius: 1rem;
+    outline: none;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}
+.button-again {
+    background-color: #F66F6F;
+}
+.button-share {
+    background-color: #FBB435;
+}

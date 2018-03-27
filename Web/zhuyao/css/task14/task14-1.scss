@@ -1,0 +1,341 @@
+@mixin bg-image($n:1) {
+    background-image:url(bg#{$n}.jpeg);
+}
+@mixin opacity-z($m:0,$n:2) {
+    opacity:$m;
+    z-index:$n;
+}
+@mixin ant-de($time:-1s) {
+    animation-delay: $time;
+}
+@mixin bg-icon($height:62px,$width:43px,$x:0) {
+    height: $height;
+    width: $width;
+    background: url(22.png) $x 0;
+}
+%fx-c {
+    display: flex;
+    justify-content: center;
+}
+$box-shadow: 0 2px 5px #989898;
+body {
+    background-color: #FAFAFA;
+}
+p {
+    color: #999;
+}
+.container {
+    padding: 0 10%;
+    margin: 100px 0;
+}
+.slider , .slider-item{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.slider-container {
+    position: relative;
+    width: 100%;
+}
+.slider,.slider-item {
+    padding-bottom: 31%;
+}
+.slider-item {
+    position: absolute;
+    width: 100%;
+    animation: {
+        timing-function: linear;
+        name: fade;
+        duration: 16s;
+        iteration-count: infinite;
+    }
+    background-size:100%;
+}
+
+.slider-item1{
+    @include bg-image;
+}
+.slider-item2{
+    @include bg-image(2);
+}
+.slider-item3{
+    @include bg-image(3);
+}
+.slider-item4{
+    @include bg-image(4);
+}
+
+@keyframes fade{
+    0%{
+        @include opacity-z;
+    }
+    6.25%{
+        @include opacity-z(1,1);
+    }
+    25%{
+        @include opacity-z(1,1);
+    }
+    31.25%{
+        @include opacity-z(0,0);
+    }
+    100%{
+        @include opacity-z(0,0);
+    }
+}
+.slider-item + .slider-item{
+    opacity:0;
+}
+.slider-item1{
+    @include ant-de;
+}
+.slider-item2{
+    @include ant-de(3s);
+}
+.slider-item3{
+    @include ant-de(7s);
+}
+.slider-item4{
+    @include ant-de(11s);
+}
+.content-introduction {
+    display: flex;
+    p {
+        text-align: center;
+    }
+    span {
+        display: inline-block;
+        text-align: left;
+    }
+}
+.content-introduction-details {
+    width: 25%;
+}
+.icon-rocket {
+    margin: auto;
+    @include bg-icon;
+}
+.icon-archive {
+    margin: 15px auto 0;
+    @include bg-icon(48px,60px,-78px);
+}
+.icon-shape {
+    margin: 8px auto 0;
+    @include bg-icon(55px,52px,-169px);
+}
+.wd-bold {
+    padding: 25px;
+    color: #000;
+    font-size: 18px;
+}
+.wd-green {
+    color: #29B078;
+}
+.content-padding {
+    width: 13%;
+    min-width: 161px;
+    padding: 75px 0 0 6%;
+}
+.icon-head {
+    display: inline-block;
+    height: 15px;
+    width: 20px;
+    background: url(888.png) no-repeat;
+    background-size: contain;
+}
+.dotted-line {
+    position: absolute;
+    height: 180px;
+    width: 1px;
+    right: 28vw;
+    background: url(110.png);
+}
+.wd-black {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #000;
+}
+.study-details {
+    display: flex;
+    padding: 20px 0;
+}
+.study-details-item {
+    position: relative;
+    width: 25%;
+    p {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        margin: 0 0 0 125px;
+        font-size: 14px;
+    }
+}
+.round , .round-special {
+    position: absolute;
+    left: 55px;
+    width: 60px;
+    height: 60px;
+    color: #29B078;
+    text-align: center;
+    line-height: 60px;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    background: url(1234.png) no-repeat;
+    background-size: contain;
+}
+.arrow {
+    position: absolute;
+    width: 30px;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    height: 25px;
+    background: url(999.png) no-repeat;
+    background-size: contain;
+}
+.outstanding-student {
+    display: flex;
+}
+.outstanding-student-item {
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+.bg-white {
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    background-color: #fff;
+    p {
+        margin-top: 10px;
+    }
+    &:hover {
+        box-shadow: $box-shadow;
+        cursor: pointer;
+    }
+}
+.student-picture {
+    @extend %fx-c;
+    margin-bottom: 30px;
+}
+.scroll {
+    @extend %fx-c;
+    width: 100%;
+}
+.round-green:hover {
+    background-color: #29B078;
+    cursor: pointer;
+}
+.round-green {
+    width: 10px;
+    height: 10px;
+    margin: 4px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: $box-shadow;
+}
+.bg-enterprise {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+.logo-enterprise {
+    @extend %fx-c;
+    width: 20%;
+    height: 200px;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.logo-enterprise:hover {
+    border: 1px solid #EDEDED;
+    box-shadow: $box-shadow;
+}
+.content-friendlink {
+    padding: 20px 10%;
+    background-color: #fff;
+}
+.friendlink-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-left: 0;
+    justify-content: space-around;
+    li {
+        color: #999;
+        border-bottom: 1px solid transparent;
+        list-style-type: none;
+        a {
+            text-decoration: none;
+            color: #999;
+            &:hover {
+            border-bottom: 1px solid #29B078;
+            }
+        }
+    }
+}
+@media screen and (max-width: 1120px) {
+    .logo-enterprise {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 1050px ) {
+    .dotted-line {
+        visibility: hidden;
+    }
+    .content-introduction {
+        display: block;
+    }
+    .content-introduction-details {
+        width: 100%;
+    }
+    .content-padding {
+        text-align: center;
+        padding: 30px 0;
+    }
+    .study-details {
+        display: block;
+        padding: 0;
+        width: 50%;
+    }
+    .study-cont {
+        display: flex;
+    }
+    .study-details-item {
+        width: 100%;
+    }
+    .outstanding-student {
+        flex-wrap: wrap;
+    }
+    .outstanding-student-item {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 992px) {
+    .friendlink-item {
+        margin: 0;
+        li {
+            width: 20%;
+        }
+    }
+}
+@media screen and (max-width: 800px) {
+    .outstanding-student {
+        display: block;
+    }
+    .outstanding-student-item {
+        width: 100%;
+    }
+    .study-cont {
+        display: block;
+    }
+    .study-details {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .friendlink-item li {
+        width: 50%;
+        padding-left: 13%;
+        box-sizing: border-box;
+    }
+}

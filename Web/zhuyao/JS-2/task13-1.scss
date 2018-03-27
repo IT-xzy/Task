@@ -1,0 +1,94 @@
+@charset "utf-8";
+@mixin abs($tsY:-50%,$height:2.5rem,$width:2rem,$number:5) {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY($tsY);
+    height: $height;
+    width: $width;
+    background: url(#{$number}.png) no-repeat;
+    background-size: contain;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    margin: 0;
+    background-color: #F0F0F0;
+}
+header {
+    padding: 1.5rem;
+    background-color: #29BDE0;
+}
+.header-nav {
+    display: block;
+    height: 2rem;
+    background: url(1.png) no-repeat;
+    background-size: contain;
+}
+main {
+    padding: 3rem;
+}
+.main-nav {
+    position: relative;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    text-align: center;
+    background-color: #fff;
+    color: #9A9A9A;
+    span {
+        font-size: 2rem;
+    }
+}
+.main-nav , .main-content {
+    border: solid .1rem #C9C9C9;
+}
+.main-nav-icon {
+    @include abs;
+}
+.game-name {
+    padding: 2rem 0;
+    border-bottom: solid .1rem #FBB435;
+    font-size: 2.5rem;
+    text-align: center;
+    background-color: #fff;
+    color: #FBB435;
+}
+.details {
+    position: relative;
+    padding: 1.5rem 3rem;
+    background-color: #fff;
+    list-style-type: none;
+    p {
+        font-size: 1.5rem;
+        text-align: center;
+        color: #9A9A9A;
+    }
+}
+.game-type {
+    display: block;
+    padding: 3rem 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2rem;
+    background-color: #69D1E9;
+    color: #fff;
+}
+.main-icon-next {
+    @include abs(-145%,3rem,2rem,2);
+}
+.scroll {
+    display: flex;
+    justify-content: center;
+}
+.round {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 .2rem;
+    border-radius: 50%;
+    background-color: #F0F0F0;
+    &:hover {
+        background-color: #69D1E9;
+    }
+}
+

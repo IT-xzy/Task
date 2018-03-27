@@ -1,0 +1,99 @@
+@import "JS-TASK2-base.scss";
+
+%bd-sizing {box-sizing:border-box;};
+%circle {
+    display: inline-block;
+    @include box(55px, 55px, null, null, null);
+    border: 1px solid map-get($color, dark-border);
+    border-radius: 50%;
+}
+body {
+    background-color: map-get($color, body);
+}
+main {
+    @include position(relative, 61px, null, null, null);
+    z-index: 9;
+    @include box(calc(100% - 20px), null, null, 1px solid map-get($color, dark-border), 0 10px);
+    margin-bottom: 15px;
+    background-color: #fff;
+    @extend %bd-sizing;
+}
+.day {
+    position: relative;
+    border-bottom: 1px solid map-get($color, dark-border);
+    margin-top: 10px;
+    font-size: 30px;
+    line-height: 50px;
+    text-align: center;
+    color: map-get($color, header);
+    }
+.arrow_down {
+    @include position(absolute, 17px, 10px, null, null);
+    cursor: pointer;
+}
+.diary_wrap {
+    position: relative;
+    @include box(calc(100% - 160px), null, 40px, null, null);
+    padding-left: 60px;
+    border-left: 1.5px solid map-get($color, dark-border);
+    margin-left: 40px;
+    padding-bottom: 100px;
+}
+.moon {
+    @include position(absolute, 39px, null, null, -28.5px);
+    z-index: 9999;
+    @extend %circle;
+    background: #fff url(https://ZZsuper.github.io/JS/TASK2/icon/moon_sun.png) no-repeat;
+    background: {
+        size: 40px;
+        position: 13px 8px;
+    }
+}
+.sun {
+    @include position(absolute, 204px, null, null, -28.5px);
+    z-index: 9999;
+    @extend %circle;
+    background: #fff url(https://ZZsuper.github.io/JS/TASK2/icon/moon_sun.png) no-repeat;
+    background: {
+        size: 40px;
+        position: 7px -88px;
+    }
+}
+button {
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    }
+%kill {
+    position: relative;
+    @include box(null, null, 15px, null, null);
+    border: 0;
+    font-size: 20px;
+    color: #fff;
+    background-color: map-get($color, header);
+    outline: none;
+}
+.kill {
+    @extend %kill;
+    margin-bottom: 100px;
+}
+.diary_1 {
+    @include position(absolute,56px, null, null, 0);
+    font-size: 14px;
+    color: #999;
+}
+.diary_2{
+    @extend .diary_1;
+}
+.step {
+    @extend %kill;
+    margin-bottom: 30px;
+}
+.triangle {
+    @include position(absolute, 18px, null, null, -19px);
+    display: inline-block;
+    border-top: 20px solid map-get($color, header);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    transform: rotate(90deg);
+}

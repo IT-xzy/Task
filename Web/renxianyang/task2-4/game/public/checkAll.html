@@ -1,0 +1,26 @@
+<div class="container" style="border-top: 1px solid #fff;padding-top: 20px">
+    <div class="row">
+        <p class="text-info text-center" style="margin-bottom: 20px">千万不要让人看到了，双击隐藏哦！</p>
+        <div class="col-xs-4" style="margin-bottom: 35px;"
+             ng-repeat="data in vm.data.domData track by $index">
+            <div class="inner POSrel">
+                <div class="content POSabs Xleft Xright Ytop Ybottom">
+                    <div class="top POSrel"
+                         ng-click="vm.falg.isCheck=$index"
+                         ng-dblclick="vm.falg.isCheck=undefined"
+                         ng-class="{true:'hi2de'}[vm.falg.isCheck===$index]">
+                        <span class="POSabs XYcenter"
+                              ng-show="vm.falg.isCheck===$index"
+                              ng-clock>{{data.type}}</span>
+                    </div>
+                    <div class="bottom POSrel">
+                        <span class="POSabs XYcenter">{{$index+1}}号</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a ui-sref="easyKillGameLog" class="fixedBottomBtn">
+        开始游戏
+    </a>
+</div>

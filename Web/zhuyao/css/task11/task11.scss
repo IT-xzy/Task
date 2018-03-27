@@ -1,0 +1,64 @@
+$color-blue: #5FC0CD;
+$color: #fff;
+@mixin a ($value: #fff){
+    text-decoration: none;
+    color: $value;
+}
+body {
+    margin: 0;
+    background-color: #EFF0F4;
+}
+header {
+    padding: 1rem;
+    background-color: $color-blue;
+}
+.header-login {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    .header-nav {
+        font-size: 18px;
+    }
+    li {
+        list-style-type: none;
+        line-height: 18px;
+        color: $color;
+        a {
+            @include a;
+        }
+    }
+}
+.input-tel , .input-password {
+    margin-top: 10px;
+}
+.input-tel input {
+    background: url(02.png) no-repeat $color 20px;
+    background-size: 50px;
+}
+.input-password input {
+    background: url(03.png) no-repeat $color 20px;
+    background-size: 50px;
+}
+input {
+    height: 40px;
+    width: 100%;
+    padding-left: 70px;
+    border: none;
+}
+.sign-in {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    background-color: $color-blue;
+    a {
+        @include a;
+    }
+}
+.forget-password {
+    float: right;
+    margin: 0;
+    a {
+        @include a($color-blue);
+    }
+}
