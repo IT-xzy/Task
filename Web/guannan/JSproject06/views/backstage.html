@@ -1,0 +1,24 @@
+<div class="row" ng-controller="backstageCtrl">
+	<nav role="navigation" class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+		<button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+			<span class="sr-only">切换导航</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<h3 class="text-center">后台管理系统</h3>
+			<div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+			<uib-accordion class="list-group" close-others="oneAtATime">
+				<button type="button" uib-accordion-group class="list-group-item" ng-repeat="menu in menus" is-open="menu.open" ng-click="menu.open = !menu.open">
+					<uib-accordion-heading>
+						<span class="glyphicon glyphicon-pencil" ng-click="menu.open = !menu.open"></span>
+						<span ng-click="menu.open = !menu.open">{{menu.title}}</span>
+						<span ng-click="menu.open = !menu.open" class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': menu.open, 'glyphicon-chevron-right': !menu.open}"></span>
+					</uib-accordion-heading>
+					<div ui-sref="{{menu.sref}}" ng-click="$event.stopPropagation()">{{menu.content}}</div>
+				</button>
+			</uib-accordion>
+		</div>
+	</nav>
+	<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 pull-right" ui-view></div>
+</div>
