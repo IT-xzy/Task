@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task.jnshu.dao.ProfessionMapper">
+  <resultMap id="BaseResultMap" type="task.jnshu.model.Profession">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="profession" jdbcType="CHAR" property="profession" />
+    <result column="social_needs" jdbcType="INTEGER" property="socialNeeds" />
+    <result column="learning_front" jdbcType="INTEGER" property="learningFront" />
+    <result column="difficult" jdbcType="INTEGER" property="difficult" />
+    <result column="images" jdbcType="CHAR" property="images" />
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+    <result column="prospect" jdbcType="LONGVARCHAR" property="prospect" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, profession, social_needs, learning_front, difficult, images, introduction, prospect,create_at, update_at
+  </sql>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from profession
+    where profession = #{profession,jdbcType=CHAR}
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from profession
+    where profession = #{profession,jdbcType=CHAR}
+  </delete>
+
+
+  <insert id="insert" parameterType="task.jnshu.model.Profession">
+    insert into profession (profession, social_needs, learning_front,
+      difficult, images, introduction, 
+      prospect, create_at,
+      update_at)
+    values (#{profession,jdbcType=CHAR}, #{socialNeeds,jdbcType=INTEGER}, #{learningFront,jdbcType=INTEGER},
+      #{difficult,jdbcType=INTEGER}, #{images,jdbcType=CHAR}, #{introduction,jdbcType=LONGVARCHAR}, 
+      #{prospect,jdbcType=LONGVARCHAR}, #{createAt,jdbcType=BIGINT},
+      #{updateAt,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="task.jnshu.model.Profession">
+    insert into profession
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="profession != null">
+        profession,
+      </if>
+      <if test="socialNeeds != null">
+        social_needs,
+      </if>
+      <if test="learningFront != null">
+        learning_front,
+      </if>
+      <if test="difficult != null">
+        difficult,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="prospect != null">
+        prospect,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=CHAR},
+      </if>
+      <if test="socialNeeds != null">
+        #{socialNeeds,jdbcType=INTEGER},
+      </if>
+      <if test="learningFront != null">
+        #{learningFront,jdbcType=INTEGER},
+      </if>
+      <if test="difficult != null">
+        #{difficult,jdbcType=INTEGER},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=CHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="prospect != null">
+        #{prospect,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="task.jnshu.model.Profession">
+    update profession
+    <set>
+      <if test="socialNeeds != null">
+        social_needs = #{socialNeeds,jdbcType=INTEGER},
+      </if>
+      <if test="learningFront != null">
+        learning_front = #{learningFront,jdbcType=INTEGER},
+      </if>
+      <if test="difficult != null">
+        difficult = #{difficult,jdbcType=INTEGER},
+      </if>
+      <if test="images != null">
+        images = #{images,jdbcType=CHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="prospect != null">
+        prospect = #{prospect,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+    </set>
+    where profession = #{profession,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="task.jnshu.model.Profession">
+    update profession
+    set
+      social_needs = #{socialNeeds,jdbcType=INTEGER},
+      learning_front = #{learningFront,jdbcType=INTEGER},
+      difficult = #{difficult,jdbcType=INTEGER},
+      images = #{images,jdbcType=CHAR},
+      introduction = #{introduction,jdbcType=LONGVARCHAR},
+      prospect = #{prospect,jdbcType=LONGVARCHAR}, create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+    where profession = #{profession,jdbcType=CHAR}
+  </update>
+
+  <select id="selectProfessionAll" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM profession
+  </select>
+
+</mapper>

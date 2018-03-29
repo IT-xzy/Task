@@ -1,0 +1,1 @@
+package task.jnshu.service;import java.util.List;import task.jnshu.model.Student;/** * Created by Administrator on 7/8/2017. */public interface StudentService {     Student studentSelect(int id);     int selectStudentNumber(Integer status);     List<Student> studentAll();}
