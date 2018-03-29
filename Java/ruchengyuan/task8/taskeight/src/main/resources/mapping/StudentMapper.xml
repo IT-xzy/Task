@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jnshu.taskeight.dao.StudentMapper">
+    <resultMap id="BaseResultMap" type="jnshu.taskeight.model.Student">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="user" jdbcType="VARCHAR" property="user" />
+        <result column="pass" jdbcType="VARCHAR" property="pass" />
+        <result column="images" jdbcType="CHAR" property="images" />
+        <result column="profession" jdbcType="CHAR" property="profession" />
+        <result column="class_id" jdbcType="INTEGER" property="classId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="wish" jdbcType="CHAR" property="wish" />
+        <result column="qq" jdbcType="INTEGER" property="qq" />
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+        <result column="phone" jdbcType="VARCHAR" property="phone" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="enrol_at" jdbcType="BIGINT" property="enrolAt" />
+        <result column="create_at" jdbcType="BIGINT" property="createAt" />
+        <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user, pass, images ,profession, class_id, name, wish, qq, user_email, phone, status, enrol_at, create_at,update_at
+    </sql>
+
+
+    <!--===================SELECT========================SELECT=========================SELECT========================-->
+    <select id="listStudentTable" resultMap="BaseResultMap">
+
+        SELECT id, user, pass, images,profession, class_id, name, wish, qq, phone,user_email, status, enrol_at, create_at,update_at
+        FROM student
+    </select>
+
+    <select id="getStudentUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from student
+        where user = #{user,jdbcType=VARCHAR}
+    </select>
+
+
+
+    <!--===================INSERT========================INSERT=========================INSERT========================-->
+
+    <!--  Service的Insert方法一定要返回ID，如果没有特殊情况，不要手动给ID赋值，现在用数据库的自增ID就对了-->
+    <!--useGeneratedKeys: 使用生成的键     keyProperty是Java对象的属性名！-->
+    <!--mapper接口返回值依然是成功插入的记录数，但不同的是主键值(即自增Id)已经赋值到领域模型实体的id中了，用getId()获取-->
+    <insert id="insertStudentUser" parameterType="jnshu.taskeight.model.Student" useGeneratedKeys="true" keyProperty="id" >
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null"> id, </if>
+            <if test="user != null"> user, </if>
+            <if test="pass != null"> pass, </if>
+            <if test="images != null"> images, </if>
+            <if test="profession != null"> profession, </if>
+            <if test="classId != null"> class_id, </if>
+            <if test="name != null"> name, </if>
+            <if test="wish != null"> wish, </if>
+            <if test="qq != null"> qq, </if>
+            <if test="userEmail != null"> user_email, </if>
+            <if test="phone != null"> phone, </if>
+            <if test="status != null"> status, </if>
+            <if test="enrolAt != null"> enrol_at, </if>
+            <if test="createAt != null"> create_at, </if>
+            <if test="updateAt != null"> update_at, </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null"> #{id,jdbcType=INTEGER}, </if>
+            <if test="user != null"> #{user,jdbcType=VARCHAR}, </if>
+            <if test="pass != null"> #{pass,jdbcType=VARCHAR}, </if>
+            <if test="images != null"> #{images,jdbcType=CHAR}, </if>
+            <if test="profession != null"> #{profession,jdbcType=CHAR}, </if>
+            <if test="classId != null"> #{classId,jdbcType=INTEGER},</if>
+            <if test="name != null"> #{name,jdbcType=VARCHAR},  </if>
+            <if test="wish != null"> #{wish,jdbcType=CHAR}, </if>
+            <if test="qq != null"> #{qq,jdbcType=INTEGER}, </if>
+            <if test="userEmail != null"> #{userEmail,jdbcType=VARCHAR},  </if>
+            <if test="phone != null"> #{phone,jdbcType=VARCHAR}, </if>
+            <if test="status != null"> #{status,jdbcType=INTEGER}, </if>
+            <if test="enrolAt != null"> #{enrolAt,jdbcType=BIGINT}, </if>
+            <if test="createAt != null"> #{createAt,jdbcType=BIGINT}, </if>
+            <if test="updateAt != null"> #{updateAt,jdbcType=BIGINT}, </if>
+        </trim>
+    </insert>
+
+
+
+    <!--===================COUNT========================COUNT=========================COUNT============================-->
+    <select id="countStudentUser" parameterType="jnshu.taskeight.model.Student" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM student
+        <where>
+            <if test="status != null"> status = #{status,jdbcType=INTEGER} </if>
+            <if test="user != null"> user = #{user,jdbcType=VARCHAR} </if>
+            <if test="id != null"> id = #{id,jdbcType=INTEGER} </if>
+            <if test="profession != null">profession = #{profession,jdbcType=CHAR} </if>
+        </where>
+    </select>
+    
+    
+
+    <update id="updateStudentUser"  parameterType="jnshu.taskeight.model.Student" >
+        UPDATE student
+        <set>
+          <if test="pass != null"> pass = #{pass,jdbcType=VARCHAR}, </if>
+          <if test="images != null">images = #{images,jdbcType=CHAR}, </if>
+          <if test="profession != null"> profession = #{profession,jdbcType=CHAR}, </if>
+          <if test="classId != null"> classId = #{classId,jdbcType=INTEGER},</if>
+          <if test="name != null">name = #{name,jdbcType=VARCHAR},  </if>
+          <if test="wish != null">wish = #{wish,jdbcType=CHAR}, </if>
+          <if test="qq != null">qq = #{qq,jdbcType=INTEGER}, </if>
+          <if test="userEmail != null">user_email = #{userEmail,jdbcType=VARCHAR},  </if>
+          <if test="phone != null">phone = #{phone,jdbcType=VARCHAR}, </if>
+          <if test="status != null"> status = #{status,jdbcType=INTEGER}, </if>
+          <if test="updateAt != null">update_at = #{updateAt,jdbcType=BIGINT} </if>
+        </set>
+        WHERE user = #{user,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
