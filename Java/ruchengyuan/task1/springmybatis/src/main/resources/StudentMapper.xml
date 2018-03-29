@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.springmybatis.Mapper.StudentMapper">
+    <!--resultType 每一个查询映射的返回类型-->
+    <select id="studySelect" parameterType="String" resultType="com.springmybatis.model.StudentMod">
+        SELECT * FROM student WHERE user_id = #{user_id}
+    </select>
+    <!-- parameterType 将要传入语句的参数的完全限定类名或别名
+         parameterType 主要指定参数类型，可以是int, short, long, string等类型，也可以是复杂类型（如对象）-->
+    <insert id="studyInsert" parameterType="com.springmybatis.model.StudentMod" flushCache="true">
+        INSERT INTO student (user_id,name,study_type,qq,entry_data,graduated,url,wish,know_from,create_at,update_at)
+             VALUES (#{user_id},#{name},#{study_type},#{qq},#{entry_data},#{graduated},#{url},#{wish},#{know_from},#{create_at},#{update_at})
+    </insert>
+    <update id="studyUpdate" parameterType="com.springmybatis.model.StudentMod" >
+        UPDATE student SET name=#{name} ,update_at=#{update_at} WHERE user_id=#{user_id}
+    </update>
+    <delete id="studyDelete" parameterType="String">
+        DELETE FROM student WHERE user_id=#{user_id}
+    </delete>
+
+    <select id="studentName" parameterType="String" resultType="com.springmybatis.model.StudentMod">
+        SELECT * FROM student
+    </select>
+</mapper>
