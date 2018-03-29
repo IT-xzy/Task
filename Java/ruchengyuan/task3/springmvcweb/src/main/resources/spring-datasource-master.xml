@@ -1,0 +1,98 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" >
+        <property name="driverClassName"
+                  value="${master.jdbc.driverClass}"/>
+        <property name="url"
+                  value="${master.jdbc.url}?characterEncoding=utf8&amp;useSSL=false" />
+        <property name="username"
+                  value="${master.jdbc.user}" />
+        <property name="password" value="${master.jdbc.password}" />
+
+
+        <!-- 关键配置 -->
+        <!-- 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时 -->
+        <property name="initialSize" value="3" />
+        <!-- 最小连接池数量 -->
+        <property name="minIdle" value="2" />
+        <!-- 最大连接池数量 -->
+        <property name="maxActive" value="15" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="10000" />
+
+        <!-- 性能配置 -->
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+        <!-- 其他配置 -->
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="10000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <!--   建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，
+                  执行validationQuery检测连接是否有效。 -->
+        <property name="testWhileIdle" value="true" />
+        <!-- 这里建议配置为TRUE，防止取到的连接不可用 ,申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。-->
+        <property name="testOnBorrow" value="true" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name="testOnReturn" value="false" />
+    </bean>
+    <!-- 二、创建mybatis会话工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/StudentMapper.xml" />
+    </bean>
+
+    <!--sql语句和dao的映射关系类-->
+    <bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.tasktwo.dao.StudentMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!--执行通知的类-->
+<bean id="LogAdvice" class="com.tasktwo.utils.LogAdvice">
+</bean>
+    
+    <aop:config>
+        <!--ref为通知使用的对象-->
+        <!--<aop:aspect id="myAspect" ref="LogAdvice">-->
+            <!--&lt;!&ndash;确定执行什么类进行通知&ndash;&gt;-->
+            <!--<aop:pointcut id="service" expression="execution(* com.tasktwo.service.*Service.*(..))" />-->
+            <!--&lt;!&ndash;确定类中的那个方法（由method确定）进行通知&ndash;&gt;-->
+            <!--&lt;!&ndash;before前置通知&ndash;&gt;-->
+            <!--&lt;!&ndash;<aop:before method="before" pointcut-ref="aspect"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;after为后置通知&ndash;&gt;-->
+            <!--&lt;!&ndash;<aop:after method="after" pointcut-ref="aspect"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;后置异常通知 &ndash;&gt;-->
+            <!--&lt;!&ndash;<aop:after-returning method="afterAdvice" pointcut-ref="aspect"/>&ndash;&gt;-->
+            <!--&lt;!&ndash; 出现异常通知 &ndash;&gt;-->
+            <!--&lt;!&ndash;<aop:after-throwing method="afterException" pointcut-ref="aspect"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;环绕通知&ndash;&gt;-->
+            <!--<aop:around method="around" pointcut-ref="service"/>-->
+        <!--</aop:aspect>-->
+        <aop:aspect id="myAspect" ref="LogAdvice">
+            <!--确定执行什么类进行通知-->
+            <aop:pointcut id="impl" expression="execution(* com.tasktwo.service.*ServiceImpl.*(..))" />
+            <!--确定类中的那个方法（由method确定）进行通知-->
+            <!--before前置通知-->
+            <!--<aop:before method="before" pointcut-ref="aspect"/>-->
+            <!--after为后置通知-->
+            <!--<aop:after method="after" pointcut-ref="aspect"/>-->
+            <!--后置异常通知 -->
+            <!--<aop:after-returning method="afterAdvice" pointcut-ref="aspect"/>-->
+            <!-- 出现异常通知 -->
+            <!--<aop:after-throwing method="afterException" pointcut-ref="aspect"/>-->
+            <!--环绕通知-->
+            <aop:around method="around" pointcut-ref="impl"/>
+        </aop:aspect>
+
+    </aop:config>
+
+</beans>
