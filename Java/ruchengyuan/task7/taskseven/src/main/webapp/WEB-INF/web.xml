@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app  xmlns="http://java.sun.com/xml/ns/javaee"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0"
+>
+
+    <display-name>Archetype Created Web Application</display-name>
+    <!--把applicationContext.xml加入到配置文件中-->
+    <!--如果不配置这个则文件名必须为：applicationContext.xml-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:conf/spring-*.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+
+        <init-param>
+            <!--配置spring-mvc.xml作为mvc的配置文件-->
+            <!--如果不配置这个则文件名必须为：spring-servlet.xml-->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+        <async-supported>true</async-supported>
+    </servlet>
+
+
+    <!-- 同样道理,也对其他的后缀名进行了设置 -->
+    <servlet-mapping>
+        <servlet-name >springmvc </servlet-name >
+        <url-pattern >*.js</url-pattern>
+    </servlet-mapping >
+    <servlet-mapping >
+        <servlet-name >springmvc </servlet-name >
+        <url-pattern >*.css</url-pattern>
+    </servlet-mapping >
+    <servlet-mapping >
+        <servlet-name >springmvc </servlet-name >
+        <url-pattern >*.htm</url-pattern>
+    </servlet-mapping >
+    <servlet-mapping >
+        <servlet-name >springmvc </servlet-name >
+        <url-pattern >*.gif</url-pattern>
+    </servlet-mapping >
+
+
+
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+
+<!--=========文件上传=================-->
+    <!--<servlet>-->
+        <!--<servlet-name>UploadFilesServlet</servlet-name>-->
+        <!--<servlet-class>jnshu.taskseven.controller.UploadFilesServlet</servlet-class>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>UploadFilesServlet</servlet-name>-->
+        <!--<url-pattern>/a/u/picture</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
+    <!-- 配置拦截路径 -->
+
+    <!--引用自定义时间转换类DateTag的配置文件datetag.tld-->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/WEB-INF/tld/datetag.tld</taglib-uri>
+            <taglib-location>/WEB-INF/tld/datetag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <!--监听在线人数-->
+    <session-config>
+        <session-timeout>2</session-timeout>
+    </session-config>
+    <listener>
+        <listener-class>jnshu.taskseven.Listener.SessionListener</listener-class>
+    </listener>
+
+    <!--监听sessio的数量-->
+    <listener>
+        <listener-class>jnshu.taskseven.Listener.SessionScanerListener</listener-class>
+    </listener>
+
+
+    <!--过滤器，过滤敏感字符，对所有网页-->
+    <filter>
+        <filter-name>SetCharacterEncoding</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>SetCharacterEncoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>InvalidCharacterFilter</filter-name>
+        <filter-class>jnshu.taskseven.filter.InvalidCharacterFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>InvalidCharacterFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
