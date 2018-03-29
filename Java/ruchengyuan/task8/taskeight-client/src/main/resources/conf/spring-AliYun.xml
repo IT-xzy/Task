@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+<!--===========文件操作==============文件操作=========================-->
+    <bean id="ClientConfiguration" class="com.aliyun.oss.ClientConfiguration">
+        <property name="maxConnections" value="200"/>
+        <property name="socketTimeout" value="1000"/>
+        <property name="maxErrorRetry" value="10"/>
+        <property name="connectionTimeout" value="5000"/>
+        <property name="connectionRequestTimeout" value="5000"/>
+    </bean>
+
+    <bean id="OSSClient" class="jnshu.taskeight.APIUtil.AliYunOssServiceImpl">
+        <property name="endpoint" value="http://oss-cn-beijing.aliyuncs.com"/>
+        <property name="accessKeyId" value="LTAIW3LccLc4orm2"/>
+        <property name="accessKeySecret" value="I93lgMqe9GdaJ2wFaqiZj03lRttNOh"/>
+        <property name="bucketName" value="xiuzhenyuan"/>
+        <property name="clientConfiguration" ref="ClientConfiguration"/>
+
+    </bean>
+
+
+<!--=============短信服务================短信服务========================-->
+    <bean id="sms" class="jnshu.taskeight.APIUtil.AliYunAttestSmsServiceImpl">
+        <constructor-arg name="accessKeyId" value="LTAIW3LccLc4orm2"/>
+        <constructor-arg name="accessKeySecret" value="I93lgMqe9GdaJ2wFaqiZj03lRttNOh"/>
+        <property name="signName" value="标量操纵"/>
+        <property name="templateCode" value="SMS_109550040"/>
+        <property name="timeOut" value="1000"/>
+    </bean>
+
+
+    <!--=================邮箱==========-->
+    <bean id="email" class="jnshu.taskeight.APIUtil.AliYunEmailServiceImpl">
+        <constructor-arg name="accessKeyId" value="LTAIW3LccLc4orm2"/>
+        <constructor-arg name="accessKeySecret" value="I93lgMqe9GdaJ2wFaqiZj03lRttNOh"/>
+        <property name="accountName" value="biaoliang@email.rcy9527.top"/>
+        <property name="fromAlias" value="标量操纵"/>
+    </bean>
+
+
+</beans>
