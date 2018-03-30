@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lujing.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="lujing.pojo.Student" >
+    <constructor >
+      <idArg column="ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="qq_num" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="per_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="grad_school" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="daily_link" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="statement" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="presenter" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="learn_from" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_at" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="update_at" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="pic" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, name, qq_num, type, per_time, grad_school, daily_link, statement, presenter, 
+    learn_from, create_at, update_at, pic
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="lujing.pojo.Student" >
+    insert into student (ID, name, qq_num, 
+      type, per_time, grad_school, 
+      daily_link, statement, presenter, 
+      learn_from, create_at, update_at, 
+      pic)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{qqNum,jdbcType=CHAR}, 
+      #{type,jdbcType=VARCHAR}, #{perTime,jdbcType=TIMESTAMP}, #{gradSchool,jdbcType=VARCHAR}, 
+      #{dailyLink,jdbcType=VARCHAR}, #{statement,jdbcType=VARCHAR}, #{presenter,jdbcType=VARCHAR}, 
+      #{learnFrom,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, 
+      #{pic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="lujing.pojo.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="qqNum != null" >
+        qq_num,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="perTime != null" >
+        per_time,
+      </if>
+      <if test="gradSchool != null" >
+        grad_school,
+      </if>
+      <if test="dailyLink != null" >
+        daily_link,
+      </if>
+      <if test="statement != null" >
+        statement,
+      </if>
+      <if test="presenter != null" >
+        presenter,
+      </if>
+      <if test="learnFrom != null" >
+        learn_from,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+      <if test="pic != null" >
+        pic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNum != null" >
+        #{qqNum,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="perTime != null" >
+        #{perTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gradSchool != null" >
+        #{gradSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyLink != null" >
+        #{dailyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="statement != null" >
+        #{statement,jdbcType=VARCHAR},
+      </if>
+      <if test="presenter != null" >
+        #{presenter,jdbcType=VARCHAR},
+      </if>
+      <if test="learnFrom != null" >
+        #{learnFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="pic != null" >
+        #{pic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="lujing.pojo.Student" >
+    update student
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNum != null" >
+        qq_num = #{qqNum,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="perTime != null" >
+        per_time = #{perTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gradSchool != null" >
+        grad_school = #{gradSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyLink != null" >
+        daily_link = #{dailyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="statement != null" >
+        statement = #{statement,jdbcType=VARCHAR},
+      </if>
+      <if test="presenter != null" >
+        presenter = #{presenter,jdbcType=VARCHAR},
+      </if>
+      <if test="learnFrom != null" >
+        learn_from = #{learnFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="pic != null" >
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lujing.pojo.Student" >
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      qq_num = #{qqNum,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
+      per_time = #{perTime,jdbcType=TIMESTAMP},
+      grad_school = #{gradSchool,jdbcType=VARCHAR},
+      daily_link = #{dailyLink,jdbcType=VARCHAR},
+      statement = #{statement,jdbcType=VARCHAR},
+      presenter = #{presenter,jdbcType=VARCHAR},
+      learn_from = #{learnFrom,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      pic = #{pic,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
