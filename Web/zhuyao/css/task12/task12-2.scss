@@ -1,0 +1,184 @@
+$value-7:7rem;
+$border: solid .1rem #AFBAC0;
+@mixin icon($height:3rem,$width:3rem,$value:2) {
+    display: block;
+    width: $width;
+    height: $height;
+    background: url(#{$value}.png) no-repeat;
+    background-size: contain;
+}
+@mixin background($number:5) {
+    background: url(#{$number}.png) no-repeat;
+    background-size: contain;
+    color: #DADCDD;
+}
+@mixin position-fixed {
+    position: fixed;
+    right: 0;
+    left: 0;
+}
+%absolute {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+%word {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+ }
+%button {
+    width: $value-7;
+    height: 5rem;
+    border: none;
+    border-radius: 1rem;
+    outline: none;
+}
+%none {
+    outline: none;
+    border: none;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    margin: 0;
+    font-size: 1.6rem;
+}
+header {
+    @include position-fixed;
+    padding: 1rem 0;
+    text-align: center;
+    background-color: #5FC0CD;
+    z-index: 5;
+}
+.header-icon {
+    @include icon(2rem,2rem,1);
+    @extend %absolute;
+    @extend %none;
+    right: 1rem;
+}
+.button-emplayer {
+    @extend %button;
+    margin-right: -1rem;
+    background-color: #55A8B3;
+    color: #fff;
+}
+.button-worker {
+    @extend %button;
+    background-color: #fff;
+    color: #5FC0CD;
+}
+main {
+    position: relative;
+    top: $value-7;
+    padding-bottom: $value-7;
+}
+.choose {
+    display: flex;
+    @include position-fixed;
+    background-color: #fff;
+    border-bottom: $border;
+    z-index: 6;
+}
+.menu {
+    position: relative;
+    width: (100%/3);
+    margin: 0;
+    padding: 0;
+    height: 4rem;
+    line-height: 4rem;
+    text-align: center;
+    list-style: none;
+    border-right: $border;
+    border-image: linear-gradient(#fff , #AFBAC0 , #fff) 1;
+    color: #AFBAC0;
+    li {
+        position: relative;
+        visibility: hidden;
+        border: solid .1rem;
+        border-top: none;
+        background-color: #fff;
+        z-index: 3;
+    }
+    :first-child li {
+        border-top: solid .1rem;
+    }
+    &:hover li {
+        visibility: visible;
+    }
+    &:after {
+        content: '';
+        right: 0;
+        position: absolute;
+        top: 50%;
+        border: solid .5rem;
+        border-color: #AFBAC0 transparent transparent transparent;
+    }
+}
+.content {
+    padding-top: 4rem;
+}
+.details {
+    position: relative;
+    padding: 1rem;
+    border-bottom: $border;
+    span {
+        margin-left: 3rem;
+        @extend %word;
+    }
+}
+.details-date {
+    @include background;
+}
+.details-address {
+    @include background(7)
+}
+.details-icon {
+    @include icon(2rem,2rem,6);
+    @extend %absolute;
+    right: 0;
+}
+.details-duration {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 1rem 1rem 4rem;
+    @extend %word;
+}
+.word-red {
+    margin-right: 1rem;
+    color: #f00;
+    @extend %word;
+}
+footer {
+    @include position-fixed;
+    display: flex;
+    bottom: 0;
+    height: $value-7;
+    justify-content: space-around;
+    background-color: #F8FAFB;
+}
+.footer-left {
+    @include icon;
+}
+.footer-right {
+    @include icon(2.8rem,2.8rem,3);
+}
+.footer-center {
+    @include icon(6rem, 6rem, 4);
+}
+.button-right span {
+    margin: .3rem 0 0 0;
+    text-align: center;
+    color: #A6A7A7;
+}
+.button-left span {
+    margin: 0;
+    text-align: center;
+    color: #55A8B3;
+}
+footer button {
+    @extend %none;
+    background-color: transparent;
+    cursor: pointer;
+}
