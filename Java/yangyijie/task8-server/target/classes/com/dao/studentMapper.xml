@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.IStudentDao">
+    <!--通过ID查询-->
+    <select id="getStudentById" parameterType="long" resultType="Student">
+        select * from `student` where id = #{id}
+    </select>
+
+
+    <!--通过名字模糊查询-->
+    <select id="getStudentByName" parameterType="String" resultType="Student">
+        SELECT * FROM `student` WHERE name like concat('%',#{name},'%')
+    </select>
+
+    <!--分页查询-->
+    <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultType="Student">
+        select * FROM `student`
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="_int">
+        select count(*) from `student`
+    </select>
+
+    <!--更新数据,update_at是一个关键时间点-->
+    <update id="updateStudent" parameterType="Student">
+        UPDATE `student`
+        <set><!--set标签会去除只有最后一个条件的,-->
+                 update_at=#{update_at},
+                 <if test="name!= null and name!=''">name = #{name},</if>
+                 <if test="QQ!= null and QQ!=''">QQ = #{QQ},</if>
+                 <if test="major!= null and major!=''">major = #{major},</if>
+                 <if test="entry_time!= null ">entry_time = #{entry_time},</if>
+                 <if test="gra_school!= null and gra_school!=''">gra_school = #{gra_school},</if>
+                 <if test="online_id!= null and online_id!=''">online_id = #{online_id},</if>
+                 <if test="daily_link!= null and daily_link!=''">daily_link = #{daily_link},</if>
+                 <if test="desire!= null and desire!=''">desire = #{desire},</if>
+                 <if test="bro!= null and bro!=''">bro = #{bro},</if>
+                 <if test="know_from!= null and know_from!=''">know_from = #{know_from},</if>
+        </set>
+        <where><!--where标签会去除第一个条件的and和or-->
+            <if test="id!=null">AND id=#{id}</if>
+        </where>
+    </update>
+
+
+    <!--插入数据-->
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO `student`(create_at, update_at, name,QQ,major,entry_time,gra_school,online_id,daily_link, desire,
+        bro, know_from)VALUES
+        (#{create_at},#{update_at},#{name},#{QQ},#{major},#{entry_time},#{gra_school},#{online_id},#{daily_link},#{desire},#{bro},#{know_from})
+        <!-- 将插入数据的主键返回，返回到user对象中 -->
+        <selectKey keyProperty="id" order="AFTER" resultType="long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+
+    <!--DELETE删除foreach模式将一个数组传入-->
+    <delete id="deleteStudent" parameterType="long">
+        DELETE FROM `student` WHERE id =#{id}<!--IN
+        <foreach collection="array" open="(" separator="," close=")" item="arr">
+            #{arr}
+        </foreach>-->
+    </delete>
+
+    <select id="selectAll" resultType="Student">
+        SELECT * FROM `student`
+    </select>
+</mapper>
