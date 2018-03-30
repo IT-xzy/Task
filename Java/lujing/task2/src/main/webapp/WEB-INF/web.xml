@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>springmvcssm</display-name>
+<!-- 	配置前端控制器 的 -->
+
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring/applicationContext-*.xml</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+<!-- 解决post中文乱码问题 -->
+<filter>
+<filter-name>CharacterEncodingFilter</filter-name>
+<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+<init-param>
+<param-name>encoding</param-name>
+<param-value>utf-8</param-value>
+</init-param>
+</filter>
+<filter-mapping>
+<filter-name>CharacterEncodingFilter</filter-name>
+<!-- 这里为什么是/* -->
+<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<!-- 浏览器不支持put,delete等method,由该filter将/xxx?_method=delete转换为标准的http delete方法 -->
+<filter>
+      <filter-name>HiddenHttpMethodFilter</filter-name>
+      <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>HiddenHttpMethodFilter</filter-name>
+      <!-- 这里为什么是/* -->
+      <url-pattern>/*</url-pattern>
+      
+  </filter-mapping>
+
+	<!--配置自定义jstl标签-->
+	<jsp-config >
+		<taglib >
+			<taglib-uri> /CustomsTags</taglib-uri >
+			<taglib-location>/LongToDate.tld</taglib-location >
+		</taglib >
+	</jsp-config >
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.html</url-pattern>
+	</servlet-mapping>
+
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>
