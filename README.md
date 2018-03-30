@@ -1,5 +1,5 @@
 # Task汇总
-> [Task汇总地址](https://ptteng.github.io/Task/index.html)
+> [Task汇总地址](https://it-xzy.github.io/Task/index.html)
 
 # 文件上传方法
 ## 1.网页上传
