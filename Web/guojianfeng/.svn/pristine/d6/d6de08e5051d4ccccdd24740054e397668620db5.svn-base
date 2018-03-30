@@ -1,0 +1,153 @@
+<div ng-controller="article">
+    <div class="articleTop">
+        <div class="row articleli">
+            <div class="col-md-6 articleTab">
+                <label class="col-md-4">发布时间</label>
+                <div class="col-md-8" data-link-format="yyyy-mm-dd">
+                    <input type="text" class="form-control inputText"
+                           id="loginUp" data-ng-model="params.startAt" >
+                </div>
+            </div>
+            <div class="col-md-6 articleTab">
+                <label class="col-md-4">&nbsp;&nbsp;—</label>
+                <div class="col-md-8" data-link-format="yyyy-mm-dd">
+                    <input type="text" class="form-control inputText"
+                           id="loginDown" data-ng-model="params.endAt">
+                </div>
+            </div>
+        </div>
+        <div class="row articleli">
+            <div class="col-md-6 articleTab">
+                <label class="col-md-4">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
+                <div class="col-md-8">
+                    <select class="select" data-ng-model="params.type"
+                            data-ng-options="a.code as a.name for a in type">
+                        <option value="">全部</option>
+                        <!--<option value="{{a.code}}" data-ng-repeat="a in type"-->
+                                <!--ng-selected="a.code==params.type">{{a.name}}</option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 articleTab">
+                <label class="col-md-4">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</label>
+                <div class="col-md-8">
+                    <select class="select" data-ng-model="params.status"
+                            data-ng-options="a.code as a.name for a in status">
+                        <option value="">全部</option>
+                        <!--<option value="{{y.code}}" data-ng-repeat="y in status"-->
+                                <!--ng-selected="y.code==params.status">{{y.name}}</option>-->
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="articleTab articleBtn">
+            <button type="button" class="btn btnG btn-danger" ng-click="clean()">清空</button>
+            <button type="button" class="btn btnG btn-success" ng-click="searching()">搜索</button>
+        </div>
+    </div>
+    <div class="articleWrap">
+        <div class="articleTitle">
+            <span>Article列表</span><span ng-show="record==''" class="warning">(暂无数据)</span>
+            <div class="btn btn-sm btn-success pull-right" data-ui-sref="welcome.addArticle">+新增</div>
+        </div>
+        <div class="list">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="articletd">
+                <tr ng-repeat="x in record">
+                    <td class="articletd">{{$index+1}}</td>
+                    <td class="articletd" data-ng-bind="x.title"></td>
+                    <td class="articletd" data-ng-bind="x.type|changeType"></td>
+                    <td class="articletd">
+                        <div data-ng-bind="x.createAt | date:'yyyy-MM-dd'"></div>
+                        <div data-ng-bind="x.createAt | date:'HH:mm:ss'"></div>
+                    </td>
+                    <td class="articletd">
+                        <div data-ng-bind="x.updateAt | date:'yyyy-MM-dd'"></div>
+                        <div data-ng-bind="x.updateAt | date:'HH:mm:ss'"></div>
+                    </td>
+                    <td class="articletd" data-ng-bind="x.author"></td>
+                    <td class="articletd" data-ng-bind="x.status|changeStatus"></td>
+                    <td>
+                        <a data-ng-bind="x.status | changeLine" data-ng-click="changeStatus(x.id ,x.status)"></a>
+                        <a data-ui-sref="welcome.addArticle({id: x.id})">编辑</a>
+                        <a data-ng-click="delete(x.id)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination pull-right">
+
+            <form name="pageJump" class="page-bar">
+                <label>每页显示
+                    <input onkeyup="value=value.replace(/\D|^0/g,'')" type="text" class="paginationGo text-center"
+                           ng-model="params.size" maxlength="2" >条
+                </label>
+                <button class="btn btn-info" ng-disabled="params.page==1" ng-click="goPage(1)">首页</button>
+                <button class="btn btn-info" ng-disabled="params.page==1" ng-click="goPage(params.page-1)">上一页</button>
+                <button class="btn btn-info" ng-disabled="params.page==allPage" ng-click="goPage(params.page-0+1)">下一页</button>
+                <button class="btn btn-info" ng-disabled="params.page==allPage" ng-click="goPage(allPage)">末页</button>
+                <label>
+                    跳转至第
+                    <input type="text" ng-model="pageSkip" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}
+                    else{this.value=this.value.replace(/\D/g,'')}"  class="paginationGo text-center">
+                    页
+                </label>
+                <span>第{{params.page}}页</span>
+                <span>共{{allPage}}页</span>
+                <button class="btn btn-primary"
+                        ng-click="goPage(pageSkip,params.size)"
+                        ng-disabled=" pageSkip>allPage || pageSkip<1 || params.size < 1"
+                >确定</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
