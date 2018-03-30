@@ -1,0 +1,144 @@
+@charset "UTF-8";
+$bule:#5fc0cd;
+$font:20px;
+$while:#fff;
+@mixin width {
+  max-width: 720px;
+  width: 100%;
+  overflow: hidden;
+}
+@mixin button {
+  padding: 3% 5%;
+  width: 46%;
+  margin: 0 2%;
+  border: 1px solid $bule;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  background-color: $while;
+}
+html {
+  background-color: #0f0f0f;
+}
+.header {
+  position: fixed;
+  @include width;
+  padding: 25px 0;
+  background-color: $bule;
+  z-index: 999;
+  text-align: center;
+  font-size: 25px;
+  color: $while;
+  img {
+    @extend .home;
+  }
+}
+.header{
+  span {
+    margin-right: 20px;
+  }
+}
+.bc {
+  position: relative;
+  background: url("../test12img/bc.png");
+  height: 328px;
+  background-size: 100% 100%;
+ span {
+   position: absolute;
+   left: 174px;
+   top: 138px ;
+   color: $while;
+   font-size: $font;
+
+ }
+}
+.woman {
+  padding: 96px 14px;
+  width: 135px;
+  height: 135px;
+
+}
+
+.star {
+  position: absolute;
+  left: 158px;
+  top: 174px;
+  width: 157px;
+  color: $while;
+  font-size: $font;
+  img {
+    width: 18px;
+    height: 23px;
+  }
+}
+.blank {
+  @include width;
+  height: 86px;
+}
+
+
+.row {
+  display: flex;
+  align-items: center;
+  @include width;
+  padding: 20px 0;
+  border-bottom: 1px solid #e1e5e7;
+  background-color:$while;
+    p {
+    font: 25px "微软雅黑 Light";
+    border-left: 3px solid $bule;
+    margin-left: 15px;
+  }
+}
+.home {
+  float: left;
+  padding: 0 10px;
+  font-size: $font;
+}
+.row-span {
+  @extend .home;
+  color: #999999;
+  border-right: 1px solid #999999;
+}
+.row-home {
+  @extend .home;
+  color: #e26163;
+}
+.message {
+  @extend .home;
+  width: 44%;
+
+}
+
+.leaving-message {
+  float: left;
+ @include button;
+  color: $bule;
+  background-color:$while;
+}
+.tel {
+  float: right;
+ @include button;
+  color: $while;
+  background-color:$bule;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  @include width;
+  padding: 15px 0;
+  background-color: $while;
+
+}
