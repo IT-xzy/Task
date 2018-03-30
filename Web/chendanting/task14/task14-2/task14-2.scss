@@ -1,0 +1,269 @@
+@charset "UTF-8";
+
+/**
+ * Authors      TZMMichael (15977536060@163.com)
+ * Date         2017-12-25 14:15:03
+ * Site         https://github.com/TZMMichael
+ * Updated      
+ * Updated by   TZMMichael 
+ */
+
+@import '../重置&公共样式/task14.mixin.scss';
+
+/* HEADER */
+.header{
+	& .header-box{
+		color: $green;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+	}
+	& .header-img{
+		.tel-word{
+			@include tel-word;
+		}
+		.weixin{
+			@include header-img;
+		}
+		.qq{
+			@include header-img;
+			background: url("../task14-1/images/qq.png") no-repeat;
+		}
+		.weibo{
+			@include header-img;
+			background: url("../task14-1/images/weibo.png") no-repeat;
+		}
+	}
+    & .login{
+        display: none;
+        float: right;
+        & .login-left{
+            border-right: 1px solid $green;
+        }
+        & .login-left,
+        & .login-right{
+            padding: 0px 6px;
+            color: black;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .header{
+        height: 57px;
+        & .header-img{
+            display: none;
+        }
+        & .tel-word {
+            visibility: hidden;
+        }
+        & .login{
+            display: block;
+        }
+    }
+}
+
+/* NAV */
+.nav{
+	& .nav-box{
+	    padding: 0 2rem;
+	}
+	& .nav-botton{
+		@include nav-botton;
+	}
+	& .nav-logo{
+		@include nav-logo;
+	}
+}
+/* NAV-PHONE */
+.nav-phone{
+    @include nav-phone;
+}
+@media (max-width: 768px) {
+    .nav{
+        display: none;
+    }
+    .nav-phone{
+        display: block;
+        & img{
+            transform: scale(.8,.8);
+        }
+    }
+}
+/* MAIN */
+.main{
+	padding: 8.2rem 2rem 0 2rem;
+	background: $offwhite;
+}
+.main-top{
+	padding: 30px 0;
+	border-bottom: 1px solid $gray;
+	& span{
+		color: $green;
+	}
+}
+.main-direction{
+	padding: 30px 0;
+	border-bottom: 1px solid $gray;
+	& a{
+		text-decoration: none;
+		color: black;
+		&:hover{
+			color: white;
+			background-color: $green;
+		}
+	}
+}
+.main-FE{
+	padding: 30px 0;
+	& .FE-content{
+		margin: 30px 0;
+		border-top: 1px solid $gray;
+	}
+	@media (min-width: 1366px) {
+		.FE-box{
+			width: 32.3%;
+			display: inline-block;
+		}
+	}
+	& .FE-box{
+		background-color: $white;
+		border-radius: 6px;
+		border: 1px solid #eeeded;
+		position: relative;
+		margin: 2rem 4px;
+		& .cover{
+			background-color: rgba(61,61,61,.5);
+			border-radius: 6px;
+			border: 1px solid #eeeded;
+			position:absolute; 
+		  	color: white;
+		  	display: flex;
+		  	display: none;
+			height: 100%;
+			& p{
+				padding: 10px 30px;
+			}
+		}
+		&:hover .cover{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+		& .box-top{
+			display: flex;
+			padding: 10px;
+			border-bottom: 1px solid #edf1f2;
+			& .box-top-title{
+				font-size: 18px;
+			    font-weight: 600;
+			    padding: 10px 0 0 20px;
+			}
+			& .box-top-p{
+				margin: 10px 0 0 20px;
+			}
+		}
+		& .box-mid{
+			display: flex;
+			& .mid-left{
+				width: 50%;
+				padding: 10px;
+				border-right: 1px solid #edf1f2;
+				border-bottom: 1px solid #edf1f2;
+				color: #a1a1a1;
+			}
+			& .mid-right{
+				width: 50%;
+				padding: 10px;
+				border-bottom: 1px solid #edf1f2;
+				color: #a1a1a1;
+			}
+			& .salary{
+				width: 50%;
+				border-right: 1px solid #edf1f2;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-bottom: 1px solid #edf1f2;
+				color: #a1a1a1;
+			}
+			& .salary-box{
+				width: 100%;
+				& .years{
+					display: flex;
+					justify-content: space-between;
+					border-bottom: 1px solid #edf1f2;
+					padding: 10px;
+				}
+			}
+			& img{
+				margin-left: 10px; 
+			}
+			& .black{
+				color: black;
+			}
+		}
+		& span{
+			color: #f01400;
+		}
+		& .box-bottom{
+			font-weight: 600;
+			border-bottom: 1px solid #edf1f2;
+			padding: 10px;
+		}
+		& .tips{
+			font-size: 12px;
+			padding: 10px;
+			color: #a1a1a1;
+		}
+	}
+}
+@media (max-width: 768px) {
+	.main-FE{
+		& .FE-box{
+			font-size: .9rem;
+			& .box-top{
+				flex-direction: column;
+				text-align: center;
+			}
+			& .box-mid img{
+				margin: 0;
+			}
+		}
+	}
+}
+
+/* FOOTER */
+.footer{
+	& .footer-box{
+		@include footer-box;
+		& a{
+			padding-right: 1rem;
+			&:link,
+			&:visited,
+			&:active{
+				color: $white;
+				text-decoration: none;
+			}
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+		& .QRcode{
+			@include QRcode;
+		}
+		& .a-border{
+			border-right: 2px solid $white;
+			margin-right: 1rem;
+		}
+	}
+}
+@media (max-width: 768px) {
+    .footer{
+        & .footer-box{
+            display: block;
+            padding: 1rem;
+        }
+    }
+}
