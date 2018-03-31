@@ -1,0 +1,92 @@
+
+$width:100% !default;
+$height:70px;
+$margin:0 !default;
+$margintop:10px;
+$padding:0 !default;
+$border:0 !default;
+$side:20px;
+$fontsize:18px;
+$grey:#eff0f4;
+$blue:#5fc0cd;
+$white:#fff;
+
+@mixin size{
+	width:$width;
+	height: $height;
+}
+body{	
+	margin: $margin;
+	padding: $padding;
+	background-color: $grey;
+}
+.header{
+	position: fixed;
+	@include size;
+	line-height:$height;
+	font-size: 20px;
+	color: $white;
+	background-color: $blue;
+	text-align: center;
+	a{
+		position:fixed;	
+		font-size: $fontsize;
+		text-decoration: none;
+		color:$white;
+		&:hover{
+			color:$white;
+		}
+		&:visited{
+			color:$white;
+		}
+	}
+	.header_left{
+		left:$side;	
+	}
+	.header_right{
+		right:$side;	
+	}
+}
+.empty{
+	height: $height;
+}
+form{
+	@include size;
+	margin-top: $margintop;
+	background-color: $white;
+	
+
+	img{
+		position: relative;
+		left: $side;
+		top: 12px;
+		padding-right:20px;
+   		border-right:2px solid $grey; 
+	}
+	input{
+		position: relative;
+		left: $side*2;
+		top:10px;
+		width: 170px;
+		border:$border;
+		outline: none;	
+		font-size: $fontsize;	
+	}
+}
+.login{
+	@include size;
+	margin-top: 50px;
+	border:$border;	
+	font-size:$fontsize;
+	color:$white;
+    background-color: $blue;
+    
+    
+}
+.missed{
+	float: right;
+	margin-top: $margintop;
+	margin-right: 20px;
+	font-size:15px;
+	color: $blue;
+}
