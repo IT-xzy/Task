@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <context:annotation-config />
+    <!--<mvc:annotation-driven/>-->
+    <context:component-scan base-package="com"/>
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!--配置druid连接池-->
+    <bean id="dataSource" class="${dataSource}" destroy-method="close" >
+        <property name="username" value="${jdbc.username}"/>
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!--以下是给mybatis的配置,数据库对话工厂,mapper映射-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 指定需要别名的类所在的包名 ，或者在mybatis中配置-->
+        <!--<property name="typeAliasesPackage" value="com.DAO"/>-->
+        <!-- 扫描所有xml文件，或者在mybatis中配置 -->
+        <property name="mapperLocations" value="classpath:com/DAO/*.xml"/>
+        <!--配置拦截器插件,分页插件-->
+       <!-- <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        &lt;!&ndash;使用下面的方式配置参数，一行配置一个 &ndash;&gt;
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                            supportMethodsArguments=true
+                            params=count=countSql
+                            autoRuntimeDialect=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>-->
+    </bean>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.DAO" />
+    </bean>
+</beans>
+
+            <!--<context:component-scan base-package="com"/>-->
+            <!--<mvc:annotation-driven/>-->
+            <!--<context:property-placeholder location="classpath:db.properties"/>-->
+            <!--<context:annotation-config/>-->
+            <!--<bean id="dataSource" class="${dataSource}" destroy-method="close">-->
+                <!--<property name="username" value="${jdbc.username}"/>-->
+                <!--<property name="driverClassName" value="${jdbc.driver}"/>-->
+                <!--<property name="url" value="${jdbc.url}"/>-->
+                <!--<property name="password" value="${jdbc.password}"/>-->
+            <!--</bean>-->
+            <!--&lt;!&ndash; 配置sqlSessionFactory，SqlSessionFactoryBean是用来产生sqlSessionFactory &ndash;&gt;-->
+            <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+                <!--<property name="dataSource" ref="dataSource"/>-->
+                <!--&lt;!&ndash; 加载数据源，使用上面配置好的数据源 &ndash;&gt;-->
+                <!--<property name="configLocation" value="classpath:com/StudentMapConfig.xml"/>-->
+            <!--</bean>-->
+            <!--&lt;!&ndash; MapperFactoryBean：根据mapper接口生成的代理对象 &ndash;&gt;-->
+            <!--<bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+                <!--<property name="mapperInterface" value="com.DAO.StudentMapper"/>-->
+                <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+            <!--</bean>-->
+        <!--</beans>-->
