@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.StudentMapper">
+    <select id="findUserById"  resultType="com.POJO.Student">
+        select * from student_copy where id=#{id}
+    </select>
+
+    <select id="findAll" parameterType="Map" resultType="com.POJO.Student">
+        select * from student_copy
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+    <select id="selectCount" resultType="int">
+        select count(*) from  student_copy
+    </select>
+    <select id="findUserByName" parameterType="java.lang.String" resultType="com.POJO.Student">
+        select * from student_copy where name like '%${name}%'
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+    <select id="selectCount2" parameterType="java.lang.String" resultType="int">
+        select count(*) from  student_copy WHERE name like '%${value}%'
+    </select>
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from student_copy where id=#{id}
+    </delete>
+    <update id="updateUser" parameterType="com.POJO.Student">
+        UPDATE `student_copy`
+        <set><!--set标签会去除只有最后一个条件的,-->
+            <if test="name!= null and name!=''">name = #{name},</if>
+            <if test="QQ!= null and QQ!=''">QQ = #{QQ},</if>
+            <if test="onlineID!= null and onlineID!=''">onlineID = #{onlineID},</if>
+            <if test="time_of_enrollment!= null ">time_of_enrollment = #{time_of_enrollment},</if>
+            <if test="graduate_institutions!= null and graduate_institutions!=''">graduate_institutions = #{graduate_institutions},</if>
+            <if test="report_link!= null and report_link!=''">report_link = #{report_link},</if>
+            <if test="swear!= null and swear!=''">swear = #{swear},</if>
+            <if test="hearfrom!= null and hearfrom!=''">hearfrom = #{hearfrom},</if>
+            update_at=unix_timestamp(now()),
+        </set>
+        <where><!--where标签会去除第一个条件的and和or-->
+            <if test="ID!=null">AND ID=#{ID}</if>
+        </where>
+    </update>
+    <!--错误代码-->
+    <!--
+    <update id="updateUser" parameterType="com.POJO.Student">
+        UPDATE `student_copy`
+        <set>&lt;!&ndash;set标签会去除只有最后一个条件的,&ndash;&gt;
+            update_at=unix_timestamp(now()),
+            <if test="name!= null and name!=''">name = #{name},</if>
+            <if test="QQ!= null and QQ!=''">QQ = #{QQ},</if>
+            <if test="onlineID!= null and onlineID!=''">onlineID=#{onlineID},</if>
+            <if test="time_of_enrollment!= null ">time_of_enrollment = #{time_of_enrollment},</if>
+            <if test="graduate_institutions!= null and graduate_institutions!=''">graduate_institutions = #{graduate_institutions},</if>
+            <if test="report_link!= null and report_link!=''">report_link = #{report_link},</if>
+            <if test="swear!= null and swear!=''">swear = #{swear},</if>
+            <if test="hearfrom!= null and hearfrom!=''">hearfrom = #{hearfrom},</if>
+        </set>
+        <where>&lt;!&ndash;where标签会去除第一个条件的and和or&ndash;&gt;
+            <if test="ID!=null">AND ID=#{ID}</if>
+        </where>
+    </update>-->
+    <insert id="insertUser" parameterType="com.POJO.Student">
+
+        insert into student_copy(name,QQ,onlineID,time_of_enrollment,
+        graduate_institutions,report_link,swear,hearfrom,create_at) values
+        (#{name},#{QQ},#{onlineID},#{time_of_enrollment},
+        #{graduate_institutions},#{report_link},#{swear},#{hearfrom},unix_timestamp(now()))
+        <selectKey keyProperty="ID" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+        <!--增加-->
+    </insert>
+</mapper>
