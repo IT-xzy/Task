@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    <context:component-scan base-package="com.ptteng">
+        &lt;!&ndash;不扫描 @Controller注解的类  &ndash;&gt;
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>-->
+
+    <context:component-scan base-package="com.ptteng.service"/>
+    <context:component-scan base-package="com.ptteng.manager"/>
+
+    <context:property-placeholder location="classpath:db.properties,classpath:redis.properties" ignore-unresolvable="true"/>
+
+    <!-- 配置数据源 -->
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_username}"/>
+        <property name="password" value="${jdbc_password}"/>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="0"/>
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="20"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="0"/>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="60000"/>
+        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="25200000"/>
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="1800"/>
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true"/>
+        <!-- 监控数据库 -->
+        <!-- <property name="filters" value="stat" /> -->
+        <property name="filters" value="mergeStat"/>
+    </bean>
+
+    <!-- myBatis文件 -->
+    <!--关于该bean的注册，可以学习http://blog.csdn.net/sky786905664/article/details/51801933-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置连接数据库数据源（必不可缺）-->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 加载mybatis配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--对应实体类的包名（如果没有这句话，*Mapper.xml中一定要写全名）-->
+        <!--其实也可以对Long，String这些常用的包装类设置别名，这里没写-->
+        <property name="typeAliasesPackage" value="com.ptteng.pojo"/>
+        <!--告诉xml文件的路径去加载-->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
+    </bean>
+
+    <!--有了这个，就不必要额外的mybatis.xml全局配置文件了-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 指定扫描的包名
+             如果扫描多个包，每个包中间使用半角逗号分隔
+          -->
+        <property name="basePackage" value="com.ptteng.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- redis连接池 -->
+    <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!-- redis连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <!--<property name="password" value="${redis.password}"/>-->
+        <property name="poolConfig" ref="jedisConfig"/>
+    </bean>
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--     如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务-->
+        <property name="enableTransactionSupport" value="true"/>
+    </bean>
+    <!--使用实例工厂方式装载hashOperationss对象-->
+    <bean id="hashOperations" factory-bean="redisTemplate" factory-method="opsForHash"/>
+
+    <bean id="homeRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="homeService"/>
+        <property name="serviceName" value="homeRMIServer"/>
+        <property name="serviceInterface" value="com.ptteng.service.HomeService"/>
+        <property name="registryPort" value="8090"/>
+        <property name="servicePort" value="8090"/>
+    </bean>
+
+    <bean id="loginRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="loginService"/>
+        <property name="serviceName" value="loginRMIServer"/>
+        <property name="serviceInterface" value="com.ptteng.service.LoginService"/>
+        <property name="registryPort" value="8090"/>
+        <property name="servicePort" value="8090"/>
+    </bean>
+
+    <bean id="studentRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="studentService"/>
+        <property name="serviceName" value="studentRMIServer"/>
+        <property name="serviceInterface" value="com.ptteng.service.StudentService"/>
+        <property name="registryPort" value="8090"/>
+        <property name="servicePort" value="8090"/>
+    </bean>
+
+    <!-- 调度工厂 -->
+    <bean id="scheduler" lazy-init="true" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="startupDelay" value="30"/>
+        <property name="triggers">
+            <list>
+                <ref bean="simpleTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 定义触发时间 -->
+    <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="exposureDetail" />
+        <property name="startDelay" value="0" />
+        <property name="repeatInterval" value="500" />
+    </bean>
+
+    <!-- 自定义任务 -->
+    <bean id="exposureDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="redis"/>
+        <property name="targetMethod" value="reportAlive"/>
+        <property name="concurrent" value="false" />
+
+    </bean>
+
+</beans>
