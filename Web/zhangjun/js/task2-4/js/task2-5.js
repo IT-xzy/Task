@@ -38,7 +38,7 @@ $(document).ready(function () {
                 "        </div>\n" +
                 "    </div>";
             // 为页面添加html结构
-            $(".row:last-child").before(html);
+            $(".row").eq(-1).before(html);
             $(".row .wrap-1").hide();
             if (aKilled[i].num === "NoOneDied") {
                 $(".message-top-1").eq(i).text("昨晚没有人被杀");

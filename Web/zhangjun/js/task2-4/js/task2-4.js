@@ -25,8 +25,8 @@ $(document).ready(function () {
             status: "live",
             num: num
         }
-        sessionStorage.setItem("aPlayerStatus",JSON.stringify(aPlayerStatus));
     }
+    sessionStorage.setItem("aPlayerStatus",JSON.stringify(aPlayerStatus));
     // 为后退按钮添加点击事件
     $(".back-btn").click(function () {
         var a = confirm("回到上一页会重新分配角色，您确定要返回吗?");
