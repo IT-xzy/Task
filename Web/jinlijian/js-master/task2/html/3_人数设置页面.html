@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>版本选择页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="../css/3_人数设置页面.css">
+</head>
+<body>
+<header>
+    人数设置
+</header>
+<main>
+    <div class="top">
+        <div id="text1">
+            <span>人</span>
+            <span>数</span>
+            <span>设</span>
+            <span>置</span>
+        </div>
+        <div id="text2" >
+            <ul id="player"></ul>
+        </div>
+    </div>
+    <div id="progress">
+        <div class="input_f">
+            <div class="text2_1">输入玩家人数</div>
+            <div style="width: 10px"></div>
+            <div class="border">
+            <input id="text_rel" min="6" max="18" onchange="text_rel()" value="6">
+            </div>
+        </div>
+        <div class="input_f">
+            <button onclick="reduce()"> - </button>
+            <input id="bar" type="range" max="18" min="6" step="1" value="6" onchange="bar()">
+            <button onclick="plus()"> + </button>
+        </div>
+    </div>
+    <div id="text3" onclick="get_number()">点击设置</div>
+    <div id="text4" onclick="give_num()">查看身份</div>
+</main>
+</body>
+<script src="../js/3_设置人数页面.js">
+</script>
+</html>
