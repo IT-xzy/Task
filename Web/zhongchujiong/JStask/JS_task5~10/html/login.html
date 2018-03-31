@@ -1,0 +1,22 @@
+<div class="backImg">
+    <div class="Window" ng-controller="loginCtrl">
+        <h3>后台登录</h3>
+        <form name="loginForm" novalidate>
+            <div class="userBox">
+                <span class="iconfont" style="margin-right:10px;">&#xe608;</span>
+                <input name="user" type="text" ng-model="user" ng-blur="change=true" ng-focus="change=false"  ng-maxlength="10">
+            </div>
+            <div style="height:16px;">
+                <span class="showMessage" ng-show="loginForm.user.$error.maxlength && change" ng-cloak>用户名最长为10个字符</span>
+            </div>
+            <div class="passwordBox">
+                <span class="iconfont" style="margin-right:10px;">&#xe63e;</span>
+                <input name="password" type="password"  ng-model="password">
+            </div>
+            <div class="showMessage" ng-bind="message"></div>
+        </form>
+        <!--{{loginForm.user.$error.maxlength}}-->
+        <button class="loginBtn" ng-click="loginduo()">登录</button>
+    </div>
+</div>
+
