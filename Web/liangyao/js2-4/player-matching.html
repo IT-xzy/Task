@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="task-css/player-matching.css">
+    <meta name="viewport" content="width=device-width" >
+    <title>玩家匹配</title>
+</head>
+<body>
+<!--头部模块-->
+<div class="header">
+    <div class="back"><img src="tesk7img/Back-Icon.png"></div>
+    <span>参数设置</span>
+    <div class="help"><img src="tesk7img/circled-help.png"> </div>
+
+</div>
+<div class="block"></div>
+<!--主体内容-->
+<div class="container">
+    <div class="message clearfix">
+        <div class="m-left">玩</br>家</br>配</br>对</div>
+        <div class="m-right">
+            <div class="m-right-top" id="blackboard">
+<!--<div class="m-killer"><span></span>ssss</div>-->
+            </div>
+            <button id="setting" onclick="reseting()" class="m-right-bottom"><span>点击设置<img src="tesk7img/pencil.png"></span></button>
+        </div>
+    </div>
+    <div class="word">
+        <input type="text" placeholder="水民词组">
+        <input type="text" placeholder="幽灵词组">
+    </div>
+    <div class="player-num">
+        <div class="player-num-text">
+            玩家人数
+            <!--onblur是对象失去焦点执行的函数-->
+            <input type="text" id="player" min="4" max="18" value="4"
+                   onblur="on_change()" onkeydown="limit()">
+            人
+        </div>
+        <div class="range">
+            <!--减按钮-->
+            <button class="btn-sub" id="btnSub" onclick="less()"></button>
+            <!--onchange是当对象发生时执行的函数-->
+
+            <input type="range"  id="slider" min="4" max="18" step="1" value="4"
+                   onchange="moveChange()">
+            <!--加按钮-->
+            <button class="btn-add" id="btnAdd" onclick="push()"></button>
+        </div>
+    </div>
+
+</div>
+<!--底部按钮-->
+<button class="footer" onclick="nextOne()">去变牌</button>
+<script src="js/playerM.js"></script>
+</body>
+</html>

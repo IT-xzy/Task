@@ -1,0 +1,165 @@
+@charset "UTF-8";
+$main-color:#29b078;
+@mixin page-h-link {
+  color: #ffffff;
+  background-color: $main-color;
+  text-decoration: none;
+}
+
+.page-header {
+  padding-bottom: 10px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eee;
+  p {
+    text-align: left;
+  }
+  span {
+    color:  $main-color;
+  }
+  ul {
+    list-style-type: none;
+  }
+  li {
+    float: left;
+    color: #999999;
+    margin-right: 30px;
+  }
+  a {
+    color: #0f0f0f;
+  }
+  a:hover {
+    @include page-h-link;
+  }
+  a:focus {
+    @include page-h-link;
+  }
+}
+/*zhutibufen*/
+.panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+}
+.page-farther {
+  position: relative;
+  background-color: #ffffff;
+  overflow: hidden;
+  width: 31.3333333%;
+  margin: 10px 1%;
+  box-sizing: border-box;
+  border: 2px solid #eeeeee;
+  span {
+    margin-left: 13px;
+  }
+}
+.page-farther-hidden {
+  width: 100%;
+  height: 100%;
+   opacity: 0;
+  position: absolute;
+  background-color: #0f0f0f;
+  display: block;
+  color: #ffffff;
+}
+.page-img-farther {
+  width: 100%;
+  border-bottom: 2px solid #eeeeee;
+  height: 158px;
+}
+.page-img {
+  float: left;
+  margin: 5px;
+  overflow: hidden;
+
+}
+.page-body {
+  float: right;
+  width: 58%;
+  overflow: hidden;
+  margin-left: 5px;
+}
+.page-table-farther {
+  width: 100%;
+  float: left;
+  border-bottom: 2px solid #eeeeee;
+}
+@mixin p-table {
+
+  background-color: #ffffff;
+  color: #999999;
+  float: left;
+}
+.page-table {
+  @include p-table;
+  border-left: 2px solid #eeeeee;
+  width: 49%;
+  padding: 20px 0;
+  overflow: hidden;
+}
+.page-table-borther {
+  @include p-table;
+  width: 40%;
+  padding: 50px 0;
+  text-align: center;
+
+}
+.page-table-time {
+  width: 59%;
+  @include p-table;
+  border-top: 1px solid #eeeeee;
+  padding: 12px 0;
+  overflow: hidden;
+  border-left: 2px solid #eeeeee;
+}
+.page-t-farther {
+  width: 59%;
+  @include p-table;
+  padding: 12px 0;
+  overflow: hidden;
+  border-left: 2px solid #eeeeee;
+
+}
+.in-study {
+padding: 15px 23px;
+  width: 80%;
+  border:1px solid #eeeeee;
+  color: #0f0f0f;
+  font: 18px 微软雅黑 ;
+  float: left;
+  span {
+    margin-left: 0;
+    color: red;
+  }
+}
+.page-farther:hover .page-farther-hidden{
+  opacity: 0.8;
+}
+
+@media (max-width:768px ) {
+  .page-farther {
+    background-color: #ffffff;
+    overflow: hidden;
+    width: 100%
+  }
+}
+@media (min-width: 320px) {
+  .page-body {
+    width: 45%;
+  }
+}
+@media (min-width: 475px) and (max-width: 768px){
+  .page-body {
+    width: 76%;
+  }
+  
+}
+@media (min-width: 769px) and (max-width: 1024px){
+  .page-body {
+    width: 49%;
+  }
+
+}
+@media (min-width: 1024px) {
+  .page-body {
+    width: 61%;
+  }
+}

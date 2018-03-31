@@ -1,0 +1,274 @@
+@import "_public.scss";
+
+
+
+
+$gray-line: #ebebeb;
+$orange: #f9a372;
+$orange-out: #ff9b63;
+
+html {
+    font-size: 625%;
+}
+@media only screen and (max-width: 767px) {
+    html {
+        font-size: 478%;
+    }
+}
+body {
+    background-color: #fafafa;
+}
+
+
+
+/*主体样式*/
+.main-box {
+    @include container;
+    margin-bottom: 2rem;
+}
+.main-top {
+    width: auto;
+    padding: .2rem 0;
+    margin: 0 .15rem;
+    font-size: .16rem;
+    @include border-bottom (1px, solid, $gray-line);
+}
+.main-top a{
+    font-size: .16rem;
+    color: $black;
+}
+.main-top a:hover{
+    color: $green;
+}
+
+.main-nav {
+    width: auto;
+    margin: 0 .15rem;
+	@include border-bottom (1px, solid, #F2F5F5);
+	display: flex;
+	flex-wrap: wrap;
+}
+.main-nav-topic {
+	font-size: .14rem;
+	color: $gray;
+	margin: .2rem .2rem .2rem 0;
+}
+.main-nav-text {
+    font-size: 0;
+	margin: .2rem .1rem .2rem 0;
+}
+.main-nav-text a{
+	background-color: $white;
+	font-size: .14rem;
+	color: $black;
+	text-decoration: none;
+}
+.main-nav-text a:hover{
+	background-color: #29B078;
+	color: #FFF;
+}
+
+.main-card-topic {
+    width: auto;
+	font-size: .16rem;
+	color: #333;
+    padding: .3rem 0;
+    margin: 0 .15rem;
+    @include border-bottom (1px, solid, #D3D8DB);
+}
+.main-card-box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .main-card-box {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .main-card-box {
+        width: 100%;
+        display: block;
+    }
+}
+.main-card {
+    width: 30%;
+    margin: .2rem .15rem 0 .15rem;
+    box-shadow: 0 0 .06rem $gray;
+    background-color: $white;
+    position: relative;
+    border-radius: .06rem;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .main-card {
+        width: 46%;
+        margin: .2rem .15rem 0 .15rem;
+        background-color: $white;
+        position: relative;
+        border-radius: .06rem;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .main-card {
+        width: auto;
+        margin: .2rem .15rem 0 .15rem;
+        background-color: $white;
+        position: relative;
+        border-radius: .06rem;
+    }
+}
+
+.card-top {
+    width: auto;
+    padding: .1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include border-bottom (1px, solid, $gray-line);
+}
+.card-top-left {
+    width: 30%;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+}
+.new-img-responsive {
+    max-width: 80%;
+}
+.card-top-right {
+    width: 70%;
+    font-size: .14rem;
+    color: $black;
+    word-wrap: break-word;
+	word-break: break-all;
+}
+.top-right-topic {
+    font-size: .16rem;
+    color: $black;
+}
+
+.card-content {
+    width: auto;
+    display: flex;
+    @include border-bottom (1px, solid, $gray-line);
+}
+.content-box {
+    width: 50%;
+}
+.content-box {
+	width: 100%;
+	font-size: .12rem;
+	color: $gray;
+	padding: .1rem 0 .1rem .1rem;
+    @include border-right (1px, solid, $gray-line);
+    @include flex;
+    justify-content: flex-start;
+}
+.content-box:nth-child(2) {
+	border-right: none;
+}
+.star {
+	width: .16rem;
+	height: .15rem;
+	margin-left: .06rem;
+	background-image: url(images/19.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+.year {
+	margin-left: .06rem;
+	font-size: .12rem;
+	color: $black;
+}
+.year-color {
+	color: red;
+}
+
+.web-money-left {
+	width: 40%;
+	min-width: 1rem;
+	@include flex;
+    justify-content: center;
+    @include border-right (1px, solid, $gray-line);
+	font-size: .12rem;
+	color: $black;
+}
+.web-money-right {
+	width: 60%;
+}
+.money {
+	width: 100%;
+	font-size: .12rem;
+	color: $black;
+	@include flex;
+	justify-content: space-between;
+	@include border-bottom (1px, solid, $gray-line);
+	padding: .1rem .16rem;
+}
+.new-money{
+	border-bottom: none;
+}
+
+.card-bottom {
+    width: auto;
+}
+.web-person {
+	width: 100%;
+	padding: .1rem;
+	font-size: .14rem;
+	color: $black;
+	@include border-bottom (1px, solid, $gray-line);
+}
+.person-color {
+	color: red;
+}
+
+
+.web-bottom {
+	width: 100%;
+	font-size: .12rem;
+	color: $black;
+	@include border-bottom (1px, solid, $gray-line);
+	padding: .1rem;
+	word-wrap: break-word;
+	word-break: break-all;
+}
+
+.ios-box {
+	background-color: #3D3D3D;
+	font-size: .16rem;
+	color: $white;
+	padding: .4rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+}
+.ios-box:hover{
+	opacity: .9;
+}
+.ios-topic {
+	width: 100%;
+	text-align: center;
+}
+/*主体样式*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
