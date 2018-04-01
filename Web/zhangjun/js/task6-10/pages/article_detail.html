@@ -1,0 +1,64 @@
+<div class="detail">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">新增Article</h3>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="myForm">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">标题名称</label>
+                    <div class="col-md-8">
+                        <input type="text" name="title" class="form-control" ng-model="title" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label word-spacing-25">类 型</label>
+                    <div class="col-md-2">
+                        <select class="form-control" ng-model="typeNum" required>
+                            <option value=''>请选择</option>
+                            <option ng-repeat="(x,y) in types" value="{{x}}" ng-selected="typeNum == x">{{y}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" ng-show="typeNum == 3">
+                        <select class="form-control" ng-model="industryNum" ng-required="typeNum == 3">
+                            <option value=''>请选择</option>
+                            <option ng-repeat="(x,y) in industry" value="{{x}}" ng-selected="industryNum == x">{{y}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label word-spacing-25">说 明</label>
+                    <div class="col-md-8">
+                        <div class="ueditor" ng-model="content"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">跳转链接</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="url" required>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 control-label word-spacing-25">配 图</label>
+                    <!-- 自定义上传图片指令 -->
+                    <div up-load></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-success"
+                                ng-click="upLine()"
+                                ng-disabled="myForm.$invalid || imageSrc == undefined">立即上线
+                        </button>
+                        <button type="button" class="btn btn-success"
+                                ng-click="save()"
+                                ng-disabled="myForm.$invalid || imageSrc == undefined">存为草稿
+                        </button>
+                        <button type="button" class="btn btn-default pull-right"
+                                ui-sref="home.article_list">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
