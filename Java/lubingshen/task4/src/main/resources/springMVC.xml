@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+
+    <context:annotation-config/>
+
+    <!--配合下面那个 mvc:annotation-driven 一起使用-->
+    <context:component-scan base-package="com.ptteng.controller">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 注意这里和正则匹配有区别 -->
+            <mvc:mapping path="/u/**"/>
+            <bean class="com.ptteng.utils.UserInterceptor"/>
+        </mvc:interceptor>
+        <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+        <!--所以设置顺序应该是日志处理、登录校核、其他拦截器-->
+    </mvc:interceptors>
+
+    <!--处理@RequestMapping注解的-->
+    <!--将controller类的名字映射为请求url。-->
+    <!--确定调用哪个controller的哪个方法来处理当前请求-->
+    <!--添加异常处理器-->
+    <mvc:annotation-driven/>
+
+    <!--也可以采用<mvc:resources />   因为前端控制器设置了全捕获，为了处理REST风格的接口，需要额外配置-->
+    <mvc:default-servlet-handler/>
+
+    <!--注册异常处理器-->
+    <bean class="com.ptteng.exception.resolver.ExceptionResolver"/>
+
+
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/view/part2/jsp/"/>  <!--前缀-->
+        <property name="suffix" value=".jsp"/>            <!--后缀-->
+        <!--这样子就能简写路径了-->
+        <property name="order" value="20"/>
+    </bean>
+
+    <!--tiles框架配置-->
+<!--    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>-->
+    <!--另一种写法-->
+    <bean id="tilesViewResolver"
+            class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+        <property name="order" value="10"/>
+<!--        <property name="prefix" value="/view/part4/"/>-->
+    </bean>
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

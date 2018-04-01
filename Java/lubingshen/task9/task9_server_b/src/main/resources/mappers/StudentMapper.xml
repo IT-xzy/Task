@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptteng.dao.StudentDAO">
+
+    <select id="findById" parameterType="java.lang.Long" resultType="Student">
+        SELECT * FROM tb_student WHERE id = #{id}
+    </select>
+    
+    <update id="updateAvatarById" parameterType="Student">
+        UPDATE tb_student SET avatar = #{avatar} WHERE id = #{id}
+    </update>
+
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO tb_student(student_name,avatar,online_number,create_at,update_at)
+        VALUE (#{studentName},#{avatar},#{onlineNumber},#{createAt},#{updateAt})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+</mapper>

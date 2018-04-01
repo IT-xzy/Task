@@ -1,0 +1,183 @@
+<div class="list">
+    <!-- 搜索模块 -->
+    <div class="panel panel-default">
+        <form class="form-horizontal">
+            <div class="panel-body">
+                <!-- 日期选择器 -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label white-space">发布时间</label>
+                            <div class="col-md-8">
+                                <!-- 开始时间 -->
+                                <input type="text"
+                                       class="form-control"
+                                       uib-datepicker-popup="yyyy-MM-dd"
+                                       datepicker-options="{maxDate:endAt,showWeeks:false}"
+                                       ng-model="startAt"
+                                       is-open="startDatOpen"
+                                       close-text="关闭"
+                                       clear-text="清空"
+                                       current-text="今天"
+                                       alt-input-formats="['yyyy-M!-d!']"
+                                       ng-click="startDatPopup()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label center">—</label>
+                            <div class="col-md-8">
+                                <!-- 结束时间 -->
+                                <input type="text"
+                                       class="form-control"
+                                       uib-datepicker-popup="yyyy-MM-dd"
+                                       datepicker-options="{minDate:startAt,showWeeks:false}"
+                                       ng-model="endAt"
+                                       is-open="endDatOpen"
+                                       close-text="关闭"
+                                       clear-text="清空"
+                                       current-text="今天"
+                                       alt-input-formats="['yyyy-M!-d!']"
+                                       ng-click="endDatPopup()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 word-spacing-25 white-space">类 型</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="typeNum">
+                                    <option value=''>全部</option>
+                                    <option ng-repeat="(x,y) in types" value="{{x}}">{{y}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 日期选择器 -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 word-spacing-25 white-space">状 态</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="statusNum">
+                                    <option value=''>全部</option>
+                                    <option ng-repeat="(x,y) in status" value="{{x}}">{{y}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 pull-right text-right">
+                        <button type="button"
+                                class="btn btn-danger"
+                                clear-text="清空"
+                                ng-click="clear()">清空
+                        </button>
+                        <button type="button"
+                                class="btn btn-success"
+                                ng-click="search()">搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 搜索模块 -->
+    <!-- 列表模块 -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Article列表</h3>
+            <button type="button"
+                    class="btn btn-xs btn-success pull-right"
+                    ng-click="add()">+&nbsp;新增
+            </button>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="list in articleList">
+                    <td>{{$index+1}}</td>
+                    <td>{{list.title}}</td>
+                    <td>{{list.type | typeFilter}}</td>
+                    <td>{{list.createAt | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td>{{list.updateAt | date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                    <td>{{list.author}}</td>
+                    <td>{{list.status | statusFliter}}</td>
+                    <td>
+                        <script type="text/ng-template" id="modalContent.html">
+                            <div class="modal-header">
+                                <p style="color:rgb(71,198 ,232)" class="modal-title" id="modal-title">操作提示</p>
+                            </div>
+                            <div class="modal-body text-center" id="modal-body">
+                                <p style="color:rgb(153,153,153)">{{modalValue}}</p>
+                                <p>{{modalValue2}}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="button" ng-click="ok()">确定</button>
+                                <button class="btn btn-warning" type="button" ng-click="cancel()">取消</button>
+                            </div>
+                        </script>
+                        <button type="button" class="btn btn-sm btn-default" ng-click="upDown()">{{line[list.status]}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-info" ng-click="edit()">编辑</button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="delete()">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 列表模块 -->
+    <!-- 分页模块 -->
+    <ul class="pagination pull-right">
+        <li>
+            每页显示 <input type="number"
+                        class="page-show text-center"
+                        min="1"
+                        ng-model="showPages"> 页
+        </li>
+        <li>
+            <ul uib-pagination
+                total-items="totalItems"
+                ng-model="currentPage"
+                max-size="3"
+                items-per-page="items"
+                first-text="首页"
+                previous-text="&lt;"
+                next-text="&gt;"
+                last-text="末页"
+                boundary-links="true"
+                boundary-link-numbers="true"
+                ng-change="pageChanged()"></ul>
+        </li>
+        <li>
+            去第 <input type="number"
+                      class="page-show text-center"
+                      min="1"
+                      ng-model="toPages"> 页
+        </li>
+        <li>
+            <bottn type="button"
+                   class="btn btn-default"
+                   ng-click="submit()">确定
+            </bottn>
+        </li>
+    </ul>
+    <!-- 分页模块 -->
+</div>
+
