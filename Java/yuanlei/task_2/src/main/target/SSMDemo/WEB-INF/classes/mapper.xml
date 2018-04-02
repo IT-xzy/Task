@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm_yl.mapper.mapper">
+    <select id="list" resultType="com.ssm_yl.category.Category">
+        SELECT * FROM student 
+    </select>
+    <insert id="insertCategory" parameterType="com.ssm_yl.category.Category">
+        INSERT INTO student (name) values (#{name});
+    </insert>
+    <delete id="delete"  parameterType="int"  >
+        DELETE FROM student WHERE id=#{id};
+    </delete>
+    <select id="select" parameterType="int" resultType="com.ssm_yl.category.Category">
+        SELECT FROM student WHERE id = #{id};
+    </select>
+    <update id="update" parameterType="com.ssm_yl.category.Category" >
+        UPDATE student SET NAME =#{name} WHERE id = #{id};
+    </update>
+</mapper>

@@ -1,0 +1,88 @@
+<div class="wrap">
+    <div class="header" ng-controller="welcome">
+        <h3 class="topbar-brand">喝我水站后台管理页</h3>
+        <div class=" pull-right">
+            <nav class="nav navbar navbar-default nav-box hidden-sm hidden-md hidden-lg" role="navigation">
+                <div class="navbar-header nav-head">
+                    <button type="button" class="navbar-toggle nav-button" data-toggle="collapse"
+                            data-target="#accordion">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+            </nav>
+            <span class="bar-black">|</span>
+            <a class="dropdown">
+                <span class="">admin</span>
+            </a>
+            <span class="bar-black">|</span>
+            <a data-ng-click="goBack()">
+                <span class="glyphicon glyphicon-off dropdown"></span>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-xs-12 sidebar">
+        <div class="panel-group collapse in panel-box table-responsive" role="tablist"
+             id="accordion" aria-multiselectable="false">
+            <div class="panel panel-primary leftMenu">
+                <!-- 利用data-target指定要折叠的分组列表 -->
+                <div class="panel-heading" id="collapseList1" data-toggle="collapse" data-target="#collapse1" role="tab" >
+                    <i class="glyphicon glyphicon-pencil"></i>信息管理
+                    <span class="glyphicon glyphicon-chevron-down right"
+                          ng-if="state.includes('welcome.position')||state.includes('welcome.articlelist')"></span>
+                    <span class="glyphicon glyphicon-chevron-up right"
+                          ng-if="!(state.includes('welcome.position')||state.includes('welcome.articlelist'))"></span>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse" role="tabpanel"
+                     ng-class="{in:state.includes('welcome.position')||state.includes('welcome.articlelist')}"
+                     aria-labelledby="collapseList1">
+                    <ul class="list-group" >
+                        <li class="list-group-item menu-item-left" ng-class="{active:state.includes('welcome.position')}" ui-sref=".position">
+                            职位列表
+                        </li>
+                        <li class="list-group-item menu-item-left" ng-class="{active:state.includes('welcome.articlelist')}" ui-sref=".articlelist">
+                            Article列表
+                        </li>
+                    </ul>
+                </div>
+            </div><!--panel end-->
+
+            <div class="panel panel-primary leftMenu">
+                <div class="panel-heading" id="collapseList2" data-toggle="collapse" data-target="#collapse2" role="tab" >
+                    <i class="glyphicon glyphicon-pencil"></i>Article管理
+                    <span class="glyphicon glyphicon-chevron-down right"
+                          ng-if="state.includes('welcome.article')||state.includes('welcome.addArticle')"></span>
+                    <span class="glyphicon glyphicon-chevron-up right"
+                          ng-if="!(state.includes('welcome.article')||state.includes('welcome.addArticle'))"></span>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse" role="tabpanel"
+                     ng-class="{in:state.includes('welcome.article')||state.includes('welcome.addArticle')}"
+                     aria-labelledby="collapseList2">
+                    <ul class="list-group" >
+                        <li class="list-group-item menu-item-left"
+                            ng-class="{active:state.includes('welcome.article')||state.includes('welcome.addArticle')}"
+                            data-ui-sref="welcome.article">Article管理
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class=" main-right">
+        <ui-view>
+            <span class="default">welcome!</span>
+        </ui-view>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

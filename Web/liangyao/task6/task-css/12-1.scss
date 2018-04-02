@@ -1,0 +1,274 @@
+@charset "UTF-8";
+$bule:rgb(95,192,205);
+$while:#fff;
+@mixin width {
+  max-width:720px;
+  width: 100%;
+  height:auto;
+}
+@mixin max-button {
+  padding: 2.5% 3.5%;
+  font:33px "微软雅黑 Light";
+  border-radius: 10px;
+  border: hidden;
+  outline: none;
+}
+@mixin footer-button {
+  width: 44px;
+  height: 83px;
+  padding-top: 60px;
+  border: hidden;
+  outline: none;
+  font: 20px "微软雅黑 Light";
+
+}
+@mixin footer-min-button {
+  width: 31px;
+  height: 30px;
+  border: hidden;
+  outline: none;
+  font:10px 微软雅黑 ;
+  background-color: inherit;
+  background-size: 100% 100%;
+  padding-top: 30px;
+
+}
+@mixin min-button {
+  border-radius: 10px;
+  border: hidden;
+  outline: none;
+  padding: 12px 18px;
+  font: 13px "微软雅黑 Light";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  background-color: #0f0f0f;
+}
+body {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: $while;
+}
+.header {
+  display: block;
+  @include width;
+  position: fixed;
+  top: 0;
+  background-color: $bule;
+  text-align: center;
+  padding: 10px 0;
+}
+.button-lfet{
+  @include max-button;
+  margin-left: 3%;
+  background-color: rgb(85,168,179);
+  color:$while;
+
+}
+.button-right{
+  @include max-button;
+  background-color:$while;
+  color: $bule;
+  margin-left: -2px;
+}
+@media only screen and (max-width: 320px) {
+  .button-lfet {
+    @include min-button;
+    margin-left: 55px;
+    background-color:  rgb(85,168,179);
+    color:$while;
+  }
+  .button-right {
+@include min-button;
+    background-color: $while;
+    color: $bule;
+  }
+}
+
+.map {
+  width: 40px;
+  height: 45px;
+  background: url("../test6img/map.png") no-repeat;
+  float: right;
+  background-size: 100% 100%;
+  margin-right: 3%;
+  margin-top: 2%;
+}
+@media only screen and (max-width: 320px){
+  .map {
+    width: 30px;
+    height: 30px;
+    margin: 8px 10px;
+  }
+}
+
+footer {
+  @include width;
+  position: fixed;
+  bottom: 0;
+  background-color: $while;
+  text-align: center;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+.center {
+  height: 95px;
+  width: 95px;
+  background: url("../test6img/Write.png") $bule no-repeat center;
+  border-radius: 50%;
+  outline: none;
+  border: hidden;
+}
+.left {
+  @include footer-button;
+  float: left;
+  background: url("../test6img/left.png") no-repeat ;
+  color: $bule ;
+
+}
+.right {
+  @include footer-button;
+  background: url("../test6img/man.png") no-repeat ;
+  float: right;
+  color:rgb(153,153,153);
+}
+@media only screen and (max-width: 320px){
+  .center {
+    height: 45px;
+    width: 45px;
+    background-size: 50% 50%;
+  }
+  .left {
+    @include footer-min-button;
+    background: url("../test6img/left.png") no-repeat inherit;
+    color:$bule ;
+    float: left;
+
+  }
+  .right {
+    @include footer-min-button;
+    background: url("../test6img/man.png") no-repeat inherit;
+    float: right;
+    color: rgb(153,153,153) ;
+
+  }
+
+}
+.list-head {
+  position: fixed;
+  top: 101px;
+  height: auto;
+  padding: 5px 0;
+  @include width;
+  border-bottom: 1px solid rgb(153,153,153);
+  background-color: $while;
+}
+@media only screen and (max-width: 320px){
+  .list-head {
+    top: 65px;
+  }
+
+}
+select {
+  float: left;
+  width: 33.333%;
+  font-size: 22px;
+  padding: 10px  20px ;
+  border-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-right: 1px solid rgb(153,153,153);
+  text-indent: 30%;
+  color: rgb(153,153,153);
+  outline: none;
+}
+@media only screen and (max-width: 320px){
+  select {
+    font-size: 12px;
+    text-indent: 4px;
+  }
+}
+.blank {
+  max-width: 720px;
+  padding: 11%;
+}
+@media only screen and (max-width: 320px){
+  .blank {
+    padding: 55px;
+  }
+}
+.row {
+  max-width: 680px;
+  padding: 20px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-bottom: 1px solid rgb(153,153,153);
+}
+@media only screen and (max-width: 320px){
+  .row {
+    padding: 10px;
+  }
+}
+@mixin contaier-side {
+  width: 170px;
+  height: 25px;
+  padding: 5px 35px;
+  font:15px "微软雅黑 Light";
+  color:rgb(153,153,153) ;
+}
+.container-top {
+  @include contaier-side;
+  background: url("../test6img/calendar21.png") no-repeat;
+}
+.container-bottom {
+@include contaier-side;
+  background: url("../test6img/Shape.png") no-repeat;
+}
+@mixin container-center-style {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.container-center {
+  @include container-center-style;
+  width: 100%;
+  height: 34px;
+  font: 25px 微软雅黑;
+  text-indent: 30px;
+}
+@media only screen and (max-width: 320px){
+  .container-center {
+    font: 20px 微软雅黑;
+    text-indent: 25px;
+  }
+}
+.container-centeritms {
+  @include container-center-style;
+  width: 25%;
+  height: 33px;
+  float: right;
+}
+.arrows {
+  width: 20px;
+  height: 30px;
+  background: url("../test6img/arrows.png") no-repeat;
+  float: right;
+  background-size: 100% 100%;
+}
+@media only screen and (max-width: 320px){
+  .arrows {
+    width: 13px;
+    height: 23px;
+  }
+}

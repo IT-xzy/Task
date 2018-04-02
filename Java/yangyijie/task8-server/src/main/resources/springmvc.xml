@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--配置组件扫描路径-->
+    <context:annotation-config/>
+
+
+    <!--开启注解驱动支持
+        配置处理器映射器寻找Controller
+        配置处理器适配器执行Controller
+    -->
+    <mvc:annotation-driven/>
+    <!--静态资源的处理-->
+    <mvc:default-servlet-handler/>
+
+    <!-- 配置sprigmvc视图解析器：解析逻辑试图
+         后台返回逻辑试图：index
+        视图解析器解析出真正物理视图：前缀+逻辑试图+后缀====/WEB-INF/jsps/list.jsp
+    -->
+    <bean  id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前缀-->
+        <property name="prefix" value="/jsps/"/>
+        <!--后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+</beans>

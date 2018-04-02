@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <bean id="ClientConfig" class="com.qcloud.cos.ClientConfig" >
+        <constructor-arg name="region" value="ap-chengdu"/>
+        <property name="maxConnectionsCount" value="200"/>
+        <property name="socketTimeout" value="1000"/>
+        <property name="connectionTimeout" value="5000"/>
+        <property name="connectionRequestTimeout" value="5000"/>
+    </bean>
+
+    <bean id="cosClient" class="jnshu.taskeight.APIUtil.TengXunCosServiceImpl">
+        <constructor-arg name="appId" value="1252088266"/>
+        <constructor-arg name="secretId" value="AKIDBLLAvVDat1y2xRaBObdWGLI7sS7dqIMf"/>
+        <constructor-arg name="secretKet" value="GLFE9uvNgntDRTK0LZ6WlpkoodHkNrAg"/>
+        <property name="bucketName" value="xiuzhenyuan"/>
+        <property name="clientConfig" ref="ClientConfig"/>
+    </bean>
+
+
+</beans>

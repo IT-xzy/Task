@@ -1,0 +1,15 @@
+<composite
+        xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+        xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+        targetNamespace="http://lujing.service"
+        name="ScaDemo">
+
+<component name="ScaDemo">
+    <implementation.spring location="spring-tuscany.xml"></implementation.spring>
+
+    <service name="ScaDemoService" >
+        <tuscany:binding.rmi uri="rmi://127.0.0.1:8088/ScaDemoService"/>
+    </service>
+</component>
+
+</composite>

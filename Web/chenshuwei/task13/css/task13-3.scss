@@ -1,0 +1,103 @@
+$reset-FontSize:0;
+$FontSizeM:.26rem;
+$ColorWhite:#fff;
+$bgcolor:#f66f6f;
+@mixin footer-button($bgcolor:#f66f6f){
+  $FontSize:.4rem;
+  flex: 1;
+  line-height: .85rem;
+  text-align: center;
+  font-size: $FontSize;
+  color: $ColorWhite;
+  border-radius: .1rem;
+  background: $bgcolor;
+}
+
+/*header*/
+header{
+  font-size: $reset-FontSize;
+  border-bottom: 1px solid $ColorWhite;
+
+  >a{
+    width: .53rem;
+  }
+
+  >h4{
+    font-size: .34rem;
+    color: $ColorWhite;
+  }
+}
+
+main{
+  padding-top: .78rem;
+  padding-bottom: 1.3rem;
+  font-size: $reset-FontSize;
+
+  >.game-result{
+    padding: 0 10.8%;
+    overflow: hidden;
+    background: #29bde0;
+
+    >.victory-img-area{
+      width: 70%;
+      margin: 0 auto;
+      padding-top: .1rem;
+      text-align: center;
+    }
+
+    >.resule-title{
+      margin: .2rem 0;
+      font-size: .33rem;
+      color: #ffc865;
+    }
+    >.text-area{
+      margin: .2rem 0;
+      font-size: $FontSizeM;
+      color: $ColorWhite;
+
+      >p {
+        padding: .05rem 0;
+
+        >span{
+          width: 30%;
+        }
+      }
+    }
+  }
+
+  >.game-daily{
+    padding: 2% 10.8% 2% 10.8%;
+    font-size: $FontSizeM;
+    color: #a6a6a6;
+    border-bottom: 1px solid #dddddd;
+
+    >.date{
+      margin-bottom: .2rem;
+      font-size: .3rem;
+      color: #515151;
+
+      >.time{
+        float: right;
+        margin-right: .1rem;
+        font-size: .2rem;
+        color: #c7c7c7;
+      }
+    }
+  }
+}
+
+footer{
+  display: flex;
+  align-items: center;
+  height: 1.3rem;
+  padding: 0 3.6%;
+  background: rgba(145,216,232,0.7);
+
+  >.another-game{
+    @include footer-button;
+  }
+  >.share{
+    @include footer-button($bgcolor:#fbb435);
+    margin-left: .5rem;
+  }
+}

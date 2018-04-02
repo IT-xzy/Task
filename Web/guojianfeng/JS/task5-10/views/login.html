@@ -1,0 +1,50 @@
+<div class="loginWrap">
+    <div class="loginBg"></div>
+    <div class="sign">
+        <div class="box">
+            <h2>喝我水站后台登录页</h2>
+            <form name="userForm" class="signForm" ng-controller="login" novalidate>
+                <div class="inputWarp userWarp">
+                    <input type="text" name="user" class="form-control form-input form-login" value="" id="user"
+                           placeholder="user name" ng-model="user" ng-minlength="4" ng-maxlength="12"
+                           ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]+$/" required>
+                </div>
+                <div data-ng-messages="userForm.user.$error" data-ng-if="userForm.user.$touched">
+                    <p class="error" data-ng-message="minlength">用户名最小长度4!</p>
+                    <p class="error" data-ng-message="maxlength">用户名最大长度12!</p>
+                    <p class="error" data-ng-message="pattern">ID含有非法字符!</p>
+                    <p class="error" data-ng-message="required">用户名必填!</p>
+                </div>
+                <div class="inputWarp pwdWarp">
+                    <input type="password" name="pwd" class="form-control form-input form-login" value="" id="pwd"
+                           placeholder="password" ng-model="pwd" ng-minlength="4" ng-maxlength="12"
+                           ng-pattern="/^[0-9a-zA_Z]+$/" required>
+                </div>
+                <div data-ng-messages="userForm.pwd.$error" ng-if="userForm.pwd.$touched">
+                    <p class="error" data-ng-message="minlength">用户密码最小长度4!</p>
+                    <p class="error" data-ng-message="maxlength">用户密码最大长度12!</p>
+                    <p class="error" data-ng-message="pattern">用户密码必须由字母和数字组成!</p>
+                    <p class="error" data-ng-message="required">用户密码必填!</p>
+                </div>
+
+                <div class="error errorE" ng-if="">{{message}}</div>
+
+                <div id="signIn" class="signIn" ng-click="signIn()" ng-keyup="myKeyup($event)"
+                     ng-disabled="userForm.user.$invalid ||userForm.pwd.$invalid">
+                    登陆
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+

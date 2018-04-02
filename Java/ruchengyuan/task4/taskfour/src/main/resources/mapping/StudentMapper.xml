@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task.jnshu.dao.StudentMapper">
+  <resultMap id="BaseResultMap" type="task.jnshu.model.Student">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user" jdbcType="VARCHAR" property="user" />
+    <result column="pass" jdbcType="VARCHAR" property="pass" />
+    <result column="images" jdbcType="CHAR" property="images" />
+    <result column="profession" jdbcType="CHAR" property="profession" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="wish" jdbcType="CHAR" property="wish" />
+    <result column="qq" jdbcType="INTEGER" property="qq" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="enrol_at" jdbcType="BIGINT" property="enrolAt" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user, pass, images ,profession, class_id, name, wish, qq, status, enrol_at, create_at,update_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--<select id="select" parameterType="java.lang.Integer" resultType="task.jnshu.model.Student">-->
+    <!--select (id id, user user, pass pass, profession_id professionId, class_id classId, name, wish, qq, status, enrol_at enrolAt, create_at createAt,-->
+    <!--update_at updateAt)-->
+    <!--from student-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</select>-->
+
+<select id="studentAll" resultMap="BaseResultMap">
+  SELECT id, user, pass, images,profession, class_id, name, wish, qq, status, enrol_at, create_at,update_at
+  FROM student
+</select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="task.jnshu.model.Student">
+    insert into student (id, user, pass, images,
+      profession, class_id, name,
+      wish, qq, status, enrol_at,
+      create_at, update_at)
+    values (#{id,jdbcType=INTEGER}, #{user,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR},#{images,jdbcType=CHAR},
+      #{profession,jdbcType=CHAR}, #{classId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{wish,jdbcType=CHAR}, #{qq,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{enrolAt,jdbcType=BIGINT},
+      #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT})
+  </insert>
+
+
+  <insert id="insertSelective" parameterType="task.jnshu.model.Student">
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user != null">
+        user,
+      </if>
+      <if test="pass != null">
+        pass,
+      </if>
+      <if test="images != null">
+        images,
+      </if>
+      <if test="profession != null">
+        profession,
+      </if>
+      <if test="classId != null">
+        class_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="wish != null">
+        wish,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="enrolAt != null">
+        enrol_at,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user != null">
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=CHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=CHAR},
+      </if>
+      <if test="classId != null">
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="wish != null">
+        #{wish,jdbcType=CHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="enrolAt != null">
+        #{enrolAt,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="task.jnshu.model.Student">
+    update student
+    <set>
+      <if test="user != null">
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null">
+        pass = #{pass,jdbcType=VARCHAR},
+      </if>
+      <if test="images != null">
+        #{images,jdbcType=CHAR},
+      </if>
+      <if test="profession != null">
+        profession = #{profession,jdbcType=CHAR},
+      </if>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="wish != null">
+        wish = #{wish,jdbcType=CHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="enrolAt != null">
+        enrol_at = #{enrolAt,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="task.jnshu.model.Student">
+    update student
+    set user = #{user,jdbcType=VARCHAR},
+      pass = #{pass,jdbcType=VARCHAR},
+      images = #{images,jdbcType=CHAR},
+      profession = #{profession,jdbcType=CHAR},
+      class_id = #{classId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      wish = #{wish,jdbcType=CHAR},
+      qq = #{qq,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      enrol_at = #{enrolAt,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectStudentNumber" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT
+    COUNT(id)
+    FROM student
+    <where>
+    <if test="_parameter!= null">
+     status = #{_parameter,jdbcType=INTEGER}
+    </if>
+    </where>
+  </select>
+</mapper>

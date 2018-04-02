@@ -1,0 +1,145 @@
+@margin-top: 3%;
+@ba-co: #fff;
+main {
+  padding: 0 4%;
+  background-color: #f0f0f0;
+  .play {
+    display:flex;
+    margin-top: 5%;
+    .distribution {
+      width: 19%;
+      margin: 0 auto;
+      padding: 7%;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #444;
+      background-color: @ba-co;
+    }
+    .role {
+
+      width: 81%;
+      border-left: 1px solid #dadada;
+      background-color: #fbfbfb;
+      .roler {
+        display:flex;
+        flex-flow: row wrap;
+        overflow-y: scroll;
+        text-align: center;
+        height:82%;
+        max-height: 180px;
+        span {
+          display:inline-block;
+          padding:2% 0;
+          width: 50%;
+        }
+      }
+      .splice {
+        font-size: 1.6rem;
+        text-align: center;
+        padding: 1% 0;
+        color: #29bde0;
+        border-top: 1px solid #dadada;
+      }
+    }
+  }
+  .keyWord {
+    display: inline-block;
+    width: 100%;
+    margin-top: 2%;
+    padding: 0 5%;
+    background-color: @ba-co;
+    input {
+      width: 100%;
+      font-size: 2rem;
+      margin-bottom: 3%;
+      padding: 3% 0;
+      outline: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid #dadada;
+      background-color: @ba-co;
+      &::-webkit-input-placeholder {
+        color: #d7d7d7;
+      }
+      &:-moz-placeholder {
+        color: #d7d7d7;
+      }
+      &::-moz-placeholder {
+        color: #d7d7d7;
+      }
+      &:-ms-input-placeholder {
+        color: #d7d7d7;
+      }
+    }
+  }
+  .playerNumber {
+    display: inline-block;
+    margin-top: 2%;
+    padding: 5%;
+    width: 100%;
+    font-size: 1.8rem;
+    background-color: @ba-co;
+    .playerNum {
+      margin: 0 0.6rem;
+      background: #f4f5f5;
+      padding: 0.2rem 0.6rem;
+      color: gold;
+      width: 30px;
+      border: none;
+      outline: none;
+    }
+  }
+  .playerRange {
+    padding-top:5%;
+    .slider-block { /*设置滑块下面那条线的样式*/
+      outline: none; /*去掉点击时出现的外边框*/
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none; /*去掉那条线原有的默认样式*/
+      width: 79%;
+      height: 0.3rem;
+      cursor: pointer;
+      vertical-align: 52%;
+      background: orange;
+      /*设置滑块下面那条线的样式*/
+    }
+    .reduceBtn { /*左边减按钮的css样式*/
+      outline: none;
+      border: none;
+      cursor: pointer;
+      background: url("../images/reduce.png") no-repeat;
+      background-size: 100%;
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+    .addBtn { /*右边+按钮的css样式*/
+      outline: none;
+      border: none;
+      cursor: pointer;
+      background: url("../images/add.png") no-repeat;
+      background-size: 100%;
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+  }
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  /*::-webkit-slider-thumb是给滑块的样式进行变更*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /*去掉滑块原有的默认样式*/
+  width: 2.6rem;
+  height: 1.6rem;
+  background: url("../images/range2.png");
+  background-size: cover;
+  /*设置滑块的样式*/
+}
+.next {
+  background-color: #ee9f1b;
+  padding: 5%;
+  margin: 5% 0;
+  color: @ba-co;
+  text-align: center;
+}

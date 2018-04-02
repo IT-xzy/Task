@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,
+    maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="../css/style.css">
+    <link type="text/css" rel="stylesheet" href="../css/player-distribution.css">
+    <title>玩家分配</title>
+</head>
+<body>
+<header>
+    <a  id="back" class="back"><img src="../images/back.png"></a>
+    <h3>玩家分配</h3>
+    <a href="#"><img src="../images/question.png"></a>
+</header>
+<main>
+    <div class="play">
+        <div class="distribution">玩家配比</div>
+        <div class="role">
+            <div class="roler" id="setRoles"></div>
+            <div class="splice" id="splice">点击设置<img src="../images/set.png"></div>
+        </div>
+    </div>
+    <div class="keyWord">
+        <input type="text" placeholder="水民词组">
+        <input type="text" placeholder="幽灵词组">
+    </div>
+    <div class="playerNumber">
+        <div >玩家人数<input type="text" class="playerNum" id="text"
+                        value="6" max="18" min="6" onblur="toChange()">人</div>
+        <div class="playerRange">
+            <button class="reduceBtn" id="reduce" onclick="less()"></button>
+            <input type="range" class="slider-block" id="range"
+                   max="18" min="6" step="1" value="6" onchange="moveChange()">
+            <button class="addBtn" id="add" onclick="plus()"></button>
+        </div>
+    </div>
+    <div class="next" id="next">去发牌</div>
+</main>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="../js/range.js"></script>
+</body>
+</html>

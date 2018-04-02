@@ -1,53 +1,96 @@
-/*
-Error: Invalid CSS after "...nt-size: 1.6rem": expected "{", was ";"
-        on line 39 of task11.scss
+/*reset*/
+html {
+  font-size: 10px; }
+  @media (min-width: 480px) {
+    html {
+      font-size: 15px; } }
+  @media (min-width: 640px) {
+    html {
+      font-size: 17px; } }
+  @media (min-width: 720px) {
+    html {
+      font-size: 20px; } }
 
-34:   border: 0;
-35:   width: 100%;
-36:   padding-left: 7rem;
-37:   height: 5rem;
-38: <<<<<<< Updated upstream
-39:   font-size: 1.6rem;
-40:   outline: none;
-41: =======
-42:   font-size: $fontsize;
-43: >>>>>>> Stashed changes
-44:   background: {
+* {
+  box-sizing: border-box; }
 
-Backtrace:
-task11.scss:39
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:1278:in `expected'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:1208:in `expected'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:1203:in `tok!'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:677:in `block'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:747:in `declaration_or_ruleset'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:697:in `block_child'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:689:in `block_contents'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:678:in `block'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:246:in `mixin_directive'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:234:in `special_directive'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:209:in `directive'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:696:in `block_child'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:689:in `block_contents'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:137:in `stylesheet'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/scss/parser.rb:41:in `parse'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:414:in `_to_tree'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/engine.rb:307:in `render_with_sourcemap'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `each'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/plugin.rb:82:in `update_stylesheets'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/sass_scss.rb:51:in `process_result'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/base.rb:52:in `parse'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/lib/sass/exec/base.rb:19:in `parse!'
-E:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/sass-3.5.3/bin/scss:13:in `<top (required)>'
-E:/Ruby24-x64/bin/scss:23:in `load'
-E:/Ruby24-x64/bin/scss:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"...nt-size: 1.6rem\": expected \"{\", was \";\"\A         on line 39 of task11.scss\A \A 34:   border: 0;\A 35:   width: 100%;\A 36:   padding-left: 7rem;\A 37:   height: 5rem;\A 38: <<<<<<< Updated upstream\A 39:   font-size: 1.6rem;\A 40:   outline: none;\A 41: =======\A 42:   font-size: $fontsize;\A 43: >>>>>>> Stashed changes\A 44:   background: {"; }
+body {
+  margin: 0;
+  background: #e5e8ea; }
+
+a {
+  cursor: pointer;
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: #fff; }
+  a:hover {
+    text-decoration: none; }
+
+/*header*/
+header {
+  padding: 0 5%;
+  color: #fff;
+  background: #5fc0cd;
+  line-height: 4.5rem;
+  text-align: center; }
+  header a {
+    float: left;
+    line-height: 4.5rem; }
+    header a:nth-child(2) {
+      float: right; }
+  header h4 {
+    margin: 0 4rem;
+    font-size: 1.8rem;
+    font-weight: normal; }
+
+/*main*/
+main form label input[type=text] {
+  margin-top: .8rem;
+  border: 0;
+  width: 100%;
+  padding-left: 7rem;
+  height: 5rem;
+  outline: none;
+  font-size: 1.6rem;
+  background-position: 2rem center;
+  background-size: 3.9rem auto;
+  background-color: #fff;
+  background-image: url("../images/iphone.png");
+  background-repeat: no-repeat; }
+main form label input[type=password] {
+  margin-top: .8rem;
+  border: 0;
+  width: 100%;
+  padding-left: 7rem;
+  height: 5rem;
+  outline: none;
+  font-size: 1.6rem;
+  background-position: 2rem center;
+  background-size: 3.9rem auto;
+  background-color: #fff;
+  background-image: url(../images/locked-2.png);
+  background-repeat: no-repeat; }
+
+/*footer*/
+footer {
+  margin-top: 2rem; }
+  footer .button a {
+    display: inline-block;
+    height: 5rem;
+    background: #5fc0cd;
+    width: 100%;
+    line-height: 5rem;
+    text-align: center;
+    color: #fff;
+    font-size: 1.6rem; }
+    footer .button a:active {
+      box-shadow: inset 3px 3px rgba(0, 0, 0, 0.2); }
+  footer .pull-right {
+    margin-top: 1rem;
+    margin-right: 1rem;
+    float: right;
+    text-decoration: none; }
+    footer .pull-right a {
+      color: #5fc0cd; }
+
+/*# sourceMappingURL=task11.css.map */

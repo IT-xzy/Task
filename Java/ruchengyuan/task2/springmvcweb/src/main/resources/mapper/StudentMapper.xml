@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tasktwo.dao.StudentMapper">
+    <!--resultType 每一个查询映射的返回类型-->
+    <select id="studySelect" parameterType="String" resultType="com.tasktwo.model.Student">
+        SELECT user_id userId,name,study_type studyType,qq,entry_data entryData,graduated,url,wish,know_from knowFrom,create_at createAt,update_at updateAt FROM student WHERE user_id = #{userId}
+    </select>
+    <!-- parameterType 将要传入语句的参数的完全限定类名或别名
+         parameterType 主要指定参数类型，可以是int, short, long, string等类型，也可以是复杂类型（如对象）-->
+    <insert id="studyInsert" parameterType="com.tasktwo.model.Student" flushCache="true">
+        INSERT INTO student (user_id,name,study_type,qq,entry_data,graduated,url,wish,know_from,create_at,update_at)
+        VALUES (#{userId},#{name},#{studyType},#{qq},#{entryData},#{graduated},#{url},#{wish},#{knowFrom},#{createAt},#{updateAt})
+    </insert>
+    <update id="studyUpdate" parameterType="com.tasktwo.model.Student" >
+        UPDATE student SET name=#{name} ,update_at=#{updateAt} WHERE user_id=#{userId}
+    </update>
+    <delete id="studyDelete" parameterType="String">
+        DELETE FROM student WHERE user_id=#{userId}
+    </delete>
+
+    <select id="studentAll" parameterType="String" resultType="com.tasktwo.model.Student">
+        SELECT user_id userId,name,study_type studyType,qq,entry_data entryData,graduated,url,wish,know_from knowFrom,create_at createAt,update_at updateAt
+          FROM student
+    </select>
+</mapper>

@@ -8,8 +8,7 @@ $(document).ready(function () {
         civilianNum = parseInt(sessionStorage.getItem("civilianNum")), // 取出保存在civilianNum中平民人数
         step = sessionStorage.getItem("step"),
         selected = 0, // 用来判断是否选中角色，选中则改变为1
-        index,  // 存储下标
-        todayKilled = {}; // 存储今天被杀的人
+        index;  // 存储下标
     for (var i = 0; i < aPlayerRole.length; i++) {
         var num = i + 1; // 角色号数
         // html结构
@@ -34,7 +33,7 @@ $(document).ready(function () {
     // 为被杀和被投死角色添加样式
     for (var i = 0; i < aPlayerRole.length; i++) {
         if (aPlayerStatus[i].status === "killed" || aPlayerStatus[i].status === "voted") {
-            var index = aPlayerStatus[i].num - 1;  // 获取被杀角色的下标
+            index = aPlayerStatus[i].num - 1;  // 获取被杀角色的下标
             $(".role").eq(index).css("background-color","#83b09a");
         }
     }
@@ -78,11 +77,11 @@ $(document).ready(function () {
                             sessionStorage.setItem("aPlayerStatus",JSON.stringify(aPlayerStatus));
                             aKilled.push(aPlayerStatus[index]); // 添加进入被杀名单
                             sessionStorage.setItem("aKilled",JSON.stringify(aKilled));
-                            todayKilled = aPlayerStatus[index]; // 存储今天被杀的名单
-                            sessionStorage.setItem("todayKilled",JSON.stringify(todayKilled));
                             civilianNum--; // 平民减少一个
                             sessionStorage.setItem("civilianNum",civilianNum);
                             if (civilianNum <= killerNum) {
+                                days++; // 如果从杀人页面直接跳转到结果界面时天数要加1天
+                                sessionStorage.setItem("days",JSON.stringify(days));
                                 alert("杀手胜利");
                                 location.href = "task2-8.html";
                             } else {
@@ -92,7 +91,6 @@ $(document).ready(function () {
                     } else {
                         alert("这个可怜虫已经死了，请不要鞭尸！")
                     }
-
                 } else {
                     alert("自己人也杀，太残忍了吧！")
                 }

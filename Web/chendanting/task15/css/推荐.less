@@ -1,0 +1,339 @@
+@bule: #29bde0;
+@white: #fff;
+@green: #29b078;
+@padding10: 10px;
+@padding20: 20px;
+@line-border: 0.1rem solid #c9c9c9;
+
+body{
+	margin: 0rem;
+	background-color: #f0f0f0;
+}
+a{
+	text-decoration: none;
+}
+ul{	
+	margin: 0px;
+	padding-left: 0px;
+	list-style: none;
+}
+// login
+@media only screen and (max-width: 750px){
+	.login{
+		display: block;
+		visibility: visible;
+		text-align: right;
+		padding: 5px 15px;
+	}
+	.login-text{
+		border-right: 1.5px solid #29b078;
+	}
+	.login-right{
+		padding-left: 5px;
+	}
+}
+// contact
+@media only screen and (min-width: 750px){
+	.contact{
+		display: flex;
+		visibility: visible;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 20px;
+		.tel{
+			color: @green;
+		}
+		.contact-img{
+		    width: 145px;
+			height: 30px;
+			background-image: url(../img/tell.png);
+			background-repeat: no-repeat;
+		}
+	}
+}
+// nav-iphone
+@media only screen and (min-width: 750px){
+	.nav-phone{
+		display: none;
+	}
+}
+// nav for phone
+.nav-phone{
+	padding: @padding20;
+	align-items: center;
+	background-color: @green;
+	.logo{
+		display: inline-block;
+		width: 70%;
+		img{
+			max-width: 100%;
+		}
+	}
+	.menu{
+		display: inline-block;
+		position: absolute;
+		right: 20px;
+		background: transparent;
+		border: none;
+	}
+	.subnav{
+		display: none;
+		text-align: center;
+		.active{
+			border-bottom: solid #fff;
+		}
+		li:hover{
+			border-bottom: solid #fff;
+		}
+		li{
+			padding-top: 13px;
+			a{
+				color: @white;
+			}
+		}
+	}
+	.menu:hover+.subnav,.subnav:hover{
+		display:block;
+	}
+}
+// nav for pc
+@media only screen and (max-width: 750px){
+	.nav-pc{
+		display: none;
+	}
+} 
+@media only screen and (min-width: 750px){
+	.nav-pc{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: @padding20;
+		background-color: @green;
+		.logo{
+			width: 50%;
+			img{
+				max-width: 100%;
+			}
+		}
+		a{	
+			padding: 5px 5px 36px 5px;
+			font-size: 25px;
+			color: @white;
+		}
+	}
+}
+@media screen and (min-width: 960px) {
+	.subnav{
+		a{
+			padding-bottom: 48px;
+		}
+	}
+}
+.active{
+		border-bottom: 3px solid #fff;
+	}
+.subnav{
+	a:hover{
+		border-bottom: 3px solid #fff;
+	}
+}
+.img{
+	max-width: 100%;
+}
+/*main-title*/
+.main-title{
+	font-size: 16px;
+	padding: 4% 3% 4% 6%;
+}
+.main-title-text{
+	color: #29b078;
+}
+/*main*/
+.main{
+	margin-bottom: 40px;
+}
+/*main-left*/
+.main-left-title{
+	font-weight: bold;
+	font-size: 18px;
+	color: black;
+	text-align: center;
+    border: 1px solid #c9c9c9;
+    padding: 10px;
+    border-bottom: none;
+}
+.main-left{
+	background-color: white;
+	padding: 0px;
+	.active{
+		color: #f1a750;
+	}
+}
+.main-left-text{
+	list-style: none;
+	border: 1px solid #c9c9c9;
+    padding-left: 33%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    margin-bottom: 0px;
+}
+.main-left-company{
+	padding-bottom: 10px;
+}
+.main-left-solid{
+	color: #f1a750;
+	padding-bottom: 10px;
+}
+/*circle*/
+.circle{
+	display: inline-block;
+	height: 14px;
+	width: 14px;
+	border-radius: 50%;
+	border: 2px solid #f1a750;
+}
+.circle-solid{
+	background-color: #f1a750;
+}
+.main-left-company:hover .circle{
+	background: #f1a750;
+}
+/*main-right*/
+.main-right{
+	color: #999999;
+}
+@media only screen and (min-width: 750px){
+	.main{
+		display: flex;
+		.main-left{
+			width: 100%;
+		}
+	}
+	
+	.main-right-title{
+		display: flex;
+	}
+}
+.main-right-title{
+	background-color: white;
+	border: 1px solid #c9c9c9;
+	border-bottom: none;
+}
+.main-right-title-text{
+	display: inline-block;
+	line-height: 25px;
+    padding: 5%;
+}
+@media only screen and (max-width: 750px){
+	.tudou-logo{
+		width: 100%;
+	}
+	.main-right{
+	    padding: 0px;
+	}
+}
+.main{
+	padding: 10px;
+}
+.main-right-content{
+	text-indent: 2em;
+	border: 1px solid #c9c9c9;
+	background-color: white;
+}
+.main-right-text{
+	line-height: 25px;
+	padding: 3% 5% 2%;
+}
+.text{
+	line-height: 40px;
+    color: #29b078;
+}
+.main-left-company:hover .text{
+	color: #f1a750;
+}
+// footer
+@media only screen and (max-width: 750px){
+	.footer{
+		position: relative;
+		height: 200px;
+	}
+	.footer-right-title{
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.footer-right-text{
+		padding-bottom: 5px;
+		padding-top: 5px;
+	}
+	.footer-img{
+		position: absolute;
+		right: 3%;
+		top: 83px;
+	}
+}
+@media only screen and (min-width: 750px){
+	.footer{
+		display: flex;
+		padding-left: 20px;
+		height: 150px;
+		.footer-title{
+			padding-left: 20px;
+		}
+		.contact-me {
+	   		padding-top: 30%;
+		}
+		.footer-img{
+			position: absolute;
+			right: 4.5%;
+		}
+		.footer-right{
+			padding-left: 80px;
+		}
+	}
+}
+@media only screen and (min-width: 960px){
+	.footer{
+		.footer-right{
+			padding-left: 200px;
+		}
+	}
+}
+.footer{
+	background-color: #26a26f;
+    padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	background-image: url(../img/二维码.png);
+	background-repeat: no-repeat;
+	background-position: 95% 75%;
+	color: white;
+	.contact-me{
+		padding-top: 20px;
+		.contact-a{
+			border-right: 1.5px solid white; 
+		}
+	}
+	.footer-title{
+		font-size: 16px;
+		color: white;
+	}
+	.footer-right{
+		line-height: 100%;
+	}
+	.footer-right-warp{
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+	.footer-a{
+		color: white;
+	}
+}
+// copyright
+.copyright{
+    padding-top: 5px;
+    padding-bottom: 5px;
+	color: white;
+	text-align: center;
+	background-color: #26a26f;
+	border-top: 1px solid white;
+}

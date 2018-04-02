@@ -1,0 +1,488 @@
+* {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style: none;
+    background-repeat: no-repeat;
+}
+body {
+    height: 100%;
+    font-size: 62.5%;
+    background-color: #29bde0;
+ }
+header,footer{
+    position: fixed;
+    font-size: 1.5rem;
+}
+header {
+    left:0;
+    right:0;
+    top: 0;
+    height: 14vw;
+    text-align: center;
+}
+header div {
+    background-color: #29bde0;
+    text-align: left;
+}
+main {
+    position: fixed;
+    top: 14vw;
+    bottom: .1vw;
+    padding-bottom: 19.9vw;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+footer{
+    display:flex;
+    left: 0;
+    right:0;
+    bottom: 0;
+    height: 30vw;
+    width: auto;
+    margin: 0 6.5vw;
+    background-color: #29bde0;
+    border-top: solid 1px #fff;
+}
+footer a {
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    margin: 5vw;
+    height: 14vw;
+    display: flex;
+    background-color: #fbb435;
+    justify-content: center;
+    align-items: center;
+}
+.form-left {
+    background-color: #f66f6f;
+
+}
+.form-right {
+    background-color: #fbb435;
+}
+#menu-2 {
+    width: 27px;
+    height: 27px;
+    margin: 3vw;
+    float: left;
+    background-image: url(images/task-7.png);
+    background-position: -228px -102px;
+    background-size: 17.5rem;
+}
+#close {
+    text-decoration: none;
+    color: white;
+    width: 5.3vw;
+    margin: 2vw;
+    float: right;
+}
+header h4 {
+    color: white;
+    font-size: 5.8vw;
+    line-height: 12.8vw;
+    display: inline;
+}
+.wrap {
+    height: 12vw;
+    font-size: 1.6rem;
+    background-color: #b9e9f5;
+    position: fixed;
+    top: 14vw;
+    left: 0;
+}
+.text {
+    font-size: 4vw;
+    line-height: 12vw;
+    margin-left:7vw;
+}
+.circle {
+    background-color: #fbb435;
+    border-radius:50%;
+    width: 8vw;
+    height: 8vw;
+    float: right;
+    margin: 2vw 10vw 2vw 0;
+    border: none;
+    outline: none;
+}
+#triangle-right {
+    width: 0;
+    height: 0;
+    border-top:3vw solid transparent;
+    border-left:6vw solid white;
+    border-bottom:3vw solid transparent;
+    position: absolute;
+    top:3vw;
+    right: 10vw;
+}
+#audio {
+    position: absolute;
+    top: 6vw;
+    left: 83vw;
+    transform: translateY(-50%);
+    opacity: 0;
+}
+#triangle-down {
+    position: absolute;
+    top: 0;
+    left: 4vw;
+    width: 0;
+    height: 0;
+    z-index: 999;
+    border-top:1.7vw solid  #b9e9f5;
+    border-left:1.7vw solid transparent;
+    border-right:1.7vw solid transparent;
+}
+.main-flot {
+    background-color: rgba(41, 189, 224, 0.7);
+    height: 9vw;
+    position:fixed;
+    top: 26vw;
+    z-index: 500;
+}
+#note {
+    height: 5vw;
+    margin: 1.5vw 10.9vw; 
+    font-size: 3.43vw;
+}
+.main-body {
+    position: absolute;
+    top: 27vw;
+    bottom: 30vw;
+    overflow-x: hidden;
+}
+.flex {
+    margin: 0;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    padding: 2vw 0 2vw 10vw;
+    list-style: none;
+}
+.player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 15vw;
+    font-size: .16rem;
+    background-color: #f5c97b;
+}
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 5vw;
+    font-size: .12rem;
+    color: #fff;
+    background-color: #83b09a;
+}
+.item {
+    position: relative;
+    width: 20vw;
+    height: 20vw;
+    margin-right: 8vw;
+    margin-bottom: 8vw;
+    text-align: center;
+    border: .5vw solid #fff;
+}
+.item-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: none;
+    padding-left: 0;
+    justify-content: space-between;
+    list-style: none;
+    padding-top: 2.5vw;
+}
+.min-pic {
+    width: 17px;
+    height: 17px;
+    margin: 0 1px;
+    display:inline-block;
+}
+.min-pic:nth-child(1) {
+    background-image: url(images/task-7.png);
+    background-position: -203px -1px;
+    background-size: 15.5rem;
+}
+.min-pic:nth-child(2) {
+    background-image: url(images/task-7.png);
+    background-position: -223px -1px;
+    background-size: 15.5rem;
+}
+.min-pic:nth-child(3) {
+    background-image: url(images/task-7.png);
+    background-position: -203px -21px;
+    background-size: 15.5rem;
+}
+.min-pic:nth-child(4) {
+    background-image: url(images/task-7.png);
+    background-position: -223px -21px;
+    background-size: 15.5rem;
+}
+.item:hover  .item-content {
+    display: flex;
+}
+.item-content:hover {
+    display: flex;
+}
+
+/*游戏结果*/
+#menu-3 {
+    width: 27px;
+    height: 26px;
+    margin: 3vw;
+    float: left;
+    background-image: url(images/task-7.png);
+    background-position: -204px -40px;
+    background-size: 15.5rem;
+}
+.title {
+    font-size: 1.8rem;
+    color: white;
+}
+#help {
+    width: 25px;
+    height: 26px;
+    margin: 3vw;
+    float: right;
+    background-image: url(images/task-7.png);
+    background-position: -202px -64px;
+    background-size: 15.5rem;
+}
+#win-pic {
+    border-top: 1px solid #74d4eb;
+    padding: 3.75vw 0;
+    text-align: center;
+}
+#win-pic img {
+    height: 55%;
+    width: 55%;
+}
+#victory {
+    width: 76vw;
+    margin: 0 12vw 3vw 12vw;
+
+}
+p.yellowfont {
+    color: #ffc865;
+    font-size: 4.68vw;
+    text-align: justify;
+}
+#gameplayer {
+    text-align: left;
+    margin-top: 6.7vw;
+}
+#gameplayer li {
+    display: inline;
+    margin: auto 8vw auto 0;
+}
+#gameplayer p {
+    color: #fff;
+    font-size: 3.43vw;
+    display: inline;
+}
+.box {
+    height: 30vw;
+    border-top: 2px solid #dddddd;
+    border-top: 2px solid #dddddd;
+    border-bottom: 2px solid #dddddd;
+    background-color: white;
+
+}
+.big {
+    font-size: 3.2vw;
+}
+.time {
+    float: right;
+    width: 55%;
+}
+.small,.time{
+    font-size: 2.2vw;
+    color: #a6a6a6;
+}
+.box p {
+    margin-left: 12vw;
+    line-height: 2;
+
+}
+form {
+    display:flex;
+    position: absolute;
+    left: 0;
+    right:0;
+    bottom: 0;
+    height: 20vw;
+    background-color: rgba(153,223,240,0.7);
+}
+form a {
+    line-height: 4vw;
+    border-radius: 3vw;
+    font-size: 5vw;
+    color: #fff;
+    margin: 3vw 4vw;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+@media (min-width: 640px) {
+    header {
+    height: 65px;
+    }
+    #menu-2 {
+    margin: 21px 21px;
+    }
+    header h4 {
+    font-size: 1.8rem;
+    line-height: 4rem;   
+    }
+    #close {
+    width: 30px;
+    margin: 18px;
+    }
+    .wrap {
+    height:5rem;
+    top: 70px;
+    }
+    .text {
+    font-size: 25px;
+    line-height: 5rem;
+    }
+    .circle {
+    width: 55px;
+    height: 55px;
+    margin: 12.5px 25px 12.5px  0;
+    }
+    #triangle-right {
+    border-top:20px solid transparent;
+    border-left:40px solid white;
+    border-bottom:20px solid transparent;
+    top:20px;
+    right: 28px;
+    }
+    #triangle-down {
+    top: 0;
+    left: 64px;
+    border-top:10px solid  #b9e9f5;
+    border-left:12px solid transparent;
+    border-right:10px solid transparent;
+    }
+    .main-flot {
+    height: 42px;
+    top: 150px;   
+    }
+    #note {
+    height: 5vw;
+    margin: 10px 0 0 65px; 
+    font-size: 23px;
+    }
+    .main-body {
+    top: 10rem;
+    bottom: 10vw;
+    }
+    .flex {
+    padding: 2vw 0 2vw 10vw;   
+    }
+    footer{
+    height: 10vw;
+    margin: 0 4vw;
+    }
+    footer a {
+    margin: 2vw 5vw;
+    height: 6vw;
+    }
+    .player {
+    font-size: 1.6rem;    
+    }
+    .number {
+    font-size: 1.2rem;
+    }
+    /*游戏结果*/
+    #menu-3 {
+    margin: 1rem;   
+    }
+    #help {
+    margin: 1rem;
+    }
+    main {
+    top: 65px;
+    bottom: .1vw;
+    padding-bottom: 11.9vw;
+    }
+    #win-pic {
+    padding: 3rem 0;
+    }
+    #win-pic img {
+    height: 35%;
+    width: 35%;
+    }
+    #victory {
+    width: 70%;
+    margin: 0 15%;
+    }
+    p.yellowfont {
+    font-size: 2.4rem;
+    }
+    #gameplayer {
+    margin-top: 2rem;
+    }
+    #gameplayer p {
+    font-size: 2.1rem;
+    }
+    .box {
+    height: 30vw;
+    padding: 0;
+    }
+    .big {
+    font-size: 2rem;
+    }
+    .time {
+    width: 50%;
+    }
+    .small,.time{
+    font-size: 1.9rem;
+    }
+    .box p {
+    margin: 0 15%;
+    }
+    form {
+    height: 12vw;
+    }
+    form a {
+    line-height: 4vw;
+    border-radius: 3vw;
+    font-size: 5vw;
+    margin: 3vw 4vw;
+    }
+}
+@media (min-width: 1024px) {
+    .box {
+    height: 20vw;
+    }
+}
+@media (min-width: 1440px) {
+    .box {
+    height: 14vw;
+    }
+}
+@media (min-width: 2560px) {
+    .box {
+    bottom: 161px;
+    height: 175px;
+    }
+    form {
+    height: 8vw;
+    }
+    form a {
+    line-height: 4vw;
+    border-radius: 3vw;
+    font-size: 2vw;
+    margin: 2vw 4vw;
+    }
+}
