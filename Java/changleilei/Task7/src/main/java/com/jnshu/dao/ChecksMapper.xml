@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.ChecksDao">
+    <resultMap id="BaseResultMap" type="com.jnshu.model.Checks">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="toCheck" jdbcType="VARCHAR" property="tocheck"/>
+        <result column="MD5" jdbcType="VARCHAR" property="md5"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="states" jdbcType="INTEGER" property="states"/>
+        <result column="createat" jdbcType="BIGINT" property="createat"/>
+        <result column="updateat" jdbcType="BIGINT" property="updateat"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, tel, email, toCheck, MD5, salt, states, createat, updateat
+  </sql>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from checks
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="countByPhone" resultType="java.lang.Integer">
+    select count(*) from checks WHERE  tel=#{tel,jdbcType=VARCHAR}
+  </select>
+    <select id="countByEmail" resultType="java.lang.Integer">
+        select count(*) from checks WHERE  email=#{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPhone" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from checks WHERE tel=#{tel,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByEmail" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from checks WHERE email=#{email,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from checks
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from checks
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.jnshu.model.Checks">
+    insert into checks (id, tel, email, 
+      toCheck, MD5, salt, 
+      states, createat, updateat
+      )
+    values (#{id,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{tocheck,jdbcType=VARCHAR}, #{md5,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{states,jdbcType=INTEGER}, #{createat,jdbcType=BIGINT}, #{updateat,jdbcType=BIGINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.jnshu.model.Checks">
+        insert into checks
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="tocheck != null">
+                toCheck,
+            </if>
+            <if test="md5 != null">
+                MD5,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="states != null">
+                states,
+            </if>
+            <if test="createat != null">
+                createat,
+            </if>
+            <if test="updateat != null">
+                updateat,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="tocheck != null">
+                #{tocheck,jdbcType=VARCHAR},
+            </if>
+            <if test="md5 != null">
+                #{md5,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="states != null">
+                #{states,jdbcType=INTEGER},
+            </if>
+            <if test="createat != null">
+                #{createat,jdbcType=BIGINT},
+            </if>
+            <if test="updateat != null">
+                #{updateat,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByIdSelective" parameterType="com.jnshu.model.Checks">
+        update checks
+        <set>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="tocheck != null">
+                toCheck = #{tocheck,jdbcType=VARCHAR},
+            </if>
+            <if test="md5 != null">
+                MD5 = #{md5,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="states != null">
+                states = #{states,jdbcType=INTEGER},
+            </if>
+            <if test="createat != null">
+                createat = #{createat,jdbcType=BIGINT},
+            </if>
+            <if test="updateat != null">
+                updateat = #{updateat,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateById" parameterType="com.jnshu.model.Checks">
+    update checks
+    set tel = #{tel,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      toCheck = #{tocheck,jdbcType=VARCHAR},
+      MD5 = #{md5,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      states = #{states,jdbcType=INTEGER},
+      createat = #{createat,jdbcType=BIGINT},
+      updateat = #{updateat,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
