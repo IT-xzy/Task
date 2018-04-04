@@ -1,0 +1,109 @@
+$ColorBlue: #69d1e9;
+$ColorWhite:#fff;
+$ColorOrange:#fbb435;
+$fontSizeM:.32rem;
+
+@mixin version-name{
+  width: 100%;
+  margin: .26rem 0;
+  line-height: 1.34rem;
+  font-size: $fontSizeM;
+  background: $ColorBlue;
+}
+
+@mixin vertical-center{
+  position: absolute;
+  top: 50%;
+  transform: translate(0,-50%);
+}
+
+body{
+  background: #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+/*header*/
+header >.category{
+    width: .4rem;
+    height: 100%;
+    background:url("../images/category.png") no-repeat center;
+    background-size: contain;
+}
+  /*main*/
+main {
+  padding: .78rem 5% 0 5%;
+  text-align: center;
+
+  > .last-game {
+    position: relative;
+    z-index: -1;
+    width: 100%;
+    height: 1.18rem;
+    margin: .24rem 0;
+    line-height: 1.18rem;
+    font-size: .34rem;
+    color: #9a9a9a;
+    background: $ColorWhite;
+    border: 1px solid #c9c9c9;
+
+    > .return {
+      @include vertical-center;
+      right: 2%;
+      width: .25rem;
+      height: 100%;
+      background: url("../images/return.png") no-repeat center;
+      background-size: contain;
+    }
+  }
+  > .game-introduction {
+    position: relative;
+    background: #fff;
+    border: 1px solid #d0d0d0;
+
+    > .game-name {
+      line-height: .9rem;
+      font-size: .37rem;
+      color: $ColorOrange;
+      border-bottom: 1px solid $ColorOrange;
+    }
+
+    > .game-version {
+      padding: 0 10%;
+
+      > .version-name {
+        @include version-name;
+        &:hover,
+        &:focus {
+          background: #1eaccd;
+        }
+      }
+
+      > p {
+        font-size: .24rem;
+        color: #787878;
+      }
+
+      > .dot {
+        font-size: 0;
+
+        > span {
+          width: .2rem;
+          height: .2rem;
+          margin: .1rem .05rem;
+          background: #f0f0f0;
+          border-radius: 50%;
+        }
+
+        > .active {
+          background: $ColorBlue;
+        }
+      }
+
+      > .triangle {
+        @include vertical-center;
+        width: .28rem;
+        right: 2%;
+      }
+    }
+  }
+}

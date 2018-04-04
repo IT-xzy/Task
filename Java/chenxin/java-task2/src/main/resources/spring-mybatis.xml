@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--扫描service包下的注解-->
+    <context:component-scan base-package="com.ptteng.service"/>
+    <!--配置数据库相关参数的properties文件位置-->
+    <context:property-placeholder location="classpath:/jdbc.properties"/>
+    <!--数据库连接池-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--<property name="driver" value="${jdbc.driver}"/>-->
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="${initialSize}"/>
+        <property name="maxActive" value="${maxActive}"/>
+        <property name="minIdle" value="${minIdle}"/>
+    </bean>
+    <!--配置SqlSessionFactory对象-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据库连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--扫描model包使用别名-->
+        <property name="typeAliasesPackage" value="com.ptteng.model"/>
+        <!--扫描sql配置文件：mapper需要的文件-->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
+    </bean>
+    <!--扫描dao接口包，动态实现Dao接口，注入到spring容器中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--注入sqlSessionFactory-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--给出需要扫描的dao包-->
+        <property name="basePackage" value="com.ptteng.dao"/>
+    </bean>
+  <!--  &lt;!&ndash;配置事物管理&ndash;&gt;
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        &lt;!&ndash;注入dataSource&ndash;&gt;
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    &lt;!&ndash;配置基于注解的声明式事务&ndash;&gt;
+    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+</beans>

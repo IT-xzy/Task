@@ -1,0 +1,166 @@
+@charset "UTF-8";
+$bule:#29bde0;
+$white:#ffffff;
+$gray:#a6a6a6;
+
+@mixin width {
+  max-width: 640px;
+  width: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  background-color: #0f0f0f;
+}
+body {
+  @include width;
+  background-color: $bule;
+  margin: 0 auto;
+  position: relative;
+  font: 2.5rem 微软雅黑;
+  color: $bule;
+}
+.header {
+  @include width;
+  padding: 2rem;
+  position: fixed;
+  z-index: 999;
+  text-align: center;
+  font: 30px 微软雅黑;
+  color:$white;
+  background-color: $bule;
+}
+.footer {
+  @include width;
+  margin: 0 auto;
+  padding: 25px 20px;
+  position: fixed;
+  bottom: 0;
+  background:rgba(41,189,244,0.5)
+}
+.return {
+  width: 51px;
+  padding: 21px;
+  background: url("../tesk7img/return.png") no-repeat;
+  float: left;
+}
+.shape {
+  width: 40px;
+  padding: 20px;
+  background: url("../tesk7img/shape.png") no-repeat;
+  float: right;
+}
+@mixin f-button {
+  width: 46%;
+  padding: 2rem;
+  overflow: hidden;
+  border: none;
+  border-radius: 12px;
+  color: #ffffff;
+  font: 3rem 微软雅黑;
+}
+.next-game {
+@include f-button;
+  float: left;
+  background: rgba(246,111,111,1);
+}
+.share {
+@include f-button;
+  float: right;
+  background: rgba(251,180,53,1);
+}
+.blank {
+  @include width;
+  padding: 2rem;
+}
+.winner {
+  width:60%;
+  padding: 16.6% 27.2%;
+  position: relative;
+  margin: 5rem auto;
+  text-align: center;
+  background:url("../tesk7img/bager.png") center rgba(41,189,244,1)  no-repeat;
+  background-size: 100% 100%;
+  font: 5rem bold 微软雅黑;
+  color:$white;
+}
+.winner-message {
+  width: 70%;
+  margin: 2.5rem auto;
+  color: #ffc865;
+  text-align:left;
+  font: 2.5rem 微软雅黑;
+}
+.winner-name {
+  position: absolute;
+  top: 63%;
+  left: 25%;
+  font: 5rem 微软雅黑;
+  text-align: center;
+  color:$white;
+}
+.process-text{
+  width: 70%;
+  font: 1.5rem 微软雅黑;
+  color: $gray;
+}
+.sp {
+  color: $white;
+  font: 2rem 微软雅黑;
+}
+span {
+@extend .sp;
+  padding-right: 3%;
+}
+
+.analyse {
+ @include width;
+  padding: 3rem;
+  background-color: $white;
+  color: $gray;
+  border-bottom: 1px solid $gray;
+}
+.analyse-day {
+  width: 100%;
+  margin: -2.5rem 0 2rem 0;
+  font: 2.5rem 微软雅黑;
+  float: left;
+  color: #0f0f0f;
+}
+.analyse-day-time {
+  font: 2rem 微软雅黑;
+  color:$gray;
+  margin-top: 0.5rem;
+  float: right;
+}
+.blank-buttom {
+ @include width;
+  padding: 6rem;
+  background-color: $white;
+}
+@media screen and (max-width:425px ){
+  html {
+    font-size: 60%;
+  }
+  .next-game {
+    font: 2rem 微软雅黑;
+  }
+  .share {
+    font: 2rem 微软雅黑;
+  }
+  .winner-name {
+    font-size: 3.5rem;
+  }
+}
+@media screen and (max-width:320px ){
+  html{
+    font-size: 40%;
+  }
+  .winner-name {
+    font-size: 4rem;
+  }
+}

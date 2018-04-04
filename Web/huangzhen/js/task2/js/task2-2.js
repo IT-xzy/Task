@@ -124,13 +124,13 @@ setting.onclick = function () {
   // 给杀手传参
   for (i = 0; i < out.length; i++) {
     // 注意这里的out[i]就是定义位置了
-    player[out[i]] = '<li class="killer">' + '杀 手' + '</li>';
+    player[out[i]] = '<li class="killer">' + '杀手' + '</li>';
   }
 
 
   for (i = 0; i < player.length; i++) {
-    if (player[i] !== '<li class="killer">' + '杀 手' + '</li>') {
-      player[i] = '<li class="civilian">' + '平 民' + '</li>';
+    if (player[i] !== '<li class="killer">' + '杀手' + '</li>') {
+      player[i] = '<li class="civilian">' + '平民' + '</li>';
     }
   }
   // console.log(player);

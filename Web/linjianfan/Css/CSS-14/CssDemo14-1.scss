@@ -1,0 +1,713 @@
+@import "_public.scss";
+
+html {
+	font-size: 625%;
+}
+@media only screen and (max-width: 767px) {
+    html {
+        font-size: 478%;
+    }
+}
+body {
+    background-color: #fafafa;
+    font-size: 0;
+}
+
+
+
+/*轮播图样式*/
+ul,li{
+    list-style: none;
+    padding: 0;
+}
+    
+/*css public start*/
+.floatfix {
+    *zoom: 1;
+}
+.floatfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/*css public end*/
+    
+/*slider start*/
+.slider-contaner{
+    width:100%;
+    position:relative;
+}
+.slider-item + .slider-item{
+    opacity:0;
+}
+.slider-item{
+    width:100%;
+    position:absolute;
+    animation-timing-function: linear;
+    animation-name:fade;
+    animation-iteration-count: infinite;
+    background-size:100%;
+    background-repeat: no-repeat;
+}
+.focus-container{
+    position:absolute;
+    z-index:7;
+    margin:0 auto;
+    left:0;
+    right:0;
+}
+.focus-container li{
+    width:.1rem;
+    height:.1rem;
+    border-radius:50%;
+    float:left;
+    margin: 0 .05rem;
+    background:#fff;
+}
+.focus-item{
+    width:100%;
+    height:100%;
+    border-radius:inherit;
+    animation-timing-function: linear;
+    animation-name:fade;
+    animation-iteration-count: infinite;
+}
+.focus-item2,.focus-item3,.focus-item4,.focus-item5{
+    opacity:0;
+}
+/*设置轮播焦点的位置*/
+.focus-container{
+    bottom:2%;
+    display: flex;
+    justify-content: center;
+}
+/*设置当前图片焦点的颜色*/
+.focus-item{
+    background:#51B1D9;
+}
+/*设置动画，请根据实际需要修改秒数*/
+.slider-item,.focus-item{
+    animation-duration: 20s;
+}
+.slider-item1,.focus-item1{
+    animation-delay: -1s;
+}
+.slider-item2,.focus-item2{
+    animation-delay: 3s;
+}
+.slider-item3,.focus-item3{
+    animation-delay: 7s;
+}
+.slider-item4,.focus-item4{
+    animation-delay: 11s;
+}
+.slider-item5,.focus-item5{
+    animation-delay: 15s;
+}
+@keyframes fade{
+        0%{
+        opacity:0;
+        z-index:2;
+    }
+        5%{
+        opacity:1;
+        z-index: 1;
+    }
+        20%{
+        opacity:1;
+        z-index:1;
+    }
+        25%{
+        opacity:0;
+        z-index:0;
+    }
+        100%{
+        opacity:0;
+        z-index:0;
+    }
+}
+/*设置背景，响应式请利用媒体查询根据断点修改路径*/
+.slider-item1{
+    background-image:url(images/banner-1.png);
+}
+.slider-item2{
+    background-image:url(images/banner-3.png);
+}
+.slider-item3{
+    background-image:url(images/banner-4.png);
+}
+.slider-item4{
+    background-image:url(images/banner-5.jpg);
+}
+.slider-item5{
+    background-image:url(images/banner-6.jpg);
+}
+/*设置图片的高度，请根据具体需要修改百分比，响应式及时修改此值*/
+.slider,.slider-item{
+    padding: 0;
+    padding-bottom:30%;
+}
+
+.banner-arrow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 40%;
+}
+.banner-left {
+    width: .2rem;
+    height: .35rem;
+    background-image: url(images/29.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 999;
+}
+.banner-right {
+    width: .2rem;
+    height: .35rem;
+    background-image: url(images/30.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 999;
+}
+
+/*轮播图样式*/
+
+/*主体顶部样式*/
+.main-box {
+    @include container;
+}
+.main-top-box {
+    width: 100%;
+    margin-top: 1rem; 
+    display: flex;
+}
+@media only screen and (max-width: 767px) {
+    .main-top-box {
+        width: 100%;
+        display: block;
+    }
+}
+.main-top {
+    width: 25%;
+    padding: 0 .15rem;
+}
+@media only screen and (max-width: 767px) {
+    .main-top {
+        width: auto;
+    }
+}
+.main-top:nth-child(4) {
+    @include border-left (1px, dashed, $gray);
+}
+@media only screen and (max-width: 767px) {
+    .main-top:nth-child(4) {
+        border: none;
+        padding-left: 32%;
+    }
+}
+.main-top-icon-A {
+    width: .44rem;
+    height: .62rem;
+    background-image: url(images/04.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
+.main-top-icon-B {
+    width: .6rem;
+    height: .48rem;
+    background-image: url(images/05.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    margin-top: .14rem;
+}
+.main-top-icon-C {
+    width: .52rem;
+    height: .55rem;
+    background-image: url(images/06.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+    margin-top: .08rem;
+}
+.main-top-topic {
+    font-size: .18rem;
+    color: $black;
+    text-align: center;
+    margin-top: .3rem;
+}
+.main-top-text {
+    font-size: .16rem;
+    color: $gray;
+    margin-top: .3rem;
+    text-align: center;
+}
+.main-top-right {
+    width: auto;
+    margin-left: .3rem;
+    margin-top: .4rem;
+}
+.main-top-right-data {
+    width: auto;
+    background-image: url(images/07.png);
+    background-repeat: no-repeat;
+    background-size: .13rem .13rem;
+    background-position: left center;
+    text-indent: .15rem;
+    font-size: .18rem;
+    color: $green;
+}
+.main-top-right-text {
+    width: auto;
+    font-size: .16rem;
+    color: $gray;
+}
+/*主体顶部样式*/
+
+
+/*主体学习样式*/
+.main-learn-box {
+    width: 100%;
+    margin-top: 1rem; 
+}
+.main-learn-topic {
+    width: 100%;
+    text-align: center;
+    font-size: .18rem;
+    color: $black;
+}
+.main-learn-inner {
+    width: 100%;
+    margin-top: .2rem;
+    display: flex;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .main-learn-inner {
+        width: 100%;
+        margin-top: .2rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .main-learn-inner {
+        width: 100%;
+        margin-top: .2rem;
+        display: block;
+    }
+}
+.learn-inner-box {
+    width: 25%;
+    padding-left: .15rem;
+    @include flex;
+    justify-content: space-between;
+    margin-top: .1rem;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .learn-inner-box {
+        width: 46%;
+        padding: 0 .15rem;
+        @include flex;
+        justify-content: space-between;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .learn-inner-box {
+        width: auto;
+        padding: 0 .15rem;
+        @include flex;
+        justify-content: space-between;
+    }
+}
+.learn-inner-icon {
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    @include flex;
+    justify-content: center;
+    font-size: .18rem;
+    color: $green;
+    box-shadow: 0 0 .06rem $gray;
+}
+.learn-inner-text {
+    width: 54%;
+    font-size: .14rem;
+    color: $gray;
+    margin-left: .1rem;
+}
+.learn-inner-arrow {
+    width: .28rem;
+    height: .26rem;
+    background-image: url(images/08.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.learn-new-arrow {
+    display: block;
+}
+@media screen and (min-width: 1024px) {
+    .learn-new-arrow {
+        display: none;
+    }
+}
+/*主体学习样式*/
+
+/*学员展示样式*/
+.main-show-box {
+    width: 100%;
+    margin-top: 1rem;
+}
+.learn-box {
+    width: 100%;
+    display: flex;
+    margin-top: .5rem;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .learn-box {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: .5rem;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .learn-box {
+        width: 100%;
+        display: block;
+        margin-top: .5rem;
+    }
+}
+.learn-card {
+    width: 25%;
+    background-color: $white;
+    margin: .2rem .15rem 0 .15rem;
+    padding: .15rem 0;
+}
+.learn-card:hover{
+    box-shadow: 0 0 .06rem $gray;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .learn-card {
+        width: 46%;
+        background-color: $white;
+        margin: .2rem .15rem 0 .15rem;
+        padding: .15rem 0;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .learn-card {
+        width: auto;
+        background-color: $white;
+        margin: .2rem .15rem 0 .15rem;
+        padding: .15rem 0;
+    }
+}
+.learn-card-icon {
+    width: 1.09rem;
+    height: 1.08rem;
+    background-image: url(images/09.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
+}
+.learn-card-topic {
+    width: 100%;
+    font-size: .18rem;
+    color: $black;
+    text-align: center;
+    margin-top: .4rem;
+}
+.learn-card-text {
+    width: auto;
+    padding: 0 .2rem;
+    font-size: .16rem;
+    color: $gray;
+    text-align: left;
+    margin-top: .3rem;
+}
+.main-learn-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: .2rem;
+}
+.point {
+    width: .1rem;
+    height: .1rem;
+    border-radius: 50%;
+    background-color: $gray;
+    box-shadow: 0 0 .06rem $gray;
+    margin-right: .1rem;
+}
+.point:first-child {
+    background-color: $green;
+}
+
+/*学员展示样式*/
+
+/*合作伙伴样式*/
+.main-partner-box {
+    width: 100%;
+    margin-top: 1rem;
+}
+.partner-box {
+    width: auto;
+    margin: .5rem .15rem 0 .15rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: $white;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .partner-box {
+        width: auto;
+        margin: .5rem .15rem 0 .15rem;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background-color: #fafafa;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .partner-box {
+        width: auto;
+        margin: .5rem .15rem 0 .15rem;
+        display: block;
+        background-color: #fafafa;
+    }
+}
+.partner-A {
+    width: 19.5%;
+    height: 1.8rem;
+    background-image: url(images/10.png);
+    background-size: 1.42rem .52rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: $white;
+    box-sizing: border-box;
+    box-shadow: 0 0 .06rem $white;
+}
+.partner-B {
+    width: 19.5%;
+    height: 1.8rem;
+    background-image: url(images/11.png);
+    background-size: .53rem .58rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: $white;
+    box-sizing: border-box;
+    box-shadow: 0 0 .06rem $white;
+}
+.partner-C {
+    width: 19.5%;
+    height: 1.8rem;
+    background-image: url(images/12.png);
+    background-size: 1.24rem .56rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: $white;
+    box-sizing: border-box;
+    box-shadow: 0 0 .06rem $white;
+}
+.partner-D {
+    width: 19.5%;
+    height: 1.8rem;
+    background-image: url(images/13.png);
+    background-size: 1.34rem .48rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: $white;
+    box-sizing: border-box;
+    box-shadow: 0 0 .06rem $white;
+}
+.partner-E {
+    width: 19.5%;
+    height: 1.8rem;
+    background-image: url(images/14.png);
+    background-size: 1.69rem .39rem;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: $white;
+    box-sizing: border-box;
+    box-shadow: 0 0 .06rem $white;
+}
+.partner-A:hover{
+    box-shadow: 0 0 .06rem $gray;
+}
+.partner-B:hover{
+    box-shadow: 0 0 .06rem $gray;
+}
+.partner-C:hover{
+    box-shadow: 0 0 .06rem $gray;
+}
+.partner-D:hover{
+    box-shadow: 0 0 .06rem $gray;
+}
+.partner-E:hover{
+    box-shadow: 0 0 .06rem $gray;
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .partner-A {
+        width: 45%;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/10.png);
+        background-size: 1.42rem .52rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-B {
+        width: 45%;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/11.png);
+        background-size: .53rem .58rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-C {
+        width: 45%;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/12.png);
+        background-size: 1.24rem .56rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-D {
+        width: 45%;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/13.png);
+        background-size: 1.34rem .48rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-E {
+        width: 45%;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/14.png);
+        background-size: 1.69rem .39rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .partner-A {
+        width: auto;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/10.png);
+        background-size: 1.42rem .52rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-B {
+        width: auto;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/11.png);
+        background-size: .53rem .58rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-C {
+        width: auto;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/12.png);
+        background-size: 1.24rem .56rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-D {
+        width: auto;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/13.png);
+        background-size: 1.34rem .48rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+    .partner-E {
+        width: auto;
+        height: 1.8rem;
+        margin: .1rem .15rem;
+        background-image: url(images/14.png);
+        background-size: 1.69rem .39rem;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-color: $white;
+    }
+}
+/*合作伙伴样式*/
+
+/*合作链接样式*/
+.link-box {
+    width: 100%;
+    background-color: $white;
+    margin-top: 1rem;
+    padding: .15rem 0;
+}
+.link-inner {
+    @include container;
+}
+.link-inner-box {
+    width: 100%;
+    margin-top: .2rem;
+    display: flex;
+    justify-content: space-between;
+}
+@media only screen and (max-width: 767px) {
+    .link-inner-box {
+        width: 100%;
+        margin-top: .2rem;
+        display: flex;
+        flex-wrap: wrap
+    }
+}
+.link {
+    width: 8%;
+    font-size: 0;
+    @include border-bottom (1px, solid, $white);
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .link {
+        width: 12%;
+        font-size: 0;
+        @include border-bottom (1px, solid, $white);
+    }
+}
+@media only screen and (max-width: 767px) {
+    .link {
+        width: 20%;
+        font-size: 0;
+        @include border-bottom (1px, solid, $white);
+    }
+}
+.link:hover {
+    font-size: 0;
+    @include border-bottom (1px, solid, $green);
+}
+.link a{
+    font-size: .14rem;
+    color: $gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*合作链接样式*/
+
+

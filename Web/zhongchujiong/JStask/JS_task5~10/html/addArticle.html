@@ -1,0 +1,142 @@
+<div class="articleList" ng-controller="addArticleCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <strong>新增Article</strong>
+            </h3>
+        </div>
+        <form class="panel-body">
+            <form role="form">
+                <div class="row form-group">
+                    <label class="col-md-2 text-right" for="titleName">标题名称</label>
+                    <div class="col-md-8">
+                        <input class=" form-control" type="text" id="titleName" ng-model="titleName">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Type" class="col-md-2 text-right wordSpacing">类 型</label>
+                    <div class="col-md-2">
+                        <select id="Type" class="form-control" ng-model="zheType" ng-options="x.name for x in Type">
+                        </select>
+                    </div>
+                    <div class="col-md-2" ng-show="toggleBigPic">
+                        <select id="bigPicture" class="form-control" ng-init="bigPictureType = bigPicture[0]" ng-model="bigPictureType" ng-options="x.name for x in bigPicture">
+                        </select>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="explain" class="col-md-2 text-right wordSpacing">说 明</label>
+                    <div class="col-md-2">
+                        <input type="text" id="explain" class="form-control" ng-model="explain">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 text-right" for="gotoLink">跳转链接</label>
+                    <div class="col-md-8">
+                        <input type="text" id="gotoLink" class="form-control" ng-model="gotoLink">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 text-right wordSpacing">配 图</label>
+                    <div class="col-md-10">
+                        <button class="btn btn-primary">选择文件</button>
+
+                        <div class="row" ng-controller="AppController">
+
+                            <div class="col-md-12">
+                                <input type="file" nv-file-select="" uploader="uploader" multiple  /><br/>
+                            </div>
+                            <div class="col-md-12">
+
+                            </div>
+
+                            <div class="col-md-12" style="margin-bottom: 40px">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th width="50%">图片名</th>
+                                        <th ng-show="uploader.isHTML5">文件大小</th>
+                                        <th ng-show="uploader.isHTML5">进度</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in uploader.queue">    <!--这个ng-repeat可以去掉，是为了上传多个文件用的-->
+                                        <td>
+                                            <strong>{{ item.file.name}}</strong>
+                                            <!-- Image preview -->
+                                            <!--auto height-->
+                                            <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                            <!--auto width-->
+                                            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                            <!--fixed width and height -->
+                                            <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                        </td>                <!--图片跟名字-->
+                                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>    <!--大小-->
+                                        <td ng-show="uploader.isHTML5">
+                                            <div class="progress" style="margin-bottom: 0;">
+                                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                            </div>
+                                        </td>           <!--进度条-->
+                                        <td class="text-center">
+                                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                            <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                        </td>              <!--状态-->
+                                        <td nowrap>             <!--操作-->
+                                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                <span class="glyphicon glyphicon-upload"></span> 上传
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                <span class="glyphicon glyphicon-ban-circle"></span> 取消
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                <span class="glyphicon glyphicon-trash"></span> 移除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div>
+                                    <div>
+                                        进度条:
+                                        <div class="progress" style="">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload all
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-s" ng-click="uploader.cancelAll()" ng-disabled="!uploader.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove all
+                                    </button>
+                                </div>         <!--总的进度条，用不到-->
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <img ng-src="{{theimg}}" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <button class="btn btn-success" ng-click="gotoline()">立即上线</button>
+                    <button class="btn btn-success">存为草稿</button>
+                    <button class="btn btn-default pull-right">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
