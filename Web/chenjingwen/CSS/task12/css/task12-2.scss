@@ -1,0 +1,192 @@
+
+
+$white:#fff;
+$blue:#5fc0cd;
+$deepblue:#55a8b3;
+$grey:#e1e5e7;
+$black:#666;
+$fontcolor:#b3b3b3;
+$red:red;
+$footercolor:#f8fafb;
+@mixin size($width,$height,$lineheight){
+    width:$width;
+    height:$height;
+    line-height:$lineheight;
+}
+@mixin acolor($color){
+    color:$color;
+    &:visited{
+        color:$color;
+    }
+    &:hover{
+        color:$color;
+        text-decoration:none;
+    }
+    &:focus{
+        text-decoration:none;
+        outline:none;
+    }
+}
+body{
+    margin:0;
+    font-size:62.5%;
+    background-color:$white;
+}
+.header{
+    position:fixed;
+    top:0;
+    z-index: 1;
+    @include size(100%,5rem,5rem);
+    background-color: $blue;
+    .employ{
+        display:flex;
+        @include size(10rem,3rem,3rem);
+        margin:0 auto;
+        margin-top:1rem;
+        border-radius: 0.5rem;
+        font-size:2rem;
+        text-align: center;
+        color:$white;
+        background-color: $deepblue;
+        .link{
+            @include acolor($white);
+        }
+        .employee{
+            @include size(5rem,3rem,3rem);
+            border-radius:0.5rem;
+            font-size:2rem;
+            text-align: center;
+            color:$blue;
+            background-color:$white;
+            a{
+               @include acolor($blue);
+            }
+        }
+    }
+    .icon-1{
+        display:inline-block;
+        position:absolute;
+        top:0rem;
+        right:1.5rem;
+        @include acolor($white);
+        img{
+            @include size(2rem,2rem,2rem);     
+        }
+    }
+}
+.empty1{
+    @include size(100%,5rem,5rem);
+}
+.main{
+    border-bottom: 1px solid $grey;
+    .date{
+        width:100%;
+        padding:0.5rem 1.5rem;
+        font-size:1.3rem;
+        color: $grey;
+        .icon2{
+            @include size(1.2rem,1.2rem,1.2rem);
+            margin-right:1rem;
+        }
+    }
+    .price{
+        display: flex;
+        justify-content: space-between;
+        padding:0 1.5rem 0 4rem;
+        font-size:1.3rem;
+        color:$black;
+        .time{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .wage{
+            color:$red;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            .icon3{
+                @include size(1.2rem,1.2rem,1.2rem);
+                margin-left:1rem;
+            }
+        }
+    }
+    .addr{
+        @extend .date;
+    } 
+}
+.footer{
+    display: flex;
+    justify-content:space-around;
+    position:fixed;
+    z-index: 1;
+    bottom:0;
+    border-top:1px solid $grey;
+    background-color: $footercolor;
+    @include size(100%,6rem,6rem);
+    .footer_left{
+        @include size(6rem,6rem,6rem);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        text-align: center;
+        a{
+            @include acolor($black);
+        .icon4{
+            @include size(3rem,3rem,3rem);
+            vertical-align: text-bottom;
+        }
+        div{
+            position: relative;
+            top:-2rem;
+            @include size(6rem,2rem,2rem);
+        }
+    }
+    }
+    .footer_middle{
+        @include size(6rem,6rem,6rem);
+        border-radius:50%;
+        text-align: center;
+        background-color: $blue;
+        .icon5{
+            @include size(3rem,3rem,3rem);
+            vertical-align: middle;
+        }   
+    }
+    .footer_right{
+        @extend .footer_left;
+    }
+}
+.empty2{
+    @include size(100%,6rem,6rem);
+}
+
+
+
+
+
+.dropmenu{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.drop{
+    width: 33.3333%
+}
+.btn{
+    position: relative;
+    width: 100%;
+    border-radius: 0;
+    border-right: 0;
+    outline: none;
+    color: #dadcdd;
+}
+.caret{
+    position: absolute;
+    right:1rem;
+    top: 1rem;
+}
+ul{
+    width: 100%;
+}
+li{
+    width: 100%;
+    text-align: center;
+}

@@ -1,0 +1,151 @@
+$width:100% !default;
+$white:#fff;
+$blue:#5fc0cd;
+$red:#e77e80;
+$black:#999;
+$grey:#d2d2d4;
+body{
+    overflow-x: hidden;
+    margin:0;
+    font-size:62.5%;
+    background-color: $white;
+    
+}
+@mixin prim($wid,$height,$lineheight,$fontsize,$color,$bc){
+    width:$wid;
+    height: $height;
+    line-height:$lineheight;
+    font-size:$fontsize;
+    color: $color;
+    background-color:$bc;
+}
+@mixin position($position,$top,$left){
+    position:$position;
+    top:$top;
+    left:$left;
+}
+@mixin size($length,$high){
+    width:$length;
+    height:$high;
+}
+@mixin bnt($marginl,$marginr){
+    margin-left:$marginl;
+    margin-right:$marginr;
+    margin-bottom: 1rem;
+    border:none;
+    border-radius: 1rem;    
+    box-sizing:border-box;
+    box-shadow: inset 0 0 0 2px $blue;
+}
+.header{
+    @include prim(100vw,5rem,5rem,2rem,$white,$blue);
+    position: fixed;
+    top:0;
+    z-index: 1;
+    text-align: center;
+    img{
+        @include position(absolute,1rem,3rem);
+        @include size(3rem,3rem);
+    }
+}
+.empty1{
+    height: 5rem;
+}
+.profile{
+    position: relative;
+    width:$width;
+
+    .first{
+        @include size($width,20rem);
+    }
+    .second{
+        @extend .first;
+        @include position(absolute,0,0);
+        background-color:rgba(0,0,0,0.2);
+    }
+    .third{
+        img{
+            @include position(absolute,6rem,3rem);
+            @include size(8rem,8rem);
+            border-radius: 50%;
+        }
+        .name{
+            @include position(absolute,8rem,14rem);
+            font-size:2rem;
+            color:$white;
+        }
+        .addr{
+            img{
+                @include position(absolute,11rem,14rem);
+                @include size(1.5rem,1.5rem);
+            }
+            p{
+                @include position(absolute,11rem,16rem);
+                margin:0;
+                padding:0;
+                font-size:1.5rem;
+                color:$white;
+            }
+        }
+       
+    }
+}
+.skill{
+    width: $width;
+    margin-top:1rem;
+    padding-bottom: 1rem;
+    border-bottom:1px solid $grey;
+    div{
+        margin-left:3rem;
+        height:2rem;
+        padding-left:2rem;
+        border-left:2px solid $blue;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+}
+.content{
+    display: flex;
+    margin:0 3rem;
+    margin-top:1rem;
+    padding-bottom:1rem;
+    border-bottom:1px solid $grey;
+    .cont-left{
+        padding:0 2rem;
+        border-right:1px solid $grey;
+    }
+    .cont-right{
+        flex:1;
+        padding-left:2rem;
+
+    }
+    .choose-left{
+        padding:0 2rem;
+        .icon{
+            @include size(1.5rem,1.5rem);
+        }
+    }
+    .choose-right{
+        @extend .choose-left;
+        border-left:1px solid $grey;
+    }
+}
+
+.footer{
+    display:flex;
+    position: fixed;
+    bottom:0;
+    z-index: 1;
+    width: $width;
+    .btn-left{
+        @include prim(50%,5rem,5rem,2rem,$blue,$white);
+        @include bnt(3rem,1rem);
+    }
+    .btn-right{
+        @include prim(50%,5rem,5rem,2rem,$white,$blue);
+        @include bnt(1rem, 3rem);
+    }
+}
+.empty2{
+    height: 7rem;
+}

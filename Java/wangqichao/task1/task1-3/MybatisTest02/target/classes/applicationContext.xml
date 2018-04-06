@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+         init-method="init" destroy-method="close">
+         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+         <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+         <property name="username" value="root"/>
+         <property name="password" value="4096"/>
+         <!--初始连接数-->
+         <property name="initialSize" value="1" />
+         <!--最小连接数-->
+         <property name="minIdle" value="5" />
+         <!--最大连接数-->
+         <property name="maxActive" value="20" />
+         <!-- 配置获取连接等待超时的时间 -->
+         <property name="maxWait" value="60000" />
+         <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+         <property name="timeBetweenEvictionRunsMillis" value="60000" />
+         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+         <property name="minEvictableIdleTimeMillis" value="300000" />
+         <!--用来检测是否有效的sql,要求为查询语句-->
+         <property name="validationQuery" value="SELECT 'x'" />
+         <!--宕机时申请检测，不会影响性能-->
+         <property name="testWhileIdle" value="true" />
+         <!--申请连接时检测连接是否有效，会影响性能-->
+         <property name="testOnBorrow" value="false" />
+         <!--归还连接时检测连接是否有效，会影响性能-->
+         <property name="testOnReturn" value="false" />
+         <!-- 打开PSCache，对支持游标的数据库性能提升巨大 -->
+         <property name="poolPreparedStatements" value="true" />
+         <!--打开PSCache后配置其连接数量-->
+         <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+         <!-- 配置监控统计拦截的filters -->
+         <property name="filters" value="stat" />
+     </bean>
+    <!--配置一个JdbcTemplate实例，并注入一个dataSource数据源-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+         <property name="dataSource" ref="dataSource"></property>
+     </bean>
+</beans>

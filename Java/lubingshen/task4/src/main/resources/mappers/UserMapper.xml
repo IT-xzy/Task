@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptteng.dao.UserDao">
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) FROM tb_user
+    </select>
+
+    <select id="findById" parameterType="long" resultType="Student">
+        SELECT * FROM tb_user WHERE id = #{id}
+    </select>
+
+    <select id="findByName" parameterType="java.lang.String" resultType="User">
+        SELECT * FROM tb_user WHERE user_name = #{userName}
+    </select>
+
+
+    <insert id="insertUser" parameterType="User">
+        INSERT INTO tb_user(user_name,user_key,create_at) VALUE (#{userName},#{userKey},#{createAt})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        DELETE FROM tb_user WHERE id = #{id}
+    </delete>
+
+    <update id="modifyLoginTime" parameterType="User">
+        UPDATE tb_user SET login_at=#{loginAt} WHERE user_name = #{userName}
+    </update>
+
+
+</mapper>
