@@ -58,7 +58,7 @@ $(document).ready(function () {
         killStep: function () {
             switch (fsm.state) {
                 case "none":
-                    sessionStorage.setItem("step","killer");
+                    sessionStorage.setItem("step", "killer");
                     location.href = "task2-6.html";
                     break;
                 case "dead":
@@ -83,9 +83,9 @@ $(document).ready(function () {
                 case "dead":
                     alert("请死者亮明身份并发表遗言");
                     fsm.state = "speak";
-                    sessionStorage.setItem("step",fsm.state);
-                    $(".dead .step-text").css("background-color","#83b09a");
-                    $(".dead .triangle").css("border-right-color","#83b09a");
+                    sessionStorage.setItem("step", fsm.state);
+                    $(".dead .step-text").css("background-color", "#83b09a");
+                    $(".dead .triangle").css("border-right-color", "#83b09a");
                     console.log(fsm.state);
                     break;
             }
@@ -103,9 +103,9 @@ $(document).ready(function () {
                 case "speak":
                     alert("请玩家依次发言讨论");
                     fsm.state = "vote";
-                    sessionStorage.setItem("step",fsm.state);
-                    $(".speak .step-text").css("background-color","#83b09a");
-                    $(".speak .triangle").css("border-right-color","#83b09a");
+                    sessionStorage.setItem("step", fsm.state);
+                    $(".speak .step-text").css("background-color", "#83b09a");
+                    $(".speak .triangle").css("border-right-color", "#83b09a");
                     console.log(fsm.state);
                     break;
             }
@@ -140,15 +140,17 @@ $(document).ready(function () {
     $(".vote .step-text").click(function () {
         fsm.voteStep();
     })
+
     // 设置高亮函数
-    function highLight(a,b) {
-        a.css("background-color","#83b09a");
-        b.css("border-right-color","#83b09a");
+    function highLight(a, b) {
+        a.css("background-color", "#83b09a");
+        b.css("border-right-color", "#83b09a");
     }
+
     // 改变高亮刷新后高亮也不会变
-    switch (sessionStorage.getItem("step")){
+    switch (sessionStorage.getItem("step")) {
         case "dead":
-            highLight($(".killer .step-text"),$(".killer .triangle"));
+            highLight($(".killer .step-text"), $(".killer .triangle"));
             $(".message-top").removeClass("hide");  // 显示被杀者的信息
             if (aKilled.slice(-1)[0].num === "NoOneDied") {
                 $(".message-top").text("昨晚没有人被杀");
@@ -157,8 +159,8 @@ $(document).ready(function () {
             }
             break;
         case "speak":
-            highLight($(".killer .step-text"),$(".killer .triangle"));
-            highLight($(".dead .step-text"),$(".dead .triangle"));
+            highLight($(".killer .step-text"), $(".killer .triangle"));
+            highLight($(".dead .step-text"), $(".dead .triangle"));
             $(".message-top").removeClass("hide");
             if (aKilled.slice(-1)[0].num === "NoOneDied") {
                 $(".message-top").text("昨晚没有人被杀");
@@ -167,9 +169,9 @@ $(document).ready(function () {
             }
             break;
         case "vote":
-            highLight($(".killer .step-text"),$(".killer .triangle"));
-            highLight($(".dead .step-text"),$(".dead .triangle"));
-            highLight($(".speak .step-text"),$(".speak .triangle"));
+            highLight($(".killer .step-text"), $(".killer .triangle"));
+            highLight($(".dead .step-text"), $(".dead .triangle"));
+            highLight($(".speak .step-text"), $(".speak .triangle"));
             $(".message-top").removeClass("hide");
             if (aKilled.slice(-1)[0].num === "NoOneDied") {
                 $(".message-top").text("昨晚没有人被杀");
@@ -180,14 +182,14 @@ $(document).ready(function () {
     }
     // 为返回按钮添加点击事件
     $(".back-btn").click(function () {
-        location.href="task2-4.html";
+        location.href = "task2-4.html";
     })
     // 为关闭按钮添加点击事件
     $(".close-btn").click(function () {
         var a = confirm("结束本轮游戏吗?");
         if (a === true) {
             sessionStorage.clear(); // 退出游戏清空所有储存在本地的数据
-            location.href="task2-1.html";
+            location.href = "task2-1.html";
         }
     })
     // 点击结束游戏
@@ -195,12 +197,12 @@ $(document).ready(function () {
         var a = confirm("本轮游戏是否已经结束?");
         if (a === true) {
             sessionStorage.clear();
-            location.href="task2-1.html";
+            location.href = "task2-1.html";
         }
     })
     // 点击法官日记
     $(".diary").click(function () {
-        location.href="task2-7.html";
+        location.href = "task2-7.html";
     })
 })
 
