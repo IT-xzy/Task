@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 激活MVC功能 -->
+    <mvc:annotation-driven/>
+    <!--使用default服务器处理静态资源-->
+    <mvc:default-servlet-handler/>
+    <!--要扫描的Controller的package -->
+    <context:component-scan base-package="com.jnshu.controller"/>
+    <!--处理jsp的ViewResolver-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--文件上传解析器配置 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 上传文件的总大小和单个文件的大小 -->
+        <property name="maxUploadSize" value="12345678900"/>
+        <property name="maxInMemorySize" value="10240100"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截器拦截的URL格式 -->
+            <mvc:mapping path="/u/**" />
+            <!--<mvc:mapping path="/" />-->
+            <!--处理拦截的具体实现类 -->
+            <bean class="com.jnshu.TestInterceptors.TestInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>
