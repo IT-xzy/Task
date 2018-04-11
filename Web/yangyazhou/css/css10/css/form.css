@@ -1,0 +1,338 @@
+
+/* header开始 */
+header {
+    border-bottom: 1px solid #b7d3ef;
+    line-height: 45px;
+    background: #1d7ad9;
+    color: #fff;
+}
+header .login-res {
+    float: right;
+}
+/* 登陆 注册按钮 */
+header .login-res a {
+    display: inline-block;
+    width:70px;
+    text-decoration: none;
+    text-align: center;    
+}
+header .login-res .login::before{
+    content: "";
+    position: absolute;
+    margin-left: -25px;
+    width: 2px;
+    height: 100%;
+    background: #fff;
+}
+header .login-res .login {
+    color: #fff;
+    transition: all 1s;
+}
+header .login-res .login:hover {
+    color: #ff7f02;
+}
+
+header .login-res .register {
+    color:#000;
+    background: #fff;
+    transition: all 1s;
+    
+} 
+header .login-res .register:hover {
+    color: #ff7f02;
+    background: #d8d8d8;
+}
+
+/* main开始 */
+main {
+    background: #fff;
+}
+/* 自适应导航栏的效果 */
+main .navbar-container {
+    background: #fff;
+}
+main .navbar-container li:first-child {
+    background: #1d7ad9;
+    
+    border-radius: 5px;
+}
+main .navbar-container li:first-child a {
+    color:#fff;
+    padding: 10px;
+}
+main .navbar-container li:hover{
+    background: #1d7ad9;
+    border-radius: 5px;
+}
+main .navbar-container li:hover a {
+    color: #fff;
+}
+
+/* 按钮步奏 */
+main .second-row .select-step {
+    float: right;
+    font-size: 0;
+}
+main .second-row .select-step .step-con {
+    display: inline-block;
+}
+main .second-row .select-step span{
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 60px;
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
+    border-radius: 50%;
+    color: #fff;
+    background: #ccc;
+}
+main .second-row .select-step .one {
+    background: #ff7f02;
+}
+main .second-row .select-step .one::after{
+    background: #ff7f02;
+}
+main .second-row .select-step .one::before{
+    background: #ff7f02;
+}
+main .second-row .select-step span::after {
+    content: "";
+    position: absolute;  
+    height: 5px;
+    background: #ccc;
+}
+main .second-row .select-step span::before {
+    content: "";
+    position: absolute;  
+    height: 5px;
+    background: #ccc;
+}
+main .second-row .select-step span:hover {
+    background: #ff7f02;
+}  
+main .second-row .select-step span:hover::after {
+    z-index: 1;
+    background: #ff7f02;
+}  
+main .second-row .select-step span:hover::before {
+    z-index: 1;
+    background: #ff7f02;
+}  
+
+/* 进入form表单 */
+main form { 
+    padding-bottom: 30px;
+    border-bottom:1px  solid  #e7e7e7;
+}
+main .thrid-row {
+    margin-top: 30px;
+}
+main .row .make-box {
+    position: relative;
+    padding-left: 15px;
+     font-size: 17px;
+    font-weight: bold;
+}
+main .row .make-box::before {
+    content: "";
+    position: absolute;
+    margin-left: -10px;
+    margin-top: 2px;
+    width: 2px;
+    height: 100%;
+    background: #1d7ad9;
+}
+main .box-title {
+    margin: 8px 0;
+    padding-left: 34px;
+    line-height: 47px;
+    color: #1d7ad9;
+    background: #f3f3f3;
+}
+main .box-title .col-xs-12 {
+    position: relative;
+    font-weight: 700;
+}
+main .box-title .col-xs-12::before{
+    content: "";
+    position: absolute;
+      margin-left: -18px;
+    left: 0;
+    top:48%;
+     transform: translateY(-50%);
+}
+main .box-title .model::before {
+    width: 23px;
+  
+    height: 19px;
+    background: url('../img/css_sprites.png') -10px -10px;
+}
+main .box-title .role::before {
+    width: 26px; 
+    height: 24px;
+    background: url('../img/css_sprites.png') -10px -93px;
+}
+main .box-title .material::before {
+    width: 19px; 
+    height: 24px;
+    background: url('../img/css_sprites.png') -10px -49px;
+}
+/* 按钮选项 */
+main .box-check-row {
+    position: relative;
+    line-height: 60px;
+}
+main .box-check-row .col-sm-1 {
+    position: relative;
+    width: 16%;
+    
+    color: #a9a9a9;
+}
+
+/* 自定义单选按钮样式 */
+main input[type="radio"] {
+    /* display: none; */
+    visibility: hidden;
+}
+main label {
+    position: relative;
+}
+main label::before {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    left:-26px;
+    top:50%;
+    transform: translateY(-50%);
+    border: 1px solid #d8d8d8;
+    border-radius: 50%;
+}
+main label::after {
+    content: "";
+    position: absolute;
+    visibility: hidden;
+    width: 6px;
+    height: 6px;
+    left:-20px;
+    top:50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border-radius: 50%;
+}
+/* 按钮选中状态，伪类发生变化 */
+main input[type="radio"]:checked+label::before {
+    background: #1d7ad9;
+}
+main input[type="radio"]:checked+label::after {
+    visibility: visible;
+}
+/* 改变下拉框的样式 */
+main .select-container {
+    position: absolute;
+    right:50px;
+}
+main .select-container::before {
+    content: "";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 28px;
+    background: #1d7ad9;
+} 
+main .select-container::after{
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top:10px solid #fff;
+    border-left:7px solid transparent;
+    border-right:7px solid transparent;
+
+}
+main select {
+    /* 将默认样式修改为none */
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 100px;
+    height: 40px;
+   
+    padding-left: 3px;
+    color: #a9a9a9;
+    border-color: #d8d8d8;
+    line-height: normal;
+}
+
+/* type=text的样式这行的样式 */
+main .box-check-row .role-box {
+    line-height: 35px;
+}
+main .role-box .box-size::before {
+    display: none;
+}
+main .role-box .box-size {
+    
+}
+main .role-box .box-size input{
+    width: 60px;
+    height: 26px;
+    margin: 0 5px;
+}
+/* 下一步按钮 */
+main .next-btn {
+    display: block;
+    margin: 80px auto ;
+    width: 160px;
+    height: 40px;
+    border:none;
+    color: #fff;
+    background: #e15053;
+    outline: none;
+   
+    border-radius: 5px;
+}
+main .btn-row {
+    border-bottom: 1px solid #e7e7e7;
+}
+/* footer开始 */
+footer {
+    background: #f9f9f9;
+     color: #bcbcbc;
+}
+/* a标签效果 */
+footer .company-info a{
+    padding: 0 20px;
+    text-decoration: none;
+    color: #bcbcbc;
+}
+footer .company-info a.active {
+    color: #1d7ad9;    
+}
+footer .company-info a:hover {
+    color: #1d7ad9;
+}
+footer .right-tel {
+    float: right;
+}
+footer .right-tel .connect-number {
+    display: inline-block;
+    vertical-align: middle;
+}
+footer .right-tel img {
+    vertical-align: top;
+}
+footer .last-footer {
+    word-break: keep-all;
+    background: #1d7ad9;
+    color: #fff;
+    text-align: center;
+}
