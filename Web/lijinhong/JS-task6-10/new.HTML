@@ -1,0 +1,108 @@
+ <div ui-view>
+ <div ng-controller='imgCtrl'>
+ 	 <section>
+	<div class="lb-head">
+		<strong ng-if= 'newPage'>新增Article</strong>
+		<strong  ng-if= 'editPage'>编辑Article</strong>
+
+	</div>
+	  
+	<div class="lb-content">
+		 <form name="form" novalidate>
+			<div class="mm">
+			<span>标题命名</span>
+			<input type="text" class="mm-input" ng-model= "title" name="name"  required>
+		
+			 <p ng-show="form.name.$dirty && form.name.$invalid" style="display: inline;">
+                <p ng-show="form.name.$error.required" style="color: red; display: inline;">*标题必填!*</p>
+            </p>
+		</div>
+		<div class="lists-select">
+			<span>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</span>
+			<select class="select2" ng-model="type" name="selectName" required>
+				<option value="">全部</option>
+				<option value="0">首页Banner</option>
+				<option value="1">找职位Banner</option>
+				<option value="2">找精英Banner</option>
+				<option value="3">行业大图</option>	
+			</select>
+			
+			<select class="select2" ng-if="type==3" ng-model="ctrlScope.industry">
+				<option value="">请选择</option>
+				<option value="0">移动互联网</option>
+				<option value="1">电子商务</option>
+				<option value="2">企业服务</option>
+				<option value="3">O2O</option>
+				<option value="4">教育</option>	
+				<option value="5">金融</option>
+				<option value="6">流水</option>			
+			</select>
+				<p ng-show="form.selectName.$dirty && form.selectName.$invalid" style="display: inline;">
+                <p ng-show="form.selectName.$error.required" style="color: red; display: inline;">*状态必选*</p>
+            </p>
+
+		</div>
+		<div class="editor-box">
+			<span style="margin-left: 20px">说&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;明</span>
+			
+			 <div id="editor">
+			 	<p ng-model="content"></p>
+             </div>
+        
+		
+       </div>
+      <p> {{ctrlScope.content}}<p>
+      
+		<div class="mm1">
+			<span>跳转链接</span>
+			<input type="text" name="urlName" class="mm-input" ng-model="url"  required>{{url}}
+			 <p ng-show="form.urlName.$dirty && form.urlName.$invalid" style="display: inline;">
+                <p ng-show="form.urlName.$error.required" style="color: red; display: inline;">*标题必填!*</p>
+            </p>
+		</div>
+	</form>
+
+
+		<div id="div">
+			<span style="margin-left: 20px;">配图</span>
+
+			<a href="javascript:;" class="file" >选择文件
+				<input type="file" id="file" name="name" ng-change= file() ng-model="file">
+			</a>
+
+		</div>
+		<div style="margin-left: 30px;">
+			<img ng-src="{{img}}" style="width: 500px;">
+		</div>
+		<div class="tempo">
+			<span class="tempo-span">图片名</span>
+			<span class="tempo-span">文件大小</span>
+			<span class="tempo-span">进度</span>
+			<span class="tempo-span">操作</span>
+			<span class="tempo-span">操作</span>
+			<span ng-bind="imgName" style="display: inline-block;"></span>
+			<span ng-bind="imgSize" style="display: inline-block; margin-left: 10px;"></span>
+			<progress max="50" value="0" id="pg" style="width: 50px;margin-left: 32px;" ng-show ='flag' ></progress>
+
+		</div>
+
+			<div class="tempo1">
+			<span ng-show ='success'>上传成功</span>
+			
+			<button ng-click= upload() class="scbutton">上传</button>
+			<button class="delete-button" ng-click=deleet()>删除</button>
+		</div> 
+		
+
+		<div class="footer">
+			<button class="btn btn-default" ng-click = status2(id) id="btn" ng-disabled="form.name.$invalid || form.selectName.$invalid || form.urlName.$invalid ">立即上线</button>
+			<button class="btn btn-default" ng-click = status1() id="btn2" ng-disabled="form.name.$invalid || form.selectName.$invalid || form.urlName.$invalid ">存为草稿</button>
+			<button class="btn btn-default" id="img-button" ng-click = cancel()>取消</button>
+
+		</div>
+	</div>
+</section>
+</div>
+</div>
+	
+

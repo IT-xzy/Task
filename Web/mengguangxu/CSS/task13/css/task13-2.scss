@@ -1,0 +1,126 @@
+@import"global.scss";
+html {
+  font-size: 625%;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+header {
+  @include position-top ();
+  @include display (flex,space-between,center);
+  @include box (100%,auto,#29BDE0);
+}
+.mulu {
+  @include display;
+  width: .3rem;
+  height: .3rem;
+  padding: .1rem 0;
+}
+.fanhui {
+  @include display;
+  width: .3rem;
+  height: .3rem;
+  padding: .1rem 0;
+}
+h6 {
+  margin: 0;
+  font-size: .2rem;
+  color: #FFF;
+}
+/*导航栏*/
+nav {
+  @include position-top ();
+  @include box (100%,.5rem,#B9E9F5);
+  margin-top: .5rem;
+}
+.nav-box {
+  @include display (flex,space-between,center);
+  @include box (auto,.6rem,#B9E9F5);
+}
+nav {
+  p {
+    display: block;
+    line-height: .6rem;
+    padding-left: .3rem;
+    font-size: .15rem;
+  }
+}
+.kaiguan {
+  float: right;
+  @include case (.2rem,.19rem);
+  margin:0 .5rem 1.1rem 0;
+  z-index: 999999;
+}
+.chart {
+  @include position-top ();
+  float: left;
+  margin: 1.1rem 0 0 .5rem;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid #B9E9F5;
+}
+.word {
+  @include position-top (fixed,0,666666);
+  display: block;
+  @include box (100%,.4rem,#29BDE0);
+  margin-top: 1.1rem;
+  padding-left: .5rem;
+  line-height: .4rem;
+}
+/*主体*/
+main {
+  @include box (100%,auto,#29BDE0);
+  padding: 1.3rem 0 1.4rem 0;
+}
+.main-box {
+  @include display (flex,space-between,center);
+}
+.box {
+  width:25vw;
+  margin: .3rem auto 0 auto;
+}
+.big-box {
+  @include display (flex,center,center);
+  flex-direction: column;
+  @include box (25vw,25vw,#fff);
+}
+.box1 {
+  @include box (24vw,20vw,#F5C97B);
+  font-size: .2rem;
+  @include text (center,20vw);
+}
+.box2 {
+  @include box (24vw,4vw,#83B09A);
+  @include text (center,4vw);
+  font-size: .1rem;
+  color: #FFF;
+}
+.small-box {
+  @include display (flex,space-between,center);
+  width:25vw;
+  height:.3rem;
+  visibility: hidden;
+}
+.big-box:hover~  .small-box {
+  visibility: visible;
+}
+/*页脚*/
+footer {
+  @include position-bottom ();
+  @include display (flex,center,center);
+  @include box (100%,1rem,#29BDE0);
+}
+.bt {
+  @include box (80%,.6rem,#FBB435);
+  @include display (flex,center,center);
+}
+.bt {
+  a {
+  font-size: .2rem;
+  color: #FFF;
+  text-decoration: none;
+}
+}

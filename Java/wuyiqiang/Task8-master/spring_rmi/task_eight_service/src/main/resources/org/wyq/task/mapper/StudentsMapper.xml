@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wyq.task.mapper.StudentsMapper" >
+  <resultMap id="BaseResultMap" type="org.wyq.task.pojo.Students" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="work_introduction" property="workIntroduction" jdbcType="VARCHAR" />
+    <result column="evaluate" property="evaluate" jdbcType="INTEGER" />
+    <result column="creat_at" property="creatAt" jdbcType="BIGINT" />
+    <result column="upeate_at" property="upeateAt" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from students
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.wyq.task.pojo.Students" >
+    insert into students (id, name, picture, 
+      profession, status, job, 
+      work_introduction, evaluate, creat_at, 
+      upeate_at)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, 
+      #{workIntroduction,jdbcType=VARCHAR}, #{evaluate,jdbcType=INTEGER}, unix_timestamp(now()), unix_timestamp(now())
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.wyq.task.pojo.Students" >
+    update students
+    set name = #{name,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      work_introduction = #{workIntroduction,jdbcType=VARCHAR},
+      evaluate = #{evaluate,jdbcType=INTEGER},
+      upeate_at = unix_timestamp(now())
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, name, picture, profession, status, job, work_introduction, evaluate, creat_at, 
+    upeate_at
+    from students
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, name, picture, profession, status, job, work_introduction, evaluate, creat_at, 
+    upeate_at
+    from students
+  </select>
+  <select id="selectByEvaluate" resultMap="BaseResultMap">
+    select id, name, picture, profession, status, job, work_introduction, evaluate, creat_at,
+    upeate_at
+    from students
+    where evaluate = 1
+  </select>
+  <select id="countByStatus" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(*)
+    from students
+    where status = #{status,jdbcType=INTEGER}
+  </select>
+  <select id="countByProfession" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(*)
+    from students
+    where profession = #{profession,jdbcType=VARCHAR} and status = 1
+  </select>
+</mapper>

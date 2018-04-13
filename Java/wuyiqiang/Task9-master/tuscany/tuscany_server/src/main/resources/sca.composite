@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="Sca">
+
+    <component name="ScaImpl">
+        <implementation.java class="com.service.ScaImpl"/>
+
+        <service name="Sca">
+            <!--这里有2个要求
+            1.如果接口没有加上@Remotable标签,service name就只能为实现类名.
+            2.接口加了@Remotable标签,service name 就只能为接口名.
+            3.所以这里只能为 接口名 or 类名.
+            -->
+            <interface.java interface="com.service.Sca"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8888/Sca1"/>
+        </service>
+
+    </component>
+</composite>
