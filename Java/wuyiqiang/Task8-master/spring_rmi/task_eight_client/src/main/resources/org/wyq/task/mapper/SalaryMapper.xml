@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wyq.task.mapper.SalaryMapper" >
+  <resultMap id="BaseResultMap" type="org.wyq.task.pojo.Salary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="time_one" property="timeOne" jdbcType="VARCHAR" />
+    <result column="salary_one" property="salaryOne" jdbcType="VARCHAR" />
+    <result column="time_two" property="timeTwo" jdbcType="VARCHAR" />
+    <result column="salary_two" property="salaryTwo" jdbcType="VARCHAR" />
+    <result column="time_three" property="timeThree" jdbcType="VARCHAR" />
+    <result column="salary_three" property="salaryThree" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from salary
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.wyq.task.pojo.Salary" >
+    insert into salary (id, time_one, salary_one, 
+      time_two, salary_two, time_three, 
+      salary_three)
+    values (#{id,jdbcType=INTEGER}, #{timeOne,jdbcType=VARCHAR}, #{salaryOne,jdbcType=VARCHAR}, 
+      #{timeTwo,jdbcType=VARCHAR}, #{salaryTwo,jdbcType=VARCHAR}, #{timeThree,jdbcType=VARCHAR}, 
+      #{salaryThree,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.wyq.task.pojo.Salary" >
+    update salary
+    set time_one = #{timeOne,jdbcType=VARCHAR},
+      salary_one = #{salaryOne,jdbcType=VARCHAR},
+      time_two = #{timeTwo,jdbcType=VARCHAR},
+      salary_two = #{salaryTwo,jdbcType=VARCHAR},
+      time_three = #{timeThree,jdbcType=VARCHAR},
+      salary_three = #{salaryThree,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, time_one, salary_one, time_two, salary_two, time_three, salary_three
+    from salary
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, time_one, salary_one, time_two, salary_two, time_three, salary_three
+    from salary
+  </select>
+</mapper>

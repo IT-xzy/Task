@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wyq.task.mapper.ProfessionMapper" >
+  <resultMap id="BaseResultMap" type="org.wyq.task.pojo.Profession" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="direction" property="direction" jdbcType="VARCHAR" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="profession_name" property="professionName" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="threshold" property="threshold" jdbcType="VARCHAR" />
+    <result column="difficulty" property="difficulty" jdbcType="VARCHAR" />
+    <result column="growth" property="growth" jdbcType="VARCHAR" />
+    <result column="market" property="market" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="INTEGER" />
+    <result column="cue" property="cue" jdbcType="VARCHAR" />
+    <result column="introduction_more" property="introductionMore" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="BIGINT" />
+    <result column="update_at" property="updateAt" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from profession
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.wyq.task.pojo.Profession" >
+    insert into profession (id, direction, picture, 
+      profession_name, introduction, threshold, 
+      difficulty, growth, market, 
+      salary, cue, introduction_more, 
+      create_at, update_at)
+    values (#{id,jdbcType=INTEGER}, #{direction,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{professionName,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, #{threshold,jdbcType=VARCHAR}, 
+      #{difficulty,jdbcType=VARCHAR}, #{growth,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=INTEGER}, #{cue,jdbcType=VARCHAR}, #{introductionMore,jdbcType=VARCHAR}, 
+      unix_timestamp(now()), unix_timestamp(now())
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="org.wyq.task.pojo.Profession" >
+    update profession
+    set direction = #{direction,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      profession_name = #{professionName,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      threshold = #{threshold,jdbcType=VARCHAR},
+      difficulty = #{difficulty,jdbcType=VARCHAR},
+      growth = #{growth,jdbcType=VARCHAR},
+      market = #{market,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=INTEGER},
+      cue = #{cue,jdbcType=VARCHAR},
+      introduction_more = #{introductionMore,jdbcType=VARCHAR},
+      update_at = unix_timestamp(now())
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, direction, picture, profession_name, introduction, threshold, difficulty, 
+    growth, market, salary, cue, introduction_more, create_at, update_at
+    from profession
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, direction, picture, profession_name, introduction, threshold, difficulty, 
+    growth, market, salary, cue, introduction_more, create_at, update_at
+    from profession
+  </select>
+  <select id="selectByDirection" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id, direction, picture, profession_name, introduction, threshold, difficulty,
+    growth, market, salary, cue, introduction_more, create_at, update_at
+    from profession
+    where direction = #{direction,jdbcType=VARCHAR}
+  </select>
+  <select id="directionCategoryList" resultType="java.lang.String">
+    select distinct direction
+    from profession
+  </select>
+</mapper>
