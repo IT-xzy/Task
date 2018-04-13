@@ -1,0 +1,130 @@
+$ColorOrange: #f5c97b;
+$fontSize:.3rem;
+$fontSizeS:.22rem;
+$font-Color:#fff;
+
+@mixin center-block{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body{
+  background: #29bde0;
+}
+/*header*/
+header{
+  font-size: 0;
+
+  >a{
+    width: .4rem;
+  }
+
+  >h4{
+    font-size: .34rem;
+    color: $font-Color;
+  }
+}
+main {
+  padding-top: 1.9rem;
+  padding-bottom: 1.9rem;
+
+  > .prompt {
+    position: fixed;
+    z-index: 999;
+    top: .78rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: .78rem;
+    font-size: .26rem;
+    background: #b9e9f5;
+
+    > p {
+      margin-left: .5rem;
+    }
+
+    > .audio {
+      width: .5rem;
+      margin-right: .15rem;
+    }
+
+    > .horn {
+      position: fixed;
+      top: 1.56rem;
+      left: .7rem;
+      width: 0;
+      height: 0;
+      border-left: .08rem solid transparent;
+      border-right: .08rem solid transparent;
+      border-top: .16rem solid #b9e9f5;
+    }
+  }
+
+  > .role-list > p {
+    margin-left: .7rem;
+    margin-bottom: .43rem;
+    font-size: .24rem;
+    color: #fff;
+  }
+
+  >.role-list> .row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    > .column {
+      position: relative;
+      height: 2.09rem;
+      &:hover .more {
+        visibility: visible;
+      }
+
+      > .square {
+        display: flex;
+        flex-direction: column;
+        width: 1.4rem;
+        height: 1.4rem;
+        border: .04rem solid #fff;
+
+        > .role-name {
+          @include center-block;
+          height: 80%;
+          font-size: $fontSize;
+          background: $ColorOrange;
+        }
+
+        > .role-number {
+          @include center-block;
+          height: 20%;
+          background: #83b09a;
+          font-size: $fontSizeS;
+          color: #fff;
+        }
+      }
+
+      > .more {
+        position: absolute;
+        bottom: .2rem;
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+
+footer{
+  @include center-block;
+  height: 1.9rem;
+  background: #29bde0;
+
+  >a{
+    width: 80%;
+    height: .89rem;
+    line-height: .89rem;
+    text-align: center;
+    font-size: .36rem;
+    background: #fbb435;
+  }
+}

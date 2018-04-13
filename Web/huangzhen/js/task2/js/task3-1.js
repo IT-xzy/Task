@@ -5,7 +5,7 @@ var num = 1;
 var obj = JSON.stringify(player);
 obj = sessionStorage.player;
 var player = JSON.parse(obj);
-'/'
+
 
 // 初始状态通用
 $('.number').text(num);
@@ -22,7 +22,7 @@ $("#look").click(function () {
         if (num > player.length) {
             $('#look').text("法官查看");
         } else {
-            sub = (sub.substring(sub.length - 8, sub.length - 5));
+            sub = (sub.substring(sub.length - 7, sub.length - 5));
             // console.log(sub);
             $('#who').text(sub);
             $('#look').text("隐藏身份并传递给 " + (num) + " 号");
