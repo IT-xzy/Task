@@ -1,0 +1,88 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+    <!-- 配置组件扫描器，使用注解方式开发,不用配置dao和service -->
+    <!-- 在springmvc.xml文件中也可以配置这个属性 -->
+    <context:component-scan base-package="task2"/>
+
+    <!-- 配置数据库连接池 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!-- 基本属性 url、user、password -->
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/><!--druid可以不配置驱动-->
+        <property name="url" value="jdbc:mysql://localhost:3306/task1?useUnicode=true&amp;useSSL=true&amp;characterEncoding=utf8" />
+        <property name="username" value="root" />
+        <property name="password" value="135246" />
+        <!--&lt;!&ndash; 连接初始值，连接池启动时创建的连接数量的初始值  默认值是0 &ndash;&gt;-->
+        <!--<property name="initialSize" value="${jdbc.initialSize}"/>-->
+        <!--&lt;!&ndash; 最小空闲值.当空闲的连接数少于阀值时，连接池就会预申请去一些连接，以免洪峰来时来不及申请  默认值是0 &ndash;&gt;-->
+        <!--<property name="minIdle" value="${jdbc.minIdle}"/>-->
+        <!--&lt;!&ndash; 最大空闲值.当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，一直减少到maxIdle为止 ，0时无限制  默认值是8 &ndash;&gt;-->
+        <!--<property name="maxIdle" value="${jdbc.maxIdle}"/>-->
+        <!--&lt;!&ndash; 连接池的最大值，同一时间可以从池分配的最多连接数量，0时无限制   默认值是8 &ndash;&gt;-->
+        <!--<property name="maxTotal" value="${jdbc.maxTotal}"/>-->
+    </bean>
+
+    <!-- mybatis文件配置，扫描所有mapper.xml文件 -->
+    <!-- 配置mybatisSqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="task2.pojo.User" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:task2/mapper/StudentMapper.xml"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 配置SqlSessionTemplate -->
+    <!--<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">-->
+        <!--<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <!-- 配置mybatis mapper接口，扫描所有dao -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="task2.mapper"/>
+    </bean>
+
+
+    <!-- 事务管理 通知 -->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+    <!--<tx:attributes>-->
+    <!--&lt;!&ndash; 对insert,update,delete 开头的方法进行事务管理,只要有异常就回滚 &ndash;&gt;-->
+    <!--<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>-->
+    <!--<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>-->
+    <!--<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>-->
+    <!--&lt;!&ndash; select,count开头的方法,开启只读,提高数据库访问性能 &ndash;&gt;-->
+    <!--<tx:method name="select*" read-only="true"/>-->
+    <!--<tx:method name="count*" read-only="true"/>-->
+    <!--&lt;!&ndash; 对其他方法 使用默认的事务管理 &ndash;&gt;-->
+    <!--<tx:method name="*"/>-->
+    <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!-- 对dataSource 数据源进行事务管理 -->
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"-->
+    <!--p:dataSource-ref="dataSource"/>-->
+
+    <!-- 使用annotation注解方式配置事务,启用对事务注解的支持 -->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+</beans>
