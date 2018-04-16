@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fml.mapper.StudentMapper">
+    <insert id="add" parameterType="com.fml.pojo.Student">
+        insert into student (create_at, update_at, stu_name, email, password, salt,lesson_type, stu_status, company, post, description)
+            values (#{create_at}, #{update_at}, #{stu_name}, #{email}, #{password}, #{salt}, #{lesson_type}, #{stu_status}, #{company}, #{post}, #{description})
+    </insert>
+
+    <delete id="deleteById">
+        delete from student where stu_id = #{stu_id}
+    </delete>
+
+    <delete id="deleteAll">
+        delete from student
+    </delete>
+
+    <update id="update" parameterType="com.fml.pojo.Student">
+        update student
+        set
+        update_at = #{update_at},
+        stu_name = #{stu_name},
+        email = #{email},
+        password = #{password},
+        lesson_type = #{lesson_type},
+        stu_status = #{stu_status},
+        company = #{company},
+        post = #{post},
+        description = #{description}
+    </update>
+
+    <select id="getById" parameterType="int" resultType="com.fml.pojo.Student">
+        select * from student where stu_id = #{stu_id}
+    </select>
+
+    <select id="getByStatus" parameterType="int" resultType="Student">
+        select * from student where stu_status = 4
+    </select>
+
+    <select id="getTotalCount" parameterType="int" resultType="java.lang.Integer">
+        select count(*) from student
+    </select>
+
+    <select id="getWorkCount" parameterType="int" resultType="java.lang.Integer">
+        select count(*) from student where stu_status = 3 or stu_status = 4
+    </select>
+
+    <select id="getStudyCountByLesson" parameterType="int" resultType="java.lang.Integer">
+        select count(*) from student where lesson_type = #{lesson_type}
+    </select>
+
+    <select id="getStuByEmail" resultType="Student">
+        select * from student where email = #{email}
+    </select>
+</mapper>

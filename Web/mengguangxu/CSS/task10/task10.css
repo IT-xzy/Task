@@ -1,0 +1,424 @@
+ html {
+     font-size: 625%;
+ }
+ body {
+     margin: 0;
+     padding: 0;
+     overflow-x: hidden;
+ }
+ header {
+     position: fixed;
+     top: 0;
+     width: 100%;
+     height: 4vh;
+     background-color: #1d7ad9;
+     z-index: 999999;
+ }
+ /*联系电话*/
+ .phone {
+     float: left;
+     color: #fff;
+     font-size: .1rem;
+     line-height: 4vh;
+ }
+ /*两个按钮*/
+ .bt1,
+ .bt2 {
+     float: right;
+     outline: none;
+     border: none;
+ }
+ .bt1 {
+     width: 15vw;
+     height: 4vh;
+     font-size: .1rem;
+     background-color:#1d7ad9;
+     color: #fff;
+     border-right: 1px solid #fff;
+ }
+ .bt2 {
+     width: 13vw;
+     height: 4vh;
+     font-size: .1rem;
+     background-color: #1d7ad9;
+     color: #fff;
+     border-left: 1px solid #fff;
+     border-right: 1px solid #fff;
+ }
+ .bt1:visited,
+ .bt2:visited {
+     background-color: #fff;
+     color: #000;
+ }
+ .bt1:hover,
+ .bt2:hover {
+     background-color: #fff;
+     color: #000;
+ }
+ /*导航*/
+ .nav1 {
+     margin-bottom: 0;
+     padding: 0;
+     border:none;
+     background-color: #f1f1f1;
+     margin-top: 4vh;
+ }
+ .ul1 {
+     float: right;
+     margin-right: 15px;
+ }
+ @media screen and (max-width: 767px){
+     .ul1 {
+         float: none;
+         text-align: center;
+         background-color: #f1f1f1;
+         z-index: 999999;
+     }
+ }
+ @media screen and (min-width: 767px)and(max-width: 769px){
+     .ul1 {
+         float: none;
+         text-align: center;
+         z-index: 999999;
+     }
+ }
+ .bt4 {
+     margin-right: -15px;
+ }
+ button {
+     font-size: .1rem;
+     color: #000;
+     background-color: #fff;
+     outline: none;
+     border: none;
+     border-radius: 2px;
+ }
+  button:hover {
+     background-color: #1d7ad9;
+     color: #fff;
+  }
+ @media screen and (max-width: 767px){
+     a button {
+         width: 100%;
+             font-size: .1rem;
+             color: #000;
+             background-color: #fff;
+             outline: none;
+             border: none;
+             border-radius: 2px;
+         }
+ }
+  /*主体*/
+ main {
+     width: 100%;
+     background-color: #fff;
+ }
+ .box {
+     float: right;
+     width: 50vw;
+ }
+ .box1 {
+     float: right;
+     display: inline-block;
+     position: relative;
+     width: 12vw;
+ }
+ .chang {
+     position: absolute;
+     top:5vh;
+     width: 12vw;
+     height: .5vh;
+     border-radius: 2px;
+     background-color:  #cccccc;
+     margin-right: 1vw;
+ }
+ .yuan {
+     position: absolute;
+     top:4vh;
+     left: 5vw;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 3vh;
+     height:3vh;
+     background-color: #cccccc;
+     border-radius: 50px;
+ }
+ .yuan span {
+     color: #fff;
+ }
+ .box1 p{
+     display: block;
+     width: 12vw;
+     font-size: .1rem;
+     text-align: center;
+     margin-top: 8vh;
+     color: #cccccc;
+ }
+ .box1:hover .chang {
+     background-color: #ff7f02;
+ }
+ .box1:hover .yuan {
+     background-color: #ff7f02;
+ }
+ .box1:hover p {
+     color: #ff7f02;
+ }
+ @media screen and (max-width: 767px){
+     .box {width: 100vw;}
+     .chang,
+     .box1 {
+         width: 20vw;
+     }
+     .box1 p {
+         width:20vw
+     }
+     .yuan {
+         position: absolute;
+         top: 4vh;
+         left: 8vw;
+     }
+ }
+ /*表单*/
+ .top {
+     display: inline-block;
+     width: 100%;
+     font-size: .13rem;
+     padding-left: .1rem;
+     border-left: 2px solid  #1d7ad9;
+     margin-bottom: .2rem;
+ }
+ .type {
+     width: 100%;
+ }
+ .case {
+     width: 100%;
+     background: #f3f3f3 url(image/box.png) no-repeat left center/.2rem .2rem;
+     color: #1d7ad9;
+     padding: .1rem 0 .1rem .1rem;
+ }
+ .case p {
+     font-size: .1rem;
+     padding-left: .1rem;
+     margin: 0;
+ }
+ @media screen and (max-width: 768px) {
+     .choice {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         align-items: center;
+         width: 100%;
+         white-space: nowrap;
+         border: 1px solid #f3f3f3;
+     }
+     form {
+         display: flex;
+         flex-direction: column;
+         justify-content: space-between;
+         align-items: center;
+         background-color: #fff;
+         padding: .1rem 0 .1rem .2rem;
+     }
+ }
+ .choice {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+     border: 1px solid #f3f3f3;
+ }
+ form {
+     background-color: #fff;
+     padding: .1rem 0 .1rem .2rem;
+ }
+ .min {
+     padding: 0;
+ }
+ input[type="radio"] {
+     display: none;
+ }
+ i {
+     display: inline-block;
+     padding: 5px;
+     border: 1px solid #1d7ad9;
+     border-radius: 50px;
+ }
+ input[type="radio"]:checked+i {
+     border:4px solid #1d7ad9;
+     padding: 2px;
+ }
+ label span,label i {
+     vertical-align: middle;
+ }
+ label span {
+     font-size: .1rem;
+     padding-left: .05rem;
+     margin-right: .05rem;
+ }
+ .select {
+     padding: .1rem .05rem .1rem 0;
+ }
+ select {
+     width: .8rem;
+     font-size: .1rem;
+     border: 1px solid #f3f3f3;
+     appearance: none;
+     -webkit-appearance: none;   /*去除chrome浏览器的默认下拉图片*/
+     background: url(image/san.png) no-repeat right center/.2rem .2rem;
+     padding-left: .1rem;
+     outline: none;
+ }
+ .size {
+     width: 100%;
+     background: #f3f3f3 url(image/size.png) no-repeat left center/.2rem .2rem;
+     color: #1d7ad9;
+     padding: .1rem 0 .1rem .1rem;
+ }
+ .size p {
+     font-size: .1rem;
+     padding-left: .1rem;
+     margin: 0;
+ }
+ .choose {
+     display:flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+     white-space: nowrap;
+     border: 1px solid #f3f3f3;
+ }
+ input[type="text"] {
+     width: .5rem;
+     height: .3rem;
+     border: 1px solid #f3f3f3;
+     outline:none;
+ }
+ .main-box {
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+ }
+ @media screen and (max-width: 768px) {
+     .choose {
+         display:flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+         width: 100%;
+         white-space: nowrap;
+         border: 1px solid #f3f3f3;
+     }
+     .main-box {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+     }
+ }
+ .main-box1 {
+     background-color: #fff;
+     padding: .1rem 0 .1rem .2rem;
+ }
+ .material {
+     width: 100%;
+     background: #f3f3f3 url(image/material.png) no-repeat left center/.2rem .2rem;
+     color: #1d7ad9;
+     padding: .1rem 0 .1rem .1rem;
+ }
+ .material p {
+     font-size: .1rem;
+     padding-left: .1rem;
+     margin: 0;
+ }
+.main-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 2rem;
+    border: 1px solid #f3f3f3;
+}
+.bt3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: .5rem;
+    background-color: #ff0000;
+    outline: none;
+    border-radius: 5px;
+}
+.bt3:hover {
+    background-color: #ff0000;
+}
+.bt3 span {
+    font-size: .2rem;
+    color: #fff;
+}
+
+ /*页脚*/
+ footer {
+     width: 100%;
+     background-color: #f1f1f1;
+ }
+ .footer-left {
+     width: 100%;
+     display: block;
+     margin-top: 3vh;
+     margin-bottom: 3vh;
+     font-size: .1rem;
+     color: #bababa;
+ }
+ .footer-content {
+     width: 100%;
+     margin-top: 3vh;
+     margin-bottom: 3vh;
+ }
+ .footer-content div a {
+     margin-right: 2vw;
+     font-size: .1rem;
+     color: #bababa;
+     text-decoration: none;
+ }
+ .footer-content div a:hover {
+     color: #1d7ad9;
+ }
+ .footer-right {
+     width: 100%;
+     margin-top: 3vh;
+     margin-bottom: 3vh;
+ }
+ .footer-right-box {
+     float: right;
+ }
+ .footer-right span {
+     display: block;
+     font-size: .1rem;
+     color: #bababa;
+ }
+ .img {
+     float: right;
+     max-width: .42rem;
+     width: .35rem;
+     margin: .05rem 0 0 .1rem;
+ }
+ @media screen and (max-width: 768px){
+     .footer-right-box {
+         float: left;
+     }
+     .img {
+         float: none;
+     }
+ }
+ address {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     height: auto;
+     margin: 0;
+     background-color: #1d7ad9;
+     font-size: .1rem;
+     color: #fff;
+ }

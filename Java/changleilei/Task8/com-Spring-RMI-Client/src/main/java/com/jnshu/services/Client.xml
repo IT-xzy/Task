@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 客户端 -->
+    <bean id="StudentService1" lazy-init="true" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.services.StudentsService"/>
+        <property name="serviceUrl" value="rmi://localhost:1099/StudentsServiceImpl"/>
+    </bean>
+
+    <!-- 客户端 -->
+    <bean id="StudentService2" lazy-init="true" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.services.StudentsService"/>
+        <property name="serviceUrl" value="rmi://localhost:1098/StudentsServiceImpl"/>
+    </bean>
+</beans>
