@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://org.wyq.task.service" name="BaseService">
+
+    <component name="schoolServiceComponent">
+        <!--spring配置文件，需要设置sca:service-->
+        <implementation.spring location="/config/spring/applicationContext-dao.xml"/>
+        <!--<implementation.java class="org.wyq.task.service.SchoolService"/>-->
+
+        <service name="BaseService">
+            <!--这里有2个要求
+            1.如果接口没有加上@Remotable标签,service name就只能为实现类名.
+            2.接口加了@Remotable标签,service name 就只能为接口名.
+            3.所以这里只能为 接口名 or 类名.
+            -->
+            <interface.java interface="org.wyq.task.service.BaseService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8888/SchoolServiceA"/>
+        </service>
+
+    </component>
+</composite>

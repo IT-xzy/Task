@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-lazy-init="true">
+
+    <!--<bean id="schoolServiceRmiA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://127.0.0.1:8086/serviceRmi"/>-->
+        <!--<property name="serviceInterface" value="org.wyq.task.service.BaseService"/>-->
+        <!--<property name="cacheStub" value="true"/>-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="schoolServiceRmiB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://127.0.0.1:8084/serviceRmi"/>-->
+        <!--<property name="serviceInterface" value="org.wyq.task.service.BaseService"/>-->
+        <!--&lt;!&ndash;stub查询的另一个问题是，目标RMI服务器和RMI注册项在查询时要为可用的。如果客户端在服务器启动之前，尝试查询和缓存该服务stub，那么客户端的启动将会失败（即使还不需要该服务）。&ndash;&gt;-->
+        <!--&lt;!&ndash;为 了能够惰性查询服务stub，设定RmiProxyFactoryBean的lookupStubOnStarup标志为false。然后在第一次访问时查询该stub，也就是说，当代理上的第一个方法被调用的时候去主动查询stub，同时被缓存。这也有一个缺点，就是直到第一次调用，否则无法确认目标服务是否实际存在。&ndash;&gt;-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--&lt;!&ndash;还有一个属性就是cacheStub，当它设置为false的时候，就完全避免了stub的缓存，但影响了性能。需要的时候还是可以试试。&ndash;&gt;-->
+        <!--&lt;!&ndash;利用上面的配置最大的优点是将客户端和服务器端的生命周期尽可能的去耦&ndash;&gt;-->
+        <!--<property name="cacheStub" value="true"/>-->
+        <!--&lt;!&ndash;因为RMI stub被连接到特定的端点，不仅仅是为每个调用打开一个给定的目标地址的连接，所以如果重新启动RMI端点主机的服务器，那么就需要重新注册这些stub，并且客户端需要再次查询它们。&ndash;&gt;-->
+        <!--&lt;!&ndash;虽然目标服务的重新注册在重新启动时通常会自动发生，不过此时客户端保持的stub将会变的陈旧，且客户端不会注意这些，除非他们再次尝试调用stub上的方法，而这也将throw一个连接失败的异常。&ndash;&gt;-->
+        <!--&lt;!&ndash;为了避免这种情形，Spring的RmiProxyFactoryBean提供了一个refreshStubOnConnectFailure的bean属性，如果调用失败，并且连接异常的话，将它设定为true来强制重新自动查询stub。&ndash;&gt;-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+</beans>
