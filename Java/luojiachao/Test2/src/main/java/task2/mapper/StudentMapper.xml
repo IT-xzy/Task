@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="task2.mapper.StudentMapper">
+    <!--<resultMap id="UserResult" type="mybatis.modle.User">-->
+    <!--<id column="id" property="id"/>-->
+    <!--<result column="create_at" property="createAt"/>-->
+    <!--<result column="update_at" property="updateAt"/>-->
+    <!--<result column="Stu_name" property="name"/>-->
+    <!--<result column="profession" property="profession"/>-->
+    <!--<result column="join_date" property="join_date"/>-->
+    <!--<result column="online_id" property="online_id"/>-->
+    <!--<result column="brother" property="brother"/>-->
+    <!--<result column="school" property="school"/>-->
+    <!--<result column="daily" property="daily"/>-->
+    <!--<result column="wishing" property="wishing"/>-->
+    <!--<result column="Qq" property="Qq"/>-->
+    <!--<result column="Heard" property="Heard"/>-->
+    <!--</resultMap>-->
+    <insert id="add"   parameterType="task2.pojo.Student" >
+        INSERT INTO mingdan(create_at,update_at,stu_name, profession, join_date, online_id, brother, school, daily,
+        qq, heard, wishing)
+        VALUES (#{create_at},#{update_at},#{stu_name},#{profession},#{join_date},#{online_id},#{brother},#{school},#{daily},
+        #{qq},#{heard},#{wishing})
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+    <delete id="delete" parameterType="task2.pojo.Student" >
+        delete from mingdan where id= #{id}
+    </delete>
+
+    <select id="findById" parameterType="int" resultType="task2.pojo.Student">
+        select * from mingdan where id=#{id}
+    </select>
+    <select id="findByName" parameterType="String" resultType="task2.pojo.Student">
+        SELECT * FROM mingdan WHERE stu_name LIKE '%${value}%'
+    </select>
+
+    <update id="update" parameterType="task2.pojo.Student">
+        update mingdan
+        <set>
+            <if test="update_at !=null">
+                update_at = #{update_at},
+            </if>
+            <if test="stu_name !=null" >
+                stu_name = #{stu_name},
+            </if>
+
+            <if test="profession!= null">
+                profession = #{profession},
+            </if>
+            <if test="qq != null">
+                qq = #{qq},
+            </if>
+            <if test="join_date != null">
+                join_date = #{join_date},
+            </if>
+            <if test="online_id != null">
+                online_id= #{online_id},
+            </if>
+            <if test="brother != null">
+                brother = #{brother},
+            </if>
+            <if test="school != null">
+                school = #{school},
+            </if>
+            <if test="daily != null">
+                daily = #{daily},
+            </if>
+            <if test="qq != null">
+                qq = #{qq},
+            </if>
+            <if test="wishing !=null">
+                wishing = #{wishing},
+            </if>
+            <if test="heard != null">
+                heard= #{heard}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="list" resultType="task2.pojo.Student">
+        select * from   mingdan
+        <!--<if test="start!=null and count!=null">-->
+            <!--limit #{start},#{count}-->
+        <!--</if>-->
+    </select>
+    <delete id="reset">
+        truncate TABLE mingdan
+
+    </delete>
+    <!--<select id="total" resultType="int">-->
+        <!--select count(*) from   mingdan-->
+    <!--</select>-->
+
+</mapper>

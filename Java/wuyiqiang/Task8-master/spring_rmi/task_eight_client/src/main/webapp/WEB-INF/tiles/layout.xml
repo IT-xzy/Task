@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <definition name="layout" template="/WEB-INF/views/layout.jsp">
+        <put-attribute name="date_tag" value="/WEB-INF/views/date_tag.jsp"></put-attribute>
+    </definition>
+    <!-- 主布局 -->
+    <!-- index项目 -->
+    <definition name="tiles_index" extends="layout">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="header" value="/WEB-INF/views/index_header.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_body.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/index_footer.jsp"/>
+        <put-list-attribute name="cssPathList">
+            <add-attribute value="/css/base.css"></add-attribute>
+            <add-attribute value="/css/main.css"></add-attribute>
+        </put-list-attribute>
+    </definition>
+    <!--项目-->
+    <!--singe_in项目-->
+    <definition name="tiles_index_sign_in" extends="layout">
+        <put-attribute name="title" value="登陆"/>
+        <put-attribute name="header" value="/WEB-INF/views/index_header.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_sign_in.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/index_footer.jsp"/>
+        <put-list-attribute name="cssPathList">
+            <add-attribute value="/css/base.css"></add-attribute>
+            <add-attribute value="/css/main.css"></add-attribute>
+        </put-list-attribute>
+    </definition>
+    <!--profession项目 -->
+    <definition name="tiles_profession" extends="layout">
+        <put-attribute name="title" value="职业"/>
+        <put-attribute name="header" value="/WEB-INF/views/profession_header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/profession_body.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/profession_footer.jsp" />
+        <put-list-attribute name="cssPathList">
+            <add-attribute value="/css/base11.css"></add-attribute>
+            <add-attribute value="/css/t11.css"></add-attribute>
+        </put-list-attribute>
+    </definition>
+    <!--项目-->
+</tiles-definitions>

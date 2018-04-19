@@ -1,0 +1,325 @@
+$white: #fff;
+$black: #333;
+$gray: #999;
+$green: #29b078;
+
+@mixin flex {
+  display: flex;
+  align-items: center;
+}
+@mixin border-top ($width, $style, $color) {
+  box-sizing: border-box;
+  border-top-width: $width;
+  border-top-style: $style;
+  border-top-color: $color;
+}
+@mixin border-right ($width, $style, $color) {
+  box-sizing: border-box;
+  border-right-width: $width;
+  border-right-style: $style;
+  border-right-color: $color;
+}
+@mixin border-bottom ($width, $style, $color) {
+  box-sizing: border-box;
+  border-bottom-width: $width;
+  border-bottom-style: $style;
+  border-bottom-color: $color;
+}
+@mixin border-left ($width, $style, $color) {
+  box-sizing: border-box;
+  border-left-width: $width;
+  border-left-style: $style;
+  border-left-color: $color;
+}
+@mixin border ($width, $style, $color) {
+  box-sizing: border-box;
+  border-width: $width;
+  border-style: $style;
+  border-color: $color;
+}
+
+
+
+a {
+  text-decoration: none;
+}
+.img-responsive {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+
+@mixin container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+
+/*顶部样式*/
+.top-box {
+  width: 100%;
+  background-color: $white;
+}
+.top {
+  @include container;
+  @include flex;
+  justify-content: space-between;
+  padding: .04rem 0;
+}
+@media only screen and (max-width: 767px) {
+  .top {
+    display: none;
+  }
+}
+.top-left {
+  font-size: .14rem;
+  color: $green;
+  margin-left: .15rem;
+}
+.top-right {
+  display: flex;
+  margin-right: .15rem;
+}
+.top-icon {
+  width: .25rem;
+  height: .24rem;
+  font-size: .1rem;
+  margin-left: .2rem;
+}
+
+.new-top {
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .new-top {
+    display: none;
+  }
+}
+.new-top-right {
+  @include flex;
+  justify-content: flex-end;
+  padding: .04rem 0;
+}
+.login {
+  font-size: .18rem;
+  color: $black;
+  padding: 0 .2rem;
+  @include border-right (1px, solid, $green);
+}
+.registeration {
+  font-size: .18rem;
+  color: $black;
+  padding: 0 .2rem;
+}
+/*顶部样式*/
+
+/*导航栏样式*/
+.nav-box {
+  width: 100%;
+  background-color: $green;
+}
+.nav-top {
+  @include container;
+  @include flex;
+  justify-content: flex-end;
+}
+@media only screen and (max-width: 767px) {
+  .nav-top {
+    display: none;
+  }
+}
+.nav-top-content {
+  display: flex;
+}
+.top-content a,
+.top-content1 a{
+  font-size: .18rem;
+  color: $white;
+  @include flex;
+  justify-content: center;
+  padding: .2rem .3rem;
+}
+.top-content a:hover,
+.top-content1 a:hover{
+  @include border-bottom (2px, solid, $white);
+}
+.top-content1 a {
+  @include border-bottom (2px, solid, $white);
+}
+
+.nav-bottom {
+  width: 100%;
+}
+@media only screen and (min-width: 768px) {
+  .nav-bottom {
+    display: none;
+  }
+}
+.nav-bottom-topic {
+  width: 100%;
+  height: .5rem;
+  @include flex;
+  justify-content: flex-end;
+  @include border-bottom (1px, solid, $white);
+}
+.nav-bottom-content {
+  width: 100%;
+  display: none;
+}
+.bottom-content {
+  width: 100%;
+  @include border-bottom (1px, solid, $green);
+}
+.bottom-content a:hover,
+.bottom-content1 a:hover{
+  @include border-bottom (1px, solid, $white);
+}
+.bottom-content1 a {
+  @include border-bottom (2px, solid, $white);
+}
+.bottom-content a,
+.bottom-content1 a{
+  font-size: .18rem;
+  color: $white;
+  @include flex;
+  justify-content: center;
+  padding: .1rem;
+}
+
+
+#toggle-trigger {
+  display: none;
+}
+#toggle-trigger ~ :not(checked) ~ .nav-bottom-content{
+  display: none;
+}
+#toggle-trigger:checked ~ .nav-bottom-content{
+  display: block;
+}
+
+
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  width: .4rem;
+  margin-right: .3rem;
+}
+.nav-button-content {
+  width: 100%;
+  height: .07rem;
+  background-color: $white;
+  margin: .03rem 0;
+}
+/*导航栏样式*/
+
+
+/*底部样式*/
+.bottom-box {
+  width: 100%;
+  background-color: $green;
+  padding-bottom: .2rem;
+  @include border-bottom (1px, solid, #2eb57e);
+}
+.bottom {
+  @include container;
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 767px) {
+  .bottom {
+    width: 100%;
+    display: block;
+  }
+}
+.bottom-content-box {
+  width: 30%;
+  padding-left: .15rem;
+  overflow: hidden;
+}
+@media only screen and (max-width: 767px) {
+  .bottom-content-box {
+    width: auto;
+    padding-left: .15rem;
+  }
+}
+.bottom-content-topic {
+  font-size: .16rem;
+  color: $white;
+  padding-top: .4rem;
+}
+.bottom-left-link {
+  width: 100%;
+  font-size: .1rem;
+  display: flex;
+  margin-top: .8rem;
+}
+.left-link-box {
+  @include border-bottom (1px, solid, $green);
+  @include border-right (1px, solid, $white);
+  margin-right: .06rem;
+  padding-right: .06rem;
+}
+.left-link-box:nth-child(3){
+  border-right: none;
+}
+.left-link-box a {
+  font-size: .14rem;
+  color: $white;
+}
+.left-link-box a:hover {
+  @include border-bottom (1px, solid, $white);
+}
+.bottom-mid-link {
+  width: 100%;
+  font-size: .1rem;
+  display: flex;
+  margin-top: .3rem;
+}
+.mid-link-box a{
+  font-size: .14rem;
+  color: $white;
+}
+.mid-link-box {
+  @include border-bottom (1px, solid, $green);
+  margin-right: .1rem;
+}
+.mid-link-box:hover {
+  @include border-bottom (1px, solid, $white);
+}
+.right-link-box {
+  float: right;
+  margin-right: .2rem;
+  overflow: hidden;
+}
+@media only screen and (max-width: 767px) {
+  .right-link-box {
+    float: left;
+    margin-left: .1rem;
+    overflow: hidden;
+  }
+}
+
+
+.bottom-icon {
+  width: .92rem;
+  height: .92rem;
+  background-image: url(../image/qrcod.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: .1rem;
+}
+/*底部样式*/
+
+/*底部信息样式*/
+.bottom-bottom {
+  width: 100%;
+  background-color: $green;
+  text-align: center;
+  font-size: .12rem;
+  color: $white;
+  padding: .1rem 0;
+}
+/*底部信息样式*/

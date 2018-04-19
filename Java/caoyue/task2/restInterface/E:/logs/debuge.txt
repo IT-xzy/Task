@@ -1,0 +1,624 @@
+ INFO [main] - FrameworkServlet 'mvcMapper': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'mvcMapper-servlet': startup date [Wed Apr 11 15:16:36 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'mvcMapper-servlet': startup date [Wed Apr 11 15:16:36 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'mvcMapper-servlet': startup date [Wed Apr 11 15:16:36 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'mvcMapper': initialization completed in 2887 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 15:34:31 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 15:34:31 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 15:34:31 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3276 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 18:38:17 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/newstudent]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] WARN [main] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+to {[/user/student]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException mapped.
+]ERROR [main] - Context initialization failed
+]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+to {[/user/student]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1578)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:682)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:553)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:494)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:244)
+	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:532)
+	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:344)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:791)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1242)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:717)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:494)
+	at org.mortbay.jetty.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:298)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:172)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:282)
+	at org.mortbay.jetty.plugin.JettyServer.doStart(JettyServer.java:65)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:520)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:365)
+	at org.mortbay.jetty.plugin.JettyRunMojo.execute(JettyRunMojo.java:523)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:154)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:146)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:309)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:194)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:107)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:955)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:290)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:194)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+to {[/user/student]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:560)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:524)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:250)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:226)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:191)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:161)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:125)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1637)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	... 61 more
+ INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 18:40:01 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/newstudent]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/studentname]}" onto public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+] WARN [main] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+to {[/user/list],methods=[GET]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception mapped.
+]ERROR [main] - Context initialization failed
+]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+to {[/user/list],methods=[GET]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1578)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:682)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:553)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:494)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:244)
+	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:532)
+	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:344)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:791)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1242)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:717)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:494)
+	at org.mortbay.jetty.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:298)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:172)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:282)
+	at org.mortbay.jetty.plugin.JettyServer.doStart(JettyServer.java:65)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:520)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:365)
+	at org.mortbay.jetty.plugin.JettyRunMojo.execute(JettyRunMojo.java:523)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:154)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:146)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:309)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:194)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:107)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:955)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:290)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:194)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+to {[/user/list],methods=[GET]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:560)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:524)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:250)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:226)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:191)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:161)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:125)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1637)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	... 61 more
+ INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 18:47:00 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/newstudent]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/studentname]}" onto public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] WARN [main] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+to {[/user/list],methods=[GET]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception mapped.
+]ERROR [main] - Context initialization failed
+]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+to {[/user/list],methods=[GET]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1578)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:682)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:553)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:494)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:244)
+	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:532)
+	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:344)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:791)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1242)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:717)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:494)
+	at org.mortbay.jetty.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:298)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:172)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:282)
+	at org.mortbay.jetty.plugin.JettyServer.doStart(JettyServer.java:65)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:520)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:365)
+	at org.mortbay.jetty.plugin.JettyRunMojo.execute(JettyRunMojo.java:523)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:154)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:146)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:309)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:194)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:107)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:955)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:290)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:194)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+to {[/user/list],methods=[GET]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:560)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:524)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:250)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:226)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:191)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:161)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:125)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1637)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	... 61 more
+ INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:00:10 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/newstudent]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/studentname]}" onto public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:00:10 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:00:10 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 2641 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:01:51 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/newstudent]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] WARN [main] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+to {[/user/student]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException mapped.
+]ERROR [main] - Context initialization failed
+]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+to {[/user/student]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1578)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:545)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:668)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:682)
+	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:553)
+	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:494)
+	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
+	at javax.servlet.GenericServlet.init(GenericServlet.java:244)
+	at org.eclipse.jetty.servlet.ServletHolder.initServlet(ServletHolder.java:532)
+	at org.eclipse.jetty.servlet.ServletHolder.doStart(ServletHolder.java:344)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:791)
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:265)
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1242)
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:717)
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:494)
+	at org.mortbay.jetty.plugin.JettyWebAppContext.doStart(JettyWebAppContext.java:298)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.server.handler.ContextHandlerCollection.doStart(ContextHandlerCollection.java:172)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerCollection.doStart(HandlerCollection.java:229)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.handler.HandlerWrapper.doStart(HandlerWrapper.java:95)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:282)
+	at org.mortbay.jetty.plugin.JettyServer.doStart(JettyServer.java:65)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.startJetty(AbstractJettyMojo.java:520)
+	at org.mortbay.jetty.plugin.AbstractJettyMojo.execute(AbstractJettyMojo.java:365)
+	at org.mortbay.jetty.plugin.JettyRunMojo.execute(JettyRunMojo.java:523)
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:134)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:208)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:154)
+	at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:146)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:117)
+	at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject(LifecycleModuleBuilder.java:81)
+	at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build(SingleThreadedBuilder.java:51)
+	at org.apache.maven.lifecycle.internal.LifecycleStarter.execute(LifecycleStarter.java:128)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:309)
+	at org.apache.maven.DefaultMaven.doExecute(DefaultMaven.java:194)
+	at org.apache.maven.DefaultMaven.execute(DefaultMaven.java:107)
+	at org.apache.maven.cli.MavenCli.execute(MavenCli.java:955)
+	at org.apache.maven.cli.MavenCli.doMain(MavenCli.java:290)
+	at org.apache.maven.cli.MavenCli.main(MavenCli.java:194)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced(Launcher.java:289)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.launch(Launcher.java:229)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode(Launcher.java:415)
+	at org.codehaus.plexus.classworlds.launcher.Launcher.main(Launcher.java:356)
+	at org.codehaus.classworlds.Launcher.main(Launcher.java:47)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'springController' method 
+public java.lang.String com.controller.SpringController.jumptosearchbyname() throws java.lang.Exception
+to {[/user/student]}: There is already 'springController' bean method
+public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:560)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:524)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:250)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:226)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:191)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:161)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:125)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1637)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	... 61 more
+ INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:02:37 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/newstudent]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:02:37 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:02:37 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3109 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:03:31 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/newstudent]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:03:31 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:03:31 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3412 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:07:52 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:07:52 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:07:52 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3702 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:19:13 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent/{ID}],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:19:13 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:19:13 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3126 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:27:31 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent],methods=[PUT]}" onto public java.lang.String com.controller.SpringController.jumptoupdate(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:27:31 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:27:31 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3559 ms
+] WARN [qtp6688524-16] - Request method 'GET' not supported
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:30:06 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectOne(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:30:06 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Wed Apr 11 19:30:06 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3115 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 09:53:07 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectOne(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 09:53:07 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 09:53:07 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 3442 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:01:44 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByID(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectOne(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:01:44 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:01:44 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 2975 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:10:09 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectOne(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:10:09 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:10:09 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 2802 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:20:26 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectOne(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:20:26 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:20:26 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 2671 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:48:56 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/result],methods=[POST]}" onto public java.lang.String com.controller.SpringController.insert(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/newstudent],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectOne(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/new]}" onto public java.lang.String com.controller.SpringController.turntoinsert() throws java.io.IOException
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:48:56 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:48:56 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 2804 ms
+] INFO [main] - FrameworkServlet 'restInterface': initialization started
+] INFO [main] - Refreshing WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:58:16 CST 2018]; root of context hierarchy
+] INFO [main] - Loading XML bean definitions from class path resource [com/StudentBeans.xml]
+] INFO [main] - Loading XML bean definitions from class path resource [restInterface-servlet.xml]
+] INFO [main] - Loading properties file from class path resource [db.properties]
+] INFO [main] - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+] INFO [main] - Mapped "{[/user/sturesult]}" onto public java.lang.String com.controller.SpringController.update(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/result],methods=[POST]}" onto public java.lang.String com.controller.SpringController.insert(com.POJO.DateTypeChange1,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/list],methods=[GET]}" onto public java.lang.String com.controller.SpringController.select(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/student]}" onto public java.lang.String com.controller.SpringController.gotosearch() throws java.io.IOException
+] INFO [main] - Mapped "{[/user/student/{ID}],methods=[DELETE]}" onto public java.lang.String com.controller.SpringController.delect(int,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/newstudent],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectOne(java.lang.Integer,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/nameList],methods=[GET]}" onto public java.lang.String com.controller.SpringController.selectByName(java.lang.String,org.springframework.ui.Model) throws java.lang.Exception
+] INFO [main] - Mapped "{[/user/new]}" onto public java.lang.String com.controller.SpringController.turntoinsert() throws java.io.IOException
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:58:16 CST 2018]; root of context hierarchy
+] INFO [main] - Looking for @ControllerAdvice: WebApplicationContext for namespace 'restInterface-servlet': startup date [Thu Apr 12 10:58:16 CST 2018]; root of context hierarchy
+] INFO [main] - Mapped URL path [/**] onto handler 'org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler#0'
+] INFO [main] - FrameworkServlet 'restInterface': initialization completed in 2913 ms
+]
