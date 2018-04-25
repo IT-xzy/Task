@@ -1,0 +1,45 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"-->
+       <!--xsi:schemaLocation="-->
+        <!--http://www.springframework.org/schema/beans-->
+        <!--http://www.springframework.org/schema/beans/spring-beans-3.2.xsd-->
+        <!--http://www.springframework.org/schema/cache-->
+        <!--http://www.springframework.org/schema/cache/spring-cache-3.2.xsd"-->
+       <!--default-autowire="byName">-->
+
+    <!--<bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<bean class="java.net.InetSocketAddress">-->
+                    <!--<constructor-arg value="127.0.0.1" />-->
+                    <!--<constructor-arg value="11211" />-->
+                <!--</bean>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--<property name="connectionPoolSize" value="5" />-->
+        <!--<property name="commandFactory">-->
+            <!--<bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory" />-->
+        <!--</property>-->
+        <!--<property name="transcoder">-->
+            <!--<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="memcachedClient" factory-bean="memcachedClientBuilder"-->
+          <!--factory-method="build" destroy-method="shutdown" />-->
+
+    <!--<bean id="cacheManager" class="memcached.MemcachedCacheManager">-->
+        <!--<property name="memcachedClient" ref="memcachedClient" />-->
+        <!--<property name="configMap">-->
+            <!--<map>-->
+                <!--&lt;!&ndash; key：@Cacheable、@CachePut、@CacheEvict等的value属性。value：缓存过期时间(单位：秒)，默认值：0 &ndash;&gt;-->
+                <!--<entry key="defaultCache" value="0" />&lt;!&ndash; 默认缓存区 不过期 &ndash;&gt;-->
+                <!--<entry key="inTimeCache" value="3600" />&lt;!&ndash; 实时缓存区 一小时过期 &ndash;&gt;-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<cache:annotation-driven cache-manager="cacheManager" />-->
+
+<!--</beans>-->
