@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.token.dao.UserInfoMapper">
+    <insert id="add" parameterType="UserInfo">
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into user_info (username,password,create_at,update_at)
+        values (#{username},#{password},#{create_at},#{update_at})
+    </insert>
+    <select id="getById" resultType="UserInfo">
+        select * from user_info where id =#{id}
+    </select>
+    <select id="getByName" resultType="UserInfo">
+        select * from user_info where username=#{username}
+    </select>
+</mapper>
