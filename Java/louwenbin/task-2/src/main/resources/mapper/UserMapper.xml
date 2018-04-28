@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserMapper">
+
+    <select id="selectUser" parameterType="int" resultType="com.entity.User">
+        SELECT * FROM step2 WHERE id = #{id}
+    </select>
+
+    <insert id="insertUser" parameterType="com.entity.User">
+         insert into step2 (name,sex,qq,type,admission,graduate,link,wish,audit,understand) values(#{name},#{sex},#{qq},#{type},#{admission},#{graduate},#{link},#{wish},#{audit},#{understand})
+    </insert>
+
+    <update id="updateUser" parameterType="com.entity.User">
+        UPDATE step2 SET name=#{name},sex=#{sex},qq=#{qq},type=#{type},admission=#{admission},graduate=#{graduate},link=#{link},wish=#{wish},audit=#{audit},understand=#{understand} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM step2 WHERE id = #{id}
+    </delete>
+
+    <select id="getAll" resultType="User">
+        select * from step2
+    </select>
+</mapper>
