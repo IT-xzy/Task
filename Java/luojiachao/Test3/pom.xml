@@ -1,0 +1,301 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>java</groupId>
+	<artifactId>Test2</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>Task2 Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+	</properties>
+
+	<dependencies>
+
+		<!--添加mybatis依赖-->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.5</version>
+		</dependency>
+
+		<!--添加mybatis-spring依赖-->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+
+		<!--添加数据库连接-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.45</version>
+		</dependency>
+
+		<!--添加测试依赖-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<!--添加spring框架组件-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>4.1.3.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>4.3.8.RELEASE</version>
+		</dependency>
+
+		<!--dbcp连接池-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.2</version>
+		</dependency>
+
+		<!--日志依赖-->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<!-- 支持jsp -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>taglibs</groupId>
+			<artifactId>standard</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+
+		<!--servlet/jsp api start-->
+		<!--<dependency>-->
+			<!--<groupId>javax.servlet</groupId>-->
+			<!--<artifactId>servlet-api</artifactId>-->
+			<!--<version>3.0-alpha-1</version>-->
+			<!--<scope>provided</scope>-->
+		<!--</dependency>-->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.2.1-b03</version>
+		</dependency>
+
+		<!--Apache common uploader-->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<!--分页插件-->
+		<dependency>
+			<groupId>com.github.jsqlparser</groupId>
+			<artifactId>jsqlparser</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>5.1.2</version>
+		</dependency>
+		<!-- 支持json，旧包 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
+		<!-- 使用MappingJackson2HttpMessageConverter，加入最新的FastJackson依赖 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.0.pr3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.0.pr3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.9.0.pr3</version>
+		</dependency>
+
+		<!-- google的json格式支持 -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.9</version>
+        </dependency>
+
+        <!--<dependency>-->
+		<!--<groupId>org.mortbay.jetty</groupId>-->
+		<!--<artifactId>jetty-maven-plugin</artifactId>-->
+		<!--<version>8.1.16.v20140903</version>-->
+		<!--</dependency>-->
+
+	</dependencies>
+
+	<build>
+		<finalName>task2_SpringMVC</finalName>
+
+		<!--解决idea源经常重置为1.5问题-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+
+			<!--jetty插件-->
+			<!--<plugin>-->
+			<!--<groupId>org.mortbay.jetty</groupId>-->
+			<!--<artifactId>jetty-maven-plugin</artifactId>-->
+			<!--<version>8.1.16.v20140903</version>-->
+
+			<!--<configuration>-->
+			<!--&lt;!&ndash;在ip：host后加任务名&ndash;&gt;-->
+			<!--&lt;!&ndash;contextPath 的默认值的 /，${project.artifactId} 引用了 节点的值，即项目的名称。&ndash;&gt;-->
+			<!--<webAppConfig>-->
+			<!--<contextPath>/${project.build.finalName}</contextPath>-->
+			<!--</webAppConfig>-->
+			<!--&lt;!&ndash;通过命令mvn jetty:stop 执行关闭jetty服务&ndash;&gt;-->
+			<!--<stopKey>shutdown</stopKey>-->
+			<!--<stopPort>8099</stopPort>-->
+			<!--&lt;!&ndash;以配置数值为一个周期，自动的扫描文件检查其内容是否有变化，如果发现文件的内容被改变，则自动重新部署运用。&ndash;&gt;-->
+			<!--&lt;!&ndash;命令行的方式：mvn -Djetty.scanIntervalSeconds=2 jetty:run&ndash;&gt;-->
+			<!--<scanIntervalSeconds>2</scanIntervalSeconds>-->
+			<!--&lt;!&ndash;reload 的可选值 ：[automatic|manual]，默认值为 automatic，它与大于 0 的 scanIntervalSeconds 节点一起作用，&ndash;&gt;-->
+			<!--&lt;!&ndash;实现自动热部署的工作。设为 manual 的好处是，当你改变文件 内容并保存时，不会马上触发自动扫描和重部署的动作，&ndash;&gt;-->
+			<!--&lt;!&ndash;你还可以继续的修改，直至你在 Console 或命令行中敲回车键（Enter）的时候才触发重新加载的动作。&ndash;&gt;-->
+			<!--&lt;!&ndash;这样可以更加的方便调试修改。&ndash;&gt;-->
+			<!--&lt;!&ndash;命令行的方式是：mvn -Djetty.reload=manual jetty:run 。&ndash;&gt;-->
+			<!--<reload>manual</reload>-->
+			<!--&lt;!&ndash;项目的静态资源文件目录默认是 src/main/webapp，如果静态资源目录有多个，或者不在默认的 src/main/webapp 目录下，-->
+			<!--可做如下配置&ndash;&gt;-->
+			<!--<webApp>-->
+			<!--<contextPath>/${project.artifactId</contextPath>-->
+			<!--<resourceBases>-->
+			<!--<resourceBase>${project.basedir}/src/main/webapp</resourceBase>-->
+			<!--<resourceBase>${project.basedir}/commons</resourceBase>-->
+			<!--</resourceBases>-->
+			<!--</webApp>-->
+			<!--</configuration>-->
+			<!--</plugin>-->
+
+		</plugins>
+
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+
+	</build>
+</project>
