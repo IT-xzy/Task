@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 配置基于注解的声明式事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+     <!---->
+    <context:annotation-config />
+    <context:component-scan base-package="com.task.service"/>
+
+    <!-- 连接jdbc数据库所需要的数据信息-->
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+        <property name="username" value="root"/>
+        <property name="password" value="4096"/>
+        <!--初始连接数-->
+        <property name="initialSize" value="1" />
+        <!--最小连接数-->
+        <property name="minIdle" value="5" />
+        <!--最大连接数-->
+        <property name="maxActive" value="20" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <!--用来检测是否有效的sql,要求为查询语句-->
+        <property name="validationQuery" value="SELECT 'x'" />
+        <!--宕机时申请检测，不会影响性能-->
+        <property name="testWhileIdle" value="true" />
+        <!--申请连接时检测连接是否有效，会影响性能-->
+        <property name="testOnBorrow" value="false" />
+        <!--归还连接时检测连接是否有效，会影响性能-->
+        <property name="testOnReturn" value="false" />
+        <!-- 打开PSCache，对支持游标的数据库性能提升巨大 -->
+        <property name="poolPreparedStatements" value="true" />
+        <!--打开PSCache后配置其连接数量-->
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat" />
+    </bean>
+
+   <!-- sqlSessionFactory类，用于创建sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--指定连接数据库的数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--指定mapper文件存放的位置,如果和Dao文件同名同包，可以不写此行-->
+        <property name="mapperLocations" value="classpath:mappers/PersonMappers.xml"/>
+        <!--实体类所在的包,配置别名用的-->
+        <property name="typeAliasesPackage" value="com.task.models"/>
+    </bean>
+    <!--数据映射器类，将PersonMapper接口加入Spring中，注意只能是接口不能是具体实现类-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.task.dao"/><!--扫描Mapper类所在包-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    </bean>
+    <!-- 配置transactionManager事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!-- 配置事物通知属性 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!-- 定义事物传播特性 -->
+        <tx:attributes>
+            <tx:method name="insert" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="edit*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="new*" propagation="REQUIRED" />
+            <tx:method name="set*" propagation="REQUIRED" />
+            <tx:method name="remove*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="change*" propagation="REQUIRED" />
+            <tx:method name="check*" propagation="REQUIRED" />
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="load*" propagation="REQUIRED" read-only="true" />
+            <!--<tx:method name="*" propagation="REQUIRED" read-only="true" />-->
+        </tx:attributes>
+    </tx:advice>
+    <!-- 配置事物切面 -->
+    <aop:config>
+        <aop:pointcut expression="execution(* com.task.service.*.*(..))" id="serviceOperation"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
+    </aop:config>
+
+    <!--配置日志切面,将此切面方法添加到serviceImpl所有方法中-->
+    <!--<bean name="service" class="com.task.service.Impl.PersonServiceImpl">-->
+    <!--</bean>-->
+    <bean id="loggerAspect" class="com.task.utils.LoggerTime"></bean>
+    <!--<bean name="controller" class="com.task.controller.PersonController">-->
+    <!--</bean>-->
+    <!--DB-->
+    <aop:config>
+        <aop:pointcut id="loggerCutpointDb" expression="execution(* com.task.service.Impl.PersonServiceImpl.*(..))"/>
+        <aop:aspect id="logAspect" ref="loggerAspect">
+            <aop:around pointcut-ref="loggerCutpointDb" method="logDb"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
