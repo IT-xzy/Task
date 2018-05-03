@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>gate.6</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background: #314559;
+
+        }
+        .container{
+            width: 600px;
+            height: 600px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -300px;
+            margin-left: -300px;
+            transition: all .5s ease;
+            transform: scale(0.25);
+        }
+        .container:hover {
+            transform: scale(1);
+        }
+        .container:hover .cube-wrap .cube{
+            animation: entrance .5s ease ;
+        }
+        .container:hover .indicators{
+            opacity: 1;
+        }
+        .cube-wrap{
+            width: 300px;
+            height: 300px;
+            perspective: 1000px;
+            user-select: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .cube-wrap .cube{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: all .5s ease;
+            animation: spin 10s linear infinite;
+        }
+        .cube-wrap .cube .cube-face{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            opacity: 0.9;
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+        .cube-wrap .cube .cube-face img{
+            width: 100%;
+            height: 100%;
+        }
+        .cube-face.front{
+            transform: translateZ(150px);
+        }
+        .cube-face.back{
+            transform: rotateX(180deg) translateZ(150px);
+        }
+        .cube-face.left{
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+        .cube-face.right{
+            transform: rotateY(90deg) translateZ(150px);
+        }
+        .cube-face.top{
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        .cube-face.bottom{
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+        .indicators{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -80px;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .indicators .indicator{
+            background-color: #fafafa;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            margin: 6px;
+            opacity: .15;
+        }
+        .controller{
+            display: none;
+        }
+        .controller:nth-of-type(1):checked ~ .cube{
+            transform: translateZ(-150px);
+        }
+        .controller:nth-of-type(2):checked ~ .cube{
+            transform: translateZ(-150px) rotateX(-180deg) ;
+        }
+        .controller:nth-of-type(3):checked ~ .cube{
+            transform: translateZ(-150px) rotateY(90deg) ;
+        }
+        .controller:nth-of-type(4):checked ~ .cube{
+            transform: translateZ(-150px) rotateY(-90deg) ;
+        }
+        .controller:nth-of-type(5):checked ~ .cube{
+            transform: translateZ(-150px) rotateX(-90deg) ;
+        }
+        .controller:nth-of-type(6):checked ~ .cube{
+            transform: translateZ(-150px) rotateX(90deg) ;
+        }
+        .controller:nth-of-type(1):checked ~ .indicators .indicator:nth-of-type(1){ opacity: 1; }
+        .controller:nth-of-type(2):checked ~ .indicators .indicator:nth-of-type(2){ opacity: 1; }
+        .controller:nth-of-type(3):checked ~ .indicators .indicator:nth-of-type(3){ opacity: 1; }
+        .controller:nth-of-type(4):checked ~ .indicators .indicator:nth-of-type(4){ opacity: 1; }
+        .controller:nth-of-type(5):checked ~ .indicators .indicator:nth-of-type(5){ opacity: 1; }
+        .controller:nth-of-type(6):checked ~ .indicators .indicator:nth-of-type(6){ opacity: 1; }
+        .cube_left .cube_action{
+            left: -75px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .cube_right .cube_action{
+            right: -75px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        @media screen and (max-width: 750px) {
+            .cube_left .cube_action{
+                left: -50px;
+            }
+            .cube_right .cube_action{
+                right: -50px;
+            }
+        }
+        .cube_action{
+            background-color: #fafafa;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            width: 40px;
+            height: 40px;
+            opacity: 0.15;
+            position: absolute;
+            transition: opacity 0.5s ease;
+            z-index: 5;
+        }
+        .cube_action:hover{
+            opacity: 1;
+        }
+        .cube_action::before{
+            border-bottom: 4px solid #111;
+            border-right: 4px solid #111;
+            content: '';
+            display: block;
+            height: 25%;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            width: 25%;
+            transform: translate(-70%, -50%) rotate(-45deg);
+        }
+        .cube_left .cube_action::before{
+            transform: translate(-40%, -50%) rotate(135deg);
+        }
+        .container:hover .controller:nth-of-type(1):checked ~ .cube_left .cube_action:nth-of-type(1),
+        .container:hover .controller:nth-of-type(1):checked ~ .cube_right .cube_action:nth-of-type(1){
+            display: block;
+        }
+        .container:hover .controller:nth-of-type(2):checked ~ .cube_left .cube_action:nth-of-type(2),
+        .container:hover .controller:nth-of-type(2):checked ~ .cube_right .cube_action:nth-of-type(2){
+            display: block;
+        }
+        .container:hover .controller:nth-of-type(3):checked ~ .cube_left .cube_action:nth-of-type(3),
+        .container:hover .controller:nth-of-type(3):checked ~ .cube_right .cube_action:nth-of-type(3){
+            display: block;
+        }
+        .container:hover .controller:nth-of-type(4):checked ~ .cube_left .cube_action:nth-of-type(4),
+        .container:hover .controller:nth-of-type(4):checked ~ .cube_right .cube_action:nth-of-type(4){
+            display: block;
+        }
+        .container:hover .controller:nth-of-type(5):checked ~ .cube_left .cube_action:nth-of-type(5),
+        .container:hover .controller:nth-of-type(5):checked ~ .cube_right .cube_action:nth-of-type(5){
+            display: block;
+        }
+        .container:hover .controller:nth-of-type(6):checked ~ .cube_left .cube_action:nth-of-type(6),
+        .container:hover .controller:nth-of-type(6):checked ~ .cube_right .cube_action:nth-of-type(6){
+            display: block;
+        }
+        @-moz-keyframes spin {
+            from {
+                transform: rotateX(45deg) rotateY(45deg);
+            }
+            to {
+                transform: rotateX(405deg) rotateY(765deg);
+            }
+        }
+        @-webkit-keyframes spin {
+            from {
+                transform: rotateX(45deg) rotateY(45deg);
+            }
+            to {
+                transform: rotateX(405deg) rotateY(765deg);
+            }
+        }
+        @-o-keyframes spin {
+            from {
+                transform: rotateX(45deg) rotateY(45deg);
+            }
+            to {
+                transform: rotateX(405deg) rotateY(765deg);
+            }
+        }
+        @-ms-keyframes spin {
+            from {
+                transform: rotateX(45deg) rotateY(45deg);
+            }
+            to {
+                transform: rotateX(405deg) rotateY(765deg);
+            }
+        }
+        @keyframes spin {
+            from {
+                transform: rotateX(45deg) rotateY(45deg);
+            }
+            to {
+                transform: rotateX(405deg) rotateY(765deg);
+            }
+        }
+        @-o-keyframes entrance {
+            from {
+                transform: rotateX(-225deg) rotateY(-225deg);
+            }
+        }
+        @-webkit-keyframes entrance {
+            from {
+                transform: rotateX(-225deg) rotateY(-225deg);
+            }
+        }
+        @-moz-keyframes entrance {
+            from {
+                transform: rotateX(-225deg) rotateY(-225deg);
+            }
+        }
+        @-ms-keyframes entrance {
+            from {
+                transform: rotateX(-225deg) rotateY(-225deg);
+            }
+        }
+        @keyframes entrance {
+            from {
+                transform: rotateX(-225deg) rotateY(-225deg);
+            }
+        }
+        .gate {
+            float: left;
+            display: flex;
+            flex-direction: column;
+        }
+        .right{
+          float: right;
+        }
+        div.gate > a {
+            display: none;
+            text-decoration: none;
+            margin: 8px 10px ;
+            height: 2rem;
+            color: #e5fdfd;
+            font-size: 1rem;
+        }
+        div.gate > span{
+            color: white;
+        }
+    </style>
+    <script src="JS/jquery/2.0.0/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="gate">
+    <span id="btn1" class="btn">css任务</span>
+    <a href="HTML/task1.html">任务1</a>
+    <a href="HTML/mirror.html">任务3</a>
+    <a href="HTML/sign in.html">任务4</a>
+    <a href="HTML/task5.html">任务5</a>
+    <a href="HTML/task6.html">任务6</a>
+    <a href="task7-1.html">任务7</a>
+    <a href="task8-1.html">任务8,9</a>
+    <a href="task10.html">任务10</a>
+    <a href="task11.html">任务11</a>
+    <a href="task12-1.html">任务12</a>
+    <a href="task13-1.html">任务13</a>
+    <a href="task14-1.html">任务14,15</a>
+</div>
+<div class="gate right">
+    <span class="btn" style="text-align: right">js任务</span>
+    <a href="js-task1.html">任务1</a>
+    <a href="js-task2.html">任务2-4</a>
+
+
+</div>
+<div class="container">
+    <div class="cube-wrap">
+        <input type="radio" name="cuber" class="controller" id="1" checked="true">
+        <input type="radio" name="cuber" class="controller" id="2">
+        <input type="radio" name="cuber" class="controller" id="3">
+        <input type="radio" name="cuber" class="controller" id="4">
+        <input type="radio" name="cuber" class="controller" id="5">
+        <input type="radio" name="cuber" class="controller" id="6">
+        <div class="cube">
+            <div class="cube-face front"><img src="IMG/6.jpg"></div>
+            <div class="cube-face back"><img src="IMG/66.jpg"></div>
+            <div class="cube-face left"><img src="IMG/666.jpg"></div>
+            <div class="cube-face right"><img src="IMG/6666.jpg"></div>
+            <div class="cube-face top"><img src="IMG/66666.jpg"></div>
+            <div class="cube-face bottom"><img src="IMG/666666.jpg"></div>
+        </div>
+        <div class="cube_left">
+            <label for="6" class="cube_action"></label>
+            <label for="1" class="cube_action"></label>
+            <label for="2" class="cube_action"></label>
+            <label for="3" class="cube_action"></label>
+            <label for="4" class="cube_action"></label>
+            <label for="5" class="cube_action"></label>
+        </div>
+        <div class="cube_right">
+            <label for="2" class="cube_action"></label>
+            <label for="3" class="cube_action"></label>
+            <label for="4" class="cube_action"></label>
+            <label for="5" class="cube_action"></label>
+            <label for="6" class="cube_action"></label>
+            <label for="1" class="cube_action"></label>
+        </div>
+        <div class="indicators">
+            <label for="1" class="indicator"></label>
+            <label for="2" class="indicator"></label>
+            <label for="3" class="indicator"></label>
+            <label for="4" class="indicator"></label>
+            <label for="5" class="indicator"></label>
+            <label for="6" class="indicator"></label>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(".btn").on("click", function () {
+        $(this).siblings("a").toggle();
+    })
+</script>
+</html>
