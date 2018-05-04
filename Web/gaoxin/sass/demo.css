@@ -1,0 +1,104 @@
+@charset "UTF-8";
+.fjac {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.HolyGrail {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 0;
+  margin: 0; }
+
+header,
+footer {
+  flex: 1;
+  background-color: #23272b; }
+
+.HolyGrail-body {
+  display: flex;
+  flex: 1;
+  height: 80vh; }
+
+.HolyGrail-content {
+  flex: 1;
+  background-color: silver; }
+
+.HolyGrail-nav, .HolyGrail-ads {
+  /* 两个边栏的宽度设为12em */
+  flex: 0 0 12em;
+  background-color: red; }
+
+.HolyGrail-nav {
+  /* 导航放到最左边 */
+  order: -1; }
+
+@media (max-width: 768px) {
+  .HolyGrail-body {
+    flex-direction: column;
+    flex: 1; }
+
+  .HolyGrail-nav,
+  .HolyGrail-ads,
+  .HolyGrail-content {
+    flex: auto; } }
+.hf2 {
+  flex: 0;
+  height: 10vh;
+  background-color: #34bddd; }
+
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0; }
+
+.Site-content {
+  flex: 1; }
+
+.parent {
+  margin: 30px;
+  width: 200px;
+  height: 150px;
+  background-color: black;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  visibility: hidden; }
+
+.child {
+  box-sizing: border-box;
+  background-color: white;
+  flex: 0 0 25%;
+  height: 50px;
+  border: 1px solid red; }
+
+input[type="checkbox"]:checked ~ .parent {
+  visibility: visible; }
+
+body {
+  margin: 0; }
+
+.parent1 {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  width: 100%;
+  height: 150px; }
+
+.child1 {
+  box-sizing: border-box;
+  flex: 0 0 25%;
+  height: 50px;
+  border: 10px white solid;
+  background-color: #34bddd; }
+
+@media only screen and (max-width: 768px) {
+  .child1 {
+    flex: 0 0 50%; } }
+@media only screen and (max-width: 425px) {
+  .child1 {
+    flex: 0 0 100%; } }
+
+/*# sourceMappingURL=demo.css.map */
