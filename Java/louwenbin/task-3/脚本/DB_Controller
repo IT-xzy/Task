@@ -1,0 +1,18 @@
+#!/bin/sh
+echo "查看DB执行时间"
+sed -n '/DB耗时/p' /usr/local/tomcat9/logs/catalina.out 
+echo "查看Controller执行时间"
+sed -n '/Controller耗时/p' /usr/local/tomcat9/logs/catalina.out 
+
+echo "其中DB执行小于10ms"
+sed -n '/DB耗时/p' /usr/local/tomcat9/logs/catalina.out | awk '{if($5""<10) print $0}'|sort -n -r -k 5
+echo "大于10ms小于20ms"
+sed -n '/DB耗时/p' /usr/local/tomcat9/logs/catalina.out | awk '{if($5"">10&&$5""<20) print $0}'|sort -n -r -k 5
+echo "大于20ms"
+sed -n '/DB耗时/p' /usr/local/tomcat9/logs/catalina.out | awk '{if($5"">20) print $0}'|sort -n -r -k 5
+echo "其中Controller执行小于10ms"
+sed -n '/Controller耗时/p' /usr/local/tomcat9/logs/catalina.out | awk '{if($5""<10) print $0}'|sort -n -r -k 5
+echo "大于10ms小于20ms"
+sed -n '/Controller耗时/p' /usr/local/tomcat9/logs/catalina.out | awk '{if($5"">10&&$5""<20) print $0}'|sort -n -r -k 5
+echo "大于20ms"
+sed -n '/Controller耗时/p' /usr/local/tomcat9/logs/catalina.out | awk '{if($5"">20) print $0}'|sort -n -r -k 5
