@@ -1,0 +1,50 @@
+$bgc:#29bde0;
+$white:#fff;
+@mixin min-mix{
+  min-width:320px;
+  max-width:768px;
+}
+body{
+  @include min-mix;
+  margin:0 auto;
+  font-size:62.5%;
+}
+@mixin hf{
+  display:flex ;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 1;
+}
+.header{
+  @include hf;
+  top:0;
+  @include min-mix;
+  width:100%;
+  height:5rem;
+  padding:0 15px;
+  border:1px solid $white;
+  font-size:2rem;
+  color:$white;
+  background-color:$bgc;
+  img{
+    width:2rem;
+    height:2.5rem;
+  }
+
+}
+.header_cover{
+  height:5rem;
+}
+.footer{
+  @include hf;
+  bottom:0;
+  @include min-mix;
+  width:100%;
+  height:8rem;
+}
+.footer_cover{
+  height:8rem;
+  font-size: 2.5rem;
+  color:$white;
+}
