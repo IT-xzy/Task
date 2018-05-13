@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper映射文件，对应数据库中表格字段和实体类属性 -->
+<mapper namespace="com.xiuzhenyuan.task1.dao.StudentDAO">
+
+    <!--单例查询-->
+    <select id="getStudent" parameterType="int"
+            resultType="studentDO">
+        SELECT * FROM student_registrantion WHERE add_id=#{addId}
+    </select>
+
+    <!--储存学员信息，获取自增主键-->
+    <insert id="saveStudent" parameterType="studentDO">
+        <selectKey keyProperty="addId" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO student_registrantion (add_id,name,qq,type,entor_time,graduate_school,net_id,daily_link,wish,senior,create_time,update_time)
+        VALUES(#{addId},#{name},#{qq},#{type},#{entorTime},#{graduateSchool},#{netId},#{dailyLink},#{wish},#{senior},#{createTime},#{updateTime})
+    </insert>
+
+    <!--根据主键全字段更新,if字段为空，字段不更新-->
+    <update id="updateStudent" parameterType="studentDO">
+        UPDATE student_registrantion
+     <!--trim标签替代关键字set-->
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name !=null and name != ''">
+                name=#{name},
+            </if>
+            <if test="qq !=null and qq != ''">
+                qq=#{qq},
+            </if>
+            <if test="type !=null and type != ''">
+                type=#{type},
+            </if>
+            <if test="entorTime !=null and entorTime != ''">
+                entor_time=#{entorTime},
+            </if>
+            <if test="graduateSchool !=null and graduateSchool != ''">
+                graduate_school=#{graduateSchool},
+            </if>
+            <if test="netId !=null and netId != ''">
+                net_id=#{netId},
+            </if>
+            <if test="dailyLink !=null and dailyLink != ''">
+                daily_link=#{dailyLink},
+            </if>
+            <if test="wish !=null and wish != ''">
+                wish=#{wish},
+            </if>
+            <if test="senior !=null and senior != ''">
+                senior=#{senior},
+            </if>
+            <if test="updateTime !=null and updateTime != ''">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+         WHERE add_id=#{addId}
+    </update>
+
+    <!--根据主键id删除学院信息-->
+    <delete id="deleteStudentByAddId" parameterType="int">
+        DELETE FROM student_registrantion WHERE add_id=#{addId}
+    </delete>
+
+    <!--根据name和netId模糊查询信息-->
+    <select id="selectLikeNameNetId" parameterType="studentDO"
+            resultType="studentDO">
+        SELECT * FROM student_registrantion
+        <where>
+            <if test="name !=null and name !=''" >
+                NAME like CONCAT(CONCAT('%',#{name},'%'))
+            </if>
+            <if test="netId !=null and netId !='' ">
+                <bind name="pattern1" value="'%'+_parameter.netId+'%'"></bind>
+                AND net_id LIKE #{pattern1}
+            </if>
+        </where>
+    </select>
+
+<!--批量插入-->
+    <insert id="studentBatchInsert" parameterType="list" useGeneratedKeys="true" keyProperty="addId">
+        INSERT INTO  student_registrantion (add_id,name,qq,type,entor_time,graduate_school,net_id,daily_link,wish,senior,create_time,update_time)
+        VALUES
+        <foreach collection= "list" item= "studentDO"  separator = ",">
+            (#{studentDO.addId},#{studentDO.name},#{studentDO.qq},#{studentDO.type},#{studentDO.entorTime},#{studentDO.graduateSchool},
+            #{studentDO.netId},#{studentDO.dailyLink},#{studentDO.wish},#{studentDO.senior},#{studentDO.createTime},#{studentDO.updateTime})
+        </foreach>
+    </insert>
+
+</mapper>
