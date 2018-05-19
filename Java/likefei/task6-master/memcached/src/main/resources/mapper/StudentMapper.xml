@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StudentMapper">
+    <insert id="add" parameterType="Student" >
+        INSERT INTO student ( name,qq,job,school,url,createtime,updatetime) VALUES (#{name},#{qq},#{job},#{school},#{url},#{createtime},#{updatetime})
+    </insert>
+
+    <delete id="delete" parameterType="Student" >
+        DELETE FROM student WHERE id= #{id}
+    </delete>
+
+    <select id="get" parameterType="java.lang.Integer" resultType="Student">
+        SELECT * FROM   student WHERE id= #{id}
+    </select>
+
+    <update id="update" parameterType="Student" >
+        UPDATE student SET name=#{name},qq=#{qq},job=#{job},school=#{school},url=#{url},updatetime=#{updatetime}  WHERE id=#{id}
+    </update>
+
+    <select id="list" resultType="Student">
+        SELECT * FROM  student
+    </select>
+
+    <select id="gettotal" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM  student
+    </select>
+
+    <select id="getjavatotal" resultType="java.lang.Integer">
+        SELECT COUNT(job) FROM student WHERE job='java'
+    </select>
+
+    <insert id="pinsert" parameterType="java.util.List">
+        INSERT INTO student ( name )
+        VALUES
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item})
+        </foreach>
+    </insert>
+</mapper>

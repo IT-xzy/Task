@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="com.longhang.MybatisTest.mapper.StudentMapper">
+
+
+         <insert id="insert" parameterType="Student">
+             insert into student (id,name,qq,wish,create_at) values(#{id} , #{name} , #{qq} , #{wish},#{create_at})
+        </insert>
+
+         <update id="update" parameterType="Student">
+             update student set wish=#{wish} where Id=#{id}
+        </update>
+
+        <delete id="delete" parameterType="Long">
+         delete from student where id=#{id}
+        </delete>
+
+         <select id="select" parameterType="Long" resultType="Student">
+          select * from student where id=#{id}
+         </select>
+
+         <select id="getAll" resultType="Student">
+          select * from student
+         </select>
+
+     </mapper>
