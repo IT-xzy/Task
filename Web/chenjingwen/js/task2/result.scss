@@ -1,0 +1,131 @@
+$blue:#29bde0;
+$lightblue:#b9e9f5;
+$lightorange:#ffedc5;
+$orange:#fbb435;
+$red:#f67489;
+$pink:#f66f6f;
+$white:#fff;
+$grey:#a6a6a6;
+@mixin fixedwidth{
+    min-width: 320px;
+    max-width: 768px;
+}
+@mixin size($width,$height){
+    width:$width;
+    height:$height;
+}
+body{
+    @include fixedwidth;
+    margin:0 auto;
+}
+header{
+    @include fixedwidth;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    padding: .5rem;
+    font-size: 1rem;
+    color:$white;
+    background-color:$blue;
+    text-align: center;
+    box-sizing: border-box;   
+    .header-left{
+        float:left;
+        img{
+            width:.6rem;
+        }
+    }
+    .header-right{
+        float:right;
+        img{
+            width:1rem;
+        }
+    }
+}
+.congrate{
+    @include fixedwidth;
+    padding-top:4rem;
+    background-color: $blue;
+    img{
+        display:block;
+        width:12rem;
+        margin:0 auto;
+    }
+    .winner{
+        margin-top:-2.4rem;
+        font-size: 1.3rem;
+        text-align: center;
+        color:$white;
+
+    }
+    .greet{
+        margin-top: 1rem;
+        padding:0.5rem 3rem;
+        font-size: 1rem;
+        color:$orange;
+    }
+    .livenum{
+        margin: 0;
+        padding:0.2rem 3rem;
+        font-size:0.8rem;        
+        color:$white;
+    }
+    .survive{
+        margin: 0;
+        padding: 0.2rem 3rem;  
+        font-size: 0.8rem;
+        color:$white;
+    }
+}
+.dailyrecord{
+    @include fixedwidth;
+    margin-bottom:6rem;
+    padding:0 3rem;
+    .days{
+        padding:0.2rem 0;
+    }
+    .night{
+        font-size: 0.8rem;
+        color:$grey;
+    }
+    .daytime{
+        @extend .night;
+        padding-bottom:0.5rem;
+        border-bottom: 1px solid $grey;
+    }
+}
+
+
+
+footer{
+    position:fixed;
+    bottom:0;
+    display: flex;
+    justify-content: space-between;
+    @include fixedwidth;
+    width: 100%;
+    padding:1rem 0.5rem;
+    text-align: center;
+    background-color:rgba(153,223,240, 0.7);
+    box-sizing: border-box;
+    .btn-left{
+        @include size(45%,3rem);
+        border:none;
+        border-radius: 0.5rem;
+        font-size:1rem;
+        text-align: center;
+        outline:none;
+        color:$white;
+        background-color:$pink;
+    }
+    .btn-right{
+        @include size(45%,3rem);
+        border:none;
+        border-radius: 0.5rem;
+        font-size:1rem;
+        text-align: center;
+        outline:none;
+        color:$white;
+        background-color:$orange;
+    }
+}

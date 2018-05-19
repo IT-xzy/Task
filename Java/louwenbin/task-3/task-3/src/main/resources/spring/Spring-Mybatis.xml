@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 开启注解扫描 -->
+    <!--<context:component-scan base-package="com.aop"/>-->
+    <!-- 开启aop注解方式，此步骤s不能少，这样java类中的aop注解才会生效 -->
+    <!--<aop:aspectj-autoproxy/>-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <context:property-placeholder location="classpath:/jdbc.properties"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+        <property name="maxPoolSize" value="30"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="autoCommitOnClose" value="false"/>
+        <property name="checkoutTimeout" value="10000"/>
+        <property name="acquireIncrement" value="2"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--<property name="configLocation" value="classpath:mybatis-config.xml"/>-->
+        <property name="typeAliasesPackage" value="com.entity"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="transactionAop" class="com.aop.TransactionAop"/>
+    <bean id="userController" class="com.controller.UserController"/>
+    <!--<aop:config>-->
+        <!--<aop:pointcut id="beginTransaction" expression="execution(* com.controller.UserController.*(..))"/>-->
+        <!--<aop:pointcut id="commit" expression="execution(* com.controller.UserController.*(..))"/>-->
+        <!--<aop:aspect ref="transactionAop">-->
+            <!--<aop:before method="beginTransaction" pointcut-ref="beginTransaction"/>-->
+            <!--<aop:after method="commit" pointcut-ref="commit"/>-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+</beans>

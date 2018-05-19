@@ -4,8 +4,6 @@ angular.module("myApp")
     $scope.params = $stateParams;
     $scope.startAt = Number($scope.params.startAt) || undefined;  // 假如没有选择日期时点击搜索会上传undefined
     $scope.endAt = Number($scope.params.endAt) || undefined;
-    $scope.size = $scope.params.size || 10;
-    $scope.page = $scope.params.page || 1;
     $scope.typeNum = $scope.params.type;  // 刷新后能保存类型状态
     $scope.statusNum = $scope.params.status;
 
@@ -27,6 +25,7 @@ angular.module("myApp")
             alert("请求失败!");
         }
     })
+    
 
    /* 日期选择器插件 */
     // 点击弹出日期选择器

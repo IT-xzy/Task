@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd">
+
+
+    <context:component-scan base-package="com.fml"/>
+    <!--<context:component-scan base-package="com.fml.utils"/>-->
+    <!--启动@AspectJ支持 默认是false。proxy-target-class强制类代理，可以避免无接口类的代理失败，因为我还要统计Controller层的方法,所以此处强制使用类代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- properties config 导入配置文件 -->
+    <bean name="configurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+                <value>classpath:validation.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 阿里云OSS -->
+    <bean id="ossClient" class="com.aliyun.oss.OSSClient" destroy-method="shutdown">
+        <!--c:_0="${aliyun.oss.endpoint}"
+        c:_1="${aliyun.access.key.id}"
+        c:_2="${aliyun.access.key.secret}"-->
+        <constructor-arg name="endpoint" value="${aliyun.oss.endpoint}" index="0"/>
+        <constructor-arg name="accessKeyId" value="${aliyun.access.key.id}" index="1" type="java.lang.String"/>
+        <constructor-arg name="secretAccessKey" value="${aliyun.access.key.secret}" index="2" type="java.lang.String"/>
+    </bean>
+    <!-- 腾讯云COS -->
+    <bean id="basicCOSCredentials" class="com.qcloud.cos.auth.BasicCOSCredentials">
+        <constructor-arg name="accessKey" value="${qclound.access.key.id}" index="0"/>
+        <constructor-arg name="secretKey" value="${qclound.access.key.secret}" index="1"/>
+    </bean>
+    <bean id="clientConfig" class="com.qcloud.cos.ClientConfig">
+        <constructor-arg name="region" value="${qclound.cos.region}"/>
+    </bean>
+    <bean id="cosClient" class="com.qcloud.cos.COSClient">
+        <constructor-arg name="cred" ref="basicCOSCredentials" index="0"/>
+        <constructor-arg name="clientConfig" ref="clientConfig" index="1"/>
+    </bean>
+    <bean id="objectMetadata" class="com.qcloud.cos.model.ObjectMetadata">
+        <property name="contentType" value="image/jpeg"/>
+    </bean>
+
+
+
+    <import resource="spring-mybatis.xml"/>
+    <import resource="spring-cache.xml"/>
+    <import resource="spring-mvc.xml"/>
+
+
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="emailServiceImpl" method="delete" cron="0 0 0 ? * MON"/>
+    </task:scheduled-tasks>
+</beans>

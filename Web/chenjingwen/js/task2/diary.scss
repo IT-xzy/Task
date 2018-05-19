@@ -1,0 +1,131 @@
+$blue:#29bde0;
+$lightorange:#ffedc5;
+$orange:#fbb435;
+$red:#f67489;
+$white:#fff;
+$gray:#f0f0f0;
+$deepgray:#c9c9c9;
+$green:#83b09a;
+$black:#000;
+$lightblue:#b9e9f5;
+$pink:#f66f6f;
+$grey:#a6a6a6;
+@mixin fixedwidth{
+    min-width: 320px;
+    max-width: 768px;
+}
+@mixin size($width,$height){
+    width:$width;
+    height:$height;
+}
+body{
+    @include fixedwidth;
+    margin:0 auto;
+}
+header{
+    @include fixedwidth;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    padding: .5rem;
+    font-size: 1rem;
+    color:$white;
+    background-color:$blue;
+    text-align: center;
+    box-sizing: border-box;   
+    .header-left{
+        float:left;
+        img{
+            width:.6rem;
+        }
+    }
+    .header-right{
+        float:right;
+        img{
+            width:1rem;
+        }
+    }
+}
+.process{
+    @include fixedwidth;
+    min-height: 100vh;
+    margin-bottom: 6rem;
+    padding:3.5rem 1rem 0 1rem;
+    background-color: $gray;
+    box-sizing: border-box;
+    .daybtn{
+        @include size(100%,3rem);
+        margin-top:0.5rem;
+        border:1px solid $deepgray;
+        font-size: 1rem;
+        color:$blue;
+        background-color:$white;
+        outline:none;
+    }
+    .journal{
+        width:100%;
+        margin-top:0.5rem;
+        border:1px solid $deepgray;
+        font-size: 1rem;
+        color:$white;
+        background-color:$white;
+        .triangle{
+            @include size(0,0);
+            margin:0 auto;
+            margin-top:-2rem;
+            border: 1rem solid transparent;
+            border-bottom: 1rem solid $white;
+        }
+        .date{
+            width:100%;
+            p{
+                margin:0.5rem 2rem;
+                padding:0.5rem;
+                text-align: center;
+                background-color:$blue;
+                box-sizing:border-box;
+            }
+            div{
+                font-size: 0.8rem;
+                text-align: center;    
+                color:$black;
+            }
+            .over{
+                background-color:$green;
+            }
+        }
+    }
+    
+}
+footer{
+    position:fixed;
+    bottom:0;
+    display: flex;
+    justify-content: space-between;
+    @include fixedwidth;
+    width: 100%;
+    padding:1rem 0.5rem;
+    text-align: center;
+    background-color:rgba(153,223,240, 0.7);
+    box-sizing: border-box;
+    .btn-left{
+        @include size(45%,3rem);
+        border:none;
+        border-radius: 0.5rem;
+        font-size:1rem;
+        text-align: center;
+        outline:none;
+        color:$white;
+        background-color:$pink;
+    }
+    .btn-right{
+        @include size(45%,3rem);
+        border:none;
+        border-radius: 0.5rem;
+        font-size:1rem;
+        text-align: center;
+        outline:none;
+        color:$white;
+        background-color:$orange;
+    }
+}
