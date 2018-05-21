@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--使用aspect注解的aop-->
+    <mvc:annotation-driven/>
+    <!--使用aspect注解的aop-->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 注解扫描包 -->
+    <!--控制器的扫描必须在spring-mvc.xml中，否则web.xml中的DispatcherServlet拦截器将无法访问到相应的控制器-->
+    <context:component-scan base-package="com.alibaba.controller"/>
+    <!-- 视图定位 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/view/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    <bean id="AdvicesM" class="com.alibaba.aop.AdvicesM"/>
+    <aop:config proxy-target-class="true">
+        <aop:aspect ref="AdvicesM"><!--切面 -->
+            <aop:pointcut expression="execution(* com.alibaba.controller.StudentController.*(..))" id="pointcut2"/><!-- 切点 -->
+            <aop:before method="before" pointcut-ref="pointcut2"/><!--连接通知方法与切点 -->
+            <aop:after method="after" pointcut-ref="pointcut2"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
