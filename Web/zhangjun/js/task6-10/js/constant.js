@@ -32,30 +32,26 @@ app
             firstLevel: "信息管理",
             secondLevel:[
                 {title: "公司列表", url: ""},
-                {title: "职位列表", url: "1"}
-            ],
-            isShow: false
+                {title: "职位列表", url: ""}
+            ]
         },
         {
             firstLevel: "Article管理",
             secondLevel:[
                 {title: "Article列表", url: "home.article_list"},
                 {title: "文章管理", url: ""}
-            ],
-            isShow: false
+            ]
         },
         {
             firstLevel: "用户管理",
             secondLevel:[
                 {title: "用户列表", url: ""}
-            ],
-            isShow: false
+            ]
         },
         {
             firstLevel: "内容管理",
             secondLevel:[
                 {title: "视频管理", url: ""}
-            ],
-            isShow: false
+            ]
         }
     ])
