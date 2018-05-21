@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longhang.stuDao.StudentDao">
+
+
+    <insert id="insert" parameterType="com.longhang.stuModel.Student">
+             insert into student (id,name,qq,wish,major,create_at,update_at,dairylink) values(#{id} , #{name} , #{qq} , #{wish},#{major},#{create_at},#{update_at},#{dairylink})
+        </insert>
+
+    <update id="update" parameterType="com.longhang.stuModel.Student">
+     update student set name=#{name},qq=#{qq},wish=#{wish},major=#{major},create_at=#{create_at},update_at=#{update_at},dairylink=#{dairylink} where Id=#{id}
+    </update>
+    <delete id="delete" parameterType="Long">
+         delete from student where id=#{id}
+        </delete>
+
+    <select id="select" parameterType="Long" resultType="com.longhang.stuModel.Student">
+          select * from student where id=#{id}
+         </select>
+    <select id="selects"  resultType="com.longhang.stuModel.Student">
+          select * from student where id=#{id}
+         </select>
+
+    <select id="getAll" resultType="com.longhang.stuModel.Student">
+          select * from student
+         </select>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://service"
+           name="ServiceComponent" >
+
+    <component name="StudentServiceComponent">
+        <implementation.spring location="applicationContext.xml"/>
+        <service name="studentServiceA">
+            <interface.java interface="com.fml.service.StudentService"/>
+            <tuscany:binding.rmi uri="http://127.0.0.1:8081/studentService"/>
+        </service>
+        <!--xmlns:scallop="http://scallop/xmlns/sca/1.0"  -->
+        <service name="emailServiceA">
+            <interface.java interface="com.fml.service.EmailService"/>
+            <tuscany:binding.rmi uri="http://127.0.0.1:8081/emailService"/>
+        </service>
+        <service name="vocationServiceA">
+            <interface.java interface="com.fml.service.VocationService"/>
+            <tuscany:binding.rmi uri="http://127.0.0.1:8081/vocationService"/>
+        </service>
+
+        <service name="studentServiceB">
+            <interface.java interface="com.fml.service.StudentService"/>
+            <tuscany:binding.rmi uri="http://127.0.0.1:8082/studentService"/>
+        </service>
+        <service name="emailServiceB">
+            <interface.java interface="com.fml.service.EmailService"/>
+            <tuscany:binding.rmi uri="http://127.0.0.1:8082/emailService"/>
+        </service>
+        <service name="vocationServiceB">
+            <interface.java interface="com.fml.service.VocationService"/>
+            <tuscany:binding.rmi uri="http://127.0.0.1:8082/vocationService"/>
+        </service>
+    </component>
+</composite>

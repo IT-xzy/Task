@@ -1,0 +1,129 @@
+$lightblue:#b9e9f5;
+$bgc:#29bde0;
+$white:#fff;
+$ocolor:#f5c97b;
+$ncolor:#83b09a;
+$black:black;
+$orange:#fbb435;
+@mixin pt($top,$left){
+  position:absolute;
+  top:$top;
+  left:$left;
+}
+@mixin size($width,$height){
+  width:$width;
+  height:$height;
+}
+@mixin pad($pad_t,$pad_r,$pad_b,$pad_l){
+  padding:$pad_t $pad_r $pad_b $pad_l;
+}
+@mixin role_set($fz,$color,$bc){
+  font-size:$fz;
+  color:$color;
+  background-color:$bc;
+}
+
+.discuss{
+  position:relative;
+  overflow:hidden;
+  @include pad(1.8rem,2rem,1.5rem,3rem);
+  font-size: 1.5rem;
+  background-color:$lightblue;
+  .play-btn {
+    display: inline-block;
+    position: absolute;
+    top:1.2rem;
+    right: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    background-image: url(../img/9.png);
+    background-repeat: no-repeat;
+    background-size: 3rem 3rem;
+
+  }
+  .play-btn.pause {
+    background-image: url(../img/10.png);
+  }
+  audio {
+    @include pt(1.2rem,100%);
+    position: absolute;
+    top:1.2rem;
+    left: 100%;
+    margin-left: -4rem;
+    opacity: 0;
+  }
+}
+.position{
+  position:relative;
+  .triangle{
+    @include pt(0,5rem);
+    width:0;
+    height:0;
+    border-width:0.7rem 0.5rem;
+    border-style:solid;
+    border-color:#b9e9f5 #29bde0 #29bde0 #29bde0;
+  }
+  .discuss_vote{
+    @include pt(1rem,5rem);
+    font-size: 1.3rem;
+    color: $white;
+  }
+}
+
+
+.role{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @include pad(5rem,3rem,0,3rem);
+  background:$bgc;
+  .role_single{
+    position: relative;
+    width:25%;
+    margin-bottom:5rem;
+    border:2px solid $white;
+    box-sizing: content-box;
+    .role_occupation{
+      width:100%;
+      padding-top:30%;
+      padding-bottom:30%;
+      text-align: center;
+      @include role_set(1.7rem,$black,$ocolor);
+    }
+    .role_number{
+      width:100%;
+      padding-top:10%;
+      padding-bottom:10%;
+      text-align: center;
+      @include role_set(1.3rem,$white,$ncolor);
+    }
+    .role_hover{
+      display: none;
+      position:absolute;
+      top:100%;
+      width:100%;
+      margin-top:1rem;
+      img{
+        width:100%;
+        height:3rem;
+      }
+    }
+  }
+}
+.role_single:hover .role_hover{
+  display: block;
+}
+.footer{
+  background-color:$bgc;
+  .btn{
+    @include size(60%,4rem);
+    margin:0 auto;
+    margin-top:2rem;
+    @include role_set(2.5rem,$white,$orange);
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+.footer_cover{
+  background-color:$bgc;
+}

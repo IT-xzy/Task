@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--客户端-->
+    <bean id="emailServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.fml.service.EmailService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8081/emailService"/>
+    </bean>
+    <bean id="studentServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.fml.service.StudentService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8081/studentService"/>
+    </bean>
+    <bean id="vocationServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.fml.service.VocationService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8081/vocationService"/>
+    </bean>
+
+
+    <bean id="emailServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.fml.service.EmailService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8082/emailService"/>
+    </bean>
+    <bean id="studentServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.fml.service.StudentService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8082/studentService"/>
+    </bean>
+    <bean id="vocationServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.fml.service.VocationService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8082/vocationService"/>
+    </bean>
+
+
+
+</beans>

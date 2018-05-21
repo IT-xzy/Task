@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="emailRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="emailRMIServer" />
+        <property name="service" ref="emailServiceImpl" />
+        <property name="serviceInterface" value="com.fml.service.EmailService" />
+        <property name="registryPort" value="8091" />
+        <property name="servicePort" value="8091" />
+    </bean>
+
+    <bean id="studentRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="studentRMIServer" />
+        <property name="service" ref="studentServiceImpl" />
+        <property name="serviceInterface" value="com.fml.service.StudentService" />
+        <property name="registryPort" value="8091" />
+        <property name="servicePort" value="8091" />
+    </bean>
+
+    <bean id="vocationRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="vocationRMIServer" />
+        <property name="service" ref="vocationServiceImpl" />
+        <property name="serviceInterface" value="com.fml.service.VocationService" />
+        <property name="registryPort" value="8091" />
+        <property name="servicePort" value="8091" />
+    </bean>
+</beans>
