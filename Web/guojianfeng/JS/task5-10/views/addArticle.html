@@ -1,0 +1,205 @@
+<div ng-controller="addArticle" class="articleWrap">
+    <div class="articletitle">
+        <span>{{addArticleTitle}}</span>
+    </div>
+
+    <form class="articlelist" name="articleForm" novalidate>
+        <div class="row articleTab">
+            <label class="col-md-2 line">
+                <span class="pull-right warning sign" ng-hide="articleForm.title.$dirty"
+                      ng-show="articleForm.title.$invalid">*</span>标题名称</label>
+            <div class="row col-md-10">
+                <div class="col-md-10">
+                    <input type="text" class="form-control form-add" name="title" ng-model="titleName"
+                           ng-minlength="5" ng-maxlength="20" ng-pattern="/^[A-Za-z0-9\u4e00-\u9fa5]*$/" required>
+                </div>
+                <div class="col-md-2">
+                    <span class="warning" ng-messages="articleForm.title.$error" ng-if="articleForm.title.$touched"
+                          ng-hide="articleForm.title.$valid">
+                        <span ng-message="minlength">标题最小长度为5!</span>
+                        <span ng-message="maxlength">标题最大长度为20!</span>
+                        <span ng-message="pattern">请输入合法字符!</span>
+                        <span ng-message="required">请填写标题!</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row articleTab">
+
+            <label class="col-md-2 line">
+                <span class="pull-right warning sign"
+                      ng-if="addType==undefined||(addType==3&&Industry===undefined)"
+                      >*</span>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</label>
+            <div class="row col-md-10">
+                <div class="row col-xs-6">
+                    <div class="col-xs-7">
+                        <select class="selectAdd" name="type" data-ng-model="addType"
+                                data-ng-options="x.code as x.name for x in types" required>
+                            <option value="" selected>请选择</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="warning" ng-messages="articleForm.type.$error"
+                              data-ng-if="articleForm.type.$touched">
+                        <span ng-message="required">请选择类型!</span></span>
+                    </div>
+                </div>
+                <div class="row col-xs-6">
+                    <div class="col-xs-7">
+                        <select class="selectAdd" name="industry" data-ng-model="Industry" ng-show="addType==3"
+                                data-ng-options="a.code as a.name for a in industries" required>
+                            <option value="" selected>请选择</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-5">
+                        <span class="warning" ng-messages="articleForm.industry.$error"
+                              data-ng-if="articleForm.industry.$touched" ng-show="addType==3">
+                        <span ng-message="required">请选择行业!</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row articleTab">
+            <label class="col-md-2 line">说&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;明</label>
+            <div class="row col-md-10">
+                <div class="col-md-11">
+                    <div type="text/html" class="umeditor" ng-model="addContent"
+                         meta-umeditor meta-umeditor-config='config'
+                         meta-umeditor-placeholder="请输入内容"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row articleTab">
+
+            <label class="col-md-2 line">
+                <span class="pull-right warning sign" ng-hide="articleForm.url.$dirty"
+                      ng-show="articleForm.url.$invalid">*</span>跳转链接</label>
+            <div class="row col-md-10">
+                <div class="col-md-10">
+                    <input type="text" class="form-control form-add" name="url" data-ng-model="url"
+                           data-ng-pattern="reg" required>
+                </div>
+                <div class="col-md-2">
+                    <span class="warning" ng-messages="articleForm.url.$error" data-ng-if="articleForm.url.$touched">
+                            <span ng-message="required">请填写链接！</span>
+                            <span ng-message="pattern">格式不正确！</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row articleTab">
+
+            <label class="col-md-2 line">
+                <span class="pull-right warning sign" ng-if="!statusText">*</span>
+                配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图</label>
+
+            <div class="row col-md-10">
+                <div class="col-md-12">
+                    <a href="javascript:" class="file">选择文件
+                        <input id="fileId1" type="file" accept="image/*" name="file"
+                               data-nv-file-select="" data-uploader="uploader"
+                               data-ng-click="clearItems()" class="btn btn-primary" multiple/>
+                    </a>
+                </div>
+                <div class="col-md-12">
+                    <div ng-show="uploader.isHTML5" data-ng-thumb="{ file: item._file, height: 100 }">
+                        <img data-ng-src="{{img}}"></div>
+                </div>
+            </div>
+            <!--图片展示-->
+
+        </div>
+
+        <div class="row articleTab">
+            <div class="col-md-2"></div>
+            <div class="col-md-9">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>图片名</th>
+                        <th>文件大小</th>
+                        <th>进度</th>
+                        <th>操作</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in uploader.queue">
+                        <td class="widTd">{{item.file.name}}</td>
+                        <td>{{item.file.size/1024/1024|number:2}} MB</td>
+                        <td data-ng-show="uploader.isHTML5" class="uploadtd">
+                            <div class="progress-box">
+                                <div class="item-progress itemProgress" style="background: #2196F3;"
+                                     data-ng-style="{ 'width': item.progress + '%'}">{{ item.progress }}%
+                                </div>
+                            </div>
+                        </td>
+                        <td><span data-ng-show="statusText" class="glyphicon glyphicon-ok"></span></td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm" data-ng-click="item.upload()"
+                                    data-ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                <span class="glyphicon glyphicon-upload"></span>上传
+                            </button>
+                            <button class="btn btn-danger btn-sm" data-ng-click="clearItems()">
+                                <span class="glyphicon glyphicon-trash"></span>删除
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success" data-ng-click="OnLine()"
+                        data-ng-disabled="articleForm.title.$invalid || addType == undefined ||(addType == 3 && Industry == undefined)
+                         || articleForm.url.$invalid || url == false || url == undefined ||statusText==''">立即上传
+                </button>
+                <button type="button" class="btn btn-success" data-ng-click="draft()"
+                        data-ng-disabled="articleForm.title.$invalid || addType == undefined ||(addType == 3 && Industry == undefined)
+                         || articleForm.url.$invalid || url == false || url == undefined ||statusText==''">存为草稿
+                </button>
+                <button type="button" class="btn btn-default" data-ng-click="remove()">取消</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

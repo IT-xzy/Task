@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com"/>
+    <mvc:annotation-driven/>
+    <context:property-placeholder location="classpath:driud.properties,classpath:xmemcached.properties,classpath:redis.properties" system-properties-mode="NEVER" ignore-unresolvable="true"/>
+    <!--配置druid连接池-->
+    <bean id="driud" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${initialSize}"/>
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="${maxActive}"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${minIdle}"/>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="${maxWait}"/>
+        <property name="validationQuery" value="${validationQuery}"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="testWhileIdle" value="true"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="252000"/>
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- 1800秒，也就是30分钟 -->
+        <property name="removeAbandonedTimeout" value="1800"/>
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true"/>
+        <!-- 监控数据库 -->
+        <!-- <property name="filters" value="stat" /> -->
+        <property name="filters" value="mergeStat"/>
+    </bean>
+    <!--以下是给mybatis的配置,数据库对话工厂,mapper映射-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="driud" />
+        <!-- 指定mybatis配置文件 -->
+        <property name="configLocation" value="classpath:xml/mybatis.xml" />
+         <!--指定需要别名的类所在的包名 ，或者在mybatis中配置-->
+        <property name="typeAliasesPackage" value="com.bean"/>
+        <!-- 扫描所有xml文件，或者在mybatis中配置 -->
+        <property name="mapperLocations" value="classpath:com/dao/*.xml"/>
+    </bean>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.dao" />
+    </bean>
+
+    <!--&lt;!&ndash;Xmemcached配置&ndash;&gt;-->
+    <!--<bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder"-->
+          <!--p:connectionPoolSize="${memcached.connectionPoolSize}" p:failureMode="${memcached.failureMode}">-->
+        <!--&lt;!&ndash; XMemcachedClientBuilder have two arguments.First is server list,and-->
+            <!--second is weights array. &ndash;&gt;-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<bean class="java.net.InetSocketAddress">-->
+                    <!--<constructor-arg value="${memcached.server1.host}"/>-->
+                    <!--<constructor-arg value="${memcached.server1.port}"/>-->
+                <!--</bean>-->
+
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<value>${memcached.server1.weight}</value>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--&lt;!&ndash; BinaryCommandFactory &ndash;&gt;-->
+        <!--<property name="commandFactory">-->
+            <!--<bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>-->
+        <!--</property>-->
+        <!--<property name="sessionLocator">-->
+            <!--<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>-->
+        <!--</property>-->
+        <!--<property name="transcoder">-->
+            <!--<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; Use factory bean to build memcached client &ndash;&gt;-->
+    <!--<bean id="memcachedClient" factory-bean="memcachedClientBuilder"-->
+          <!--factory-method="build" destroy-method="shutdown" />-->
+
+    <!--（1）如果你有多个数据源需要通过<context:property-placeholder管理，且不愿意放在一个配置文件里，那么一定要加上ignore-unresolvable=“true"-->
+    <!--（2）注意新版的（具体从哪个版本开始不清楚，有兴趣可以查一下）JedisPoolConfig的property name，不是maxActive而是maxTotal，而且没有maxWait属性，建议看一下Jedis源码。-->
+
+    <!-- redis连接池 -->
+    <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!-- redis连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <!--<property name="password" value="${redis.password}"/>-->
+        <property name="poolConfig" ref="jedisConfig"/>
+    </bean>
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--     如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务-->
+        <property name="enableTransactionSupport" value="true"/>
+    </bean>
+        <!--使用实例工厂方式装载hashOperationss对象-->
+    <bean id="hashOperations" factory-bean="redisTemplate" factory-method="opsForHash"/>
+</beans>

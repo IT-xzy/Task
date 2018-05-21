@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+
+
+
+    <!--<context:annotation-config/>-->
+    <context:component-scan base-package="jnshu.taskseven"/>
+    <!--加入jdbc.properties,当自动扫描mapper.xml确定到和jdbc.properties不是同一级目录下-->
+    <!--order="1" 当有多个配置文件时的查找顺序  ignore-unresolvable="false"是否忽略解析不到的属性，如果不忽略，找不到将抛出异常 -->
+    <context:property-placeholder order="1" location="classpath:jdbc.properties"  ignore-unresolvable="false"/>
+    <!-- 注解方式配置事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!--memcached 缓存配置 -->
+    <import resource="classpath:conf/spring-memcached.xml" />
+
+    <!--===================================mybatis=====================================-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName"
+                  value="${master.jdbc.driverClass}" />
+        <property name="url"
+                  value="${master.jdbc.url}?characterEncoding=utf8&amp;useSSL=false" />
+        <property name="username"
+                  value="${master.jdbc.user}" />
+        <property name="password"
+                  value="${master.jdbc.password}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize"
+                  value="${master.jdbc.initialSize}"/>
+        <!-- 连接池最大数量 -->
+        <property name="maxActive"
+                  value="${master.jdbc.maxActive}"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle"
+                  value="${master.jdbc.minIdle}"/>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait"
+                  value="${master.jdbc.maxWait}"/>
+
+        <!-- 性能配置 -->
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <!--DBCP连接池可以缓存PreparedStatement，本质上就是缓存游标。
+        一个SQL语句，无论是Insert,Update,Delete还是Select都是游标操作，
+        只不过Select游标指向查询结果，而其余的指向修改的目标。
+        除了连接可以缓存，游标也是可以缓存的，主要是避免游标的反复创建。
+        虽然Oracle对完全相同的SQL可以共享执行计划，但是也需要去共享池查询这个SQL的信息(该SQL的Hash值是否在共享池内)。
+        缓存游标，则进一步优化，避免了反复查询共享池的操作-->
+        <property name="poolPreparedStatements" value="${master.jdbc.poolPreparedStatements}" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${master.jdbc.maxPoolPreparedStatementPerConnectionSize}" />
+
+        <!-- 其他配置 -->
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${master.jdbc.timeBetweenEvictionRunsMillis}" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="${master.jdbc.minEvictableIdleTimeMillis}" />
+        <!--   建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，
+                  执行validationQuery检测连接是否有效。 -->
+        <property name="testWhileIdle" value="${master.jdbc.testWhileIdle}" />
+        <!-- 这里建议配置为TRUE，防止取到的连接不可用 ,申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。-->
+        <property name="testOnBorrow" value="${master.jdbc.testOnBorrow}" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name="testOnReturn" value="${master.jdbc.testOnReturn}" />
+    </bean>
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <!-- 二、创建mybatis会话工厂 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:mapping/*.xml"></property>
+    </bean>
+
+    <!--MapperScannerConfigurer 可以不用再写映射关系的命名空间-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="jnshu.taskseven.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+
+
+    <!--===================================事务管理=====================================-->
+    <!--(事务管理)transaction manager, use JtaTransactionManager for global tx-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+
+
+    <!--=============AOP=========================AOP====================AOP=================AOP==========-->
+    <bean id="LogAdvice" class="jnshu.taskseven.util.LogAdvice">
+    </bean>
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <aop:config>
+        <aop:aspect id="myAspect" ref="LogAdvice">
+            <!--确定执行什么类进行通知-->
+            <aop:pointcut id="time" expression="execution(* jnshu.taskseven.service.*Service.*(..)) ||
+                                                execution(* jnshu.taskseven.dao.*Mapper.*(..)) ||
+                                                execution(* jnshu.taskseven.controller.*Controller.*(..))" />
+            <aop:around method="around" pointcut-ref="time" />
+        </aop:aspect>
+    </aop:config>
+
+
+
+</beans>

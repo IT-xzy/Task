@@ -1,0 +1,35 @@
+@import "./module/reset.less";
+@import "./module/color.less";
+
+
+body {
+	padding: 8rem 10% 0;
+	background: @baseColor;
+	//wrap（点击进入下一页）
+	#nextPage {
+		display: -webkit-flex;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		//图片
+		#mainPic {  }
+		//标语
+		#slogan {
+			font-size: 4rem;
+			line-height: 4;
+			font-weight: 700;
+			color: @white;
+		}
+	}
+}
+
+//媒体查询
+@media screen and (max-width: 460px) {
+	body {
+		#nextPage {
+			#slogan {
+				font-size: 3rem;
+			}
+		}
+	}
+}

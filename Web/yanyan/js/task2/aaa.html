@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <script type="text/javascript" src="jquery-1.10.2.js"></script>
+</head>
+<body>
+
+<div id="nav">
+    <a href="">朕知道了</a>
+    <a href="">萌萌哒</a>
+    <a href="">不行你来咬我呀</a>
+    <a href="">你是猴子请来的逗逼吗</a>
+</div>
+
+<ul id="u">
+    <li id="foo">foo</li>
+    <li id="bar">bar</li>
+    <li id="baz">baz</li>
+</ul>
+
+<script>
+    $("#u li").click(function(){
+        var a = $('li').index(document.getElementById('bar')); //1，传递一个DOM对象，返回这个对象在原先集合中的索引位置
+        var b = $('li').index($('#bar')); //1，传递一个jQuery对象
+        var c = $('li').index($('li:gt(0)')); //1，传递一组jQuery对象，返回这个对象中第一个元素在原先集合中的索引位置
+        var d = $('#bar').index('li'); //1，传递一个选择器，返回#bar在所有li中的索引位置
+        var e = $('#bar').index(); //1，不传递参数，返回这个元素在同辈中的索引位置。
+        alert(e);
+    });
+
+    $("#nav a").click(function(){
+        //四个经典的用法
+        var index1 = $("#nav a").index(this);
+        var index2 = $("#nav a").index($(this));
+        var index3 = $(this).index();
+        var index4 = $(this).index("a");
+        alert(index2);
+        return false;
+    });
+</script>
+</body>
+</html>

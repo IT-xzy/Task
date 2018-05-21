@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 注解AOP以及MVC驱动 -->
+    <aop:aspectj-autoproxy/>
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+
+    <!--要扫描的Controller的package -->
+    <context:component-scan base-package="com.jnshu.controller"/>
+    <!-- 扫描service包下所有使用注解的类型 -->
+    <context:component-scan base-package="com.jnshu.service"/>
+
+    <bean id="studentService" class="com.jnshu.service.Impl.StudentServiceImpl"/>
+    <bean id="StudentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.jnshu.dao.StudentMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.jnshu.dao"/>
+    </bean>
+    <!-- 配置数据库相关参数properties的属性：${url} -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${studentname}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+    <!-- 配置SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"><!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/><!-- 扫描model包 使用别名 -->
+        <property name="typeAliasesPackage" value="com.jnshu.model"/><!-- 扫描sql配置文件:mapper需要的xml文件 -->
+        <property name="mapperLocations" value="classpath:StudentMapper.xml"/>
+    </bean>
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <!--切面注册-->
+    <bean id="AdvicesM" class="com.jnshu.aop.AdvicesM"/>
+    <aop:config proxy-target-class="true">
+        <aop:aspect ref="AdvicesM"><!--切面 -->
+            <aop:pointcut expression="execution(* com.jnshu.controller.StudentController.*(..))" id="pointcut2"/><!-- 切点 -->
+            <aop:before method="before" pointcut-ref="pointcut2"/><!--连接通知方法与切点 -->
+            <aop:after method="after" pointcut-ref="pointcut2"/>
+        </aop:aspect>
+    </aop:config>
+    <bean id="AdvicesD" class="com.jnshu.aop.AdvicesD"/>
+    <aop:config proxy-target-class="true">
+        <aop:aspect ref="AdvicesD"><!--切面 -->
+            <aop:pointcut expression="execution(* com.jnshu.service.Impl.StudentServiceImpl.*(..))" id="pointcut1"/><!-- 切点 -->
+            <aop:before method="before" pointcut-ref="pointcut1"/><!--连接通知方法与切点 -->
+            <aop:after method="after" pointcut-ref="pointcut1"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

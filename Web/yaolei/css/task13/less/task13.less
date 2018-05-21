@@ -1,0 +1,470 @@
+@import "framework.less";
+@base1: #29bde0;
+@base2: #f0f0f0;
+@base3: #ffffff;
+@base4: #69D1E9;
+.a(@color:#fff;@pad:0 0 0 0;@bg) {
+  text-decoration: none;
+  color:@color;
+  display: flex;
+  width:100%;
+  padding:@pad;
+  justify-content: center;
+  align-items: center;
+  background: @bg;
+}
+.div-box(@col:#fff;@bg:#29bde;@wid:100%;@mar:0;@pad:0;) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: @col;
+  background:@bg;
+  width:@wid;
+  margin:@mar;
+  padding:@pad;
+}
+.header(@wid;@hei;@col;@bg) {
+  width:@wid;
+  height: @hei;
+  color:@col;
+  background: @bg;
+}
+.main(@bg;@top) {
+  background: @bg;
+  position: relative;
+  top: @top;
+}
+.footer(@hei;@bg;@wid) {
+  position: fixed;
+  bottom: 0;
+  height: @hei;
+  background: @bg;
+  z-index:1;
+  width: @wid;
+}
+html {
+  height: 100%;
+  width :100%;
+}
+.body(@bg-col) {
+  background: @bg-col;
+  height: 100%;
+  width: 100%;
+}
+body {
+  .body(#f0f0f0;);
+}
+.header1,.header2-1 {
+  .header(100%;auto;@base3;@base1;);
+  position: fixed;
+  top:0;
+  z-index: 1;
+  div {
+    button {
+      padding: 0;
+      margin: 20px;
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      outline: none;
+      img {
+        height: 20px;
+        width: 20px;
+      }
+      /*&:focus +ul {
+        display: block;
+      }*/
+    }
+    ul {
+      position: absolute;
+      display: none;
+      padding: 0;
+      margin: 0;
+      width: 30%;
+      left: 20px;
+      top: 40px;
+      z-index: 1;
+      background: @base2;
+      /*&:hover {
+        display: block;
+      }*/
+      li {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid @base1;
+        a{
+          .a(#000000;10px 0;@base2);
+        }
+      }
+    }
+  }
+}
+.main1 {
+  .main(@base2;63px);
+  padding: 30px 5%;
+  .triangle {
+    border-left: 15px solid #FBB435;
+    border-right: 1px transparent;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+    position: absolute;
+    right: -10%;
+    top: 10px;
+  }
+  div.last-game {
+    .div-box(#9a9a9a; @base3; 100%; 0; 0);
+    position: relative;
+    a {
+      .a(#9a9a9a;20px 0;@base3)
+    }
+  }
+  .arrow {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+  }
+  div.game {
+    .div-box(#FBB435;@base3;100%;20px 0 0 0;24px 0 24px 0);
+    border-bottom:1px solid #FBB435;
+  }
+  div.inside {
+    .div-box(@base3;@base3;100%;0 0 0 0;20px 0);
+    display: block !important;
+    div.version {
+      position: relative;
+      .div-box(@base3;@base4;80%;0 auto 20px;0;);
+      a {
+        .a(@base3;20px 0;@base4)
+      }
+    }
+    div.player {
+      .div-box(#979797;@base3;100%;0;0 0 20px 0;)
+    }
+    div.main-buttom {
+      .div-box(@base3;@base3;100%;0;0);
+      padding: 10% 0;
+      div.circle {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        background: @base2;
+        display: inline-block;
+        margin:0 10px;
+        &:hover {
+          background: @base1;
+        }
+      }}
+
+  }
+}
+
+
+.header2 {
+  .header(100%; 124px; @base3; @base1);
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  .header2-1 {
+    button {
+      float: left;
+    }
+  .vote {
+    text-align: center;
+    padding: 30px;
+    line-height: 0;
+    font-size: 20px;
+  }
+  .close {
+    float: right;
+    padding: 20px;
+    img {
+      height: 20px;
+      width: 20px;
+    }
+    }
+  }
+  .header2-2 {
+    background:#b9e9f5;
+    height: 60px;
+    top: 64px;
+    position: fixed;
+    width: 100%;
+    img {
+      padding: 15px;
+      float: right;
+      width:30px;
+    }
+    .suggest {
+      line-height: 0;
+      padding: 30px 0 30px 50px;
+      font-size: 15px;
+      color:#000000;
+    }
+    .triangle2 {
+    border-top: 10px solid #b9e9f5;
+    border-right: 5px solid transparent;
+    border-bottom: 0;
+    border-left: 5px solid transparent;
+    position: fixed;
+    top: 124px;
+    left: 3rem;
+    z-index: 666;
+    }
+  }
+}
+.main2 {
+  .main(@base1;124px);
+  position: absolute;
+  width: 100%;
+  padding-bottom: 160px;
+  .click {
+    .div-box(@base3;@base1;auto;0;20px 0 20px 45px);
+    display: block!important;
+  }
+}
+.role {
+  width: 25%;
+  padding: 0;
+  float: left;
+  margin: 4%;
+}
+.role:hover .child {
+  visibility: visible;
+}
+.child {
+  visibility: hidden;
+  width:100%;
+  padding: 20% 0;
+
+}
+.hover1 {
+  background: url(../img/hover.png) 2%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  margin-right:1%;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.hover2 {
+  background: url(../img/hover.png) 34%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  margin-right:1%;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.hover3 {
+  background: url(../img/hover.png) 67%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  margin-right: 1%;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.hover4 {
+  background: url(../img/hover.png) 99%;
+  width: 24%;
+  padding: 0 0 24% 0;
+  float: left;
+  background-size: cover;
+  border: 0;
+  cursor: pointer !important;
+  outline: none !important;
+}
+.div8 {
+  width: 100%;
+  padding: 40% 0;
+  background: #f5c97b;
+  line-height: 0;
+  font-size: 16px;
+  font-family: 微软雅黑;
+}
+.div9 {
+  width: 100%;
+  padding: 10% 0;
+  background: #83b09a;
+  line-height: 0;
+  color: #FFFFFF;
+}
+.button2 {
+  width: 100%;
+  padding: 0;
+  border: .25rem solid #fff;
+}
+.footer2 {
+  .footer(100px;@base1;100%;);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  a{
+    background-color: #fbb435;
+    width: 80%;
+    padding: 2% 0;
+    font-size: 150%;
+    color: #fff;
+    text-align: center;
+    text-decoration: none !important;
+  }
+}
+.footer1 {
+  .footer(100px;transparent;100%;)
+}
+
+.header3 {
+  .header(100%; auto; @base3; @base1);
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  .header3-1 {
+    .header(100%;60px;@base3;@base1);
+    position: fixed;
+    top: 0;
+    text-align: center;
+    border-bottom:1px solid #daddcd;
+    .a2 {
+      float: left;
+      margin: 1rem;
+      background: url("../img/回到首页.png") no-repeat;
+      background-size: contain;
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+    .a3 {
+      float: right;
+      margin: 1rem;
+      background: url("../img/提示.png") no-repeat;
+      background-size: contain;
+      height: 2rem;
+      width: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      line-height: 0;
+      padding-top: 30px;
+    }
+  }
+}
+  .header3-2 {
+    .header(100%;auto;@base3;@base1);
+    position: absolute;
+    top: 61px;
+    margin-bottom: 65px;
+    .header-part2 {
+      padding: 10px 10%;
+    }
+
+    .header-div1{
+      background: url("../img/卧底胜利.png") no-repeat;
+      width: 15rem;
+      height: 10rem;
+      margin: 0 auto;
+      background-size: contain;
+    }
+    .header-div2 {
+      max-width: 72.5rem;
+      margin: 0 auto;
+      color: #ffc865;
+      font-size:1.2rem;
+      line-height: 1.4;
+      font-family: "微软雅黑";
+      padding-bottom: 1rem;
+    }
+    .header-div3 {
+      max-width: 72.5rem;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+    .ul1 {
+      list-style: none;
+      padding:0;
+      margin:0 auto;
+      max-width:72.5rem;
+      font-size: 1.2rem;
+      color: #fff;
+      z-index: 666;
+      li {
+        line-height: 1.2;
+      }
+    }
+  }
+.ul2 {
+  color: #a6a6a6;
+  border-bottom:0.1rem solid;
+  border-top:0;
+  border-left:0;
+  border-right:0;
+  list-style: none;
+  padding: 0 10%;
+  margin: 0;
+  background: #fff;
+  li:first-child {
+    font-size: 20px;
+    small {
+      font-size: 12px;
+      float: right;
+    }
+  }
+  li {
+    padding: 5px 0;
+    font-family: sans-serif;
+    font-size: 13px;
+  }
+}
+.footer-div0 {
+  position: fixed;
+  bottom: 0;
+  height: 4rem;
+  width:100%;
+  background: #29bde0;
+  opacity:0.3;
+}
+.footer-button1 {
+  position: fixed;
+  background: #f66f6f;
+  color: #fff;
+  width:40%;
+  height:3rem;
+  margin: 0.5rem;
+  opacity:1;
+  bottom:0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: .5rem;
+  font-size: 1.4rem;
+}
+.footer-button2 {
+  position: fixed;
+  background: #fbb435;
+  color: #fff;
+  width:40%;
+  height:3rem;
+  margin:0.5rem;
+  opacity:1;
+  bottom:0;
+  right:0;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: .5rem;
+  font-size: 1.4rem;
+}
+@media screen and (min-width: 1024px){
+  .header3-2 {
+    text-align: center;
+  }
+}
+

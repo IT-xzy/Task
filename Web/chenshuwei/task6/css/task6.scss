@@ -1,0 +1,168 @@
+/*reset*/
+html {
+  font-size: 62.5%;
+  @media (max-width: 480px) {
+    font-size: 30%;
+  }
+}
+body{
+  max-width: 720px;
+  margin: 0 auto;
+  min-width: 320px;
+}
+@mixin fixed{
+  position: fixed;
+  width: 100%;
+  max-width: 720px;
+}
+@mixin button($bgcolor:#5fc0cd){
+  flex: 1;
+  padding: 5% 0;
+  border-radius: 5px;
+  border: none;
+  font-size: 2.8rem;
+  color: $bgcolor;
+}
+$width:100%;
+$bgcolor:#5fc0cd;
+/*layout*/
+/*header*/
+header{
+  @include fixed;
+  top: 0;
+  >.head{
+    width: $width;
+    padding: 1% 0;
+    background: $bgcolor;
+    text-align: center;
+    >.loc{
+      float: right;
+      width: 6%;
+      margin-right: 5%;
+      margin-top: 2%;
+    }
+    >.button{
+      display: flex;
+      width: 40%;
+      margin: 0 30%;
+      >.button-left{
+        @include button(#fff);
+        background: #55a8b3;
+      }
+      >.button-right{
+        @include button();
+        background: #fff;
+      }
+    }
+  }
+  >.list-head{
+    display: flex;
+    max-width: $width;
+    padding: 2% 0;
+    border-bottom: 1px solid #e7e7e7;
+    background: #fff;
+    >label{
+      flex: 1;
+      display: flex;
+      >select{
+        flex: 1;
+        padding-left: 10%;
+        text-align: center;
+        font-size: 2.3rem;
+        color: #999;
+        border: none;
+        border-right: 1px solid #e7e7e7;
+        outline: none;
+        &:first-child{
+          border-left: 1px solid #e7e7e7;
+        }
+      }
+    }
+  }
+}
+main{
+  margin: 20% 0 15% 0;
+  float: left;
+  width: $width;
+  >.list{
+    float: left;
+    width: 94%;
+    padding: 3% 4% 3% 2%;
+    border-bottom: 1px solid #e7e7e7;
+    >.list-top{
+      width: $width;
+      padding-left: 6%;
+      font-size: 2.1rem;
+      color: #999999;
+      background: url(../images/task6.png) no-repeat left;
+      background-size: 4%;
+    }
+    >.list-item{
+      float: left;
+      width: $width;
+      padding: 2% 0;
+      font-size: 2.2rem;
+      color: #333333;
+      >.fanhui{
+        float: right;
+        width: 2.5%;
+        >img{
+          max-width: 100%;
+        }
+      }
+      >.list-item-left{
+        float: left;
+        padding-left: 12%;
+      }
+      >.list-item-right{
+        float: right;
+        color: #eb6e59;
+        padding-right: 2.5%;
+
+      }
+    }
+    >.list-buttom {
+      float: left;
+      width: $width;
+      padding-left: 6%;
+      background: url(../images/task6.2.png) no-repeat left center;
+      background-size: 3%;
+      font-size: 2.1rem;
+      color: #999999;
+    }
+  }
+}
+footer{
+  @include fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #e2eaec;
+  background: #f8fafb;
+   img{
+    max-width: 50%;
+  }
+   p{
+    margin: 8% 0;
+  }
+
+  >.footer-center{
+    width: 27%;
+    padding: 0 10%;
+    text-align: center;
+  }
+  >.foot-left{
+    width: 13%;
+    text-align: center;
+    color: $bgcolor;
+    font-size: 1.6rem;
+  }
+  >.footer-right{
+    width: 13%;
+    text-align: center;
+    color: #9fa0a0;
+    font-size: 1.6rem;
+  }
+
+}

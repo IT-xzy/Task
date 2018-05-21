@@ -1,0 +1,282 @@
+@import "JS-TASK2-base.scss";
+
+%border_box {
+	box-sizing: border-box;
+}
+%inl-blk {display: inline-block;}
+%block {
+    display: inline-block;
+    margin: 0 10px;
+    margin-bottom: 3px;
+    padding: 3px;
+}
+body {
+
+	background-color: map-get($color, body);
+}
+header {
+    @include position(fixed, 0, null, null, 0);
+    z-index: 999999;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: map-get($color, header);
+    box-sizing: border-box;
+    p {
+    	font-size: 16px;
+    	line-height: 30px;
+    	color: map-get($color, white);
+    }
+}
+
+.icon_back {
+    @extend %inl-blk;
+    padding: 15px;
+    @include bg(25px, 2px -99px);
+    cursor: pointer;
+}
+.icon_help {
+	@extend %inl-blk;
+	padding: 15px;
+	@include bg(25px, 2px -143px);
+    cursor: pointer;
+}
+
+main {
+	@include position(absolute, 50px, 0, 0, 0);
+	@include box(calc(100% - 20px), null, null, null, 10px);
+    max-width: 768px;
+	margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+	@extend %border_box;
+	
+}
+.players-wrap {
+
+	width: 100%;
+    height: 50%;
+    min-height: 220px;
+	border-radius: 3px;
+	@extend %border_box;
+	background-color: map-get($color, white);
+}
+
+.title {
+    float: left;
+    @include flex_center;
+	width: 20%;
+    height: 100%;
+	border-right: 1px solid map-get($color_2, border_gray);
+    @extend %border_box;
+	writing-mode: vertical-lr;
+	p {
+		font-size: 20px;
+	}
+}
+
+.players {
+	float:left;
+    position: relative;
+    width: 80%;
+    height: 80%;
+    padding-top: 20px;
+    @extend %border_box;
+	background-color: #f1f1f1ba;
+    p {
+        display: inline-block;
+        font-size: 16px;
+        color: #b7b4b4;
+    }
+}
+.role_num {
+    @extend %inl-blk;
+    @include box(20px, null, null, 0, null);
+    text-align: center;
+    outline: none;
+    box-shadow: 40px 40px 40px 40px #f1f1f1ba inset;
+}
+.players-group_l {
+    float: left;
+
+    @extend %inl-blk;
+}
+.players-group_r {
+    float: right;
+    text-align: left;
+    @extend %inl-blk;
+}
+@media (min-width: 511px) {
+    .players-group_r {
+        float: none;
+        width: 40%;
+        padding-left: 30px;
+        margin-bottom: 8px;
+        text-align: left;
+        padding-right: 15px;
+    }
+
+    .players-group_l {
+    float: none;
+    width: 40%;
+    padding-right: 30px;
+    margin-bottom: 8px;
+    text-align: right;
+    }
+}
+
+@media (min-width: 430px) and (max-width: 510px) {
+    .players-group_r, .players-group_l {
+        width: 48%;
+    }
+    .players-group_r {
+        text-align: right;
+    }
+}
+.yellow_block {
+    @extend %block; 
+    background-color: map-get($color_2, yellow_block);
+}
+.blue_block {
+    @extend %block; 
+    background-color: map-get($color_2, blue_block);
+}
+.setting {
+    float:left;
+    @extend %inl-blk;
+    @include box(80%, 20%, 10px, null, null);
+    border-top: 1px solid map-get($color_2, border_gray);
+    text-align: center;
+    color: map-get($color, header);
+    @extend %border_box;
+    background-color: #f1f1f1ba;
+    cursor: pointer;
+}
+.pen {
+    @extend %inl-blk;
+    padding: 7px;
+    @include bg(30px, 5px 5px);
+}
+.set_text {
+    @extend %inl-blk;
+    font-size: 16px;
+
+}
+
+.phrase {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: map-get($color, white);
+    border-radius: 3px;
+    input {
+        display: block;
+        @include box(100%, 40px, 10px, null, null);
+        border: 0;
+        border-bottom: 1px solid map-get($color_2, border_gray);
+        @extend %border_box;
+        font-size: 16px;
+        outline: none;
+    }
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {   
+ /* WebKit browsers */   
+color: #d2d1d1;   
+}   
+input:-moz-placeholder, textarea:-moz-placeholder { 
+/* Mozilla Firefox 4 to 18 */ 
+color: #d2d1d1; 
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+ /* Mozilla Firefox 19+ */ 
+color: #666; 
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+ /* Internet Explorer 10+ */ 
+color: #666; 
+} 
+
+.set_player_num {
+    padding: 10px 20px;
+    margin-top: 5px;
+    font-size: 17px;
+    letter-spacing: 2px;
+    background-color: map-get($color, white);
+}
+.player_num {
+    @include box(40px, 25px, null, 0, 0 10px);
+    color: map-get($color_2, yellow_btn);
+    text-align: center;
+    box-shadow: 40px 40px 40px 40px #f1f1f1 inset;
+    outline: none;
+}
+.sliding_strip {
+    @include flex_center;
+    position: relative;
+    padding: 10px 20px;
+}
+.icon_minus {
+    @extend %inl-blk;
+    padding: 8px;
+    @include bg(25px, 1px -25px);
+    cursor: pointer;
+}
+.line {
+    -webkit-appearance: none;
+    -moz-appearance:none;
+    width: 70%;
+    border-radius: 1px;
+    cursor: pointer;
+    &::-webkit-slider-thumb {//滑块
+        -webkit-appearance: none;
+        width: 40px;
+        height: 20px;
+        margin-top: -8px;
+        background: url(https://ZZsuper.github.io/JS/TASK2/icon/slider.png) no-repeat;
+        background-size: 85%;
+    }
+    &::-moz-slider-thumb {
+        -moz-appearance: none;
+        width: 40px;
+        height: 20px;
+        margin-top: -8px;
+        background: url(https://ZZsuper.github.io/JS/TASK2/icon/slider.png) no-repeat;
+        background-size: 85%;
+    }
+    &::-webkit-slider-runnable-track {//轨道
+        height: 3px;
+        border-radius: 1px;
+        background-color: #ffe6be;
+    }
+    &::-moz-slider-runnable-track {
+        height: 3px;
+        border-radius: 1px;
+        background-color: #ffe6be;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+
+
+.slider {
+    position: relative;
+    top: -215%;
+    max-width: 28px;
+}
+.icon_plus {
+    @extend %inl-blk;
+    padding: 8px;
+    @include bg(25px, 0 -58px);
+    cursor: pointer;
+}
+.deal {
+    @include box(100%, null, 10px, 0, null);
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: map-get($color, white);
+    background-color: map-get($color_2, yellow_btn);
+    outline: none;
+    cursor: pointer;
+}

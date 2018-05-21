@@ -1,0 +1,112 @@
+$color:#fff;
+$background:#29bde0;
+$padding:.1rem;
+$border: solid #cccccc;
+html {
+    font-size: 625%;
+}
+
+body {
+    margin: 0;
+    font-size: .16rem;
+    background-color: #f0f0f0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: $padding*1.5;
+    background: $background;
+    z-index: 1;
+}
+
+@mixin main {
+    text-align: center;
+    margin: $padding*3;
+    padding: $padding;
+    border: 1px $border;
+    background: $color;
+}
+
+main {
+    margin-top: .8rem;
+    .last {
+        position: relative;
+        @include main;
+        color: #aaaaaa;
+        font-size: $padding*2;
+        .into {
+            position: absolute;
+            top: 40%;
+            transform: translateY(-50%);
+            width: $padding*2;
+            height: $padding*2;
+            right: $padding*2;
+            border-top: 3px $border;
+            border-right: 3px $border;
+            transform: rotate(45deg);
+        }
+    }
+    .start {
+        @include main;
+        @mixin spot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #69d1e9;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+        padding: 0 !important;
+        .title {
+            color: #fcc768;
+            padding: $padding*2;
+            font-size: $padding*2;
+            border-bottom: 1px solid #fcc768;
+        }
+        .button {
+            margin: $padding*2;
+            margin-bottom: 0 !important;
+            button {
+                position: relative;
+                color: $color;
+                font-size: .16rem;
+                letter-spacing: $padding;
+                width: 80%;
+                padding: $padding*2;
+                padding-left: $padding*3;
+                border: 0;
+                background: $background;
+            }
+            .user-font {
+                font-size: .14rem;
+                color: #aaaaaa;
+                margin: $padding;
+            }
+            .triangel {
+                position: absolute;
+                right: -.3rem;
+                top: .15rem;
+                border-width: 15px 0px 15px 15px;
+                border-color: transparent #fcc768;
+                border-style: solid;
+            }
+            .foot {
+                text-align: center;
+                overflow: hidden;
+                .spot {
+                    @include spot;
+                }
+                .spot-no {
+                    @include spot;
+                    background: #f0f0f0;
+                }
+                .spot-no:hover{
+                    @include spot;
+                }
+            }
+        }
+    }
+}

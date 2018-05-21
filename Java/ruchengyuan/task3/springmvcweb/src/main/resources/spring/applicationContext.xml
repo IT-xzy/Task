@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com.tasktwo"/>
+
+    <!--数据库的链接信息的文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <import resource="../spring-datasource-master.xml"/>
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--&lt;!&ndash; 扫描路径如果有多个包要 扫描,包中间使用半角逗号隔开 &ndash;&gt;-->
+        <!--<property name="basePackage" value="com.tasktwo.dao.StudentMapper"></property>-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />-->
+
+    <!--</bean>-->
+
+
+</beans>

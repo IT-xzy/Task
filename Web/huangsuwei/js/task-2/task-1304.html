@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Title</title>
+    <link href="../task-06/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/task-1303.css" rel="stylesheet">
+    <script>
+        function myfunc() {
+
+            var showLeft = document.getElementById('showLeft');
+
+            var leftCont = document.getElementById('leftCont');
+
+            var rightCont = document.getElementById('rightCont');
+
+            if (rightCont.classList.contains("left-zero") == true) {
+
+                rightCont.classList.remove("left-zero");
+
+                rightCont.classList.add("main-pos");
+
+                leftCont.classList.remove("left-pos");
+
+                leftCont.classList.add("left-zero");
+
+            }
+
+            else {
+
+                rightCont.classList.add("left-zero");
+
+                leftCont.classList.add("left-pos");
+
+                rightCont.classList.remove("main-pos");
+
+                leftCont.classList.remove("left-zero");
+            }
+        }
+    </script>
+</head>
+<body>
+<nav class="left-list left-zero" id="leftCont">
+    <header>
+    </header>
+    <div class="left-line">
+        <div class="line-text">
+            <img src="./img/task-1311.png" class="li-img">
+            公告
+        </div>
+        <span class="glyphicon glyphicon-menu-right line-btn" ></span>
+    </div>
+    <div class="left-line">
+        <div class="line-text">
+            <img src="./img/task-1312.png" class="li-img">
+            设置
+        </div>
+        <span class="glyphicon glyphicon-menu-right line-btn" ></span>
+    </div>
+    <div class="left-line">
+        <div class="line-text">
+            <img src="./img/task-1313.png" class="li-img">
+            帮助
+        </div>
+        <span class="glyphicon glyphicon-menu-right line-btn" ></span>
+    </div>
+    <div class="left-line">
+        <div class="line-text">
+            <img src="./img/task-1314.png" class="li-img">
+            关于
+        </div>
+        <span class="glyphicon glyphicon-menu-right line-btn" ></span>
+    </div>
+</nav>
+<div class="part-main main-pos" id="rightCont">
+    <header>
+        <div role="button" id="showLeft" class="btn btn-slide" onclick="myfunc()">
+        </div>
+    </header>
+    <main>
+        <div class="game-last">
+            <p>上次游戏：捉鬼猜词版</p>
+            <a >
+                <span class="glyphicon glyphicon-chevron-right last-btn"></span>
+            </a>
+        </div>
+        <div class="game-main">
+            <div class="game-title">捉鬼游戏</div>
+            <a >
+                <div role="button" class="game-btn" >
+                    简化版
+                </div>
+            </a>
+            <div class="game-text">
+                有1133位用户正在玩此款游戏
+            </div>
+            <a >
+                <div class="game-btn" role="button">
+                    猜词版
+                </div>
+            </a>
+            <div class="game-text">
+                有1133位用户正在玩此款游戏
+            </div>
+            <a >
+                <div class="game-btn" role="button">
+                    白痴版
+                </div>
+            </a>
+            <div class="game-text">
+                有1133位用户正在玩此款游戏
+            </div>
+            <div class="game-slide">
+                <div class="game-slide-btn"></div>
+                <div class="game-slide-btn"></div>
+                <div class="game-slide-btn"></div>
+                <div class="game-slide-btn"></div>
+            </div>
+            <span class="glyphicon glyphicon-triangle-right game-slide-sign"></span>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

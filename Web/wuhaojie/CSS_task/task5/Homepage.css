@@ -1,0 +1,189 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,fieldset,button,input,textarea,th,td{
+    margin: 0;           /*外边距0*/
+    padding: 0;          /*内边距0*/
+    list-style: none;    /*列表样式无*/
+    font-weight: normal; /*设置文本的粗细*/
+}
+header{
+    position: fixed; /*将页面固定住 相对于电脑屏幕*/
+    background: #5fc0cd; /*改变颜色为蓝色*/
+    color: #fff; /*改变字体的颜色为白色*/
+    width: 100%; /*宽度调整为满的适应屏幕*/
+    height: 2.5rem;/*高度*/
+    font-size: 1.8rem;/*调整字体大小*/
+    line-height: 2.4rem;/*行高*/
+}
+header img{
+    display: block; /*块级元素*/
+    position: absolute; /*相对于父级元素定位*/
+    width: 1.4rem;
+    height: 2rem;
+    padding-left: 0.5rem;/*内边距向左*/
+    padding-top: 0.2rem;
+    text-decoration: none;/*字体样式定义文本*/
+}
+header p{
+    text-align: center;  /*文本对齐方式：居中*/
+    font-size: 1.18rem; /*字体大小*/
+}
+/*个人基本信息与头像部分*/
+/*主体部分-加入背景图片*/
+.nav{
+    color: #fff; /*背景颜色*/
+    height: 200px;    /*元素高度*/
+    background: url("img/img2.png") no-repeat 0 -5px;/*背景图片不重复*/
+    background-origin: content-box; /*背景图片存在于内容框中*/
+    background-size: cover; /*背景图片一直存在并且维持纵横比例最小*/
+    padding-top: 40px;  /*内边距上端距离40像素*/
+}
+.main-top{
+    display: flex; /*使用弹性布局*/
+    align-items: center;/*所有弹性盒子居中*/
+    flex-direction: row;
+    height: 1.64rem;    /*高度*/
+    padding-top: 5rem;  /*内边距*/
+}
+.nav .photo{
+    flex:none;/*flex-grow放大比例, flex-shrink缩小比例 和 flex-basis占据空间的简写*/
+    width: 7rem;  /*宽度*/
+    height: 7rem; /*高度*/
+    /*border-radius: 4.25rem;*/
+    margin-left: 1.5rem;
+}
+.nav .info{
+    padding-left: 2rem;
+}
+.nav .dong{
+    padding-bottom: 1rem;
+}
+
+/*个人详情页面*/
+/*总体样式*/
+.content{
+    font-size: 1rem;
+    padding-bottom: 120px;
+}
+.content p{
+    display: block;
+    border-left:3px solid #5fc0cd;
+    margin: 1rem;
+    /*border-top: 1px solid rgb(215,215,215);*/
+    padding-left: 0.4rem;
+}
+.demandle{
+    margin:1rem 0 1rem 0;
+    width: 100%;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(215,215,215);
+}
+.live{
+    padding-left: 1rem;
+    display: inline-block;
+}
+.live img{
+    height: 1rem;
+    width: 1rem;
+}
+.eat{
+    padding-left: 1rem;
+    display: inline-block;
+}
+.eat img{
+    height: 1rem;
+    width: 1rem;
+}
+.demand{
+
+    margin: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(215,215,215);
+
+}
+.demandlist{
+    padding-right: 1rem;
+    color: rgb(197,196,199);
+    display: inline-block;
+    border-right: 1px solid rgb(215,215,215);
+}
+.price{
+    padding-left: 1rem;
+    color: black;
+    display: inline-block;
+}
+
+.price span{
+    display: inline-block;
+}
+
+/*底部部分*/
+footer{
+    position: fixed; /*将底部部分依据电脑屏幕固定*/
+    left: 0;    /*要有*/
+    right: 0;   /*要有*/
+    bottom: 0;  /*要有*/
+    display: flex; /*使用弹性盒子布局*/
+    justify-content: space-between;/*定义项目在主轴上的对齐方式 两端对齐中间有间距*/
+    padding: 1rem 1rem 1rem 1rem; /*设置内边距*/
+    background: #fff; /*背景颜色设置为白色*/
+}
+footer button:first-child{ /*footer 的头一个 button*/
+    flex:1;     /*子元素获得父元素的长度*/
+    height: 3rem;   /*元素高度*/
+    font-size: 1.1rem; /*字体大小*/
+    line-height: 3rem; /*行高*/
+    color: #5fc0cd; /*字体颜色*/
+    background: #fff;/*背景颜色*/
+    border:2px solid #5fc0cd; /*蓝色边框*/
+    border-radius: 0.6rem; /*圆角*/
+    margin-right: 0.6rem;
+}
+
+footer button:last-child{ /*footer 的头一个 button*/
+    flex:1;     /*弹性盒模型对象的子元素都有相同的长度，忽略它们内部的内容 */
+    height: 3rem;   /*元素高度*/
+    font-size: 1.1rem; /*字体大小*/
+    line-height: 3rem; /*行列高度*/
+    color: #fff; /*字体颜色*/
+    background: #5fc0cd;/*背景颜色*/
+    border:2px solid #5fc0cd; /*蓝色边框*/
+    border-radius: 0.6rem; /*圆角*/
+    margin-left: 0.6rem;
+}
+
+.my {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(197,196,199);
+    border-top: 1px solid rgb(197,196,199);
+}
+.b3 {
+    white-space: nowrap;
+    font-size: 1rem;
+    padding-right: 1rem;
+    color: #999;
+    border-right: 1px solid rgb(197,196,199);
+}
+.d2 {
+    padding-left: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

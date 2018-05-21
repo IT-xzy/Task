@@ -1,0 +1,53 @@
+@import "./reset.less";
+@import "./color.less";
+
+
+header {
+	position: relative;
+	#slideMenu {
+		position: absolute;
+		right: 100%;
+		top: 0;
+		width: 80%;
+		background: @white;
+		z-index: 99999;
+		.menuList {
+			padding: 1rem 2rem 1rem 8rem;
+			border-bottom: 1px solid @gray05;
+			font-size: 3rem;
+			color: @baseColor;
+			background: no-repeat 2rem center / 4rem 4rem;
+			> button {
+				float: right;
+				width: 2.4rem;
+				height: 4rem;
+				background: url(../image/module/sidemenu/icon_05.png) no-repeat left / contain;
+			}
+		}
+		#icon1 {
+			background-image: url(../image/module/sidemenu/icon_01.png);
+		}
+		#icon2 {
+			background-image: url(../image/module/sidemenu/icon_02.png);
+		}
+		#icon3 {
+			background-image: url(../image/module/sidemenu/icon_03.png);
+		}
+		#icon4 {
+			background-image: url(../image/module/sidemenu/icon_04.png);
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	header {
+		#slideMenu {
+			.menuList {
+				font-size: 1.5rem;
+				background: no-repeat 2rem center / 2rem 2rem;
+				> button {
+					height: 2rem;
+				}
+			}
+		}
+	}
+}

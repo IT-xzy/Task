@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0,  maximum-scale=1">
+	<title>任务五</title>
+<style type="text/css">
+body{
+	margin:0;
+	padding: 0;
+	overflow-y: auto;
+}
+.upper{
+	position: fixed;
+    width: 100%;
+	height: 60px;
+    line-height:60px;
+	background-color: #5fc0cd;
+	color:white;
+	font-weight: bold;
+	font-size: 30px;
+    text-align: center;
+    z-index: 1;
+}
+.back{
+    position: absolute;
+	width: 40px;
+	height: 40px;
+	top: 10px;
+	left: 10px;
+}
+.empty{
+	width: 100%;
+	height: 60px;
+}
+.cover{
+	position: relative;
+}
+.backdrop{
+	width: 100%;
+    height: 230px;
+}	
+.second{
+      width: 100%;
+      height: 230px;
+      background-color: rgba(0,0,0,0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+}
+.image{
+       position: absolute;
+       width: 100px;
+       height: 100px;
+       left: 30px;
+       top: 65px;
+       z-index: 1px;
+       border-radius: 50px;
+}
+.name{
+	color: white;
+	font-size: 21px;
+	position: absolute;
+	left: 160px;
+	top: 85px;
+	margin:0px;
+}
+.locate{
+	   width: 16px;
+	   height: 16px;
+       position: absolute;
+       left: 160px;
+       top: 125px;
+}
+.address{
+	   color: white;
+	   position: absolute;
+	   left:180px;
+	   top: 122px;
+	   margin: 0;
+	   font-size: 15px;
+}
+.message{
+	display: flex;
+	height: 420px;
+	width: 100%;
+	flex-direction: column;
+}
+.unit{
+	display: flex;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-bottom: 10px;
+    align-items: center;
+    height: auto;
+    border-bottom: 1px solid #d2d2d4;
+}
+.skill{
+	align-items: center;
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	margin-left: 10px;
+    padding-left: 10px;
+	border-left: 3px solid #5fc0cd;
+}
+.star{
+	width: 20px;
+	height: 20px;
+	margin-left: 23px;margin-right: 1px;
+}
+.item{
+	flex-shrink: 0;
+	margin-left: 23px;
+	margin-right: 23px;
+	padding-right: 23px;
+	height: 20px;
+	color: #d2d2d4;
+	border-right: 1px solid #d2d2d4;
+}
+.cost{
+	color: red;
+}
+.lower{
+	box-sizing:border-box;   
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding:10px;	
+	display: flex;
+    height: 60px;
+    width: 100%;
+    background-color: white;
+}
+.lower>.writing{
+	flex: 1;
+	height:40px;
+	width: 50%;
+}
+.writing{
+	box-sizing:border-box;   
+	align-items: flex-start;
+	color: #5fc0cd;
+    line-height: 40px;
+	font-size: 20px;
+	background-color: white;
+	border:none;
+	box-shadow:inset 0 0 0 2px #5fc0cd;
+	border-radius:5px;
+	text-align: center;
+	margin-right:5px;
+}
+.lower>.tel{
+	flex:1;
+	height: 40px;
+	width: 50%;
+}
+.tel{
+	box-sizing:border-box;   
+	align-items: flex-start;
+	line-height: 40px;
+	border:none;
+	background-color: #5fc0cd;
+	color: white;
+	font-size: 20px;
+	text-align: center;
+     border-radius: 5px;
+     margin-left: 5px;
+ }
+p{
+	margin:0;
+}
+</style>
+</head>
+<body>
+	<header class="upper">
+		<a href="#">
+			<img class="back" src="./img/1.png">
+		</a>
+		个人主页
+	</header>
+	<div class="empty"></div>
+	<div class="cover">
+		<img class="backdrop" src="./img/2.png">
+		<div class="second"></div>
+		<img class="image" src="./img/3.png">
+		<p class="name">徐士林 55岁</p>
+		<img class="locate" src="./img/4.png">
+		<p class="address">京城·四方·报纸林</p>
+	</div>
+	<div class="message">
+		<div class="unit">
+			<span class="skill">专业技能</span>	
+		</div>
+		<div class="unit">
+			<img class="star" src="./img/5.png">
+			<span class="choose">住家</span>
+			<img class="star" src="./img/5.png">
+			<span class="choose">不含餐</span>
+		</div>
+		<div class="unit">
+			<span class="item">从业年限</span>
+			<span class="content">0~3年</span>
+		</div>
+		<div class="unit">   
+			<span class="item">工作时间</span>
+			<span class="content">全天</span>
+		</div>
+		<div class="unit">
+			<span class="item">服务价格</span>
+			<span class="cost">25元/小时</span>
+		</div>
+		<div class="unit">
+			<span class="item">自我介绍</span>
+			<p class="content">可以洗衣做饭照顾老人，可以洗衣做饭照顾老人，可以洗衣做饭照顾老人，可以洗衣做饭照顾老人，可以洗衣做饭照顾老人。</p>
+		</div>
+	</div>
+	<footer class="lower">
+		<button class="writing">留言</button>
+		<button class="tel">电话联系</button>
+	</footer>
+</body>
+</html>

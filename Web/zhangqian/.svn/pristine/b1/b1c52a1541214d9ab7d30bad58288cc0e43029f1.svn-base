@@ -1,0 +1,102 @@
+@import "common";
+
+/*顶部*/
+@include header;
+
+/*导航*/
+@include nav;
+
+/*底部*/
+@include bottom;
+
+.title {
+  padding: 1rem 0;
+  border-bottom: 1px solid #eeeded;
+  p2 {
+    color: $green2;
+  }
+  @include md-lg {
+    margin: 0 10vw;
+  }
+}
+
+.content {
+  @include df;
+  p {
+    text-indent: 2rem;
+  }
+  .company {
+    margin-bottom: 1rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    h1 {
+      text-align: center;
+    }
+    ul {
+      @include flex-center;
+      @include jc-c;
+      @include fw-w;
+      list-style: none;
+      li {
+        margin: .3rem 0;
+        @include flex-center;
+        @include jc-c;
+        width: 51%;
+        &:hover {
+          a {
+            color: #ff7d45;
+          }
+          .company-point {
+            background-color: #ff7d45;
+          }
+        }
+        .company-point {
+          width: 10px;
+          height: 10px;
+          list-style: none;
+          border: .7px solid #ff7d45;
+          border-radius: 100%;
+          background-color: #fff;
+          margin: .2em;
+        }
+        a {
+          width: 5rem;
+          cursor: pointer;
+          text-decoration: none;
+          color: $green2;
+        }
+      }
+    }
+  }
+  .intro {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    .intro-head {
+      padding-bottom: .5rem;
+      border-bottom: 1px solid #e6e6e6;
+      img {
+        float: left;
+      }
+    }
+  }
+  @include xs-md {
+    padding: 1rem 5vw;
+    @include fw-w;
+    .company {
+      width: 100%;
+    }
+    .intro {
+      width: 100%q;
+    }
+  }
+  @include md-lg {
+    padding: 1rem 10vw;
+    @include jc-sa;
+    .company {
+      width: 20%;
+    }
+    .intro {
+      width: 70%;
+    }
+  }
+}

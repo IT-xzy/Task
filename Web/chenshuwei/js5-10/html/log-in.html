@@ -1,0 +1,22 @@
+<div class="log-in"  ng-controller="myCtrl as login" >
+<form class="log-in-wrap" name="myForm" novalidate>
+    <h4>后台登录</h4>
+    <div class="account-wrap">
+        <input class="account"  name="account" type="text" placeholder="请输入账号" ng-blur="verify=true" ng-focus="verify=false" ng-model="account" required>
+    </div>
+    <div class="test">
+        <span ng-show="myForm.account.$invalid&&verify" ng-class="{redCenter:true}">必须填写用户名</span>
+    </div>
+    <div class="password-warp">
+        <input class="password" name="password" type="password" ng-blur="pwd=true" ng-focus="pwd=false" placeholder="请输入密码" ng-model="password" required>
+        <div class="test">
+            <p ng-bind="myText"></p>
+            <div ng-show="myForm.password.$invalid&&pwd" ng-class="{redCenter:true}">必须填写密码</div>
+        </div>
+    </div>
+    <div class="submit-wrap" >
+        <button type="submit" class="submit" ng-disabled="myForm.account.$invalid||myForm.password.$invalid" ng-click="submit()">登录</button>
+    </div>
+</form>
+</div>
+<div ui-view=""></div>

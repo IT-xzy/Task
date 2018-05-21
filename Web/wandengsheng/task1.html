@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>九宫格</title>
+    <style type="text/css">
+        div{
+            width:190px;
+            height:190px;
+            background:#FFA600;
+            float:left;
+            margin:10px;
+            border-radius: 10px;
+        }
+        body{
+            width:700px;
+            margin:0 auto;
+        }
+        button{
+            clear:both;
+            width:200px;
+            height:50px;
+            background:#FFF;
+            border:none;
+            border-radius:10px;
+            position:relative;
+            left:100px;
+        }
+        button:hover{
+            background:#FFA600;
+        }
+    </style>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<button id="btnone">开始闪</button>
+<button id="btntwo">结束闪</button>
+<script type="text/javascript" >
+    var div=document.getElementsByTagName('div');
+    var colors=['red','plum','blue','green','cyan','black','pink','gray','brown'];
+    btnone.onclick=function(){//点击开始
+        c=setInterval(function(){//使用定时器
+            start();//调用函数
+        },1000)//设置时间
+    }
+    btntwo.onclick=function(){//停止按钮的
+        for(i=0;i<div.length;i++){//循环
+            div[i].style.background="#FFA600";//遍历清除颜色
+        }
+        clearInterval(c);//停止定时器
+    }
+    function start(){
+        for(var i=0;i<div.length;i++){//每次随机颜色时遍历将背景设置好
+            div[i].style.background="#FFA600";
+        }
+        var arr=new Array(3);//创建数组容纳随机数
+        var arr1=new Array(3);
+        for(var i=0;i<arr.length;i++){//创建第一组数组
+            var a=parseInt(Math.random()*9);
+            console.log(a);
+            if(i==0){//第一个数字直接导入数组
+                arr[i]=a;
+            }else{
+                for(var j=0;j<i;j++){//第二个与第三个数字进行判断
+                    if(a==arr[j]){//如果重复从新开始
+                        i--
+                    }else{
+                        arr[i]=a;
+                    }
+                }
+            }
+        }
+        for(var i=0;i<arr1.length;i++){//同上。随机颜色
+            var a=parseInt(Math.random()*9);
+            if(i==0){
+                arr1[i]=a;
+            }else{
+                for(var j=0;j<i;j++){
+                    if(a==arr1[j]){
+                        i--
+                    }else{
+                        arr1[i]=a;
+                    }
+                }
+            }
+        }
+        for(var i=0;i<arr.length;i++){
+            div[arr[i]].style.background=colors[arr1[i]];//将随机的颜色给随机的地址
+        }
+    }
+</script>
+</body>
+</html>

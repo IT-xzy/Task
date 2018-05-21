@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular.min.js"></script>
+</head>
+<body ng-controller="each">
+<script>
+    angular.module('app',[]).controller('each',function($scope){
+        $scope.json = {
+            1:'apple',
+            2:'banana',
+            3:'orange',
+            4:'pear'
+        };
+        $scope.arr = [];
+        //循环json
+        //注意*   value = 内容 key = 索引值;位置不能变但可以简写
+        angular.forEach($scope.json,function (value,key) {
+            alert(key+':'+value);
+            //这个this是arr
+            this.push(key+':'+value);
+        },$scope.arr);
+        console.log($scope.arr);
+        $scope.arr2 = ['1:apple', '2:banana', '3:orange', '4:pear'];
+        $scope.json2 = {};
+        //循环数组
+        //注意*   value = 内容 index = 索引值;位置不能变但可以简写
+        angular.forEach($scope.arr,function (value,index) {
+            //这个this是json2
+            this[value.split(':').slice(0,1)]=value.split(':').slice(1,2).toString();
+        },$scope.json2);
+        console.log($scope.json2);
+
+    })
+</script>
+</body>
+</html>

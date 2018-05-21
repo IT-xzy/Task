@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- （真）memcached.properties配置文件  -->
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="order" value="1"/>-->
+        <!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath:memcached.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--或者-->
+    <!--<context:property-placeholder order="2" location="classpath:memcached.properties"  ignore-unresolvable="false"/>-->
+
+    <!-- 作为工厂方法 getInstance() 的参数, 即指明 poolname 为 memcachePool -->
+    <!-- Memcached配置 -->
+    <bean id="memcachedPool" class="com.whalin.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize" destroy-method="shutDown"
+          lazy-init="false" >
+        <constructor-arg>
+            <value>neeaMemcachedPool</value>
+        </constructor-arg>
+        <property name="servers">
+            <list>
+                <value>localhost:11211</value>
+            </list>
+        </property>
+        <property name="Failover" value="true"/>
+        <property name="aliveCheck" value="true"/>
+        <property name="initConn" value="10"/>
+        <property name="minConn" value="5"/>
+        <property name="maxConn" value="250"/>
+        <property name="maintSleep" value="30"/>
+        <property name="nagle" value="false"/>
+        <property name="socketTO" value="3000"/>
+    </bean>
+     <!--在使用 memcachedClient 访问 memchached 时, 需指明 poolname 为 memcache,指定默认-->
+    <bean id="memcachedClient" class="com.whalin.MemCached.MemCachedClient" lazy-init="false">
+        <constructor-arg>
+            <value>neeaMemcachedPool</value>
+        </constructor-arg>
+    </bean>
+
+</beans>

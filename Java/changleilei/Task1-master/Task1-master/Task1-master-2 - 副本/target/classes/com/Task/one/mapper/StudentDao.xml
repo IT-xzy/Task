@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Task.one.dao.StudentDao">
+    <!--parameterType 传入SQL语句的数据类型-->
+    <insert id="insertStudents" parameterType="com.Task.one.model.Student">
+        INSERT  INTO students(Name,Sex,QQ,Graduate,Number,AutoGraph,CreateTime)
+          values(#{Name},#{Sex},#{QQ},#{Graduate},#{Number},#{AutoGraph},#{CreateTime})
+    </insert>
+    <delete id="deleteStudents" parameterType="java.lang.String">
+        DELETE  FROM  students WHERE  NAME =#{NAME}
+    </delete>
+    <update id="updateStudents" parameterType="com.Task.one.model.Student">
+        UPDATE  students SET NUMBER =#{password} WHERE  NAME=#{NAME} 
+    </update>
+    <select id="selectStudents" parameterType="java.lang.String">
+        SELECT * FROM  students  WHERE  NAME =#{NAME}
+    </select>
+    <select id="countAll" parameterType="java.lang.String">
+        SELECT COUNT(*) AS COUNT  FROM students
+    </select>
+    <!--<delete id="deleteManyId" parameterType="java.lang.Integer">-->
+        <!--DELETE  FROM  students WHERE  Id =#{Id}-->
+    <!--</delete>-->
+    
+    <resultMap id="studentMap" type="com.Task.one.model.Student">
+        <result property="id" column="Id"/>
+        <result property="name"  column="Name"/>
+        <result property="Sex" column="Sex"/>
+        <result property="QQ" column="QQ"/>
+        <result property="Graduate" column="Graduate"/>
+        <result property="Number" column="Number"/>
+        <result property="AutoGraph" column="AutoGraph"/>
+        <result property="CreateTime" column="CreateTime"/>
+        <result property="UpdateTime" column="UpdateTime"/>
+    </resultMap>
+</mapper>

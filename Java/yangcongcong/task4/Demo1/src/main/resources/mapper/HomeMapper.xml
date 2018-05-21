@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiles.dao.HomeMapper">
+    <insert id="addHome" parameterType="Home">
+        insert into homepage
+        (online_num,find_job,consultant,introduce,img_path,create_at,update_at)
+        values
+        (#{online_num},#{find_job},#{consultant},#{introduce},#{img_path},#{create_at},#{update_at})
+    </insert>
+
+    <delete id="deleteHome" parameterType="int">
+        delete from homepage where id=#{id}
+    </delete>
+
+    <update id="updateHome" parameterType="Home">
+        update homepage
+        <trim prefix="set" suffix="where id=#{id}" suffixOverrides=",">
+            <if test="online_num!=null">online_num=#{online_num},</if>
+            <if test="find_job!=null">find_job=#{find_job},</if>
+            <if test="consultant!=null">consultant=#{consultant},</if>
+            <if test="introduce!=null">introduce=#{introduce},</if>
+            <if test="img_path!=null">img_path=#{img_path},</if>
+            <if test="create_at!=null">create_at=#{create_at},</if>
+            <if test="update_at!=null">update_at=#{update_at},</if>
+        </trim>
+    </update>
+
+    <select id="getById" parameterType="int" resultType="Home">
+        select * from homepage where id=#{id}
+    </select>
+
+    <select id="getAll" resultType="Home">
+        select * from homepage
+    </select>
+</mapper>

@@ -1,0 +1,26 @@
+<div class="picture" ng-controller="myCtrl">
+    <div class="background">
+        <h1>喝我水站后台登录</h1>
+        <form class="form" name="myForm">
+            <div class="text-list">
+                <div class="border"><label class="text"></label></div>
+                <input type="text" name="username" ng-pattern="/[a-zA-Z0-9]/" autocomplete="false" ng-minlength="5" ng-maxlength="16" ng-model="user.name" style="    position: relative;
+    top: -10px;" required>
+            </div>
+            <div class="warm" ng-show="myForm.username.$dirty && myForm.username.$invalid">
+                <div ng-show="!ng-minlength &&!ng-maxlength">用户名为5-16位</div>
+            </div>
+            <br/>
+            <div class="text-list">
+                <div class="border"><label class="password"></label></div>
+                <input type="password" id="password" name="userpwd" ng-pattern="/[a-zA-Z0-9]/" ng-minlength="5" ng-maxlength="16" ng-model="user.pwd" style="    position: relative;
+    top: -10px;" required>
+            </div>
+            <div class="warm" ng-show="myForm.userpwd.$dirty && myForm.userpwd.$invalid">
+                <div ng-show="!ng-minlength &&!ng-maxlength">密码为5-16位</div>
+            </div>
+            <button type="button" ng-click="submit1()" class="submit" ng-disabled="myForm.userpwd.$pristine || myForm.userpwd.$invalid || myForm.username.$pristine || myForm.username.$invalid">登录</button>
+            <div class="warm" ng-show="myForm.username.$dirty && myForm.username.$invalid" ng-model="button"></div>
+        </form>
+    </div>
+</div>

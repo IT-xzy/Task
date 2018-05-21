@@ -1,0 +1,33 @@
+<div>
+    <header>
+        <div class="top-right"  ng-controller="mainLeft">
+            <a style="cursor: pointer">猎头</a>
+            <a style="cursor: pointer">user</a>
+            <span class="glyphicon glyphicon-off" ui-sref="login" style="cursor: pointer" ng-click="logOut()"></span>
+        </div>
+        <div class="top-left">
+            <h3>萝卜多后台管理系统</h3>
+        </div>
+    </header>
+    <main>
+        <div class="nav" ng-controller="nav">
+            <div class="nav-list" ng-click="toggle(0)"><span class="glyphicon glyphicon-pencil" ></span>信息管理</div>
+            <div class="nav-content" ng-hide=a[0]></div>
+            <div class="nav-list" ng-click="toggle(1)"><span class="glyphicon glyphicon-pencil"></span>Article管理</div>
+            <div class="nav-content" ng-hide=a[1] ui-sref="houtai.js6-2({'page':1,'size':null,'type':null ,'status':null,startAt:null,endAt: null})">Article列表</div>
+            <div class="nav-list" ng-click="toggle(2)"><span class="glyphicon glyphicon-pencil"></span>人才管理</div>
+            <div class="nav-content" ng-hide=a[2]></div>
+            <div class="nav-list" ng-click="toggle(3)"><span class="glyphicon glyphicon-pencil"></span>推荐管理</div>
+            <div class="nav-content" ng-hide=a[3]></div>
+            <div class="nav-list" ng-click="toggle(4)"><span class="glyphicon glyphicon-pencil"></span>后台管理</div>
+            <div class="nav-content" ng-hide=a[4]></div>
+            <div class="nav-list" ng-click="toggle(5)"><span class="glyphicon glyphicon-pencil"></span>用户管理</div>
+            <div class="nav-content" ng-hide=a[5]></div>
+            <div class="nav-list" ng-click="toggle(6)"><span class="glyphicon glyphicon-pencil"></span>内容管理</div>
+            <div class="nav-content" ng-hide=a[6]></div>
+        </div>
+        <div class="view">
+            <div ui-view=""><h1>welcome</h1></div>
+        </div>
+    </main>
+</div>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--邮件配置-->
+    <bean id="sendEmail" class="com.util.SendEmail">
+        <property name="from">
+            <value>sendcloud@sendcloud.org</value>
+        </property>
+        <property name="fromName">
+            <value>SendCloud</value>
+        </property>
+        <property name="replyTo">
+            <value>reply@sendcloud.org</value>
+        </property>
+        <property name="subject">
+            <value>来自 SendCloud SDK 的邮件</value>
+        </property>
+        <property name="localhost">
+            <value>http://localhost:8080/</value>
+        </property>
+    </bean>
+
+    <!--手机短信配置-->
+    <bean id="sendShortMessage" class="com.util.SendShortMessage">
+        <!--//******************************注释*********************************************-->
+        <!--//*初始化服务器地址和端口                                                       *-->
+        <!--//*沙盒环境（用于应用开发调试）：restAPI.init("sandboxapp.cloopen.com", "8883");*-->
+        <!--//*生产环境（用户应用上线使用）：restAPI.init("app.cloopen.com", "8883");       *-->
+        <!--//*******************************************************************************-->
+        <property name="serverIP">
+            <value>sandboxapp.cloopen.com</value>
+        </property>
+        <property name="serverPort">
+            <value>8883</value>
+        </property>
+        <!--//******************************注释*********************************************-->
+        <!--//*初始化主帐号和主帐号令牌,对应官网开发者主账号下的ACCOUNT SID和AUTH TOKEN     *-->
+        <!--//*ACOUNT SID和AUTH TOKEN在登陆官网后，在“应用-管理控制台”中查看开发者主账号获取*-->
+        <!--//*参数顺序：第一个参数是ACOUNT SID，第二个参数是AUTH TOKEN。                   *-->
+        <!--//*******************************************************************************-->
+        <property name="accountSid">
+            <value>8aaf0708612c8039016130097c00006a</value>
+        </property>
+        <property name="accountToken">
+            <value>5233e7710a0241339f050534a451e195</value>
+        </property>
+        <!--//******************************注释*********************************************-->
+        <!--//*初始化应用ID                                                                 *-->
+        <!--//*测试开发可使用“测试Demo”的APP ID，正式上线需要使用自己创建的应用的App ID     *-->
+        <!--//*应用ID的获取：登陆官网，在“应用-应用列表”，点击应用名称，看应用详情获取APP ID*-->
+        <!--//*******************************************************************************-->
+        <property name="appID">
+            <value>8aaf0708612c8039016130097c600071</value>
+        </property>
+    </bean>
+
+
+    <!--七牛云存储配置-->
+    <bean id="uploadHead" class="com.util.UploadHead">
+        <property name="accessKey">
+            <value>24gxIUZ5j7kqonT62C5lb6ioALAnoMbwi0XMdPc8</value>
+        </property>
+        <property name="secretKey">
+            <value>5m0iyWHewOwMgqx-6CdA3KLcbpZmbzVZ3VWc3yhC</value>
+        </property>
+        <property name="bucket">
+            <value>picture</value>
+        </property>
+        <property name="path">
+            <value>C:\\Users\\Blue\\Desktop\\task3gai-3\\src\\main\\webapp\\files\\</value>
+        </property>
+
+    </bean>
+    
+    <!--阿里OOS图片上传配置-->
+    <bean id="aliOss" class="com.util.AliOss">
+        <property name="endpoint">
+            <value>http://oss-cn-shenzhen.aliyuncs.com</value>
+        </property>
+        <property name="accessKeyId">
+            <value>LTAILoRyqqAywaCG</value>
+        </property>
+        <property name="accessKeySecret">
+            <value>31hYSeKHcIzFPQd3lhmlNZ585XT93A</value>
+        </property>
+        <property name="bucketName">
+            <value>pictureok</value>
+        </property>
+        <property name="path">
+            <value>C:\\Users\\Blue\\Desktop\\task3gai-3\\src\\main\\webapp\\files\\</value>
+        </property>
+    </bean>
+
+    <!--图片迁移-->
+    <bean id="migration" class="com.util.Migration">
+        <!--ali-->
+        <property name="accessKey">
+            <value>24gxIUZ5j7kqonT62C5lb6ioALAnoMbwi0XMdPc8</value>
+        </property>
+        <property name="secretKey">
+            <value>5m0iyWHewOwMgqx-6CdA3KLcbpZmbzVZ3VWc3yhC</value>
+        </property>
+        <property name="bucketqiniu">
+            <value>picture</value>
+        </property>
+        <!--qiniu-->
+        <property name="endpoint">
+            <value>http://oss-cn-shenzhen.aliyuncs.com</value>
+        </property>
+        <property name="accessKeyId">
+            <value>LTAILoRyqqAywaCG</value>
+        </property>
+        <property name="accessKeySecret">
+            <value>31hYSeKHcIzFPQd3lhmlNZ585XT93A</value>
+        </property>
+        <property name="bucketali">
+            <value>pictureok</value>
+        </property>
+    </bean>
+    <!--选择存储空间 0是七牛，1是阿里-->
+    <bean id="oos" class="com.util.OOS">
+        <property name="i">
+            <value>0</value>
+        </property>
+    </bean>
+</beans>

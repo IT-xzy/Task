@@ -1,0 +1,301 @@
+*{
+  box-sizing: border-box;
+}
+
+//backstage
+#down{
+display: none;
+}
+.sidebar-menu > li > a{
+  width:210px;
+  color:#fff;
+}
+@media screen and (max-width: 768px) {
+  .main-sidebar{
+    display: none;
+  }
+  #cut{
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    right: 28px;
+
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    &:active{
+      background: #fafafa;
+    }
+  }
+  .sidebar-menu > li > a {
+    width: 100%;}
+}
+@media screen and (min-width: 770px) {
+  .main-sidebar{
+    display:block;
+  }
+  #cut{
+    display: none;
+  }
+
+}
+
+.header{
+  width: 100%;
+  background: #0f0f0f;
+  .log-in{
+    font-size: 2rem;
+    color: #fff;
+    text-align: left;
+    line-height: 5rem;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;}
+  .icon-bar{
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 0.5rem 0;
+    border-radius: 1px;
+    background-color: #888;
+  }
+
+  .use{
+    height: 5rem;
+    line-height: 5rem;
+    text-align: right;
+    .string{
+      margin: 0 1rem;
+      color: #fafafa;
+      font-size: 2rem;
+    }
+    .user{
+      color: #fff;
+      font-size: 2rem;
+    }
+    a:hover{
+      text-decoration: none;
+    }
+    .glyphicon{
+      display: inline;
+      padding: 1.6rem;
+      color: #fff;
+      font-size: 2rem;
+      &:hover{
+        cursor: pointer;
+        background: #a0a0a0;
+      }
+    }
+  }
+}
+.main{
+  display: flex;
+  .artical{
+    width: 100%;
+    font-size: 3rem;
+  }
+  .info{
+    margin-top: 2rem ;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0f0f0f;
+    cursor: pointer;
+  }
+  .list{
+    @extend .info;
+  }
+  .trangile1{
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-right: 2px solid #000;
+    border-top: 2px solid #000;
+    transform: rotate(45deg);
+  }
+  .trangile2{
+    @extend .trangile1;
+  }
+  #info1{
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    //display: none;
+  }
+  #list1{
+    @extend #info1
+  }
+}
+
+//Artical
+.choose {
+  padding: 1rem;
+  margin: 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  .col{
+    margin: 1rem 0;
+  }
+  .input-group {
+     display: block;
+    }
+
+
+.search{
+  float: right;
+}
+}
+.lists{
+  height: auto;
+  margin: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    font-size: 2rem;
+    background: #f9f9f9;
+
+  }
+  table{
+    width: 98%;
+    border: 1px solid #e0e0e0;
+    margin: 1%;
+  }
+
+  thead{
+    font-size: 1.5rem;
+    th{
+      text-align: center;
+    }
+  }
+  .table tbody>tr>td{
+     vertical-align: middle;
+   }
+  tbody{
+    font-size: 1.5rem;
+    text-align: center;
+    img{
+       width: 5rem;
+     }
+  }
+  td .btn{
+    background: transparent;
+    color: #337ab7;
+    &:hover{
+      color: #000;
+    }
+  }
+
+}
+
+
+//pagination
+.style1{
+  background: green;
+}
+.pagination>li>a[disabled],
+.pagination>li>a[disabled]:hover {
+  cursor: not-allowed;
+}
+.pull-right {
+  line-height: 2rem;
+  .text-center{
+  width: 50px;
+}
+}
+.pagination>li {
+  font-size: 1.5rem;
+}
+.pagination>li>a{
+  margin: 0 .5rem;
+  cursor: pointer;
+}
+.pull-left{
+
+}
+
+//AddArt
+@media screen and (min-width: 985px) {
+  .col-md-3{
+    margin-top: 2rem;
+    text-align: right;
+  }
+  .align{
+    margin-left: 4rem;
+    margin-right: -4rem;
+  }
+}
+.newArt{
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f5f5;
+  font-size: 2rem;
+  overflow: hidden;
+  .ArtCot{
+    margin: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #fff;
+    span{
+      display: inline-block;
+    }
+    .col-md-3{
+      margin-top: 2rem;
+      font-weight: 600;
+    }
+    .align{
+      letter-spacing: 4rem;
+    }
+    #div1{
+      margin-top: 1rem;
+      display: inline-block;
+    }
+    .addArt{
+      height: 4rem;
+      padding: 0 2rem;
+      line-height: 4rem;
+      background: #f5f5f5;
+      border-bottom: 1px solid #ddd;
+    }
+    .form-group{
+      margin-top: 1rem;
+    }
+    .content{
+      padding: 0 2rem;
+      overflow: hidden;
+      input{
+        height: 4rem;
+        margin-top: 1rem;
+        font-size: 2rem;
+        border: 2px solid #f0f0f0;
+        border-radius: 5px;
+       }
+      select{
+        @extend input;
+      }
+    }
+    .btn[disabled], fieldset[disabled] .btn {
+      pointer-events: all;
+      margin-bottom: 2rem;
+    }
+    .pos{
+      float: right;
+    }
+  }
+}
+
+
+//wangEditor
+.w-e-toolbar{
+  flex-wrap: wrap;
+}

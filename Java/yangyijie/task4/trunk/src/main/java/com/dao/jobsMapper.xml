@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.JobsDao">
+<resultMap id="jobs" type="com.bean.Jobs">
+    <!--配置映射订单信息-->
+    <result column="id" property="id"/>
+    <result column="create_at" property="createAt"/>
+    <result column="update_at" property="updateAt"/>
+    <result column="low_salary" property="lowSalary"/>
+    <result column="medium_salary" property="mediumSalary"/>
+    <result column="high_salary" property="highSalary"/>
+    <result column="intros_id" property="introsId"/>
+    <result column="jobname" property="jobname"/>
+    <result column="online" property="online"/>
+    <result column="head" property="head"/>
+    <result column="intro"  property="intro"/>
+    <result column="hint" property="hint"/>
+    <!--配置映射的关联的职业介绍信息-->
+    <!--association(联合,关联)用于映射关联查询单个对象的信息
+    property:要将关联查询的用户信息映射到jobs的哪个属性
+    javatype:该属性的类型
+    -->
+    <association  property="jobsIntros" javaType="com.bean.JobsIntros">
+        <result column="id" property="id"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="intros" property="intros"/>
+    </association>
+</resultMap>
+
+    <select id="selectJobs" resultMap="jobs">
+        SELECT jobs.*,jobs_intros.intros FROM jobs,jobs_intros WHERE
+        jobs.intros_id = jobs_intros.id
+    </select>
+</mapper>

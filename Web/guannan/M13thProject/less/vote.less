@@ -1,0 +1,178 @@
+/*PAGE COMMON CSS START*/
+	/*spacing*/
+	@per5: 5%;
+	@per10: 10%;
+	@per15: 15%;
+	@sp5: .5rem;
+	@sp10: 1rem;
+	@sp15: 1.5rem;
+	@sp20: 2rem;
+	@sp25: 2.5rem;
+	@sp30: 3rem;
+	@sp50: 5rem;
+
+	/*theme*/
+	@baseColor: #69d1ea;
+	@lightBlue: #b9e9f5;
+	@white: #fff;
+	@gray: #f0f0f0;
+	@darkGray: #9a9a9a;
+	@black: #000;
+	@orange: #fbb436;
+	@lightOrange: #f4c97b;
+	@darkGreen: #83b09b;
+
+	/*background*/
+	.bg-spr { background: url(../images/sprites.png) no-repeat; }
+
+	/*transition*/
+	.ts { transition: all .3s ease-out; }
+
+	/*scale*/
+	.sc(@x, @y) { transform: scale(@x, @y) }
+/*PAGE COMMON CSS END*/
+
+
+/*vote.less START*/
+body {
+	background: @baseColor;
+	header {
+		padding: @sp10 @per5;
+		color: @white;
+		.leftButton {
+			.bg-spr;
+			.ts;
+			width: 19.5px;
+			height: 20px;
+			background-size: 46px auto;
+			background-position: -10px -301.5px;
+			&:hover {
+				.sc(1.3, 1.3);
+			}
+		}
+		.rightButton {
+			.bg-spr;
+			.ts;
+			width: 18px;
+			height: 18px;
+			background-size: 46px auto;
+			background-position: -10px -183.5px;
+			&:hover {
+				transform: rotate(90deg);
+			}
+		}
+	}
+	main {
+		> aside {
+			padding: @sp15 @per5 @sp15 @per10;
+			background: @lightBlue;
+			color: @black;
+			> a {
+				.bg-spr;
+				.ts;
+				width: 20px;
+				height: 20px;
+				background-size: 35px auto;
+				background-position: -7px -291px;
+				&:hover {
+					.sc(1.3, 1.3);
+				}
+			}
+			&::after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: @per15;
+				border-top: 10px solid @lightBlue;
+				border-right: 5px solid transparent;
+				border-left: 5px solid transparent;
+			}
+		}
+		> p {
+			padding: @sp10 @per5 @sp10 @per15;
+			color: @white;
+		}
+		> div {
+			margin: @sp5 @per5;
+			width: 23.3vw;
+			> div {
+				border: 3px solid @white;
+				height: 23.3vw;
+				.ts;
+				> p {
+					.ts;
+					vertical-align: middle;
+					height: 70%;
+					line-height: 16.31vw;
+					background: @lightOrange;
+				}
+				> p + p {
+					.ts;
+					vertical-align: middle;
+					height: 30%;
+					line-height: 6.99vw;
+					background: @darkGreen;
+					color: @white;
+				}
+				&:hover {
+					box-shadow: 0 0 5px 2px rgba(0, 0, 0, .35);
+					+ aside { visibility: visible; }
+					> p { background: saturate(@lightOrange, 40%); }
+					> p + p { background: saturate(@darkGreen, 40%); }
+				}
+			}
+			> aside {
+				visibility: hidden;
+				height: @sp30;
+				.ts;
+				> span {
+					width: 25%;
+					> a {
+						.bg-spr;
+						.ts;
+						margin: 5px auto;
+						width: 20px;
+						height: 20px;
+						background-size: 61.3px auto;
+						&:hover {
+							box-shadow: 0 0 5px 2px rgba(0, 0, 0, .35);
+							.sc(1.2, 1.2);
+						}
+					}
+					.icon1 {	
+						background-position: -13.3px -59px;
+					}
+					.icon2 {	
+						background-position: -13.3px -105px;
+					}
+					.icon3 {	
+						background-position: -13px -152px;
+					}
+					.icon4 {	
+						background-position: -13.3px -198px;
+					}
+				}
+				&:hover {
+					visibility: visible;
+				}
+			}
+		}
+	}
+	footer {
+		bottom: 0;
+		padding: @sp20 @per10;
+		background: @baseColor;
+		> a {
+			.ts;
+			height: @sp30;
+			background: @orange;
+			color: @white;
+			&:hover {
+				box-shadow: 0 0 5px 2px rgba(0, 0, 0, .35);
+				background: @darkGray;
+				color: #c00;
+			}
+		}
+	}
+}
+/*vote.less END*/

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lujing.mapper.ProfessionsMapper" >
+  <resultMap id="BaseResultMap" type="lujing.pojo.Professions" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="profession" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="picture_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="level" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="difficult" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="grow_up" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="scarcity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="salary1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="salary2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="salary3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tips" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ppid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_at" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="update_at" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, profession, picture_path, introduce, level, difficult, grow_up, scarcity, salary1, 
+    salary2, salary3, tips, ppid, create_at, update_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from professions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from professions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="lujing.pojo.Professions" >
+    insert into professions (id, profession, picture_path, 
+      introduce, level, difficult, 
+      grow_up, scarcity, salary1, 
+      salary2, salary3, tips, 
+      ppid, create_at, update_at
+      )
+    values (#{id,jdbcType=INTEGER}, #{profession,jdbcType=VARCHAR}, #{picturePath,jdbcType=VARCHAR}, 
+      #{introduce,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{difficult,jdbcType=VARCHAR}, 
+      #{growUp,jdbcType=VARCHAR}, #{scarcity,jdbcType=VARCHAR}, #{salary1,jdbcType=VARCHAR}, 
+      #{salary2,jdbcType=VARCHAR}, #{salary3,jdbcType=VARCHAR}, #{tips,jdbcType=VARCHAR}, 
+      #{ppid,jdbcType=INTEGER}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="lujing.pojo.Professions" >
+    insert into professions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="picturePath != null" >
+        picture_path,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="difficult != null" >
+        difficult,
+      </if>
+      <if test="growUp != null" >
+        grow_up,
+      </if>
+      <if test="scarcity != null" >
+        scarcity,
+      </if>
+      <if test="salary1 != null" >
+        salary1,
+      </if>
+      <if test="salary2 != null" >
+        salary2,
+      </if>
+      <if test="salary3 != null" >
+        salary3,
+      </if>
+      <if test="tips != null" >
+        tips,
+      </if>
+      <if test="ppid != null" >
+        ppid,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePath != null" >
+        #{picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="difficult != null" >
+        #{difficult,jdbcType=VARCHAR},
+      </if>
+      <if test="growUp != null" >
+        #{growUp,jdbcType=VARCHAR},
+      </if>
+      <if test="scarcity != null" >
+        #{scarcity,jdbcType=VARCHAR},
+      </if>
+      <if test="salary1 != null" >
+        #{salary1,jdbcType=VARCHAR},
+      </if>
+      <if test="salary2 != null" >
+        #{salary2,jdbcType=VARCHAR},
+      </if>
+      <if test="salary3 != null" >
+        #{salary3,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="ppid != null" >
+        #{ppid,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="lujing.pojo.Professions" >
+    update professions
+    <set >
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="picturePath != null" >
+        picture_path = #{picturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="difficult != null" >
+        difficult = #{difficult,jdbcType=VARCHAR},
+      </if>
+      <if test="growUp != null" >
+        grow_up = #{growUp,jdbcType=VARCHAR},
+      </if>
+      <if test="scarcity != null" >
+        scarcity = #{scarcity,jdbcType=VARCHAR},
+      </if>
+      <if test="salary1 != null" >
+        salary1 = #{salary1,jdbcType=VARCHAR},
+      </if>
+      <if test="salary2 != null" >
+        salary2 = #{salary2,jdbcType=VARCHAR},
+      </if>
+      <if test="salary3 != null" >
+        salary3 = #{salary3,jdbcType=VARCHAR},
+      </if>
+      <if test="tips != null" >
+        tips = #{tips,jdbcType=VARCHAR},
+      </if>
+      <if test="ppid != null" >
+        ppid = #{ppid,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lujing.pojo.Professions" >
+    update professions
+    set profession = #{profession,jdbcType=VARCHAR},
+      picture_path = #{picturePath,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      difficult = #{difficult,jdbcType=VARCHAR},
+      grow_up = #{growUp,jdbcType=VARCHAR},
+      scarcity = #{scarcity,jdbcType=VARCHAR},
+      salary1 = #{salary1,jdbcType=VARCHAR},
+      salary2 = #{salary2,jdbcType=VARCHAR},
+      salary3 = #{salary3,jdbcType=VARCHAR},
+      tips = #{tips,jdbcType=VARCHAR},
+      ppid = #{ppid,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

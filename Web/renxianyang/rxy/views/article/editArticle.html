@@ -1,0 +1,129 @@
+<style>
+    .fileUploadBtnWrap {
+        width: 100px;
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+    }
+
+    .fileUploadBtnWrap .fileUploadBtn {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 panel panel-default " style="padding: 0;margin-top: 20px;">
+            <div class="panel-heading">
+                编辑Article
+            </div>
+            <div class="panel-body">
+                <form name="editForm" role='form' class="form form-horizontal">
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">标题</label>
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" name="title" ng-model="vm.$httpSend.title"
+                                   required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">类型</label>
+                        <div class="col-xs-4">
+                            <select class="form-control" name="status" required ng-model="vm.$httpSend.type"
+                                    ng-options="Data.type as Data.name for Data in  vm.count.type">
+                            </select>
+                        </div>
+                        <div class="col-xs-4 col-xs-offset-1" ng-if="vm.$httpSend.type==3">
+                            <select class="form-control" name="industry" required ng-model="vm.$httpSend.industry"
+                                    ng-options="Data.type as Data.name for Data in vm.count.industry">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">说明</label>
+                        <div class="col-xs-9">
+                            <editor-tool ng-model='vm.$httpSend.content'></editor-tool>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">跳转链接</label>
+                        <div class="col-xs-9">
+                            <input type="text" ng-model="vm.$httpSend.url" name="url" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">配图</label>
+                        <div class="col-xs-1">
+                            <a href="javascript:void(0)"
+                               ng-click="vm.imgUp.clearQueue()"
+                               class="fileUploadBtnWrap btn btn-success">选择文件
+                                <input type="file" value="选择文件" class="fileUploadBtn" nv-file-select
+                                       uploader='vm.imgUp.instance'/>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-xs-offset-2">
+                            <img ng-src="{{vm.$httpSend.img}}" style="max-width: 100%;"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-9 col-xs-offset-3">
+                            <table class="table table-responsive" ng-show="vm.imgUp.imgInfoPanel">
+                                <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>文件大小</th>
+                                    <th>进度</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="self in vm.imgUp.instance.queue track by $index">
+                                    <td width="50%" style="word-break: break-all;">
+                                        {{self._file.name}}
+                                    </td>
+
+                                    <td ng-clock>{{self._file.size/1024/1024|limitTo:4}}Mb</td>
+
+                                    <td>1</td>
+
+                                    <td class="text-center">
+                                        <input type="button" class="btn btn-success" id="uploadBtn" value="上传"
+                                               ng-disabled="vm.imgUp.uploadBtnFlag"
+                                               ng-click="vm.imgUp.uploadAitem($index)"/>
+                                        <input class="btn btn-danger" type="button" id="deleteBtn" value="取消"
+                                               ng-disabled="vm.imgUp.deleteBtnFlag"
+                                               ng-click="vm.imgUp.cancelAitem($index)"/>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-10 col-xs-offset-2">
+                            <input type="submit" value="立即上线" class="btn btn-success"
+                                   ng-disabled="editForm.$error.required || !!vm.$httpSend.img!=true"
+                                   ng-click="vm.ways.savaArticle(2)"
+                            />
+                            <input type="submit" value="存为草稿" class="btn btn-success"
+                                   ng-disabled="editForm.$error.required || !!vm.$httpSend.img!=true"
+                                   ng-click="vm.ways.savaArticle(1)"
+                            />
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+</div>

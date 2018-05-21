@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body >
+
+
+<!-- main content -->
+<div id="page-wrapper" class="page-wrapper" style="width:100%">
+    <div class="panel panel-default ">
+        <form class="form-horizontal ">
+            <div class="panel-body">
+                <div class="row pd-bottom-2">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">发布时间</label>
+                            <div class="col-md-8">
+                                <input type="text"
+                                       class="form-control "
+                                       size="20"
+                                       data-date-format="yyyy-MM-dd" data-date-type="number"
+                                       data-max-date="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 text-center ">—</label>
+                            <div class="col-md-8">
+                                <input type="text"
+                                       class="form-control "
+                                       size="20" bs-datepicker="" autoclose="true"
+                                       data-date-format="yyyy-MM-dd" data-date-type="number"
+                                       ng-model="vm.searchParams.endAt" data-min-date="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 word-spacing-25">类 型</label>
+                            <div class="col-md-8">
+                                <select class="form-control ">
+                                    <option value="">全部</option>
+                                    <option value="0">首页Banner</option>
+                                    <option value="1">找职位Banner</option>
+                                    <option value="2">找精英Banner</option>
+                                    <option value="3">行业大图</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pd-bottom-2">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 word-spacing-25">状 态</label>
+                            <div class="col-md-8">
+                                <select class="form-control ">
+                                    <option value="">全部</option>
+                                    <option value="2">上线</option>
+                                    <option value="1">草稿</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row pd-bottom-2">
+                    <div class="col-md-4 pull-right text-right">
+                        <div>
+                            <button type="button" class="btn btn-danger">清空</button>
+                            <button type="button" class="btn btn-success">搜索</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="panel panel-default ">
+        <div class="panel-heading">
+            <strong>Article列表</strong>
+            <button type="button" class="btn btn-xs btn-success pull-right margin-left-10">
+                +新增
+            </button>
+
+        </div>
+        <div class="panel-body table-responsive"  >
+            <table class="table table-striped add-table-border" ng-controller="bbbCtrl">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="x in articele">
+                    <th>{{x.id}}</th>
+                    <th>{{x.title}}</th>
+                    <th>{{x.type}}</th>
+                    <th>{{x.createAt}}</th>
+                    <th>{{x.updateAt}}</th>
+                    <th>{{x.author}}</th>
+                    <th>{{x.status}}</th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- ngIf: vm.total -->
+        <ul class="pagination pull-right ng-isolate-scope"total="48">
+            <style>
+                .pagination > li > a[disabled],
+                .pagination > li > a[disabled]:hover {
+                    cursor: not-allowed;
+                }
+            </style>
+            <li class="pull-left paginationCenter">
+                每页显示
+                <input type="text" class="paginationGo text-center">
+                条
+            </li>
+
+            <li><a disabled="disabled">首页</a></li>
+            <li><!-- ngIf: isHavePrePage() --></li>
+
+            <!-- ngRepeat: li in pageList track by $index -->
+            <li ng-class="{'active': isActive(li)}" class="ng-scope active">
+                <a class="" disabled="disabled"> 1 </a>
+            </li><!-- end ngRepeat: li in pageList track by $index -->
+            <li>
+                <a class=""> 2 </a>
+            </li><!-- end ngRepeat: li in pageList track by $index -->
+            <li>
+                <a class=""> 3 </a>
+            </li><!-- end ngRepeat: li in pageList track by $index -->
+            <li>
+                <a class=""> 4 </a>
+            </li><!-- end ngRepeat: li in pageList track by $index -->
+            <li>
+                <a class=""> 5 </a>
+            </li><!-- end ngRepeat: li in pageList track by $index -->
+
+            <li><!-- ngIf: isHaveNextPage() -->
+                <a> &gt;</a>
+                <!-- end ngIf: isHaveNextPage() -->
+            </li>
+            <li><a>末页</a></li>
+            <li>
+                去第
+                <input type="text">
+                页
+                <a class="pull-right">确定</a>
+            </li>
+        </ul><!-- end  -->
+    </div>
+</div>
+
+</body>
+
+</html>

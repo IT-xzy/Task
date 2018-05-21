@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--Mapper中的namespace用于绑定Dao接口的，即面向接口编程。-->
+<!--好处在于当使用了namespace之后就可以不用写接口实现类，
+业务逻辑会直接通过这个绑定寻找到相对应的SQL语句进行对应的数据处理-->
+<mapper namespace="com.ycc.dao.UserDao">
+    <select id="getUserById" parameterType="int" resultType="User">
+        select * from task1 where id=#{id}
+    </select>
+    <select id="getUserByName" parameterType="String" resultType="User">
+        select * from task1 where stu_name=#{stu_name}
+    </select>
+    <select id="getUserByNumber" parameterType="int" resultType="User">
+        select * from task1 where number=#{number}
+    </select>
+    <insert id="addUser" parameterType="java.util.List">
+        insert into task1 values
+        <foreach collection="list" item="item" separator="," index="index">
+            (#{item.id},#{item.stu_name},#{item.number},#{item.qq},#{item.type},
+            #{item.university},#{item.time},#{item.link},#{item.pledge},#{item.senior},
+            #{item.locality},#{item.create_at},#{item.update_at})
+        </foreach>
+    </insert>
+    <update id="updateUser" parameterType="User">
+        update  task1 set stu_name=#{stu_name},number=#{number},qq=#{qq},type=#{type},university=#{university},
+        time=#{time},link=#{link},pledge=#{pledge},senior=#{senior},locality=#{locality},update_at=#{update_at} where id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from task1 where id=#{id}
+    </delete>
+    <select id="getAllUser" resultType="User">
+        select * from task1
+    </select>
+</mapper>

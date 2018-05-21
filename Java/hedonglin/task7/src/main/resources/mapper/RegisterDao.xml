@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.student.dao.RegisterDao">
+  <resultMap id="BaseResultMap" type="com.student.model.Register">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+    <result column="email_code" jdbcType="VARCHAR" property="emailCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_at, update_at, code, email, cellphone
+  </sql>
+  <select id="getEmailCodeByEmail" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT email_code FROM register WHERE email =#{email,jdbcType=VARCHAR}
+  </select>
+    <select id="getAllRegister" resultMap="BaseResultMap">
+        SELECT * FROM register
+    </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from register
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectCellphoneSize" parameterType="java.lang.String" resultType="java.lang.Long">
+        SELECT count(cellphone) from register where cellphone=#{cellphone,jdbcType=VARCHAR}
+    </select>
+    <select id="selectFinalCodeByCellphone" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM register WHERE cellphone=#{cellphone,jdbcType=VARCHAR} ORDER BY create_at desc LIMIT 1
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from register
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.student.model.Register">
+    insert into register (id, create_at, update_at, 
+      code, email, cellphone
+      )
+    values (#{id,jdbcType=BIGINT}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, 
+      #{code,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.student.model.Register">
+    insert into register
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="cellphone != null">
+        cellphone,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.student.model.Register">
+    update register
+    <set>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.student.model.Register">
+    update register
+    set create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      code = #{code,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

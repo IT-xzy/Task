@@ -1,0 +1,38 @@
+<canvas height="100%" width="100%" style="position: fixed; top: 0; left: 0; z-index: -1; opacity: 1;"
+        id="canvas"></canvas>
+<div class="bg-img" ng-controller="siteCtrl">
+    <div class="login-container container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="panel panel-default" style="background-color:rgba(210, 215, 223, 0.8)">
+                    <div class="name">喝我水站后台登陆</div>
+                    <div class="panel-body login-panel">
+                        <form>
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control input-lg pd-left-50 login-user ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched"
+                                           placeholder="用户名" name="username" id="username" type="text" autofocus=""
+                                           ng-model="names" required="">
+                                    <div class="login-user-icon"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control input-lg pd-left-50 login-psd ng-dirty ng-valid-parse ng-valid ng-valid-required ng-touched"
+                                           placeholder="密码" name="password" id="psw" type="password" ng-model="pwd"
+                                           required="">
+                                    <div class="login-psd-icon "></div>
+                                </div>
+                                <div class="checkbox">
+                                    <p class="text-danger" id="text-danger">{{errorNote}}</p>
+                                </div>
+                                <button type="button" class="btn btn-lg btn-submit btn-block login-btn"
+                                        ng-click="login()">
+                                    登录
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

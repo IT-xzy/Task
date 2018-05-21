@@ -1,0 +1,53 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE mapper-->
+        <!--PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+        <!--"http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+
+<!--&lt;!&ndash;<mapper namespace="test">&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash; 需求：通过id查询用户 &ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;<select id="find" parameterType="int" resultType="mybatis.User">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;select * from student where ID = #{ID}&ndash;&gt;-->
+    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+<!--&lt;!&ndash;</mapper>&ndash;&gt;-->
+        <!--&lt;!&ndash;<mapper>&ndash;&gt;-->
+        <!--&lt;!&ndash;&lt;!&ndash; 根据用户名称模糊查询用户信息，可能返回多条 &ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<select id="findUserByName" parameterType="java.lang.String" resultType="mybatis.po.User">&ndash;&gt;-->
+        <!--&lt;!&ndash;select * from user where username like '%${value}%'&ndash;&gt;-->
+        <!--&lt;!&ndash;</select>&ndash;&gt;-->
+        <!--&lt;!&ndash;</mapper>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;<mapper namespace="test">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;&lt;!&ndash; 省略不相关配置 &ndash;&gt;&ndash;&gt;-->
+
+        <!--&lt;!&ndash;&lt;!&ndash; 添加用户 &ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<insert id="insertUser" parameterType="mybatis.po.User">&ndash;&gt;-->
+        <!--&lt;!&ndash;insert into user(username,birthday,sex,address) values(#{username},#{birthday},#{sex},#{address})&ndash;&gt;-->
+
+        <!--&lt;!&ndash;&lt;!&ndash; 将插入数据的主键返回，返回到user对象中 &ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">&ndash;&gt;-->
+        <!--&lt;!&ndash;select last_insert_id()&ndash;&gt;-->
+        <!--&lt;!&ndash;</selectKey>&ndash;&gt;-->
+
+        <!--&lt;!&ndash;&lt;!&ndash; &ndash;&gt;-->
+        <!--&lt;!&ndash;<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.String">&ndash;&gt;-->
+        <!--&lt;!&ndash;select uuid()&ndash;&gt;-->
+        <!--&lt;!&ndash;</selectKey>&ndash;&gt;-->
+        <!--&lt;!&ndash;&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;</insert>&ndash;&gt;-->
+        <!--&lt;!&ndash;</mapper>&ndash;&gt;-->
+        <!--<mapper namespace="test">-->
+
+        <!--&lt;!&ndash; 省略不相关配置 &ndash;&gt;-->
+
+        <!--&lt;!&ndash; 删除用户 &ndash;&gt;-->
+        <!--<delete id="deleteUser" parameterType="java.lang.Integer">-->
+        <!--delete from student where ID = #{id}-->
+        <!--</delete>-->
+
+        <!--&lt;!&ndash;&lt;!&ndash; 更新用户 &ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;<update id="updateUser" parameterType="mybatis.po.User">&ndash;&gt;-->
+        <!--&lt;!&ndash;update user set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}&ndash;&gt;-->
+        <!--&lt;!&ndash;</update>&ndash;&gt;-->
+        <!--</mapper>-->

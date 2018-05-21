@@ -1,0 +1,148 @@
+<div id="page-wrapper" style="width: 100%">
+    <div class="panel panel-default ">
+        <form class="form-horizontal ">
+            <div class="panel-body">
+                <div class="row ">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">时 间</label>
+                            <div class="col-md-8">
+                                <div class='input-group ' id='datetimepicker1'>
+                                    <input type="text" ng-model="params.startAt" id="datepicker" class="form-control">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 text-center ">至</label>
+                            <div class="col-md-8">
+                                <div class='input-group date' id='datetimepicker2'>
+                                    <input type="text" ng-model="params.endAt" id="datepicker1" class="form-control">
+                                    <span class="input-group-addon"><span
+                                            class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 word-spacing-25">类 型</label>
+                            <div class="col-md-8">
+                                <select class="form-control " ng-model="params.type">
+                                    <option value="">全部</option>
+                                    <option ng-repeat="y in type" value="{{y.code}}"
+                                            data-ng-selected="y.code==params.type">
+                                        {{y.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 word-spacing-25">状 态</label>
+                            <div class="col-md-8">
+                                <select class="form-control " ng-model="params.status">
+                                    <option value="">全部</option>
+                                    <option ng-repeat="y in status" value="{{y.code}}"
+                                            data-ng-selected="y.code==params.status">{{y.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row ">
+                    <div class="col-md-4 pull-right text-right">
+                        <div>
+                            <button data-ng-click="empty()" type="button" class="btn btn-danger">清空</button>
+                            <button data-ng-click="search()" type="button" class="btn btn-success">搜索</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="panel panel-default ">
+        <div class="panel-heading">
+            <strong>Article列表</strong>
+            <button type="button" class="btn btn-xs btn-success pull-right margin-left-10"
+                    ui-sref="backStage.addArticle">
+                +新增
+            </button>
+
+        </div>
+        <div class="panel-body table-responsive">
+            <table class="table table-striped add-table-border">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="x in articleList">
+                    <td>{{$index+1}}</td>
+                    <td ng-bind="x.title"></td>
+                    <td ng-bind="x.type | typeFilter"></td>
+                    <td ng-bind="x.createAt | date:'yyyy-MM-dd '"></td>
+                    <td ng-bind="x.updateAt | date:'yyyy-MM-dd '"></td>
+                    <td ng-bind="x.author"></td>
+                    <td ng-bind="x.status | statusFilter"></td>
+                    <td>
+                        <a type="button" class="btn btn-sm" data-ng-click="changeStatus(x.id,x.status)">
+                            {{x.status | statusONOFFFilter}}</a>
+                        <a type="button" class="btn btn-sm" ui-sref="backStage.addArticle({id:x.id})"
+                        >编辑
+                        </a>
+                        <a type="button" class="btn btn-sm" data-ng-click="delete(x.id)">删除</a>
+                    </td>
+                </tr>
+                <tr ng-show="articleList==''">
+                    <td  colspan="10">未查询到数据！</td>
+                </tr>
+                </tbody>
+            </table>
+            <form class="page-bar">
+                <label>
+                    每页显示
+                    <input type="number" style="width: 50px" class="text-center" ng-model="params.size" onkeyup="value=value.replace(/\D|^0/g,'')" >
+                    条
+                </label>
+                <button class="btn btn-default" data-ng-disabled="params.page==1" data-ng-click="goPage(1,params.size)">首页</button>
+                <button class="btn btn-default" data-ng-disabled="params.page==1"
+                        data-ng-click="goPage(params.page-1,params.size)">上一页
+                </button>
+                <button class="btn btn-default" data-ng-disabled="params.page==pageAll"
+                        data-ng-click="goPage(params.page-1+2,params.size)">
+                    下一页
+                </button>
+                <button class="btn btn-default" data-ng-disabled="params.page==pageAll" data-ng-click="goPage(pageAll,params.size)">末页
+                </button>
+                <label>
+                    跳转至第
+                    <input type="number" style="width: 50px" class="text-center" ng-model="pageSkip" onkeyup="value=value.replace(/\D|^0/g,'')">
+                    页
+                </label>
+                <span>第{{params.page}}页</span>
+                <span>共{{pageAll}}页</span>
+                <button class="btn btn-success" data-ng-click="goPage(pageSkip,params.size)"
+                        data-ng-disabled=" pageSkip>pageAll || pageSkip<1 || params.size < 1">确定
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

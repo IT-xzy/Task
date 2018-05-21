@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hedonglin.dao.TalentDao">
+  <resultMap id="BaseResultMap" type="com.hedonglin.model.Talent">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="job_description" jdbcType="LONGVARCHAR" property="jobDescription" />
+    <result column="password" jdbcType="VARCHAR" property="password"/>
+    <result column="salt" jdbcType="VARCHAR" property="salt"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, job, photo, job_description,password,salt
+  </sql>
+  <select id="randomSelectTalent" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM t_10 ORDER BY RAND() LIMIT 4;
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_10
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectIdByName" parameterType="java.lang.String" resultType="java.lang.Long">
+    select
+    id
+    from t_10
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_10
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_10
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hedonglin.model.Talent">
+    insert into t_10 (id, name, job, 
+      photo, job_description,password,salt)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{jobDescription,jdbcType=LONGVARCHAR},#{password,jdbcType=VARCHAR},#{salt,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hedonglin.model.Talent">
+    insert into t_10
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="photo != null">
+        photo,
+      </if>
+      <if test="jobDescription != null">
+        job_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDescription != null">
+        #{jobDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hedonglin.model.Talent">
+    update t_10
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="jobDescription != null">
+        job_description = #{jobDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hedonglin.model.Talent">
+    update t_10
+    set name = #{name,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      job_description = #{jobDescription,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hedonglin.model.Talent">
+    update t_10
+    set name = #{name,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  
+</mapper>

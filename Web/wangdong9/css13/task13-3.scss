@@ -1,0 +1,166 @@
+$precorlor:#29bde0;
+$prefont:2rem;
+$headerheight:4rem;
+$colorw:#fff;
+$colorgry:#ccc;
+$coloryellow:#f5c97b;
+$brr:50%;
+$mgl:40px;
+$maxwidth:780px;
+$minwidth:320px;
+%mar0a{margin:0 auto;}
+%maricon{margin:0 10px;}
+%body{ max-width: 780px;
+  min-width: 320px;
+  font-size: 62.5%;
+  margin: 0 auto;  }
+$por:relative;
+$poa:absolute;
+$hundred:100%;
+$footerfont:1rem;
+$tenpx:10px;
+%ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+%disc{
+  display: flex;
+  align-items: center;
+}
+%discs{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+%discsb{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+%discc{display: flex;
+  align-items: center;
+  justify-content: center;}
+%bb{border-bottom: 1px solid #fff}
+%bbc{border-bottom: 1px solid #ccc}
+@mixin fixed($top,$bottom){
+  width: $hundred;
+  height: $headerheight;
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  z-index: 1;
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  background: $precorlor;
+}
+@mixin margin($right,$left,$btncorlor){
+  height: $headerheight;
+  width: 40%;
+  background: $btncorlor;
+  color: $colorw;
+  font-size: $prefont;
+  line-height: $headerheight;
+  text-align: center;
+  margin-right: $right;
+  margin-left: $left;
+  border-radius: 10%;
+}
+%mmm{
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  margin: 0 auto;
+}
+$borderr:6%;
+%linenone{text-decoration: none}
+
+body{
+  @extend %body;
+}
+header{
+  @include fixed(0,auto);
+  @extend %discs;
+  @extend %bb;
+}
+.white_house {
+  width: 51px;
+  height: 42px;
+  background: url(images/css_sprites.png) -102px -210px;
+  background-size: 763%;
+}
+.head{
+  font-size: 2rem;
+  color: white;
+}
+.white_roll {
+  width: 42px;
+  height: 44px;
+  background: url(images/css_sprites.png) -360px -9px;
+  background-size: 977%;
+}
+main{
+  background:$precorlor;
+  margin-top: $headerheight;
+}
+.box{
+  height: 23px;
+  width:$hundred;
+}
+.wincup{
+  text-align: center;
+}
+.cup{
+  width: 242px;
+}
+.good{
+  margin: 0 $mgl;
+}
+.characters{
+  font-size:$prefont;
+  color: #ffc865;
+}
+.explain{
+  margin: 10px 0 0 $mgl;
+  font-size: 1rem;
+  color: #fff;
+}
+.time{
+  float: right;
+  color: #a6a6a6;
+  margin-top: 10px;
+
+}
+.day{
+  background: #fff;
+  padding-left: $mgl;
+@extend %bbc;
+}
+.numberday{
+  font-size: 1.6rem;
+}
+.night{
+  margin: 10px 0 15px 0;
+}
+li{
+  color: #a6a6a6;
+}
+
+.boxlast{
+  width: 100%;
+  height: 80px;
+  background: #ffffff;
+}
+.footer{
+@include fixed(auto,0);
+  height: 80px;
+ @extend %discsb;
+  background:rgba(41,189,224,0.6);
+}
+.once{
+  @include margin(auto,5%,#f66f6f);
+
+}
+.up{
+  @include margin(5%,auto,#fbb435)
+
+}

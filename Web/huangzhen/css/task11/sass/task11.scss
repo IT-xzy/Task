@@ -1,0 +1,80 @@
+$font-size: .16rem;
+$backgroud-header:#5fc0cd;
+$backgroud:#eff0f4;
+$color:#fff;
+$padding:.1rem;
+html {
+    font-size: 625%;
+}
+
+body {
+    font-size: $font-size;
+    background: $backgroud;
+}
+
+body,
+h4 {
+    margin: 0;
+}
+
+a {
+    cursor: pointer;
+    font-size: .14rem;
+}
+
+header {
+    color: $color;
+    background: $backgroud-header;
+    padding: $padding;
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+    .title {
+        text-align: center;
+    }
+}
+
+main {
+    $wrap-width: $padding*3;
+    .wrap {
+        background: $color;
+        padding: $padding;
+        margin-top: $padding;
+        img {
+            height: $wrap-width;
+            vertical-align: middle;
+            margin-right: $padding;
+        }
+        input[type="text"] {
+            width: 70%;
+            height: $wrap-width/1.5;
+            line-height: $wrap-width/1.5;
+            outline: none;
+            padding-left: $padding;
+            border: 0;
+            border-left: 1px solid #cccccc;
+        }
+    }
+    .login {
+        @extend header;
+        width: 100%;
+        outline: none;
+        border: 0;
+        margin-top: $padding;
+        padding: $padding*2;
+        letter-spacing: $padding;
+        padding-right: $padding; // 纯粹无聊分间距
+    }
+}
+
+footer {
+    margin-top: $padding;
+    float: right;
+    .forget {
+        // @extend a; // 这里怎么没有继承a的手势属性?
+        color: $backgroud-header;
+    }
+}

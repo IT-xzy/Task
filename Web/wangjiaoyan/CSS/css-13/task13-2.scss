@@ -1,0 +1,94 @@
+$blue:#29bde0;
+$yellow:#ffc865;
+$brilyellow:#fbb435;
+$pink:#f66f6f;
+$gray:#a6a6a6;
+$lightgray:#e3e3e3;
+@mixin back($background-color:$blue){
+  background-color: $background-color;
+}
+
+
+
+img{
+  transform: scale(0.6);
+}
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 3rem;
+  border-bottom: 1px solid #74d4eb;
+  @include back();
+}
+main{
+  margin-bottom: 6rem;
+  padding-top: 5rem;
+  @include back();
+  .garland{
+    height: 135px;
+    width: 220px;
+    margin: auto;
+    background: url("../css-7/img7/garland.png") no-repeat;
+    background-size: contain;
+    text-align: center;
+    .win{
+      margin: 0;
+      font-size: 25px;
+      color: #fff;
+    }
+  }
+  .amazing{
+    margin: 1rem 5rem 2rem 5rem;;
+    font-size: 1.6rem;
+    color: $yellow;
+  }
+  pre{
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    color: #fff;
+  }
+  ul{
+    @include back(#fff);
+    li{
+      padding:.5rem 5rem;
+      border-bottom: 1px solid $lightgray;
+      font-size: 1.2rem;
+      color: $gray;
+      .time {
+        display: flex;
+        justify-content: space-between;
+      }
+      .date{
+        font-size: 1.3rem;
+      }
+      .date1{
+        font-size: 1rem;
+        color: $lightgray;
+      }
+      p{
+      margin: .5rem 0;
+    }
+    }
+  }
+}
+footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 5rem;
+  background-color: rgba(41,189,224,0.5);
+  .more{
+    height: 4rem;
+    width: 13rem;
+    border-radius: .5rem;
+    background: $pink;
+    font-size: 2rem;
+    color: #fff;
+  }
+  .git{
+    @extend .more;
+    @include back($brilyellow);
+  }
+}
+

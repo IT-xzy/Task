@@ -1,0 +1,53 @@
+@charset "UTF-8";
+@import "../global-style/global.scss";
+// 侧边栏 begin
+.side {
+	margin-bottom: .3rem;
+	width: 20%;
+	border-radius: 5px;
+	border: 1px solid $border-color;
+	background-color: #fff;
+	.side-top {
+		font-size: .2rem;
+		border-bottom: 1px solid $border-color;
+		h3 {
+			padding-top: .2rem;
+			padding-bottom: .2rem;
+			font-size: .2rem;
+		}
+	}
+	.side-list {
+		margin: 0 auto;
+		width: 1rem;
+		li {
+			line-height: .5rem;
+			a {
+				color: $base-color;
+				&:hover {
+					color: #ff640c;
+					.dot {
+						background-color: #ff640c;
+					}
+				}
+				.dot {
+					display: inline-block;
+				    width: 10px;
+				    height: 10px;
+				    margin-right: .1rem;
+				    border: 1px solid #ff640c;
+				    border-radius: 50%;
+				    color: #fff;
+				}
+			}	
+		}
+	}
+}
+// 侧边栏 end
+@media screen and (max-width: 768px) {
+	.side,
+	.main {
+		margin-left: 0;
+		margin-right: 0;
+		width: 100%;
+	}
+}

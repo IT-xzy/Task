@@ -1,0 +1,456 @@
+main{
+    background: #fafafa;
+    margin-top: -5px;
+    padding-bottom: 15rem;
+    .about {
+        position: relative;
+        top: 0;
+        padding-top: 12rem;
+        display: flex;
+        @media screen and ($maxw:$sm) {
+            display: block
+        }
+        .format {
+            @include flex-center;
+            flex-flow: column;
+            @media screen and ($maxw:$sm) {
+                width: 100%;
+            }
+            width:25%;
+        }
+        h4{
+            margin: 2rem 0;
+        }
+        p{
+            color: $gray1;
+            margin: 1rem 0;
+        }
+        .eg {
+            display: flex;
+            flex-flow: column;
+            margin-top: 10px;
+            padding: 60px 0 50px 50px;
+            border-left: .1rem dashed $gray1;
+            @media ($maxw:$sm){
+                border: none;
+                align-items: center;
+            }
+            img{
+                padding-top: 3px;
+                width: 13px;
+                height: 13px;
+            }
+            .Qty {
+                display: flex;
+                font-size: 14px;
+                color: $green1;
+            }
+        }
+    }
+    .how {
+        margin-top: 5rem;
+        .title {
+            @include flex-center;
+            width: 100%;
+            font-size: 22px;
+        }
+        .main{
+            display: flex;
+            flex-flow: wrap;
+        }
+        .list{
+            @include flex-center;
+            justify-content: space-around;
+            padding: 10px 0;
+            @media ($minw:$md){
+                width: 25%;
+            }
+            @media ($minw:$sm) and ($maxw:$md){
+                width: 50%;
+            }
+            @media ($maxw:$sm){
+                width: 100%;
+            }
+            img{
+                width: 2rem;
+                height: 2rem;
+            }
+            .img{
+                width: 2rem;
+                height: 2rem;
+            }
+            .circle {
+                @include flex-center;
+                width: 5rem;
+                height: 5rem;
+                border-radius: 50%;
+                border: .1rem solid $gray2;
+                background: #FFF;
+                box-sizing: border-box;
+                box-shadow: 1px 1px 3px #888;
+            }
+            p{
+                width: 11rem;
+                color: #999;
+            }
+        }
+    }
+    .display{
+        margin-top: 5rem;
+        .title{
+            @include flex-center;
+            width: 100%;
+            font-size: 22px;
+        }
+        .mains {
+            display: flex;
+            flex-flow: wrap;
+        }
+        .main {
+            @include flex-center;
+            @media ($minw:$md){
+                width: 25%;
+            }
+            @media ($minw:$sm) and ($maxw:$md){
+                width: 50%;
+            }
+            @media ($maxw:$sm){
+                width: 100%;
+            }
+            .student{
+                @include flex-center;
+                flex-flow: column;
+                justify-content: space-around;
+                align-items: center;
+                height: 300px;
+                padding: 1rem;
+                margin-top: 2rem;
+                background: #fff;
+                box-shadow: 1px 1px 3px #888;                
+                h3{
+                    font-size: 1.5rem;
+                }
+                p{
+                    width: 16.5rem;
+                    color: #999;
+                }                
+            }
+        }
+        .btns {
+            @include flex-center;
+            .circles {
+                margin: 1.25rem .4rem;
+                width: .8rem;
+                height: .8rem;
+                border-radius: 50%;
+                background: #fff;
+                border: none;
+                box-shadow: 1px 1px 3px #888;
+                &:hover {
+                    background: $green1;
+                }
+            }
+        }
+    }
+    .company {
+        margin-top: 5rem;
+        .title {
+            font-size: 22px;
+            text-align: center;
+        }
+        .lists {
+            display: flex;
+            flex-flow: wrap;
+            a{
+                box-sizing: border-box;
+                width: 20%;
+                height: 178px;
+                background-color: #fff !important;;
+                @media ($minw:$sm) and ($maxw:$md){
+                    width: 50%;
+                }
+                @media ($maxw:$sm){
+                    width: 100%;
+                }
+                &:hover {
+                    border: .2rem solid $gray1;
+                }
+            }
+            .none {
+                @media ($maxw:$sm){
+                    width: 0;
+                }
+                @media ($minw: $md){
+                    width: 0;
+                }
+            }
+            .ali {
+                background: url(../img/company1.jpg) no-repeat center;
+            }
+            .jinshan {
+                background: url(../img/company2.jpg) no-repeat center;
+            }
+            .huanxin {
+                background: url(../img/company3.jpg) no-repeat center;
+            }
+            .ronglian {
+                background: url(../img/company4.jpg) no-repeat center;
+            }
+            .qianniu {
+                background: url(../img/company5.jpg) no-repeat center;
+            }
+        }
+    }
+    .link {
+        background: #fff;
+        padding-bottom: 1.6rem;
+        .set {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .title {
+            font-size: 22px;
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+        .links {
+            width: 25%;
+            @media ($minw:$sm) and ($maxw:$md){
+                width: 50%;
+            }
+            @media ($maxw:$sm){
+                width: 100%;
+            }
+            ul{
+                display: flex;
+                justify-content: space-around;
+                margin-bottom: 10px;
+                a{
+                    color: #999999;
+                    font-size: 1.15rem;
+                }
+            }
+        }
+    }
+    .position {
+        height: 4rem;
+        @include flex-center;
+        justify-content: flex-start;
+        width: 100%;
+        h5{
+            margin: 10px 0;
+            font-weight: 400;
+            padding-left: 15px;
+            a{
+                color: #333;
+            }
+            .active {
+                color: $green2;
+            }
+        }
+    }
+    .direction {
+        display: flex;
+        align-items: center;
+        height: 4rem;
+        border-bottom: .1rem solid $gray1;
+        border-top: .2rem solid $gray1;
+        flex-wrap: wrap;
+        width: 100%;
+        p{
+            color: #999;
+            padding-left: 15px;
+        }
+        a{
+            margin: 0 1rem;
+            padding: .1rem .2rem;
+            color: #333;
+            &:hover {
+                background: $green1;
+                color: #fff;
+            }
+        }        
+        .active {
+            background: $green1;
+            color: #fff;
+        }
+    }
+    .company-list {
+        background: #fff;
+        width: 24%;
+        @media ($maxw:$sm){
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 3rem;
+        }
+        margin-right: 1%;
+        @include flex-center;
+        justify-content: flex-start;
+        flex-flow: column;
+        .title {
+            height: 4rem;
+            width: 100%;
+            font-size: 2rem;
+            font-weight: 900;
+            @include flex-center;
+            border-bottom: .1rem solid $gray2;
+        }
+        ul{
+            li{
+                font-size: 2rem;
+                color: $orange1;
+                margin: 2rem;
+                list-style-type: circle;
+                a{
+                    font-size: 1.5rem;
+                    color: $green2;
+                }
+            }
+            .active {
+                list-style-type: disc;
+                color: $orange2;
+            }
+        }
+    }
+    .companys {
+        padding: 3rem 3rem 10rem 3rem;
+        background: #FFF;
+        width: 74%;
+        @media ($maxw:$sm){
+            width: 100%;
+            margin-left: 0;
+        }
+        margin-left: 1%;
+        .title {
+            border-bottom: .1rem solid $gray2;
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+        }
+        p{
+            margin-top: 2.5rem;
+        }
+    }
+    .titles {
+        font-size: 24px;
+        color: #333;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-bottom: .2rem solid $gray1;
+        padding-left: 15px;        
+    }
+    .major {
+        float: left;
+        overflow: hidden;        
+        .box {
+            width: 31.3%;
+            position:relative;            
+            &:hover .hiddens {
+                display: block;
+            }
+            @media ($minw: $sm) and ($maxw: $md){
+                width: 48%;
+                margin: 1.5rem 1%;
+            }
+            @media ($maxw:$sm) {
+                width: 100%;
+                margin: 1.5rem 0;
+            }
+            margin: 1.5rem 1%;
+            float: left;
+            overflow: hidden;
+            .list1 {
+                border: .1rem solid #edf1f2;
+                .img {
+                    width: 40%;
+                    padding: 1rem;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .about {
+                    width: 60%;
+                    display: flex;
+                    flex-flow: wrap;
+                    padding: 0;
+                    h4{
+                        margin: .5rem 2rem;
+                        font-weight: 400;                        
+                    }
+                    p{
+                        margin: .5rem 2rem;
+                        color: #333;
+                    }
+                }
+                .row1 {
+                    width: 50%;
+                    height: 3rem;
+                    border-right: .1rem solid #EDF1F2;
+                    h5{
+                        padding: 1rem;
+                        color: #999;
+                        font-weight: 400;
+                    }
+                    span{
+                        color: #f01400;
+                    }
+                }
+                .pay {
+                    width: 40%;
+                    @include flex-center;
+                }
+                .row2 {
+                    width: 60%;
+                    .year {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 1rem;
+                        height: 3.3rem;
+                        border-bottom: .1rem solid #EDF1F2;
+                        border-left: .1rem solid #EDF1F2;
+                    }
+                }
+            }
+            .align {
+                display: flex;
+                align-items: center;
+                h6{
+                    font-weight: 900;
+                    padding: 1rem 0 1rem 1rem;
+                    font-size: 14px;
+                    span{
+                        color: #F01400;
+                    }
+                }                
+            }
+            h5{
+                padding: 1rem;
+                color: #999;
+                font-weight: 400;
+            }
+        }
+    }
+    .hiddens {
+        position: absolute;
+        display: none;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(69,69,69,.6);
+        text-align: center;
+        color: #fff;
+        padding: 1rem;
+        h4{
+            height: 12rem;
+            @include flex-center;
+        }
+        p{
+            @include flex-center;
+        }
+    }
+}

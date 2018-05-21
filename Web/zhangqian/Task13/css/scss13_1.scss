@@ -1,0 +1,106 @@
+@import "common";
+
+/*导航栏*/
+header {
+  @include header;
+  img {
+    max-height: 1rem;
+    margin-left: .5rem;
+  }
+}
+
+main {
+  height: auto;
+  width: 100%;
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  bottom: 0;
+  background-color: $gray1;
+  .history {
+    height: 4rem;
+    font-size: 1.4rem;
+    margin: 1rem 5vw;
+    background-color: $white;
+    border: .5px solid #cbcbcb;
+    @include flex-center;
+    @include jc-sb;
+    p {
+      color: $gray2;
+      margin-left: 1.5rem;
+    }
+    img {
+      margin-right: .5rem;
+      height: 1.5rem;
+      width: 1rem;
+    }
+  }
+  .menu {
+    background-color: $white;
+    border: .5px solid #cbcbcb;
+    text-align: center;
+    margin: {
+      left: 5vw;
+      right: 5vw;
+    }
+    .menu-game {
+      line-height: 3rem;
+      border-bottom: 1px solid $yellow2;
+      color: $yellow2;
+      font-size: 1.4rem;
+    }
+    a {
+      text-decoration: none
+    }
+    .menu-version {
+      width: 80%;
+      line-height: 4rem;
+      margin: {
+        top: .5rem;
+        bottom: .5rem;
+        left: 10%;
+        right: 10%;
+      }
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: $white;
+      background-color: $blue3;
+    }
+    .menu-point {
+      margin: {
+        top: .5rem;
+        bottom: .5rem;
+      }
+      ul {
+        @include flex-center;
+        @include jc-c;
+        li {
+          width: 15px;
+          height: 15px;
+          margin: {
+            left: 5px;
+            right: 5px;
+          }
+          list-style: none;
+          background-color: $gray1;
+          border-radius: 50%;
+          &:hover , &:active {
+            background-color: $blue3;
+          }
+        }
+      }
+    }
+    .menu-user {
+      font-size: .8rem;
+      height: 1rem;
+    }
+  }
+  .img {
+    position: absolute;
+    top: 16.5rem;
+    height: 2rem;
+    right: 6vw;
+  }
+}

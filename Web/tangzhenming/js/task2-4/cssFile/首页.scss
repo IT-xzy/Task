@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+/**
+ * Authors      TZMMichael (15977536060@163.com)
+ * Date         2017-12-11 18:04:36
+ * Site         https://github.com/TZMMichael
+ * Updated      
+ * Updated by   TZMMichael 
+ */
+
+
+@import './mixin.scss';
+
+body{
+	background-color:$grey;
+}
+
+/* HEADER */
+.header{
+	background-color:$blue;
+	padding:1rem;
+	& img{
+		height: 1rem;
+        cursor: pointer;
+	}
+}
+
+/* MAIN */
+.main{
+	top:3rem;
+	color:$gray;
+	font-size:1.8rem;
+	& img{
+		height: 1.8rem;
+	}
+	& .main-top{
+		background-color:$white;
+		margin: 1rem;
+    	padding: 1rem 0;
+    	position: relative;
+    	text-align: center;
+    	& a{
+    		position: absolute;
+        	right: 1rem;
+        	line-height: 0;
+    	}
+    }
+    & .main-bottom{
+        background-color:$white;
+        margin: 1rem;
+        padding: 1rem 0;
+        position: relative;
+        text-align: center;
+        & .bottom-title{
+            color: $orange;
+            border-bottom: 1px solid $orange;
+            padding-bottom:1rem;
+        }
+        & .bottom-content{
+            & .versions{
+                background-color: $blue;
+                padding: 1rem 0;
+                margin: 1rem 2rem;
+                position:relative;
+                cursor: pointer;
+                & a{
+                    text-decoration: none;
+                    color: $white;
+                }
+            }
+            & .triangle{
+                width: 0;
+                height: 0;
+                border-top: 12.5px solid transparent;
+                border-left: 13px solid $orange;
+                border-bottom: 12.5px solid transparent;
+                position: absolute;
+                right: -1.6rem;
+                margin: auto;
+                top: 0;
+                bottom: 0;
+                //采用这种垂直居中的方法，必须要记得margin auto 
+            }
+            & p{
+                font-size: .8rem;
+            }
+            & .dots{
+                display: flex;
+                justify-content: center;
+                & .dot{
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50px;
+                    margin: 0px 2px;
+                    background-color:$grey;
+                    cursor: pointer;
+                    &:hover{
+                        @extend .dot-active;
+                    }
+                }
+                & .dot-active{
+                    width: 8px;
+                    height: 8px;
+                    border-radius: 50px;
+                    margin: 0px 2px;
+                    background-color:$blue;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

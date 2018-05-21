@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="true">
+    <!--①构造器实例化方式-->
+    <bean id="imp1" class="com.myspring.ioc.factory.BeanImp1"/>
+    <!--②静态工厂方式实例化-->
+    <bean id="imp2" class="com.myspring.ioc.factory.BeanImp2StaticFactory" factory-method="getBeanImp2"/>
+    <!--③实例工厂方式实例化-->
+    <bean id="imp3Factory" class="com.myspring.ioc.factory.BeanImp3Factory"/>
+    <bean id="imp3" factory-bean="imp3Factory" factory-method="getBeanImp3"/>
+    <!-- ④实现FactoryBean接口实例化：实例工厂变种：集成其他框架使用：LocalSessionFactoryBean
+             这个有区别,class这里限定的是LocalSessionFactoryBean的类,而不是我们需要的bean类-->
+    <bean id="imp4" class="com.myspring.ioc.factory.BeanImp4SessionFactory" />
+</beans>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.StudentMapper">
+  <resultMap id="BaseResultMap" type="com.model.Student">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="class_id" jdbcType="INTEGER" property="classId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="passWord" />
+    <result column="head_picture" jdbcType="VARCHAR" property="headPicture" />
+    <result column="account_status" jdbcType="INTEGER" property="accountStatus" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="email_code" jdbcType="VARCHAR" property="emailCode" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, name, score, status, class_id, create_time, update_time,user_name,password,head_picture,account_status,email,email_code,phone_number,qq
+  </sql>
+
+  <!--通过id查用户-->
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <!--动态查询用户————使用唯一约束-->
+  <select id="selectByUnique" parameterType="com.model.Student" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM student
+    <where>
+      <if test="userName != null">
+        user_name = #{userName}
+      </if>
+      <if test="phoneNumber !=null">
+        phone_number = #{phoneNumber}
+      </if>
+      <if test="email !=null">
+        email = #{email}
+      </if>
+    </where>
+  </select>
+
+
+
+
+
+  <!--通过id删除用户-->
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+    <!--delete from student-->
+    <!--where id = #{id,jdbcType=INTEGER}-->
+  <!--</delete>-->
+
+  <!--按照状态查询人数-->
+  <select id="selectByStatus" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM student  WHERE status = #{status}
+  </select>
+
+  <!--筛选优秀学员-->
+  <select id="selectCollege" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM student  ORDER BY score DESC LIMIT 4
+  </select>
+
+    <!--按照类型查询在学人数-->
+    <select id="selectByclass" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM student,class WHERE student.class_id = class.id AND class.name = #{classname} AND status = 0
+    </select>
+
+
+   <!--按照用户名查-->
+   <select id="selectByuserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+     select
+     <include refid="Base_Column_List" />
+     from student
+     where user_name = #{userName,jdbcType=VARCHAR}
+   </select>
+
+
+  <!--新增用户-->
+  <insert id="insert" parameterType="com.model.Student">
+    insert into student (id, name, score, 
+      status, class_id, create_time, 
+      update_time,user_name,password,
+      head_picture,account_status,
+      email,email_code,phone_number,qq)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP},#{userName,jdbcType=VARCHAR},#{passWord,jdbcType=VARCHAR},
+      #{headPicture,jdbcType=VARCHAR},#{accountStatus,jdbcType=INTEGER},#{email,jdbcType=VARCHAR},
+      #{emailCode,jdbcType=VARCHAR},#{phoneNumber,jdbcType=VARCHAR},#{qq,jdbcType=VARCHAR})
+  </insert>
+
+
+  <!--<insert id="insertSelective" parameterType="com.modell.Student">-->
+    <!--insert into student-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+      <!--<if test="id != null">-->
+        <!--id,-->
+      <!--</if>-->
+      <!--<if test="name != null">-->
+        <!--name,-->
+      <!--</if>-->
+      <!--<if test="score != null">-->
+        <!--score,-->
+      <!--</if>-->
+      <!--<if test="status != null">-->
+        <!--status,-->
+      <!--</if>-->
+      <!--<if test="classId != null">-->
+        <!--class_id,-->
+      <!--</if>-->
+      <!--<if test="createTime != null">-->
+        <!--create_time,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null">-->
+        <!--update_time,-->
+      <!--</if>  -->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+      <!--<if test="id != null">-->
+        <!--#{id,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="name != null">-->
+        <!--#{name,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="score != null">-->
+        <!--#{score,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="status != null">-->
+        <!--#{status,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="classId != null">-->
+        <!--#{classId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="createTime != null">-->
+        <!--#{createTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null">-->
+        <!--#{updateTime,jdbcType=TIMESTAMP},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+
+    <!--有选择更新-->
+  <update id="updateByPrimaryKeySelective" parameterType="com.model.Student">
+    update student
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null">
+        class_id = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        password = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="headPicture != null">
+         head_picture = #{headPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="accountStatus != null">
+         account_status = #{accountStatus,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+          email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailCode != null">
+          email_code = #{emailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null">
+          phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+          qq = #{qq,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--根据id更新-->
+  <update id="updateByPrimaryKey" parameterType="com.model.Student">
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      class_id = #{classId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      user_name = #{userName,jdbcType=VARCHAR},
+      password = #{passWord,jdbcType=VARCHAR},
+      head_picture = #{headPicture,jdbcType=VARCHAR},
+      account_status = #{accountStatus,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      email_code = #{emailCode,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

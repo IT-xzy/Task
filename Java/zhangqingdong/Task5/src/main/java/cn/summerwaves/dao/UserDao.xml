@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.summerwaves.dao.UserDao">
+    <insert id="insertUser" parameterType="cn.summerwaves.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user(username, password) values(#{username},#{password})
+    </insert>
+
+    <select id="selectUserByName" parameterType="java.lang.String" resultMap="userMap">
+        SELECT * FROM user WHERE username = #{username}
+     </select>
+
+    <resultMap id="userMap" type="cn.summerwaves.model.User">
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="token" column="token"/>
+    </resultMap>
+
+
+</mapper>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>task6</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://zzsuper.github.io/task-all/css/bootstrap.min.css">    
+    <style type="text/css">
+    * {
+    	padding: 0;
+    	margin: 0;
+    	box-sizing: border-box;
+    }
+    header 	{
+    	position: fixed;
+    	top: 0;
+    	left: 0;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    	width: 100%;
+    	height: 44px;
+    	background-color: #5fc0cd;
+    }
+    
+    .button-top {
+    	width: 70px;
+    	height: 30px;
+    	border-radius: 3px;
+    	border: 0;
+    	outline: none;
+    	background-color: #fff;
+    	color: #5fc0cd;
+    }
+    .button-top-left {
+    	width: 70px;
+    	height: 30px;
+    	border-radius: 3px;
+    	border: 0;
+    	outline: none;
+    	background-color: #55a8b3;
+    	color: #fff;
+    }
+    .map {
+    	position: absolute;
+    	right: 10px;
+    	
+    	width: 22px;
+    	padding-top: 22px;
+    	border: 0;
+    	background: url(https://zzsuper.github.io/task6/task6-sprite.png) 
+    	no-repeat center;
+    	background-size: 250px;
+    	background-position: -229.5px 0;
+    	overflow: hidden;
+    	outline: none;
+    }
+    .drop-list {
+    	display: flex;
+    	justify-content: space-between;
+    	align-items: center;
+    	position: absolute;
+    	top: 44px;
+    	left: 0;
+    	width: 100%;
+    	height: 40px;
+    	padding: 0 15px;
+    	border-bottom: 1px solid #999;
+    	color: #999;
+    	
+    }
+
+    .btn-group {width: 30%;}
+    .btn {
+    	padding-left: 30px;
+    	background-color: #fff;
+    	width: 100%;
+    }
+    select {
+    		    appearance: none;
+   		   -moz-appearance: none;
+  		-webkit-appearance: none;
+  		      		 color: #999;
+    }
+    .triangle {
+    	display: inline-block;
+    	width: 0;
+    	height: 0;
+    	margin-left: 15%;
+    	vertical-align: middle;
+    	border-top: 5px solid #999;
+    	border-left: 5px solid transparent;
+    	border-right: 5px solid transparent;
+    }
+ 
+   /*渐变边界*/
+    .border {
+   	  width: 1px;
+   	  height: 30px;
+   	  background: linear-gradient(#fff, #cccaca, #fff);
+   }
+
+   /*覆盖bootstrap样式，使下拉菜单右对齐*/
+   .drop-list-right {
+    	padding-left: 15px;
+   }
+   .dropdown-menu-right {
+   		position: absolute;
+   		right: 0;
+   }
+
+   /*表单样式*/
+    main {
+    	position: absolute;
+    	top: 84px;
+    	bottom: 50px;
+    	width: 100%;
+    	height: auto;	
+    	overflow: auto;    	
+    }
+    ul {
+    	list-style: none;
+    }
+    li {
+    	position: relative;
+    	width: 100%;	
+    	padding: 15px;
+    	padding-left: 45px;
+    	border-bottom: 1px solid #999;
+    	list-style: none;
+    	line-height: 24px;
+    	color: #999;
+    }
+
+    /*日历图标*/
+    .icon-calendar {
+    	position: absolute;
+    	top: 20px;
+    	left: 15px;
+    	width: 18px;
+    	padding-top: 15px;	
+    	background:  url(https://zzsuper.github.io/task6/task6-sprite.png)
+    	no-repeat center;
+    	background-size: 300px;
+    	background-position: -64px 0;
+    }
+
+    /*位置图标*/
+    .icon-pos {
+    	position: absolute;
+    	bottom: 18px;
+    	left: 15px;
+    	width: 18px;
+    	padding-top: 15px;
+    	background:  url(https://zzsuper.github.io/task6/task6-sprite.png)
+    	no-repeat center;
+    	background-size: 300px;
+    	background-position: -29px 0;
+    }
+    .sevice-date {
+    	display: flex;
+    	justify-content: space-between;
+    	align-items: center;    	
+    	color: #000;
+    	white-space: nowrap;
+    }
+
+    /*定义文本溢出后出现省略号*/
+    p {
+    	margin-bottom: 0;
+    	overflow: hidden;
+    	text-overflow: ellipsis;
+    }
+    .sevice-price {
+    	width: 75px;
+    	margin-right: 30px;
+    	margin-bottom: 0;
+    	color: #e63b0e;
+    }
+
+    /*绿色箭头*/
+    .icon-ahead {
+    	position: absolute;
+    	right: 15px;
+    	top: 43px;
+    	width: 19px;
+    	padding-top: 19px;
+    	background: url(https://zzsuper.github.io/task6/task6-sprite.png) 
+    	no-repeat center;
+    	background-size: 300px;
+    	background-position: -95px 0;
+    	
+    }
+    footer {    	
+    	position: fixed;
+    	bottom: 0;
+    	left: 0;
+    	display: flex;
+    	justify-content: space-between;
+    	align-items: center;
+    	width: 100%;
+    	height: 50px;
+    	background-color: #f8fafb;
+    }
+
+    /*footer中首页按钮*/
+    .button-home {
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    	
+    	background: #fff url(https://zzsuper.github.io/task6/task6-sprite.png) 
+    	no-repeat center;
+    	background-size: 300px;
+    	background-position: -126px 5px;
+    	width: 40px;
+    	padding-top: 28px;
+    	border: 0;
+    	margin-left: 20%;
+    	color: #5fc0cd;
+    	font-size: 50%;
+    	outline: none;
+    }
+
+    /*footer中编辑按钮*/
+    .button-write {
+    	display: flex;
+    	align-items: center;
+    	
+    	background: #5fc0cd url(https://zzsuper.github.io/task6/task6-sprite.png)
+    	no-repeat center;
+    	background-size: 300px;
+    	background-position: -166px 11px;
+    	width: 47.5px;
+    	height: 47.5px;
+    	padding-top: 28px;
+    	border: 0;
+    	border-radius: 50%;
+    	outline: none;
+    }
+
+    /*footer中"我的按钮*/
+    .button-mine {
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    	background: url(https://zzsuper.github.io/task6/task6-sprite.png)
+    	no-repeat center;
+    	background-size: 300px;
+    	background-position: -221px 5px;
+    	width: 40px;
+    	padding-top: 28px;
+    	border: 0;
+    	margin-right: 20%;
+    	color: #999;
+    	font-size: 50%;
+    	outline: none;
+    }
+   </style> 
+</head>
+<body>
+	<header>
+		<button class="button-top-left" type="button">找雇主</button>
+		<button class="button-top" type="button">找护工</button>
+		<button class="map"></button>
+	</header>
+
+	<div class="drop-list">
+		<div class="btn-group ">
+  			<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    			所在地 <span class="triangle"></span>
+  			</button>
+  			<ul class="dropdown-menu">
+    			<li><a href="#">北京</a></li>
+    			<li><a href="#">上海</a></li>
+    			<li><a href="#">成都</a></li>
+    			<li><a href="#">Separated link</a></li>
+  			</ul> 	   
+		</div>
+
+		<span class="border"></span>
+		<div class="btn-group ">
+  			<button type="button" class="btn dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    			食宿 <span class="triangle"></span>
+  			</button>
+  			<ul class="dropdown-menu">
+    			<li><a href="#">Something else here</a></li>
+  			</ul>
+		</div>
+		<span class="border"></span>
+
+		<div class="btn-group ">
+  			<button type="button" class="btn dropdown-toggle drop-list-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    			病人情况 <span class="triangle"></span>
+  			</button> 
+  			<ul class="dropdown-menu dropdown-menu-right">
+    			<li><a href="#">Something else here</a></li>
+  			</ul>		
+		</div>
+	</div>
+
+
+ 	<main>
+		<li>
+			<div class="icon-calendar"></div>
+			<p>服务日期</p>
+			<div class="icon-pos"></div>
+			<div class="sevice-date">
+				<p>2017-11-21至2017-12-21</p>
+				<p class="sevice-price">25元/小时</p>
+			</div>
+			<img class="icon-ahead">
+			<div>北京.通州.果园</div>
+		</li>
+		<li>
+			<div class="icon-calendar"></div>
+			<p>服务日期</p>
+			<div class="icon-pos"></div>
+			<div class="sevice-date">
+				<p>2017-11-21至2017-12-21</p>
+				<p class="sevice-price">35元/小时</p>
+				<img class="icon-ahead">
+			</div>
+			<div>北京.通州.果园</div>
+		</li>
+		<li>
+			<div class="icon-calendar"></div>
+			<p>服务日期</p>
+			<div class="icon-pos"></div>
+			<div class="sevice-date">
+				<p>2017-11-21至2017-12-21</p>
+				<p class="sevice-price">45元/小时</p>
+				<img class="icon-ahead">
+			</div>
+			<div>北京.通州.果园</div>
+		</li>
+		<li>
+			<div class="icon-calendar"></div>
+			<p>服务日期</p>
+			<div class="icon-pos"></div>
+			<div class="sevice-date">
+				<p>2017-11-21至2017-12-21</p>
+				<p class="sevice-price">25元/小时</p>
+				<img class="icon-ahead">
+			</div>
+			<div>北京.通州.果园</div>
+		</li>
+		<li>
+			<div class="icon-calendar"></div>
+			<p>服务日期</p>
+			<div class="icon-pos"></div>
+			<div class="sevice-date">
+				<p>2017-11-21至2017-12-21</p>
+				<p class="sevice-price">25元/小时</p>
+				<img class="icon-ahead">
+			</div>
+			<div>北京.通州.果园</div>
+		</li>
+		
+	</main>
+	<footer>
+		<button class="button-home" type="button">首页</button>
+		<button class="button-write" type="button"></button>
+		<button class="button-mine" type="button">我的</button>
+	</footer>
+
+	 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

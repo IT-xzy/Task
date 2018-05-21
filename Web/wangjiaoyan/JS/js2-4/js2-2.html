@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="js2-2.css" rel="stylesheet" type="text/css"/>
+    <title>Title</title></head>
+<body>
+<header>
+    <a href="javascript:history.go(-1)"><img src="back.png" /></a>
+</header>
+<main>
+    <div class="line1">玩家配比</div>
+    <div class="line2">
+        <div class="sum">
+            <div class="k">
+                <img src="杀手.png"/>
+                杀手
+                <span id="killer">  </span>
+                人
+            </div>
+            <div class="p">
+                <img src="平民.png"/>
+                平民
+                <span id="people">  </span>
+                人
+            </div>
+        </div>
+        <div class="group">
+            <div id="per">
+            </div>
+            <!--<button id="num">请点击设置</button>-->
+        </div>
+    </div>
+<div class="line3"></div>
+    <div class="line3">
+        <span class="put">请输入玩家数量</span>
+        <input type="text" id="import" onkeyup="value=value.replace(/[^\d]/g,'') " oninput="allot()"/>
+        <span class="number">玩家数量为4-18人</span>
+    </div>
+    <div>
+        <input type="button" name="button" value="去发牌" id="go" />
+        <div id="mask"></div>
+        <div id="login">
+            <p class="hint">请输入正确的玩家数量</p>
+            <div id="close_login">
+                <button class="close">确认</button>
+                <button class="close">取消</button>
+            </div>
+        </div>
+    </div>
+
+</main>
+<script src="js2-2.js"></script>
+</body>
+</html>

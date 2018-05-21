@@ -1,0 +1,28 @@
+<div class="background">
+    <form class="box" ng-controller="myCtrl" name="myForm">
+        <p>喝我水站后台登录</p>
+        <div class="username"> <!-- ng-submit="myFunc()"-->
+            <img src="../images/head.png" alt=""/>
+            <input type="text" name="user"
+                   ng-model="user"
+                   ng-minlength="5"
+                   ng-maxlength="12"
+                   placeholder="用户名"
+                   id="userName"
+                   required>
+        </div>
+        <!--<div style="color:red;font-size:14px;" ng-show="myForm.user.$invalid">长度在5~12之间</div>-->
+        <div style="color:red;font-size:14px;" ng-messages="myForm.user.$error" ng-if="myForm.user.$touched">
+            <span ng-message="minlength">最小长度5</span>
+            <span ng-message="maxlength">最大长度12</span>
+            <span ng-message="required">用户名必填</span>
+        </div>
+        <div ng-bind="message1" class="message"></div>
+        <div class="username">
+            <img src="../images/lock.png" alt=""/>
+            <input type="password" name="pwd" placeholder="密码" id="passWord" ng-model="pwd">
+        </div>
+        <div ng-bind="message2" class="message"></div>
+        <button class="login" ng-click="login()">登录</button>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <meta name='viewport' , content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular.js"></script>
+    <!--<link href="../../css/style.css" rel="stylesheet">-->
+    <style>
+        .heightLight{
+            background: #31b0d5;
+        }
+    </style>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<script>
+//    let ajax = new XMLHttpRequest();
+//    ajax.open("HEAD",location.href,true);
+//    ajax.send(null);
+//    ajax.onreadystatechange=function () {
+//        if(ajax.status ===200&&ajax.readyState===4) {
+//            console.log(ajax.getResponseHeader('Date'))
+//        }
+//    };
+    angular.module('myApp',[])
+        .controller('myCtrl',function ($scope,$http) {
+        $http({
+            method:'HEAD',
+            url:location.href
+        }).then(function (res) {
+            console.log(res.headers().date)
+        })
+    })
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+package jnshu.taskeight.service;import jnshu.taskeight.model.Profession;import java.util.List;/** * profession在service接口 * @author Administrator * @date 11/8/2017 */public interface ProfessionService {    /**     * get a list of profession information     *     * @param     * @return List<Profession>     */    List<Profession> listProfession();}

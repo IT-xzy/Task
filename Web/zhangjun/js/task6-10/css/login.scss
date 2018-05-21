@@ -1,0 +1,107 @@
+@charset "UTF-8";
+// 公共变量
+$font-size: 16px;
+// 公共混合器
+@mixin bgimage($url,$repeat:no-repeat) {
+	background: {
+		image: url($url);
+		repeat: $repeat;
+	}
+}
+/* 公共样式 */
+button {
+	border: none;
+	cursor: pointer;
+	&:focus {
+		outline: none;
+	}
+}
+.wrap {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	font-size: $font-size;
+	@include bgimage("../images/background.jpg");
+	background-size: 100% 100%;
+	/* 登录框 */
+	.login {
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		width: 400px;
+		z-index: 100;
+		border-radius: 5px;
+		background-color: rgba(185,190,199,.7);
+		-webkit-transform: translate(-50%,-50%);
+		-moz-transform: translate(-50%,-50%);
+		-o-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50%);
+		h2 {
+			margin-top: 20px;
+			margin-bottom: 20px;
+			font-size: 24px;
+			text-align: center;
+		}
+		.input-box {
+			margin: 0 auto;
+			width: 350px;
+			input {
+				padding-left: 50px;
+				width: 100%;
+				height: 40px;
+				box-sizing: border-box;
+				font-size: $font-size;
+				background-position: 10px;
+				border: 0;
+				border-radius: 5px;
+				&:focus {
+					box-shadow: inset 0px 0px 5px #5bc0de;
+				}
+			}
+			.login-user-icon,
+			.login-pwd-icon {
+				position: absolute;
+				width: 26px;
+				height: 26px;
+				left: 35px;
+			}
+			.login-user-icon {
+				top: 75px;
+				@include bgimage("../images/user.png");
+			}
+			.login-pwd-icon {
+				top: 135px;
+				@include bgimage("../images/password.png");
+			}
+			input:focus + .login-user-icon {
+				@include bgimage("../images/user-1.png");
+			}
+			input:focus + .login-pwd-icon {
+				@include bgimage("../images/password-1.png");
+			}
+			&:nth-of-type(2){
+				margin-top: 20px;
+			}
+		}
+		.login-mess {
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			color: #f00;
+		}
+		.login-btn {
+			display: block;
+			margin: 0 auto 10px;
+			width: 350px;
+			height: 40px;
+			color: #fff;
+			background-color: #5bc0de;
+			border-radius: 5px;
+			&:hover {
+				background-color: rgba(91,192,222,.7);
+			}
+		}
+	}
+}

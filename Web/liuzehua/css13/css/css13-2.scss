@@ -1,0 +1,214 @@
+@import "reset";
+@mixin img {
+    background: url(../img/img.png) no-repeat;
+    background-size: cover;
+}
+
+@mixin i3 {
+    height: 4vw;
+    width: 4vw;
+    background-position: 0 0;
+}
+
+@mixin i4 {
+    height: 4vw;
+    width: 4vw;
+    background-position: 0 33.33%;
+}
+
+@mixin i1 {
+    height: 4vw;
+    width: 4vw;
+    background-position: 0 66.66%;
+}
+
+@mixin i2 {
+    height: 4vw;
+    width: 4vw;
+    background-position: 0 100%;
+}
+
+@mixin flex-start-center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin flex-between-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header {
+    @include flex-between-center;
+    color: #fff;
+    font-size: .18rem;
+    border-bottom: 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #29bde0;
+    .head-left {
+        border: 1px solid #fff;
+        margin-left: .1rem;
+        .head-line {
+            width: .18rem;
+            height: .02rem;
+            background: #fff;
+            margin: .04rem 0.02rem;
+        }
+    }
+    .head-right {
+        width: 24px;
+        margin-right: .1rem;
+        .right-1,
+        .right-2 {
+            width: .22rem;
+            border: 1px solid #fff;
+            background: #fff;
+        }
+        .right-1 {
+            transform: rotate(45deg)
+        }
+        .right-2 {
+            margin-top: -2px;
+            transform: rotate(-45deg)
+        }
+    }
+}
+
+.tips1 {
+    background: #b9e9f5;
+    height: .42rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: .5rem;
+    p {
+        margin-left: .2rem;
+        font-size: .16rem;
+    }
+    #play {
+        background: #fbb435;
+        width: .3rem;
+        height: .3rem;
+        border-radius: 50%;
+        border: none;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: .1rem;
+        >div {
+            width: 0;
+            height: 0;
+            border-top: .09rem solid transparent;
+            border-left: .18rem solid #fff;
+            border-bottom: .09rem solid transparent;
+            margin-left: 5px;
+        }
+    }
+}
+
+.tips2 {
+    color: #fff;
+    .icon-triangel {
+        width: 0;
+        height: 0;
+        display: block;
+        border-top: .1rem solid #b9e9f5;
+        border-left: .05rem solid transparent;
+        border-right: .05rem solid transparent;
+        margin-left: .3rem;
+
+    }
+    >p {
+        margin-left: .3rem;
+    }
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 1rem;
+    .list {
+        flex: 0 0 33.33%;
+    }
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: .1rem;
+    .box {
+        width: 22vw;
+        height: 22vw;
+        border: 3px solid #fff;
+        .box-a {
+            background: #fbb435;
+            line-height: 16vw;
+        }
+        .box-b {
+            color: #fff;
+            background: #83b09a;
+            line-height: 6vw;
+        }
+    }
+}
+
+.hover {
+    width: 22vw;
+    display: flex;
+    justify-content: space-between;
+    visibility: hidden;
+    margin: 0.08rem 0;
+    .icon-1 {
+        @include img;
+        @include i1;
+    }
+    .icon-2 {
+        @include img;
+        @include i2;
+    }
+    .icon-3 {
+        @include img;
+        @include i3;
+    }
+    .icon-4 {
+        @include img;
+        @include i4;
+    }
+}
+
+.player:hover .hover {
+    visibility: visible;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: #29bde0;
+    width: 100%;
+    .foot {
+        display: block;
+        width: 80%;
+        height: .5rem;
+        margin: .2rem auto;
+        background: #fbb435;
+        text-align: center;
+        line-height: .5rem;
+        font-size: .18rem;
+        color: white;
+    }
+}

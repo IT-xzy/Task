@@ -1,0 +1,25 @@
+<?xml version= "1.0" encoding ="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           name="helloworld-contribution">
+
+    <component name="StudentCalculator">
+        <implementation.spring location="spring-sca.xml"/>
+        <service name="StudentService">
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:2181/StudentService"/>
+        </service>
+    </component>
+    <component name="ProfessionCalculator">
+        <implementation.spring location="spring-sca.xml" />
+        <service name="ProfessionService">
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:2181/ProfessionService"/>
+        </service>
+    </component>
+    <component name="CountNumberCalculator">
+        <implementation.spring location="spring-sca.xml" />
+        <service name="CountNumberService">
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:2181/CountNumberService"/>
+        </service>
+    </component>
+ </composite>

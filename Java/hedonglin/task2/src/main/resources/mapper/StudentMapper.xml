@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.student.dao.StudentDao">
+  <resultMap id="BaseResultMap" type="com.student.model.Student">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="entry_time" jdbcType="BIGINT" property="entryTime" />
+    <result column="come_from" jdbcType="VARCHAR" property="comeFrom" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_at, update_at, name, sex, qq, major, entry_time, come_from
+  </sql>
+
+  <select id="getAll"  resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM student_list
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from student_list
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student_list
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.student.model.Student">
+    insert into student_list (id, create_at, update_at, 
+      name, sex, qq, major, 
+      entry_time, come_from)
+    values (#{id,jdbcType=BIGINT}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, 
+      #{entryTime,jdbcType=BIGINT}, #{comeFrom,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.student.model.Student">
+    insert into student_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="entryTime != null">
+        entry_time,
+      </if>
+      <if test="comeFrom != null">
+        come_from,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        #{entryTime,jdbcType=BIGINT},
+      </if>
+      <if test="comeFrom != null">
+        #{comeFrom,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.student.model.Student">
+    update student_list
+    <set>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        entry_time = #{entryTime,jdbcType=BIGINT},
+      </if>
+      <if test="comeFrom != null">
+        come_from = #{comeFrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.student.model.Student">
+    update student_list
+    set create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=BIGINT},
+      come_from = #{comeFrom,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

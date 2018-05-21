@@ -1,0 +1,180 @@
+<div id="page-wrapper" class="page-wrapper" style="width: 100%;">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong ng-if="vn.params.id">编辑Article</strong>
+            <strong ng-if="!vn.params.id">新增Article</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="myForm">
+                <div class="row form-group">
+
+                    <label class="col-md-2 control-label">标题名称
+                        <span ng-if="myForm.title.$invalid" class="color-red">&#9728;</span>
+                        <span ng-if="!myForm.title.$invalid">&nbsp;&nbsp;&nbsp;</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" ng-model="vn.params.title" name="title" ng-minlength="5"
+                               ng-maxlength="20" required>
+                    </div>
+                    <span class="col-md-2 help-block color-red" ng-messages="myForm.title.$error"
+                          ng-if="myForm.title.$touched">
+                        <span ng-message="minlength">标题最小长度为5</span>
+                        <span ng-message="maxlength">标题最大长度为20</span>
+                        <span ng-message="required">请填写标题</span>
+                    </span>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 control-label word-spacing-25 ">类 型
+                        <span ng-if=" vn.params.type == undefined ||(vn.params.type == 3 && vn.params.industry == undefined) "
+                              class="color-red">&#9728;</span>
+                        <span
+                                ng-if="! (vn.params.type == undefined ||(vn.params.type == 3 && vn.params.industry == undefined)) ">&nbsp;&nbsp;&nbsp;</span>
+                    </label>
+                    <div class="col-md-2">
+                        <!--<select class="form-control " ng-model="vn.params.type" required>-->
+                        <!--<option value="">请选择</option>-->
+                        <!--<option ng-repeat="x in type" value="{{x.code}}"-->
+                        <!--ng-selected="x.code==vn.params.type">{{x.name}}-->
+                        <!--</option>-->
+                        <!--</select>-->
+                        <select class="form-control"
+                                ng-model="vn.params.type"
+                                name="type"
+                                ng-options="x.code as x.name for x in type"
+                                required>
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 color-red help-block">
+                    <span ng-messages="myForm.type.$error" ng-if="myForm.type.$touched">
+                        <span ng-message="required">请选择类型</span>
+                    </span>
+                    </div>
+                    <div class="col-md-2">
+                        <!--<select class="form-control " ng-if="vn.params.type==3" ng-model="vn.params.industry" required>-->
+                        <!--<option value="">请选择</option>-->
+                        <!--<option ng-repeat="y in industry" ng-selected="y.code==vn.params.industry"-->
+                        <!--value="{{y.code}}">{{y.name}}-->
+                        <!--</option>-->
+                        <!--</select>-->
+                        <select class="form-control"
+                                ng-show="vn.params.type==3"
+                                ng-model="vn.params.industry"
+                                name="industry"
+                                ng-options="y.code as y.name for y in industry"
+                                required>
+                            <option value="">请选择</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 color-red help-block">
+                    <span ng-messages="myForm.industry.$error" ng-if="myForm.industry.$touched || vn.params.type ==3">
+                        <span ng-message="required">请选择行业</span>
+                    </span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 control-label word-spacing-25">说 明<span>&nbsp;&nbsp;&nbsp;</span></label>
+                    <div class="col-md-8">
+                        <div type="text/html" style="height:300px;"
+                             ng-model="vn.params.content"
+                             meta-umeditor
+                             data-meta-umeditor-config="config"
+                             data-meta-umeditor-placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group ng-scope">
+                    <label class="col-md-2 control-label">跳转链接
+                        <span ng-if="vn.params.url == undefined" class="color-red">&#9728;</span>
+                        <span ng-if="!(vn.params.url == undefined)">&nbsp;&nbsp;&nbsp;</span>
+                    </label>
+                    <div class="col-md-8">
+                        <input class="form-control " type="url" ng-model="vn.params.url" name="url"
+                               ng-pattern="urlProving" required>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="color-red" ng-messages="myForm.url.$error" ng-if="myForm.url.$touched">
+                        <span ng-message="required">请填写跳转链接</span>
+                        <span ng-message="pattern">填写格式不正确</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 control-label word-spacing-25 ">配 图
+                        <span ng-if="vn.params.img == undefined" class="color-red">&#9728;</span>
+                        <span ng-if="!(vn.params.img == undefined)">&nbsp;&nbsp;&nbsp;</span>
+                    </label>
+                    <div class="col-md-10 padding-0">
+                        <div class="col-md-12 ">
+                            <label class="btn btn-primary" for="file2" data-ng-click="clearItems()">选择文件</label>
+                            <input onchange="" type="file" id="file2" style="display: none" nv-file-select
+                                   data-uploader="uploader"
+                                   required>
+                        </div>
+                        <div class="col-md-12">
+                            <img alt="" class="img-responsive" data-ng-src="{{vn.params.img}}">
+                        </div>
+                        <div class="ngthumb" ng-repeat="item in uploader.queue">
+                            <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 300 }"></div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="table-responsive col-md-8 width-100">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>图片名</th>
+                                        <th>文件大小</th>
+                                        <th>进度</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in uploader.queue">
+                                        <td class="widTd">{{ item.file.name }}</td>
+                                        <td>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                        <td ng-show="uploader.isHTML5" class="uploadtd">
+                                            <div class="item-progress-bar">
+                                                <div class="item-progress"
+                                                     ng-style="{ 'width': item.progress + '%' }"></div>
+                                                {{ item.progress }}%
+                                            </div>
+                                        </td>
+                                        <td class="bindtd" ng-bind-template="{{statusText}}"></td>
+                                        <td>
+                                            <button class="btn btn-success btn-sm" data-ng-click="item.upload()"
+                                                    data-ng-disabled="item.isReady || item.isUploading || item.isSuccess">上传
+                                            </button>
+                                            <button class="btn btn-danger btn-sm"
+                                                    data-ng-click="item.remove(); clearItems()">删除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-success" data-ng-click="vn.online(2)"
+                                data-ng-disabled="myForm.title.$invalid || vn.params.type == undefined ||(vn.params.type == 3 && vn.params.industry == undefined)  || myForm.url.$invalid || vn.params.img == undefined ">
+                            立即上线
+                        </button>
+                        <button type="button" class="btn btn-success" data-ng-click="vn.online(1)"
+                                data-ng-disabled="myForm.title.$invalid || vn.params.type == undefined ||(vn.params.type == 3 && vn.params.industry == undefined)  || myForm.url.$invalid || vn.params.img == undefined ">
+                            存为草稿
+                        </button>
+                        <button type="button" class="btn btn-default pull-right" data-ng-click="vn.canCell()">取消
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

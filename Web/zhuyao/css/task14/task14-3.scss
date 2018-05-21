@@ -1,0 +1,115 @@
+$border-e6: 1px solid #E6E6E6;
+%border-ra {
+    border-radius: 5px;
+    background-color: #fff;
+}
+@mixin fl-wd($width:23%) {
+    float: left;
+    width: $width;
+}
+body {
+    background-color: #FAFAFA;
+}
+p {
+    color: #999;
+    font-size: 16px;
+}
+.container {
+    padding: 0 10%;
+    &:after {
+        display: table;
+        content: '';
+        clear: both;
+    }
+}
+img {
+    max-width: 100%;
+}
+.main-left {
+    @include fl-wd;
+    margin-right: 2%;
+}
+.main-right {
+    @include fl-wd(75%);
+}
+.main-nav {
+    margin: 15px;
+    span {
+        color: #29B078;
+    }
+}
+.main-left-menu {
+    position: relative;
+    height: 600px;
+    margin-top: 20px;
+    border: $border-e6;
+    @extend %border-ra;
+    p {
+        padding: 10px;
+        color: #000;
+        border-bottom: $border-e6;
+        text-align: center;
+    }
+    ul {
+        position: absolute;
+        padding: 0;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    li {
+        margin: 20px 0;
+        list-style: none;
+        color: #FF650E;
+        span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin-right: 3px;
+            border: 1px solid;
+            border-radius: 50%;
+        }
+        &:hover span {
+            background-color: #FF650E;
+        }
+    }
+}
+li a:hover {
+    color: #FF650E;
+    text-decoration: none;
+}
+li a {
+    color: #29B078;
+    text-decoration: none;
+}
+.img-logo {
+    float: left;
+    height: 80px;
+    width: 170px;
+    margin: 38px 20px 0 50px;
+    background: url(103.png) no-repeat;
+    background-size: contain;
+}
+.enterprise-Introduction {
+    margin: {
+        top: 20px;
+        bottom: 200px;
+    }
+    padding-bottom: 100px;
+    border: $border-e6;
+    @extend %border-ra;
+}
+.border-bottom {
+    border-bottom: $border-e6;
+}
+.enterprise-Introduction p {
+    padding: 10px 50px;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    line-height: 25px;
+    text-indent: 26px;
+}
+@media all and (max-width: 960px) {
+    .main-left , .main-right {
+        width: 100%;
+    }
+}

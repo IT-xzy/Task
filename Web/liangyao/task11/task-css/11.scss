@@ -1,0 +1,101 @@
+@charset "UTF-8";
+$bule:#68CDDA;
+$white:#fff;
+$blank:#999;
+
+@mixin border {
+  border: 1px solid #999999;
+  border-right: 0;
+  border-bottom: 0;
+  border-top: 0;
+}
+
+@mixin header-items {
+  padding: 10px 0;
+  width: 100px;
+}
+@mixin font-style {
+  font: 18px "微软雅黑 Light";
+  color: #fff;
+}
+.fr {
+  float: right;
+}
+.fl {
+  float: left;
+}
+
+*{
+  margin:0;
+  padding:0;
+  position: static;
+}
+body {
+  background-color: #eff0f4;
+}
+.header {
+  width: 100%;
+  text-align: center;
+  background-color: $bule;
+  @include font-style
+}
+.left {
+  @include  header-items;
+  @extend .fl;
+}
+.right {
+  @include  header-items;
+ @extend .fr;
+}
+.center {
+  @include header-items;
+  display: inline-block;
+}
+.input-page {
+  width: 100%;
+  padding: 20px 0;
+  margin-top: 10px;
+  background-color: $white;
+}
+.input-number {
+  outline: none;
+  padding: 5px;
+  width: 130px;
+  text-indent: 10px;
+  @include border;
+  font: 18px "微软雅黑 Light";
+  color: $blank;
+}
+.input-img {
+  width: 25px;
+  height: 40px;
+  margin: 0 20px;
+  @extend .fl;
+}
+.logon {
+  width: 100%;
+  padding: 15px 0;
+  margin-top: 55px;
+  background-color: $bule;
+  @include font-style;
+  outline: none;
+  border: none;
+}
+.link {
+  @extend .fr;
+  color: $bule;
+  padding: 20px;
+  text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+

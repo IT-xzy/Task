@@ -1,0 +1,135 @@
+@import "cssreset.less";
+@import "color.less";
+@import "common.less";
+
+header {
+	.top-bg {
+		.w-f;
+		padding: 0 calc(~"50% - 62rem");
+		height: 24.8rem;
+		background-color: @bgOrange;
+	}
+}
+main {
+	padding: 0 calc(~"50% - 60rem");
+	background: @lineColor2;
+	.index {
+		.fs16;
+		height: 8rem;
+		> p {
+			.fl-l;
+			.lh16;
+			margin: 3.2rem 0;
+		}
+		> a {
+			.fl-l;
+			.lh16;
+			margin: 3.2rem 0;
+			color: @darkGreen;
+		}
+	}
+	.row-user {
+		.dp-ib;
+		.w-f;
+		padding-bottom: 23rem;
+		.col-left {
+			.fl-l;
+			.ta-l;
+			padding-bottom: 2.5rem;
+			padding-left: 11.5rem;
+			width: 30rem;
+			background-color: @white;
+			box-shadow: 0 0 .2rem .2rem #ededed;
+			.col-left-title {
+				.fs16;
+				.lh16;
+				.fw-b;
+				margin: 2rem 0 4rem;
+				color: @gray3;
+			}
+			.company {
+				.dp-b;
+				.fs14;
+				.lh14;
+				margin-left: -.6rem;
+				padding: 1.75rem 0;
+				color: @darkGreen;
+				background-color: #fff;
+				border: none;
+				outline-style: none;
+				&:hover {
+					color: @orange;
+				}
+				&:focus {
+					color: @orange;
+				}
+				.circle {
+					.dp-ib;
+					width: 1.2rem;
+					height: 1.2rem;
+					border: solid 2px #ff650e;
+					border-radius: 50%;
+				}
+			}
+			.company:hover .circle {
+				background-color: @lightOrange;
+			}
+			.company:focus .circle {
+				background-color: @lightOrange;
+			}
+		}
+		.col-right {
+			.fl-r;
+			padding: 2.5rem 6.5rem 17.5rem;
+			width: 87rem;
+			background-color: @white;
+			box-shadow: 0 0 .2rem .2rem #ededed;
+			.col-right-logo {
+				.fl-l;
+				margin: 3rem 3.5rem 3.5rem 1.5rem;
+				width: 12.2rem;
+				height: 3.3rem;
+				background: url(../images/icon_10.png) no-repeat;
+			}
+			.company-intro {
+				.fs14;
+				line-height: 2.8rem;
+				color: @gray1;
+			}
+		}
+	}
+}
+@media screen and (max-width: 1199px) {
+	header {
+		.top-bg {
+			.w-f;
+			padding: 0;
+			height: auto;
+		}
+	}
+	main {
+		padding: 0;
+		.index {
+			padding: 0 10%;
+		}
+		.row-user {
+			padding: 0;
+			.col-left {
+				.ta-c;
+				margin: 2rem 5%;
+				padding: 0 5%;
+				width: 90%;
+				.company {
+					.dp-ib;
+					margin: 0;
+					padding: 1.75rem 1rem;
+				}
+			}
+			.col-right {
+				margin: 2rem 5%;
+				padding: 2.5rem 10%;
+				width: 90%;
+			}
+		}
+	}	
+}

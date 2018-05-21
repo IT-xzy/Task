@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd ">
+
+    <context:component-scan base-package="com.mybatis_spring.dao"/>
+    <context:property-placeholder location="classpath:druid.properties" system-properties-mode="NEVER"/>
+       <!--连接池bean-->
+    <bean id="druid" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="${initalSize}"/>
+    </bean>
+
+    <!--以下是给mybatis配置,数据库对话工厂,mapper映射-->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定mybatis的全局配置文件的路径 -->
+        <property name="configLocation" value="classpath:com/mybatis_spring/dao/mybatis.xml"/>
+        <!-- 数据源 -->
+        <property name="dataSource" ref="druid"/>
+    </bean>
+
+    <!-- 配置StudentDao -->
+    <bean id="studentDao" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+        <!-- 依赖注入SqlSessionFactory -->
+        <property name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+        <property name="mapperInterface" value="com.mybatis_spring.dao.IStudentDao"/>
+    </bean>
+
+</beans>

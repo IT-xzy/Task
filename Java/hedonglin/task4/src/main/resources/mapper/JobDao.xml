@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hedonglin.dao.JobDao">
+  <resultMap id="BaseResultMap" type="com.hedonglin.model.Job">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="entrance" jdbcType="INTEGER" property="entrance" />
+    <result column="degree_of_difficulty" jdbcType="INTEGER" property="degreeOfDifficulty" />
+    <result column="one_year" jdbcType="VARCHAR" property="oneYear" />
+    <result column="two_to_three_year" jdbcType="VARCHAR" property="twoToThreeYear" />
+    <result column="three_to_five_year" jdbcType="VARCHAR" property="threeToFiveYear" />
+    <result column="learning_number" jdbcType="VARCHAR" property="learningNumber" />
+    <result column="rare" jdbcType="VARCHAR" property="rare" />
+    <result column="learn_cycle" jdbcType="VARCHAR" property="learnCycle" />
+      <result column="prompt" jdbcType="LONGVARCHAR" property="prompt" />
+      <result column="job_description" jdbcType="LONGVARCHAR" property="jobDescription" />
+  </resultMap>
+  <!--<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.job.model.JobWithBLOBs">-->
+    <!--<result column="prompt" jdbcType="LONGVARCHAR" property="prompt" />-->
+    <!--<result column="job_description" jdbcType="LONGVARCHAR" property="jobDescription" />-->
+  <!--</resultMap>-->
+  <sql id="Base_Column_List">
+    id, job, entrance, degree_of_difficulty, one_year, two_to_three_year, three_to_five_year,
+    learning_number, rare, learn_cycle,prompt, job_description
+  </sql>
+  <!--<sql id="Blob_Column_List">-->
+    <!--prompt, job_description-->
+  <!--</sql>-->
+    <select id="getAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from t_11
+    </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    from t_11
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_11
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hedonglin.model.Job">
+    insert into t_11 (id, job, 
+entrance, 
+      degree_of_difficulty, one_year, two_to_three_year, 
+      three_to_five_year, learning_number, rare, 
+      learn_cycle, prompt, job_description
+      )
+    values (#{id,jdbcType=BIGINT}, #{job,jdbcType=VARCHAR}, #{
+entrance,jdbcType=INTEGER}, 
+      #{degreeOfDifficulty,jdbcType=INTEGER}, #{oneYear,jdbcType=VARCHAR}, #{twoToThreeYear,jdbcType=VARCHAR}, 
+      #{threeToFiveYear,jdbcType=VARCHAR}, #{learningNumber,jdbcType=VARCHAR}, #{rare,jdbcType=VARCHAR}, 
+      #{learnCycle,jdbcType=VARCHAR}, #{prompt,jdbcType=LONGVARCHAR}, #{jobDescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hedonglin.model.Job">
+    insert into t_11
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="
+entrance != null">
+        
+entrance,
+      </if>
+      <if test="degreeOfDifficulty != null">
+        degree_of_difficulty,
+      </if>
+      <if test="oneYear != null">
+        one_year,
+      </if>
+      <if test="twoToThreeYear != null">
+        two_to_three_year,
+      </if>
+      <if test="threeToFiveYear != null">
+        three_to_five_year,
+      </if>
+      <if test="learningNumber != null">
+        learning_number,
+      </if>
+      <if test="rare != null">
+        rare,
+      </if>
+      <if test="learnCycle != null">
+        learn_cycle,
+      </if>
+      <if test="prompt != null">
+        prompt,
+      </if>
+      <if test="jobDescription != null">
+        job_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="
+entrance != null">
+        #{
+entrance,jdbcType=INTEGER},
+      </if>
+      <if test="degreeOfDifficulty != null">
+        #{degreeOfDifficulty,jdbcType=INTEGER},
+      </if>
+      <if test="oneYear != null">
+        #{oneYear,jdbcType=VARCHAR},
+      </if>
+      <if test="twoToThreeYear != null">
+        #{twoToThreeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="threeToFiveYear != null">
+        #{threeToFiveYear,jdbcType=VARCHAR},
+      </if>
+      <if test="learningNumber != null">
+        #{learningNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rare != null">
+        #{rare,jdbcType=VARCHAR},
+      </if>
+      <if test="learnCycle != null">
+        #{learnCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="prompt != null">
+        #{prompt,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="jobDescription != null">
+        #{jobDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hedonglin.model.Job">
+    update t_11
+    <set>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="
+entrance != null">
+        
+entrance = #{
+entrance,jdbcType=INTEGER},
+      </if>
+      <if test="degreeOfDifficulty != null">
+        degree_of_difficulty = #{degreeOfDifficulty,jdbcType=INTEGER},
+      </if>
+      <if test="oneYear != null">
+        one_year = #{oneYear,jdbcType=VARCHAR},
+      </if>
+      <if test="twoToThreeYear != null">
+        two_to_three_year = #{twoToThreeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="threeToFiveYear != null">
+        three_to_five_year = #{threeToFiveYear,jdbcType=VARCHAR},
+      </if>
+      <if test="learningNumber != null">
+        learning_number = #{learningNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rare != null">
+        rare = #{rare,jdbcType=VARCHAR},
+      </if>
+      <if test="learnCycle != null">
+        learn_cycle = #{learnCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="prompt != null">
+        prompt = #{prompt,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="jobDescription != null">
+        job_description = #{jobDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hedonglin.model.Job">
+    update t_11
+    set job = #{job,jdbcType=VARCHAR},
+      
+entrance = #{
+entrance,jdbcType=INTEGER},
+      degree_of_difficulty = #{degreeOfDifficulty,jdbcType=INTEGER},
+      one_year = #{oneYear,jdbcType=VARCHAR},
+      two_to_three_year = #{twoToThreeYear,jdbcType=VARCHAR},
+      three_to_five_year = #{threeToFiveYear,jdbcType=VARCHAR},
+      learning_number = #{learningNumber,jdbcType=VARCHAR},
+      rare = #{rare,jdbcType=VARCHAR},
+      learn_cycle = #{learnCycle,jdbcType=VARCHAR},
+      prompt = #{prompt,jdbcType=LONGVARCHAR},
+      job_description = #{jobDescription,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

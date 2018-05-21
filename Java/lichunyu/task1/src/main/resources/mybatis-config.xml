@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--Spring-Mybatis整合-->
+    <settings>
+        <!--配置使全局的映射器启用或禁用缓存-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--允许JDBC生成的键-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--配置默认的执行器-->
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <!--全局启用或禁用延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--设置超时时间，驱动等待时间-->
+        <setting name="defaultStatementTimeout" value="25000"/>
+    </settings>
+
+    <!--别名设置-->
+   <!-- <typeAliases>
+        <typeAlias type="pojo.Category" alias="category"/>
+    </typeAliases>-->
+
+    <mappers>
+        <mapper resource="UserServiceMapper.xml"/>
+    </mappers>
+</configuration>

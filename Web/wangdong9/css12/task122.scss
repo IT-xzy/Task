@@ -1,0 +1,223 @@
+$headerheight:60px;
+$hdcolor:#5fc0cd;
+$colorw:#ffffff;
+$colorgry:#cccccc;
+$brr:50%;
+$maxwidth:780px;
+$minwidth:320px;
+%mar0a{margin:0 auto;}
+%maricon{margin:0 10px;}
+$por:relative;
+$hundred:100%;
+$footerfont:15px;
+%ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+%disc{
+  display: flex;
+  align-items: center;
+}
+%discs{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+%discc{display: flex;
+  align-items: center;
+  justify-content: center;}
+%bb{border-bottom: 1px solid #999999}
+@mixin fixed($top,$bottom){
+  width: $hundred;
+  height: $headerheight;
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  z-index: 1;
+  max-width: $maxwidth;
+  min-width: $minwidth;}
+%mm{
+  max-width: $maxwidth;
+  min-width: $minwidth;
+}
+$borderr:6%;
+%linenone{text-decoration: none}
+
+body{
+@extend %mm;
+  @extend %mar0a;
+}
+
+.header{
+  @include fixed(0,auto);
+  @extend %discc;
+  background: $hdcolor;
+}
+.center{
+  @extend %discc;
+  height: 48px;
+  width: 160px;
+  border-radius: $borderr;
+  background: #55a8b3;
+}
+
+.employee,.nursing  {
+  @extend %linenone;
+  @extend %discc;
+  border-radius: $borderr;
+  color: $colorw;
+  width: 80px;
+  height: 48px;
+}
+
+.nursing{
+  background: $colorw;
+  color: $hdcolor;
+}
+  .location {
+    width: 42px;
+    height: 44px;
+    background: url(images/sprites.png) -5px -46px;
+    position: absolute;
+    right: 20px;
+    background-size: 389%;
+  }
+  .choose{
+    padding-top: $headerheight;
+  @extend %discs;
+    height: $headerheight;
+    width: $hundred;
+    @extend %bb;
+
+  }
+.local,.food,.patient{
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance:none;
+  background: url("images/strangle.png");
+  background-repeat: no-repeat;
+  background-size: 12px;
+  width: 33%;
+  height: 40px;
+  font-size: 1rem;
+  background-position: 92% 18px;
+  color: $colorgry;
+  margin-top: 10px;
+  border-right: 1px solid #ccc;
+  padding-left: 14%;
+}
+.food{
+padding-left: 14%;
+}
+.patient{
+  border: none;
+padding-left: 7%;
+}
+.local{
+  padding-left: 10%;
+}
+ul{
+  padding: 0;
+@extend %bb;
+}
+li{
+  list-style: none;
+}
+.calendar{
+  width: 25px;
+  height: 25px;
+  background: url(images/sprites.png) -126px -5px;
+  float: left;
+  background-size: 624%;
+ @extend %maricon;
+}
+.service{
+  color:$colorgry;
+}
+.date{
+  display: flex;
+  justify-content: space-between;
+ margin: 5px 10px 5px 45px;
+  white-space: nowrap;
+}
+.when{
+@extend %ellipsis;
+}
+.arrow{
+  width: 19px;
+  height: 24px;
+  background: url(images/sprites.png) -195px -4px;
+  float: right;
+  background-size: 628%;
+  margin-right: 10px;
+}
+.fees{
+  color: #FF3300;
+@extend %maricon;
+}
+.littlelocal {
+  width: 25px;
+  height: 25px;
+  background: url(images/sprites.png) -144px -46px;
+  float: left;
+  background-size: 715%;
+  margin: 0 10px ;
+}
+.localbj{
+  margin-bottom: 10px;
+}
+.beijing{
+  color:$colorgry;
+}
+.footer{
+ @include fixed(auto,0);
+  background: #f8fafb;
+ @extend %discs
+}
+.house{
+  width: 47px;
+  height: 34px;
+  background: url(images/sprites.png) -4px -8px;
+  background-size: 375%;
+}
+.circle{
+  width: 55px;
+  height: 55px;
+  background: #5fc0cd;
+  border-radius: $brr;
+@extend %discc;
+
+}
+.write {
+  width: 41px;
+  height: 42px;
+  border-radius: $brr;
+  background: url(images/sprites.png) -45px -43px;
+  background-size: 356%;
+}
+.person {
+  width: 42px;
+  height: 34px;
+  background: url(images/sprites.png) -57px -8px;
+  background-size: 400%;
+}
+.home{
+  text-align: center;
+}
+.homepage{
+  font-size:$footerfont;
+  color: #5fc0cd;
+  text-decoration: none;
+}
+.my{
+  font-size:$footerfont;
+  color:$colorgry;
+  text-decoration: none;
+}
+.last{
+height: $headerheight;
+  width: $hundred;
+}

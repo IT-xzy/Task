@@ -1,0 +1,413 @@
+/* 
+ * Author:SIRengar
+ * date:2018.01.17
+ */
+$bgcolor: #5fc0cd;
+$border: .1rem solid #c5c5c7;
+$padding: 1.2rem 0 1.2rem 1rem;
+*{
+    padding: 0;
+    margin: 0;
+}
+html{
+    font-size: 62.5%;
+}
+@mixin position{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+@mixin flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@mixin align-center {
+    display: flex;
+    align-items: center;
+}
+@mixin head-btn {
+    border-radius: .5rem;
+    -webkit-border-radius: .5rem;
+    font-size: 1.8rem;
+    padding: .8rem;
+    border: none;
+}
+@mixin hidden {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 1.5rem;
+}
+.col-xs-3 {
+    flex: 0 0 25%;
+}
+.col-xs-6 {
+    flex: 0 0 50%;
+}
+.col-xs-3-5 {
+    flex: 0 0 31%;
+}
+.col-xs-4 {
+    flex: 0 0 33.33%;
+}
+.col-xs-8 {
+    flex: 0 0 66.67%;
+}
+.margin-left-3 {
+    margin-left: 25%;
+}
+.caret {
+    border-top: 5px dashed;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    color: #D0D0D0;
+}
+a{
+    text-decoration: none;
+}
+header{
+    @include position;
+    background-color: $bgcolor;
+    height: 5rem;
+    top: 0;
+    .back {
+        top: 2rem;
+        left: 1.5rem;
+        font-size: 2rem;
+        width: 1rem;
+        height: 1rem;
+        position: absolute;
+        border-left: .25rem solid #fff;
+        border-bottom: .25rem solid #fff;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg); 
+    }
+    h1{
+        font-size: 1.8rem;
+        text-align: center;
+        color: #fff;
+        line-height: 5rem;
+    }
+    .container {
+        display: flex;
+        width: 100%;
+        height: 5rem;
+    }
+    .btn_left {
+        @include head-btn;
+        background: #55a8b3;
+        color: #fff;        
+        -webkit-border-top-right-radius: 0;
+        -webkit-border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-right: -.5rem;
+    }
+    .btn_right {
+        @include head-btn;
+        background: #fff;
+        color: $bgcolor;
+    }
+    .btn_set {
+        @include flex-center;
+    }
+    .icon_loc {
+        background-image: url(../img/task6-4.png);
+        background-position: 0 0;
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 0;
+    }    
+}
+main{
+    position: absolute;
+    margin: 5rem 0 10rem 0;
+    top: 0;
+    width: 100%;
+    font-size: 2rem;
+    .background_box {
+        position: relative;
+        background: url(../img/background.png) no-repeat 0 0;
+        width: 100%;
+        height: 15rem;
+        background-size: 100% 100%;
+        .user_img {
+            @include flex-center;
+            height: 100%;
+            width: 13rem;
+            img{
+                width: 6rem;
+                height: 6rem;
+            }
+        }
+        .information {
+            color: #fff;
+            position: absolute;
+            top: 35%;
+            left: 12rem;
+            .name {
+                font-size: 2rem;
+            }
+            .position {
+                font-size: 1.5rem;
+                img{
+                    width: 1rem;
+                    height: 1.5rem;
+                }
+                p{
+                    display: inline;
+                }
+            }
+        }
+    }
+    .major {
+        .power {
+            padding: 1.2rem 0;
+            border-bottom: $border;
+            h2{
+                font-size: 2rem;
+                border-left: .3rem solid #5fc0cd;
+                margin-left: 1.5rem;
+                text-indent: 1rem;
+                font-weight: 400;
+            }
+        }
+        .row {
+            margin-left: 1.2rem;
+            line-height: 1;
+            border-bottom: $border;
+            padding: $padding;
+            @include align-center;
+            .skill {
+                display: inline-block;
+                width: 2rem;
+                height: 2rem;
+                margin-right: 1rem;
+                background-image: url(../img/star.png);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                vertical-align: bottom;
+            }
+            .space {
+                display: inline-block;
+                margin: 0 .5rem;
+            }
+        }
+        .fw {
+            font-size: 2rem;
+            padding: $padding;
+            margin-left: 1.2rem;
+            color: #e6706f;
+            line-height: 1;
+            border-bottom: $border;            
+        }
+        .hs {
+            padding-right: 2rem;
+            margin-right: 2rem;
+            color: #a5a5a6;
+            border-right: .13rem solid #c5c5c7;
+            min-width: 7rem;
+        }
+        .about_Kind {
+            display: table-cell;
+            width: 20rem;
+        }
+    }
+    .drop_down {
+        @include position;        
+        height: 4rem;
+        border-bottom: .1rem solid #d0d0d0;
+        background: #fff;
+        display: flex;
+        .btn {
+        border-right: .1rem solid #d0d0d0;        
+        @include flex-center;
+        height: 100%;
+        &:hover ul{
+            display: flex;
+            flex-flow: column;            
+        }
+        button{
+            font-size: 1.8rem;
+            border: none;
+            background: #fff;
+            color: #D0D0D0;
+            width: 100%;
+            height: 100%;
+            span{
+                position: absolute;
+                top: 50%;
+                left: 28.5%;
+            }
+            .caret2 {
+                left: 62%;
+            }
+            .caret3 {
+                left: 96%;
+            }
+        }              
+    }
+        ul {
+            display: none;
+            border-top: .1rem solid #D0D0D0;
+            position: absolute;
+            background: #fff;
+            min-width: 1rem;
+            list-style: none;
+            width: 33.33%;
+            top: 4rem;
+            border: .1rem solid #D0D0D0;
+            box-shadow: 0 6px 12px rgba(0,0,0,.175);
+            border-radius: .3rem;            
+            li{
+                color: #000;
+                width: 100%;
+                text-align: center;
+                padding-bottom: 1rem;
+                a{
+                    text-decoration: none;
+                    color: #333;
+                }                
+            }            
+        }              
+    }
+    .main {
+        position: relative;
+        top: 4rem;
+        .format {
+            border-bottom: .1rem solid #d0d0d0;
+            display: flex;
+            .format_ {
+                display: flex;
+                padding-right: 15px;
+                padding-left: 15px;
+                width: 45%;
+                .icon_day {
+                    background-image: url(../img/task6-2.png);
+                    background-position: 0 0;
+                    width: 20px;
+                    height: 20px;
+                    border: none;
+                    margin-right: 4px;
+                }
+                .p_day {
+                    @include hidden;
+                    color: #D0D0D0;                    
+                }
+            }
+            .margin-left-1 {
+                margin-left: 3.3rem;
+                width: 50%;
+                .p2 {
+                    @include hidden;                    
+                }
+            }
+            .icon_live {
+                background-image: url(../img/task6-2.png);
+                background-position: -20px 0;
+                width: 20px;
+                height: 20px;
+                border: none;
+                margin-right: 4px;
+            }            
+        }
+        .format_2 {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            .p_pay {
+                color: #ff5809;
+                font-size: 1.5rem;
+            }
+            .p_icon {
+                height: 9px;
+                width: 9px;
+                border-width: 1.5px 1.5px 0 0;
+                border-color: #5fc0cd;
+                border-style: solid;
+                transform: matrix(0.71,0.71,-0.71,0.71,0,0);
+            }
+        }
+    }
+}
+footer{
+    @include position;
+    bottom: 0;
+    height: 6rem;
+    font-size: 3rem;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    .foot {
+        @include flex-center;
+        width: 100%;       
+        button{            
+            width: 90%;
+            border-radius: .2rem;
+            -webkit-border-radius: .6rem;
+            font-size: 2rem;
+        }
+        .left {
+            background: #fff;
+            height: 4rem;
+            border: .25rem solid $bgcolor;
+            color: $bgcolor;
+        }
+        .right {
+            background: $bgcolor;
+            color: #fff;
+            height: 4rem;
+            border: none;
+        }
+    }
+    .foot2 {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        .foot_button {
+            @include flex-center;
+            flex-flow: column;
+            height: 100%;
+        }
+        .icon_home {
+            background-image: url(../img/task6-4.png);
+            background-position: 0 30px;
+            width: 30px;
+            height: 30px;
+            z-index: 3;
+        }
+        .home {
+            color: $bgcolor;
+            font-size: 1.5rem;
+        }
+        .icon_circle {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            background-color: $bgcolor;
+            @include flex-center;
+            border: none;
+            .icon_menu {
+                background-image: url(../img/task6-4.png);
+                background-position: 30px 0;
+                width: 30px;
+                height: 30px;
+            }
+        }
+        .icon_me {
+            background-image: url(../img/task6-4.png);
+            background-position: 30px 30px;
+            width: 30px;
+            height: 30px;
+            border: none;
+        }
+        .me {
+            color: #D0D0D0;
+            font-size: 1.5rem;
+        }
+    }
+}

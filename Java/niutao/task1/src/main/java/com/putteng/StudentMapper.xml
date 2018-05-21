@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.putteng.StudentMapper">
+    <!-- 根据id获取学员信息 -->
+    <select id="findStudentById" parameterType="int" resultType="Student">
+        select * from student where id = #{id}
+    </select>
+    <!-- 根据id名字查报名帖 -->
+    <select id="fingdLinkById" parameterType="int" resultType="String">
+        select link from student where id = #{id}
+    </select>
+    <!-- 根据名字查报名帖 -->
+    <select id="fingdLinkByName" parameterType="String" resultType="String">
+        select link from student where name = #{name}
+    </select>
+
+
+    <!-- 添加学员信息 -->
+    <insert id="insertStuden" parameterType="Student" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into student(name,qq,classId,graduateSchool,olineNumber,link,wish,brotherId)
+        values(#{name},#{qq},#{class_id},#{graduate_school},#{oline_number},#{link},#{wish},#{brother_id})
+    </insert>
+    <!-- 根据id删除信息 -->
+    <delete id="deleteStudent" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
+    <!--修改信息-->
+    <update id="updateStudent" parameterType="Student">
+        update student set
+            name=#{name},
+            qq=#{qq},
+            graduateSchool=#{graduate_school},
+            olineNumber=#{oline_number},
+            link=#{link},
+            wish=#{wish},
+            brotherId=#{brother_id}
+        where id = #{id}
+    </update>
+</mapper>

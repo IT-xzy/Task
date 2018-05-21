@@ -1,0 +1,145 @@
+@import "public.scss";
+
+@mixin bottom-button {
+	width: 100%;
+	padding: .23rem 0;
+	font-size: .4rem;
+	border-radius: 10px;
+}
+$blue: #29bde0;
+$blue-line: #6AD1E9;
+$white: #fff;
+$orange: #fbb435;
+$red: #f66f6f;
+$orange-text: #ffc865;
+$black: #515151;
+$gray: #a6a6a6;
+$gray-text: #c7c7c7;
+
+
+
+
+.header-box {
+	@include position-fixed;
+	top: 0;
+	background-color: $blue;
+}
+.header {
+	@include flex;
+	justify-content: space-between;
+	font-size: .34rem;
+	color: $white;
+	padding: .1rem;
+	margin-bottom: .2rem;
+	@include border-bottom (1px, solid, $blue-line);
+}
+.house {
+	width: .51rem;
+	height: .42rem;
+}
+.information {
+	width: .4rem;
+	height: .4rem;
+}
+.img-responsive {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.header-icon {
+	width: 3.51rem;
+	height: 2.04rem;
+	background-image: url(images/13.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	margin: 0 auto;
+}
+
+.header-text {
+	width: auto;
+	height: 1.26rem;
+	padding: 0 .7rem;
+	font-size: .33rem;
+	line-height: 1.4;
+	color: $orange-text;
+	text-align: center;
+}
+.header-data-box {
+	width: auto;
+	padding: 0 .7rem;
+	margin-top: .5rem;
+	margin-bottom: .2rem;
+	font-size: .26rem;
+	color: $white;
+}
+.header-data {
+	width: 100%;
+	display: flex;
+}
+.header-data-inner {
+	width: 30%;
+	margin-right: 3%;
+	@include flex;
+	justify-content: space-between;
+}
+
+
+.main-box {
+	width: 100%;
+	margin-top: 6.4rem;
+	margin-bottom: 1.3rem;
+	background-color: $white;
+}
+.main {
+	width: auto;
+	padding: 0 .7rem;
+	margin: .1rem 0;
+	@include border-bottom (1px, solid, $gray-text);
+}
+.main-top {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: .1rem;
+}
+.top-left {
+	font-size: .3rem;
+	color: $black;
+}
+.top-right {
+	font-size: .2rem;
+	color: $gray-text;
+}
+.main-bottom {
+	font-size: .26rem;
+	color: $gray-text;
+	line-height: 1.6;
+}
+
+
+.footer-box {
+	@include position-fixed;
+	height: 1.3rem;
+	background-color: rgba(153,223,240,.5);
+	bottom: 0;
+	@include flex;
+	justify-content: space-around;
+}
+.again {
+	width: 40%;
+}
+.share {
+	width: 40%;
+}
+.again a{
+	@include bottom-button;
+	color: $white;
+	background-color: #F66F6F;
+	@include flex;
+}
+.share a{
+	@include bottom-button;
+	color: #FFF;
+	background-color: #FBB435;
+	@include flex;
+}
+

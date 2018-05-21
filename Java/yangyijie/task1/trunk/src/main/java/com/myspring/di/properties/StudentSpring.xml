@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--使用setter方式注入属性.-->
+    <bean id="student1" class="com.myspring.di.properties.StudentSetterImpl">
+        <property name="name" value="张三"/>
+        <property name="age" value="23"/>
+        <property name="gender" value="男"/>
+        <property name="money" value="999.9"/>
+    </bean>
+    <!--使用Constrator注入属性-->
+    <bean id="student2" class="com.myspring.di.properties.StudentConstractorImpl" >
+         <!--这里我使用了SpEL表达式获取到,ID为student3里面的ceshi属性.-->
+        <constructor-arg name="name" value="#{student3.ceshi}"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="gender" value="女"/>
+        <constructor-arg name="money" value="5.5"/>
+        <!--使用SpEL表达式获取到系统时间.-->
+        <constructor-arg name="time" value="#{T(System).currentTimeMillis()}"/>
+    </bean>
+    <!--对引用数据注入类型-->
+    <bean id="student3" class="com.myspring.di.properties.StudentReferenceImpl">
+        <!--在类中使用@Autowired自动注入之后,配置文件中就不用再声明-->
+        <property name="studentUtil" ref="studentUtil"/>
+    </bean>
+    <bean id="studentUtil" class="com.myspring.di.properties.StudentUtil"/>
+
+
+    <!--对集合数组注入数据-->
+    <bean id="connection" class="com.myspring.di.properties.ConnectionBean">
+        <property name="list">
+            <list>
+                <value>list1</value>
+                <value>list1</value>
+                <value>list1</value>
+                <value>list2</value>
+                <value>list3</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="1" value="map1"/>
+                <entry key="1" value="map2"/>
+                <entry key="2" value="map3"/>
+                <entry key="3" value="map4"/>
+                <entry key="4" value="map4"/>
+            </map>
+        </property>
+        <property name="properties">
+            <value>
+                name=zhangsan
+                age=20
+                money=5.5
+            </value>
+        </property>
+        <property name="set">
+            <set>
+                <value>set1</value>
+                <value>set1</value>
+                <value>set2</value>
+                <value>set3</value>
+                <value>set1</value>
+            </set>
+        </property>
+        <property name="strings">
+            <array>
+                <value>剑飞</value>
+                <value>剑飞</value>
+                <value>剑飞</value>
+                <value>剑飞</value>
+                <value>剑飞</value>
+            </array>
+        </property>
+    </bean>
+</beans>

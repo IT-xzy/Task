@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">
+    <!-- 模糊查询 -->
+    <select id="findUserList" parameterType="java.lang.String" resultType="User2">
+        select * from user
+        <where>
+          <include refid="sqlfrase"></include>
+        </where>
+    </select>
+    <sql id="sqlfrase" >
+        <if test="user!=null">
+            <if test="user.sex!=null and user.sex!=''" >
+                and user.sex=#{user.sex}
+            </if>
+            <if test="user.username!=null and user.username!=''">
+                and user.username like '%${user.username}%'
+            </if>
+            <if test="ids!=null">
+                <foreach collection="ids" item="user_id" open="AND(" close=")" separator="OR">
+                    id=#{user_id}
+                </foreach>
+            </if>
+        </if>
+    </sql>
+   <!--右边拼接AND id IN(1,12,17) -->
+    <!--
+    <sql id="sqlfrase" >
+        <if test="user!=null">
+            <if test="user.sex!=null and user.sex!=''" >
+                and user.sex=#{user.sex}
+            </if>
+            <if test="user.username!=null and user.username!=''">
+                and user.username like '%${user.username}%'
+            </if>
+            <if test="ids!=null">
+                <foreach collection="ids" item="user_id" open="AND id IN(" close=")" separator=",">
+                    id=#{user_id}
+                </foreach>
+            </if>
+        </if>
+    </sql>-->
+</mapper>

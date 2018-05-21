@@ -1,0 +1,102 @@
+
+<div ng-controller="mainCtrl">
+<div class="header"  ng-controller="userCtr">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="log-in" >萝卜多后台登陆</div>
+
+            </div>
+
+            <div class="col-md-8">
+                <div class="use">
+                    <span class="string">|</span>
+                    <a href=""> <span class="user">admin</span></a>
+
+                    <span class="string">|</span>
+                    <a href=""><span class="glyphicon glyphicon-off" ng-click="logout()"></span></a>
+                </div>
+            </div>
+
+            <button id="cut">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+    </div>
+        <div  class="sidebar" id="down">
+            <ul class="sidebar-menu">
+                <li class="treeview">
+                    <a href="">
+                        <span class="glyphicon glyphicon-pencil"></span> <span>信息管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a ui-sref=".page1">学员信息</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="">
+                        <span class="glyphicon glyphicon-pencil"></span>   <span>Article管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a ui-sref=".Article">Article信息</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+
+</div>
+
+<div class="main">
+    <aside class="main-sidebar">
+        <section  class="sidebar">
+            <ul class="sidebar-menu">
+                <li class="treeview">
+                    <a href="">
+                        <span class="glyphicon glyphicon-pencil"></span> <span>信息管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a ui-sref=".page1">学员信息</a></li>
+
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="">
+
+                        <span class="glyphicon glyphicon-pencil"></span>   <span>Article管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a ui-sref=".Article">Article信息</a></li>
+
+                    </ul>
+                </li>
+            </ul>
+
+        </section>
+    </aside>
+
+   <div class="artical">
+       <div ui-view>welcome{{name}}</div>
+   </div>
+</div>
+
+
+</div>
+<script>
+    $.sidebarMenu($('.sidebar-menu'));
+    $(document).ready(function(){
+        $("#cut").click(function(){
+            $("#down").toggle();
+        });
+    });
+</script>

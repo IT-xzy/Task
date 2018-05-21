@@ -1,0 +1,160 @@
+$color:#fff;
+$background:#29bde0;
+$font-size: .16rem;
+$padding:.1rem;
+html {
+    font-size: 625%;
+}
+
+body {
+    background: $background;
+}
+
+body,
+p {
+    font-size: $font-size;
+    margin: 0;
+}
+
+.music {
+    opacity: 0;
+    position: absolute;
+    width: .64rem;
+    right: .1rem;
+    top: .6rem;
+    z-index: 999;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: .5rem;
+    color: $color;
+    border-bottom: .1px solid #ffffff;
+    background: $background;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+        width: $padding*2;
+        padding: $padding $padding*1.5;
+    }
+    p {
+        font-size: .2rem;
+    }
+}
+
+.back {
+    width: $font-size;
+    height: $font-size;
+    border-left: 2px solid $color;
+    border-bottom: 2px solid $color;
+    transform: rotate(45deg);
+    margin: .1rem;
+}
+
+main {
+    background: #29bde0;
+    margin-top: .5rem;
+    margin-bottom: .8rem;
+    padding-bottom: .2rem;
+    overflow: hidden;
+    .please {
+        position: relative;
+        height: .5rem;
+        line-height: .5rem;
+        padding-left: .2rem;
+        font-size: .14rem;
+        background-color: #b9e9f5;
+        text-overflow: ellipsis;
+        img {
+            transform: scale(.6);
+        }
+        .trangel {
+            position: absolute;
+            left: .35rem;
+            bottom: -.1rem;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid #b9e9f5;
+        }
+    }
+    .hint {
+        color: $color;
+        font-size: .14rem;
+        letter-spacing: .01rem;
+        padding: $padding .35rem;
+    }
+}
+
+.items {
+    padding: 0 2vw;
+}
+
+.item {
+    box-sizing: border-box;
+    float: left;
+    width: 26vw;
+    height: 26vw;
+    margin: 3vw 3vw; // display: inline-block;
+    text-align: center;
+    border: 2px solid #fff;
+    @mixin flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .id {
+        @include flex-center;
+        font-size: .2rem;
+        letter-spacing: .1rem;
+        padding-left: .1rem;
+        height: 75%;
+        background-color: #fbb435;
+    }
+    .number {
+        @include flex-center;
+        height: 25%;
+        color: $color;
+        font-size: .18rem;
+        background-color: #83b09a;
+    }
+    .choose {
+        opacity: 0; // 想分开距离,很难控制
+        margin-top: .05rem;
+    }
+    .choose img {
+        width: 5vw;
+    }
+    .another {
+        opacity: .4;
+        background: #012345;
+        color: $color;
+    }
+}
+
+.item:hover .choose {
+    opacity: 1;
+}
+
+footer {
+    position: fixed;
+    width: 100%;
+    height: .6rem;
+    bottom: 0;
+    text-align: center;
+    padding: .15rem 0;
+    background-color: $background;
+    .confirm {
+        height: .6rem;
+        line-height: .6rem;
+        width: 80%;
+        font-size: .24rem;
+        color: #ffffff;
+        margin: 0 auto;
+        border: none;
+        background-color: #fbb435;
+    }
+}

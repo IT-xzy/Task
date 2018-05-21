@@ -1,0 +1,42 @@
+<div class="container-fluid carrots-wrap" ng-controller="carrots as Carrots">
+    <div class="row carrots-navigation ">
+        <div class="navbar navbar-default carrots-nav-sidebar ">
+            <h4>萝卜多后台管理系统</h4>
+            <button type="button" class="navbar-toggle navbar-toggle-button iconfont" data-toggle="collapse"
+                    data-target="#example-navbar-collapse">&#xe65e;
+            </button>
+        </div>
+        <div class="carrots-nav">
+            <div class="pull-right nav-button-wrap">
+                |<span class="nav-account">admin</span>|
+                <span class="nav-close" ui-sref="logIn">
+                <i class="iconfont">&#xe601;</i>
+            </span>
+            </div>
+        </div>
+    </div>
+    <div class="row carrots-main">
+        <div class=" navbar-collapse collapse sidebar" id="example-navbar-collapse">
+            <div class="drop-menu-wrap">
+                <div class="siderbar-drop-menu" ng-repeat="x in manageList" >
+                    <div class="drop-title" ng-click="toggleList(x)" ng-class="{highLight:x.show}">
+                        <i class="iconfont">&#xe98a;</i>
+                        <a>{{x.name}}</a>
+                        <i ng-show="x.show" class="iconfont pull-right">&#xe6a6;</i>
+                        <i ng-hide="x.show" class="iconfont pull-right">&#xe697;</i>
+                    </div>
+                    <ul ng-repeat="c in x.data"  ng-show="x.show">
+                        <li ng-class="{highLight2:state.includes(c.statu)}"
+                            ui-sref={{c.statu}}({size:10,page:1})
+                            style="padding-left: 70px">
+                            <a>{{c.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div ui-view=""></div>
+        </div>
+    </div>
+</div>

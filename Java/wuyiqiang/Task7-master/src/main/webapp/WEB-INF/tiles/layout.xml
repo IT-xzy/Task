@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <definition name="layout" template="/WEB-INF/views/layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/index_header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/index_footer.jsp"/>
+        <put-list-attribute name="cssPathList">
+            <add-attribute value="css/base.css"></add-attribute>
+            <add-attribute value="css/main.css"></add-attribute>
+        </put-list-attribute>
+    </definition>
+    <!-- 主布局 -->
+
+    <!--index 项目-->
+    <definition name="tiles_index" extends="layout">
+        <put-attribute name="title" value="主页"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_body.jsp"/>
+    </definition>
+
+    <!--sign_in 项目-->
+    <definition name="tiles_sign_in" extends="layout">
+        <put-attribute name="title" value="登陆"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_body_sign_in.jsp"/>
+    </definition>
+
+    <!--tiles_sign_up_by_phone 项目-->
+    <definition name="tiles_sign_up_by_phone" extends="layout">
+        <put-attribute name="title" value="手机注册"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_body_sign_up_by_phone.jsp"/>
+    </definition>
+
+    <!--tiles_sign_up_by_phone_commit 项目-->
+    <definition name="tiles_sign_up_by_phone_commit" extends="layout">
+        <put-attribute name="title" value="手机注册"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_body_sign_up_by_phone_commit.jsp"/>
+    </definition>
+
+    <!--tiles_sign_up_by_phone 项目-->
+    <definition name="tiles_sign_up_by_email" extends="layout">
+        <put-attribute name="title" value="邮箱注册"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_body_sign_up_by_email.jsp"/>
+    </definition>
+
+    <!--tiles_sign_up_by_phone_commit 项目-->
+    <definition name="tiles_sign_up_by_email_commit" extends="layout">
+        <put-attribute name="title" value="邮箱注册"/>
+        <put-attribute name="body" value="/WEB-INF/views/index_body_sign_up_by_email_commit.jsp"/>
+    </definition>
+</tiles-definitions>

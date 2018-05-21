@@ -1,0 +1,115 @@
+@charset "UTF-8";
+/*reset*/
+html{
+  font-size: 10px;
+  @media (min-width: 480px) {
+    font-size: 15px;
+  }
+  @media (min-width: 640px){
+    font-size: 17px;
+  }
+  @media (min-width: 720px) {
+    font-size: 20px;
+  }
+}
+$bgcolor:#5fc0cd;
+$fontsize:1.6rem;
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  background: #e5e8ea;
+}
+a{
+  cursor: pointer;
+  font-size: $fontsize;
+  text-decoration: none;
+  color: #fff;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+@mixin input($url:url("../images/iphone.png")){
+  margin-top: .8rem;
+  border: 0;
+  width: 100%;
+  padding-left: 7rem;
+  height: 5rem;
+  outline: none;
+  font-size: $fontsize;
+  background: {
+    position: 2rem center;
+    size:3.9rem auto;
+    color: #fff;
+    image: $url;
+    repeat: no-repeat;
+  };
+ 
+}
+/*header*/
+header{
+  padding: 0 5%;
+  color: #fff;
+  background: $bgcolor;
+  line-height: 4.5rem;
+  text-align: center;
+  a{
+    float: left;
+    line-height: 4.5rem;
+    &:nth-child(2){
+      float: right;
+    }
+  }
+  h4{
+    margin: 0 4rem;
+    font: {
+      size: 1.8rem;
+      weight: normal;
+    };
+  }
+}
+/*main*/
+main{
+  form{
+    label{
+      input[type=text]{
+        @include input();
+      }
+      input[type=password]{
+        @include input(url(../images/locked-2.png))
+      }
+    }
+  }
+}
+/*footer*/
+footer{
+  margin-top: 2rem;
+  .button{
+    a{
+      display: inline-block;
+      height: 5rem;
+      background: $bgcolor;
+      width: 100%;
+      line-height: 5rem;
+      text-align: center;
+      color: #fff;
+      font-size: $fontsize;
+      &:active{
+        box-shadow: inset 3px 3px rgba(0,0,0,.2);
+      }
+    }
+  }
+  .pull-right{
+    margin: {
+      top:1rem;
+      right: 1rem;
+    };
+    float: right;
+    text-decoration: none;
+    a{
+      color: #5fc0cd;
+    }
+  }
+}

@@ -1,0 +1,153 @@
+$blue:#29bde0;
+$lightblue:#b9e9f5;
+$lightorange:#ffedc5;
+$orange:#fbb435;
+$red:#f67489;
+$white:#fff;
+$yellow:#f5c97b;
+$green:#83b09a;
+
+
+@mixin fixedwidth{
+    min-width: 320px;
+    max-width: 768px;
+}
+@mixin size($width,$height){
+    width:$width;
+    height:$height;
+}
+body{
+    @include fixedwidth;
+    margin:0 auto;
+}
+header{
+    @include fixedwidth;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    padding: .5rem;
+    font-size: 1rem;
+    color:$white;
+    background-color:$blue;
+    text-align: center;
+    box-sizing: border-box;   
+    .header-left{
+        float:left;
+        img{
+            width:.6rem;
+        }
+    }
+    .header-right{
+        float:right;
+        img{
+            width:1rem;
+        }
+    }
+}
+
+.content{
+    @include fixedwidth;
+    min-height: 100vh;
+    background-color:$blue;
+    .indicate{
+        width:100%;
+        margin-top:2rem;
+        margin-bottom:0;
+        padding:1rem;
+        font-size: 0.8rem;
+        background-color:$lightblue;
+        box-sizing: border-box;
+    }
+    .triangle{
+        @include size(0,0);
+        margin-left:2rem;
+        border: 0.5rem solid transparent;
+        border-top: 0.7rem solid $lightblue;
+    }
+    .point{
+        margin:0;
+        padding-left:2rem;
+        font-size: 0.7rem;
+        color:$white;
+        background-color:$blue;
+    }
+    .squares{
+        @include fixedwidth;
+        width:100%;
+        padding:2rem 5% 8rem;
+        background-color:$blue;
+        box-sizing: border-box;
+        .square{
+            position:relative;
+            display: inline-block;
+            width:25%;
+            margin:1rem 3.35%;
+            border:2px solid $white;
+            box-sizing: border-box;
+            .upper{
+                padding:25%;
+                text-align: center;
+                font-size: 1rem;
+                background-color: $yellow;
+            }
+            .upperchange{
+                background-color:$green;
+            }
+            .lower{
+                padding:10% ;
+                text-align: center;
+                font-size:0.6rem;
+                background-color:$green;
+            }
+            img{
+                position: absolute;
+                top: 105%;
+                left: 50%;
+                display: none;
+                margin-left: -17%;
+                padding: 0.2rem 0.2rem;               
+                background-color: white;
+            }
+        }
+    }
+}
+footer{
+    position:fixed;
+    bottom:0;
+    @include fixedwidth;
+    width: 100%;
+    padding:2rem;
+    text-align: center;
+    background:$blue;
+    box-sizing: border-box;
+    button{
+        @include size(80%,3rem);
+        border:none;
+        font-size:1.2rem;
+        text-align: center;
+        outline:none;
+        color:$white;
+        background-color:$orange;
+    }
+}
+
+@media screen and (max-width:550px){
+    .content{
+        .squares{
+            .square{
+                box-sizing: border-box;
+                .upper{
+                    padding:17%;
+                }
+                .lower{
+                    padding:8%;
+                }
+                img{
+                    position: absolute;
+                    top: 110%;
+                    left: 50%;
+                }
+            }
+        }
+    }   
+}

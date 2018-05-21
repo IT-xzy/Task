@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- 向 HTML 文档添加 <!DOCTYPE> 声明，这样浏览器才能获知文档类型。 -->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 响应式web设计 也就是 显示窗口 宽度 是 客户端的 屏幕 宽度 （就是 满屏 ！），
+        显示的文字和图形的初始比例 是 1.0-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- css文件引入方法 -->
+    <title>伪元素基线居中</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        .red {
+            background: red;
+            width: 100%;
+            height: 200px;
+            color: #1e00be;
+        }
+
+        .vt {
+            display: inline;
+            vertical-align: middle;
+            color: #ffffff;
+        }
+
+        .vt::after {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="red">我是div
+        <p class="vt">我是p</p>
+    </div>
+</body>
+
+</html>

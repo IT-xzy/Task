@@ -1,0 +1,174 @@
+@charset "UTF-8";
+@import "common.css";
+$Colorgreen:#29b078;
+$fontColor:#999999;
+$fontSize:14px;
+$fontSizeMin:12px;
+@mixin h5{
+  padding: 30px 0;
+  border-bottom: 1px solid #d0d6d9;
+}
+@mixin clearfix{
+  &:after{
+    display: table;
+    content: " ";
+    clear: both;
+  }
+}
+@mixin border{
+  border-bottom: 1px solid #edf1f2;
+}
+.content{
+  background: #fafafa;
+/*首页*/
+  >.contianer>.row>h5{
+    @include h5;
+
+    >span{
+      color: $Colorgreen;
+    }
+  }
+/*方向选择*/
+  >.contianer>.option-area{
+    display: flex;
+    padding: 20px 0;
+    border-bottom: 1px solid #d0d6d9;
+
+    >.option-title{
+      flex: 0 0 auto;
+      color: $fontColor;
+      font-size: $fontSize;
+    }
+
+    >.option{
+      flex: 1;
+
+      >a{
+        margin-left: 5%;
+        font-size: $fontSizeMin;
+        color: #333;
+        &:hover{
+          color: #fff;
+          background: $Colorgreen;
+        }
+      }
+    }
+  }
+  /*information-area*/
+  .contianer>.row>.information-area {
+    float: left;
+    width: 33.33%;
+    padding: 40px 15px 0 15px;
+    @media (max-width: 1170px) {
+      width: 50%;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    > .job-information {
+      position: relative;
+      font-size: $fontSizeMin;
+      word-break: break-all;
+      border: 1px solid #eeeded;
+      background: #fff;
+      &:hover > .cover {
+        opacity: 0.8;
+        transition: 1s;
+      }
+      /*job-information头部*/
+      > .information-title {
+        padding: 15px 10px;
+        @include border;
+        @include clearfix;
+
+        > img {
+          float: left;
+          margin-right: 10px;
+        }
+
+        > h5 {
+          padding: 10px 0;
+        }
+      }
+      /*job-information行*/
+      .information-row {
+        border-bottom: 1px solid #edf1f2;
+        @include clearfix;
+        &:nth-of-type(4){
+          border: none;
+        }
+
+        .col-5 {
+          float: left;
+          width: 50%;
+          padding-left: 10px;
+          color: $fontColor;
+          &:last-of-type {
+            border-left: 1px solid #edf1f2;
+          }
+        }
+
+        > .col-4 {
+          float: left;
+          width: 40%;
+          height: 120px;
+          line-height: 120px;
+          text-align: center;
+          border-right: 1px solid #edf1f2;
+          @include border;
+        }
+
+        > .col-6 {
+          float: left;
+          width: 60%;
+          > .col-wrap {
+            height: 40px;
+            @include border;
+          }
+        }
+      }
+      /*jod-information行内模块*/
+      .col-wrap {
+        padding: 10px;
+      }
+
+      .red {
+        color: #f01400;
+        font-weight: bold;
+      }
+
+      .black {
+        color: #333;
+        font-weight: bold;
+      }
+/*cover开始*/
+      > .cover {
+        position: absolute;
+        top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 10%;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0;
+
+        > h5 {
+          color: #fff;
+          padding: 30px;
+          text-align: center;
+        }
+        > p {
+          color: #fff;
+          font-size: 16px;
+        }
+      }
+      /*cover结束*/
+    }
+  }
+}
+.footer{
+  margin-top: 100px;
+}

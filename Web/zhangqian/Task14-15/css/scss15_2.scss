@@ -1,0 +1,142 @@
+@import "common";
+
+/*顶部*/
+@include header;
+
+/*导航*/
+@include nav;
+
+/*底部*/
+@include bottom;
+
+
+.body {
+  @include df;
+  @include fw-w;
+  @include jc-fs;
+  .content {
+    margin: .5rem;
+    position: relative;
+    box-sizing: border-box;
+    p {
+      font-size: 12px;
+    }
+    .content-list {
+      box-sizing: border-box;
+      height: 16rem;
+      @include df;
+      @include fw-w;
+      border: 1px solid #eeeded;
+      border-radius: 5px;
+      .list {
+        @include flex-center;
+        box-sizing: border-box;
+        border-bottom: 1px solid #eeeded
+      }
+      .list-half {
+        width: 50%;
+        padding-left: .5rem;
+        box-sizing: border-box;
+      }
+      .list-border {
+        border-left: 1px solid #eeeded;
+      }
+      .list-head {
+        width: 100%;
+        img {
+          height: 120px;
+          width: 120px;
+        }
+      }
+      .money-l {
+        border-bottom: 1px solid #eeeded;
+        height: 3.2rem;
+        line-height: 3.2rem;
+        text-align: center;
+      }
+      .money {
+        height: 3.2rem;
+        .money-r {
+          border-left: 1px solid #eeeded;
+          padding-left: .5rem;
+          margin-left: -.5rem;
+          @include df;
+          @include jc-sb;
+        }
+      }
+      .list-num, .list-tips {
+        padding-left: .5rem;
+        box-sizing: border-box;
+        width: 100%;
+      }
+      .list-tips {
+        border: none;
+      }
+      &:hover ~ .list-web {
+        display: block;
+      }
+    }
+    .list-web {
+      display: none;
+      width: 100%;
+      height: 16rem;
+      background-color: #000000;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      opacity: 0.85;
+      z-index: 9;
+      border-radius: 5px;
+      text-align: center;
+      p {
+        color: #fff;
+        font-size: 16px;
+      }
+      &:hover {
+        display: block;
+      }
+    }
+  }
+  @include xs {
+    @include jc-c;
+    .content {
+      width: 100%;
+    }
+  }
+  @include sm {
+    .content {
+      flex: 1;
+      min-width: 40%;
+    }
+  }
+  @include md-lg {
+    justify-content: flex-start;
+    .content {
+      flex: 1;
+      min-width: 30%;
+      max-width: 50%;
+    }
+  }
+}
+
+.title {
+  margin: 0 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eeeded;
+  p2 {
+    color: $green2;
+  }
+}
+
+.direction {
+  margin: 0 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eeeded;
+  @include df;
+  a {
+    cursor: pointer;
+    margin: 0 1rem;
+    text-decoration: none;
+    color: black;
+  }
+}

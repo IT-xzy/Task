@@ -1,0 +1,227 @@
+@charset "UTF-8";
+
+/**
+ * Authors      TZMMichael (15977536060@163.com)
+ * Date         2017-12-25 14:16:56
+ * Site         https://github.com/TZMMichael
+ * Updated      
+ * Updated by   TZMMichael 
+ */
+
+@import '../重置&公共样式/task14.mixin.scss';
+
+/* HEADER */
+.header{
+	& .header-box{
+		color: $green;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem;
+	}
+	& .header-img{
+		.tel-word{
+			@include tel-word;
+		}
+		.weixin{
+			@include header-img;
+		}
+		.qq{
+			@include header-img;
+			background: url("../task14-1/images/qq.png") no-repeat;
+		}
+		.weibo{
+			@include header-img;
+			background: url("../task14-1/images/weibo.png") no-repeat;
+		}
+	}
+    & .login{
+        display: none;
+        float: right;
+        & .login-left{
+            border-right: 1px solid $green;
+        }
+        & .login-left,
+        & .login-right{
+            padding: 0px 6px;
+            color: black;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .header{
+        height: 57px;
+        & .header-img{
+            display: none;
+        }
+        & .tel-word {
+            visibility: hidden;
+        }
+        & .login{
+            display: block;
+        }
+    }
+}
+
+/* NAV */
+.nav{
+	& .nav-box{
+	    padding: 0 2rem;
+	}
+	& .nav-botton{
+		@include nav-botton;
+	}
+	& .nav-logo{
+		@include nav-logo;
+	}
+}
+/* NAV-PHONE */
+.nav-phone{
+    @include nav-phone;
+}
+@media (max-width: 768px) {
+    .nav{
+        display: none;
+    }
+    .nav-phone{
+        display: block;
+        & img{
+            transform: scale(.8,.8);
+        }
+    }
+}
+
+/* BANNER */
+.banner{
+	margin-top: 118px;
+	& img{
+		width: 100%;
+	}
+}
+
+/* MAIN */
+.main{
+	padding: 2rem;
+	background: $offwhite;
+	& .main-top{
+		& span{
+			color: $green;
+		}
+	}
+	& .nav-top{
+		padding: 10px 15px;
+		background-color: #fff;
+		border: 1px solid #ededed;
+		border-radius: 8px 8px 0 0;
+		font-size: 18px;
+		margin-top: 10px;
+	}
+	& .nav-bottom{
+		padding: 10px 15px;
+		background-color: #fff;
+		border-radius: 0 0 8px 8px;
+		border-right: 1px solid #ededed;
+		border-left: 1px solid #ededed;
+		border-bottom:1px solid #ededed;
+		margin-bottom: 20px;
+		& .circle{
+			width: 10px;
+			height: 10px;
+			border-radius: 5px;
+			border: 1px solid #ff650e;
+			background-color: transparent;
+			margin-right: 5px;
+			display: inline-block;
+		}
+		& .nav-a{
+			margin: 10px 0;
+		}
+		& .nav-a a{
+			text-decoration: none;
+			&:link{
+				color: #29b078;
+			}
+			&:visited{
+				color: grey;
+			}
+			&:hover{
+				color: #ff650e;
+			}
+			&:hover .circle{
+				background-color: #f9a372;
+			}
+
+		}
+	}
+	& .content-top{
+		color: $gray;
+		background-color: $white;
+		border: 1px solid #ededed;
+		border-radius: 8px 8px 0 0;
+		padding: 12px;
+		margin-top: 10px;
+		text-align: center;
+	}
+	& .content-bottom{
+		color: $gray;
+		background-color: $white;
+		border-radius: 0 0 8px 8px;
+		padding: 12px;
+		border-left: 1px solid #ededed;
+		border-right: 1px solid #ededed;
+		border-bottom: 1px solid #ededed;
+	}
+	& .main-left{
+		width: 100%;
+		margin-right: 2rem;
+		text-align: center;
+	}
+	& .main-img{
+		margin: 1rem;
+	}
+}
+@media (min-width: 1050px) {
+	.content-top {
+		display: flex;
+		align-items: center;
+	}
+	.main-bottom{
+		display: flex;
+    	margin: 2rem 2rem 2rem 0;
+	}
+
+}
+
+/* FOOTER */
+.footer{
+	& .footer-box{
+		@include footer-box;
+		& a{
+			padding-right: 1rem;
+			&:link,
+			&:visited,
+			&:active{
+				color: $white;
+				text-decoration: none;
+			}
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+		& .QRcode{
+			@include QRcode;
+		}
+		& .a-border{
+			border-right: 2px solid $white;
+			margin-right: 1rem;
+		}
+	}
+}
+@media (max-width: 768px) {
+    .footer{
+        & .footer-box{
+            display: block;
+            padding: 1rem;
+        }
+    }
+}

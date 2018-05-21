@@ -1,0 +1,22 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://cn.summerwaves.service"
+           name="IUserService">
+<!--    <component name="userServiceComponent">
+        <implementation.java class="cn.summerwaves.service.impl.UserServiceImpl"/>
+        <service name="IUserService">
+            <interface.java interface="cn.summerwaves.service.IUserService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:2224/userService"/>
+        </service>
+    </component>-->
+    <component name="userServiceComponent">
+        <implementation.spring location="server.xml"/>
+        <service name="IUserService">
+            <!--开放的接口-->
+            <interface.java interface="cn.summerwaves.service.IUserService"/>
+            <!--绑定的uri-->
+            <tuscany:binding.rmi  uri="https://127.0.0.1:2224/userRMIService"/>
+        </service>
+    </component>
+
+</composite>

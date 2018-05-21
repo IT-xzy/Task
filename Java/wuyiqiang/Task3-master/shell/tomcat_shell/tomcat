@@ -1,0 +1,29 @@
+# !/bin/bash
+# Description: start or stop the tomcat    
+# Usage:        tomcat [start|stop|restart]    
+#    
+export PATH=$PATH:$HOME/bin  
+export BASH_ENV=$HOME/.bashrc  
+export USERNAME="root"  
+  
+case "$1" in  
+start)  
+#startup the tomcat    
+cd /usr/local/apache-tomcat-8.5.27/bin  
+./startup.sh  
+;;  
+stop)  
+# stop tomcat    
+cd /usr/local/apache-tomcat-8.5.27/bin
+./shutdown.sh  
+echo "Tomcat Stoped"  
+;;  
+restart)  
+$0 stop  
+$0 start  
+;;  
+*)  
+echo "tomcat: usage: tomcat [start|stop|restart]"  
+exit 1  
+esac  
+exit 0

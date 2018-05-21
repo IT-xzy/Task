@@ -1,0 +1,47 @@
+<div class="box">
+    <!-- 顶部导航栏 -->
+    <nav class="navbar navbar-default navbar-static-top topnav">
+        <div class="navbar-header text-center topnav-left">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <b class="navbar-brand">萝卜多后台管理系统</b>
+        </div>
+        <div class="topnav-rigth">
+            <ul class="nav navbar-nav pull-right">
+                <li><span class="vertical">|</span></li>
+                <li><a href="" class="user">admin</a></li>
+                <li><span class="vertical">|</span></li>
+                <li><a href="" ng-click="loginOut()"><span class="glyphicon glyphicon-off"></span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div class="sidebar-list navbar-collapse collapse">
+            <ul>
+                <li class="first-level" ng-repeat="first in sidebarList">
+                    <a ng-click="toggleList(first)" ng-class="{current: first.isShow}">
+                        <i class="glyphicon glyphicon-pencil icon"></i>
+                        {{first.firstLevel}}
+                        <span class="glyphicon pull-right arrow"
+                              ng-class="first.isShow ? 'glyphicon-chevron-down' : 'glyphicon-chevron-left'"></span>
+                    </a>
+                    <ul class="second-level" ng-show="first.isShow">
+                        <li ng-repeat="second in first.secondLevel">
+                            <a ui-sref="{{second.url}}" ng-class="{active: state.is(second.url)}">{{second.title}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main">
+        <div ui-view>
+            <h1>Welcome!</h1>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+@import "./module/reset.less";
+@import "./module/color.less";
+@import "./module/header_3.less";
+
+body {
+	background: @baseColor;
+}
+main {
+	padding: 2rem 0 10rem;
+	background: @baseColor;
+	.block {
+		display: inline-block;
+		margin: 5%;
+		border: 2px solid @white;
+		width: 23.333333%;
+		height: 23.333333vw;
+		.name {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 80%;
+			font-size: 3.6rem;
+			color: @black;
+			background: @lightOrange;
+		}
+		.number {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 20%;
+			font-size: 2.4rem;
+			color: @white;
+			background: @darkGreen;
+		}
+	}
+}
+.death {
+	opacity: .2;
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: @baseColor;
+	padding: 2rem 10%;
+	#start {
+		padding: 2rem 0;
+		width: 100%;
+		font-size: 3.2rem;
+		text-align: center;
+		color: @white;
+		background: @orange;
+	}
+}
+@media screen and (max-width: 768px) {
+	main {
+		.block {
+			.name {
+				font-size: 1.8rem;
+			}
+			.number {
+				font-size: 1.2rem;
+			}
+		}
+	}
+	footer {
+		#start {
+			padding: 1.5rem 0;
+			font-size: 1.6rem;
+		}
+	}
+}

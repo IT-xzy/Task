@@ -1,0 +1,220 @@
+$precorlor:#29bde0;
+$prefont:2rem;
+$headerheight:4rem;
+$colorw:#fff;
+$colorgry:#ccc;
+$coloryellow:#f5c97b;
+$brr:50%;
+$mgl:40px;
+$maxwidth:780px;
+$minwidth:320px;
+%mar0a{margin:0 auto;}
+%maricon{margin:0 10px;}
+%body{
+  max-width: 780px;
+  min-width: 320px;
+  font-size: 62.5%;
+  margin: 0 auto;
+}
+$por:relative;
+$poa:absolute;
+$hundred:100%;
+$footerfont:1rem;
+$tenpx:10px;
+%ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+%disc{
+  display: flex;
+  align-items: center;
+}
+%discs{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+%discsb{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+%discc{display: flex;
+  align-items: center;
+  justify-content: center;}
+%bb{border-bottom: 1px solid #fff}
+%bbc{border-bottom: 1px solid #ccc}
+@mixin fixed($top,$bottom){
+  width: $hundred;
+  height: $headerheight;
+  position: fixed;
+  top: $top;
+  bottom: $bottom;
+  z-index: 1;
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  background: $precorlor;
+}
+@mixin margin($right,$left,$btncorlor){
+  height: $headerheight;
+  width: 40%;
+  background: $btncorlor;
+  color: $colorw;
+  font-size: $prefont;
+  line-height: $headerheight;
+  text-align: center;
+  margin-right: $right;
+  margin-left: $left;
+  border-radius: 10%;
+}
+%mmm{
+  max-width: $maxwidth;
+  min-width: $minwidth;
+  margin: 0 auto;
+}
+$borderr:6%;
+%linenone{text-decoration: none}
+
+body{
+  @extend %body;
+  position: $por;
+ overflow: hidden;
+}
+header{
+  @include fixed(0,auto);
+  @extend %discs;
+  @extend %bb;
+}
+.tab-bar {
+  background: $precorlor;
+  color: $colorw;
+
+}
+.left-small {
+  border:none;
+}
+.left-off-canvas-menu {
+  background: #fff;
+
+}
+ul.off-canvas-list li  {
+ @extend %bbc;
+  position: $por;
+}
+ul.off-canvas-list li a {
+  position: $poa;
+  top: 10px;
+  display: inline;
+  color: $precorlor;
+  border: none;
+  padding: 0;
+  font-size: 1.3rem;
+}
+ul.off-canvas-list li a:active {
+  background: $colorw;
+}
+ul.off-canvas-list li a:hover {
+  background: $colorw;
+}
+.icon{
+  width: 32px;
+  display: inline;
+  margin: 10px;
+}
+.coin{
+  display: inline;
+  float: right;
+  margin: 14px 15px 0 0;
+  width: 15px;
+}
+.strangle{
+  width: 16px;
+  position: absolute;
+  top: 45%;
+  left: 92%;
+}
+main{
+  background: #f0f0f0;
+  padding-bottom: 3000px;
+  //margin-bottom: -3000px;
+}
+.lastgame{
+  height: $headerheight;
+  width: 90%;
+  background: #fff;
+  margin: 0 5% 15px 5% ;
+  line-height: $headerheight;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #a6a6a6;
+  border: 1px solid #a6a6a6;
+}
+.arrow{
+  width: 20px;
+  float: right;
+  padding-top: 14px;
+}
+.option{
+  width: 90%;
+  background: $colorw;
+  margin: 0 5%;
+  text-align: center;
+  color: #a6a6a6;
+}
+.all{
+  position: relative;
+  border:1px solid #a6a6a6;
+}
+.top{
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  color: #fbb435;
+  border-bottom: 1px solid #fbb435;
+  text-align: center;
+  font-size: 1.8rem;
+}
+a{color: $colorw}
+.versions{
+  width: 80%;
+  height: 80px;
+  background: #29bde0;
+  margin: 10px auto;
+  line-height: 80px;
+  text-align: center;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.user{
+  height: 30px;
+  line-height: 30px;
+}
+
+
+.fourpoint{
+  width: 100%;
+  height: 30px;
+ @extend %discc;
+}
+.point1{
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #29bde0;
+  margin: 0 5px;
+}
+
+.point2{
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background: #a6a6a6;
+
+}
+
+.point2:hover{
+  background: #29bde0;
+}

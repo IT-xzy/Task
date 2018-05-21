@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lujing.mapper.CustomProfessionInfoMapper">
+    
+
+    <resultMap id="customResult" type="lujing.pojo.Professions">
+        <!--id：关联主查询表格的唯一标识-->
+        <id column="id" property="id"/>
+        <result column="profession" property="profession"/>
+        <result column="picture_path" property="picturePath"/>
+        <result column="introduce" property="introduce"/>
+        <result column="level" property="level"/>
+        <result column="difficult" property="difficult"/>
+        <result column="grow_up" property="growUp"/>
+        <result column="scarcity" property="scarcity"/>
+        <result column="salary1" property="salary1"/>
+        <result column="salary2" property="salary2"/>
+        <result column="salary3" property="salary3"/>
+        <result column="tips" property="tips"/>
+        <result column="ppid" property="ppid"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+
+        <association property="professionsInfo" javaType="lujing.pojo.ProfessionsInfo">
+
+            <id column="ppid" property="id"/>
+            <result column="profession" property="profession"/>
+            <result column="info" property="info"/>
+        </association>
+
+
+    </resultMap>
+    <select id="customProfessionInfo" resultMap="customResult" >
+      SELECT
+	professions.*,professions_info.info
+FROM
+	professions ,
+	professions_info
+WHERE
+	professions.ppid = professions_info.id
+    </select>
+</mapper>

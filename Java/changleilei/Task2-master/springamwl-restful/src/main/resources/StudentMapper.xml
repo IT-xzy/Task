@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.jnshu.model.Student">
+        <id column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="Name" jdbcType="CHAR" property="name"/>
+        <result column="Sex" jdbcType="CHAR" property="sex"/>
+        <result column="QQ" jdbcType="VARCHAR" property="qq"/>
+        <result column="Graduate" jdbcType="VARCHAR" property="graduate"/>
+        <result column="Number" jdbcType="CHAR" property="number"/>
+        <result column="AutoGraph" jdbcType="VARCHAR" property="autograph"/>
+        <result column="CreateTime" jdbcType="VARCHAR" property="createtime"/>
+        <result column="UpdateTime" jdbcType="TIMESTAMP" property="updatetime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    Id, Name, Sex, QQ, Graduate, Number, AutoGraph, CreateTime, UpdateTime
+  </sql>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select  *  from students   where Id = #{id}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from students where Id = #{id}
+  </delete>
+    <insert id="insert" parameterType="com.jnshu.model.Student">
+    insert into students (Name, Sex, QQ, Graduate, Number, AutoGraph, 
+      CreateTime)
+    values ( #{name}, #{sex}, #{qq},
+      #{graduate}, #{number}, #{autograph},
+      #{createtime})
+  </insert>
+    <insert id="insertSelective" parameterType="com.jnshu.model.Student">
+        insert into students
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                Id,
+            </if>
+            <if test="name != null">
+                Name,
+            </if>
+            <if test="sex != null">
+                Sex,
+            </if>
+            <if test="qq != null">
+                QQ,
+            </if>
+            <if test="graduate != null">
+                Graduate,
+            </if>
+            <if test="number != null">
+                Number,
+            </if>
+            <if test="autograph != null">
+                AutoGraph,
+            </if>
+            <if test="createtime != null">
+                CreateTime,
+            </if>
+            <if test="updatetime != null">
+                UpdateTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="sex != null">
+                #{sex},
+            </if>
+            <if test="qq != null">
+                #{qq},
+            </if>
+            <if test="graduate != null">
+                #{graduate},
+            </if>
+            <if test="number != null">
+                #{number},
+            </if>
+            <if test="autograph != null">
+                #{autograph},
+            </if>
+            <if test="createtime != null">
+                #{createtime},
+            </if>
+            <if test="updatetime != null">
+                #{updatetime},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByIdSelective" parameterType="com.jnshu.model.Student">
+        update students
+        <set>
+            <if test="name != null">
+                Name = #{name},
+            </if>
+            <if test="sex != null">
+                Sex = #{sex},
+            </if>
+            <if test="qq != null">
+                QQ = #{qq},
+            </if>
+            <if test="graduate != null">
+                Graduate = #{graduate},
+            </if>
+            <if test="number != null">
+                Number = #{number},
+            </if>
+            <if test="autograph != null">
+                AutoGraph = #{autograph},
+            </if>
+        </set>
+        where Id = #{id}
+    </update>
+    <update id="updateById" parameterType="com.jnshu.model.Student">
+    update students
+    set Name = #{name},
+      Sex = #{sex},
+      QQ = #{qq},
+      Graduate = #{graduate},
+      Number = #{number},
+      AutoGraph = #{autograph}
+    where Id = #{id}
+  </update>
+    <select id="getAllStudent" resultType="com.jnshu.model.Student">
+        select * from students
+    </select>
+
+    <select id="countStudentById" resultType="java.lang.Integer">
+        select count(#{id}) from students where Id = #{id}
+    </select>
+    <select id="countAll" resultType="java.lang.Integer">
+        select count(*) from students
+    </select>
+    <!--获取所有学员信息-->
+    <select id="list" resultType="com.jnshu.model.Student">
+        select * from students
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+</mapper>

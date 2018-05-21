@@ -1,0 +1,102 @@
+@charset "UTF-8";
+@import "../global-style/global.scss";
+/* 头部 begin */
+.hd {
+	// 头部联系方式 begin	
+	.hd-contact {
+		display: flex;
+		justify-content: space-between;
+		padding-top: .1rem;
+	    padding-bottom: .1rem;
+		color: $base-color;
+		.hd-tel {
+			align-self: center;
+		}
+		.hd-icon {
+			a {
+				padding-left: .1rem;
+			}
+			img {
+				vertical-align: middle;
+			}
+		}
+	}
+	// 头部联系方式 end
+	// 响应式导航栏 begin
+	.navbar {
+		background-color: $base-color;
+		.container {
+			display: flex;
+			justify-content: space-between;
+			.navbar-logo {
+				align-self: center;
+			}
+			.navbar-list {
+				border-top: 1px solid #999;
+				li {
+					padding: .4rem .3rem;
+					border-bottom: 3px solid $base-color;
+					a {
+						color: #fff;
+					}
+					&:hover {
+						cursor: pointer;
+						border-bottom: 3px solid #fff;
+					}
+				}
+				// 导航栏高亮
+				.active {
+					border-bottom: 3px solid #fff;
+				}
+			}
+			.menu-btn {
+				align-self: center;
+				height: .28rem;
+				width: .34rem;
+				background-color: $base-color;
+				@include bgimage("../images/menu.png");
+			}
+		}
+	}
+	@media screen and (max-width: 768px) {
+		.navbar .container {
+			position: relative;
+			display: block;
+			padding: 0;
+		}
+		.navbar .container .navbar-nav {
+			display: none;
+		}
+		.navbar .container .navbar-nav .navbar-list li {
+			padding: .1rem;
+			text-align: center;
+			border-bottom: 1px solid $base-color;
+		}
+		.navbar .container .navbar-nav .navbar-list li:hover {
+			border-bottom: 1px solid #fff;
+		}
+		.navbar {
+			padding: .1rem;
+		}
+		.navbar .menu-btn {
+			position: absolute;
+			top: .1rem;
+			right: 0;
+		}
+		// 导航栏高亮
+		.navbar .container .navbar-nav .navbar-list .active {
+			border-bottom: 1px solid #fff;
+		}
+	}
+	@media screen and (min-width: 768px) {
+		.menu-btn {
+			display: none;
+		}
+		// 屏幕变宽时重新变为flex布局
+		.navbar-list {
+			display: flex !important;
+		}
+	}	
+	// 响应式导航栏 end
+}
+/* 头部 end */

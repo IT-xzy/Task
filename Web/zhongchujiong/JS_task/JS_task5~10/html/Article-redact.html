@@ -1,0 +1,159 @@
+<div class="articleList">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <strong>{{Arti}}Article</strong>
+            </h3>
+        </div>
+        <div class="panel-body">
+            <form role="form" name="myForm" novalidate>
+                <div class="row form-group">
+                    <label class="col-md-2 text-right" for="titleName">标题名称</label>
+                    <div class="col-md-8">
+                        <input class=" form-control" type="text" name="titleName" id="titleName" ng-model="titleName" required>
+                    </div>
+                    <div class="col-md-2" style="padding-top:13px;">
+                        <span style="color:red;">
+                            <span ng-show="myForm.titleName.$error.required">必填</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Type" class="col-md-2 text-right wordSpacing">类 型</label>
+                    <div class="col-md-2">
+                        <select id="Type" name="Type" class="form-control" ng-model="zheType" required>
+                            <option value="">全部</option>
+                            <option ng-selected="zheType==x" ng-selected="y" ng-value="x" ng-repeat="(x,y) in Type">
+                                {{y}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 marginTop" ng-show="zheType==3">
+                        <select id="bigPicture" name="BigPicture" class="form-control" ng-model="bigPictureType" required>
+                            <option value="">请选择</option>
+                            <option ng-selected="bigPictureType==x" ng-selected="y" ng-value="x" ng-repeat="(x,y) in bigPicture">
+                                {{y}}
+                            </option>
+                        </select>
+
+                       <!-- <select id="bigPicture" class="form-control" ng-init="bigPictureType = bigPicture[0]" ng-model="bigPictureType" ng-options="x.name for x in bigPicture">
+                        </select>-->
+                    </div>
+
+                    <div class="col-md-2" style="padding-top:13px;">
+                        <span style="color:red;">
+                            <span ng-show="myForm.Type.$error.required">请填类型</span>
+                            <div ng-show="zheType==3">
+                                <span ng-show="myForm.BigPicture.$error.required">请填子类型</span>
+                            </div>
+                        </span>
+                    </div>
+                    <!--<div class="col-md-2" style="padding-top:13px;" ng-show="zheType==3">
+                        <span style="color:red;">
+                            <span ng-show="myForm.BigPicture.$error.required||zheType==3">必填</span>
+                        </span>
+                    </div>-->
+                </div>
+                <div class="row form-group">
+                    <label for="editor" class="col-md-2 text-right wordSpacing">说 明</label>
+                    <div class="col-md-10" style="z-index:1;">
+
+                        <!--<input type="text" id="explain" class="form-control" ng-model="editor">-->
+                        <div id="editor">
+
+                        </div>
+                       <!-- <button id="btn1">获取html</button>
+                        <button id="btn2">获取text</button>-->
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 text-right" for="gotoLink">跳转链接</label>
+                    <div class="col-md-8">
+                        <input type="text" name="GotoLink" id="gotoLink" class="form-control" ng-model="gotoLink" ng-pattern="/(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/" required>
+                    </div>
+                    <div class="col-md-2" style="padding-top:13px;">
+                        <span style="color:red;">
+                            <span ng-show="myForm.GotoLink.$error.pattern">请输入正确的url地址</span>
+                            <span ng-show="myForm.GotoLink.$error.required">必填</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label class="col-md-2 text-right wordSpacing">配 图</label>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="file" class="btn btn-info">选择文件</label>
+                                <input id="file" type="file" nv-file-select="" uploader="uploader" multiple style="display: none;"/>
+                                    <span style="color:red;margin-left:20px;">
+                                        <span ng-show="PicUrl==undefined">必填</span>
+                                    </span>
+                                <br/>
+                            </div>
+                            <div class="col-md-5">
+                                <img style="max-width:100%;" ng-src="{{PicUrl}}" alt="">
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 40px">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>图片名</th>
+                                        <th ng-show="uploader.isHTML5">文件大小</th>
+                                        <th ng-show="uploader.isHTML5">进度</th>
+                                        <th>状态</th>
+                                        <th style="text-align: center;">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody ng-repeat="item in uploader.queue">
+                                    <tr>    <!--这个ng-repeat可以去掉，是为了上传多个文件用的-->
+                                        <td>
+                                            <strong>{{ item.file.name}}</strong>
+                                        </td>                <!--图片跟名字-->
+                                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>    <!--大小-->
+                                        <td ng-show="uploader.isHTML5">
+                                            <div class="progress" style="margin-bottom: 0;">
+                                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                            </div>
+                                        </td>           <!--进度条-->
+                                        <td class="text-center">
+                                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                            <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                        </td>              <!--状态-->
+                                        <td nowrap style="text-align: center;">             <!--操作-->
+                                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                                <span class="glyphicon glyphicon-upload"></span> 上传
+                                            </button>
+                                            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                                <span class="glyphicon glyphicon-ban-circle"></span> 取消
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                                <span class="glyphicon glyphicon-trash"></span> 移除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        </div>
+                    </div>
+                </form>
+
+             <!--   <div class="row">
+                    <div class="col-md-12">
+                        <img ng-src="{{PicUrl}}" alt="">
+                    </div>
+                </div>-->
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <button class="btn btn-success" ng-click="gotoline(2)" ng-disabled="!titleName||!zheType||!gotoLink||!PicUrl||myForm.GotoLink.$error.pattern">立即上线</button>
+                        <button class="btn btn-success" ng-click="gotoline(1)" ng-disabled="!titleName||!zheType||!gotoLink||!PicUrl||myForm.GotoLink.$error.pattern">存为草稿</button>
+                        <button class="btn btn-default pull-right" ui-sref="backstage.ArticleList({page:1,size:10,type:'',status:'',startAt:'',endAt:''})">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>

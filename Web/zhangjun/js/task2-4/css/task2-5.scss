@@ -1,0 +1,215 @@
+@charset "UTF-8";
+// 公共变量
+$base-color: #f0f0f0;
+$bg-color: #29bde0;
+$btn-color: #fab344;
+$border-color: #c9c9c9;
+$font-size: .16rem;
+// 公共混合器
+@mixin middle {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+@mixin middle-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+@mixin bgimage($url,$repeat: no-repeat) {
+	background: {
+		image: url($url);
+		repeat: $repeat;
+	}
+}
+/* 公共样式 */
+html {
+	font-size: 625%;
+}
+body {
+	margin: 0 auto;
+	max-width: 750px;
+	font-size: $font-size;
+	font-family: "Microsoft YaHei";
+}
+button,
+button:focus {
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+a {
+	display: block;
+	text-decoration: none;
+}
+// 清除Safari按钮点击时出现的半透明灰色背景
+button,input {
+	-webkit-tap-highlight-color: transparent;
+}
+.clearfix:after {
+	content:".";
+	display: block;
+	clear: both;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.clearfix {
+	zoom: 1;
+}
+.hd,
+.main,
+.ft {
+	position: absolute;
+	margin: 0 auto;
+	max-width: 750px;
+}
+.box {
+	position: relative;
+}
+.hide {
+	display: none;
+}
+/* 头部 begin */
+.hd {
+	top: 0;
+	width: 100%;
+	.box {
+		width: 100%;
+		height: .5rem;
+		z-index: 10;
+		box-sizing: border-box;
+		border-bottom: 1px solid #74d4eb;
+		background-color: $bg-color;
+		.back-btn,
+		.close-btn {
+			@include middle;
+		}
+		.back-btn {
+			width: .14rem;
+			height: .20rem;
+			left: .1rem;
+			@include bgimage("../images/back@1x.png");
+		}
+		h1 {
+			@include middle-center;
+			font-size: .25rem;
+			color: #fff;
+			font-weight: normal;
+		}
+		.close-btn {
+			right: .1rem;
+			width: .18rem;
+			height: .18rem;
+			@include bgimage("../images/close@1x.png");
+		}
+	}
+}
+/* 头部 end */
+/* 主体 begin*/
+.main {
+	top: .5rem;
+	bottom: .8rem;
+	width: 100%;
+	overflow: auto;
+	background-color: $base-color;
+	.row {
+		padding: .1rem;
+		.days {
+			padding: .1rem .2rem;
+			text-align: center;
+			color: $bg-color;
+			border: 1px solid $border-color;
+			background-color: #fff;
+			cursor: pointer;
+		}
+		.wrap,
+		.wrap-1 {
+			display: flex;
+			padding-left: .5rem;
+			padding-right: .2rem;
+			border: 1px solid $border-color;
+			border-top: none;
+			background-color: #fff;
+			.step-wrap {
+				padding: .2rem 0 .2rem .4rem;
+				width: 100%;
+				box-sizing: border-box;
+				border-left: 1px solid $border-color;
+				.steps {
+					position: relative;
+					padding-bottom: .2rem;
+					width: 100%;
+					.step-text,
+					.step-text-1 {
+						line-height: .4rem;
+						text-align: center;
+						color: #fff;
+						background-color: $bg-color;
+						cursor: pointer;
+					}
+					.step-text-1 {
+						background-color: #83b09a;
+					}
+					// 左三角形图标
+					.triangle,
+					.triangle-1 {
+						position: absolute;
+						top: 20%;
+						left: -.1rem;
+						width: 0;
+						height: 0;
+						border-top: .07rem solid transparent;
+						border-right: .1rem solid $bg-color;
+						border-bottom: .07rem solid transparent;
+					}
+					.triangle-1 {
+						border-right-color: #83b09a;
+					}
+					.icon {
+						position: absolute;
+						top: .05rem;
+						left: -.57rem;
+						width: .3rem;
+						height: .3rem;
+						line-height: .36rem;
+						text-align: center;
+						border-radius: 50%;
+						border: 1px solid $border-color;
+						background-color: #fff;
+					}
+				}
+				// 提示信息
+				.message {
+					text-align: center;
+				}
+				.message-top,
+				.message-top-1 {
+					padding-bottom: .2rem;
+				}
+			}
+		}
+
+	}
+}
+/* 主体 end*/
+/* 底部 begin */
+.ft {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	bottom: 0;
+	height: .8rem;
+	width: 100%;
+	background-color: rgba(41,189,224,.5);
+	button {
+		width: 40%;
+		height: .4rem;
+		color: #fff;
+		font-size: $font-size;
+		border-radius: 5px;
+		background-color: $btn-color;
+	}
+}
+/* 底部 end */

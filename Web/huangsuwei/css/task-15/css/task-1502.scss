@@ -1,0 +1,69 @@
+$warpwidth: 100vw;
+$warpheight:35vw;
+$pos-size: 1vw;
+#slideshow-father{
+  position: relative;
+  width: $warpwidth;
+  height: $warpheight;
+  overflow: hidden;
+}
+#list{
+  position: absolute;
+  width: 500vw;
+  height: $warpheight;
+
+  z-index: 1;
+}
+#list img{
+  float: left;
+  width: $warpwidth;
+  height: $warpheight;
+}
+.arrow{
+  display: none;
+  position: absolute;
+  top: 50%;
+  width: 5vw;
+  height: 5vw;
+  font-size: 3.5vw;
+  font-weight: bold;
+  text-align: center;
+  color: rgba(225,225,225,0.5);
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  text-decoration: none;
+}
+#slideshow-father:hover .arrow{
+  display: block;
+}
+.arrow{
+  color: rgba(225,225,225,0.5);
+  background-color: rgba(0,0,0,0.5);
+}
+#prev{
+  left: $pos-size;
+}
+#next{
+  right: $pos-size;
+}
+.slideshow-btn{
+  position: absolute;
+  bottom: 1vw;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 3;
+}
+.slideshow-btn span{
+  display: inline-block;
+  margin: 2px;
+  width:  15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid rgba(225,225,225,0.5);
+  background-color: transparent;
+}
+.slideshow-btn span:hover,
+.slideshow-btn span:active
+{
+  background-color: rgba(225,225,225,0.7);
+}

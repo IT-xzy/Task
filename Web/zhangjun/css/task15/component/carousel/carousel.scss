@@ -1,0 +1,118 @@
+@charset "UTF-8";
+@import "../global-style/global.scss";
+/* 轮播图 begin */
+.carousel {
+	position: relative;
+	// 轮播（Carousel）指标
+	.carousel-indicators {
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		z-index: 15;
+		width: 60%;
+		padding-left: 0;
+		margin-left: -30%;
+		text-align: center;
+		li {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			margin: 1px;
+			text-indent: -999px;
+			cursor: pointer;
+			background-color: #000;
+			background-color: rgba(0, 0, 0, 0);
+			border: 1px solid #fff;
+			border-radius: 10px;			
+		}
+		.active {
+			width: 12px;
+			height: 12px;
+			margin: 0;
+			background-color: #fff; 
+		}
+	}
+	// 轮播（Carousel）导航
+	.carousel-control {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 15%;
+		font-size: 20px;
+		color: #fff;
+		text-align: center;
+		text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+		background-color: rgba(0, 0, 0, 0);
+		filter: alpha(opacity=50);
+		opacity: .5;
+		.position-middle {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: .8rem; 
+		}
+	}
+	.carousel-control.right {
+		right: 0;
+		left: auto;
+	}
+	.carousel-control:hover,
+	.carousel-control:focus {
+		color: #fff;
+		text-decoration: none;
+		filter: alpha(opacity=90);
+		outline: 0;
+		opacity: .9; 
+	}
+	.carousel-inner {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		.item {
+			position: relative;
+			display: none;
+			-webkit-transition: .3s ease-in-out left;
+			-o-transition: .3s ease-in-out left;
+			transition: .3s ease-in-out left;
+			img {
+				display: block;
+				max-width: 100%;
+				height: auto;
+				line-height: 1;
+			}
+		}
+		>.active,
+		>.next,
+		>.prev {
+			display: block;
+		}
+		>.active {
+			left: 0;
+		}
+		>.next,
+		>.prev {
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+		>.next {
+			left: 100%;
+		}
+		>.prev {
+			left: -100%; 
+		}
+		> .next.left,
+		> .prev.right {
+			left: 0;
+		}
+		> .active.left {
+		  	left: -100%; 
+		}
+		> .active.right {
+  			left: 100%; 
+  		}
+	}
+}
+/* 轮播图 end */

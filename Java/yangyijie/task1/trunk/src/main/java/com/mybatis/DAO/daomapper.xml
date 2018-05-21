@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="daomapper">
+<select id="getStudentById" parameterType="_long" resultType="Student">
+    select * from `t_student` where id = #{id}
+</select>
+<select id="getStudentByName" parameterType="String" resultType="Student">
+    SELECT * FROM `t_student` WHERE name like #{name}
+</select>
+<update id="updateStudent" parameterType="Student">
+    UPDATE  `t_student` SET name = #{name},age = #{age} WHERE id = #{id}
+</update>
+<insert id="insertStudent" parameterType="Student">
+    INSERT INTO `t_student`(name,age)VALUES (#{name},#{age})
+    <!-- 将插入数据的主键返回，返回到user对象中 -->
+    <selectKey keyProperty="id" order="AFTER" resultType="long">
+        select last_insert_id()
+    </selectKey>
+</insert>
+<delete id="deleteStudent" parameterType="long">
+    DELETE FROM `t_student` WHERE id=#{id}
+</delete>
+</mapper>

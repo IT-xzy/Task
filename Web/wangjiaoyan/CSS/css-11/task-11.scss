@@ -1,0 +1,109 @@
+@charset "UTF-8";
+$blue:#5fc0cd;
+$white:#fff;
+$gray:#eff0f4;
+@mixin border{
+  border:none;
+  outline: none;
+}
+body{
+  min-width: 320px;
+  max-width: 780px;
+  margin: auto;
+  background-color: $gray;
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  background-color: $blue;
+  a{
+    margin: 0 1rem;
+    font-size:1.8rem ;
+    color: $white;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+  p{
+     margin-bottom: 0;
+     font-size: 2.5rem;
+     color: $white;
+   }
+}
+main{
+  .number{
+    height: 6rem;
+    margin-top: 1rem;
+    background-color: #fff;
+    .phone{
+      padding: 1rem 2rem;
+      transform: scale(0.6);
+    }
+    label{
+      padding-left: 2rem;
+      margin-bottom: 0;
+      font-weight: 100;
+      border-left: 2px solid $gray;
+      input{
+        font-size: 1.5rem;
+        @include border;
+      }
+    }
+  }
+  .login{
+     height: 5rem;
+     width: 100%;
+     margin-top: 1.5rem;
+     font-size: 2.5rem;
+     color: $white;
+     letter-spacing: 1rem;
+     background-color: $blue;
+     @include border;
+   }
+  .help{
+      float: right;
+      margin-right: 1rem;
+      font-size: 2rem;
+      color: $blue;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+}
+footer{
+  width: 100%;
+  margin-top: 10rem;
+  font-size: 1.2rem;
+  .otherway{
+  text-align: right;
+  margin-right: 2rem;
+  color: darken($gray,20%);
+  .string{
+    display: inline-block;
+    vertical-align: middle;
+    width: 11rem;
+    border: 1px solid darken($gray,20%);
+  }
+}
+  .ID{
+   display: flex;
+   justify-content: space-around;
+   width: 100%;
+   color: darken($gray,40%);
+   .name{
+     text-align: center;
+     .imgsize{
+       height: 4rem;
+       margin-top: 3rem;
+     }
+   }
+ }
+}
+
+button{
+  @include border ;
+}
+
+

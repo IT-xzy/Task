@@ -1,0 +1,112 @@
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" charset="UTF-8"/>
+    <meta content="">
+    <style>
+        .navbar{
+            background-color: #34495E;
+            height: 50px;
+            display: block;
+        }
+        .navbar .nav-list{
+            z-index: 0;
+            display: block;
+
+        }
+        .navbar .nav-list li{
+            list-style: none;
+            float: left;
+            margin-left: 30px;
+        }
+        .navbar .nav-list a{
+            color: white;
+            line-height: 50px;
+            text-decoration-line: none;
+        }
+        .navbar .nav-list  a:hover{
+            color: #1ABC9C;
+
+        }
+        .navbar input:checked~.nav-list {
+            position: absolute;
+            padding-bottom: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            display: block;
+            background-color: #34495E;
+            z-index: 0;
+            margin-top: 50px;
+
+        }
+        .navbar input:checked~.nav-list li{
+            clear: both;
+            background-color: #34495E;
+
+        }
+        .navbar label{
+            display: none;
+        }
+        .navbar .nav-toggle{
+            display: none;
+        }
+        @media screen and (max-width: 600px) {
+            .navbar .nav-toggle{
+                display: none;
+            }
+            .navbar label{
+                display: block;
+                z-index: 4;
+            }
+            .navbar .nav-list{
+                display: none;
+                margin-left: 0;
+                width: 100%;
+            }
+            .navbar .nav-list li{
+                margin-left: 0;
+            }
+            .navbar  .menu-icon{
+                display: block;
+                float: left;
+                width: 36px;
+                height: 26px;
+                line-height: 0;
+                padding-top: 10px;
+                text-align: center;
+
+            }
+            .navbar  .menu-icon>svg path{
+                fill: white;
+            }
+            .navbar  label[for="nav-toggler"] {
+                display: block;
+                float: left;
+                width: 36px;
+                height: 36px;
+                z-index: 2;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+
+    <nav class="navbar">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle"/>
+        <label for="nav-toggle">
+                <span class="menu-icon">
+                    <img src="images/1-task7.png">
+                </span>
+        </label>
+        <ul class="nav-list">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">职业</a></li>
+            <li><a href="#">推荐</a></li>
+            <li><a href="#">关于</a></li>
+        </ul>
+    </nav>
+</header>
+</body>
+</html>

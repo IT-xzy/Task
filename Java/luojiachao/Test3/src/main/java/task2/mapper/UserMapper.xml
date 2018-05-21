@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="task2.mapper.UserMapper">
+
+    <!--注意sql语句没有分号结尾  -->
+
+    <insert id="addUser" parameterType="task2.pojo.User">
+        insert into admin(id,username,password,email) values(#{id},#{username},#{password},#{email})
+    </insert>
+
+    <!--注意这里的参数类型是parameterType而不是parameterMap，因为返回的是单个类型  -->
+    <select id="findUserByName"  parameterType="map"  resultType="task2.pojo.User">
+        select username,password from admin  where username=#{username} and password=#{password}
+    </select>
+
+</mapper>

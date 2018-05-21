@@ -1,0 +1,89 @@
+@charset "utf-8";
+html {
+	font-size: 625%;
+}
+body {
+	background-color: #eff0f4;
+}
+button, input {
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+$hd-height: .5rem;
+$bg-color: #5fc0cd;
+$white: #fff;
+$btn-size: .16rem;
+.login {
+	header, button {
+		height: $hd-height;
+		background-color: $bg-color;
+	}
+	header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		padding: 0 .1rem;
+		button {
+			font-size: $btn-size;
+			color: $white;
+		}
+		.close-btn {
+			float: left;
+		}
+		.regist-btn {
+			float: right;
+		}
+		h2 {
+			/* 两边设置padding的作用是：去掉header的三块文字的任意一两个，剩下的一两个都还在原位置上不会受到影响 */
+			padding: 0 .5rem; 
+			font-size: .2rem;
+			line-height: $hd-height;
+			text-align: center;
+			color: $white;
+			font-weight: normal;
+		}
+	}
+	.main {
+		padding-top: .6rem;
+		input {
+			display: block;
+			box-sizing: border-box;
+			width: 100%;
+			padding: .15rem 0 .15rem .8rem;
+			font-size: $btn-size;
+		}
+		.password, .number {
+			background: {
+				color: $white;
+				position: .2rem center;
+				repeat: no-repeat;
+			}
+		}
+		.number {
+			margin-bottom: .1rem;
+			background-image: url(../image/iphone@1x.png);
+		}
+		.password {
+			background-image: url(../image/locked@1x.png);
+		}
+		.login-btn {
+			display: block;
+			width: 100%;
+			height: $hd-height;
+			margin: {
+				top: .2rem;
+				bottom: .1rem;
+			}
+			font-size:  $btn-size;
+			color: $white;
+			background-color: $bg-color;
+		}
+		.forget {
+			float: right;
+			font-size: $btn-size;
+			color: $bg-color;
+		}
+	}
+}

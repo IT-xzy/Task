@@ -1,0 +1,76 @@
+@charset "UTF-8";
+@import './mixin.scss';
+
+html {
+    background-color: $blue;
+}
+// header
+.header {
+    background-color: $blue;
+    color: $white;
+    font-size: 1.8rem;
+    padding: 1rem 0;
+    & img {
+        height: 2rem;
+        margin: 0 1rem;
+    }
+    & a {
+        line-height: 0rem;
+    }
+}
+
+// main
+.main {
+    background: $blue;
+    border-top: 1px solid #74d4eb;
+    top: 4rem;
+    bottom: 8rem;
+    & .container {
+        text-align: center;
+    }
+    & .square {
+        text-align: center;
+        display: inline-block;
+        margin: 1rem;
+        cursor: pointer;
+        & .identification {
+            background-color: #f5c97b;
+            width: 70px;
+            height: 50px;
+            display: table-cell;
+            vertical-align: middle;
+            border-top: 2px solid white;
+            border-right: 2px solid white;
+            border-left: 2px solid white;
+        }
+        & .num {
+            background-color: #83b09a;
+            color: white;
+            border-bottom: 2px solid white;
+            border-right: 2px solid white;
+            border-left: 2px solid white;
+            font-size: 10px;
+        }
+        & .choose {
+            visibility: hidden;
+        }
+        &:hover .choose {
+            visibility: visible;
+        }
+    }
+}
+
+// footer
+.footer {
+    background: $blue;
+    & .watch {
+        background: $orange;
+        border: none;
+        color: $white;
+        font-size: 3rem;
+        margin: 2rem 8%;
+        padding: 1rem;
+        width: 84%;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,137 @@
+<form ng-controller="detailCtrl" class="article-add" name="myForm">
+    <label class="add-top" ng-model="addEdit">{{addEdit}}</label>
+    <div class="add-detail">
+        <div class="row">
+            <label class="col-md-2 col-sm-12 titles">标题名称</label>
+            <input type="text" class="col-md-8 col-sm-12 titles-input" ng-model="params.title" name="title" required>
+            <span style="color:red"
+                  class="col-md-8"
+                  ng-show="myForm.title.$dirty && myForm.title.$invalid">标题名称是必需的</span>
+        </div>
+
+        <div class="row">
+            <label class="col-md-2 col-sm-12 titles">类　　型</label>
+            <select class="col-md-8 col-sm-12 titles-input titles-select"
+                    ng-model="params.type"
+                    name="type"
+                    required>
+                <option value="">请选择</option>
+                <option value="{{key}}" ng-selected="params.type == $index" ng-repeat="(key,value) in types">{{value}}
+                </option>
+            </select>
+
+            <select ng-show="params.type==3" class="titles-input titles-select"
+                    ng-model="params.industry"
+                    name="type2"
+                    required>
+                <option value="">请选择</option>
+                <option value="{{key}}" ng-selected="params.industry == $index" ng-repeat="(key,value) in addIndustry">
+                    {{value}}
+                </option>
+            </select>
+            <span style="color:red;line-height:.3rem;margin-top: .1rem;"
+                  class="col-md-8 "
+                  ng-show="(myForm.type.$dirty && myForm.type.$invalid)|| (params.type==3&&myForm.type2.$invalid)">请选择类型</span>
+        </div>
+
+        <div class="row">
+            <label class="col-md-2 col-sm-12 titles">说　　明</label>
+            <!--富文本编辑器-->
+            <div id="editor" class="col-md-8 col-sm-12 no-padding"></div>
+        </div>
+
+        <div class="row">
+            <label class="col-md-2 col-sm-12 titles">跳转链接</label>
+            <input type="text" class="col-md-8 col-sm-12 titles-input"
+                   ng-model="params.url"
+                   name="url"
+                   ng-pattern="reg"
+                   required>
+            <div style="color:red;font-size:14px;"
+                 ng-messages="myForm.url.$error"
+                 ng-if="myForm.url.$touched"
+                 class="col-md-8 col-sm-12">
+                <span ng-message="pattern">链接格式不正确</span>
+                <span ng-message="required">请填写链接</span>
+            </div>
+        </div>
+
+        <div class="row">
+            <label class="col-md-2 col-sm-12 titles">配　　图</label>
+            <div class="col-md-8 col-sm-12">
+                <label class="input-file btn-pic" for="input">
+                    选择文件
+                </label>
+                <input type="file" accept="image/*"
+                       name="file" id="input"
+                       style="display: none;"
+                       nv-file-select=""
+                       uploader="uploader">
+                <img class="preview" ng-src="{{params.img}}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+
+                <!-----上传图片插件----->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="50%">Name</th>
+                        <th ng-show="uploader.isHTML5">Size</th>
+                        <th ng-show="uploader.isHTML5">Progress</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in uploader.queue">
+                        <td style="word-break:break-all">
+                            <strong>{{ item.file.name }}</strong>
+                        </td>
+                        <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                        <td ng-show="uploader.isHTML5">
+                            <div class="progress" style="margin-bottom: 0;">
+                                <div class="progress-bar" role="progressbar"
+                                     ng-style="{ 'width': item.progress + '%' }"></div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                            <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                            <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                                    ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                <span class="glyphicon glyphicon-upload"></span> Upload
+                            </button>
+                            <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()"
+                                    ng-disabled="!item.isUploading">
+                                <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                <span class="glyphicon glyphicon-trash"></span> Remove
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-----上传图片插件----->
+
+
+                <button class="online-now" ng-click="publish(2)"
+                        ng-disabled="myForm.url.$invalid||myForm.title.$invalid||myForm.type.$invalid||(params.type==3&&myForm.type2.$invalid)">
+                    立即上线
+                </button>
+                <button class="online-now" ng-click="publish(1)"
+                        ng-disabled="myForm.url.$invalid||myForm.title.$invalid||myForm.type.$invalid||(params.type==3&&myForm.type2.$invalid)">
+                    存为草稿
+                </button>
+                <button class="cancel" ng-click="cancel('放弃编辑？')">取消</button>
+            </div>
+        </div>
+
+    </div>
+</form>

@@ -1,0 +1,270 @@
+@import "shared.scss";
+ul {
+    list-style: none;
+}
+
+// slider start
+.slider-contaner {
+    width: 100%;
+    position: relative;
+}
+
+.slider-item+.slider-item {
+    opacity: 0;
+}
+
+.slider-item {
+    width: 100%;
+    position: absolute;
+    animation-timing-function: linear;
+    animation-name: fade;
+    animation-iteration-count: infinite;
+    background-size: 100%;
+}
+
+/*设置动画，请根据实际需要修改秒数*/
+
+.slider-item {
+    animation-duration: 20s;
+}
+
+.slider-item1 {
+    animation-delay: -1s;
+}
+
+.slider-item2 {
+    animation-delay: 3s;
+}
+
+.slider-item3 {
+    animation-delay: 7s;
+}
+
+.slider-item4 {
+    animation-delay: 11s;
+}
+
+.slider-item5 {
+    animation-delay: 15s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+        z-index: 2;
+    }
+    5% {
+        opacity: 1;
+        z-index: 1;
+    }
+    20% {
+        opacity: 1;
+        z-index: 1;
+    }
+    25% {
+        opacity: 0;
+        z-index: 0;
+    }
+    100% {
+        opacity: 0;
+        z-index: 0;
+    }
+}
+
+/*设置背景，响应式请利用媒体查询根据断点修改路径*/
+
+.slider-item1 {
+    background-image: url(img/bg1.png);
+}
+
+.slider-item2 {
+    background-image: url(img/bg1.jpg);
+}
+
+.slider-item3 {
+    background-image: url(img/bg2.jpg);
+    background-repeat: no-repeat;
+}
+
+.slider-item4 {
+    background-image: url(img/bg1.png);
+}
+
+.slider-item5 {
+    background-image: url(img/bg1.png);
+}
+
+/*设置图片的高度，请根据具体需要修改百分比，响应式及时修改此值*/
+
+.slider,
+.slider-item {
+    padding-bottom: 30%;
+}
+
+// 主体栅格
+.content {
+    @include container;
+    padding: .3rem 0;
+    text-align: center;
+}
+
+h3 {
+    margin: .1rem;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: .1rem 0;
+    .features-item {
+        // width: 100%;
+        text-align: center;
+        padding: .3rem;
+        box-sizing: border-box;
+        img {
+            margin: .1rem 0;
+        }
+        p {
+            padding: .1rem;
+        }
+    }
+    .result {
+        img {
+            height: .2rem;
+            vertical-align: middle;
+        }
+    }
+    @media screen and (min-width: 685px) {
+        .features-item {
+            width: 50%;
+        }
+        .result {
+            border-left: 1px dashed #cccccc;
+        }
+    }
+    @media screen and (min-width: 1024px) {
+        .features-item {
+            width: 25%;
+        }
+        .result {
+            border-left: 1px dashed #cccccc;
+        }
+    }
+}
+
+.method {
+    position: relative;
+    .icon-circle {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: .5rem;
+        line-height: .5rem; 
+        border-radius: 50%;
+        color: #29b078;
+        box-shadow: 0 0 2px 2px #e2e2e2;
+        background-color: #fff;
+    }
+    p {
+        text-align: left;
+        display: flex;
+        height: 50px;
+        margin-left: .6rem;
+        align-items: center;
+        padding: 0 !important;
+    }
+    .img-right {
+        height: .2rem !important;
+        vertical-align: middle;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: .1rem;
+        margin: 0 !important;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .method {
+        width: 100%;
+        margin: 0 .2rem;
+    }
+}
+
+.shows {
+    padding: .1rem !important;
+    .show {
+        padding: .3rem .1rem;
+        border: 1px solid #cccccc;
+    }
+}
+
+.partner {
+    padding: 0 !important;
+    margin: -1px;
+    border: 1px solid transparent;
+}
+
+.partner:hover {
+    border: 1px solid #cccccc;
+}
+
+@media screen and (min-width: 1024px) {
+    .partner {
+        width: 20% !important;
+    }
+}
+
+.link-a {
+    text-decoration: none;
+    position: relative;
+    color: #999;
+}
+
+.link-a:hover {
+    border-bottom: 1px solid #29b078;
+}
+
+.link:hover {
+    border: 0 !important;
+}
+
+.link-dot {
+    position: absolute;
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #999;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -.1rem;
+}
+
+@media screen and (min-width: 1024px) {
+    .links {
+        text-align: center;
+    }
+    .link {
+        width: 10% !important;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .link {
+        width: 14%;
+        margin-left: .5rem;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .link {
+        width: 30%;
+    }
+}
+
+.link-center {
+    text-align: center;
+}

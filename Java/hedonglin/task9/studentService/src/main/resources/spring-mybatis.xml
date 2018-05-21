@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/sca
+                           http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 扫描该包路径下所有使用注解的类型 -->
+    <!--<context:component-scan base-package="com.student.aop"/>-->
+    <!--<context:component-scan base-package="com.student.service" />-->
+
+
+    <!--&lt;!&ndash;使用aspect注解的aop&ndash;&gt;-->
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+
+    <sca:service name="StudentService" type="com.student.service.StudentService" target="studentService"/>
+    <bean id="studentService" class="com.student.service.impl.StudentServiceIpl"/>
+
+    <!-- 配置数据库相关参数properties的属性：${url} -->
+    <context:property-placeholder location="classpath:JDBC.properties"/>
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+
+    <!-- 配置SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 扫描sql配置文件:mapper需要的xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.student.dao"/>
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!--<bean id="myRMIService" class="org.springframework.remoting.rmi.RmiServiceExporter">-->
+    <!--<property name="serviceName" value="studentServiceRMI"/>-->
+    <!--<property name="service" ref="studentServiceIpl"/>-->
+    <!--<property name="serviceInterface" value="com.student.service.StudentService"/>-->
+    <!--<property name="registryPort" value="8885"/>-->
+    <!--<property name="servicePort" value="8885"/>-->
+    <!--</bean>-->
+
+
+
+
+</beans>

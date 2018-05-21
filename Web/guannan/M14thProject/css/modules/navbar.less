@@ -1,0 +1,56 @@
+@import "cssreset.less";
+@import "color.less";
+@import "common.less";
+
+.navbar-user {
+	.ta-r;
+	padding: 0 calc(~"50% - 60rem");
+	height: 10rem;
+	background: @darkGreen;
+	.logo {
+		.fl-l;
+		margin: 2.55rem 0 0 2.5rem;
+		width: 10.7rem;
+		height: 4.9rem;
+		background: url(../images/icon_03.png) no-repeat;
+	}
+	.nav-user {
+		.ps-r;
+		.dp-ib;
+		.ta-c;
+		.fs16;
+		.h-f;
+		left:3rem;
+		width: 10rem;
+		line-height: 10rem;
+		color: @white;
+		&:hover,
+		&:focus {
+			border-bottom: 4px solid  @lineColor1;
+			color: @white;
+		}
+	}
+	.dropdown {
+		.dp-n;
+	}
+}
+@media screen and (max-width: 1199px) {
+	.navbar-user {
+		padding: 0;
+		height: 7.5rem;
+		.logo { margin: 1.3rem 0 0 1rem; }
+		.nav-user { .dp-n; }
+		.dropdown {
+			.dp-b;
+			.fl-r;
+			.h-f;
+			padding: 1.8rem 1rem;
+			.btn { background: @darkGreen; }
+			.dropdown-menu { background: @lineColor2!important; }
+			.dropdown ul li a {
+				.fs18;
+				.ta-c;
+			}
+		}
+	}
+}

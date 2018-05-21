@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptteng.dao.StudentDao">
+
+    <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultType="com.ptteng.bean.Student">
+        select * FROM students
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) FROM `students`
+    </select>
+
+    <select id="findById" parameterType="long" resultType="Student">
+        SELECT * FROM students WHERE id = #{id}
+    </select>
+
+    <select id="findByName" parameterType="java.lang.String" resultType="Student">
+        SELECT * FROM students WHERE name LIKE '%${value}%'
+    </select>
+
+    <select id="findByNum" parameterType="java.lang.String" resultType="Student">
+        SELECT * FROM students WHERE num = #{num}
+    </select>
+
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO students(name,qq,type,admission_time,school,num,daily,declaration,elder,knew_from,create_at) VALUE
+        (#{name},#{qq},#{type},#{admissionTime},#{school},#{num},#{daily},#{declaration},#{elder},#{knewFrom},#{createAt})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <delete id="deleteStudent" parameterType="java.lang.Long">
+        DELETE FROM students WHERE id = #{id}
+    </delete>
+
+    <update id="updateStudent" parameterType="Student">
+        UPDATE students
+
+        <set><!--set标签会去除只有最后一个条件的,-->
+            <if test="updateAt!=null and updateAt!=''">
+                update_at=#{updateAt},
+                <if test="name!= null and name!=''">name = #{name},</if>
+                <if test="qq!= null and qq!=''">QQ = #{qq},</if>
+                <if test="type!= null and type!=''">type = #{type},</if>
+                <if test="admissionTime!= null and admissionTime!=''">admission_time = #{admissionTime},</if>
+                <if test="school!= null and school!=''">school = #{school},</if>
+                <if test="num!= null and num!=''">num = #{num},</if>
+                <if test="daily!= null and daily!=''">daily = #{daily},</if>
+                <if test="declaration!= null and declaration!=''">declaration = #{declaration},</if>
+                <if test="elder!= null and elder!=''">elder = #{elder},</if>
+                <if test="knewFrom!= null and knewFrom!=''">knew_from = #{knewFrom},</if>
+            </if>
+        </set>
+
+        <where><!--where标签会去除第一个条件的and和or-->
+            <if test="id!=null">AND id=#{id}</if>
+        </where>
+    </update>
+
+</mapper>

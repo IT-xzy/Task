@@ -1,0 +1,514 @@
+$ddd: #ddd;
+$fff: #fff;
+$gray: #999;
+$blue: #29bde0;
+$bef: #b9e9f5;
+$fb3: #fbb435;
+$fc7: #f5c97b;
+$green: #83b09a;
+$f66: #f66e6e;
+
+@mixin bc($bc){
+  background-color: $bc;
+}
+@mixin cl($cl){
+  color: $cl;
+}
+
+@mixin bpxy($bpx:0, $bpy:0, $bph:2.5rem, $bpw:1.5rem){
+  background-position: $bpx $bpy;
+  height: $bph;
+  width: $bpw;
+}
+
+@mixin fcc ($dl:flex, $xct:center, $yct:center){
+    display: $dl;
+    justify-content: $xct;
+    align-items: $yct;
+}
+
+.cblue1 {
+  background-color: #29bde0;
+}
+
+.corange1 {
+  background-color: #fbb435;
+}
+
+.cred {
+  background-color: #f66e6e;
+}
+.cwhite {
+  background-color: #fff;
+}
+
+
+.bcfff {
+  color: #fff;
+}
+
+.bc999 {
+  color: #999;
+}
+
+.bc000{
+  color: #000;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+body{
+  font-size: 14px;
+  margin:0;
+}
+
+ul,
+li,
+button {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+button {
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
+
+a,
+a:hover {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+}
+
+.img {
+  background-image: url(../../picture/task7/sprite7.png);
+  background-size: 61.875rem 12.8125rem;
+}
+
+.img-one1 {
+  @extend .img;
+  @include bpxy;
+}
+
+.img-one2 {
+  @extend .img;
+  @include bpxy($bpx:-1.875rem, $bph:3.5rem, $bpw:1.75rem);
+}
+
+.img-one3 {
+  @extend .img;
+  @include bpxy($bpx:-13.6875rem, $bph:1.6875rem, $bpw:2.125rem);
+}
+
+.img-two1 {
+  @extend .img;
+  @include bpxy($bpx:-4.0625rem, $bph:1.875rem, $bpw:1.875rem);
+}
+
+.img-two2 {
+  @extend .img;
+  @include bpxy($bpx:-6.375rem, $bph:1.875rem, $bpw:1.875rem);
+}
+
+.img-two3 {
+  @extend .img;
+  @include bpxy($bpx:-8.75rem, $bph:1.875rem, $bpw:1.875rem);
+}
+
+.img-two4 {
+  @extend .img;
+  @include bpxy($bpx:-11.1875rem, $bph:1.875rem, $bpw:1.875rem);
+}
+
+.img-two6 {
+  @extend .img;
+  @include bpxy($bpx:-16.4375rem, $bph:2.25rem, $bpw:2.25rem);
+}
+
+.img-two7 {
+  @extend .img;
+  @include bpxy($bpx:-19.375rem, $bph:2.5rem, $bpw:2.5rem);
+}
+
+.img-two8 {
+  @extend .img;
+  @include bpxy($bpx:-29.375rem, $bph:3.25rem, $bpw:3.25rem);
+}
+
+.img-thr1 {
+  @extend .img;
+  @include bpxy($bpx:-22.375rem, $bph:2.5rem, $bpw:2.5rem);
+}
+
+.img-thr2 {
+  @extend .img;
+  @include bpxy($bpx:-25.625rem, $bph:2.625rem, $bpw:3.1875rem);
+}
+
+.img-thr3 {
+  height: 12.8125rem;
+  width: 21.9375rem;
+  background-image: url(../../picture/task7/win.png);
+  background-size: 21.9375rem 12.8125rem;
+}
+
+.l-result{
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.float-r{
+  float: right;
+}
+
+
+.top{
+  position: fixed;
+  top:0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.bottom{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.header {
+  @include fcc($xct:space-between);
+  height: 5rem;
+  padding: 0.625rem;
+  border-bottom: 1px solid #ddd;
+  @include bc($blue);
+}
+
+
+.main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 9rem;
+  left: 0;
+  margin: 0 auto;
+
+}
+.main-home {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  bottom: 2rem;
+  left: 1rem;
+  @include bc($ddd);
+}
+
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 5rem;
+  right: 0;
+  left: 0;
+  width: 100%;
+  @include bc($blue);
+
+}
+
+
+
+
+.footer-two {
+  @include fcc;
+  font-size: x-large;
+  border-top: 0.1rem solid #ddd;
+  @include bc($blue);
+}
+
+.footer-two-vote {
+  height: 5rem;
+  width: 31rem;
+  margin: 2rem 4rem;
+  @include bc($fb3);
+  @include cl($fff);
+}
+
+.footer-thr {
+  @include fcc;
+  background: rgba(48, 189, 224, .5);
+}
+
+.thr-vote {
+  height: 5rem;
+  width: 17rem;
+  margin: 2rem 1.5rem;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+
+  @include cl($fff);
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin: 0.3rem;
+  cursor: pointer;
+  &:hover{
+    background-color: #29bde0;
+  }
+}
+
+
+.dot-array {
+  @include fcc($yct:flex-end);
+  @include bc(#fff);
+}
+
+.text-center{
+  text-align: center;
+}
+
+.jump {
+  position: absolute;
+  top: 32rem;
+  right: 0;
+}
+
+.jump-gray {
+  position: absolute;
+  top: 3rem;
+  right: 0;
+}
+
+.edition {
+  margin: 2rem;
+  line-height: 8.5rem;
+  @include bc($blue);
+  @include cl($fff);
+  cursor: pointer;
+}
+
+.lastgame {
+  line-height: 6.25rem;
+  @include bc($fff);
+}
+
+.game {
+
+  line-height: 5rem;
+  border-bottom: 0.0625rem solid #fbb435;
+  @include cl($fb3);
+}
+
+
+.inline-block{
+  display: inline-block;
+}
+
+
+
+.two-speak {
+  @include fcc($xct:space-between);
+  position: absolute;
+  top: 5rem;
+  right: 0;
+  left: 0;
+  height: 5rem;
+  padding-left: 3rem;
+  padding-right: 1rem;
+  @include bc($bef);
+}
+
+.two-main {
+  position: relative;
+  top: 10rem;
+  padding-right: 15px;
+  padding-left: 15px;
+  width:100%;
+
+}
+.two-main-move{
+  position: relative;
+  height: 57.4rem;
+  margin-right: -15px;
+  margin-left: -15px;
+  overflow: auto;
+}
+.dropdown{
+  position: relative;
+  float: left;
+  width: 33.33%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.tow-box {
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  margin: 0 auto;
+  padding: 0.3rem;
+  @include bc($fff);
+  cursor: pointer;
+
+}
+
+.two-orange {
+  @include fcc;
+  height: 5.3rem;
+  @include bc($fc7)
+}
+
+
+.two-green {
+  @include fcc;
+  height: 2.1rem;
+  @include cl($fff);
+  @include bc($green);
+}
+
+.two-choice {
+  @include fcc;
+  padding: 1rem 0;
+  opacity: 0;
+}
+
+
+.two-choice a {
+  cursor: pointer;
+  margin: 0.1rem;
+}
+
+
+.dropdown:hover .two-choice {
+  opacity: 1;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 1rem solid #b9e9f5;
+  border-right: 0.5rem solid transparent;
+  border-left: 0.5rem solid transparent;
+}
+
+.p-triangle {
+  @include cl($fff);
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
+}
+
+.thr-row1 {
+  padding: 1rem 1.5rem 3rem 1.5rem;
+  font-weight: 600;
+  @include cl($fb3);
+}
+
+.thr-row2 {
+  padding: 0.5rem 0;
+  letter-spacing: 0.2rem;
+}
+
+.thr-row3 {
+  padding-top: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  letter-spacing: 0.2rem;
+  border-top: 1px solid #ddd;
+}
+
+.thr-width{
+  display: inline-block;
+  width: 32%;
+}
+
+.pt1 {
+  padding-top: 1rem;
+}
+
+.pb9{
+  padding-bottom: 9rem;
+}
+
+.fl{
+  font-size: large;
+}
+
+.lh5{
+  line-height: 5rem;
+}
+.margin-b{
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  html{
+    font-size:120%;
+  }
+  body{
+    position: relative;
+    max-width: 768px;
+    margin: auto;
+  }
+  .jump {
+    top: 31.5rem;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  html{
+    font-size:65%;
+  }
+  .jump {
+    top: 32rem;
+  }
+  .jump-gray {
+    top: 3.5rem;
+  }
+}
+
+@media screen and (min-width: 700px){
+  html{
+    font-size:100%;
+  }
+}
+
+
+@media screen and (max-width: 600px){
+  .edition {
+    line-height: 5.5rem;
+  }
+  .jump{
+    top: 28rem;
+  }
+}
+
+
+@media screen and (max-width: 340px){
+  html{
+    font-size:50%;
+  }
+  .jump {
+    top: 28.5rem;
+  }
+}
+
+
+
+
+

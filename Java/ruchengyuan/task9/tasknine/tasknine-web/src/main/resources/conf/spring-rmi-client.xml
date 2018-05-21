@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:annotation-config/>
+    <context:component-scan base-package="jnshu.tasknine"/>
+
+
+    <!--<bean id = "studentServiceImpl" class="jnshu.tasknine.service.StudentServiceImpl"></bean>-->
+    <bean id="studentRMIService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://120.79.22.141:2181/StudentService"/>
+        <property name="serviceInterface" value="jnshu.tasknine.service.StudentService"/>
+    </bean>
+
+
+
+    <!--<bean id = "professionServiceImpl" class="jnshu.tasknine.service.ProfessionServiceImpl"></bean>-->
+    <bean id="professionRMIService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://120.79.22.141:2181/ProfessionService"/>
+        <property name="serviceInterface" value="jnshu.tasknine.service.ProfessionService"/>
+    </bean>
+
+    <!--<bean id = "CountNumberServiceImpl" class="jnshu.tasknine.service.ReadFileServiceImpl"></bean>-->
+    <bean id="CountNumberRMIService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://120.79.22.141:2181/CountNumberService"/>
+        <property name="serviceInterface" value="jnshu.tasknine.service.CountNumberService"/>
+    </bean>
+
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="5400000"/>
+    </bean>
+
+</beans>

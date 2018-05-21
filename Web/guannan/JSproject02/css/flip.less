@@ -1,0 +1,125 @@
+@import "./module/reset.less";
+@import "./module/color.less";
+@import "./module/header_3.less";
+
+body {
+	background: @baseColor;
+}
+main {
+	padding: 5rem 20% 15rem;
+	background: @baseColor;
+	#card {
+		position: relative;
+		border: 3px solid @white;
+		padding: 15rem calc(~"50% - 15rem");
+		text-align: center;
+		background: @meat;
+		transition: all .5s ease-in-out;
+		> img {
+			transition: all .5s ease-in-out;
+		}
+		#backCover {
+			position: absolute;
+			top: 15rem;
+			left: calc(~"50% - 11.1rem");
+			transform: rotateY(180deg);
+		}
+		> p {
+			transform: rotateY(180deg);
+			transition: all .5s ease-in-out;
+		}
+		#indentity {
+			margin-top: -6rem;
+			font-size: 3.2rem;
+			color: @baseColor;
+		}
+		#phrase {
+			display: inline-block;
+			margin: 1.5rem 0;
+			font-size: 3.2rem;
+			color: @red;
+		}
+		#hint {
+			margin: 1.5rem 0;
+			padding-top: 1rem;
+			border-top: 2px solid @white;
+			font-size: 1.8rem;
+			color: @orange;
+		}
+		#number {
+			position: absolute;
+			display: flex;
+			top: -3rem;
+			left: calc(~"50% - 3rem");
+			border-radius: 50%;
+			border: 1px solid @meat;
+			width: 6rem;
+			height: 6rem;
+			font-size: 3.6rem;
+			justify-content: center;
+			align-items: center;
+			color: @red;
+			background: @white;
+			z-index: 999999;
+		}
+	}
+}
+.hidden {
+	opacity: 0;
+}
+footer {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: @baseColor;
+	padding: 2rem 10%;
+	#check {
+		padding: 2rem 0;
+		width: 100%;
+		font-size: 3.2rem;
+		text-align: center;
+		color: @white;
+		background: @orange;
+	}
+}
+@media screen and (max-width: 768px) {
+	main {
+		padding: 3rem 20% 10rem;
+		#card {
+			padding: 6rem calc(~"50% - 8rem");
+			> img {
+				width: 16rem;
+			}
+			#backCover {
+				top: 6rem;
+				left: calc(~"50% - 5.55rem");
+				width: 11.1rem;
+			}
+			#indentity {
+				margin-top: -4rem;
+				font-size: 1.6rem;
+			}
+			#phrase {
+				margin-top: 1rem;
+				font-size: 1.6rem;
+			}
+			#hint {
+				margin: .8rem 0;
+				font-size: 1.2rem;
+			}
+			#number {
+				top: -1.5rem;
+				left: calc(~"50% - 1.5rem");
+				width: 3rem;
+				height: 3rem;
+				font-size: 1.8rem;
+			}
+		}
+	}
+	footer {
+		#check {
+			padding: 1.5rem 0;
+			font-size: 1.6rem;
+		}
+	}
+}

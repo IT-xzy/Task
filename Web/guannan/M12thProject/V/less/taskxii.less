@@ -1,0 +1,205 @@
+//CSS reset Start
+html {
+	font-size: 10px;
+}
+
+body {
+    line-height: 1.4;
+    color: #333;
+    font-family: arial;
+    font-size: 12px;
+    background: white;
+}
+input,textarea,select {
+    font-size: 12px;
+    font-size: 100%;    
+    font-family: arial;
+    font-family: inherit;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,form {
+    margin: 0;
+}
+h4,h5,h6 {
+    font-size: 1em;
+}
+ul,ol {
+    padding-left: 0; 
+    list-style-type: none;
+}
+/*image with no-border*/
+a img {
+border: 0;
+}
+img {
+border: 0;
+}
+/*button no-border&shadow*/
+button {
+	outline-style: none;
+	box-shadow: none;
+}
+//CSS reset END
+
+
+@baseColor: #5fc0cd;
+@baseFontsize: 1.7rem;
+@white: #fff;
+@lineColor: #e1e5e7;
+
+.fixedTop {
+	position: fixed;
+	top: 0;
+	padding: 1.8rem;
+	width: 100%;
+	text-align: center;
+}
+.fixedBot {
+	.fixedTop;
+	top: auto;
+	bottom: 0;
+}
+.lineBottom {
+	border-bottom: 1px solid @lineColor;
+}
+
+header {
+	.fixedTop;
+	box-sizing: border-box;
+	background-color: @baseColor;
+	a {
+		float: left;
+		width: 3rem;
+		height: @baseFontsize;
+		background: url(../images/tab_05.png) no-repeat;
+		background-size: contain;
+	}
+	p {
+		font-size: @baseFontsize;
+		line-height: @baseFontsize;
+		color: @white;
+	}
+}
+
+main {
+	font-size: 0;
+	.bg {
+		display: inline-block;
+		box-sizing: border-box;
+		padding: 4rem 1.8rem;
+		margin-top: @baseFontsize + 1.8rem * 2;
+		width: 100%;
+		background: url(../images/background.png) no-repeat bottom left;
+		background-size: cover;
+		.avatar {
+			float: left;
+			height: 8rem;
+		}
+		.bg-info {
+			float: left;
+			margin: 1.5rem 0 0 1rem;
+			.name {
+				float: left;
+				font-size: @baseFontsize;
+				letter-spacing: .1rem;
+				color: @white;
+			}
+			.age {
+				.name;
+				margin-left: 1rem;
+				font-size: 1.5rem;
+			}
+			.location {
+				.name;
+				clear: left;
+				margin-top: 1rem;
+				padding-left: 1.5rem;
+				font-size: 1.2rem;
+				background: url(../images/tab_01.png) no-repeat left;
+				background-size: contain;
+			}
+		}
+	}
+	form {
+		.line1 {
+			box-sizing: border-box;
+			margin: 1.8rem 1.5rem;
+			padding-left: 1rem;
+			border-left: 2px solid @baseColor;
+			font-size: @baseFontsize;
+			line-height: 1.3rem;
+		}
+		> div {
+			box-sizing: border-box;
+			border-top: 1px solid @lineColor;
+			padding-left: 3rem;
+			.lineNormal {
+				.lineBottom;
+				display: inline-block;
+				box-sizing: border-box;
+				padding: 1.8rem;
+				width: 100%;
+				font-size: @baseFontsize;
+				line-height: @baseFontsize;
+				.line2-1 {
+					float: left;
+					padding: 0 1.5rem 0 2.5rem;
+					border-right: 1px solid @lineColor;
+					background: url(../images/star_03.png) no-repeat left -.2rem;
+					background-size: contain;
+				}
+				.line2-2 {
+					.line2-1;
+					padding-left: 4rem;
+					border: none;
+					background-position: 1.5rem -.2rem;
+				}
+				.line-left {
+					.line2-1;
+					padding-left: 0;
+					background: none;
+					color: #999;
+				}
+				.line-right {
+					.line2-2;
+					padding-left: 1.5rem;
+					background: none;
+					color: #000;
+				}
+				.intro {
+					.line-right;
+					float: none;
+					padding-left: 9.9rem;
+					font-size: 1.4rem;
+				}
+			}
+			.hidden {
+				height: 7rem;
+			}
+		}
+	}
+}
+
+footer {
+	.fixedBot;
+	box-sizing: border-box;
+	.message {
+		float: left;
+		border: 2px solid @baseColor;
+		border-radius: 0.5rem;
+		width: 50% - 3rem;
+		height: 4.5rem;
+		font-size: @baseFontsize;
+		color: @baseColor;
+		background-color: #fff;
+		cursor: pointer;
+		&:hover {
+			border-color: @white;
+		}
+	}
+	.phoneNum {
+		.message;
+		float: right;
+		color: @white;
+		background-color: @baseColor;
+	}
+}

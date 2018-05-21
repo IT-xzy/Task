@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.summerwaves.dao.UserDao">
+    <insert id="insertUser" parameterType="cn.summerwaves.domain.User">
+        INSERT INTO user(user_name,password,sex)VALUE (#{userName},#{password},#{sex})
+    </insert>
+
+    <select id="selectUserByName" parameterType="java.lang.String" resultMap="userResultMap">
+        SELECT * FROM user WHERE user_name = #{user_name}
+    </select>
+
+    <update id="updateUserByName" parameterType="cn.summerwaves.domain.User">
+        UPDATE user SET password = #{password} WHERE user_name = #{userName}
+    </update>
+
+    <delete id="deleteUserByName" parameterType="java.lang.String">
+        DELETE FROM user WHERE user_name = #{userName}
+    </delete>
+
+    <resultMap id="userResultMap" type="cn.summerwaves.domain.User">
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="sex" column="sex"/>
+    </resultMap>
+
+</mapper>

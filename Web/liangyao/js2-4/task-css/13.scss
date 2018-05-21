@@ -1,0 +1,130 @@
+@charset "UTF-8";
+$bule:#29bde0;
+$gray:#b6b6b6;
+$yellow:rgb(251,180,53);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  background-color: #0f0f0f;
+}
+body {
+  max-width: 640px;
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+.header {
+  max-width: 640px;
+  width: 100%;
+  height: 90px;
+  background-color:$bule;
+}
+span {
+  white-space:pre-wrap;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.option {
+  @extend .fl;
+  width: 35px;
+  margin: 30px 10px 0 10px;
+  padding: 30px;
+  background: url("../tesk7img/option.png") no-repeat center;
+}
+.last-game {
+  width: 80%;
+  padding: 40px ;
+  margin: 25px auto;
+  color:$gray;
+  background-color: white;
+  font: 2em 微软雅黑;
+  text-align: center;
+  border: 1px $gray solid;
+  outline: none;
+  span{
+    display: block;
+  }
+}
+.t-hidden {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.back {
+  @extend .fr;
+  width: 22px;
+  height: 40px;
+  background: url("../tesk7img/Back.png");
+  position: relative;
+}
+.list-header {
+  padding: 25px 20px;
+  color: $yellow;
+  font: 32px 微软雅黑;
+  text-align: center;
+  border-bottom: 1px $yellow solid;
+}
+.list-content {
+  width: 80%;
+  padding-bottom: 20px;
+  margin: 0 auto;
+  border: 1px solid $gray;
+  background-color: white;
+  text-align: center;
+}
+.list-content-edition {
+  width: 70%;
+  padding: 30px;
+  margin: 25px auto;
+  text-align: center;
+  color: white;
+  font: 26px 微软雅黑;
+  background-color: $bule;
+  outline: none;
+  border: hidden;
+}
+.list-content-text {
+  width: 60%;
+  padding: 5px;
+  color: $gray;
+  font: 18px 微软雅黑 ;
+  margin: 0 auto;
+  text-align: center;
+  @extend .t-hidden;
+}
+.next {
+  @extend .fr;
+  width: 28px;
+  height: 56px;
+  top: 43px;
+  background: url("../tesk7img/next.png") no-repeat;
+  position: relative;
+}
+.paging {
+  width: 22%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+@mixin dot{
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+.paging-dot {
+  @include dot;
+  background-color: $bule;
+}
+.paging-dot1 {
+  @include dot;
+  background-color: $gray;
+}

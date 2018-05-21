@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Game</title>
+    <link rel="stylesheet" href="../css/task.css">
+    <link rel="stylesheet" href="../css/game.css">
+    <script src="../js/jquery-3.3.1.js"></script>
+</head>
+<body>
+<header>
+    <div class="header-left" onclick="back()"></div>
+    <p>法官日志</p>
+    <div class="header-right" onclick="home()"></div>
+</header>
+<main>
+    <div id="record"></div>
+    <div id="days" class="days"></div>
+    <div class="triangle"></div>
+    <div class="processes">
+        <div class="step">
+            <img src="../images/night.png">
+            <div class="trigon"></div>
+            <div id="kill" class="proceed" onclick="kill()">杀手杀人</div>
+        </div>
+        <div class="step">
+            <img src="../images/day.png">
+            <div class="trigon"></div>
+            <div id="ghost" class="proceed" onclick="ghost()">亡灵发表遗言</div>
+        </div>
+        <div class="step">
+            <img src="../images/day.png">
+            <div class="trigon"></div>
+            <div id="player" class="proceed" onclick="player()">玩家依次发言</div>
+        </div>
+        <div class="step">
+            <img src="../images/day.png">
+            <div class="trigon"></div>
+            <div id="vote" class="proceed" onclick="vote()">全民投票</div>
+        </div>
+    </div>
+    <div class="shadow" id="shade"></div>
+    <div class="dialog" id="circle">
+        <p id="dialog"></p>
+        <div>
+            <button id="end" onclick="end()">确 认</button>
+            <button id="enter" onclick="enter()">确 认</button>
+            <button onclick="cancel()">取 消</button>
+        </div>
+    </div>
+</main>
+<footer>
+    <button class="footer-left" onclick="finish()">结束游戏</button>
+    <button class="footer-right" onclick="judge()">法官日志</button>
+</footer>
+<script src="../js/state-machine.js"></script>
+<script src="../js/task.js"></script>
+<script src="../js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<div>
+    <div class="BodyBackground">
+        <div class="Center container">
+            <div class=" panel-login">
+                <h1 class="Title">后台登陆</h1>
+                <div class="panel-body login-panel">
+                    <form name="myForm">
+
+                            <div class="form-group">
+                                <img class="login-user-icon" src="img/user.jpg">
+                                <input class="input-lg form-control pd-left-50" type="text" placeholder="用户名"
+                                       name="user" ng-model="name" ng-minlength="5" ng-maxlength="10" required>
+                                <span class=" color-red help-block position-login" ng-messages="myForm.user.$error"
+                                     ng-if="myForm.user.$touched">
+                                    <span ng-message="minlength">用户名最小长度为5</span>
+                                    <span ng-message="maxlength">用户名最大长度为10</span>
+                                    <span ng-message="required">请填写标题</span>
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <img class="login-psd-icon" src="img/password.jpg">
+                                <input class="input-lg form-control pd-left-50" type="password" placeholder="密码"
+                                       name="pwd"
+                                       ng-maxlength="10" ng-minlength="5"
+                                       ng-model="pwd" required>
+                                <span class=" color-red help-block position-login" ng-messages="myForm.pwd.$error"
+                                     ng-if="myForm.pwd.$touched">
+                                    <span ng-message="minlength">密码最小长度为5</span>
+                                    <span ng-message="maxlength">密码最大长度为10</span>
+                                    <span ng-message="required">请填写标题</span>
+                                </span>
+                            </div>
+
+                            <!--<div class="checkbox">-->
+                            <!--<p class="text-danger ng-binding">  </p>-->
+                            <!--</div>-->
+
+                            <div class="Error">{{message}}</div>
+                            <button class="Land btn btn-lg  btn-block" data-ng-click="loginFn()">登陆</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

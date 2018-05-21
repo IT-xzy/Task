@@ -1,0 +1,146 @@
+$value-1:1rem;
+$border: solid #E1E5E7 .15rem;
+@mixin position ($position:absolute,$top:0){
+    position: $position;
+    top:$top;
+    right: 0;
+    left: 0;
+}
+@mixin bg-c($border-s:solid,$bg-c:#fff,$color:#5fc0cd){
+    border: $border-s;
+    background-color: $bg-c;
+    color: $color;
+}
+@mixin bg-icon($height:2rem,$width:2rem,$value:11,$bg-size:contain){
+    height: $height;
+    width: $width;
+    background: url(#{$value}.png) no-repeat;
+    background-size: $bg-size;
+}
+%button {
+    height: 5rem;
+    width: 40%;
+    border-radius: $value-1;
+    outline: none;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    margin: 0;
+}
+header {
+    @include position(fixed,0);
+    padding: $value-1;
+    font-size: 1.5rem;
+    text-align: center;
+    background-color: #5FC0CD;
+    color: #fff;
+    a {
+        float: left;
+        @include bg-icon;
+    }
+}
+main {
+    @include position(absolute, 4rem);
+    bottom: 6rem;
+    font-size: 1.2rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.user-content {
+    @include bg-icon(18rem,100%,12,cover);
+}
+.picture {
+    @include position(absolute,0);
+    @include bg-icon(7rem,7rem,13,contain);
+    margin: {
+        top: 5rem;
+        left: 4rem;
+    }
+}
+.information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 18rem;
+    padding-left: 12rem;
+}
+.name {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff;
+}
+.address {
+    color: #fff;
+    i {
+        display: inline-block;
+        width: 1.3rem;
+        height: 1.3rem;
+        background: url(04.png) no-repeat;
+        background-size: contain;
+    }
+}
+.skill {
+    border-bottom: $border;
+    p {
+        margin-left: $value-1;
+        padding-left: $value-1;
+        border-left: solid #5FC0CD;
+    }
+}
+.condition {
+    display: flex;
+    margin-left: $value-1;
+    border-bottom: $border;
+    font-size: 1.2rem;
+    p {
+        margin-left: $value-1;
+        padding-left: 2rem;
+        background: url(05.png) no-repeat;
+        background-size: 1.5rem;
+    }
+}
+.details-cont {
+    position: relative;
+    padding: 3rem 0;
+    margin-left: 1rem;
+    border-bottom: $border;
+}
+.left {
+    display: inline-block ;
+    padding-right: 1rem;
+    border-right: solid #999 .15rem;
+    color: #999;
+    vertical-align: middle;
+}
+.word-red {
+    color: #f00;
+}
+.mine {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.mg-left {
+    display: inline-block;
+    margin-left: 8rem;
+}
+.left, .right {
+    margin-left: $value-1;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 0 10%;
+}
+.button-message {
+    @extend %button;
+    @include bg-c;
+    margin-right: $value-1;
+}
+.button-telephone {
+    @extend %button;
+    @include bg-c(none,#5fc0cd,#fff);
+}

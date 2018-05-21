@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lujing.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="lujing.pojo.Student" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="qq_num" property="qqNum" jdbcType="CHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="per_time" property="perTime" jdbcType="TIMESTAMP" />
+    <result column="grad_school" property="gradSchool" jdbcType="VARCHAR" />
+    <result column="daily_link" property="dailyLink" jdbcType="VARCHAR" />
+    <result column="statement" property="statement" jdbcType="VARCHAR" />
+    <result column="presenter" property="presenter" jdbcType="VARCHAR" />
+    <result column="learn_from" property="learnFrom" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="BIGINT" />
+    <result column="update_at" property="updateAt" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, name, qq_num, type, per_time, grad_school, daily_link, statement, presenter, 
+    learn_from, create_at, update_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="lujing.pojo.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from student
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from student
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="lujing.pojo.StudentExample" >
+    delete from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="lujing.pojo.Student" >
+    insert into student (ID, name, qq_num, 
+      type, per_time, grad_school, 
+      daily_link, statement, presenter, 
+      learn_from, create_at, update_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{qqNum,jdbcType=CHAR}, 
+      #{type,jdbcType=VARCHAR}, #{perTime,jdbcType=TIMESTAMP}, #{gradSchool,jdbcType=VARCHAR}, 
+      #{dailyLink,jdbcType=VARCHAR}, #{statement,jdbcType=VARCHAR}, #{presenter,jdbcType=VARCHAR}, 
+      #{learnFrom,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="lujing.pojo.Student" >
+    insert into student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="qqNum != null" >
+        qq_num,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="perTime != null" >
+        per_time,
+      </if>
+      <if test="gradSchool != null" >
+        grad_school,
+      </if>
+      <if test="dailyLink != null" >
+        daily_link,
+      </if>
+      <if test="statement != null" >
+        statement,
+      </if>
+      <if test="presenter != null" >
+        presenter,
+      </if>
+      <if test="learnFrom != null" >
+        learn_from,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNum != null" >
+        #{qqNum,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="perTime != null" >
+        #{perTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gradSchool != null" >
+        #{gradSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyLink != null" >
+        #{dailyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="statement != null" >
+        #{statement,jdbcType=VARCHAR},
+      </if>
+      <if test="presenter != null" >
+        #{presenter,jdbcType=VARCHAR},
+      </if>
+      <if test="learnFrom != null" >
+        #{learnFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="lujing.pojo.StudentExample" resultType="java.lang.Integer" >
+    select count(*) from student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update student
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qqNum != null" >
+        qq_num = #{record.qqNum,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perTime != null" >
+        per_time = #{record.perTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gradSchool != null" >
+        grad_school = #{record.gradSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dailyLink != null" >
+        daily_link = #{record.dailyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.statement != null" >
+        statement = #{record.statement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.presenter != null" >
+        presenter = #{record.presenter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.learnFrom != null" >
+        learn_from = #{record.learnFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createAt != null" >
+        create_at = #{record.createAt,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateAt != null" >
+        update_at = #{record.updateAt,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update student
+    set ID = #{record.id,jdbcType=BIGINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      qq_num = #{record.qqNum,jdbcType=CHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      per_time = #{record.perTime,jdbcType=TIMESTAMP},
+      grad_school = #{record.gradSchool,jdbcType=VARCHAR},
+      daily_link = #{record.dailyLink,jdbcType=VARCHAR},
+      statement = #{record.statement,jdbcType=VARCHAR},
+      presenter = #{record.presenter,jdbcType=VARCHAR},
+      learn_from = #{record.learnFrom,jdbcType=VARCHAR},
+      create_at = #{record.createAt,jdbcType=BIGINT},
+      update_at = #{record.updateAt,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="lujing.pojo.Student" >
+    update student
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="qqNum != null" >
+        qq_num = #{qqNum,jdbcType=CHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="perTime != null" >
+        per_time = #{perTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gradSchool != null" >
+        grad_school = #{gradSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyLink != null" >
+        daily_link = #{dailyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="statement != null" >
+        statement = #{statement,jdbcType=VARCHAR},
+      </if>
+      <if test="presenter != null" >
+        presenter = #{presenter,jdbcType=VARCHAR},
+      </if>
+      <if test="learnFrom != null" >
+        learn_from = #{learnFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="lujing.pojo.Student" >
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      qq_num = #{qqNum,jdbcType=CHAR},
+      type = #{type,jdbcType=VARCHAR},
+      per_time = #{perTime,jdbcType=TIMESTAMP},
+      grad_school = #{gradSchool,jdbcType=VARCHAR},
+      daily_link = #{dailyLink,jdbcType=VARCHAR},
+      statement = #{statement,jdbcType=VARCHAR},
+      presenter = #{presenter,jdbcType=VARCHAR},
+      learn_from = #{learnFrom,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

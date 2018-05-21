@@ -1,0 +1,227 @@
+@font-face {
+  font-family: 'iconfont';  /* project id 503922 */
+  src: url('//at.alicdn.com/t/font_503922_a3wodd88xcfbhuxr.eot');
+  src: url('//at.alicdn.com/t/font_503922_a3wodd88xcfbhuxr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_503922_a3wodd88xcfbhuxr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_503922_a3wodd88xcfbhuxr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_503922_a3wodd88xcfbhuxr.svg#iconfont') format('svg');
+}
+.iconfont{
+  font-family:"iconfont" !important;
+  font-size:16px;font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;}
+$Colorgreen:#29b078;
+$fontColor:#999999;
+$fontSize:14px;
+$fontSizeMin:12px;
+
+/*header*/
+.header {
+  > .head {
+    font-size: 0;
+    height: 40px;
+    line-height: 40px;
+    background: #fff;
+
+    .contianer > p {
+      font-size: 14px;
+      color: $Colorgreen;
+      @media (max-width: 768px){
+        display: none;
+      }
+    }
+    .contianer > .img-area > img {
+      margin-left: 5px;
+    }
+  }
+  /*nav*/
+  > .nav {
+    position: relative;
+    line-height: 100px;
+    background: $Colorgreen;
+    @media (max-width: 768px) {
+      line-height: 50px;
+    }
+
+    > .contianer > .button-area {
+      @media (max-width: 768px) {
+        display: none;
+      }
+
+      >.active{
+        border-bottom: 5px solid #fff;
+      }
+
+      > a {
+        padding: 0 10px;
+        line-height: 90px;
+        font-size: 16px;
+        border-bottom: 5px solid transparent;
+        &:hover {
+          border-bottom: 5px solid #fff;
+        }
+      }
+    }
+
+    >.contianer>a>img{
+      @media (max-width: 768px) {
+        width: 55px;
+        height: auto;
+      }
+    }
+
+    > .contianer > .nav-btn {
+      float: right;
+      margin-top: 10px;
+      padding: 8px;
+      background: transparent;
+      border-radius: 2px;
+      border: none;
+      outline: none;
+      &:hover{
+        background: #fafafa;
+      }
+      &:focus+.drop-down{
+        display: block;
+      }
+      @media (min-width: 768px) {
+        display: none;
+      }
+    }
+
+    >.contianer > .drop-down {
+      display: none;
+      background: $Colorgreen;
+      border-top: 1px solid #dedede;
+      &:hover{
+        display: block;
+      }
+      > li {
+        text-align: center;
+        line-height: 48px;
+        border-bottom: 1px solid transparent;
+        &:hover{
+          border-bottom: 1px solid #fff;
+        }
+
+        >a{
+          width: 100%;
+        }
+        }
+      >.active{
+        border-bottom: 1px solid #fff;
+      }
+    }
+  }
+}
+
+.footer {
+  > .bottom {
+    background: $Colorgreen;
+    > .contianer {
+
+      p {
+        margin: 20px 0;
+        font-size: 16px;
+        color: #fff;
+        > a {
+          font-size: 14px;
+          line-height: 26px;
+          border-bottom: 1px solid transparent;
+          &:hover {
+            border-bottom: 1px solid #fff;
+          }
+        }
+      }
+      > .about-us {
+        @media (min-width: 990px) {
+          float: left;
+          width: 30%;
+        }
+      }
+      > .about-website {
+        @media (min-width: 990px) {
+          float: left;
+          width: 50%;
+        }
+
+        > p > a {
+          @extend a;
+          margin-right: 20px;
+        }
+      }
+
+      > .erweima {
+        @media (min-width: 990px) {
+          float: left;
+          width: 20%;
+        }
+
+        > p {
+          margin: 10px 0;
+        }
+
+        > img {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+  > .copyRight {
+    line-height: 40px;
+    text-align: center;
+    border-top: 1px solid #32c086;
+    background: $Colorgreen;
+
+    > p {
+      font-size: 12px;
+      color: #fff;
+    }
+  }
+}
+
+.contianer{
+  padding: 0 5%;
+}
+.row{
+}
+.contianer:before,
+.contianer:after,
+.row:before,
+.row:after{
+  display: table;
+  content: " ";
+}
+.contianer:after,
+.row:after{
+  clear: both;
+}
+
+.col-xs-4,
+
+
+
+  .pull-left{
+  float: left;
+}
+
+.pull-right{
+  float: right;
+}
+
+h4{
+  margin-bottom: 50px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+h5{
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+p{
+  font-size: 14px;
+}

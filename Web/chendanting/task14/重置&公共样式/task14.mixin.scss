@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+/**
+ * Authors      TZMMichael (15977536060@163.com)
+ * Date         2017-12-16 14:28:26
+ * Site         https://github.com/TZMMichael
+ * Updated      
+ * Updated by   TZMMichael 
+ */
+
+//COLOR
+$green: #29b078;
+$white: #fff;
+$offwhite: #fafafa;
+$gray: #999;
+
+//HEADER部分组件
+@mixin tel-word {
+	color: #56a087;
+}
+
+@mixin header-img {
+	margin-right: 2.5rem;
+	position: relative;
+	background: url("../task14-1/images/wechat.png") no-repeat;
+	width: 25px;
+	height: 25px;
+	background-size: 100%;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+//NAV部分组件
+@mixin nav-botton {
+	& span {
+		display: inline-block;
+		padding: 28px;
+		margin: 0 10px;
+		border-bottom: 2px solid #29b078;
+		&:hover{
+			border-bottom: 2px solid $white;
+		}
+	}
+    & .active-line{
+        display: inline-block;
+        padding: 28px;
+        margin: 0 10px;
+        border-bottom: 2px solid $white;
+    }
+	& a {
+		text-decoration: none;
+		color: $white;
+	}
+}
+@mixin nav-logo{
+	background: url("../task14-2/images/技能树LOGO.png") no-repeat;
+	height: 3rem;
+	width: 7rem;
+	margin: 0 2rem;
+}
+@mixin nav-phone{
+    display: none;
+    & li{
+        list-style: none;
+    }
+    & ul{
+        margin: 0;
+        padding: 0;
+    }
+    & .menu:hover .navbar{
+        display: block;
+    }
+    & .navbar{
+        text-align: center;
+        display: none;
+        margin-top: 1rem;
+        border-top: 1px solid $gray;
+        & a{
+            text-decoration: none;
+            color: $white;
+        }
+        & li{
+            padding: 1rem 0;
+            border-bottom: 1px solid transparent;
+            &:hover {
+                border-bottom: 1px solid $white;
+            }
+        }
+        & .active-li{
+            border-bottom: 1px solid $white;
+        }
+    }
+    & .navbar-logo{
+        position: absolute;
+        margin: 1rem;
+    }
+    & .menu{
+        text-align: right;
+        padding: 1rem 0;
+        & img{
+            margin-right: 1rem;
+        }
+    }
+}
+
+//FOOTER部分组件
+@mixin QRcode {
+	background: url("../task14-1/images/QRcode.png") no-repeat;
+	height:92px;
+	width:92px;
+	// background-position:-1429px 0;
+}
+@mixin footer-box {
+    display:  flex;
+    justify-content: space-between;
+    padding: 1rem 4rem;
+}

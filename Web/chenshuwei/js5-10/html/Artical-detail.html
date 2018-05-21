@@ -1,0 +1,129 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>{{pageTitle}}</h4>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal" name="ArticleList" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" form-group">
+                        <label class="control-label col-md-2">标题名称</label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="title"
+                                   name="title"
+                                   ng-class="{borderRed:ArticleList.title.$dirty&&ArticleList.title.$invalid}"
+                                   required>
+                        </div>
+                        <span ng-show="ArticleList.title.$invalid"
+                              ng-class="{red:true,inputLineHeight:true}">
+                            *
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" form-group">
+                        <label class="control-label col-md-2">类&emsp;&emsp;型</label>
+                        <div class="col-md-2">
+                            <select class="form-control"
+                                    ng-model="selectType"
+                                    name="type"
+                                    ng-class="{borderRed:ArticleList.type.$dirty&&ArticleList.type.$invalid}"
+                                    required>
+                                <option value="">请选择</option>
+                                <option ng-repeat="(x,y) in type" value="{{x}}" ng-selected="selectType==x">{{y}}</option>
+                            </select>
+                        </div>
+                        <span ng-show="ArticleList.type.$invalid"
+                              ng-class="{red:true,inputLineHeight:true}">
+                           *
+                        </span>
+                        <div class="col-md-2" ng-show="selectType==3">
+                            <select class="form-control" ng-model="selectIndustry" name="Industry"
+                                    required>
+                                <option value="">请选择</option>
+                                <option ng-repeat="(x,y) in industry" value="{{x}}" ng-selected="selectIndustry==x" >{{y}}</option>
+                            </select>
+                        </div>
+                        <span ng-show="ArticleList.Industry.$invalid&&selectType==3"
+                              ng-class="{red:true,inputLineHeight:true}">
+                           *
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" form-group">
+                        <label class="control-label col-md-2">说&emsp;&emsp;明</label>
+                        <div class="col-md-8">
+                            <div id="editor">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" form-group">
+                        <label class="control-label col-md-2">跳转链接</label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="jumpLink"
+                                   name="JumpLink"
+                                   ng-pattern="/(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]/"
+                                   ng-class="{borderRed:link&&ArticleList.JumpLink.$invalid}"
+                                   ng-blur="link=true"
+                                   ng-focus="link=false"
+                                   required>
+                            <div ng-show="ArticleList.JumpLink.$invalid&&link"
+                                 ng-class="{red:true,inputLineHeight:true}">
+                                格式应为：http://xx.xxx或ftp://xx.xx
+                            </div>
+                        </div>
+                        <span ng-show="ArticleList.JumpLink.$invalid"
+                              ng-class="{red:true,inputLineHeight:true}">
+                            *
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class=" form-group">
+                        <label class="control-label col-md-2">配&emsp;&emsp;图</label>
+                        <up-load></up-load>
+                    </div>
+                    <div class="col-md-8 col-md-offset-2">
+                        <button class="btn btn-success"
+                                ng-disabled="
+                                ArticleList.title.$invalid||
+                                ArticleList.type.$invalid||
+                                selectType==3&& ArticleList.Industry.$invalid||
+                                ArticleList.JumpLink.$invalid||
+                                !(imgSrc)"
+                                ng-click="upLoadItem('up')">
+                            立即上线
+                        </button>
+                        <button class="btn btn-success"
+                                ng-disabled="
+                                ArticleList.title.$invalid||
+                                ArticleList.type.$invalid||
+                                selectType==3&& ArticleList.Industry.$invalid||
+                                ArticleList.JumpLink.$invalid||
+                                !(imgSrc)"
+                                ng-click="upLoadItem('down')">
+                            存为草稿
+                        </button>
+                        <button class="btn btn-default pull-right" ng-click="cancel()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

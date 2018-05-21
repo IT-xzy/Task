@@ -1,0 +1,39 @@
+@import "JS-TASK2-base.scss";
+%border_box {
+    box-sizing: border-box;
+}
+%inl-blk {display: inline-block;}
+
+header {
+    @include position(fixed, 0, null, null, 0);
+    z-index: 999999;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #b9e9f5;
+    background-color: map-get($color, header);
+    box-sizing: border-box;
+    p {
+    	font-size: 16px;
+    	line-height: 30px;
+    	color: map-get($color, white);
+    }
+}
+
+.icon_back {
+    @extend %inl-blk;
+    padding: 15px;
+    @include bg(25px, 2px -99px);
+    cursor: pointer;
+}
+.icon_quit {
+    @extend %inl-blk;
+    padding: 15px;
+    background: url(https://ZZsuper.github.io/JS/TASK2/icon/X.png) no-repeat;
+    background: {
+        size: 21px;
+        position: 8px 4px;
+    };
+    cursor: pointer;
+}

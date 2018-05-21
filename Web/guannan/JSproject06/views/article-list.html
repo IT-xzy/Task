@@ -1,0 +1,72 @@
+<ul class="nav nav-tabs header">
+    <li role="presentation" class="pull-right"><a><span class="glyphicon glyphicon-off"></span></a></li>
+    <li role="presentation" class="pull-right"><a>user</a></li>
+    <li role="presentation" class="pull-right"><a>猎头</a></li>
+</ul>
+<div class="row search">
+    <div class="row">
+        <form class="row">
+            <div class="col-lg-4 col-md-6">
+                <label>发布时间</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label class="form-control-static">&emsp;&#8212;&#8212;</label>
+                <input class="form-control" type="text">
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label>类&emsp;&emsp;型</label>
+                <select class="form-control">
+                    <option>非常好</option>
+                    <option>good</option>
+                    <option>excellent</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label>状&emsp;&emsp;态</label>
+                <select class="form-control">
+                    <option>非常好</option>
+                    <option>good</option>
+                    <option>excellent</option>
+                </select>
+            </div>
+        </form>
+        <div class="row">
+            <button type="button" class="btn btn-danger pull-right">清空</button>
+            <button type="button" class="btn btn-success pull-right">搜索</button>
+        </div>
+    </div>
+</div>
+<div class="row list">
+    <div class="row panel panel-default">
+        <div class="panel-body">Article列表<button class="btn btn-success pull-right">+新增</button></div>
+        <div class="panel-footer table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">名称</th>
+                        <th class="text-center">类型</th>
+                        <th class="text-center">发布时间</th>
+                        <th class="text-center">修改时间</th>
+                        <th class="text-center">发布者</th>
+                        <th class="text-center">状态</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="list in lists">
+                        <td class="text-center">{{list.id}}</td>
+                        <td class="text-center">{{list.name}}</td>
+                        <td class="text-center">{{list.type}}</td>
+                        <td class="text-center">{{list.releaseTime}}</td>
+                        <td class="text-center">{{list.changeTime}}</td>
+                        <td class="text-center">{{list.publisher}}</td>
+                        <td class="text-center">{{list.state}}</td>
+                        <td class="text-center"><a>下线</a><a>编辑</a><a>删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

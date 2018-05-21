@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/><!--在这里这数据源配置文件进行注册，并获取其中的值-->
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbcDriver}"/><!--数据库驱动-->
+                <property name="url" value="${jdbcUrl}"/><!--数据库链接-->
+                <property name="username" value="${userName}"/><!--数据库用户-->
+                <property name="password" value="${password}"/><!--数据库密码-->
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers><!--此处对mybatis的配置文件进行注册：-->
+        <mapper class="com.Task.one.dao.StudentDao"/><!--这里注册的是配置文件对应的类-->
+        <!--<mapper resource="com/Task/one/mapper/StudentDao.xml"/>&lt;!&ndash;这里对应的是配置文件所在的路径，以斜杠作为分割&ndash;&gt;-->
+    </mappers>
+</configuration>
+

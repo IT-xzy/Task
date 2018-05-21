@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name='viewport' , content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular.js"></script>
+    <script src="../js/plug-in.js/angular-file-upload.js"></script>
+</head>
+<body ng-app="app" ng-controller="AppController">
+
+<!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+<input type="file" nv-file-select="" uploader="uploader" multiple/>
+
+
+<div class="col-md-9" style="margin-bottom: 40px">
+    <table class="table">
+        <thead>
+        <tr>
+            <th width="50%">Name</th>
+            <th ng-show="uploader.isHTML5">Size</th>
+            <th ng-show="uploader.isHTML5">Progress</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in uploader.queue">
+            <td>
+                <strong>{{ item.file.name }}</strong>
+                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+            </td>
+            <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+            <td ng-show="uploader.isHTML5">
+                <div class="progress" style="margin-bottom: 0;">
+                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                </div>
+            </td>
+            <td class="text-center">
+                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+            </td>
+            <td nowrap>
+                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                    <span class="glyphicon glyphicon-upload"></span> Upload
+                </button>
+                <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()"
+                        ng-disabled="!item.isUploading">
+                    <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                </button>
+                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    angular
+        .module('app', ['angularFileUpload'])
+        .controller('AppController', ['$scope', 'FileUploader', function ($scope, FileUploader) {
+            var uploader = $scope.uploader = new FileUploader({
+                url: '/carrots-admin-ajax/a/u/img/3',
+            });
+
+            // FILTERS
+
+            uploader.filters.push({
+                name: 'imageFilter',
+                fn: function (item /*{File|FileLikeObject}*/, options) {
+                    var type = '|' + item.type.slice(item.type.lastIndexOf('/') + 1) + '|';
+                    return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                }
+            });
+
+            // CALLBACKS
+
+        }]);
+</script>
+</html>

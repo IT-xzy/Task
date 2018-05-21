@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>game</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1,maxmum-scale=1，minmum-scale=1,user-scalable=yes">
+	<link rel="stylesheet" href="https://zzsuper.github.io/task-all/css/bootstrap.min.css">
+	<style type="text/css">
+	* {
+	   box-sizing: border-box;
+	}
+	body {
+	  padding: 0;
+	  background-color: #f0f0f0;
+	}
+	header {
+	  position: fixed;
+	  left: 0;
+	  top: 0;
+	  z-index: 999999;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  align-items: flex-start;	
+	  width: 100%;
+	  height: 45px;
+	  background-color: #29bde0;
+	}
+
+	/*
+	*头部左上角下拉菜单
+	*需要设置点击感应距离
+	*/
+	.icon-menu{
+	  display: block;
+	  width: 25px;
+	  padding-top: 2px;
+	  border: 0;
+	  outline: none;
+	  margin: 5px 0 5px 11px;
+	  background-color: #fff;
+	}
+
+  main {
+    position: absolute;
+    top: 45px;
+    bottom: 0px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+/*上次游戏*/
+  .lastgame {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    border: 1px solid #9a9999;
+    margin: 15px 0;
+    font-size: 16px;
+    color: #9a9999;
+    background-color: #fff;
+    outline: none;
+  }
+  .icon-aheard {
+    position: absolute;
+    right: 15px;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #c1c0c0;
+    border-left: transparent;
+    border-bottom: transparent;
+    transform:rotate(45deg)
+  }
+
+  /*捉鬼游戏*/
+  .gamechoice {
+    position: relative;
+    top: 0;
+    bottom: 0px;
+    height: auto;
+    border: 1px solid #c1c0c0;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+  .gamechoice-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    border-bottom: 1px solid #fbb435;	
+    font-size: 16px;
+    color: #fbb435;
+  }
+  .game-form {
+    width: 100%;
+  }
+  .gamevision {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: block;
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    border: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    background-color: #29bde0;
+    color: #fff;
+    outline: none;
+  }
+  .btn-gamevision {
+    width: 100%;
+    padding: 15px 30px;
+  }
+  .triangle {
+    position: absolute;
+    right: 5px;
+    top: 240px;
+    border-left: 15px solid #fbb435;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+  }
+  p {  	
+    margin: 0;
+    text-align: center;
+    color: #9a9999
+  }
+  .slide-dot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .slide-dot-1 {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #29bde0;
+  }
+  .slide-dot-2 {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #f0f0f0;
+  }
+	</style>
+</head>
+<body>
+  <header>
+  	<div class="btn-group ">
+  		<button class="icon-menu" type="button"></button>
+  	  <button class="icon-menu" type="button"></button>
+  	  <button class=" dropdown-toggle icon-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  type="button"></button>
+  	    <ul class="dropdown-menu">
+    			<li><a href="#">北京</a></li>
+    			<li><a href="#">上海</a></li>
+    			<li><a href="#">成都</a></li>
+    			<li><a href="#">Separated link</a></li>
+  		  </ul>
+  	</div> 
+  </header>
+  	
+  <main>
+  	
+  	<button class="lastgame" onclick="location.href='https://ZZsuper.github.io/task-all/task7-投票.html'">
+  		<p>上次游戏：捉鬼猜词版</p>
+  		<span class="icon-aheard"></span>
+  	</button>
+  	<div class="gamechoice">
+      <div class="triangle"></div>
+      
+       
+  		  <div class="gamechoice-title">捉鬼游戏</div>
+  		  <div class="btn-gamevision">
+  		    <button class="gamevision" onclick="location.href=''">简化版</button>
+  		    <p>有1133个用户正在玩此款游戏</p>
+  		  </div>
+  		  <div class="btn-gamevision">
+  		    <button class="gamevision" onclick="location.href='https://ZZsuper.github.io/task-all/task7-投票.html'">猜词版</button>
+  		    <p>有1133个用户正在玩此款游戏</p>
+  		  </div>
+  		  
+  		  <div class="btn-gamevision">
+  		    <button class="gamevision" onclick="location.href=''">白痴版</button>
+  		    <p>有1133个用户正在玩此款游戏</p>
+  		  </div>
+  		  <div class="slide-dot">
+  		    <div class="slide-dot-1"></div>
+  		    <div class="slide-dot-2"></div>
+  		    <div class="slide-dot-2"></div>
+  		    <div class="slide-dot-2"></div>
+  	    </div>
+
+      </div>
+  </div>
+  </main>
+
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
