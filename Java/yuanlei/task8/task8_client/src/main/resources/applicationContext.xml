@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/task
+     http://www.springframework.org/schema/task/spring-task-3.0.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/cache
+     http://www.springframework.org/schema/cache/spring-cache-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config />
+    <!--<context:property-placeholder location="classpath:c3p0.properties"/>-->
+    <context:component-scan base-package="com.ssm_yl.*" />
+
+     <!--开启定时任务-->
+    <task:annotation-driven/>
+
+
+    <bean id="clientRmi1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://192.168.31.42:1099/task8_server1"/>
+        <property name="serviceInterface" value="com.ssm_yl.service.CategoryService"/>
+        <!--是否启动时连接RMI服务。默认为true,表示启动时立即连接，这个属性建议设置成false,-->
+        <!--可避免当服务器不可用时，客户端的服务无法正常启动。-->
+        <property name="lookupStubOnStartup" value="false"/>
+        <!--&lt;!&ndash;当服务不可用时，是否进行重连。默认为false表示不重连，这个属性强烈建议设置为true.&ndash;&gt;-->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="clientRmi2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://192.168.31.42:1098/task8_server2"/>
+        <property name="serviceInterface" value="com.ssm_yl.service.CategoryService"/>
+        <!--是否启动时连接RMI服务。默认为true,表示启动时立即连接，这个属性建议设置成false,-->
+        <!--可避免当服务器不可用时，客户端的服务无法正常启动。-->
+        <property name="lookupStubOnStartup" value="false"/>
+        <!--&lt;!&ndash;当服务不可用时，是否进行重连。默认为false表示不重连，这个属性强烈建议设置为true.&ndash;&gt;-->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+
+
+
+</beans>
