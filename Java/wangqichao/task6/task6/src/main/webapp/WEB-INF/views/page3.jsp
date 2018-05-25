@@ -1,0 +1,158 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+         pageEncoding="UTF-8" import="java.util.*" isELIgnored="false"  %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>技能树首页</title>
+    <link rel="stylesheet/less" type="text/css" href="../../less/task15.less">
+    <script src="../../less.js-2.5.3/dist/less.min.js" type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+</head>
+<body>
+<div class="header">
+    <!--1联系方式-->
+    <div class="header-1">
+        <div class="col-md-6  col-lg-4">
+            <div class="top1">客服热线：010-594-78634</div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="topright">
+                <button class="button1" type="button"></button>
+                <button class="button2" type="button"></button>
+                <button class="button3" type="button"></button>
+            </div>
+        </div>
+    </div>
+    <!--title-->
+    <div class=" row2">
+        <div class="col-md-6 col-lg-4 col-lg-offset-2">
+            <div class="logo">
+                <img class="img-logo" src="img/技能树.png">
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <button type="button" class="page2-button"></button>
+            <div class="newbutton">
+                <button class="row2-button1 row2-button1:hover" type="button"><a href="${pageContext.request.contextPath}/homepage" style="color:#fff !important;text-decoration: none;">首页</a></button>
+                <button class="row2-button2 row2-button2:hover" type="button"><a href="${pageContext.request.contextPath}/profession" style="color:#fff !important;text-decoration: none;">职业</a></button>
+                <button class="row2-button3 row2-button3:hover" type="button"><a href="${pageContext.request.contextPath}/recommend" style="color:#fff !important;text-decoration: none;">推荐</a></button>
+                <button class="row2-button4 row2-button4:hover" type="button">关于</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--picture-->
+  <div class="bg-img"><img src="img/背景图片2.png"></div>
+<main>
+    <div class="col-md-12 col-sm-12 col-lg-12">
+        首页＞<a class="company" href="#">合作企业</a>
+    </div>
+    </div>
+    <div class=" col-sm-12 col-lg-3 row list-main">
+        <div class="list-top"><strong>合作企业</strong></div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">阿里巴巴</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">腾讯视频</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">土豆网</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">北京葡萄藤</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">阿里巴巴</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">阿里巴巴</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">腾讯视频</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">土豆网</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">北京葡萄藤</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">阿里巴巴</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">北京葡萄藤</a>
+        </div>
+        <div class="list">
+            <div class="circle2"></div>
+            <a class="company" href="#">阿里巴巴</a>
+        </div>
+  </div>
+  <div class="col-lg-9 col-md-9 col-sm-9 row row1">
+        <div class="main-left-top">
+            <div style="float: left"><img class="tudouwang" src="img/土豆网.png"></div>
+            <div class="head">土豆网是中国最早和最具影响力的网络视频平台，是中国网络
+                视频行业的领军品牌。于2005年4月15日正式上线，是全球最早上线的视频网站之一。2014
+                年1月，"土豆网"正式更名为"土豆"，标志着土豆网进入品牌发展的新阶段。
+            </div>
+        </div>
+        <div class="main-right">
+            <p>土豆网是中国的一家大型视频分享网站，用户可以在该网站上传、观看、分享与下载视频短片。土豆网于2005年4月15日正式上线，截至2007年9月，该站每日提供的视频有5,500万之多。创始人为福建人王微。2011年8月17日晚上9点45分，土豆网在美国纳斯达克上市，股票代码为“TUDO”。</p>
+            <br/><p>2011年10月18日，视频网站乐视网及土豆网联合宣布成立合资公司进行版权采购和分销，并共同筹建视频合作平台。2012年3月12日，优酷股份有限公司和土豆股份有限公司共同宣布双方于3月11日签订最终协议，优酷和土豆将以100%换股的方式合并。</p>
+            <br/><p>“每个人都是生活的导演”是土豆创立第一天就明确的价值观，而优酷联合土豆杨伟东提出的土豆2.0战略，更加关注中国年轻人的生活方式和成长分享，是对土豆价值观的进一步加强。</p>
+            <br/><p>土豆相信年轻人的想象力、创造力，相信土豆的平台能帮助年轻人创造出更多，更好的影像作品，来表达对自己、生活和这个时代的看法。同时，土豆提倡尊重“每个人”的个性，尊重每个人自主地选择自己的生活，成为自己成长的导演。</p>
+            <br/><p>根据第三方调研公司艾瑞的数据，从2010年12月到2013年5月，土豆网每月独立访问用户数量从1.82亿增长到2.27亿，截至2013年5月，优酷土豆集团在PC端和移动端全平台各项数据持续占据视频行业绝对领先优势。</p>
+            <br/><br/><br/><br/><br/>
+        </div>
+    </div>
+
+  </div>
+</main>
+  <div class="container-fluid Official-website">
+      <div class="footer">
+          <div class="row">
+              <div class="col-md-3 col-sm-3 col-lg-3">
+                  <div class="footer-left">
+                      <div class="JNS">技能树 — 改变你我</div>
+                      <span>
+                        <a class="a1" href="#">关于我们</a>
+                        <a class="a1" href="#">|联系我们|</a>
+                        <a class="a1" href="#">合作企业</a>
+                    </span>
+                  </div>
+              </div>
+              <div class="col-md-3 col-sm-3 col-lg-3">
+                  <div class="JNS">旗下网站</div>
+                  <a  class="a1" href="#">草船云孵化器</a>
+                  <a  class="a1" href="#">最强IT特训营</a><br/>
+                  <a  class="a1" href="#">葡萄藤轻游戏</a>
+                  <a  class="a1" href="#">桌游精灵</a>
+              </div>
+              <div class="col-md-2 col-sm-2 col-lg-3"></div>
+              <div class="col-md-2  col-sm-2 col-lg-3 row-16">
+                  <div class="weixin-text">微信公众平台</div>
+                  <div class="weixin-img"><img src="img/微信.png" class="weixin"></div>
+              </div>
+          </div>
+      </div>
+      <!--15版权-->
+      <div class="row">
+          <div class="col-md-12 copyright">Copyright © 2015 北京葡萄藤信息技术有限公司 All Rights Reserved | 京ICP备15035574号-1</div>
+      </div>
+  </div>
+</body>
+</html>
