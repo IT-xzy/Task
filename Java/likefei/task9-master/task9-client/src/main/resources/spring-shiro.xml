@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+ ">
+    <!-- Shiro Filter 拦截器相关配置 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- securityManager -->
+        <property name="securityManager" ref="securityManager" />
+        <!-- 登录路径 -->
+        <property name="loginUrl" value="/login" />
+        <!-- 用户访问无权限的链接时跳转此页面  -->
+        <property name="unauthorizedUrl" value="/error" />
+        <!-- 过滤链定义 -->
+        <property name="filterChainDefinitions">
+            <value>
+                /login=anon
+                /a/**=authc,roles[admin]
+                /u/** =user
+            </value>
+        </property>
+    </bean>
+
+    <!-- securityManager -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm" />
+        <!-- shiro使用redis缓存 -->
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="rememberMeManager" />
+    </bean>
+
+    <!-- 自定义Realm实现 -->
+    <bean id="myRealm" class="shiro.CustomRealm" >
+    <!-- 配置AuthorizationInfo信息不用放redis缓存，直接放session即可 -->
+    <property name="cachingEnabled" value="false"/>
+    <property name="authenticationCachingEnabled" value="false" />
+    </bean>
+
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--开启AOP-->
+    <aop:config proxy-target-class="true"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+    <!-- 会话Cookie模板 -->
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <!--cookie的name -->
+        <constructor-arg value="ayase"/>
+        <property name="httpOnly" value="true"/>
+        <!--cookie的有效时间 -->
+        <property name="maxAge" value="-1"/>
+    </bean>
+
+    <!-- 会话管理器 -->
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="1800000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+        <property name="sessionValidationSchedulerEnabled" value="true"/>
+        <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+        <property name="sessionDAO" ref="sessionDAO"/>
+        <property name="sessionIdCookieEnabled" value="true"/>
+        <property name="sessionIdCookie" ref="sessionIdCookie"/>
+        <!--不在url中加入jessionID！-->
+        <property name="sessionIdUrlRewritingEnabled" value="false" />
+    </bean>
+    <!-- 会话ID生成器 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+    <!-- 会话DAO -->
+    <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+        <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>
+        <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+    </bean>
+    <!-- 会话验证调度器 -->
+    <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+        <property name="sessionValidationInterval" value="1800000"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+    <!-- 相当于调用SecurityUtils.setSecurityManager(securityManager) -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
+        <property name="arguments" ref="securityManager"/>
+    </bean>
+
+    <!-- remenberMe配置 -->
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe" />
+        <property name="httpOnly" value="false" />
+        <!-- 默认记住7天（单位：秒） -->
+        <property name="maxAge" value="604800" />
+    </bean>
+    <!-- rememberMe管理器 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+        <property name="cookie" ref="rememberMeCookie" />
+    </bean>
+</beans>
