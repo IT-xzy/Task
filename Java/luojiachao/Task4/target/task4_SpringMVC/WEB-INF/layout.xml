@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <!--template 模版 definition 定义 attribute 属性-->
+    <definition name="layout" template="/WEB-INF/jsp/layout.jsp">
+        <put-attribute name="title" value="/WEB-INF/jsp/title.jsp" />
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+    </definition>
+    <!-- 主布局 -->
+    <!-- 首页 -->
+    <definition name="home" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/jsp/homebody.jsp" />
+    </definition>
+
+    <!--职业-->
+    <definition name="position" extends="layout">
+    <put-attribute name="body" value="/WEB-INF/jsp/positionbody.jsp" />
+    </definition>
+
+    <!--合作-->
+    <definition name="company" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/jsp/companybody.jsp" />
+    </definition>
+
+    <!--重写-->
+    <definition name="test" extends="layout">
+        <put-attribute name="header" value="/WEB-INF/jsp/chongxie.jsp"/>
+    </definition>
+
+    <!--嵌套-->
+    <definition name="test1" extends="layout">
+        <put-attribute name="body" value="layout"/>
+    </definition>
+
+    <!--匿名嵌套-->
+    <definition name="test2" extends="layout">
+    <put-attribute name="body" >
+        <definition name="in" extends="test1">
+            <put-attribute name="body" value="/WEB-INF/jsp/homebody.jsp"/>
+        </definition>
+    </put-attribute>
+        <!--<put-attribute name="header" value="/WEB-INF/jsp/chongxie.jsp"/>-->
+        <!--<put-attribute name="footer" value="/WEB-INF/jsp/chongxie.jsp"/>-->
+    </definition>
+
+    <!--EL表达式-->
+    <definition name="test3" extends="layout">
+        <put-attribute name="body" expression="/WEB-INF/jsp/${body}.jsp"/>
+    </definition>
+</tiles-definitions>

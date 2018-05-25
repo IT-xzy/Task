@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.dao.IStudentDao">
+    <!--查找全部-->
+    <select id="getAll" resultType="student">
+        SELECT * FROM student
+    </select>
+    <!--增加一条数据-->
+    <insert id="addStudent" parameterType="student">
+        insert into student
+        (student.name,sex,qq,whatType,joinTime,school,student_id,link,wishes,tutorBro,knowFrom,create_at,update_at)
+         values
+         (#{name},#{sex},#{qq},#{whatType},#{joinTime},#{school},#{student_id},#{link},#{wishes},#{tutorBro},
+         #{knowFrom},#{create_at},#{update_at})
+    </insert>
+
+    <!--批量增加多条数据-->
+    <insert id="addStudentList" parameterType="java.util.List">
+        <!--insert into student (name,sex)VALUES (student1.name,student1.sex),(student2.name,student2.sex)...-->
+        INSERT INTO student
+        (student.name,sex,qq,whatType,joinTime,school,student_id,link,wishes,tutorBro,knowFrom,create_at)
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.name},#{item.sex},#{item.qq},#{item.whatType},#{item.joinTime},#{item.school},#{item.student_id},
+            #{item.link},#{item.wishes},#{item.tutorBro},#{item.knowFrom},#{item.create_at})
+        </foreach>
+    </insert>
+
+    <!--通过id查询-->
+    <select id="getOneById" parameterType="java.lang.Integer" resultType="student">
+        SELECT * FROM student WHERE id=#{id}
+    </select>
+    <!--通过String模糊查询查询-->
+    <select id="getOneByKey" parameterType="java.lang.String" resultType="student">
+        SELECT * FROM student
+        <where>
+            student.name LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.sex LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.whatType LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.school LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.student_id LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.link LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.wishes LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.tutorBro LIKE CONCAT(CONCAT('%', #{key}),'%')
+            OR student.knowFrom LIKE CONCAT(CONCAT('%', #{key}),'%')
+        </where>
+    </select>
+    <!--通过电话号码查找-->
+    <select id="getOneByQq" parameterType="java.lang.Long" resultType="student">
+        SELECT * FROM student WHERE qq=#{qq}
+    </select>
+    <!--更新一条数据
+        & &&-->
+    <update id="updateOne" parameterType="student">
+        UPDATE student
+        <set>
+            <!--id为updateSet的sql片段-->
+            <include refid="updateSet"/>
+        </set>
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+        </where>
+    </update>
+    <!--批量更新-->
+<!--    <update id="updateCustomers" parameterType="java.util.List">
+        /* UPDATE TABLE set
+        name =
+        case
+        WHEN id=#{id} THEN #{list.name}
+        tel =
+        case
+        WHEN id=#{id} THEN #{list.tel}
+        address =
+        case
+        WHEN id=#{id} THEN #{list.address}
+        email =
+        case
+        WHEN id=#{id} THEN #{list.email}
+        WHERE id IN
+        (list.id)*/
+        /*SET以及id in中的内容通过foreach遍历传入的list取得*/
+        UPDATE customer SET
+        customer.name=
+        <foreach collection="list" item="item" index="index" open="case id" separator=" " close="end">
+            <if test="item.name != null and item.name != ''">
+                when #{item.id} then #{item.name}
+            </if>
+            <if test="item.name == null or item.name ==''">
+                when =#{item.id} then customer.name
+            </if>
+        </foreach>
+        ,customer.tel=
+        <foreach collection="list" item="item" index="index" open="case id" separator=" " close="end">
+            <if test="item.tel != null and item.tel != ''">
+                when #{item.id} then #{item.tel}
+            </if>
+            <if test="item.tel == null or item.tel ==''">
+                when #{item.id} then customer.tel
+            </if>
+        </foreach>
+        ,customer.address=
+        <foreach collection="list" item="item" index="index" open="case id" separator=" " close="end">
+            <if test="item.address != null and item.address != ''">
+                when #{item.id} then #{item.address}
+            </if>
+            <if test="item.address == null or item.address ==''">
+                when #{item.id} then customer.address
+            </if>
+        </foreach>
+        ,customer.email
+        <foreach collection="list" item="item" index="index" open="case id" separator=" " close="end">
+            <if test="item.email != null and item.email != ''">
+                when #{item.id} then #{item.name}
+            </if>
+            <if test="item.email == null or item.email ==''">
+                when #{item.id} then customer.email
+            </if>
+        </foreach>
+        WHERE customer.id IN
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            <if test="item.id != null">
+                #{item.id}
+            </if>
+            <if test="item.id == null">
+                1
+            </if>
+        </foreach>
+    </update>-->
+    <!--通过id删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM student WHERE id IN
+        <foreach collection="array" item="id" index="index" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <!--通过电话删除-->
+    <delete id="deleteByQq" parameterType="java.lang.Long">
+        DELETE FROM student WHERE qq IN
+        <foreach collection="array" item="qq" index="index" open="(" separator="," close=")">
+            #{qq}
+        </foreach>
+    </delete>
+    <select id="select" parameterType="student" resultType="student">
+        SELECT * FROM student
+        <where>
+            <choose>
+                <when test="id !=null and id >0">
+                    student.id = #{id}
+                </when>
+                <when test="name !=null ">
+                    AND student.name LIKE CONCAT(CONCAT('%', #{name}),'%')
+                </when >
+                <when test="sex != null and sex != ''">
+                    AND student.sex = #{sex,}
+                </when >
+                <when test="qq != null and qq != ''">
+                    AND student.qq = #{qq,}
+                </when >
+                <otherwise>
+                    student.id = 2
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="selectBySomething" parameterType="student" resultType="student">
+        SELECT * FROM student
+        <where>
+            <if test="id != null and id > 0">
+                student.id = #{id}
+            </if>
+            <if test="name != null and name !=''">
+                AND student.name LIKE CONCAT(CONCAT('%', #{name}),'%')
+            </if>
+            <if test="whatType != null and whatType !=''">
+                AND student.whatType LIKE CONCAT(CONCAT('%', #{whatType}),'%')
+            </if>
+            <if test="school != null and school !=''">
+                AND student.school LIKE CONCAT(CONCAT('%', #{school}),'%')
+            </if>
+            <if test="student_id != null and student_id !=''">
+                AND student.student_id LIKE CONCAT(CONCAT('%', #{student_id}),'%')
+            </if>
+            <if test="tutorBro != null and tutorBro !=''">
+                AND student.tutorBro LIKE CONCAT(CONCAT('%', #{tutorBro}),'%')
+            </if>
+        </where>
+    </select>
+    <!--查询总记录数-->
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        SELECT COUNT (*) FROM student
+    </select>
+    <sql id="updateSet">
+        <if test="name !=null and name !=''">
+            student.name=#{name},
+        </if>
+        <if test="sex !=null and sex !=''">
+            sex=#{sex},
+        </if>
+        <if test="qq !=null and qq !=''">
+            qq=#{qq},
+        </if>
+        <if test="whatType !=null and whatType !=''">
+            whatType=#{whatType},
+        </if>
+        <if test="joinTime !=null and joinTime!=''">
+            joinTime=#{joinTime},
+        </if>
+        <if test="school !=null and school !=''">
+            school=#{school},
+        </if>
+        <if test="student_id !=null and student_id !=''">
+            student_id=#{student_id},
+        </if>
+        <if test="link !=null and link !=''">
+            link=#{link},
+        </if>
+        <if test="wishes !=null and wishes !=''">
+            wishes=#{wishes},
+        </if>
+        <if test="tutorBro !=null and tutorBro !=''">
+            tutorBro=#{tutorBro},
+        </if>
+        <if test="knowFrom !=null and knowFrom !=''">
+            knowFrom=#{knowFrom},
+        </if>
+        <if test="create_at !=null and create_at !=''">
+            create_at=#{create_at},
+        </if>
+        <if test="update_at !=null and update_at !=''">
+            update_at=#{update_at},
+        </if>
+    </sql>
+</mapper>

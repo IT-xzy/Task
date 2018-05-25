@@ -1,0 +1,87 @@
+$bgc:#29bde0;
+$orange:#fbb435;
+$white:#fff;
+$grey:#a6a6a6;
+$red:#f66f6f;
+$black:#000;
+@mixin pad-lr($p-left,$p-right){
+  padding-left:$p-left;
+  padding-right:$p-right;
+}
+@mixin footer-btn{
+  width:45%;
+  height:5rem;
+  border-radius:1rem;
+  outline: none;
+  border-style: none;
+  font-size:2.5rem;
+  text-align:center;
+  vertical-align:middle;
+}
+.game {
+  background-color:$bgc;
+  .game_picture {
+    text-align: center;
+    img {
+      width:20rem;
+    }
+  }
+
+
+  .game_result {
+    @include pad-lr(4rem, 4rem);
+    margin-top:1rem;
+    font-size:2rem;
+    color: $orange;
+  }
+  .game-message{
+    padding:1rem 4rem;
+    p{
+      width:100%;
+      font-size:1.3rem;
+      color:$white;
+      span{
+        display:inline-block;
+        width:30%;
+      }
+    }
+  }
+}
+.game_flow{
+    position:relative;
+    padding:1rem 4rem;
+    border-bottom:1px solid #c7c7c7;
+    background-color:$white;
+    .game_date{
+      padding-bottom:1rem;
+      font-size:1.8rem;
+      color:$black;
+    }
+    .game_duration{
+      position:absolute;
+      top:1rem;
+      right:4rem;
+      font-size:1.2rem;
+      color:#c7c7c7;
+    }
+    p{
+      margin:0;
+      font-size:1.3rem;
+      color: $grey;
+    }
+}
+.footer {
+  @include pad-lr(1.5rem, 1.5rem);
+  background-color:rgba(123,194,210,0.6);
+  color:$white;
+  .btn_left {
+    @include footer-btn;
+    margin: 2rem 5% 2rem 0;
+    background-color: $red;
+  }
+  .btn_right {
+    @include footer-btn;
+    margin: 2rem 0 2rem 5%;
+    background-color: $orange;
+  }
+}

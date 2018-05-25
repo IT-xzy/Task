@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<context:annotation-config/>-->
+    <context:component-scan base-package="com.ptteng"/>
+    <context:property-placeholder location="classpath:/jdbc.properties" ignore-unresolvable="true"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--数据源-->
+        <!--<property name="driverClassName" value=""/>-->
+        <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="10"/>
+        <property name="maxActive" value="30"/>
+        <property name="minIdle" value="15"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.ptteng.model"/>
+        <property name="mapperLocations" value="classpath:mappers/*Mapper.xml"/>
+    </bean>
+    <!--有了这个，就不用额外的mybatis的全局配置文件了-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定扫描的包名
+        如果扫描多个包，每个包中间使用半角逗号分隔-->
+        <property name="basePackage" value="com.ptteng.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--引入jedis的properties配置文件-->
+    <!--如果有多个数据源需要通过context:properties-placeholder管理,且不
+    愿放在同一个配置文件中,一定要加上ignore-unresolvable="true"-->
+    <context:property-placeholder location="classpath:properties/redisPool.properties" ignore-unresolvable="true"/>
+    <!--Jedis连接池 的相关配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--新版本的jedis.jar包将maxActive 替换为maxTotal-->
+        <property name="maxTotal" value="${redis.pool.maxActive}" />
+        <property name="minIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxActive}"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+    </bean>
+    <bean id="JedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+        <constructor-arg name="host" value="${redis.host}"/>
+        <constructor-arg name="port" value="${redis.port}" type="int"/>
+        <constructor-arg name="timeout" value="${redis.timeout}" type="int"/>
+    </bean>
+</beans>

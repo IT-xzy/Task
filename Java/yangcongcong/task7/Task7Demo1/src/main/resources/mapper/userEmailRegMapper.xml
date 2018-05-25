@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssm.dao.UserEmailRegMapper">
+    <insert id="addUserEmail" parameterType="UserEmailReg">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into user_emailreg
+        (e_name,e_password,e_email,create_at,update_at)
+        values
+        (#{e_name},#{e_password},#{e_email},#{create_at},#{update_at})
+    </insert>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="UserEmailReg">
+        select * from user_emailreg where id=#{id}
+    </select>
+
+    <select id="getByName" parameterType="java.lang.String" resultType="UserEmailReg">
+        select * from user_emailreg where e_name=#{e_name}
+    </select>
+
+    <select id="getAllEmailReg" resultType="UserEmailReg">
+        select * from user_emailreg
+    </select>
+</mapper>
