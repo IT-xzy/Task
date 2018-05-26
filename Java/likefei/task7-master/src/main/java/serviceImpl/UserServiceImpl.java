@@ -53,32 +53,38 @@ public class UserServiceImpl implements UserService{
         //获取系统当前时间戳
         Long time = System.currentTimeMillis();
         //比较两个时间戳,有效时间5分钟
-        if (phonenumbertest(user)) {
-            if ((time - Long.valueOf(array[1])) < 1000 * 60 * 5) {
-                if (array[0].equals(phonecode)) {
-                    MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) httpServletRequest;
-                    String fileName =  multipartHttpServletRequest.getFile("photo").getOriginalFilename();
-                    String[] filename = fileName.split("\\.");
-                    String fileName1 = user.getName()+"headimage"+System.currentTimeMillis()+"."+filename[filename.length-1];
-                    if (ossutils.uploadimage(multipartHttpServletRequest.getFile("photo"),user,fileName1)) {
-                        if (nametest(user)) {
-                            try {
-                                user.setImage(fileName1);
-                                user.setCreateTime(System.currentTimeMillis());
-                                //把用户角色写死
-                                Long id = insert(user);
-                                userRoleMapper.insert(id,4L);
-                                logger.info("用户注册成功{}", user);
-                                return new JsonResult(0, "处理成功", null);
-                            } catch (Exception e) {
-                                logger.info("注册失败" + e.getMessage(), e);
-                                return new JsonResult(-1, "注册失败", null);
-                            }
-                        } else return new JsonResult(-1, "用户名已存在", null);
-                    } else return new JsonResult(-1,"图片上传失败",null);
-                } else return new JsonResult(-1, "验证码错误", null);
-            } else return new JsonResult(-1, "验证码过期", null);
-        }else return new JsonResult(-1, "手机号已被注册", null);
+        if (!phonenumbertest(user)) {
+            return new JsonResult(-1, "手机号已被注册", null);
+        }
+        if ((time - Long.valueOf(array[1])) > 1000 * 60 * 5) {
+            return new JsonResult(-1, "验证码过期", null);
+        }
+        if (!array[0].equals(phonecode)) {
+            return new JsonResult(-1, "验证码错误", null);
+        }
+        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) httpServletRequest;
+        String fileName =  multipartHttpServletRequest.getFile("photo").getOriginalFilename();
+        String[] filename = fileName.split("\\.");
+        String fileName1 = user.getName()+"headimage"+System.currentTimeMillis()+"."+filename[filename.length-1];
+        if (!ossutils.uploadimage(multipartHttpServletRequest.getFile("photo"),user,fileName1)) {
+            return new JsonResult(-1, "图片上传失败", null);
+        }
+        if (!nametest(user)) {
+            return new JsonResult(-1, "用户名已存在", null);
+        }
+        try {
+            user.setImage(fileName1);
+            user.setCreateTime(System.currentTimeMillis());
+            //把用户角色写死
+            Long id = insert(user);
+            userRoleMapper.insert(id,4L);
+            logger.info("用户注册成功{}", user);
+            return new JsonResult(0, "处理成功", null);
+        }
+        catch (Exception e) {
+            logger.info("注册失败" + e.getMessage(), e);
+            return new JsonResult(-1, "注册失败", null);
+        }
     }
 
     /**
@@ -106,7 +112,8 @@ public class UserServiceImpl implements UserService{
                 logger.info(sendSmsResponse.getMessage());
                 return new JsonResult(-1,"短信发送错误",null);
             }
-        } catch (ClientException e) {
+        }
+        catch (ClientException e) {
             logger.info("短信发送错误:"+e.getErrMsg());
             return new JsonResult(-1,"未知错误",null);
         }
@@ -125,7 +132,8 @@ public class UserServiceImpl implements UserService{
             String time = String.valueOf(System.currentTimeMillis());
             httpSession.setAttribute("emailcode",emailcode+"."+time);
             return new JsonResult(0,"处理成功",null);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             logger.info(e.getMessage());
             return new JsonResult(-1,"发送邮件异常",null);
         }
@@ -145,22 +153,27 @@ public class UserServiceImpl implements UserService{
         //获取系统当前时间戳
         Long time = System.currentTimeMillis();
         //比较两个时间戳,有效时间5分钟
-        if (emailtest(user)) {
-            if ((time - Long.valueOf(array[1])) < 1000 * 60 * 5) {
-                if (array[0].equals(emailcode)) {
-                    if (nametest(user)) {
-                        try {
-                            insert(user);
-                            logger.info("用户注册成功{}", user);
-                            return new JsonResult(0, "注册成功", null);
-                        } catch (Exception e) {
-                            logger.info("用户注册失败{}", user);
-                            return new JsonResult(-1, "注册失败", null);
-                        }
-                    } else return new JsonResult(-1, "用户名已存在", null);
-                } else return new JsonResult(-1, "验证码错误", null);
-            } else return new JsonResult(-1, "验证码过期", null);
-        }else return new JsonResult(-1,"邮箱已被注册",null);
+        if (!emailtest(user)) {
+            return new JsonResult(-1, "邮箱已被注册", null);
+        }
+        if ((time - Long.valueOf(array[1])) > 1000 * 60 * 5) {
+            return new JsonResult(-1, "验证码过期", null);
+        }
+        if (!array[0].equals(emailcode)) {
+            return new JsonResult(-1, "验证码错误", null);
+        }
+        if (!nametest(user)) {
+            return new JsonResult(-1, "用户名已存在", null);
+        }
+        try {
+            insert(user);
+            logger.info("用户注册成功{}", user);
+            return new JsonResult(0, "注册成功", null);
+        }
+        catch (Exception e) {
+            logger.info("用户注册失败{}", user);
+            return new JsonResult(-1, "注册失败", null);
+        }
     }
 
     /**
@@ -174,22 +187,21 @@ public class UserServiceImpl implements UserService{
         // 取出sesson中的验证码
         String signcodeSession = (String) httpSession.getAttribute("signcode");
         //如果验证码检验通过
-        if (signcodeSession.equalsIgnoreCase(signcode)) {
-            //验证用户名是否存在
-            if (nametest(user)) {
-                try {
-                    insert(user);
-                    return new JsonResult(0,"注册成功",null);
-                } catch (Exception e) {
-                    logger.error("异常"+e.getMessage(),e);
-                    return new JsonResult(-1,"未知错误",null);
-                }
-            }
-            //返回用户名错误
+        if (!signcodeSession.equalsIgnoreCase(signcode)) {
+            return new JsonResult(-1, "验证码错误", new Date());
+        }
+        //验证用户名是否存在
+        if (!nametest(user)) {
             return new JsonResult(-1, "用户名已存在", new Date());
         }
-        //返回验证码错误信息
-        return new JsonResult(-1, "验证码错误", new Date());
+        try {
+            insert(user);
+            return new JsonResult(0,"注册成功",null);
+        }
+        catch (Exception e) {
+            logger.error("异常"+e.getMessage(),e);
+            return new JsonResult(-1,"未知错误",null);
+        }
     }
 
     /**
@@ -207,12 +219,15 @@ public class UserServiceImpl implements UserService{
         Long time = System.currentTimeMillis();
         //比较两个时间戳,有效时间5分钟
         if (!phonenumbertest(user)) {
-            if ((time - Long.valueOf(array[1])) < 1000 * 60 * 5) {
-                if (array[0].equals(phonecode)) {
-                   return new JsonResult(0,"登陆成功",null);
-                } else return new JsonResult(-1, "验证码错误", null);
-            } else return new JsonResult(-1, "验证码过期", null);
-        }else return new JsonResult(-1, "手机号不存在", null);
+            return new JsonResult(-1, "手机号不存在", null);
+        }
+        if ((time - Long.valueOf(array[1])) > 1000 * 60 * 5) {
+            return new JsonResult(-1, "验证码过期", null);
+        }
+        if (!array[0].equals(phonecode)) {
+            return new JsonResult(-1, "验证码错误", null);
+        }
+        else  return new JsonResult(0,"登陆成功",null);
     }
 
     /**
@@ -226,23 +241,28 @@ public class UserServiceImpl implements UserService{
     public JsonResult emaillogin(User user,String emailcode,HttpSession httpSession,String signcode) {
         String signcodeSession = (String) httpSession.getAttribute("signcode");
         //如果验证码检验通过
-        if (signcodeSession.equalsIgnoreCase(signcode)) {
-            //取出发送验证码的时间戳
-            String str = (String) httpSession.getAttribute("emailcode");
-            String[] array = str.split("\\.");
-            //获取系统当前时间戳
-            Long time = System.currentTimeMillis();
-            //比较两个时间戳,有效时间5分钟
-            if (!emailtest(user)) {
-                if ((time - Long.valueOf(array[1])) < 1000 * 60 * 5) {
-                    if (array[0].equals(emailcode)) {
-                        if (emailpdtest(user)) {
-                            return new JsonResult(0, "登陆成功", null);
-                        }return new JsonResult(-1, "密码错误", null);
-                    }return new JsonResult(-1, "验证码错误", null);
-                }return new JsonResult(-1, "验证码过期", null);
-            }return new JsonResult(-1, "邮箱不存在", null);
-        } return new JsonResult(-1, "图形验证码错误", null);
+        if (!signcodeSession.equalsIgnoreCase(signcode)) {
+            return new JsonResult(-1, "图形验证码错误", null);
+        }
+        //取出发送验证码的时间戳
+        String str = (String) httpSession.getAttribute("emailcode");
+        String[] array = str.split("\\.");
+        //获取系统当前时间戳
+        Long time = System.currentTimeMillis();
+        //比较两个时间戳,有效时间5分钟
+        if (!emailtest(user)) {
+            return new JsonResult(-1, "邮箱不存在", null);
+        }
+        if ((time - Long.valueOf(array[1])) > 1000 * 60 * 5) {
+            return new JsonResult(-1, "验证码过期", null);
+        }
+        if (!array[0].equals(emailcode)) {
+            return new JsonResult(-1, "验证码错误", null);
+        }
+        if (!emailpdtest(user)) {
+            return new JsonResult(-1, "密码错误", null);
+        }
+        else return new JsonResult(0, "登陆成功", null);
     }
 
     /**
@@ -255,27 +275,28 @@ public class UserServiceImpl implements UserService{
     public JsonResult commonlogin(User user,@RequestParam("signcode") String signcode,HttpSession httpSession){
         String signcodeSession = (String) httpSession.getAttribute("signcode");
         //如果验证码检验通过
-        if (signcodeSession.equalsIgnoreCase(signcode)) {
-            User user1 = userMapper.selectbyname(user);
-            //如果有这个用户
-            if (user1 !=null) {
-                //当前Subject
-                Subject currentUser = SecurityUtils.getSubject();
-                String password = Md5.passwordtest(user.getPassword(), user1.getSalt());
-                ShiroToken shiroToken = new ShiroToken(user1.getName(), password);
-                try {
-                    shiroToken.setRememberMe(true);
-                    currentUser.login(shiroToken);
-                    logger.info("登陆成功");
-                    return new JsonResult(0, "登陆成功", JSON.toJSONString(user1));
-                } catch (AuthenticationException e) {//登录失败
-                    logger.info("登陆失败" + e.getMessage(), e);
-                    return new JsonResult(-1, "用户名或密码错误", null);
-                }
-            }return new JsonResult(-1,"用户名或密码错误",null);
+        if (!signcodeSession.equalsIgnoreCase(signcode)) {
+            return new JsonResult(-1, "验证码错误", new Date());
         }
-        //返回验证码错误信息
-        return new JsonResult(-1, "验证码错误", new Date());
+        User user1 = userMapper.selectbyname(user);
+        //如果有这个用户
+        if (user1 ==null) {
+            return new JsonResult(-1, "用户名或密码错误", null);
+        }
+        //当前Subject
+        Subject currentUser = SecurityUtils.getSubject();
+        String password = Md5.passwordtest(user.getPassword(), user1.getSalt());
+        ShiroToken shiroToken = new ShiroToken(user1.getName(), password);
+        try {
+            shiroToken.setRememberMe(true);
+            currentUser.login(shiroToken);
+            logger.info("登陆成功");
+            return new JsonResult(0, "登陆成功", JSON.toJSONString(user1));
+        }
+        catch (AuthenticationException e) {//登录失败
+            logger.info("登陆失败" + e.getMessage(), e);
+            return new JsonResult(-1, "用户名或密码错误", null);
+        }
     }
     /**
      * 普通4位验证码生成

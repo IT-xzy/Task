@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task.dao.ProfessionDao">
+    <!--添加信息-->
+    <insert id="addPro" parameterType="Profession" useGeneratedKeys="true" keyProperty="id" >
+        insert into  profession (createdAt,name,intro,difficulty,request,growthPeriod,rareness,firstSalary,thirdSalary,fourthSalary,requestSkills) values (#{createdAt},#{name},#{intro},#{difficulty},#{request},#{growthPeriod},#{rareness},#{firstSalary},#{thirdSalary},#{fourthSalary},#{requestSkills})
+    </insert>
+    <!--删除信息-->
+    <delete id="deletePro" parameterType="int" >
+        delete from profession where id=#{id}
+    </delete>
+    <!--修改信息-->
+    <update id="updatePro" parameterType="Profession" >
+        update profession
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="intro!=null">intro=#{intro},</if>
+            <if test="difficulty!=null">difficulty=#{difficulty},</if>
+            <if test="request!=null">request=#{request},</if>
+            <if test="growthPeriod!=null">growthPeriod=#{growthPeriod},</if>
+            <if test="rareness!=null">rareness=#{rareness},</if>
+            <if test="firstSalary!=null">firstSalary=#{firstSalary},</if>
+            <if test="thirdSalary!=null">thirdSalary=#{thirdSalary},</if>
+            <if test="fourthSalary!=null">fourthSalary=#{fourthSalary},</if>
+            <if test="requestSkills!=null">requestSkills=#{requestSkills},</if>
+            <if test="updatedAt!=0">updatedAt=#{updatedAt}</if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--根据姓名模糊查找-->
+    <select id="getProByName" parameterType="String" resultType="Profession">
+        select * from   profession WHERE  name=#{name}
+    </select>
+</mapper>

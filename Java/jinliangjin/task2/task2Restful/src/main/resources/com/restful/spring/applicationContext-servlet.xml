@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 一个配置节解决映射器和适配器的配置注解配置 -->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!-- 扫描所有的Controller -->
+    <context:component-scan base-package="com.restful.controller"></context:component-scan>
+
+    <!-- 配置视图解析器
+        进行jsp解析，默认使用jstl标签，classpath下得有jstl的包
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+        <property name="prefix" value="/WEB-INF/com/restful/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--错误信息文件-->
+    <bean id="messageResource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <!--资源文件地址，不带.properties-->
+            <value>com/restful/StudentValidationMessage</value>
+        </property>
+        <!--设置字符集-->
+        <property name="fileEncodings" value="UTF-8"/>
+        <!--设置资源文件缓存时间，100s-->
+        <property name="cacheSeconds" value="100"/>
+    </bean>
+    <!--配置校验器-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!--注入校验器类，使用的是Hibernate校验器-->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!--注入错误信息文件-->
+        <property name="validationMessageSource" ref="messageResource"/>
+    </bean>
+
+    <!--支持上传文件-->
+    <!--id必须是multipartResolver，不然还会报错
+        MultipartHttpServletRequest: is a MultipartResolver configured?-->
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+        <!--与jsp的字符一致-->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--缓冲区大小，kb-->
+        <property name="maxInMemorySize" value="2048"/>
+    </bean>
+
+    <!--通过@Value读取.properties配置文件内容-->
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:com/restful/pageSize.properties</value>
+            </list>
+        </property>
+    </bean>
+</beans>
