@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.UserRegisterMapper">
+    <insert id="addUser" parameterType="UserRegister">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into user_register (username,password,phoneNum,create_at,update_at)
+        values (#{username},#{password},#{phoneNum},#{create_at},#{update_at})
+    </insert>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="UserRegister">
+        select * from user_register wherer id=#{id}
+    </select>
+
+    <select id="getByName" parameterType="java.lang.String" resultType="UserRegister">
+        select * from user_register where username=#{username}
+    </select>
+
+   <select id="getAllRegister" resultType="UserRegister">
+       select * from user_register
+   </select>
+</mapper>
