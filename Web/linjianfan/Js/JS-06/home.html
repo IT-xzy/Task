@@ -1,0 +1,53 @@
+<div ng-controller="homeCtrl">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#example-navbar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="navbar-brand">萝卜多后台管理系统</div>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="">管理员</a></li>
+                    <li><a href="">admin</a></li>
+                    <li ng-click="toback()" ><a href=""><span class="glyphicon glyphicon-off"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="home-box">
+        <div class="home-sidebar">
+            <div ng-repeat="x in sideBar">
+                <div class="home-sidebar-title"
+                     ng-click="getHomeTitle($index)">
+                    <span class="glyphicon glyphicon-pencil icon"></span>
+                    <span>{{x.sideBarTitle}}</span>
+                    <span ng-class="ggtitle == $index?'glyphicon glyphicon-menu-down':'glyphicon glyphicon-menu-right'"></span>
+                </div>
+                <div class="home-sidebar-content"
+                     ng-show="ggtitle == $parent.$index"
+                     ng-repeat="y in x.sideBarContent"
+                     ng-click="getHomeContent(y.sideBarName, $parent.$index)"
+                     ng-class="{tcontent: ggcontent === y.sideBarName}">
+                    <a href="" ui-sref="{{y.url}}">
+                        <span>{{y.sideBarName}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="home-content">
+            <div ui-view="">
+                <div class="home-hello">
+                    <span>{{hello}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
