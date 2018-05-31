@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--one-->
+    <bean id="myRMIClientC11"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.ssm.service.UserService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/helloRMI1"/>
+    </bean>
+
+    <bean id="myRMIClientC12"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.ssm.service.UserRegisterService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/helloRMI2"/>
+    </bean>
+
+    <bean id="myRMIClientC13"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.ssm.service.UserEmailRegService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/helloRMI3"/>
+    </bean>
+
+    <!--two-->
+    <bean id="myRMIClientC21"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.ssm.service.UserService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:9999/helloRMI11"/>
+    </bean>
+
+    <bean id="myRMIClientC22"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.ssm.service.UserRegisterService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:9999/helloRMI22"/>
+    </bean>
+
+    <bean id="myRMIClientC23"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.ssm.service.UserEmailRegService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:9999/helloRMI33"/>
+    </bean>
+</beans>

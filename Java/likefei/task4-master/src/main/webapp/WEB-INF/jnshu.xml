@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <definition name="jnshu" template="/WEB-INF/jsp/task4/jnshu.jsp">
+    </definition>
+    <!-- 主布局 -->
+    <!-- 项目 -->
+    <definition name="*.page" extends="jnshu">
+        <put-attribute name="header" value="/WEB-INF/jsp/task4/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsp/task4/{1}.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/task4/footer.jsp" />
+    </definition>
+    <!--项目-->
+</tiles-definitions>

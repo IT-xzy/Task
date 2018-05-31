@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:mvn="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <context:annotation-config/>
+    <!-- 自动扫描bean、把作了注解的类转化成bean base-package 如果多个，用“,”分隔 -->
+    <context:component-scan base-package="com.controller"/>
+    <!-- 激活组件扫描功能,扫描aop的相关组件组件 -->
+    <context:component-scan base-package="com.AOP"/>
+    <!-- 启动对@AspectJ注解的支持 -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <!--简化配置:
+    	1、自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter
+    	2、提供一系列:数据绑定,数字和日期的format,@NumberFormat,@DataTimeFormat,xml,json默认读写支持
+    -->
+    <mvc:annotation-driven/>
+
+    <!--静态资源默认servlet配置
+       1、加入对静态资源的处理:js,css,gif,png
+       2、允许使用"/"做整体映射
+   -->
+    <mvc:default-servlet-handler/>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="WEB-INF/jsps/" p:suffix=".jsp"/>
+    <!--tiles框架配置-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+    <property name="definitions">
+    <list>
+        <value>tiles.xml</value>
+    </list>
+    </property>
+    </bean>
+ <!-- 登录拦截器 -->
+ <mvc:interceptors>
+  <mvc:interceptor>
+   <!-- 拦截 路径 -->
+   <mvc:mapping path="/u/jobs"/>
+      <mvc:mapping path="/signout"/>
+   <!--排除的拦截路径-->
+   <bean class="com.interceptor.SessionInterceptor"></bean>
+  </mvc:interceptor>
+ </mvc:interceptors>
+</beans>

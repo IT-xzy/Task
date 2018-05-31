@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task.dao.IPersonDao">
+    <insert id="addPerson" parameterType="Person" useGeneratedKeys="true" keyProperty="id" >
+        insert into  person1 (created_at,name,age,personID) values (#{createdAt},#{name},#{age},#{personID})
+    </insert>
+    <select id="getPerson" parameterType="int" resultType="Person">
+        select * from person1 where id=#{id}
+    </select>
+    <delete id="deletePerson" parameterType="int" >
+        delete from person1 where id= #{id}
+    </delete>
+    <update id="updatePerson" parameterType="Person" >
+        update person1
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="age!=null">age=#{age},</if>
+            <if test="personID!=null">personID=#{personID},</if>
+            <if test="updatedAt!=null">updated_at=#{updatedAt}</if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="listPerson" parameterType="map" resultType="Person">
+        select * from   person1
+        <where>
+            <if test="name!=null">
+                AND name like concat('%',#{name},'%')
+            </if>
+            <if test="id!=null and id!=0">
+                AND id>#{id}
+            </if>
+        </where>
+    </select>
+    <select id="listPersonById" parameterType="list" resultType="Person">
+        SELECT * FROM person1
+        WHERE ID in
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <update id="truncatePerson">
+        truncate table person1
+    </update>
+
+</mapper>

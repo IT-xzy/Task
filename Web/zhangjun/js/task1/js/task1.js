@@ -69,7 +69,7 @@ window.onload = function(){
     // 还原颜色
     var restoreColor = function (){
         for(var i = 0; i < gridList.length; i++){
-            gridList[i].style.background = "#ffa600"; // 遍历每个格子变成原色
+            gridList[i].style.backgroundColor = "#ffa600"; // 遍历每个格子变成原色
         }
     };
     // 开始函数

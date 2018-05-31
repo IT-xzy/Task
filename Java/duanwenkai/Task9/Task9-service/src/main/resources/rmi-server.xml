@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/sca
+       http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd">
+
+    <bean id="studentService" class="com.fml.service.impl.StudentServiceImpl" />
+    <bean id="emailService" class="com.fml.service.impl.EmailServiceImpl" />
+    <bean id="vocationService" class="com.fml.service.impl.VocationServiceImpl" />
+
+
+    <sca:service name="studentServiceA" type="com.fml.service.StudentService" target="studentService"/>
+    <sca:service name="emailServiceA" type="com.fml.service.EmailService" target="emailService"/>
+    <sca:service name="vocationServiceA" type="com.fml.service.VocationService" target="vocationService"/>
+
+
+    <sca:service name="studentServiceB" type="com.fml.service.StudentService" target="studentService"/>
+    <sca:service name="emailServiceB" type="com.fml.service.EmailService" target="emailService"/>
+    <sca:service name="vocationServiceB" type="com.fml.service.VocationService" target="vocationService"/>
+
+
+</beans>
