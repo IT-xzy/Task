@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fangyuyang.dao.CareerMapper" >
+  <resultMap id="BaseResultMap" type="com.fangyuyang.model.Career" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="career" property="career" jdbcType="VARCHAR" />
+    <result column="career_about" property="careerAbout" jdbcType="VARCHAR" />
+    <result column="money3" property="money3" jdbcType="VARCHAR" />
+    <result column="money2" property="money2" jdbcType="VARCHAR" />
+    <result column="money1" property="money1" jdbcType="VARCHAR" />
+    <result column="learning_man" property="learningMan" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="be_needed" property="beNeeded" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, career, career_about, money3, money2, money1, learning_man, time, be_needed
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from career
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from career
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fangyuyang.model.Career" >
+    insert into career (id, career, career_about, 
+      money3, money2, money1, 
+      learning_man, time, be_needed
+      )
+    values (#{id,jdbcType=INTEGER}, #{career,jdbcType=VARCHAR}, #{careerAbout,jdbcType=VARCHAR}, 
+      #{money3,jdbcType=VARCHAR}, #{money2,jdbcType=VARCHAR}, #{money1,jdbcType=VARCHAR}, 
+      #{learningMan,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR}, #{beNeeded,jdbcType=INTEGER}
+      )
+  </insert>
+  <select id="countCareer1"  resultType="int" >
+    select count(id) from user where career = "WEB工程师"
+  </select>
+  <select id="countCareer2"  resultType="int" >
+    select count(id) from user where career = "js工程师"
+  </select>
+  <select id="countCareer3"  resultType="int" >
+    select count(id) from user where career = "Android"
+  </select>
+  <select id="countCareer4"  resultType="int" >
+    select count(id) from user where career = "ios"
+  </select>
+  <select id="countCareer5"  resultType="int" >
+    select count(id) from user where career = "JAVA工程师"
+  </select>
+  <select id="countCareer6"  resultType="int" >
+    select count(id) from user where career = "op工程师"
+  </select>
+  <select id="countCareer7"  resultType="int" >
+    select count(id) from user where career = "pm"
+  </select>
+  <select id="countCareer8"  resultType="int" >
+    select count(id) from user where career = "ui"
+  </select>
+  <select id="countCareer9"  resultType="int" >
+    select count(id) from user where career = "QA"
+  </select>
+
+  <insert id="insertSelective" parameterType="com.fangyuyang.model.Career" >
+    insert into career
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="career != null" >
+        career,
+      </if>
+      <if test="careerAbout != null" >
+        career_about,
+      </if>
+      <if test="money3 != null" >
+        money3,
+      </if>
+      <if test="money2 != null" >
+        money2,
+      </if>
+      <if test="money1 != null" >
+        money1,
+      </if>
+      <if test="learningMan != null" >
+        learning_man,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="beNeeded != null" >
+        be_needed,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="career != null" >
+        #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="careerAbout != null" >
+        #{careerAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="money3 != null" >
+        #{money3,jdbcType=VARCHAR},
+      </if>
+      <if test="money2 != null" >
+        #{money2,jdbcType=VARCHAR},
+      </if>
+      <if test="money1 != null" >
+        #{money1,jdbcType=VARCHAR},
+      </if>
+      <if test="learningMan != null" >
+        #{learningMan,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="beNeeded != null" >
+        #{beNeeded,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fangyuyang.model.Career" >
+    update career
+    <set >
+      <if test="career != null" >
+        career = #{career,jdbcType=VARCHAR},
+      </if>
+      <if test="careerAbout != null" >
+        career_about = #{careerAbout,jdbcType=VARCHAR},
+      </if>
+      <if test="money3 != null" >
+        money3 = #{money3,jdbcType=VARCHAR},
+      </if>
+      <if test="money2 != null" >
+        money2 = #{money2,jdbcType=VARCHAR},
+      </if>
+      <if test="money1 != null" >
+        money1 = #{money1,jdbcType=VARCHAR},
+      </if>
+      <if test="learningMan != null" >
+        learning_man = #{learningMan,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="beNeeded != null" >
+        be_needed = #{beNeeded,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByLearningMan" parameterType="com.fangyuyang.model.Career" >
+    update career
+    set
+      learning_man = #{learningMan,jdbcType=INTEGER}
+
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="list" resultType="com.fangyuyang.model.Career" >
+    select * from   career
+  </select>
+
+</mapper>
