@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.StudentDao">
+    <resultMap id="userResultMap" type="com.entity.Student">
+        <id property="id" column="ID"/>
+        <result property="name" column="name"/>
+        <result property="qq" column="QQ"/>
+        <result property="type" column="type"/>
+        <result property="startDay" column="start_day"/>
+        <result property="university" column="university"/>
+        <result property="studyName" column="study_name"/>
+        <result property="link" column="diary_link"/>
+        <result property="hope" column="hope"/>
+        <result property="tutorshipSenior" column="tutorship_senior"/>
+        <result property="know" column="where_know_xiuzhenyuan"/>
+        <result property="createAt" column="creat_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+    <!-- 单例插入 -->
+    <insert id = "addStudent"  parameterType="com.entity.Student" keyProperty="id" useGeneratedKeys="true">
+        insert into biao VALUE (null,#{name},#{qq},#{type},#{startDay},#{university},#{studyName},#{link},#{hope},#{tutorshipSenior},#{know},#{createAt},#{updateAt})
+    </insert>
+    <!-- 批量插入 -->
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into biao(ID,name,QQ,type,start_day,university,study_name,diary_link,hope,tutorship_senior,where_know_xiuzhenyuan,creat_at,update_at) VALUES
+        <foreach collection="list" item="student" separator=",">
+            (null,#{student.name},#{student.qq},#{student.type},#{student.startDay},#{student.university},#{student.studyName},#{student.link},#{student.hope},#{student.tutorshipSenior},#{student.know},#{student.createAt},#{student.updateAt})
+        </foreach>
+
+    </insert>
+    <!-- 查询所有 -->
+    <select id="findAll" resultMap="userResultMap">
+        select * from biao
+    </select>
+    <!-- 通过关键字查询 -->
+    <select id="findByName" parameterType="com.entity.Student" resultMap="userResultMap">
+        select * from biao
+        <where>
+            <if test="studyName!=null" >
+                and study_name = #{studyName}
+            </if>
+            <if test="name!=null" >
+                and name = #{name}
+            </if>
+            <if test="id!=0" >
+                and ID = #{id}
+            </if>
+        </where>
+    </select>
+    <!-- 模糊查询 -->
+    <select id="findByLike" parameterType="com.entity.Student" resultMap="userResultMap">
+        select * from biao
+        <where>
+            <if test="name!=null and name!=''">
+                   name like concat("%",#{name},"%")
+            </if>
+            <if test="studyName!=null and studyName!=0">
+                 and study_name like concat("%",#{studyName},"%")
+            </if>
+
+        </where>
+    </select>
+    <!-- 更新数据 -->
+    <update id = "updateByName" parameterType="com.entity.Student">
+        update biao
+        <set>
+            <if test="name!=null">name = #{name},</if>
+            <if test="type!=null">type = #{type},</if>
+            <if test="startDay!=null">start_day = #{startDay},</if>
+            <if test="tutorshipSenior!=null">tutorship_senior = #{tutorshipSenior},</if>
+            <if test="updateAt!=null">update_at = #{updateAt}</if>
+        </set>
+        where ID = #{id}
+    </update>
+    <!-- 通过id和学号删除 -->
+    <delete id="deleteById" parameterType="com.entity.Student">
+        delete from biao
+        <where>
+            <if test="id!=0" >
+                 and ID = #{id}
+            </if>
+            <if test="studyName!=0" >
+               and study_name = #{studyName}
+            </if>
+        </where>
+    </delete>
+
+    <!--清除所有数据-->
+    <delete id="truncate" >
+        truncate   table biao
+    </delete>
+</mapper>
+
