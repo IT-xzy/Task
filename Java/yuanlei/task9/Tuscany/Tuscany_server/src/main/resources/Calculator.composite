@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="CalculatorImpl" >
+
+    <component name="CalculatorServiceComponent">
+        <implementation.java class="server.CalculatorImpl" />
+
+        <service name="CalculatorImpl">
+            <interface.java interface="server.Calculator"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8099/CalculatorRMIService"/>
+        </service>
+
+        <reference name="addService" target="AddComponent"/>
+    </component>
+
+    <component name="AddComponent">
+        <implementation.java class="server.AddServiceImpl" />
+    </component>
+
+</composite>
