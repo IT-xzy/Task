@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+<!-- 引用java配置文件 -->
+    <context:property-placeholder location="db.properties" />
+
+    <!-- 配置数据源 -->
+    <bean id ="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name ="driverClassName" value="${db.driver}"/>
+        <property name ="url" value="${db.url}"/>
+        <property name ="username" value="${db.username}"/>
+        <property name ="password" value="${db.password}"/>
+    </bean>
+
+    <!-- 配置SqlSessionFactory -->
+    <bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="SqlMapConfig.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- spring创建mapper代理两种方式 -->
+    <!-- 第一种，单个配置，一个mapper就一个配置 -->
+
+    <bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!-- 指定要映射的mapper接口的全限定名 -->
+        <property name="mapperInterface" value="com.DAO.StudentMapper"/>
+        <!-- 指定sqlSessionFactory -->
+        <property name="sqlSessionFactory" ref="SqlSessionFactory"/>
+    </bean>
+
+    <bean id="StudentAnnotation" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!-- 指定要映射的mapper接口的全限定名 -->
+        <property name="mapperInterface" value="com.DAO.StudentAnnotation"></property>
+        <!-- 指定sqlSessionFactory -->
+        <property name="sqlSessionFactory" ref="SqlSessionFactory"></property>
+    </bean>
+
+    <!-- 批量配置，这里是批量配置mapper代理，那么下面就不用配置id了。
+        我们想要获取哪个mapper代理用这个格式：类名首字母小写
+     -->
+    <!--     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="basePackage" value="com.wuhao.ms.mapper"></property>
+        </bean> -->
+</beans>
