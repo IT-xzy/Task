@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.restful.dao.mapper,com.restful.service"/>
+    <context:property-placeholder location="classpath*:c3p0.properties"/>
+
+    <!-- 使用annotation注解方式配置事务 -->
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!--<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+
+        <!--初始化和最大最小连接数-->
+        <property name="initialPoolSize" value="${initialPoolSize}"/>
+        <property name="maxPoolSize" value="${max_size}"/>
+        <property name="minPoolSize" value="${min_size}"/>
+
+        <property name="acquireIncrement" value="${acquireIncrement}"/>
+        <property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+        <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}"/>
+        <property name="maxIdleTime" value="${maxIdleTime}"/>
+        <property name="acquireRetryDelay" value="${acquireRetryDelay}"/>
+        <property name="autoCommitOnClose" value="${autoCommitOnClose}"/>
+        <property name="maxStatements" value="${maxStatements}"/>
+    </bean>
+
+    <!--把Source注入sqlSessionFactory工厂，并且注入mapper配置文件-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--在mybatis-config里或者这里取一个地方配置就可以了-->
+        <property name="mapperLocations" value="classpath*:mapper/*.xml"/>
+
+        <!--容器管理事务 务管理-->
+        <!--<property name="transactionFactory">-->
+            <!--<bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory" />-->
+        <!--</property>-->
+    </bean>
+
+    <!--扫描mapper文件,注册bean-->
+    <!--扫描mapper接口文件，在mybatis-config里有配置，但是spring-mybatis整合要在这里配置，不然会嵌套异常 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.restful.dao/mapper/"/>
+    </bean>
+
+    <!--注册sqlSessionTemplate bean SqlSessionTemplate 对象可以使用 SqlSessionFactory 作为构造方法的参数来创建。-->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="studentService" class="com.restful.service.StudentServiceImpl"/>
+    <bean id="userService" class="com.restful.service.UserServiceImpl"/>
+
+    <!--<bean id="springMybatisAction" class="com.action.SpringMybatisAction"/>-->
+
+    <!--<bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+        <!--<property name="mapperInterface" value="com.dao.mapper.StudentMapper"/>-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+
+    <!--Spring注册Source 事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+</beans>
