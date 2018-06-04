@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.longhang" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 配置jedispool缓存存取验证信息 -->
+    <bean id="jedispool" class=" redis.clients.jedis.JedisPool">
+    </bean>
+
+    <!-- 阿里云emial -->
+    <bean id="aliyunEmail" class="com.longhang.util.AliyunEmail">
+        <constructor-arg index="0" value="LTAIKnqIIeA3uHck"/>
+        <constructor-arg index="1" value="JSoSk7dfaEz8aq7QLLKjkzQ2WWEHvH"/>
+    </bean>
+    <!-- 阿里云Sms -->
+    <bean id="smsDemo" class="com.longhang.util.SmsDemo">
+        <constructor-arg index="0"  value="LTAIKnqIIeA3uHck"/>
+        <constructor-arg index="1" value="JSoSk7dfaEz8aq7QLLKjkzQ2WWEHvH"/>
+    </bean>
+    <!--<OOS设置>-->
+    <context:property-placeholder location="classpath:oos.properties" ignore-unresolvable="true"/>
+    <!-- OOS -->
+    <bean id="oosUtil" class="com.longhang.util.OOSUtil">
+    <constructor-arg index="0" value="${endpoint}"/>
+    <constructor-arg index="1" value="${accessKeyId}"/>
+    <constructor-arg index="2" value="${accessKeySecret}"/>
+    <constructor-arg index="3" value="${bucketName}"/>
+    <constructor-arg index="4" value="${folderName}"/>
+    </bean>
+    <!-- 迁移数据 -->
+    <context:property-placeholder   location="classpath:uploadOOS.properties" ignore-unresolvable="true"/>
+    <bean id="uploadOOS" class="com.longhang.util.UploadOOS">
+    <constructor-arg index="0" value="${aliyunEndpoint}"/>
+    <constructor-arg index="1" value="${aliyunAccessKeyId}"/>
+    <constructor-arg index="2" value="${aliyunAccessKeySecret}"/>
+    <constructor-arg index="3" value="${aliyunBucketName}"/>
+    <constructor-arg index="4" value="${qiniuyunEndpoint}"/>
+    <constructor-arg index="5" value="${qiniuyunAccessKeyId}"/>
+    <constructor-arg index="6" value="${qiniuyunAccessKeySecret}"/>
+    <constructor-arg index="7" value="${qiniuyunBucketName}"/>
+    <constructor-arg index="8" value="${folderName}"/>
+    </bean>
+
+
+
+</beans>
