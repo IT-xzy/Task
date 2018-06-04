@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder"
+          p:connectionPoolSize="5" p:failureMode="true">
+        <!--XMemcachedClientBuilder有两个参数。第一个是服务器列表，第二个是权重数组。-->
+        <constructor-arg>
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg>
+                        <value>47.106.125.80</value>
+                    </constructor-arg>
+                    <constructor-arg>
+                        <value>11211</value>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+
+        <!-- 二进制协议 ，默认是 TextCommandFactory-->
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>
+        </property>
+
+        <!--序列化转换器，默认就是这个 -->
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+
+    </bean>
+
+    <!-- Use factory bean to build memcached client -->
+    <bean
+            id="memcachedClient"
+            factory-bean="memcachedClientBuilder"
+            factory-method="build"
+            destroy-method="shutdown"/>
+
+</beans>
