@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>RestUser</groupId>
+  <artifactId>RestUser</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>RestUser Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <spring.version>5.0.4.RELEASE</spring.version>
+    <junit.version>4.12</junit.version>
+    <mysql.version>5.1.40</mysql.version>
+    <slf4j.version>1.7.16</slf4j.version>
+    <!--<log4j.version>1.2.17</log4j.version>-->
+    <log4j.version>2.5</log4j.version>
+    <c3p0.version>0.9.5.2</c3p0.version>
+    <mybatis.version>3.4.5</mybatis.version>
+    <mybatispring.version>1.3.2</mybatispring.version>
+    <jetty.version>9.4.5</jetty.version>
+    <jsontaglib.version>0.4.1</jsontaglib.version>
+  </properties>
+
+  <!--阿里云资源镜像-->
+  <repositories>
+    <repository>
+      <id>aliyun</id>
+      <name>aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </repository>
+  </repositories>
+  <dependencies>
+
+    <!--测试 与 日志-->
+
+    <!--junit包-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <!--测试的时候用，不测试注掉-->
+      <!--<scope>test</scope>-->
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.1.0</version>
+    </dependency>
+
+    <!--log4j日志包-->
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <!--<version>${log4j.version}</version>-->
+      <version>1.2.17</version>
+    </dependency>
+
+    <!--log4j2的依赖包-->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <!--格式化-->
+    <!--<dependency>-->
+      <!--<groupId>org.slf4j</groupId>-->
+      <!--<artifactId>slf4j-api</artifactId>-->
+      <!--<version>${slf4j.version}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.slf4j</groupId>-->
+      <!--<artifactId>slf4j-log4j12</artifactId>-->
+      <!--<version>${slf4j.version}</version>-->
+    <!--</dependency>-->
+
+
+    <!--测试 与 日志 end-->
+
+    <!--数据库-->
+
+    <!--mysql包-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+
+    <!--数据库连接池 c3p0-->
+    <dependency>
+      <groupId>com.mchange</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>${c3p0.version}</version>
+    </dependency>
+
+    <!--数据库持久层 end-->
+
+    <!--spring及mybatis-->
+
+    <!--mybatis包-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+
+    <!--mybati-spring包-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${mybatispring.version}</version>
+    </dependency>
+
+    <!--spring framework包-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-oxm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--Spring-web（mvc） jar-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-websocket</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--spring end-->
+
+    <!--JSON-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.32</version>
+    </dependency>
+
+    <!-- jsp -->
+    <!--标签库 -->
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!--JSON Taglib -->
+    <dependency>
+      <groupId>json-taglib</groupId>
+      <artifactId>json-taglib</artifactId>
+      <version>${jsontaglib.version}</version>
+    </dependency>
+
+    <!--json-lib-->
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.4</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+
+    <!-- jsp的taglib标签库相关 -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+
+
+    <!--jetty 更新日志-->
+    <!--<dependency>-->
+    <!--<groupId>org.eclipse.jetty</groupId>-->
+    <!--<artifactId>jetty-project</artifactId>-->
+    <!--<version>9.4.9.v20180320</version>-->
+    <!--<classifier>version</classifier>-->
+    <!--<type>txt</type>-->
+    <!--</dependency>-->
+
+    <!--jsp end-->
+
+    <!--支持自定义标签的jar包-->
+    <!--<dependency>-->
+    <!--<groupId>javax.servlet.jsp</groupId>-->
+    <!--<artifactId>javax.servlet.jsp-api</artifactId>-->
+    <!--<version>2.3.1</version>-->
+    <!--<scope>provided</scope>-->
+    <!--</dependency>-->
+    <!--jackson  json-->
+    <!--<dependency>-->
+    <!--<groupId>org.codehaus.jackson</groupId>-->
+    <!--<artifactId>jackson-mapper-asl</artifactId>-->
+    <!--<version>1.9.13</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+    <!--<artifactId>jackson-core</artifactId>-->
+    <!--<version>2.8.0</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+    <!--<artifactId>jackson-annotations</artifactId>-->
+    <!--<version>2.8.0</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.codehaus.jackson</groupId>-->
+    <!--<artifactId>jackson-core-asl</artifactId>-->
+    <!--<version>1.9.13</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.codehaus.jackson</groupId>-->
+    <!--<artifactId>jackson-mapper-lgpl</artifactId>-->
+    <!--<version>1.9.13</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+    <!--<artifactId>jackson-databind</artifactId>-->
+    <!--<version>2.8.0</version>-->
+    <!--</dependency>-->
+
+    <!-- web上传下载包 -->
+    <!--<dependency>-->
+    <!--<groupId>commons-fileupload</groupId>-->
+    <!--<artifactId>commons-fileupload</artifactId>-->
+    <!--<version>1.3.1</version>-->
+    <!--</dependency>-->
+
+  </dependencies>
+
+
+
+  <build>
+    <finalName>RestUser</finalName>
+
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+        <!--<targetPath>WEB-INF/classes</targetPath>-->
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+        </includes>
+        <!-- 是否替换资源中的属性-->
+        <!--<filtering>true</filtering>-->
+      </resource>
+      <resource>
+      <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+          <include>**/*.xml</include>
+          <include>**/*</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>2.4</version>
+          <configuration>
+            <archive>
+              <!--生成的jar中，不要包含pom.xml和pom.properties这两个文件-->
+              <!--<addMavenDescriptor>false</addMavenDescriptor>-->
+              <manifest>
+                <!--是否要把第三方jar放到manifest的classpath中-->
+                <addClasspath>true</addClasspath>
+                <!--生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/-->
+                <classpathPrefix>lib/</classpathPrefix>
+                <!--应用的main class -->
+                <mainClass>com.action.MainAction</mainClass>
+              </manifest>
+            </archive>
+            <!--过滤掉不希望包含在jar中的文件-->
+            <!--<excludes>-->
+            <!--<exclude>${project.basedir}/xml/*</exclude>-->
+            <!--</excludes>-->
+          </configuration>
+        </plugin>
+        <!--跳过junit测试包-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+
+
+        <!--配置maven jdk版本-->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <encoding>UTF-8</encoding>
+          </configuration>
+        </plugin>
+
+
+        <!--jetty-->
+        <plugin>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <!--<version>9.4.5.v20170502</version>-->
+          <version>9.2.2.v20140723</version>
+
+          <configuration>
+
+            <!--开启自动检测配置,然后重新部署 （热部署） 默认为0秒,. 单位为秒 -->
+            <scanIntervalSeconds>2</scanIntervalSeconds>
+            <!--webapp-->
+            <webApp>
+              <!--webapp上下文路径-->
+              <contextPath>/</contextPath>
+              <!--web.xml文件路径-->
+              <descriptor>/WEB-INF/</descriptor>
+              <!--webdefault.xml的路径，在web.xml之前使用-->
+              <defaultsDescriptor>webdefault.xml</defaultsDescriptor>
+
+              <!--jetty提供静态资源的路径，默认src/main/webapp-->
+              <baseResource>src/main/webapp</baseResource>
+              <!--用于代替baseResource提供静态资源，是一个数组，可以提供多个提供静态资源的文件夹-->
+              <resourceBases>/</resourceBases>
+            </webApp>
+
+            <httpConnector>
+              <!--配置端口号-->
+              <port>8088</port>
+              <!--空闲超时-->
+              <idleTimeout>60000</idleTimeout>
+            </httpConnector>
+            <!--<webAppConfig>-->
+            <!--<contextPath>/</contextPath>-->
+            <!--</webAppConfig>-->
+            <!--让插件知道应用的配置文件-->
+            <!--<jettyXml>jetty.xml,jetty-ssl.xml,jetty-https.xml</jettyXml>-->
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

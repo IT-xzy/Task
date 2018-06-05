@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper映射文件，对应数据库中表格字段和实体类属性 -->
+<mapper namespace="com.mojorjoe.web.dao.StudentDAO">
+
+    <!--学生信息插入   void saveStudent(Student student)-->
+    <insert id="saveStudent" parameterType="student" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO student_info (name,qq,type,entor_time,graduate_school,net_id,daily_link,wish,senior,create_time,update_time)
+        VALUES(#{name},#{qq},#{type},#{entorTime},#{graduateSchool},#{netId},#{dailyLink},#{wish},#{senior},#{createTime},#{updateTime})
+    </insert>
+
+    <!--删除信息    boolean deleteStudent(long id)-->
+    <delete id="deleteStudent" parameterType="Long">
+        DELETE FROM student_info WHERE id=#{id}
+    </delete>
+
+    <!--查询信息   Student selectStudent(int id);-->
+    <select id="selectStudent" parameterType="long" resultType="student">
+        select * FROM student_info WHERE id=#{id}
+    </select>
+
+    <!--模糊查询   List<Student> selectByName(String name)-->
+    <select id="selectByName" parameterType="String" resultType="student">
+        select * FROM student_info WHERE name like CONCAT(CONCAT('%',#{name},'%'))
+    </select>
+
+    <!--更新信息   boolean updateStudent(Student student)-->
+    <update id="updateStudent" parameterType="student">
+        UPDATE student_info
+        <!--trim标签替代关键字set-->
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name !=null and name != ''">
+                name=#{name},
+            </if>
+            <if test="qq !=null and qq != ''">
+                qq=#{qq},
+            </if>
+            <if test="type !=null and type != ''">
+                type=#{type},
+            </if>
+            <if test="entorTime !=null and entorTime != ''">
+                entor_time=#{entorTime},
+            </if>
+            <if test="graduateSchool !=null and graduateSchool != ''">
+                graduate_school=#{graduateSchool},
+            </if>
+            <if test="netId !=null and netId != ''">
+                net_id=#{netId},
+            </if>
+            <if test="dailyLink !=null and dailyLink != ''">
+                daily_link=#{dailyLink},
+            </if>
+            <if test="wish !=null and wish != ''">
+                wish=#{wish},
+            </if>
+            <if test="senior !=null and senior != ''">
+                senior=#{senior},
+            </if>
+            <if test="updateTime !=null and updateTime != ''">
+                update_time=#{updateTime},
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
+    <!--分页查询    List<Student> pageListStudent (PageBean pageBean)-->
+    <select id="pageListStudent" resultType="student">
+        SELECT * FROM student_info
+        <if test="startIndex!=null and pageSize!=null">
+            limit #{startIndex},#{pageSize}
+        </if>
+    </select>
+
+    <!--查询总条数   long totalStudent()-->
+    <select id="totalStudent" resultType="long">
+        SELECT COUNT(*) FROM student_info
+    </select>
+
+
+
+
+
+
+</mapper>
+
+
+
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <!-- 变量配置 -->
+    <Properties>
+        <Property name="log_path">logs</Property>
+    </Properties>
+
+    <!-- appender配置 -->
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d][%t][%p][%c:%L] %m%n" />
+        </Console>
+        <RollingFile name="DailyRollingFile" fileName="${log_path}/logs.log"
+                     filePattern="${log_path}/logs%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="[%d][%t][%p][%c:%L] %m%n" />
+            <TimeBasedTriggeringPolicy  interval="1"/>
+            　　　　　　　<SizeBasedTriggeringPolicy size="10 MB" />
+
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        　　　　<Logger name="mylog" level="trace" additivity="false">
+        　　　　　　<AppenderRef ref="DailyRollingFile" />
+        　　　　</Logger>
+        <!-- 配置要使用的appender -->
+
+        　　 <!--
+        additivity开启的话，由于这个logger也是满足root的，所以会被打印两遍。
+        不过root logger 的level是error，为什么Bar 里面的trace信息也被打印两遍呢
+        -->
+
+
+        <Root level="info">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="DailyRollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

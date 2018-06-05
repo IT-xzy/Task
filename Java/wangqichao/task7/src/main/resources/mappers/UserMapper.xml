@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task.dao.UserDao">
+    <!--添加信息-->
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id" >
+        insert into  user (createdAt,username,salt,hashKey,loginTime) values (#{createdAt},#{username},#{salt},#{hashKey},#{loginTime})
+    </insert>
+    <!--删除信息-->
+    <delete id="deleteUser" parameterType="int" >
+        delete from user where id= #{id}
+    </delete>
+    <!--修改信息-->
+    <update id="updateUser" parameterType="User" >
+        update user
+        <set>
+            <if test="username!=null">username=#{username},</if>
+            <if test="password!=null">salt=#{salt},</if>
+            <if test="password!=null">hashKey=#{hashKey},</if>
+            <if test="updatedAt!=0">updatedAt=#{updatedAt}</if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--根据姓名模糊查找-->
+    <select id="getUserByName" parameterType="String" resultType="User">
+        select * from  user WHERE  username=#{username}
+    </select>
+    <!--更新登录时间-->
+    <update id="updateLoginTime" parameterType="User" >
+        update user set loginTime=#{loginTime} where username=#{username}
+    </update>
+</mapper>

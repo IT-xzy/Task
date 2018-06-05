@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--<context:component-scan base-package="com.jdbc.impl"></context:component-scan>-->
+
+    <!-- 导入资源文件 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties"></property>
+    </bean>
+
+    <!-- 1.将连接池放入spring容器 -->
+    <bean id="DataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${user}"></property>
+        <property name="password" value="123"></property>
+    </bean>
+
+    <bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="DataSource"></property>
+    </bean>
+
+    <!--<bean id="UserDao" class="com.impl.UserDaoImpl">-->
+    <!--<property name="JdbcTemplate" ref="JdbcTemplate"></property>-->
+    <!--</bean>-->
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--指定对哪个数据库进行管理-->
+        <property name="dataSource" ref="DataSource"></property>
+    </bean>
+
+    <!-- 2.开启事务的注解 -->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    <!--配置事务的增强，指定对哪个事务管理器进行增强-->
+    <!--<tx:advice id="userTxAdvice" transaction-manager="transactionManager">-->
+
+        <!--<tx:attributes>-->
+            <!--&lt;!&ndash;-->
+                <!--表示来配置你要增强的方法的匹配的一个规则，-->
+                <!--注意：只须改方法的命名规则，其他都是固定的！-->
+                <!--propagation：事务的传播行为。-->
+            <!--&ndash;&gt;-->
+            <!--&lt;!&ndash;<tx:method name="account*" propagation="REQUIRED"></tx:method>&ndash;&gt;-->
+            <!--<tx:method name="insert" propagation="REQUIRED"  read-only="false" rollback-for="java.lang.Exception" ></tx:method>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!--&lt;!&ndash;配置切点和切面&ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--&lt;!&ndash;切入点&ndash;&gt;-->
+        <!--<aop:pointcut id="pointcut1" expression="execution(* com.jdbc.impl.UserDaoImpl.*(..))"/>-->
+        <!--&lt;!&ndash;切面，即表示把哪个增强用到哪个切点上&ndash;&gt;-->
+        <!--<aop:advisor advice-ref="userTxAdvice" pointcut-ref="pointcut1"/>-->
+
+    <!--</aop:config>-->
+
+</beans>
