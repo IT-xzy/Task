@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+
+    <!--客户端-->
+    <bean id="myRMIClient1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.longhang.stuService.StuService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8885/studentServiceRMI"/>
+    </bean>
+
+
+    <!--客户端-->
+    <bean id="myRMIClient2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceInterface" value="com.longhang.stuService.StuService"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8886/studentServiceRMI"/>
+    </bean>
+
+
+</beans>
