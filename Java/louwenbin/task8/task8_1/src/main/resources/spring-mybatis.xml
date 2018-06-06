@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.*">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--<import resource="spring-memcached.xml"/>-->
+    <import resource="rmiClient.xml"/>
+    <import resource="rmiClient2.xml"/>
+
+
+    <!-- redis config start -->
+    <!-- 配置JedisPoolConfig实例 --><!-- redis连接池 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="300"/>
+        <property name="maxTotal" value="600"/>
+        <property name="maxWaitMillis" value="1000"/>
+        <property name="testOnBorrow" value="true"/>
+    </bean>
+
+    <!-- 配置JedisConnectionFactory -->    <!-- redis连接工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="47.106.125.80" p:port="6379" p:password="root" p:pool-config-ref="poolConfig"/>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <bean id="receiveDemo" class="com.ptteng.utils.aliyunAPI.ReceiveDemo">
+        <property name="endpoint" value="cn-hangzhou"/>
+        <property name="accessKeyId" value="LTAIf892kCXG88JR"/>
+        <property name="accessKeySecret" value="ZSU8xlK7x7dmGc2TVOwvNHHn3r9onV"/>
+    </bean>
+    <bean id="SMSSend" class="com.ptteng.utils.aliyunAPI.SMSSend">
+        <property name="accessKeyId" value="LTAIf892kCXG88JR"/>
+        <property name="accessKeySecret" value="ZSU8xlK7x7dmGc2TVOwvNHHn3r9onV"/>
+        <property name="connectTimeout" value="10000"/>
+        <property name="readTimeout" value="10000"/>
+    </bean>
+
+    <bean id="qiniuyunImage" class="com.ptteng.utils.qiniuyunAPI.QiNiuYunImage">
+        <constructor-arg index="0" value="GibKUPut4XmdAvfIT5GF0tj8y19CeUWmJGZw62WH"/>
+        <constructor-arg index="1" value="l_zXTFaLyLyJSdA7SYINjiNzS3DF_-VxBsxCFCic"/>
+        <constructor-arg index="2" value="leon"/>
+    </bean>
+
+    <bean id="helloOSS" class="com.ptteng.utils.aliyunAPI.HelloOSS">
+        <constructor-arg index="0" value="http://oss-cn-shenzhen.aliyuncs.com"/>
+        <constructor-arg index="1" value="LTAIf892kCXG88JR"/>
+        <constructor-arg index="2" value="ZSU8xlK7x7dmGc2TVOwvNHHn3r9onV"/>
+        <constructor-arg index="3" value="leonle"/>
+    </bean>
+
+    <bean id="context" class="com.ptteng.utils.strategy.concreteStrategy.Context">
+        <!--<constructor-arg  ref="ALiConfig"/>-->
+        <constructor-arg ref="QiNiuConfig"/>
+    </bean>
+    <bean name="ALiConfig" class="com.ptteng.utils.strategy.concreteStrategy.ALiConfig"/>
+    <bean name="QiNiuConfig" class="com.ptteng.utils.strategy.concreteStrategy.QiNiuConfig"/>
+
+
+</beans>
