@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="userServiceImpl" class="com.ptteng.service.Impl.UserServiceImpl"/>
+    <bean id="userServiceImpl_t11" class="com.ptteng.service.Impl.UserServiceImpl_t11"/>
+    <bean id="userServiceImplLogin" class="com.ptteng.service.Impl.UserServiceImplLogin"/>
+    <bean id="uerServiceStudentImpl" class="com.ptteng.service.Impl.UserServiceStudentImpl"/>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="myRMIServer2-1" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="helloRMI2-1"/>
+        <property name="service" ref="userServiceImpl"/>
+        <property name="serviceInterface" value="com.ptteng.service.UserService"/>
+        <property name="registryPort" value="2111"/>
+        <property name="servicePort" value="2111"/>
+
+    </bean>
+    <bean id="myRMIServer2-2" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="helloRMI2-2"/>
+        <property name="service" ref="userServiceImpl_t11"/>
+        <property name="serviceInterface" value="com.ptteng.service.UserService_t11"/>
+        <property name="registryPort" value="2112"/>
+        <property name="servicePort" value="2112"/>
+    </bean>
+    <bean id="myRMIServer2-3" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="helloRMI2-3"/>
+        <property name="service" ref="userServiceImplLogin"/>
+        <property name="serviceInterface" value="com.ptteng.service.UserServiceLogin"/>
+        <property name="registryPort" value="2113"/>
+        <property name="servicePort" value="2113"/>
+    </bean>
+    <bean id="myRMIServer2-4" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="helloRMI2-4"/>
+        <property name="service" ref="uerServiceStudentImpl"/>
+        <property name="serviceInterface" value="com.ptteng.service.UserServiceStudent"/>
+        <property name="registryPort" value="2114"/>
+        <property name="servicePort" value="2114"/>
+    </bean>
+
+</beans>
