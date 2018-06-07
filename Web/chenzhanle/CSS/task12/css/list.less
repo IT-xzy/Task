@@ -1,0 +1,134 @@
+@import "common.less";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+a {  text-decoration: none;}
+header {
+  .fixed;
+  top: 0;
+  width: 100%;
+  height: 90px;
+  .bgc(@blue);
+  .hd-btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 50%;
+    height: 60px;
+    font-size: 0;
+    .bgc(darken(@blue,20%));
+    border-radius: 10px;
+    button {
+      width: 50%;
+      height: 60px;
+      padding: 0;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+    }
+    .btn-left {
+      .clr(@white);
+      .bgc(darken(@blue,20%));
+    }
+    .btn-right {
+      .clr(@blue);
+      .bgc(@white2);
+    }
+  }//hd-btn end/
+  a {
+    float: right;
+    margin: 20px;
+  }
+}
+
+main {
+  position: relative;
+  top: 90px;
+  width: 100%;
+  margin-bottom: 100px; 
+}
+.list-inline {
+  height: 40px;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  li {
+    float: left;
+    width: 33.3333%;
+    border-bottom: 1px solid @grey;
+    select {
+      width: 100%;
+      height: 30px;
+      margin: 10px 0;
+      border: none;
+      border-right: 1px solid @grey2;
+      text-align: center;
+      text-align-last: center;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+.cnt-row {
+  border-bottom: 1px solid @grey2;
+  p {
+    margin: 5px 0;
+    padding: 10px 0;
+    .clr(@grey);
+    text-indent: 60px;
+    &:first-child {
+      background: url(../img/calendar.png) no-repeat 30px center;
+      background-size: 18px auto;
+    }
+    &:last-child {
+      background: url(../img/pot.png) no-repeat 30px center;
+      background-size: 15px auto;
+    }
+  }
+}
+.cnt-txt {
+  font-size: 1.2em;
+  .txt-elps {
+    display: inline-block;
+    width: 30%;
+    min-width: 100px;
+    max-width: 200px;
+    margin-left: 60px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .txt-red {
+    float: right;
+    margin-right: 20px;
+    .clr(@red);
+    img {
+      width: auto;
+      height: 18px;
+      padding-left: 10px;
+      vertical-align: middle;
+    }
+  }
+}
+footer {
+  .fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  .bgc(@white);
+  a {
+    display: inline-block;
+    width: 32%;
+    text-align: center;
+    vertical-align: middle;
+    span {display: block;}
+    &:first-child { .clr(@blue);}
+    &:last-child { .clr(@grey);}
+  }
+}

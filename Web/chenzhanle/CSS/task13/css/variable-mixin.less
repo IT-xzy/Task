@@ -1,0 +1,46 @@
+// variable
+
+// color
+@bg-lightblue: rgb(35,169,200);
+@bg-blue: rgb(41,189,224);
+@bg-darkblue: rgb(105,209,233);
+@bg-blue183: rgb(183,227,237);
+@bg-grey: rgb(240,240,240);
+@bg-white: rgb(255,255,255);
+@bg-yellow: rgb(251,180,53);
+@bg-yellow245: rgb(245,201,123);
+@bg-lightyellow: rgb(253,215,147);
+@bg-red: rgb(246,111,111);
+@bg-green: rgb(131,176,154);
+//font-color
+@font-grey: rgb(154,154,154);
+@font-white: rgb(255,255,255);
+@font-yellow: rgb(251,180,53);
+@font-yellow200: rgb(255,200,101);
+@font-black: rgb(120,120,120);
+
+@img-url: "../img";
+
+// mixins
+
+.fixed() {
+  position: fixed;
+}
+.mixin(@-) {.fixed();}
+.mixin(top) {
+  top: 0;
+}
+.mixin(bottom) {
+  bottom: 0;
+}
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
