@@ -1,0 +1,44 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+       <!--xmlns:context="http://www.springframework.org/schema/context"-->
+       <!--xmlns:p="http://www.springframework.org/schema/p"-->
+       <!--xmlns:aop="http://www.springframework.org/schema/aop"-->
+       <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+       <!--xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+       <!--http://www.springframework.org/schema/beans/spring-beans-4.0.xsd-->
+	    <!--http://www.springframework.org/schema/context-->
+	    <!--http://www.springframework.org/schema/context/spring-context-4.0.xsd-->
+	    <!--http://www.springframework.org/schema/aop-->
+	    <!--http://www.springframework.org/schema/aop/spring-aop-4.0.xsd-->
+	    <!--http://www.springframework.org/schema/tx-->
+	    <!--http://www.springframework.org/schema/tx/spring-tx-4.0.xsd-->
+	    <!--http://www.springframework.org/schema/util-->
+	    <!--http://www.springframework.org/schema/util/spring-util-4.0.xsd">-->
+
+    <!--&lt;!&ndash;1加载配置文件&ndash;&gt;-->
+    <!--<context:property-placeholder location="../../../../main/resources/db.properties"/>-->
+
+    <!--&lt;!&ndash;2创建c3p0连接池&ndash;&gt;-->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--<property name="driverClass" value="${jdbc.driver}"/>-->
+        <!--<property name="jdbcUrl" value="${jdbc.url}"/>-->
+        <!--<property name="user" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
+    <!--</bean>-->
+    <!--<context:component-scan base-package="task1"/>-->
+
+    <!--&lt;!&ndash;3创建sqlSessionFactory对象&ndash;&gt;-->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--&lt;!&ndash;加载全局配置文件&ndash;&gt;-->
+        <!--<property name="configLocation" value="../../../../main/resources/sqlMapConfig.xml"/>-->
+        <!--&lt;!&ndash;加载数据源&ndash;&gt;-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;4创建接口Dao实例对象&ndash;&gt;-->
+    <!--<bean id="tnDao" class="task1.dao.TnDaoImpl_2_2">-->
+        <!--&lt;!&ndash;传递sqlSessionFactory对象&ndash;&gt;-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+<!--</beans>-->

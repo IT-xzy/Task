@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task1.dao.TnDao">
+    <select id="findByName" parameterType="java.lang.String" resultType="task1.domain.Trainees">
+        select * from student where name = #{name}
+    </select>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="task1.domain.Trainees">
+        select * from student where id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+            delete from student where id=#{id}
+    </delete>
+
+    <insert id="addTrainees" parameterType="task1.domain.Trainees">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+            insert into student (name,senior,noturl) value (#{name },#{senior},#{noturl})
+    </insert>
+
+    <update id="updateTrainees" parameterType="task1.domain.Trainees">
+        update student set name= #{name},senior=#{senior},noturl=#{noturl} where id=#{id}
+    </update>
+
+</mapper>

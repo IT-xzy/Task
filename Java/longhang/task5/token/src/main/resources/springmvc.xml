@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.longhang.controller" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <!--&lt;!&ndash; 静态资源处理  css js imges &ndash;&gt;-->
+    <!--&lt;!&ndash;<mvc:resources location="classpath:" mapping="/resources"/>&ndash;&gt;-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/u/**" />
+            <bean class="com.longhang.userHandler.UserRoleHandler"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/logins" />
+            <bean class="com.longhang.userHandler.UserLonginHandler"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <bean id="aspectJ" class="com.longhang.aspectj.AspectJ"/>
+    <aop:config>
+        <!--定义切面-->
+        <aop:aspect id="logAspect" ref="aspectJ">
+            <!-- 定义切入点 (配置在com.gray.user.controller下所有的类在调用之前都会被拦截)-->
+            <aop:pointcut expression="execution(* com.longhang.controller.*.*(..))" id="logPointCut"/>
+            <!--方法执行之前被调用执行的-->
+            <aop:before method="before" pointcut-ref="logPointCut"/><!--一个切入点的引用-->
+            <aop:after method="after" pointcut-ref="logPointCut"/><!--一个切入点的引用-->
+            <aop:around method="around" pointcut-ref="logPointCut"/>
+        </aop:aspect>
+    </aop:config>
+
+
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="order" value="1"/>
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+</beans>

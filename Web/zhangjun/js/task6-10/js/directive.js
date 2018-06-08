@@ -51,6 +51,7 @@ app.directive("upLoad",function ($http) {
                 scope.isShow = false;
                 scope.okIcon = false;
                 scope.progress = 0;
+                scope.imageSrc = undefined;
                 angular.element("#preview").attr("src","");  // 删除预览图
                 scope.input.value = ""; // 防止删除一个文件后不能再次上传同一个文件的问题
             }

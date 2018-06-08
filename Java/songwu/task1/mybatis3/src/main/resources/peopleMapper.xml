@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.PeopleMapper">
+   <insert id="insertPeople" parameterType="com.pojo.people">
+       insert  into people(sex,name,address)values (#{sex},#{name},#{address})
+   </insert>
+    <delete id="deletePeopleById" parameterType="int">
+        delete from people where  id=#{id}
+    </delete>
+    <update id="updatePeopleById"  parameterType="com.pojo.people">
+        update people set name =#{name} where id=#{id}
+    </update>
+    <select id="findPeopleById"  parameterType="int" resultType="com.pojo.people">
+        select * from people where id=#{id}
+    </select>
+    <select id="findPeopleAll"   resultType="com.pojo.people">
+        select * from people
+    </select>
+    <select id="insertBatch" parameterType="java.util.List">
+        insert into people (sex,name ,address)
+        values
+        <foreach collection="list" item="people" index="index" separator=",">
+            (#{people.sex},#{people.name},#{people.address})
+        </foreach>
+    </select>
+</mapper>
+

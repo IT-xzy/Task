@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--设置为为StudentDao 提供sql语句配置-->
+<mapper namespace="com.ptteng.dao.StudentDao">
+    <!--查询-->
+    <select id="getStudentById" parameterType="java.lang.Long" resultType="com.ptteng.model.Student">
+        SELECT * FROM t_students WHERE  id=#{id}
+    </select>
+    <select id="getAllStudents" resultType="com.ptteng.model.Student">
+        SELECT * from t_students
+    </select>
+    <select id="getStudentsListByName" parameterType="java.lang.String" resultType="Student">
+        SELECT * FROM t_students WHERE NAME LIKE '%${value}%'
+    </select>
+    <!--删除-->
+    <delete id="deleteStudentById" parameterType="java.lang.Long">
+        DELETE FROM t_students WHERE id=#{id}
+    </delete>
+    <!--新增-->
+    <insert id="saveStudent" parameterType="Student">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT last_insert_id()
+        </selectKey>
+        INSERT INTO t_students
+        (name,qq,goal,registration_date,graduated_from,number,daily_link,pledge,senior,know_from,created_at,updated_at)
+        VALUES
+        (#{name},#{qq},#{goal},#{registration_date},#{graduated_from},#{number},#{daily_link},#{pledge},#{senior},#{know_from},#{created_at},#{updated_at})
+    </insert>
+    <!--更新-->
+    <update id="updateStudent" parameterType="com.ptteng.model.Student">
+        UPDATE t_students
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name !=null">name=#{name},</if>
+            <if test="qq !=null">qq =#{qq},</if>
+            <if test="goal!=null">goal=#{goal},</if>
+            <if test="registration_date!=null">registration_date=#{registration_date},</if>
+            <if test="graduated_from!=null">graduated_from=#{graduated_from},</if>
+            <if test="number!=null">number=#{number},</if>
+            <if test="daily_link!=null">daily_link=#{daily_link},</if>
+            <if test="pledge!=null">pledge=#{pledge},</if>
+            <if test="senior!=null">senior=#{senior},</if>
+            <if test="know_from!=null">know_from=#{know_from},</if>
+            <if test="created_at!=null">created_at=#{created_at},</if>
+            <if test="updated_at!=null">updated_at=#{updated_at},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+    <!--sql分页查询-->
+    <select id="getStudentsListByPage" parameterType="Map" resultType="com.ptteng.model.Student">
+        select * FROM t_students
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+    <!--查找总数-->
+    <select id="getCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM t_students
+    </select>
+</mapper>

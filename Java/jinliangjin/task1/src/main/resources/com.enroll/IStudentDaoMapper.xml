@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.enroll.DAO.IStudentDao">
+    <!--add entryForm-->
+    <insert id="addEntryForm" parameterType="java.util.List">
+        INSERT INTO entryform
+        (entryform.name,sex,qq,whatType,joinTime,school,student_id,link,wishes,tutorBro,knowFrom)
+        VALUES
+        <foreach collection="list" item="item" separator="," index="index">
+            (#{item.name},#{item.sex},#{item.qq},#{item.whatType},#{item.joinTime},#{item.school},#{item.student_id},
+            #{item.link},#{item.wishes},#{item.tutorBro},#{item.knowFrom})
+        </foreach>
+    </insert>
+    <!--delete entryForm by id-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM entryform WHERE id=#{id}
+    </delete>
+    <!--delete entryForm by name-->
+    <delete id="deleteByName" parameterType="java.lang.String">
+        DELETE FROM entryform WHERE name=#{name}
+    </delete>
+    <!--update entryForm by id-->
+    <update id="update" parameterType="EntryForm">
+        <!--注意表名、字段名是区分大小写的-->
+        UPDATE entryform
+        <!--set语句，省略逗号-->
+        <trim prefix="set" suffixOverrides=",">
+            <!--引用updateSet-->
+            <include refid="updateSet"/>
+        </trim>
+        <where>
+            <!--引用idWhere-->
+            <include refid="idWhere"/>
+        </where>
+    </update>
+    <!--get entryForm list-->
+    <select id="getAll" resultType="EntryForm">
+        SELECT * FROM entryform
+    </select>
+    <!--get entryForm -->
+    <select id="getEntryFormById" parameterType="java.lang.Integer" resultType="EntryForm">
+        SELECT * FROM entryform WHERE id=#{id}
+    </select>
+
+    <!--get entryForm list by "like name"-->
+    <select id="getEntryFormByQq" parameterType="java.lang.Long" resultType="EntryForm">
+        SELECT * FROM entryform WHERE qq=#{qq};
+    </select>
+
+    <select id="getEntryFormByString" parameterType="java.lang.String" resultType="EntryForm">
+        SELECT * FROM entryform
+        <where>
+            <if test="str !=null and str !=''">
+                entryform.name=#{str},
+                OR entryform.sex=#{str},
+                OR entryform.qq=#{str},
+                OR entryform.whatType=#{str},
+                OR entryform.joinTime=#{str},
+                OR entryform.school=#{str},
+                OR entryform.student_id=#{str},
+                OR entryform.link=#{str},
+                OR entryform.wishes=#{str},
+                OR entryform.tutorBro=#{str},
+                OR entryform.knowFrom=#{str},
+            </if>
+        </where>
+    </select>
+
+    <sql id="idWhere">
+        <if test="id !=null and id !=''">
+            AND id=#{id}
+        </if>
+    </sql>
+    <sql id="updateSet">
+        <if test="name !=null and name !=''">
+            entryform.name=#{name},
+        </if>
+        <if test="sex !=null and sex !=''">
+            sex=#{sex},
+        </if>
+        <if test="qq !=null and qq !=''">
+            qq=#{qq},
+        </if>
+        <if test="whatType !=null and whatType !=''">
+            whatType=#{whatType},
+        </if>
+        <if test="joinTime !=null and joinTime!=''">
+            joinTime=#{joinTime},
+        </if>
+        <if test="school !=null and school !=''">
+            school=#{school},
+        </if>
+        <if test="student_id !=null and student_id !=''">
+            student_id=#{student_id},
+        </if>
+        <if test="link !=null and link !=''">
+            link=#{link},
+        </if>
+        <if test="wishes !=null and wishes !=''">
+            wishes=#{wishes},
+        </if>
+        <if test="tutorBro !=null and tutorBro !=''">
+            tutorBro=#{tutorBro},
+        </if>
+        <if test="knowFrom !=null and knowFrom !=''">
+            knowFrom=#{knowFrom}
+        </if>
+    </sql>
+</mapper>

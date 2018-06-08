@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pojo.User">
+
+    <select id="findUserById" parameterType="int" resultType="com.pojo.User">
+        select * from tb_test where id=#{id}
+    </select>
+
+    <select id="findUserByName" resultType="com.pojo.User">
+        select * from tb_test where name like "%"#{name}"%"
+    </select>
+
+    <select id="findUserByNumber" resultType="com.pojo.User">
+        select * from tb_test where number like "%"#{number}"%"
+    </select>
+
+    <select id="findUsers" resultType="com.pojo.User">
+        select * from tb_test
+    </select>
+
+    <insert id="insertUser" parameterType="com.pojo.User">
+        <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_test(id,name,number,create_at,update_at)
+        values(#{id},#{name},#{number},#{create_at},#{update_at})
+    </insert>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from tb_test where id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.pojo.User">
+        update tb_test set name =#{name},number =#{number},update_at=#{update_at}
+        where id=#{id}
+    </update>
+</mapper>

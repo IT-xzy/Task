@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longhang.stuDao.StuDao">
+
+    <insert id="insertCu" parameterType="com.longhang.model.Curriculum">
+      insert into curriculum (id,name,introduce,threshold,difficulty,cycle,demand,wages1,wages2,wages3,prompt,onnum) values(#{id},#{name},#{introduce},#{threshold},#{difficulty},#{cycle},#{demand},#{wages1},#{wages2},#{wages3},#{prompt},#{onnum})
+        </insert>
+    <update id="updateCu" parameterType="com.longhang.model.Curriculum">
+       update curriculum set name=#{name},introduce=#{introduce},threshold=#{threshold},difficulty=#{difficulty},cycle=#{cycle},demand=#{demand},wages1=#{wages1},wages2=#{wages2},wages3=#{wages3},prompt=#{prompt},onnum=#{onnum} where Id=#{id}
+       </update>
+    <update id="updateCuByName" >
+       update curriculum set onnum=#{onnum} <where> name like #{name}</where>
+       </update>
+    <delete id="deleteCu" parameterType="Long">
+         delete from curriculum where id=#{id}
+        </delete>
+    <select id="selectCu" parameterType="Long" resultType="com.longhang.model.Curriculum">
+          select * from curriculum where id=#{id}
+         </select>
+    <select id="getAllCu" resultType="com.longhang.model.Curriculum">
+          select * from curriculum
+         </select>
+    <select id="getAllCuName" resultType="String">
+          select name from curriculum
+         </select>
+</mapper>

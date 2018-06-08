@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+
+">
+    <!-- 引入外部属性文件 -->
+    <!--<context:property-placeholder location="classpath:db.properties"/>-->
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties"></property>
+    </bean>
+    <!--声明扫描，注解-->
+    <context:component-scan base-package="com.task1.aspectJ"></context:component-scan>
+    <context:component-scan base-package="com.task1.service"></context:component-scan>
+    <!--aop代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--切面-->
+    <bean id="timeInterceptor" class="com.task1.aspectJ.TimeInterceptor"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties"></property>
+    </bean>
+    <!--c3p0-->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--dbcp-->
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
+        <!--DriverManager-->
+        <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <property name="driverClassName" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="initialSize" value="${InitialPoolSize}"></property>
+        <property name="maxActive" value="${MaxActive}"></property>
+        <property name="maxIdle" value="${MaxIdleTime}"></property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="typeAliasesPackage" value="com.task1.pojo"></property>
+    </bean>
+
+    <!--&#45;&#45;指定扫描的包名，如果有多个包就用逗号隔开&ndash;&gt;-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描映射文件mapper-->
+        <property name="basePackage" value="com.task1.dao"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+    <bean id="userMapperService" class="com.task1.service.UserMapperService">
+
+        <property name="userMapper" ref="userMapper"></property>
+
+    </bean>
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!--指定对哪个数据库进行管理-->
+        <property name="dataSource" ref="dataSource"></property>
+
+    </bean>
+
+
+    <!-- 2.开启事务的注解 -->
+    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    <!--配置事务的增强，指定对哪个事务管理器进行增强-->
+
+    <tx:advice id="userTxAdvice" transaction-manager="transactionManager">
+
+        <tx:attributes>
+            <!--
+                表示来配置你要增强的方法的匹配的一个规则，
+                注意：只须改方法的命名规则，其他都是固定的！
+                propagation：事务的传播行为。
+
+             propagation :事务传播行为
+             isolation   :事务的隔离级别
+             read-only   :只读
+             rollback-for:发生哪些异常回滚
+             no-rollback-for :发生哪些异常不回滚
+             timeout     :过期信息
+          -->
+    <!--&ndash;&gt;-->
+            <tx:method name="select*" propagation="REQUIRED" read-only="false" rollback-for="Exception" ></tx:method>
+            <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="Exception" ></tx:method>
+            <tx:method name="insertBatch*" propagation="REQUIRED" read-only="false" rollback-for="Exception"></tx:method>
+        </tx:attributes>
+    </tx:advice>
+    <!--配置切点和切面-->
+<aop:config>
+    <aop:pointcut id="pointcut1" expression="execution(* com.task1.*.*(..))"></aop:pointcut>
+    <aop:advisor advice-ref="userTxAdvice" pointcut-ref="pointcut1"></aop:advisor>
+
+</aop:config>
+
+</beans>

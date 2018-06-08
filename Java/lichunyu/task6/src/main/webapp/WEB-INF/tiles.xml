@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!--layout主模板:definition定义接口名称-->
+    <definition name="layout" template="/tiles/layout.jsp">
+        <put-attribute name="header" value="/tiles/header.jsp" />
+        <put-attribute name="body" value="/tiles/body.jsp" />
+        <put-attribute name="footer" value="/tiles/footer.jsp" />
+    </definition>
+
+    <!--home:继承base接口,覆盖base中的内容-->
+    <definition name="home" extends="layout">
+        <put-attribute name="header" value="/tiles/homeheader.jsp" />
+        <put-attribute name="body" value="/tiles/homebody.jsp" />
+        <put-attribute name="footer" value="/tiles/homefooter.jsp" />
+    </definition>
+
+    <!--career:继承home-->
+    <definition name="career" extends="home">
+        <put-attribute name="body" value="/tiles/careerbody.jsp"/>
+    </definition>
+
+    <!--login-->
+    <definition name="login" extends="home">
+        <put-attribute name="body" value="/tiles/loginbody.jsp"/>
+    </definition>
+
+    <!--register-->
+    <definition name="register" extends="home">
+        <put-attribute name="body" value="/tiles/registerbody.jsp"/>
+    </definition>
+
+    <!--嵌套-->
+
+    <!--匿名嵌套-->
+
+</tiles-definitions>

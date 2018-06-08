@@ -1,0 +1,192 @@
+$grey:#f0f0f0;
+$lightgrey:#fbfbfb;
+$deepgrey:#d9d9d9;
+$white:#fff;
+$blue:#29bde0;
+$orange:#fab344;
+$lightorange:#ffe6be;
+@mixin mmwidth(){
+    min-width: 320px;
+    max-width: 768px;
+}
+@mixin mtb($mtop,$mbtm){
+    margin-top:$mtop;
+    margin-bottom:$mbtm;
+}
+@mixin ptb($ptop,$pbtm){
+    padding-top: $ptop;
+    padding-bottom:$pbtm;
+}
+@mixin fixedmg(){
+    margin-left:.5rem;
+    margin-right:.5rem;
+}
+@mixin fixedpd(){
+    padding-left:.5rem;
+    padding-right:.5rem;
+}
+@mixin size($width,$height){
+    width:$width;
+    height:$height;
+}
+body{
+    @include mmwidth;
+    margin:0 auto;   
+}
+header{
+    @include mmwidth;
+    @include ptb(.5rem,.5rem);
+    @include fixedpd;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    color:$white;
+    background-color: $blue;
+    img{
+        height:1.2rem;
+    }
+    .iconright{
+        width:1.2rem;
+    }
+}
+.main{
+    @include mmwidth;
+    padding:.5rem;
+    background-color: $grey;
+    .match{
+        display:flex;
+        .match_left{
+            display: flex;
+            align-items: center;
+            width:1.2rem;
+            padding:0 1rem;
+            border-right:1px solid $deepgrey;
+            font-size: 1.2rem;
+            background-color: $white;
+        }
+        .match_right{
+            flex:1;
+            background-color: $lightgrey;
+            #write{    
+                height:10rem;
+                margin-top: 1rem;
+                border-bottom:1px solid $deepgrey;
+                font-size: 0.8rem;
+                background-color: $lightgrey;
+                text-align: center;
+                overflow-y: auto;
+            }
+            button{
+                width:100%;
+                @include ptb(.5rem,.5rem);
+                border:none;
+                font-size: 0.8rem;
+                color:$blue;
+                text-align: center;
+                background-color: $lightgrey;
+                outline:none;
+            }
+        }
+    }
+    .keyword{
+        @include mtb(.5rem,.5rem);
+        padding:0.5rem 2rem 1.2rem;
+        background-color: $white;
+        input{
+            @include ptb(.6rem,.6rem);
+            display: block;
+            width:100%;
+            border:none;
+            border-bottom:1px solid $deepgrey;
+            font-size: .8rem;
+            color:$lightgrey;
+
+        }
+    }
+    .playernum{
+        margin-bottom: .5rem;
+        padding:1rem 1rem;
+        background-color: $white;
+        .number{
+            margin-bottom: 1rem;
+            input{
+                @include size(1.6rem,1.3rem);
+                margin:0 1rem;
+                border:none;
+                font-size: 1rem;
+                text-align:center;
+                background-color: $grey;
+                outline: none;      
+                &:focus{
+                    outline:none;
+                }
+            }
+        }
+        .slide{
+            display: flex;
+            justify-content: space-between;
+
+            input[type=button]{
+                margin: 0 2rem;
+                border:1px solid $deepgrey;
+                font-size: 0.7rem;
+                font-weight: bold;
+                color:$orange;
+                background-color: $white;
+                outline: none;
+            }
+            input[type=range] {
+                -webkit-appearance: none;
+                width: 100%;
+            }
+            input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+            }    
+            input[type=range]{
+                flex:1;
+                outline: none;
+            }
+            input[type=range]::-webkit-slider-runnable-track{
+                -webkit-appearance:none;
+                height:0.3rem;
+                background-color: $lightorange;
+            }
+            //input[type=range]::-webkit-slider-thumb {
+            //    -webkit-appearance: none;
+            //    height: 25px;
+            //    width: 25px;
+            //    margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+            //    background: red; 
+            //    border-radius: 50%; /*外观设置为圆形*/
+            //    border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+            //    box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+            //}
+            input[type=range]::-webkit-slider-thumb{
+                -webkit-appearance:none;
+                width:2rem;
+                height:1.5rem;
+               background:url("./img/11.png") no-repeat;
+               background-size: 2rem 1.5rem;
+               margin-top: -0.6rem;
+            }
+        }
+
+    }
+
+    input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+    }
+    input[type=number]{
+        -moz-appearance: textfield;       
+    } 
+    .deal{
+        @include size(100%,3rem);
+        font-size: 1.2rem;
+        border: none;
+        outline: none;
+        color:$white;
+        background-color: $orange;
+    }
+}
+
+    

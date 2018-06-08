@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.JobMapper">
+    <select id="listtype"  resultType="Job">
+        SELECT type FROM job GROUP BY type
+    </select>
+    <select id="getbyid" parameterType="Job" resultType="Job">
+        SELECT * FROM  job WHERE  id=#{id}
+    </select>
+    <select id="list" resultType="Job">
+        SELECT * FROM job
+    </select>
+</mapper>

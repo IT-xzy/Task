@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis_xml.dao.IStudent">
+
+	<select id="getStudent" parameterType="Long"
+        resultType="model.Student">
+        SELECT *
+        FROM entry_form
+        WHERE id = #{id}
+    </select>
+
+   
+    <select id="getStudentList" resultType="model.Student">
+        SELECT * FROM entry_form
+    </select>
+
+	<insert id="insertStudent" parameterType="Student">
+        INSERT INTO entry_form(name,
+        qq, profession,join_date,school,online_id, daily_url,
+        declaration,introducer,referee,counselor,description,city,review)
+        VALUES(#{name}, #{qq}, #{profession}, #{join_date},#{school},
+        #{online_id},#{daily_url},#{declaration},#{introducer},#{referee},
+        #{counselor},#{description},#{city},#{review} )
+    </insert>
+    
+    <update id="updateStudent" parameterType="Student">
+        UPDATE entry_form
+        SET
+        name = #{name},
+        qq = #{qq},
+        profession = #{profession},
+        join_date = #{join_date},
+        school = #{school},
+        online_id = #{online_id},
+        daily_url = #{daily_url},
+        declaration = #{declaration},
+        introducer = #{introducer},
+        referee = #{referee},
+        counselor = #{counselor},
+        description = #{description},
+        city = #{city},
+        review = #{review} 
+        WHERE
+        id = #{id}
+    </update>
+    
+    <delete id="deleteStudent" parameterType="Long">
+        DELETE FROM entry_form WHERE id = #{id}
+    </delete>
+</mapper>

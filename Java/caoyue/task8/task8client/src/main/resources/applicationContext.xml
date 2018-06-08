@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 客户端 -->
+    <bean id="OtherPageRMIServer" lazy-init="true" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.service.OtherPageService"/>
+        <property name="serviceUrl" value="rmi://localhost:8080/OtherPageRMIServer"/>
+    </bean>
+
+    <!-- 客户端 -->
+    <bean id="ProfessionRMIServer" lazy-init="true" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.service.ProfessionService"/>
+        <property name="serviceUrl" value="rmi://localhost:8080/ProfessionRMIServer"/>
+    </bean>
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.DAO.GreatStudentMapper">
+    <!-- 根据姓名模糊查询 -->
+    <select id="findUserByName" parameterType="Map" resultType="com.POJO.GreatStudent">
+        select * from greatstudent
+    </select>
+
+    <select id="findCooperation" parameterType="Map" resultType="com.POJO.Cooperation">
+        SELECT * FROM cooperation
+    </select>
+
+    <select id="findStudy" parameterType="Map" resultType="com.POJO.HowToStudy">
+        SELECT * FROM howtostudy
+    </select>
+
+    <select id="findFront" parameterType="Map" resultType="com.POJO.Profession">
+        SELECT profession.*,pro.proname,pro.prointroduce FROM profession,pro
+        where profession.ID = pro.ID AND profession.direction = "前端方向"
+    </select>
+
+    <select id="findAfter" parameterType="Map" resultType="com.POJO.Profession">
+        SELECT profession.*,pro.proname,pro.prointroduce FROM profession,pro
+        where profession.ID = pro.ID AND profession.direction = "后端方向"
+    </select>
+
+    <select id="findOP" parameterType="Map" resultType="com.POJO.Profession">
+        SELECT profession.*,pro.proname,pro.prointroduce FROM profession,pro
+        where profession.ID = pro.ID AND profession.direction = "运维方向"
+    </select>
+
+    <select id="findPM" parameterType="Map" resultType="com.POJO.Profession">
+        SELECT profession.*,pro.proname,pro.prointroduce FROM profession,pro
+        where profession.ID = pro.ID AND profession.direction = "产品方向"
+    </select>
+
+    <select id="findCompany" parameterType="Map" resultType="com.POJO.Company">
+        SELECT * FROM company
+    </select>
+</mapper>
