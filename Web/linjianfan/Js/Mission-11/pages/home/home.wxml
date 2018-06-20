@@ -1,0 +1,17 @@
+  <!--pages/home/home.wxml-->
+<text class='title'>试试什么职业最适合你</text>  
+
+<form bindsubmit='formSubmit'>
+  <view class='box' wx:for="{{objectTheArray}}"  wx:for-index="idx">
+  
+    <view class='titlebox'>{{item.name}}</view>
+
+   <picker class='contentbox' bindchange='bindCareerChange{{idx}}' value='{{objectTheArray[idx].theIndex}}' range='{{item.option}}' range-key='name' name='picker{{idx}}'>
+      <view class='picker'>
+        {{item.option[objectTheArray[idx].theIndex].name}}
+      </view> 
+    </picker> 
+
+  </view>
+  <button class='weui-btn mini-btn' type='primary' size='middle' form-type='submit'>选好了，点击查看</button> 
+</form>
