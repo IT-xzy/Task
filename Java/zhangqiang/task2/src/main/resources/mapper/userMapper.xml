@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.restful.dao.mapper.UserMapper">
+
+    <resultMap id="userMapper" type="com.restful.model.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="pwd"  property="pwd"/>
+        <result column="qq"  property="qq"/>
+        <result column="email"  property="email"/>
+        <result column="tell" property="tell"/>
+        <result column="address"  property="address"/>
+        <result column="create_at"  property="createAt"/>
+        <result column="update_at"  property="updateAt"/>
+    </resultMap>
+
+    <sql id="userColumn">
+         id,name,pwd,qq,email,address,tell,create_at,update_at
+    </sql>
+    
+    <select id="findById" resultType="int"  resultMap="userMapper">
+      SELECT <include refid="userColumn"/> FROM rest_user where id = #{id}
+    </select>
+
+    <select id="findAllCount"  resultType="int">
+      SELECT COUNT(*) FROM  rest_user
+    </select>
+
+    <select id="findByUser" parameterType="User"  resultMap="userMapper">
+        SELECT * FROM rest_user
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id!=null and id!=0">
+                AND id = #{id}
+            </if>
+            <if test="name!=null">
+                AND name like '%${name}%'
+            </if>
+            <if test="pwd!=null">
+                AND pwd like '%${pwd}%'
+            </if>
+            <if test="qq!=null and qq!=0">
+                AND qq = #{qq}
+            </if>
+            <if test="email!=null">
+                AND email like '%${email}%'
+            </if>
+            <if test="tell!=null and tell!=0">
+                AND tell = #{tell}
+            </if>
+            <if test="address!=null">
+                AND address = #{address}
+            </if>
+            <if test="createAt!=null and createAt!=0">
+                AND create_at = #{createAt}
+            </if>
+            <if test="updateAt!=null and updateAt!=0">
+                AND update_at = #{updateAt}
+            </if>
+        </trim>
+    </select>
+    
+    <select id="findPage"  parameterType="Map" resultMap="userMapper">
+        SELECT
+        <include refid="userColumn"/>
+        FROM rest_user
+        <if test="nowpage!=null and pagesize!=null">
+            limit #{nowpage} ,#{pagesize}
+        </if>
+    </select>
+
+    <!--插入单条数据-->
+    <insert id="insertOne" parameterType="User" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+        INSERT INTO rest_user
+        (name,pwd,qq,email,tell,address,create_at,update_at)
+        values
+        (#{name,jdbcType=VARCHAR},
+        #{pwd,jdbcType=VARCHAR},
+        #{qq,jdbcType=INTEGER},
+        #{email,jdbcType=VARCHAR},
+        #{tell,jdbcType=BIGINT},
+        #{address,jdbcType=VARCHAR},
+        #{createAt,jdbcType=BIGINT},
+        #{updateAt,jdbcType=BIGINT})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+
+    <!--修改数据-->
+    <update id="updateOne" parameterType="User" >
+        UPDATE rest_user
+        SET
+        name=#{name},pwd=#{pwd},qq=#{qq},email=#{email},tell=#{tell},address=#{address},update_at=#{updateAt} WHERE id=#{id}
+    </update>
+
+
+    <!--删除单条数据-->
+    <delete id="deleteOne" parameterType="int"  >
+        DELETE FROM rest_user WHERE id = #{id}
+    </delete>
+
+</mapper>

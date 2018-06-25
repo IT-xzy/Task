@@ -1,0 +1,90 @@
+@import "variables.less";
+@import "mixins.less";
+main {
+  padding-bottom: 200px;
+  background-color: darken(@white, 3%);
+}
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+
+h5 {
+  margin-left: 1rem;
+  >a+a::before {
+    content: '>';
+    color: @black;
+  }
+  a {
+    &:first-child {
+      color: @black;
+    }
+    &:last-child {
+      color: @green;
+    }
+  }
+}
+
+.subnav {
+  margin-bottom: 1rem;
+  >div {
+    margin: 0 1rem;
+    padding-bottom: 1rem;
+    background-color: @white;
+    &::before {
+      content: '';
+      display: table;
+    }
+  }
+  h4 {
+    padding: 20px 0;
+    border-bottom: 1px solid lighten(@black, 50%);
+    text-align: center;
+  }
+  ul {
+    width: 150px;
+    margin: auto;
+  }
+  li {
+    margin: 30px 5px;
+    color: @orange;
+    list-style-type: circle;
+    text-align: left;
+    span {
+      color: @green;
+    }
+    &:hover {
+      list-style-type: disc;
+      span {
+        color: @orange;
+      }
+    }
+  }
+  .subnav-current {
+    list-style-type: disc;
+    span {
+      color: @orange;
+    }
+  }
+}
+
+article {
+  line-height: 28px;
+  padding: 10px 0 200px 0;
+  margin: 0 1rem;
+  color: darken(@white,50%);
+  background-color: @white;
+  section {
+    padding: 10px 60px;
+  }
+  section:last-child {
+    text-indent: 2em;
+  }
+  .art-hd {
+    border-bottom: 1px solid darken(@white,50%);
+    img {
+      float: left;
+    }
+  }
+}

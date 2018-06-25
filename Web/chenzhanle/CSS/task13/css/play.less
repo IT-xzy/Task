@@ -1,0 +1,184 @@
+//import
+@import "variable-mixin.less";
+
+a {text-decoration: none;}
+// header 
+header {
+  background-color: @bg-blue;
+  .middle {
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: 6px;
+    color: @font-white;
+  }
+  .left {
+    a {
+      display: inline-block;
+      width: 19px;
+      height: 20px;
+      margin-left: 20px;
+      background: url(../img/head.png) -24px 0;
+      background-size: 67px 45px;
+    }
+  }  //left
+  .right {
+    a {
+      float: right;
+      width: 17.5px;
+      height: 18px;
+      margin-right: 20px;
+      background: url(../img/head.png) -49px 0;
+      background-size: 67px 45px;
+    }
+  }
+}
+
+// main
+main {
+  position: relative;
+  top: 65px;
+  left: 0;
+  margin-bottom: 90px;
+  background-color: @bg-darkblue;
+}
+.top {
+  position: fixed;
+  top: 65px;
+  z-index: 10;
+  width: 100%;
+  min-width: 320px;
+  max-width: 768px;
+  > span {
+    &::before {
+      content: '';
+      display: block;      
+      width: 0;
+      height: 0;
+      margin-bottom: 5px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid @bg-blue183;
+    }
+    display: inline-block;
+    padding-left: 30px;
+    color: @font-white;
+  }
+}
+.info {
+  background-color: rgba(183, 227, 237, 0.9);
+  span {
+    display: inline-block;
+    padding: 15px 20px;
+    color: darken(@font-black,10%);
+  }
+  .icon-audio {
+    float: right;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: @bg-yellow;
+    }
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 14px;
+      right: 28px;
+      z-index: 1;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid @bg-white;
+    }
+  }//.icon-audio
+}
+
+.play {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 40px 10px 0 10px;
+  padding-top: 50px;
+  border-radius: 10px;
+  background-color: @bg-lightblue;  
+}
+//* 内部使用vw实现方形、垂直居中，外部自适应占位 *// 
+.player {
+  width: 25%;
+  height: 0;
+  margin: 0 3%;
+  padding-bottom: 35%;  
+}
+.player-id {
+  height: 0;
+  padding-bottom: ~'calc(100% - 10px)';
+  border: 5px solid @bg-white;
+  text-align: center;
+  .player-name {    
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 70%;
+    color: darken(@font-black,13%);
+    background-color: @bg-yellow245;
+  }
+  .player-num {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 30%;
+    color: darken(@font-white,5%);
+    background-color: @bg-green;
+  }
+  span {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: inline-block;
+    width: 100%;
+  }
+
+}
+.play-drop {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  opacity: 0;
+  span {
+    width: 20%;
+    padding: 10% 0;
+    background-color:  @bg-white;
+    background: url(../img/choice.png) no-repeat;
+    background-size: 500%;
+    &:first-child { background-position: 0;}
+    &:nth-child(2) {background-position: 33%;}
+    &:nth-child(3) {background-position: 66%;}
+    &:last-child {background-position: 100%;}
+  }
+}
+.player:hover .play-drop {opacity: 1;}
+
+// footer
+
+footer {
+  text-align: center;
+  background-color: @bg-darkblue;
+  a {
+    display: inline-block;
+    width: 70%;
+    padding: 10px;
+    margin: 15px 10px 30px;
+    font-size: 1.3em;
+    letter-spacing: 10px;
+    text-align: center;
+    color: @font-white;
+    background-color: @bg-yellow;
+  }
+}
