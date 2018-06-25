@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--status:log4j本身的打印日志的级别-->
+<!--monitorInterval：指定log4j自动重新配置的检测间隔时间-->
+<Configuration status="off" monitorInterval="1800">
+
+    <!--设置变量-->
+    <properties>
+        <property name="LOG_HOME">../task6/log/</property>
+        <property name="ERROR_LOG_FILE_NAME">error_task</property>
+    </properties>
+
+
+
+    <!--子节点-->
+     <Appenders>
+         <!--输出到控制台-->
+         <!--name：Appender的名字-->
+         <!--target：SYSTEM_OUT 或 SYSTEM_ERR,一般只设置默认:SYSTEM_OUT.-->
+         <Console name="Console" target="SYSTEM_OUT">
+             <!--输出格式-->
+             <PatternLayout pattern="%d %-5p (%F:%L) - %m%n" />
+         </Console>
+
+         <RollingRandomAccessFile name="ErrorLog"
+                                  fileName="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log"
+                                  filePattern="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log.%d{yyyy-MM-dd}.gz">
+             <PatternLayout
+                     pattern="%d %-5p (%F:%L) - %m%n"/>
+             <Policies>
+                 <TimeBasedTriggeringPolicy/>
+                 <SizeBasedTriggeringPolicy size="100 MB"/>
+             </Policies>
+             <DefaultRolloverStrategy max="20"/>
+         </RollingRandomAccessFile>
+
+     </Appenders>
+
+
+     <Loggers>
+         <!-- 3rdparty Loggers -->
+         <logger name="org.springframework.core" level="info">
+         </logger>
+         <logger name="org.springframework.beans" level="info">
+         </logger>
+         <logger name="org.springframework.context" level="info">
+         </logger>
+         <logger name="org.springframework.web" level="info">
+         </logger>
+
+         <!--单独指定某一个类的输出-->
+         <logger name="com.task.controller" level="info" includeLocation="true" additivity="false">
+            <appender-ref ref="ErrorLog"/>
+            <appender-ref ref="Console"/>
+        </logger>
+
+         <!--指定项目的根日志-->
+        <root level="info" includeLocation="true">
+            <appender-ref ref="Console"/>
+        </root>
+    </Loggers>
+</Configuration>

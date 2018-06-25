@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!-- 扫描service包下所有使用注解的类型 -->
+    <context:component-scan base-package="service"/>
+    <context:component-scan base-package="mapper"/>
+    <context:annotation-config/>
+    <!-- 加载classpath下的db.properties文件，里面配了数据库连接的一些信息 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="${dataSource}" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <!-- 配置mapper扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="mapper"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+    <!--以下是给mybatis的配置,数据库对话工厂,mapper映射-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 指定需要别名的类所在的包名 ，或者在mybatis中配置-->
+        <!-- 扫描所有xml文件，或者在mybatis中配置 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+    <bean id="otherPageServiceImpl" class="Impl.OtherPageServiceImpl"/>
+    <bean id="OtherPageRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="otherPageServiceImpl"/>
+        <property name="serviceName" value="otherPageServiceImpl"/>
+        <property name="serviceInterface" value="service.OtherPageService"/>
+        <property name="registryPort" value="8082"/>
+    </bean>
+    <bean id="ProfessionServiceImpl" class="Impl.ProfessionServiceImpl"/>
+    <bean id="ProfessionRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="ProfessionServiceImpl"/>
+        <property name="serviceName" value="ProfessionServiceImpl"/>
+        <property name="serviceInterface" value="service.ProfessionService"/>
+        <property name="registryPort" value="8082"/>
+    </bean>
+
+</beans>

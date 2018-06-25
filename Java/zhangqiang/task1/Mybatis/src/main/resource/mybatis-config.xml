@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="datasource.properties"/>
+
+    <!--替换 mapple.xml  parameterType="model.Student" 为 parameterType="modeltudent" -->
+    <typeAliases>
+        <typeAlias alias="modeltudent" type="model.Student" />
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driverClass}"/>
+                <property name="url" value="${jdbcUrl}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mapper/studentMapper.xml"/>
+        <mapper resource="mapper/studentAnnotationMapper.xml"/>
+        <!--不需要StudentMapper,直接配置xml文件,然后在mapper的namespace属性配置值"dao.mapper.StudentMapper"-->
+        <!--<mapper class="dao.mapper.StudentMapper"/>-->
+    </mappers>
+
+</configuration>

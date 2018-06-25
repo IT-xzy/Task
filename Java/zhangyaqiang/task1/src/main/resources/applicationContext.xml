@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- JdbcTemplate -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="dataSource"
+          class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbcUrl}"></property>
+        <property name="driverClass" value="${driverClass}"></property>
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+
+        <property name="initialPoolSize" value="${initPoolSize}"></property>
+        <property name="maxPoolSize" value="${maxPoolSize}"></property>
+    </bean>
+    <bean id="jdbcTemplate"
+          class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--Spring与Mybatis整合-->
+    <context:annotation-config/>
+    <bean id="dataSource2" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+            <!--<value>com.mysql.cj.jdbc.Driver</value>-->
+        <!--</property>-->
+        <property name="url" value="jdbc:mysql:///myjava?serverTimezone=UTC"/>
+            <!--<value>jdbc:mysql:///myjava?serverTimezone=UTC</value>-->
+        <!--</property>-->
+        <property name="username" value="root"/>
+            <!--<value>root</value>-->
+        <!--</property>-->
+        <property name="password" value="314317"/>
+            <!--<value>314317</value>-->
+        <!--</property>-->
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.zyq.domain"/>
+        <property name="dataSource" ref="dataSource2"/>
+        <!--Spring与Mybatis结合注解执行数据库操作时此配置不起作用,可以注释掉-->
+        <property name="mapperLocations" value="StudentMapper.xml"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.zyq.dao"/>
+    </bean>
+
+    <!--Spring与Mybatis整合（注解）,使用Spring与Mybatis整合配置的sqlSessionFactory-->
+    <!--<bean id="properConfiguer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+    <!--<property name="location" value="classpath:jdbc.properties"/>-->
+    <!--</bean>-->
+    <!--<bean id="datasource3" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+    <!--<property name="driverClassName" value="${driverClass}"/>-->
+    <!--<property name="url" value="${jdbcUrl}"/>-->
+    <!--<property name="username" value="${user}"/>-->
+    <!--<property name="password" value="${password}"/>-->
+    <!--</bean>-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+    <!--<property name="basePackage" value="com.zyq.dao"/>-->
+    <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    <!--</bean>-->
+</beans>

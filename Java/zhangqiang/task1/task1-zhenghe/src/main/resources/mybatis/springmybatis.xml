@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+
+    <!--开启自动扫描-->
+    <context:component-scan base-package="mybatis,action"/>
+
+    <!--载入配置文件-->
+    <context:property-placeholder location="classpath:c3p0.properties"/>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+
+        <!--初始化和最大最小连接数-->
+        <property name="initialPoolSize" value="${initialPoolSize}"/>
+        <property name="maxPoolSize" value="${max_size}"/>
+        <property name="minPoolSize" value="${min_size}"/>
+
+        <property name="acquireIncrement" value="${acquireIncrement}"/>
+        <property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+        <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}"/>
+        <property name="maxIdleTime" value="${maxIdleTime}"/>
+        <property name="acquireRetryDelay" value="${acquireRetryDelay}"/>
+        <property name="autoCommitOnClose" value="${autoCommitOnClose}"/>
+    </bean>
+
+    <!--要和 Spring 一起使用 MyBatis,你需要在 Spring 应用上下文中定义至少两样东西:一个 SqlSessionFactory 和至少一个数据映射器类。-->
+    <!--在 MyBatis-Spring 中,SqlSessionFactoryBean 是用于创建 SqlSessionFactory 的。 SqlSessionFactory 需要一个 DataSource(数据源)-->
+    <!--配置这个工厂 bean:       1.导入数据源  2.配置mapper.xml 3.可以配置mybatis-config文件，但是不需要-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"/>
+        <!--<property name="configLocation" value="classpath:mybatis/mybatis-context.xml"/>-->
+    </bean>
+
+    <!--使用MapperFactoryBean 把PsersonMapper接口注入到spring中-->
+    <!--<bean id="personMapper" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--<property name="mapperInterface" value="mybatis.mapper.PersonMapper"/>-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--因为会自动装配 SqlSessionFactory 和 SqlSessionTemplate 所以没有必要去指定SqlSessionFactory或 SqlSessionTemplate 因此可省略不配置；  -->
+        <!--但是,如果你使用了一个以上的DataSource，那么自动装配可能会失效。 这种情况下你可以使用sqlSessionFactoryBeanName或sqlSessionTemplateBeanName属性来设置正确的 bean名称来使用-->
+        <!--<property name="sqlSessionFactoryBeanName" ref="sqlSessionFactory"/>-->
+
+        <!--basePackage 是映射器接口文件的包路径，会扫描路径下面的所有文件注册成bean-->
+        <property name="basePackage"  value="mybatis/mapper"/>
+    </bean>
+
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+
+    <!--配置jdbcDataSource事物管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+
+</beans>
