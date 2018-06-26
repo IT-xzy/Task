@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        /* arguments对象的长度由实参的个数决定而不是形参个数决定 */
+        // function demo(separator) {
+        //     console.log(arguments.length);
+        // }
+        // demo(",", "red", "orange", "yellow"); //4
+
+        /* js方法中形参个数并不能实际反映实参个数, 所幸的是 arguments.length 可以取得实参个数 */
+        // function a(a, b, c) {
+        //     console.log('实参个数:' + arguments.length);
+        // }
+        // a(1, 2); //实参个数:2
+
+        // /* properties-indexes内部元素的个数等于arguments.length. properties-indexes 的值和实际传递进来的参数之间是共享的；所以也可以通过arguments[ ]来更改参数的数值； */
+        // function b(x, y, z) {
+        //     arguments[1] = 10;
+        //     console.log(y);
+        // }
+        // b(1, 2); //10
+
+        // /* arguments对象中callee返回的是arguments对象所在函数的引用在使用函数递归调用时就可以使用arguments.callee代替函数名本身；callee是arguments的一个指针，指向拥有arguments对象的函数； */
+
+        function cont(a) {
+            if (a == 1) {
+                return 1;
+            }
+            return a + arguments.callee(--a);//递归调用callee方法后：55
+            // return a + cont(--a);//递归调用自身后：55
+        }
+        var m = cont(10);
+        console.log("递归调用callee方法后：" + m);
+    </script>
+
+</body>
+
+</html>

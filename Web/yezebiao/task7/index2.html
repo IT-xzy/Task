@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vote</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="main2.css">
+    <script src="http://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="audio.js"></script>
+</head>
+<body>
+    <div class="header navbar navbar-default navbar-fixed-top btn-group">
+        <input type="button" class="btn-menu">
+        <span class="vote">投票</span>
+        <input type="button" class="btn-close">
+    </div>
+    <div class="content container">
+        <ul class="vote-info row">
+            <li class="vote-text col-xs-7">
+                发言讨论结束，大家请投票
+            </li>
+            <li class="vote-audio">
+                <audio id="mp3Btn"><source src="财富自由.mp3" type="audio/mpeg" /></audio>
+            </li>
+            <li class="vote-tgl"></li>
+        </ul>
+        <ul class="vote-prom row">
+            <li class="prom col-xs-6">
+                点击得票数最多人的头像
+            </li>
+        </ul>
+        <ul class="vote-peo container">
+            <ul class="peo-row row">
+                <ul class="peo-col col-xs-1">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox1.style.visibility=''"
+                    onmouseout="document.all.peobox1.style.visibility='hidden'">
+                        <li class="peo-pic">水民</li>
+                        <li class="peo-num">1号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox1" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox2.style.visibility=''"
+                        onmouseout="document.all.peobox2.style.visibility='hidden'">
+                        <li class="peo-pic">水民</li>
+                        <li class="peo-num">2号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox2" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox3.style.visibility=''"
+                        onmouseout="document.all.peobox3.style.visibility='hidden'">
+                        <li class="peo-pic">警察</li>
+                        <li class="peo-num">3号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox3" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+            </ul>
+            <ul class="peo-row row">
+                <ul class="peo-col col-xs-3">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox4.style.visibility=''"
+                        onmouseout="document.all.peobox4.style.visibility='hidden'">
+                        <li class="peo-pic">法官</li>
+                        <li class="peo-num">4号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox4" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3 col-xs-offset-1">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox5.style.visibility=''"
+                        onmouseout="document.all.peobox5.style.visibility='hidden'">
+                        <li class="peo-pic">狙击手</li>
+                        <li class="peo-num">5号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox5" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3 col-xs-offset-1">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox6.style.visibility=''"
+                        onmouseout="document.all.peobox6.style.visibility='hidden'">
+                        <li class="peo-pic">医生</li>
+                        <li class="peo-num">6号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox6" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+            </ul>
+            <ul class="peo-row row">
+                <ul class="peo-col col-xs-3">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox7.style.visibility=''"
+                        onmouseout="document.all.peobox7.style.visibility='hidden'">
+                        <li class="peo-pic">杀手</li>
+                        <li class="peo-num">7号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox7" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3 col-xs-offset-1">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox8.style.visibility=''"
+                        onmouseout="document.all.peobox8.style.visibility='hidden'">
+                        <li class="peo-pic">水民</li>
+                        <li class="peo-num">8号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox8" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3 col-xs-offset-1">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox9.style.visibility=''"
+                        onmouseout="document.all.peobox9.style.visibility='hidden'">
+                        <li class="peo-pic">水民</li>
+                        <li class="peo-num">9号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox9" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+            </ul>
+            <ul class="peo-row row">
+                <ul class="peo-col col-xs-3">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox10.style.visibility=''"
+                       onmouseout="document.all.peobox10.style.visibility='hidden'">
+                        <li class="peo-pic">水民</li>
+                        <li class="peo-num">10号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox10" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3 col-xs-offset-1">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox11.style.visibility=''"
+                       onmouseout="document.all.peobox11.style.visibility='hidden'">
+                        <li class="peo-pic">水民</li>
+                        <li class="peo-num">11号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox11" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+                <ul class="peo-col col-xs-3 col-xs-offset-1">
+                    <a class="peo-box" href="#" onmouseover="document.all.peobox12.style.visibility=''"
+                       onmouseout="document.all.peobox12.style.visibility='hidden'">
+                        <li class="peo-pic">水民</li>
+                        <li class="peo-num">12号</li>
+                    </a>
+                    <ul class="peo-act row" id="peobox12" style="visibility: hidden;">
+                        <li class="peo-knife col-xs-3"></li>
+                        <li class="peo-glass col-xs-3"></li>
+                        <li class="peo-aim col-xs-3"></li>
+                        <li class="peo-medicine col-xs-3"></li>
+                    </ul>
+                </ul>
+            </ul>
+        </ul>
+    </div>
+    <div class="footer container navbar navbar-default navbar-fixed-bottom btn-group">
+        <div class="footer-box row">
+            <a href="index3.html" class="footer-btn col-xs-8 col-xs-offset-2">投死</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo1</title>
+</head>
+
+<body>
+
+    <script>
+        /* ——————————————————基本类型有哪些—————————————————————————— */
+
+        // var a;
+        // console.log("var a= " + typeof a); //undefined
+
+        // var b = null;
+        // console.log("var b= " + typeof b); //返回的值是object；为什么呢?因为null是一个空对象指针，简单的理解指针就是内存中的一个地址，
+        // console.log(b instanceof Object); //返回的是false；
+
+        /*
+        所有引用类型的值都是object的实例（变量相对于object来说是一个实例），检测一个引用类型和object构造函数，instanceof 会返回true
+        如果检测到的是基本类型的话就会返回false */
+
+
+        // var c = true;
+        // console.log("var c= " + typeof c);
+
+        // var d = 11;
+        // console.log("var d= " + typeof d);
+        // console.log(d instanceof Object);
+
+        // var e = '12';
+        // console.log("var e= " + typeof e);
+
+        // var s = Symbol();
+        // console.log("var s= " + typeof s);
+        // console.log(s instanceof Object);
+
+
+        /* ———————————————————引用类型——————————————————————————— */
+        // function f() {};
+        // console.log(f instanceof Object); // true
+
+        // var g = new Array(23);
+        // console.log(g instanceof Object); //true
+
+        // var h = new Object();
+        // console.log(h instanceof Object); //true
+
+
+
+        /* ——————————————————添加属性  差别  ———————————————————————— */
+
+
+        /* 动态的值添加属性以便将来使用 */
+        // 引用类型
+        // var person = new Object();
+        // person.name = "Nicholas";
+        // console.log("引用类型=     " + person.name); //返回 Nicholas
+
+        // // 基本类型
+        // var name = "Nicholas";
+        // name.age = 27;
+        // console.log("基本类型name.age=    " + name.age); //undefined
+
+        /* 根据上面的demo，很清楚的知道，引用类型可以动态的给添加属性，但是基本类型的值是不可变；*/
+
+
+
+        /* —————————————————————————引用类型和基本类型  复制变量值的不同—————————————————————————————— */
+
+        // var num1 = 5;
+        // var num2 = num1;
+        // console.log("num2的值是 " + num2);//5
+        // num1 = 4;
+        // console.log("num1的值修改后num2的值为 " + num2); /* 基本类型引用后是独立个体的存在 */
+        // /* –––––– */
+
+        // var obj1 = new Object();
+        // obj1.name = "佩奇";
+        // var obj2 = obj1;
+        // obj1.name = "小猪";
+        // console.log("复制的值name为：  " + obj2.name);
+
+        /* 画图 */
+
+
+        /* ————————————————————————————————————————————————————————————————————— */
+
+        /* 基本类型传值 */
+
+        function addTen(num) {
+            num+=10;
+            return num;
+        }
+        var count = 20;
+        var result = addTen(count);
+        console.log("count的值是： "+count);//20
+        console.log("result的值是： "+ result);//30
+        
+
+        /* 引用类型传值 */
+
+        function setName(obj) {
+            obj.name = "小猪";
+        }
+        var person = new Object();
+        person.name = "佩奇弟弟";
+        console.log("person的原始name=  "+person.name);
+        person.age = 25;
+        setName(person);
+        console.log(person.age); //25
+        console.log("当person被传入函数setname后的name值为：  "+person.name); //小猪
+
+        var pig = new Object();
+        setName(pig);
+        console.log(pig.age); //undefined
+
+
+        /* 这个person变量被传递到setName函数中被复制到给了obj，在函数内部，obj和person引用的是同一个对象。上面说过了，引用类型复制的时候只会复制堆空间中的地址；
+        判断引用类型是不是按照值来传递的很简单，照上面所讲的，引用类型操作的是引用地址，如果参数是按引用来传递的话，那么为person添加一个age属性，函数里面的obj肯定也能够访问的到；那么结果是
+        引用类型可以引用堆空间的多个地址值， */
+
+
+        /* –––––––––––––––– */
+        var obj1 = {
+            value: '111'
+        };
+
+        var obj2 = {
+            value: '222'
+        };
+
+        function changeStuff(obj) {
+            obj.value = '333';
+            obj = obj2;
+            return obj.value;
+        }
+        var foo = changeStuff(obj1);
+
+        console.log(foo); // '222' 参数obj指向了新的对象obj2
+        console.log(obj1.value); //'333'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function changeAgeAndReference(person) {
+            person.age = 25;
+            person = {
+                name: 'John',
+                age: 50
+            };
+
+            return person;
+        }
+        var personObj1 = {
+            name: 'Alex',
+            age: 30
+        };
+        var personObj2 = changeAgeAndReference(personObj1);
+        console.log(personObj1); // -> ?
+        console.log(personObj2); // -> ?
+    </script>
+
+</body>
+
+</html>

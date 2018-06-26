@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <context:component-scan base-package="com.ev.service.implement"/>
+    <context:component-scan base-package="com.ev.utils"/>
+    <context:component-scan base-package="com.ev.manager"/>
+
+    <!-- 将多个配置文件读取到容器中，交给Spring管理 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!-- 这里支持多种寻址方式：classpath和file -->
+                <value>classpath:jdbc.properties</value>
+                <!-- 推荐使用file的方式引入，这样可以将配置和代码分离 -->
+                <value>classpath:3rdPartyApiAccount.properties</value>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_user}"/>
+        <property name="password" value="${jdbc_password}"/>
+        <property name="filters" value="stat"/>
+        <property name="maxActive" value="20"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxOpenPreparedStatements" value="20"/>
+        <property name="asyncInit" value="true"/>
+    </bean>
+
+    <!-- mybatis文件配置，扫描所有mapper.xml文件 -->
+    <!-- 配置mybatisSqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="mapperLocations" value="classpath*:com/ev/DAO/mapper/*Mapper.xml"/>
+    </bean>
+
+    <!-- 配置SqlSessionTemplate -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 配置mybatis mapper接口，扫描所有dao -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ev.DAO"/>
+        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
+    </bean>
+
+    <!--redis-->
+    <!--注意此处注入的是JedisPoolConfig，说明SDR还依赖与Jedis-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+
+    <bean id="connectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="${redis.host}" p:port="${redis.port}" p:password="${redis.pass}"
+          p:pool-config-ref="poolConfig"/>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--如果不配置Serializer，那么存储的时候智能使用String，如果用User类型存储，那么会提示错误User can't cast to String！！！-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <!--短信服务的账号信息注入-->
+    <bean id="smsUtil" class="com.ev.utils.SMSUtil">
+        <constructor-arg name="accessKeyId" value="${aliyun.accessKeyId}"/>
+        <constructor-arg name="accessKeySecret" value="${aliyun.accessKeySecret}"/>
+        <constructor-arg name="signName" value="${sms.signName}"/>
+        <constructor-arg name="templateCode" value="${sms.templateCode}"/>
+    </bean>
+
+    <!--邮件服务信息注入-->
+    <bean id="mailUtil" class="com.ev.utils.MailUtil">
+        <property name="accessKeyId" value="${aliyun.accessKeyId}"/>
+        <property name="accessKeySecret" value="${aliyun.accessKeySecret}"/>
+        <property name="accountName" value="${mail.accountName}"/>
+        <property name="addressType" value="${mail.addressType}"/>
+        <property name="formAlias" value="${mail.formAlias}"/>
+        <property name="replyToAddress" value="${mail.replyToAddress}"/>
+        <property name="tagName" value="${mail.tagName}"/>
+    </bean>
+
+    <bean id="ossUtil" class="com.ev.utils.OSSUtil">
+        <constructor-arg name="accessKeyId" value="${aliyun.accessKeyId}"/>
+        <constructor-arg name="accessKeySecret" value="${aliyun.accessKeySecret}"/>
+        <constructor-arg name="endpoint" value="${oss.endpoint}"/>
+        <constructor-arg name="bucketName" value="${oss.bucketName}"/>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,38 @@
+@mixin menu-icon {
+    display: inline-block;
+    margin: 10px 15px 10px 10px;
+    width: 30px;
+    height: 19px;
+    border-top: 3px solid $white;
+    border-bottom: 3px solid $white;
+    background-color: $white;
+    padding: 5px 0;
+    background-clip: content-box;
+}
+
+/* 三条横线按钮 */
+
+input {
+    display: none;
+    /* 取消input样式 */
+}
+
+input:checked~a {
+    height: 45px !important;
+}
+
+/* 点击后列表显示 */
+
+.nav-toggle {
+    display: none;
+    span {
+        cursor: pointer;
+        @include menu-icon();
+        /* 导入按钮 */
+    }
+    @media (max-width:767px) {
+        display: block;
+        text-align: right;
+        /* 向右对齐 */
+    }
+}
