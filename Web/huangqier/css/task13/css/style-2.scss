@@ -1,0 +1,138 @@
+@charset "UTF-8";
+@import "global";
+
+body {
+  background: #29bde0;
+}
+
+/*头部开始*/
+header {
+  @include box(100%, 40px);
+  background: #29bde0;
+  @include middle;
+  @include jc-sb;
+  padding: 0 12px;
+  @include p-t;
+  a:first-child {
+    img {
+      @include box(23px, 23px);
+    }
+  }
+  a:last-child {
+    img {
+      @include box(20px, 20px);
+    }
+  }
+  h1 {
+    @include text(1.913rem, #fff);
+  }
+}
+
+/*头部结束*/
+/*发言讨论开始*/
+.statement {
+  @include p-t;
+  background: #29bde0;
+  top: 40px;
+  @include box(100%, auto);
+  .speak {
+    @include box(100%, 45px);
+    @include middle;
+    @include jc-sb;
+    background: #b9e9f5;
+    padding: 0 8px 0 25px;
+    span {
+      @include text(1.463rem, #464646);
+    }
+    a {
+      margin-top: 1px;
+      img {
+        @include box(30px, 30px);
+      }
+    }
+  }
+  i {
+    display: block;
+    margin-left: 40px;
+    @include box(0, 0);
+    border-top: 8px solid #b9e9f5;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    margin-bottom: 5px;
+  }
+  p {
+    @include text(1.35px, #fff);
+    margin-left: 40px;
+    margin-bottom: 20px;
+  }
+}
+
+/*发言讨论结束*/
+/*选人开始*/
+.choice {
+  @include box(100%, auto);
+  margin-top: 140px;
+  margin-bottom: 108px;
+  .row {
+    @include box(100%, auto);
+    display: flex;
+    justify-content: space-around;
+    .item {
+      cursor: pointer;
+      @include box(21vw, 30.57vw);
+      .content {
+        @include box(21vw, 21vw);
+        background: #fff;
+        @include middle-center;
+        flex-direction: column;
+        h1 {
+          @include box(19.4vw, 15.3vw);
+          @include middle-center;
+          background: #f5c97b;
+          @include text(4.68vw, #565656);
+        }
+        span {
+          @include box(19.4vw, 4.15vw);
+          @include middle-center;
+          background: #83b09a;
+          @include text(3.55vw, #fff);
+        }
+      }
+      .signs {
+        @include box(21vw, auto);
+        margin: 2.7vw 0;
+        @include middle;
+        @include jc-sb;
+        img {
+          @include box(4.16vw, 4.16vw);
+        }
+        display: none;
+      }
+      &:hover {
+        .signs {
+          display: flex;
+        }
+      }
+    }
+  }
+
+}
+
+/*选人结束*/
+/*底部开始*/
+footer {
+  @include box(100%, auto);
+  background: #29bde0;
+  @include p-b;
+  display: flex;
+  @include center;
+  a {
+    @include box(76.5vw, 48px);
+    @include middle-center;
+    @include text(2.25rem, #fff);
+    margin: 25px 0 30px 0;
+    background: #fbb435;
+  }
+}
+
+/*底部结束*/
