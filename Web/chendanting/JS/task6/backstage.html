@@ -1,0 +1,55 @@
+<div class="row">
+    <!-- 左边的导航栏 -->
+    <div class="navLeft text-center col-xs-12 col-sm-2">
+        <div class="page-header">萝卜多后台管理系统</div>
+        <!-- 信息管理部分 -->
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#message">信息管理
+        </button>
+        <ul id="message" class="collapse">
+            <li>
+                <a>公司列表</a>
+            </li>
+            <li>
+                <a>职位列表</a>
+            </li>
+        </ul>
+        <br>
+        <!-- 文章管理部分 -->
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#article">文章管理
+        </button>
+        <ul id="article" class="collapse">
+            <li>
+                <a ui-sref=".list">文章列表</a>
+            </li>
+            <li>
+                <a>文章管理</a>
+            </li>
+        </ul>
+        <br>
+        <!-- 用户管理部分 -->
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#user">用户管理
+        </button>
+        <ul id="user" class="collapse">
+            <li>
+                <a>用户列表</a>
+            </li>
+        </ul>
+        <br>
+    </div>
+    <!-- main -->
+    <div class="main col-xs-12 col-sm-10">
+        <div class="row title">
+            <ul class="nav navbar-nav">
+                <li class="admin">管理员</li>
+                <li class="admin">admin</li>
+                <li id="close" class="admin glyphicon glyphicon-off"  ng-click="vm.logout()"></li> 
+            </ul>
+        </div>
+        <!-- 渲染部分 -->
+        <div class="row">
+            <div ui-view>
+                <h1>Welcome！</h1>
+            </div>
+        </div>
+    </div>
+</div>

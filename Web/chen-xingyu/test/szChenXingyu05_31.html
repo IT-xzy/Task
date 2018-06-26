@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,  user-scalable=no">
+    <title>test</title>
+    <style>
+        .ojbk {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        a {
+            transform: scale(1.5);
+            margin: .4rem .4rem;
+            display: block;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 20px;
+            color: #fff;
+            
+        }
+        #btn1 {
+            background: #ff6911;
+        }
+        #btn2 {
+            background: #f592e2;
+        }
+        #btn3 {
+            background: #83b09a;
+        }
+    </style>
+</head>
+<body>
+<div class="ojbk">
+    <a id="btn1" href="../Javascript/task2/html/03identify_view.html">按钮1</a>
+    <a id="btn2" href="../Javascript/task2/html/03identify_view.html">按钮2</a>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script>
+    $('#btn1').on('click',function () {//点击按钮1要发生的事
+        alert("按钮1测试弹窗（默认情况会跳转）");
+        return true;
+        alert("xxxxxxx");
+    });
+    $('#btn2').on('click',function () {//点击按钮2要发生的事
+        alert("按钮2测试弹窗（return false阻止默认跳转）");
+        return false;
+    });
+
+
+    //若RETURN用在FOR循环中，还会执行下一次循环吗？
+
+    // function Loop() {
+    //     var i,
+    //         result = [];
+    //     for(i=0;i<10;i++){
+    //         result.push(i);
+    //         if(i===8){
+    //             return result;
+    //         }
+    //     }
+    // }
+    // console.log(Loop());
+
+
+    //其他跳出循环的语句: break
+
+    // for( var x=0;x<=10;x++){
+    //     console.log(x);
+    //     if(x===5){break;}//满足该条件时，中断其所在的最近的循环
+    // }
+    //
+    //
+    // //其他跳出循环的语句: continue
+    // for(var y=1;y<=10;y++){
+    //     if (y === 3||y===7) continue;//满足条件时跳过改条件的执行节点
+    //     console.log(y);
+    // }
+
+</script>
+</body>
+</html>

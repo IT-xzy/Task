@@ -1,0 +1,180 @@
+$nav-blue:#5fc0cd;
+$color:#333;
+$gary:#c9cacb;
+$red:#e26163;
+$text:normal;
+$font:.32rem;
+$hight:1rem;
+$nav-height:.85rem;
+$foot-height:1.52rem;
+@mixin text-black($font,$color, $text) {
+    font-size: $font;
+    color: $color;
+    font-weight: $text;
+}
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: 16px;
+    margin: 0;
+}
+ul,li,p{
+    margin: 0;
+    list-style: none;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $nav-height;
+    padding: 0 .35rem;
+    background: $nav-blue;
+    div{
+        width: .32rem;
+        height: .32rem;
+        border: {
+            top: 2px solid #fff;
+            left: 2px solid #fff;
+        }
+        transform: rotate(-45deg)
+    }
+    h1{
+       
+        @include text-black(.38rem,#fff ,$text )
+    }
+    p{
+        width: .32rem;
+    }
+}
+main{
+    margin: $nav-height 0  $foot-height 0;
+    .massge{
+        display: flex;
+        align-items: center;
+        padding-left: .33rem;
+        height: 3.26rem;
+        color: #fff;
+        background: url(../image/bg.png) no-repeat;
+        background-size: cover;
+        img{
+            width: 1.68rem;
+            margin-right: .33rem;
+        }
+        .name{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 2rem;
+            margin-bottom: .24rem;
+            p{
+                font-size: .36rem;
+            }
+            span{
+                font-size: .28rem;
+            }
+
+        }
+      .name-massge{
+          display: flex;
+          align-items: center;
+          font-size: .24rem;
+          li{
+              width: .20rem;
+              height: .24rem;
+              margin-right: .14rem;
+              background: url(../image/坐标.png) no-repeat;
+              background-size: 100%;
+          }
+      }  
+    }
+    .title{
+        display: flex;
+        align-items: center;
+        height: $hight;
+       
+        padding-left: .3rem;
+        p{
+            padding-left: .22rem;
+            @include text-black($font,$color ,bold );
+            border-left: 2px solid $nav-blue;
+        }
+    }
+    ul{
+        padding-left: .29rem;
+        border: {
+            bottom: 1px solid $gary;
+            top: 1px solid $gary;
+        }
+        li{
+            display: flex;
+            align-items: center;
+            
+            padding: .4rem .98rem .4rem .28rem;
+            border-top: 1px solid $gary;
+            p{
+                margin-right: .28rem;
+                padding-right: .28rem;
+                border-right: 1px solid $gary;
+                @include text-black(.32rem,$gary ,$text );
+                white-space:nowrap;
+            }
+            span{
+                @include text-black(.32rem,$color ,$text )
+            }
+            .logo-style{
+                
+                margin-right: .28rem;
+                padding-right: .28rem;
+                border-right: 1px solid $gary;
+            }
+            .logo{
+                display: inline-block;
+                width: .32rem;
+                height: .32rem;
+                margin-right: .08rem;
+                background: url(../image/星.png) no-repeat;
+                background-size:100%;
+            }
+        }
+        li:nth-child(1){
+            border: none;
+        }
+        li:nth-child(4) span{
+            color: $red;
+        }
+    }
+}
+
+footer{
+    position:fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: $foot-height;
+    background: #fff;
+    div{
+        width: 3.1rem;
+        height: .88rem;
+        text-align: center;
+        line-height: .88rem;
+        border:  1px solid $nav-blue;
+        border-radius: 6px;
+    }
+    div:nth-child(1){
+        color: $nav-blue;
+    }
+    div:nth-child(2){
+        background: $nav-blue;
+        color: #fff;
+    }
+}

@@ -1,0 +1,77 @@
+@charset 'UTF-8';
+$grid: ( xm:0px, sm :768px, md:992px, lg:1200px);
+//媒体chaxun
+@mixin reactive($para, $list) {
+    @each $e,
+    $px in $grid {
+        @media screen and (min-width: $px) {
+            #{$para}:map-get($map:$list, $key: $e)
+        }
+    }
+}
+
+;
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 0 15px 0 15px;
+    $container-width: ( xm:auto, sm: 750px, md: 970px, lg: 1170px);
+    @include reactive(width, $container-width);
+    @media screen and (min-width: 768px) {
+        margin: 0 auto;
+    }
+    ;
+    @media screen and(max-width:767px)and(min-width:0px) {
+        margin: 0 0;
+    }
+    ;
+
+}
+
+
+
+.row {
+    margin: 0 -15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+//分配栅格布局
+$grid: ( xm:0px, sm :768px, md:992px, lg:1200px);
+@each $e,
+$px in $grid {
+    @media screen and (min-width: $px) {
+        @for $i from 1 through 12 {
+            .col-#{$e}-#{$i} {
+                flex: 0 0 100%/12*$i;
+                padding: 0 15px;
+                position: relative;
+            }
+        }
+    }
+    $hidden:(xm:0px, sm:992px, md:1200px, lg:1200px, );
+    $min:map-get( $hidden, $e);
+    @if $px==1200px {
+        @media screen and(min-width:$px) {
+            .hidden-#{$e} {
+                display: none;
+            }
+        }
+    }
+    @else if $px==0px {
+        @media screen and (max-width: 768px)and(min-width:$px) {
+            .hidden-#{$e} {
+                display: none;
+            }
+        }
+    }
+    @else {
+        @media screen and (max-width: $min)and(min-width:$px) {
+            .hidden-#{$e} {
+                display: none;
+            }
+        }
+    }
+}

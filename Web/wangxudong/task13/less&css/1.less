@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    background: #f0f0f0;
+}
+
+p {
+    margin: 0;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@blue: #29bde0;
+@yellow: #fbb435;
+
+.pointer {
+    cursor: pointer;
+}
+
+header {
+    line-height: 2.75rem;
+    background: @blue;
+    img {
+        width: 1.2rem;
+        margin-left: 1rem;
+        .pointer;
+    }
+}
+
+.title {
+    position: relative;
+    display: block;
+    line-height: 3.7rem;
+    margin: 1rem 5%;
+    text-align: center;
+    color: #9a9a9a;
+    background: #fff;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 1.43rem;
+        right: .6rem;
+        width: .7rem;
+        height: .7rem;
+        color: #e7e7e7;
+        border-right: .15rem solid;
+        border-top: .15rem solid;
+        transform: rotate(45deg);
+        .pointer;
+    }
+}
+
+.box {
+    position: relative;
+    margin: 0 5%;
+    background: #fff;
+    text-align: center;
+    span:first-child {
+        display: block;
+        line-height: 2.8rem;
+        margin: 0;
+        color: @yellow;
+        background-color: #fff;
+        border-bottom: solid .07rem @yellow;
+        
+    }
+    span {
+        display: block;
+        line-height: 4rem;
+        margin: 1rem 10%;
+        color: #fff;
+        background: @blue;
+        .pointer;
+    }
+    p {
+        font-size: .75rem;
+        color: #9a9a9a;
+    }
+    &::after {
+        content: "";
+        position: fixed;
+        top: 20.5rem;
+        right: 7%;
+        border-left: .85rem solid #fbb435;
+        border-bottom: .85rem solid transparent;
+        border-top: .85rem solid transparent;
+        .pointer;
+    }
+    li:first-child {
+        background-color: @blue;
+    }
+    li {
+        display: inline-block;
+        width: .5rem;
+        height: .5rem;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        .pointer;
+        &:hover {
+            background-color: @blue;
+        }
+    }
+}
+
+#menu {
+    display: none;
+}
+
+#menu:checked~.main {
+    transform: translateX(9rem);
+}
+
+.menu {
+    overflow: hidden;
+    ul:nth-child(2) {
+        position: absolute;
+        width: 9rem;
+        height: 15rem;
+        background: #fff;
+        padding-top: 2.75rem;
+        li {
+            text-align: center;
+            line-height: 2.5rem;
+            .pointer;
+            &:hover {
+                background: @blue;
+                color: #fff;
+            }
+        }
+    }
+    .main {
+        position: relative;
+        background: #f0f0f0;
+        transition: all 0.25s;
+    }
+}

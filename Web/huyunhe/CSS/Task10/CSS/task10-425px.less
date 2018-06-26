@@ -1,0 +1,395 @@
+//color:
+@blue: #1d7ad9;
+@nav-gray: #f9f9f9;
+@title-gray: #f3f3f3;
+@button-color: #e15053;
+@content-color: #fbfcff;
+@text-color: #737374;
+@progress-color: #cccccc;
+@progress-active-color: #ff7f02;
+@border-color: #d6d6d6;
+//font-size:
+@small-size: 1.4rem;
+@normal-size: 1.6rem;
+@big-size: 1.8rem;
+@title-size: 2.2rem;
+//progress-bar-component
+@progress-bar-width: 16rem;
+@progress-bar-height: 0.5rem;
+@progress-circle-radius: 2.4rem;
+//component
+.block-center-align {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.abs-ver-align {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.abs-hzt-align {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.rel-ver-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-format {
+  border: 0;
+  background: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.clearfix {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+html {
+  font-size: 62.5%;
+}
+
+header {
+  background-color: @blue;
+}
+
+.header-wrap {
+  .space-between;
+  .block-center-align;
+  color: white;
+  font-size: @normal-size;
+  .login {
+    .clear-format;
+    padding: 1rem 2rem;
+    background-color: @blue;
+  }
+  .register {
+    .clear-format;
+    padding: 1rem 2rem;
+    background-color: white;
+    color: black;
+  }
+  @media screen and (max-width:350px){
+    font-size: @small-size;
+
+  }
+}
+
+.collapse {
+  .block-center-align;
+  background-color: @nav-gray;
+}
+
+//add nav label hover effect
+.navbar-nav {
+  float: none;
+
+  ul{
+    text-align: center;
+  }
+  li{
+    text-align: center;
+  }
+  a {
+    margin: 2.8rem;
+    border-radius: 0.5rem;
+    color: black !important;
+    font-size: @normal-size;
+    background-color: white;
+    box-shadow: 2px 2px 5px rgb(57, 57, 57);
+    &:hover {
+      background-color: @blue !important;
+      color: white !important;
+    }
+  }
+}
+
+.my-progress-body {
+  .block-center-align;
+  position: relative;
+  display: block;
+  top:2rem;
+  text-align: center;
+}
+
+.my-progress-wrap {
+  float: left;
+  width: 50%;
+  text-align: center;
+}
+
+//draw progress bar and circle and add hover effect
+.my-progress-bar {
+  display: inline-block;
+  position: relative;
+  width: @progress-bar-width;
+  height: @progress-bar-height;
+  border-radius: 0.25rem;
+  background-color: @progress-color;
+  color: white;
+  font-size: @normal-size;
+  text-align: center;
+
+  &::before {
+    content: "";
+    .abs-ver-align;
+    left: @progress-bar-width / 2 - @progress-circle-radius / 2;
+    width: @progress-circle-radius;
+    height: @progress-circle-radius;
+    border-radius: 50%;
+    background-color: @progress-color;
+  }
+  &:hover {
+    background-color: @progress-active-color;
+    &::before {
+      background-color: @progress-active-color;
+    }
+  }
+  &:hover+span {
+    color: @progress-active-color;
+  }
+  span {
+    position: relative;
+    left: 0px;
+    bottom: 8px;
+    font-size: @normal-size;
+  }
+}
+
+.progress-text {
+  display: block;
+  margin: 3rem 0;
+  font-size: @normal-size;
+  color: @progress-color;
+}
+
+.step-title {
+  .block-center-align;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  border-left: 4px solid @blue;
+  font-size: @big-size;
+}
+
+section.step {
+  .block-center-align;
+  border: 1px solid @border-color;
+  .row-title {
+    padding: 1.5rem;
+    background-color: @title-gray;
+    color: @blue;
+    font-size: @normal-size;
+    * {
+      vertical-align: middle;
+    }
+  }
+  .group {
+    position: relative;
+    text-align: center;
+    padding: 4.8rem 3.6rem;
+    font-size: @normal-size;
+    background-color: @content-color; //vertical align the select component
+    >div{
+      display: block;
+    }
+    select {
+      .clear-format;
+      width: 13rem;
+      height: 4rem;
+      border: 1px solid @border-color;
+      padding: 0 1%;
+      background-image: url(../resource/box-assets/select.png);
+      background-repeat: no-repeat;
+      background-position: 10rem 0.5rem;
+    }
+  }
+  .outer-radius,
+  .inner-radius {
+    margin: 2.5rem 0;
+
+  }
+  .input {
+    margin: 0 1rem;
+  }
+}
+
+#select-box {
+  select {
+    position: relative;
+    float: right;
+    top: 0rem;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}
+
+#ruler-group {
+  .input {
+    display: block;
+  }
+  select {
+    position: relative;
+    float: right;
+    top: 0rem;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+}
+
+#select-material {
+  .input {
+    display: inline-block;
+  }
+  select {
+    position: relative;
+    float: right;
+    top: 0rem;
+    right: 50%;
+    transform: translateX(50%);
+  }
+  label {
+    margin: 2rem 4rem;
+  }
+}
+
+.btn-wrap {
+  text-align: center;
+  input[type="submit"] {
+    .clear-format;
+    position: relative;
+    padding: 2rem 5.4rem;
+    margin: 14rem 0;
+    border-radius: 1rem;
+    color: white;
+    background-color: @button-color;
+    font-size: 2.4rem;
+  }
+}
+
+footer {
+  margin-top: 6rem;
+  color: @text-color;
+  background-color: @nav-gray;
+  .footer-wrap {
+    .block-center-align;
+    position: relative;
+    overflow: hidden;
+  }
+  .footer-title {
+    display: block;
+    padding: 2rem 0 1rem 0;
+
+    margin-left: 0.5rem;
+    font-size: @big-size;
+  }
+  .link {
+    display: inline-block;
+    font-size: 1.4rem;
+    width: 10rem;
+    vertical-align: middle;
+    a {
+      display: inline-block;
+      color: @text-color;
+      margin: 0.5rem 1rem;
+    }
+  }
+  .barcode {
+    position: absolute;
+    display: inline-block;
+    text-align: justify;
+    top: 6rem;
+    right: 2rem;
+    font-size: 1.2rem;
+    @media screen and (max-width:350px){
+      top: 7rem;
+    right: 4rem;
+    }
+  }
+  .contact {
+    position: relative;
+    float: left;
+    top: 2rem;
+    div {
+      margin: 0.5rem 0;
+    }
+    @media screen and (max-width:350px){
+      display: none;
+    }
+  }
+  img{
+    width: 10rem;
+  }
+}
+
+.copyright {
+  text-align: center;
+  padding: 0.5rem 0;
+  background-color: @blue;
+  color: white;
+}
+
+// cancel the input box focus effect
+[type="number"] {
+  width: 75%;
+  height: 3rem;
+  margin: 1rem;
+  outline: none;
+  &::-webkit-inner-spin-button,
+  ::-webkit-outer-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
+  }
+}
+
+//optimize the radio cosmetic
+[type="radio"] {
+  display: none;
+  &:checked+label::before {
+    border: 5px solid @blue;
+  }
+}
+
+//draw custom radio button
+label {
+  display: inline-block;
+  position: relative;
+
+  margin: 1rem 2rem;
+  &::before {
+    position: absolute;
+    content: "\a0";
+    width: 1.6rem;
+    height: 1.6rem;
+    left: -3rem;
+    border: 1px solid @border-color;
+    border-radius: 50%;
+    background-color: white;
+  }
+}
+#active,#active::before{
+  background-color: @progress-active-color;
+}
+#active+span{
+  color: @progress-active-color;
+}

@@ -1,0 +1,166 @@
+@charset "utf-8";
+@import "component";
+//初始化变量
+$header-height:.88rem;
+$header-bgcolor:#5fc0cd;
+$page-bgcolor:#5fc0cd;
+$text-color-white:#fff;
+
+//给body初始字体尺寸，子级文字继承这个
+$body-bgcolor:#f0f0f0;
+@mixin translateY{
+    top:50%;
+    transform: translateY(-50%);
+}
+html{
+    height: 100%;
+}
+body {
+    margin:0;
+    height: 100%;
+    font-size: .32rem;
+    background: $body-bgcolor;
+}
+
+.page-container {
+    display: flex;  
+    height: 100%;
+    overflow: hidden;
+    .select-list {
+        flex:0 0 75%;
+        background: #fff;
+        color: #5fc0cd;
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            padding: .15rem 0 .15rem .4rem;
+            border-bottom: 1px solid #d8d8d8;
+        }
+        .fa {
+            width: .5rem;
+            margin-right: .2rem;
+            border: 3px solid currentColor;
+            text-align: center;
+            line-height: .5rem;
+            border-radius: 50%;
+        }
+        .fa-chevron-right {
+            float: right;
+            border: none;
+            margin-top: .05rem;
+        }
+    }
+    .page{
+    flex-shrink: 0;
+    flex-basis: 100%;
+    background: $page-bgcolor;
+}
+}
+
+
+header {
+    line-height: $header-height;
+    background: $header-bgcolor;
+    .find-list {
+        display: inline-block;
+        width: .38rem;
+        height: .04rem;
+        border-top: .04rem solid #fff;
+        padding: .1rem 0;
+        margin-left: .22rem;
+        border-bottom: .04rem solid #fff;
+        vertical-align: middle;
+        background: #fff;
+        background-clip: content-box;
+    }     
+}
+
+
+
+//使用混合器
+$bottom-width:1px;
+$bottom-color:#c9c9c9;
+@mixin border ($width:$bottom-width,$color:$bottom-color){
+    border: $width solid $color;
+}
+
+main {
+    padding: 0 .38rem; 
+  
+    .title-box {
+        margin:.28rem 0;
+   @include border;
+        
+        line-height: 1.16rem;
+        text-align: center;
+        color: #9a9a9a;
+        background: #fff;
+        img {
+            float: right;
+            width: .24rem;
+            height: .4rem;
+            margin-right: .2rem;
+            margin-top: .4rem; 
+        }
+    }
+    .game-body {
+        @include border;
+        padding-bottom: .1rem;
+        background: #fff;
+        text-align: center;
+         .verson {
+            display: inline-block;
+            width: 80%;
+            line-height: 1.35rem;
+            background: #69d1e9;
+            color:#fff;
+            text-decoration: none;
+        }
+        .easy {
+            margin-top: .3rem;
+        }
+        .user-num {
+            line-height: .78rem;
+            color: #787878;
+            font-size: .24rem;
+        }
+        // 小三角fixed的定位
+        .go-page {
+            position: fixed;
+            margin-left: .2rem;
+            margin-top: .22rem;
+            border-left: .28rem solid #fbb435;
+            border-top: .28rem solid transparent;
+            border-bottom: .28rem solid transparent;
+        }
+    }
+    .game-name {
+        line-height: .9rem;
+        color:#fbb435;
+        font-size: .38rem;
+        border-bottom: .01rem solid currentColor;   
+       
+    }
+    // 四个小圆点
+    .leaf-point {
+        line-height: .3rem;
+        i {
+            display: inline-block;
+            width: .18rem;
+            height: .18rem;
+            border-radius: 50%;
+            vertical-align: middle;
+            background: #787878;
+        }
+        .one {
+            background: #69d1e9;
+        }
+    }
+  
+   
+    
+}
+
+

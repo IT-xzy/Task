@@ -1,0 +1,189 @@
+@charset "UTF-8";
+$bg-blue: #29bde0;
+$bg-sky-blue: #b9e9f5;
+$bg-s-orange: #fbb435;
+$bg-white: #fff;
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+body {
+  margin: 0;
+  font-size: 62.5%;
+  background: $bg-blue;
+}
+
+a:hover, a:link {
+  text-decoration: none;
+}
+
+/**头部**/
+header {
+  @include flex-between;
+  height: 3rem;
+  border-bottom: 1px solid $bg-white;
+  font-size: 22px;
+  border-bottom: 0;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: $bg-white;
+  background: $bg-blue;
+
+  .head-left {
+    margin-left: 1rem;
+  }
+
+  .icon-left {
+    width: 80%;
+  }
+
+  .head-right {
+    width: 24px;
+    margin-right: 1.2rem;
+  }
+
+  .icon-right {
+    width: 100%;
+  }
+}
+
+/**提示栏**/
+.prompts {
+  @include flex-between;
+  background: $bg-sky-blue;
+  height: 2.5rem;
+  margin-top: 3rem;
+}
+
+.prompts p {
+  margin-left: 1rem;
+  font-size: 14px;
+}
+
+.circle{
+  @include flex-center;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  margin-right: 0.7rem;
+  background-color: $bg-s-orange;
+}
+
+.play {
+  width: 3rem;
+  border: none;
+  margin-left: 0.35rem;
+  background: url(images/icon3.png) center center no-repeat;
+}
+
+.line {
+  color: $bg-white;
+}
+
+.line .triangle {
+  width: 0;
+  height: 0;
+  display: block;
+  border-top: 0.5rem solid $bg-sky-blue;
+  border-left: 0.3rem solid transparent;
+  border-right: 0.3rem solid transparent;
+  margin-left: 1rem;
+}
+
+.line p {
+  margin-left: 1rem;
+  font-size: 13px;
+}
+
+/**投票列表**/
+main {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-bottom: 5rem;
+
+  .box {
+    flex: 0 0 33.33%;
+  }
+
+  .player {
+    @include flex-column;
+    margin-top: 1rem;
+  }
+
+  .square {
+    width: 22vw;
+    height: 22vw;
+    border: 3px solid $bg-white;
+  }
+
+  .square-name {
+    font-size: 16px;
+    line-height: 16vw;
+    background: #f5c97b;
+  }
+
+  .square-number {
+    font-size: 16px;
+    line-height: 6vw;
+    color: $bg-white;
+    background: #83b09a;
+  }
+
+  .icon {
+    @include flex-between;
+    width: 22vw;
+    visibility: hidden;
+    margin: 0.8rem 0 0 0;
+  }
+
+  .icon img {
+    background-size: cover;
+    height: 4vw;
+    width: 22vw;
+  }
+
+  .player:hover .icon {
+    visibility: visible;
+  }
+}
+/**底部**/
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: $bg-blue;
+  width: 100%;
+
+  .foot {
+    display: block;
+    width: 80%;
+    height: 3rem;
+    margin: 1rem auto;
+    background: $bg-s-orange;
+    text-align: center;
+    line-height: 3rem;
+    font-size: 22px;
+    color: $bg-white;
+  }
+}

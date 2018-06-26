@@ -1,0 +1,80 @@
+@charset "utf-8";
+$bgcolor:#5fc0cd;
+@mixin translateY {
+    position: absolute;
+    top: 50%;
+}
+@mixin translateX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+html{
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+
+// header设置相关变量
+$header-height:.88rem;
+$header-bgcolor:#5fc0cd;
+$body-bgcolor:#29bde0;
+$text-color-white:#fff;
+// 两端的距离
+$justify-size:.2rem;
+$center-font-size:.34rem;
+html{
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+
+header {
+    display: flex;
+    position: fixed;
+    top:0;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: $header-height;
+    border-bottom: .01rem solid #74d4eb;
+    font-size: $center-font-size;
+    color: #fff;
+    background: $body-bgcolor;
+    z-index: 2;
+    i {
+        display: inline-block;
+        &:first-child {
+            width: .3rem;
+            height: .3rem;
+            border-left: .05rem solid;
+            border-bottom: .05rem solid;
+            transform: rotate(45deg);
+            margin-left: $justify-size;
+        }
+        &:last-child {
+            position: relative;
+            width: .5rem;
+            height: .4rem;
+            margin-right: $justify-size;
+            &::before {
+                content: "";
+                @include translateY();
+                width: 100%;
+                height: .05rem;
+                background: currentColor;
+                transform:translateY(-50%) rotate(45deg); 
+            }
+            &::after{
+                content: "";
+                @include translateY();
+                width: 100%;
+                height: .05rem;
+                background: currentColor;
+                transform:translateY(-50%) rotate(-45deg); 
+            }
+        }
+    }
+}
