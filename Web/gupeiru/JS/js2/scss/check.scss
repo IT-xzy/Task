@@ -1,0 +1,71 @@
+@import "../../common/all";
+@import "mystyle";
+body {
+    background: $blue;
+}
+
+// 顶部按钮
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @extend %head;
+    border-bottom: 1px solid $grey-f0;
+    .arrow {
+        @include arrow(.16rem, .16rem, .03rem, #fff, 225deg);
+        margin-left: .2rem;
+        cursor: pointer;
+    }
+    .close {
+        margin-right: .2rem;
+        font-size: .28rem;
+    }
+    .title {
+        font-size: .2rem;
+    }
+}
+
+.img-box {
+    position: relative;
+    margin: 1rem auto .6rem;
+    width: 2.3rem;
+    height: 3.2rem;
+    background: #FFEDC5;
+    border: .03rem solid #FFF;
+    .circle {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include circle(.3rem, .3rem, #fff);
+        line-height: .3rem;
+        text-align: center;
+        font-size: .18rem;
+        color: #F56B81;
+        border: .01rem solid #FFEDC5;
+    }
+    #img {
+        position: absolute;
+        @include center(50%, 50%, -50%, -50%);
+    }
+    #killer,
+    #villager {
+        position: absolute;
+        @include center(50%, .3rem, -50%, 0);
+        height: 1.1rem;
+        width: 1.1rem;
+        border-radius: 50%;
+    }
+}
+
+#position {
+    @extend %position;
+    z-index: 1;
+}
+
+#go {
+    position: fixed;
+    bottom: .2rem;
+    left: 10%;
+    width: 80%;
+    @extend %button;
+}
