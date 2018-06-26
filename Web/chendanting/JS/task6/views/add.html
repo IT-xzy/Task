@@ -1,0 +1,56 @@
+<div class="add rounded">
+
+    <div class="add-head">新增Article</div>
+
+    <form class="add-main">
+        <div class="form-group form-inline">
+            <label class="txt">标题名称</label>
+            <input type="text" class="form-control big-input" ng-model="title">
+        </div>
+        <div class="form-group form-inline">
+            <label class="txt">类型</label>
+            <select class="form-control" ng-init="select.$type = select.type[1]" ng-model="select.$type" ng-options="x.name for x in select.type">
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <label class="txt">说明</label>
+            <input type="text" class="form-control big-input" ng-model="content">
+        </div>
+        <div class="form-group form-inline">
+            <label class="txt">跳转链接</label>
+            <input type="text" class="form-control big-input" ng-model="url">
+        </div>
+
+        <div>获得的大小{{imgMb}}</div>
+        <div class="form-group form-inline">
+            <label class="btn btn-primary" for="file">选择文件</label> 
+            <input id="file" type="file" name='file' accept="image/png,image/jpeg,image/gif" onchange="angular.element(this).scope().click()"> 
+        </div> 
+        <div id="result" name="result"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>图片名</th>
+                    <th>文件大小</th>
+                    <th>进度</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>    
+            <tbody>
+                <tr>
+                    <td>{{imgName}}</td>
+                    <td ng-bind="imgMb"></td>
+                    <td></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-success" ng-click="sendData(1)">立即上线</button>
+        <button type="button" class="btn btn-success" ng-click="sendData(2)">存为草稿</button>
+        <button type="button" class="btn m10">
+            <a ui-sref="admin.list">取消</a>
+        </button>
+    </form>
+</div>

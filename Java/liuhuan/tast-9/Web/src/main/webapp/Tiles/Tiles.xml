@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- definition name 为Controller 返回的页面名称 这里定义一个基础模板页 -->
+    <definition name="home" template="/WEB-INF/jsp/tiles/templet/templet.jsp">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="head" value="/WEB-INF/jsp/tiles/head.jsp"/>
+        <put-attribute name="top" value="/WEB-INF/jsp/tiles/top.jsp"/>
+        <put-attribute name="nav" value="/WEB-INF/jsp/tiles/homeNav.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/public/home.jsp"/>
+        <!-- {1} 取的是Controller 返回的值 -->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />-->
+        <put-attribute name="footer" value="/WEB-INF/jsp/tiles/foot.jsp"/>
+
+        <!-- 跳转页面 -->
+        <put-attribute name="dumpPage" value="profession"/>
+
+    </definition>
+
+    <!-- 继承直接引用父类模板 如有不同内容重写即可-->
+    <definition name="profession" extends="home">
+        <put-attribute name="title" value="职业"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/public/profession.jsp"/>
+        <!-- 跳转页面 -->
+        <put-attribute name="dumpPage" value="home"/>
+    </definition>
+
+    <!-- 登陆页面 Tiles必须定义模板-->
+    <definition name="login" template="/WEB-INF/jsp/tiles/templet/loginTemple.jsp">
+        <put-attribute name="title" value="登陆"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/public/login.jsp"/>
+    </definition>
+
+    <!-- 登陆后页面 -->
+    <definition name="protect" template="/WEB-INF/jsp/tiles/templet/protectTemple.jsp">
+        <put-attribute name="title" expression="${title}" />
+        <put-attribute name="body" expression="/WEB-INF/jsp/protect/${body}.jsp" />
+    </definition>
+
+    <!-- 提示信息页面 -->
+    <definition name="message" template="/WEB-INF/jsp/tiles/templet/messageTemple.jsp">
+        <put-attribute name="body" value="/WEB-INF/jsp/public/message.jsp" />
+    </definition>
+
+</tiles-definitions>

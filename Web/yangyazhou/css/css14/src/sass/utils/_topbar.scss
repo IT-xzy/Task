@@ -1,0 +1,53 @@
+/* topbar */
+.topbar{
+    height: 44px;
+    line-height: 44px;
+    overflow: hidden;
+}
+.hot-line{
+    color: $bg-color;
+}
+.sns-icon{
+    height: 44px;
+    width: 100%;
+    text-align: right;
+    /* 这里Firefox浏览器默认会继承父元素行高，但是Chrome浏览器不继承！所以统一为0 */
+    line-height: 0;
+    button{
+        height: 24px;
+        width: 25px;
+        margin-left: 16px;
+        margin-top: 10px;
+    }
+}
+.wechat{
+    background: url(../images/wechat.png);
+}
+.qq{
+    background: url(../images/qq.png);
+}
+.weibo{
+    background: url(../images/weibo.png);
+}
+@media screen and (max-width: 767px){
+    .topbar{
+        height: 22px;
+        line-height: 22px;
+        font-size: 12px;
+    }
+    .sns-icon button{
+        height: 20px;
+        width: 20px;
+        margin-top: 1px;
+        margin-left: 4px;
+    }
+    .wechat, .qq, .weibo{
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+}
+@media screen and (max-width: 325px){
+    .topbar .col-xs-8,.topbar .col-xs-4{
+        padding: 0;
+    }
+}

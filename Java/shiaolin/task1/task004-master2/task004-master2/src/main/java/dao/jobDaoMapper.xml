@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.JobDao">
+    <select id="listJob" parameterType="String" resultType="pojo.Job">
+        SELECT * FROM job
+    </select>
+    <insert id="insertJob" parameterType="pojo.Job">
+        INSERT INTO `student`.`student`(`id`, `name`, `introduction`, `isSuper`, `isWork`, `jobTitle`, `creat_at`, `update_at`) VALUES (5, '韩红', '修真院技术后台：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理，负责技术研发，团队管理与建设。', 1, '1', 1, unix_timestamp(now()), unix_timestamp(now()))
+    </insert>
+</mapper>

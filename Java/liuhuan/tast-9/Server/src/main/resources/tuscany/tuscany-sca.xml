@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/sca http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd">
+
+    <!-- sca, type: 接口类, target: 实现类bean id -->
+    <sca:service name="serverDao" type="com.jnshu.service.ServiceDao"
+                 target="serviceDaoImpl"/>
+    <!-- OSS 阿里云 -->
+    <sca:service name="serverALiYunOSS" type="com.jnshu.service.ServiceOSS"
+                 target="serviceOSSAliyunImpl"/>
+    <!-- OSS 七牛云 -->
+    <sca:service name="serverQiNiuYunOSS" type="com.jnshu.service.ServiceOSS"
+                 target="serviceOSSQiniuImpl"/>
+    <!-- Mail SendCloudMail -->
+    <sca:service name="serverMailSendCloud" type="com.jnshu.service.ServiceMail"
+                 target="serviceMailSendCloudImpl"/>
+
+    <!-- SMS 容联短信 -->
+    <sca:service name="serverSMSRLian" type="com.jnshu.service.ServiceSMS"
+                 target="serviceSMSRLianImpl"/>
+
+    <!-- cached Memcached  -->
+    <sca:service name="serviceCacheMem" type="com.jnshu.service.ServiceCache"
+                 target="serviceCacheMemImpl"/>
+</beans>

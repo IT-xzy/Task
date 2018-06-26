@@ -1,0 +1,227 @@
+@import "mystyle"; //引入共用样式
+//雪碧图
+@mixin sprite($x, $width, $height) {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: $width;
+    height: $height;
+    vertical-align: text-bottom;
+    background: url(../images/icon6.png) $x 0/1.99rem;
+}
+
+//顶部按钮
+/* 顶部按钮 */
+
+header {
+    @extend %flex-center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    height: 0.5rem;
+    width: 100%;
+    background-color: #5fc0cd;
+    z-index: 2;
+    button {
+        width: 25%;
+        height: 80%;
+        font-size: .17rem;
+        @include rounded-corners(5);
+        cursor: pointer;
+    }
+    .left-button {
+        margin-right: -.05rem;
+        background-color: #55a8b3;
+        color: #fff;
+    }
+    .right-button {
+        background-color: #fff;
+        a {
+            color: $blue;
+        }
+    }
+    .icon-map {
+        @include sprite(-.95rem, .21rem, .24rem);
+        right: .1rem;
+    }
+}
+
+//下拉列表
+/* 下拉列表 */
+
+nav {
+    @extend %flex-center;
+    position: fixed;
+    margin-top: .5rem;
+    width: 100%;
+    height: .5rem;
+    border-bottom: 1px solid #ccc;
+    z-index: 1;
+    & div:nth-child(-n+2) {
+        border-right: 1px solid #ccc;
+    }
+    div {
+        position: relative;
+        width: 33.3%;
+        height: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        background: #fff;
+        z-index: 0;
+        input {
+            display: none;
+        }
+        label {
+            display: inline-block;
+            width: 100%;
+            line-height: .5rem;
+            cursor: pointer;
+            &::after {
+                content: "";
+                position: absolute;
+                top: .2rem;
+                right: .1rem;
+                width: 0;
+                height: 0;
+                border-width: .05rem;
+                border-style: solid;
+                border-color: #ccc transparent transparent transparent;
+            }
+        }
+        ul {
+            display: none;
+            line-height: .28rem;
+            border: .01rem solid #ccc;
+            box-sizing: border-box;
+            background-color: #fff;
+            li {
+                a {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                }
+                &:hover {
+                    background-color: $blue;
+                    a {
+                        color: #fff;
+                    }
+                }
+            }
+        } //点击，下拉列表出现
+        /* 点击，下拉列表出现 */
+        .nav-one:checked~ul,
+        .nav-two:checked~ul,
+        .nav-three:checked~ul {
+            display: block;
+        }
+        .nav-one:checked~label,
+        .nav-two:checked~label,
+        .nav-three:checked~label {
+            color: $blue;
+        }
+    }
+}
+
+//护工信息列表
+/* 护工信息 */
+
+main {
+    position: absolute;
+    top: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    li {
+        @extend %flex-center;
+        justify-content: space-between;
+        position: relative;
+        line-height: .3rem;
+        text-indent: .3rem;
+        &:nth-child(3n) {
+            border-bottom: .01rem solid #ccc;
+        }
+        h4 {
+            color: #ccc;
+        }
+        p {
+            overflow: hidden;
+            /*超出宽度部分的隐藏*/
+            white-space: nowrap;
+            /*文字不换行*/
+            text-overflow: ellipsis;
+            /*超出则...代替*/
+        }
+        span {
+            flex-shrink: 0;
+            color: $red;
+            margin-right: .25rem;
+        }
+        .icon-date {
+            @include sprite(-1.69rem, .15rem, .13rem);
+            left: .15rem;
+        }
+        .icon-right {
+            @include sprite(-1.51rem, .11rem, .16rem);
+            right: .05rem;
+        }
+        .icon-address {
+            @include sprite(-1.89rem, .1rem, .12rem);
+            left: .15rem;
+        }
+    }
+}
+
+//底部按钮
+/* 底部按钮 */
+
+footer {
+    @extend %flex-center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: .5rem;
+    background-color: #f8fafb;
+    .home-button {
+        position: relative;
+        width: 38%;
+        margin: 7%;
+        height: 100%;
+        cursor: pointer;
+    }
+    .icon-home {
+        @include sprite(-.63rem, .24rem, .26rem);
+        margin-top: -.05rem;
+        &~span {
+            display: inline-block;
+            margin-top: .1rem;
+            font-size: .12rem;
+            color: $blue;
+        }
+    }
+    .mine-button {
+        @extend .home-button;
+        cursor: pointer;
+        .icon-mine {
+            @include sprite(-1.23rem, .21rem, .22rem);
+            margin-top: -.05rem;
+            &~span {
+                display: inline-block;
+                margin-top: .1rem;
+                font-size: .12rem;
+                color: #999;
+            }
+        }
+    }
+    .write-button {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+        width: .54rem;
+        height: .5rem;
+        ;
+        .icon-write {
+            @include sprite(0, .54rem, .5rem);
+            left: 50%;
+            cursor: pointer;
+        }
+    }
+}
