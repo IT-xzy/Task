@@ -1,0 +1,61 @@
+@import '../helpers/mixin';
+$white:#fff;
+$blue:#1D7AD9;
+@mixin menu-icon {
+    display: inline-block;
+    margin: 10px 0 10px 10px;
+    width: 30px;
+    height: 19px;
+    border-top: 3px solid #1D7AD9;
+    border-bottom: 3px solid #1D7AD9;
+    background-color: #1D7AD9;
+    padding: 5px 0;
+    background-clip: content-box;
+}
+
+//菜单按钮（三条横线）
+nav {
+    background: #f9f9f9;
+    .container {
+        @include d-right-alignment;
+        padding-top: 25px;
+        padding-bottom: 25px; //导航栏布局
+        @media (max-width: 767px) {
+            display: block;
+            text-align: right;
+        } //响应式
+        .menu-icon {
+            @media (max-width: 767px) {
+                @include menu-icon();
+            } //导航栏按钮
+        }
+        input {
+            display: none;
+        } //隐藏input按钮
+        input:checked~a {
+            display: block;
+        } //
+        a {
+            margin-left: 60px;
+            button {
+                background: $white;
+                padding: 15px 17px;
+                border-radius: 5px;
+                cursor: pointer; //
+                &:hover {
+                    background: $blue;
+                    color: $white;
+                }
+                @media (max-width:767px) {
+                    width: 100%;
+                    margin-bottom: 2px;
+                }
+            } //菜单栏按钮
+            @media (max-width: 767px) {
+                display: none;
+                text-align: center;
+                margin: 0;
+            } //小于767后隐藏按钮
+        }
+    }
+}

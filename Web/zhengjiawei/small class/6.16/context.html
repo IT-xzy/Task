@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>执行环境</title>
+</head>
+
+<body>
+    <script>
+        /* 执行环境， */
+
+        var a = 10;
+
+        function fn(num1, num2) {
+            var c = 2;//在fn中的局部变量
+
+            function innerfn() {//
+                var c = 3;
+                // alert(a + b + c);
+                console.log(c);//3
+            }
+            innerfn();
+        }
+        fn(4, 5);
+
+
+
+        /* 作用域 */
+        
+        // var a = 10;
+        
+        // function prison(a) {
+            //     console.log("a的值"+a); //1
+            //     var a;
+            //     console.log("a的值："+a); //1
+            // }
+            // prison(a);
+            
+            
+            
+        /* 函数执行顺序 */
+
+        // alert(typeof fn); //function，函数声明提前
+        // alert(typeof fn0); //undefined,变量声明提前但未赋值
+        // function fn() {
+        //     //函数表达式
+        // }
+        // var fn0 = function () {
+        //     //函数定义式
+        // }
+        // alert(typeof fn0); //function，此时变量已被赋值
+
+
+
+    </script>
+</body>
+
+</html>
