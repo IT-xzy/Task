@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <context:component-scan base-package="com.ev.service.implement"/>
+
+    <!-- 将多个配置文件读取到容器中，交给Spring管理 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <!-- 这里支持多种寻址方式：classpath和file -->
+                <value>classpath:jdbc.properties</value>
+                <!-- 推荐使用file的方式引入，这样可以将配置和代码分离 -->
+                <value>classpath:memcached.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${jdbc_user}"/>
+        <property name="password" value="${jdbc_password}"/>
+        <property name="filters" value="stat"/>
+        <property name="maxActive" value="20"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxWait" value="60000"/>
+        <property name="minIdle" value="1"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxOpenPreparedStatements" value="20"/>
+        <property name="asyncInit" value="true"/>
+    </bean>
+
+    <!-- mybatis文件配置，扫描所有mapper.xml文件 -->
+    <!-- 配置mybatisSqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="mapperLocations" value="classpath*:com/ev/DAO/mapper/*Mapper.xml"/>
+    </bean>
+
+    <!-- 配置SqlSessionTemplate -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 配置mybatis mapper接口，扫描所有dao -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ev.DAO"/>
+        <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
+    </bean>
+
+    <context:component-scan base-package="com.ev.cache" />
+
+    <bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder"
+          p:connectionPoolSize="${memcached.connectionPoolSize}" p:failureMode="${memcached.failureMode}">
+        <!-- XMemcachedClientBuilder have two arguments.Fir-+st is server list,and second is weights array. -->
+        <constructor-arg>
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg value="${server1.memcached.host}"/>
+                    <constructor-arg value="${server1.memcached.port}"/>
+                </bean>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg value="${server2.memcached.host}"/>
+                    <constructor-arg value="${server2.memcached.port}"/>
+                </bean>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>${server1.memcached.weight}</value>
+                <value>${server2.memcached.weight}</value>
+            </list>
+        </constructor-arg>
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory" />
+        </property>
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
+        </property>
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+        </property>
+    </bean>
+    <!-- Use factory bean to build memcached client -->
+    <bean id="memcachedClient" factory-bean="memcachedClientBuilder"
+          factory-method="build" destroy-method="shutdown" />
+
+</beans>
