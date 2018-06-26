@@ -1,0 +1,86 @@
+@charset "utf-8";
+// @import "component";
+//初始化变量
+//给body初始字体尺寸，子级文字继承这个
+$body-bgcolor:#5fc0cd;
+@mixin translateY{
+    top:50%;
+    transform: translateY(-50%);
+}
+body {
+    margin:0;
+    // font-size: .32rem;
+    background: $body-bgcolor;
+}
+// header设置相关变量
+$header-height:.88rem;
+$header-bgcolor:#5fc0cd;
+$text-color-white:#fff;
+// 两端的距离
+$justify-size:.2rem;
+$center-font-size:.34rem;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $header-height;
+    font-size: $center-font-size;
+    color: #fff;
+    border-bottom:.01rem solid #74d4eb;
+    img{
+        &:first-child {
+            width: .51rem;
+            height: .42rem;
+            margin-left: $justify-size;
+        }
+        &:last-child {
+            width: .4rem;
+            height: .4rem;
+            margin-right: $justify-size;
+        }
+    }
+    
+}
+
+
+//main开始
+main {
+    padding: 0 .81rem;
+    .result-show {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2.48rem;
+     
+        img {
+            width: 3.51rem;
+        }
+    }
+    .result-text {
+        margin-bottom: .62rem;
+        font-size: .32rem;
+        // padding:0 .81rem;
+        color: #ffc865;
+    } 
+    .result-container {
+        color: #fff;
+        font-size: .26rem;
+        margin-bottom: .28rem;
+        p{
+            white-space: pre-wrap;
+            margin:0;
+        }
+    }
+    .game-step {
+        height: 1.64rem;
+        background: #fff;
+        .hour {
+            float: right;
+            font-size: .2rem;
+            color: #d5d5d5;
+        }
+        h4 {
+            font-size: .3rem;
+        }
+    }
+}

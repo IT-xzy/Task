@@ -1,0 +1,104 @@
+@charset "utf-8";
+//分隔符组件，实现原理padding
+$separa-padding-top:.15rem;
+$separa-padding-lr:.16rem;
+$separa-padding-bo:.15rem;
+$separa-margin-l:.18rem;
+$separa-border-color:#e1e5e7;
+$separa-border-width:1px;
+.separator {
+    display: inline-block;
+    padding: $separa-padding-top $separa-padding-lr $separa-padding-bo;
+    margin-left: $separa-margin-l;
+    border-left: $separa-border-width solid $separa-border-color;
+}
+//模拟下拉菜单的组件,原理是配合单选按钮checked状态配合jq
+$nav-height:.8rem;
+$nav-font:.3rem;
+$nav-color:#999;
+$sparator-bgcolor:#e1e5e7;
+$nav-label-bor-bgcolor:#e1e5e7;
+$nav-label-active-bgcolor:#5fc0cd;
+$nav-triangle-border-width:.08rem;
+$nav-triangle-r:.16rem;
+$nav-triangle-border-color:#afbac0;
+@mixin translateY{
+    top:50%;
+    transform: translateY(-50%);
+}
+.nav-fixed {
+    position: fixed;
+    width: 100%;
+    .drop-nav {
+        display: flex;
+        height: $nav-height;
+        color:$nav-color;
+        input {
+            width: 0;
+            height: 0;
+            &:checked ~ul{
+                display: block;
+            }
+        }
+        label {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            font-size: $nav-font;
+            border-bottom: 1px solid $nav-label-bor-bgcolor;
+            background: #fff;
+            &:active {
+                background: $nav-label-active-bgcolor;
+                color: #fff;
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                right: $nav-triangle-r;
+                @include translateY();
+                width: 0;
+                height: 0;
+                border-top: $nav-triangle-border-width solid $nav-triangle-border-color;
+                border-right: $nav-triangle-border-width solid transparent;
+                border-left: $nav-triangle-border-width solid transparent;
+            }
+        }
+        .drop-container {
+            position: relative;
+            flex: 1;
+            font-size: 0;
+            line-height: .8rem;
+            &::after {
+                content: "";
+                position: absolute;
+                @include translateY();
+                width: 1px;
+                height: 80%;
+                background: $sparator-bgcolor;
+            }
+            ul{
+                display: none;
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                margin-top:-.1rem;
+                padding: 0;
+                font-size: $nav-font;
+                list-style: none;
+                text-align: center;
+                background: #fff;
+            }
+            li {
+                &:hover {
+                    background: #d8d8d8;
+                    color:#fff;
+                }
+            }
+        }
+    }
+
+}
+//三道杠组件
+$three-width:.34rem;
+$three-height:.04rem;
+
