@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="dao.StudentMapper">
+
+    <!--新增学员 -->
+    <insert id="insertStudent"  parameterType="model.Student" >
+        <selectKey keyProperty="id" order="AFTER" resultType="Integer">
+            select LAST_INSERT_ID();
+        </selectKey>
+    insert into db_student (name, studentNum,entranceDate,graduatedDate,isWork,career,duty,isExcellent,createdDate)
+    values(#{name},#{studentNum},#{entranceDate},#{graduatedDate},#{isWork},#{career},#{duty},#{isExcellent},#{createdDate})
+    </insert>
+
+    <!-- 删除学员 -->
+    <delete id="deleteById" parameterType="model.Student">
+        delete from  db_student  where studentNum = #{studentNum}
+    </delete>
+
+    <!-- 查询累计在学学生-->
+    <select id="getLearningStudentCount"  resultType="Integer">
+        select count(*) from db_student
+    </select>
+
+    <!-- 查询毕业学生-->
+    <select id="getGraduatedStudentCount" resultType="Integer">
+        select count(*) from db_student where isWork ='Y'
+    </select>
+
+    <!-- 查询优秀毕业学生-->
+    <select id="getExcellentStudent" parameterType="model.Student" resultType="model.Student">
+        select * from db_student where isWork ='Y' and isExcellent='Y' and studentNum=#{studentNum}
+    </select>
+
+    <!--查询职业人数-->
+    <select id="getCareerTypeCount"  resultType="Integer">
+        select count(*) from db_student where  career like CONCAT('%',#{career},'%')
+    </select>
+
+
+    <!--编辑学员-->
+    <update id="updateStudent" parameterType="model.Student" >
+        update db_student
+        set graduatedDate = #{graduatedDate},isWork = #{isWork}, career= #{career},duty = #{duty},
+            isExcellent = #{isExcellent},updatedDate = #{updatedDate}
+        where studentNum = #{studentNum}
+    </update>
+
+</mapper>
