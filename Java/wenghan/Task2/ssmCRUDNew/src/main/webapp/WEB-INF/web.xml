@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+  <!-- 加载spring整合mybatis的核心配置文件
+      整合核心配置文件:在ioc容器中添加数据源类、会话类、数据层的实现类、通过注解方式配置业务层的实现类
+  -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <!--监听器？：监听web容器启动，默认执行初始化spring容器的方法
+  ContextLoaderListener的作用就是启动Web容器时，自动装配applicationContext.xml的配置信息。-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!--编码过滤器-->
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <!--隐藏域提交PUT/DELETE请求-->
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <!-- spring mvc核心：分发servlet 前端控制器-->
+  <servlet>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- spring mvc的配置文件 -->
+    <init-param><!--web开启时给参数赋初始值，加载springMVC.xml-->
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springMVC.xml</param-value>
+    </init-param><!--设置优先级-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!--配置分发器，设置拦截规则-->
+  <servlet-mapping>
+    <servlet-name>mvc-dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!--设置404错误时跳转的页面-->
+  <!--<error-page>-->
+    <!--<error-code>404</error-code>-->
+    <!--<location>/WEB-INF/jsp/404.jsp</location>-->
+  <!--</error-page>-->
+  <!--&lt;!&ndash;设置405错误时跳转的页面&ndash;&gt;-->
+  <!--<error-page>-->
+    <!--<error-code>405</error-code>-->
+    <!--<location>/WEB-INF/jsp/400.jsp</location>-->
+  <!--</error-page>-->
+  <!--&lt;!&ndash;设置404错误时跳转的页面&ndash;&gt;-->
+  <!--<error-page>-->
+    <!--<error-code>400</error-code>-->
+    <!--<location>/WEB-INF/jsp/400.jsp</location>-->
+  <!--</error-page>-->
+</web-app>
+

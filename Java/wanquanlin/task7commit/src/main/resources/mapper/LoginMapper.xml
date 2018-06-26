@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.DAO.LoginMapper">
+    <!--查找优秀学员 -->
+    <select id="findGood" resultType="com.POJO.GoodStudent">
+        select * from good_student
+    </select>
+    <!--在学人数统计 -->
+    <select id="selectCount" resultType="int">
+        select count(*) from  student_copy
+    </select>
+    <!--毕业人数统计 -->
+    <select id="selectCountGraduate" resultType="int">
+        select count(*) from  graduated_student
+    </select>
+    <!--查找页面前三张图片 -->
+    <select id="findImgaes1" resultType="com.POJO.Images1">
+        select * from images_1
+    </select>
+    <select id="findJobList1"  resultType="com.POJO.JobList">
+        select * from joblist1
+    </select>
+    <select id="clientLogin" resultType="com.POJO.Register">
+        SELECT sign_id,account,password from account_password WHERE sign_id=#{sign_id}
+    </select>
+    <select id="clientLogin2" resultType="com.POJO.Register">
+        SELECT  * from account_password WHERE account=#{account}
+    </select>
+
+    <insert id="register" parameterType="com.POJO.Register">
+        INSERT into account_password (account,password,telephone,email) values (#{account},#{password},#{telephone},#{email})
+    </insert>
+
+</mapper>

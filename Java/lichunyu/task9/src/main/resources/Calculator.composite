@@ -1,0 +1,25 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="Calculator">
+
+    <component name="CalculatorServiceComponent">
+        <implementation.java class="service.impl.CalculatorServiceImpl"/>
+
+        <!--远程调用接口-->
+        <!--name必须是实现类的名字，否则会报错-->
+        <service name="CalculatorServiceImpl">
+            <interface.java interface="service.CalculatorService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:9099/CalculatorRMIService"/>
+        </service>
+
+        <reference name="addService" target="AddServiceComponent"/>
+    </component>
+
+    <component name="AddServiceComponent">
+        <implementation.java class="service.impl.AddServiceImpl"/>
+    </component>
+
+</composite>
