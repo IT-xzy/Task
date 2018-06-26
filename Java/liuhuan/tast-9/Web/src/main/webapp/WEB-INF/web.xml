@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 序号为加载顺序 -->
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <!-- 过滤器 3-->
+    <filter>
+        <filter-name>CharacterEncoding</filter-name>
+        <!-- 自动转码 防止中文乱码 -->
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 前端控制器 4-->
+    <servlet>
+        <servlet-name>jsp_rest</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <!-- 设置前端控制器加载顺序 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jsp_rest</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- 初始化时加载log4j 1-->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log/log4j.xml</param-value>
+    </context-param>
+    <!-- 配置log4j.xml变量，如果需要动态的就使用下面方式，使用方法${name} -->
+    <context-param>
+        <param-name>controller</param-name>
+        <param-value>controller-log</param-value>
+    </context-param>
+    <!-- 配置log4j 变量-->
+    <context-param>
+        <param-name>loggingLevel</param-name>
+        <param-value>info</param-value>
+    </context-param>
+    <!-- 初始化时加载Spring配置 1 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/applicationContext-*.xml</param-value>
+    </context-param>
+
+    <!-- 监听器 Log4J -->
+    <listener>
+        <!-- 在Spring 4.2.1中已经将其标记为过时了.如果使用spring4.2.1以上的版本又会造成不兼容
+Log4jConfigListener必须要在Spring的Listener之前 -->
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    <!-- 监听器 Spring 2-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!-- jsp 使用自定义tag, 时间类型转换 -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <taglib-location>/tld/DateTag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+    <filter>
+        <!-- 解析 DELETE 和 PUT 请求,前端借助_method属性 -->
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- wellCome 页面 -->
+    <!-- 开启Rest / 拦截后需在配置中添加 <mvc:default-servlet-handler/>-->
+    <welcome-file-list>
+        <welcome-file>WEB-INF/jsp/index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- 错误页面 -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/static/jsp/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/static/jsp/500.jsp</location>
+    </error-page>
+</web-app>
