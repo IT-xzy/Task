@@ -1,0 +1,139 @@
+@import "mystyle";
+/*顶部按钮和标题*/
+
+header {
+    position: fixed;
+    top: 0;
+    height: 0.5rem;
+    width: 100%;
+    text-align: center;
+    background-color: #5fc0cd;
+    color: #fff;
+    a {
+        position: absolute;
+        left: .2rem;
+        top: .2rem;
+        width: .1rem;
+        height: .1rem;
+        border: {
+            left: .02rem solid #fff;
+            top: .02rem solid #fff;
+        }
+        transform: rotate(-45deg);
+    }
+    h2 {
+        line-height: .5rem;
+    }
+}
+
+/*主题背景图片和个人信息*/
+
+.main-top {
+    @extend %flex-center;
+    margin-top: 0.5rem;
+    height: 1.5rem;
+    color: #fff;
+    background: url(../images/doctor.png) 100%/cover no-repeat;
+    img {
+        width: .8rem;
+        @include margin(auto, .2rem, auto, .2rem);
+    }
+    .big-word {
+        font-size: .17rem;
+        margin-right: .1rem;
+    }
+    .little-word {
+        font-size: .12rem;
+        line-height: .3rem;
+        &::before {
+            @include icon(.12rem, .12rem, "../images/add.png");
+            @include margin(auto, .05rem, .01rem, auto);
+            vertical-align: text-bottom;
+        }
+    }
+}
+
+/*主体
+专业技能r*/
+
+.main-body {
+    padding-bottom: 1rem;
+    li {
+        @extend %flex-center;
+        padding: .18rem .1rem;
+        border-bottom: .01rem solid #ccc;
+    }
+    .title {
+        font-size: .17rem;
+        &::before {
+            @include shape(.17rem, .02rem, #5fc0cd, .02rem);
+            vertical-align: text-top;
+            margin-right: .1rem;
+        }
+    }
+    .star {
+        // 添加五角星
+        &::before {
+            @include icon(.14rem, .14rem, "../images/star.png");
+            @include margin(auto, .06rem, -.01rem, auto);
+        }
+        &:first-child::after {
+            @include shape(.17rem, .01rem, #ccc, 0);
+            vertical-align: text-top;
+            margin: 0 .1rem;
+        }
+    }
+}
+
+.list {
+    &:nth-child(-n+5) {
+        margin-left: .2rem;
+    }
+    &:last-child {
+        padding-left: .3rem;
+    }
+    .grey-word {
+        color: #ccc;
+        flex-shrink: 0;
+        &::after {
+            @include shape(.17rem, .01rem, #ccc, 0);
+            vertical-align: text-top;
+            margin: 0 .1rem;
+        }
+    } // 红字
+    .red-word {
+        color: $red;
+    }
+}
+
+/*底部按钮*/
+
+footer {
+    @extend %flex-center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    button {
+        width: 42%;
+        height: .5rem;
+        margin-bottom: .1rem;
+        font-size: .16rem;
+        @include rounded-corners(5);
+        border: .01rem solid $blue;
+        cursor: pointer;
+    }
+    .left-button {
+        margin-left: .2rem;
+        background-color: #fff;
+        color: $blue;
+    }
+    .right-button {
+        margin-right: .2rem;
+        background-color: $blue;
+        a {
+            color: #fff;
+        }
+    }
+}

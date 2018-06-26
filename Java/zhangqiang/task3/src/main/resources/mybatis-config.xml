@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   <settings>
+       <!--是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射。-->
+       <setting name="mapUnderscoreToCamelCase" value="true"/>
+       <!--指定 MyBatis 所用日志的具体实现，未指定时将自动查找。 值: SLF4J | LOG4J | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING（控制台） | NO_LOGGING -->
+       <setting name="logImpl" value="STDOUT_LOGGING"/>
+
+       <!--&lt;!&ndash; 全局映射器启用缓存 &ndash;&gt;-->
+       <!--<setting name="cacheEnabled" value="true" />-->
+       <!--&lt;!&ndash; 查询时，关闭关联对象即时加载以提高性能 &ndash;&gt;-->
+       <!--<setting name="lazyLoadingEnabled" value="true" />-->
+       <!--&lt;!&ndash; 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指定)，不会加载关联表的所有字段，以提高性能 &ndash;&gt;-->
+       <!--<setting name="aggressiveLazyLoading" value="false" />-->
+       <!--&lt;!&ndash; 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果 &ndash;&gt;-->
+       <!--<setting name="multipleResultSetsEnabled" value="true" />-->
+       <!--&lt;!&ndash; 允许使用自定义的主键值(比如由程序生成的UUID 32位编码作为键值)，数据表的PK生成策略将被覆盖 &ndash;&gt;-->
+       <!--<setting name="useGeneratedKeys" value="true" />-->
+       <!--&lt;!&ndash; 给予被嵌套的resultMap以字段-属性的映射支持 &ndash;&gt;-->
+       <!--<setting name="autoMappingBehavior" value="FULL" />-->
+       <!--&lt;!&ndash; 对于批量更新操作缓存SQL以提高性能  &ndash;&gt;-->
+       <!--<setting name="defaultExecutorType" value="BATCH" />-->
+       <!--&lt;!&ndash; 数据库超过25000秒仍未响应则超时 &ndash;&gt;-->
+       <!--<setting name="defaultStatementTimeout" value="25000" />-->
+   </settings>
+
+
+    <!-- 全局别名设置，在映射文件中只需写别名，而不必写出整个类路径  -->
+    <typeAliases>
+        <typeAlias alias="Student"  type="com.restful.model.Student" />
+        <typeAlias alias="User"  type="com.restful.model.User" />
+    </typeAliases>
+
+    <mappers>
+        <!-- 非注解的sql映射文件配置，如果使用mybatis注解，该mapper无需配置，但是如果mybatis注解中包含@resultMap注解，则mapper必须配置，给resultMap注解使用 -->
+        <!--使用xml配置 class是注册mapper接口 里面有resultMap和映射语句-->
+        <!--<mapper resource="springmybatis/mapper/studentMapper.xml"/>-->
+        <!--<mapper class="com.dao.mapper.StudentMapper"/>-->
+        <!--<mapper class="com.dao.mapper.UserMapper"/>-->
+        <!--使用注解配置 里面只有resultMap-->
+        <!--<mapper resource="springmybatis/mapper/studentAnnotationMapper.xml"/>-->
+        <!--<mapper class="com.dao.mapper.StudentAnnotationMapper"/>-->
+    </mappers>
+</configuration>

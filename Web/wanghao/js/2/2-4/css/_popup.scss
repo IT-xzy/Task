@@ -1,0 +1,113 @@
+.popup-style {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  
+    background: rgba(3, 3, 3, 0.5);
+    z-index: 2;
+    .headlink {
+        @include flex-between;
+        flex-direction: column;
+        width: 4rem;
+        height: 2rem;
+        margin: 30vh auto;
+        background: #fff;
+        p {
+            line-height: 1.3rem;
+        }
+        button {
+            width: 100%;
+            height: 0.7rem;
+            background: #fff;
+        }
+    }
+}
+
+.witch-popup {
+    @include flex-alignCenter; // display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(3, 3, 3, 0.5);
+    display: none;
+    .witchlink {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 4rem;
+        height: 2rem;
+        background: #fff;
+        p {
+            line-height: 1.3rem;
+            text-align: center;
+        }
+        >div {
+            @include flex-between;
+            button {
+                height: 0.7rem;
+                background: #fff;
+                padding: 0;
+                &:nth-child(1) {
+                    flex: 1 0 30%;
+                    color: #fff;
+                    background: red;
+                }
+                &:nth-child(2) {
+                    flex: 1 0 40%;
+                }
+                &:nth-child(3) {
+                    flex: 1 0 30%;
+                    color: #fff;
+                    background: #333;
+                }
+            }
+        }
+    }
+}
+.close-popup {
+    @include flex-alignCenter; // display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(3, 3, 3, 0.5);
+    display: none;
+    z-index: 2;
+    .closelink {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        width: 4rem;
+        height: 2rem;
+        margin: 40vh auto;
+        background: #fff;
+        p {
+            line-height: 1.3rem;
+            text-align: center;
+        }
+        >div {
+            @include flex-between;
+            button {
+                height: 0.7rem;
+                background: #fff;
+                padding: 0;
+                border-top: 1px solid #333;
+                &:nth-child(1) {
+                    flex: 1 0 50%;
+                    border-right:1px solid #333;
+                   
+                }
+                &:nth-child(2) {
+                    flex: 1 0 50%;
+                }
+              
+            }
+        }
+    }
+}

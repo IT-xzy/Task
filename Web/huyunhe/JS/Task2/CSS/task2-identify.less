@@ -1,0 +1,144 @@
+@header-color: #29bde0;
+@text-color: #a1a1a1;
+@border-color: #d9d9d9;
+@body-background-color: #f0f0f0;
+@div-background-color: #fbfbfb;
+@yellow:#ee9f1b;
+@head-color:#ffedc5;
+@header-font-size: 3.4rem;
+@normal-size: 2.6rem;
+@big-size: 3.6rem;
+@button-font-size: 4rem;
+//base rules
+html {
+  font-size: 10px;
+  @media screen and (max-width:600px) {
+   font-size: 7px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  max-width: 720px;
+  margin: 0 auto;
+  background-color: @body-background-color;
+}
+.all-center{
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+}
+
+.header {
+  display: flex;
+  display: -webkit-flex;
+  max-width: 720px;
+  min-height: 88px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  color: white;
+  background-color: @header-color;
+  box-sizing: border-box;
+  img{
+    height: 3rem;
+  }
+}
+
+.header__title {
+  font-size: @big-size;
+}
+
+main{
+  position: absolute;
+  top: 88px;
+  bottom: 0;
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+  background-color: @header-color;
+  overflow: auto;
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}
+.prompt{
+  display: inline-block;
+  position: relative;
+  width: 80%;
+  min-height: 738px;
+  margin: 5rem 0;
+  border: 8px solid white;
+  background-color: @head-color;
+}
+.prompt__img{
+  display: inline-block;
+  width: 70%;
+  margin: 15rem 0;
+  img{
+    width: 100%;
+  }
+}
+.prompt__number{
+  display: flex;
+  display: -webkit-flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  top: -3.5rem;
+  transform: translateX(-50%);
+  width:7rem;
+  height: 7rem;
+  border: 2px solid @head-color;
+  border-radius: 50%;
+  background-color: white;
+  color: #f56b81;
+  font-size: 4rem;
+  font-weight: bold;
+}
+.identity{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 2em;
+
+  display: none;
+}
+.identity__img{
+  margin-bottom: 5rem 0;
+}
+.identity__name,
+.identity__words{
+  margin: 2rem 0;
+  font-size: @button-font-size;
+}
+.identity__name{
+  color: @header-color;
+}
+.identity__words{
+  color: #f56b81;
+}
+.identity__tips{
+  margin: 6rem 0;
+  color: @yellow;
+  font-size: @normal-size;
+  text-align: left;
+  letter-spacing: 2px;
+}
+
+.check{
+  display: inline-block;
+  width: 85%;
+  padding: 1.5rem 0;
+  border: none;
+  margin-bottom: 5rem;
+  color: white;
+  background-color: @yellow;
+  font-size: @button-font-size;
+}

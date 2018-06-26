@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--注解bean-->
+    <context:annotation-config></context:annotation-config>
+    <!--扫描切面-->
+    <context:component-scan base-package="com.ptt.advice"/>
+
+    <!--aop-->
+    <!--service层aop，输出操作db的执行时间-->
+    <aop:config>
+        <aop:pointcut id="servicePointcut" expression="execution(* com.ptt.service.*.*(..))"/>
+        <aop:aspect id="serviceAdvice" ref="serviceAdvice">
+            <aop:before method="before" pointcut-ref="servicePointcut"/>
+            <aop:after method="after" pointcut-ref="servicePointcut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

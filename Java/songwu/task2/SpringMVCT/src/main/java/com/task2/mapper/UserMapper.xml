@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task2.mapper.UserMapper">
+    <!--查询数据总数-->
+    <select id="findUserCount" resultType="int">
+        select count(*)from studentx
+    </select>
+    <!--分页查询-->
+    <select id="findUserByPage" parameterType="int" resultType="User">
+        select *from studentx limit #{start},#{pageSize}
+    </select>
+    <!--新增-->
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into studentx(name,qq,type,createAt,updateAt)values(#{name},#{qq},#{type},#{createAt},#{updateAt})
+
+    </insert>
+    <!--综合更改-->
+    <update id="updateUser" parameterType="User">
+        update studentx
+        <set>
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="qq!=null and qq!=''">qq=#{qq},</if>
+            <if test="type!=null and type!=''">type=#{type},</if>
+            <if test="updateAt!=null and updateAt!=''">updateAt=#{updateAt}</if>
+
+        </set>
+        <where>
+            <if test="id!=null">and id=#{id}</if>
+        </where>
+    </update>
+
+    <!--根据id查询-->
+    <select id="findUserById" parameterType="long" resultType="User">
+        select * from studentx where id=#{id}
+    </select>
+    <!--根据id删除-->
+    <delete id="deleteUserById" parameterType="long">
+        delete from studentx where id=#{id}
+    </delete>
+    <!--综合查询-->
+    <select id="selectUser" parameterType="User" resultType="User">
+        select * from studentx
+        <where>
+            <if test="id!=null and id!=''">and id=#{id}</if>
+            <if test="name!=null and name!=''">and name like "%"#{name}"%"</if>
+            <if test="qq!=null and qq!=''">and qq=#{qq}</if>
+            <if test="type!=null and type!=''">and type=#{type}</if>
+        </where>
+    </select>
+</mapper>

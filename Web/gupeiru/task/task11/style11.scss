@@ -1,0 +1,100 @@
+$blue: #5fc0cd;
+$white: #fff;
+$big-font: .18rem;
+@mixin flex($h){
+    display: flex;
+    justify-content: $h;
+    align-items: center;
+    height: .6rem;
+}
+%padding {
+    padding-left: .2rem;
+    padding-right: .2rem;
+}
+html{
+    font-size: 625%;
+    body{
+        font-size: .16rem;
+        margin: 0;
+        padding: 0;
+        background-color: #eff0f4;
+        a{
+            text-decoration: none;
+            color: $white;
+        }
+    }
+}
+ /* 顶部按钮*/
+header{
+    @include flex(space-between);
+    @extend %padding;
+    background-color: $blue;
+    a:nth-child(2){
+        font-size: $big-font;
+    }
+}
+ /* 输入框 */
+main{
+    margin-bottom: .3rem;
+    .input-box{
+        @include flex(start);
+        @extend %padding;
+        background-color: $white;
+        margin: .1rem 0;
+        input{
+            height: 100%;
+            padding: 0;
+            border: none;
+            outline: none;
+            flex: 1;
+            /* webkit内核浏览器 */
+            &::-webkit-input-placeholder{
+                color:#ccc;
+            }
+            /* ie内核浏览器 */
+            &::-ms-input-placeholder{
+                color: #ccc;
+            }
+            /* 火狐内核 */
+            &::-moz-placeholder{
+                color:#ccc;
+            }
+        }
+        img{
+            height: .3rem;
+            width: .43rem;
+            margin-right: .1rem;
+        }
+    }
+}
+ /* 底部按钮 */
+footer{
+    text-align: center;
+    line-height: .6rem;
+    background-color: $blue;
+    a{
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        font-size: $big-font;
+    }
+}
+ /* 忘记密码 */
+.forget{
+    float: right;
+    margin: {
+        right: .2rem;
+        top: .1rem;
+    }
+    a{
+        color: $blue;
+    }
+}
+ /* 修改input type=number样式 */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance:textfield;
+}     
+input[type="number"]{         
+    -moz-appearance:textfield;    
+}

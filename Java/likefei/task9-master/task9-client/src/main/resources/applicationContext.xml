@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  ">
+
+  <context:property-placeholder location="classpath:log4j.properties"/>
+  <context:component-scan base-package="pojo" />
+
+  <bean id="rmiClientSocketFactory" class="beanfactory.RMICustomClientSocketFactory">
+    <property name="timeout" value="5000"/>
+  </bean>
+  <!-- 客户端 -->
+  <bean id="userRmiServiceA"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+    <property name="serviceUrl" value="rmi://127.0.0.1:8080/studentService"/>
+    <property name="serviceInterface" value="service.UserRmiService"/>
+    <property name="refreshStubOnConnectFailure" value="true"/>
+    <property name="lookupStubOnStartup" value="false"/>
+    <!--<property name="registryClientSocketFactory" ref="rmiClientSocketFactory"/>-->
+  </bean>
+
+  <bean id="userRmiServiceB"  class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+    <property name="serviceUrl" value="rmi://120.131.8.132:8082/studentService"/>
+    <property name="serviceInterface" value="service.UserRmiService"/>
+    <property name="refreshStubOnConnectFailure" value="true"/>
+    <property name="lookupStubOnStartup" value="false"/>
+    <!--<property name="registryClientSocketFactory" ref="rmiClientSocketFactory"/>-->
+  </bean>
+
+  <bean id="loadBalancedService" class="beanfactory.LoadBalancedFactoryBean">
+    <property name="serviceInterface" value="service.UserRmiService"/>
+    <property name="stateful" value="false"/>
+    <property name="balanceStrategy">
+      <bean class="beanfactory.RoundRobinStrategy"/>
+    </property>
+    <property name="serviceProxyList">
+      <list>
+        <ref bean="userRmiServiceA"/>
+        <ref bean="userRmiServiceB"/>
+      </list>
+    </property>
+  </bean>
+
+
+  <!--<bean id="paymentService" class="LoadBalancingFactoryBean">-->
+    <!--<property name="serviceList">-->
+      <!--<list>-->
+        <!--<bean ref="userRmiServiceA"/>-->
+        <!--<bean ref="userRmiServiceB"/>-->
+      <!--</list>-->
+    <!--</property-arg>-->
+    <!--<property name="selectionStrategy"  class="RoundRobin">-->
+    <!--<property name="serviceInterface" value="service.UserRmiService"/>-->
+  <!--</bean>-->
+
+</beans>
+

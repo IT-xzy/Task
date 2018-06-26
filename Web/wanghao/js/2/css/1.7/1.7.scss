@@ -1,0 +1,111 @@
+@import "../_style.scss";
+@import"../_mixin.scss";
+$nav-height: .75rem;
+body {
+    background: $nav-blue;
+}
+
+header {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include flex-between;
+    height: $nav-height;
+    padding: 0 .23rem;
+    background: $nav-blue;
+    font-size: .34rem;
+    color: #fff;
+   .back{
+       width: .25rem;
+       height: .25rem;
+       border: {
+           top:2px solid #fff;
+           left: 2px solid #fff;
+       }
+       transform: rotate(-45deg);
+   }
+    .close {
+        width: .4rem;
+        height: .4rem;
+        text-align: center;
+        position: relative;
+        &::before,
+        &::after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            right: .4/2-.02rem;
+            width: .04rem;
+            height: .42rem;
+            background: #fff;
+        }
+        &::before {
+            transform: rotate(-45deg);
+        }
+        &::after {
+            transform: rotate(45deg);
+        }
+    }
+}
+
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    margin: {
+        top: 1rem;
+        bottom: 3rem;
+    }
+    .box-flex {
+        flex: 0 1 33.3%;
+        .box-style {
+            position: relative;
+            width: 24vw;
+            height: 24vw;
+            margin: 4vw  4vw;
+            background: #f5c97b; 
+            border:1vw solid #fff;
+            box-sizing: border-box;
+            .name{
+                @include flex-align;
+                justify-content: center;
+                height: 70%;
+                font-size: .3rem;
+                color: #333;
+            }
+            .number{
+                @include flex-align;
+                justify-content: center;
+                height: 30%;
+                font-size: .22rem;
+                color: #fff;
+                background: #83b09a;
+            }
+        }
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include flex-align;
+    justify-content: center;
+    height: 1.92rem;
+    background: $nav-blue;
+    a {
+        width: 80%;
+        height: .88rem;
+        line-height: .88rem;
+        border: none;
+        font-size: .4rem;
+        color: #fff;
+        background: #fbb435;
+        text-align: center;
+       
+    }
+}
