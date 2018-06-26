@@ -1,0 +1,174 @@
+-------------start.sh-------------
+
+#! /bin/sh
+sh /usr/local/tomcat/bin/startup.sh
+echo "TOMCAT 已经启动..."
+
+--------------stop.sh-------------
+#! /bin/sh
+sh /usr/local/tomcat/bin/shutdown.sh
+echo "TOMCAT 已经停止..."
+
+--------------deploy.sh-----------
+#! /bin/bash
+if [$id>0];then
+echo "stop project"
+kill -9 $id
+else
+echo "project is stopped"
+fi
+echo "remove project war file"
+cd /usr/local/tomcat/webapps
+rm -rf SSM
+rm -rf SSM.war
+echo "copy project war to webapp"
+cd ~
+mv -f SSM.war /usr/local/tomcat/webapps
+chmod 777 /usr/local/tomcat/webapps/*.war
+echo "start project tomcat"
+sh /usr/local/tomcat/bin/startup.sh
+echo "start tomcat finished"
+echo $id "start project tomcat successfull"
+exit 0
+
+---------------tomcat.sh------------
+#! /bin/bash
+# tomcat management tool
+# function 这个脚本是给/etc/init.d里边的文件使用
+. /etc/rc.d/init.d/functions
+
+export PATH=$PATH:/bin:/sbin:/usr/sbin
+export LANG="zh_CN.UTF-8"
+
+#监控日志目录
+LogDir=/usr/local/nginx/logs/host.access.log
+#取日志文件名cut   使用 / 将LogDir 分割为 4 个域
+LogName=$(echo "$LogDir" | cut -d '/' -f 4)
+#API日志文件
+InfoDir=/var/log/tomcat/info.log
+#系统版本
+OS_NAME=$(cat /etc/system-release)
+#监控网口名
+eth=eth0
+#监控
+function Monitor(){
+ if [ ! -d /sys/class/net/$eth ];then
+    echo -e "Network-Interface Not Found"
+    echo -e "Your system have network-interface:\n 'ls /sys/class/net'"
+ fi
+
+#循环
+while [ "1" ]
+do
+    # 查看访问数次超过100的ip
+    TopIp10=$(cat "$LogDir" | awk '{print $1}' | sort | uniq -c | sort -rn | head -n 10)
+    # 查看访问最频繁的10个页面
+    TopUrl5=$(grep -v "-" "$LogDir" | awk '{print $11}' | sort | uniq -c | sort -rn | head -n 5)
+    # 每分钟请求数
+    TopTime5=$(awk '{print $2}' "$LogDir"| cut -c 16-17 | sort | uniq -c | sort -nr | head -n 5)
+    # 传输时间大于10ms的页面
+    TopTime=$(grep -v "-" "$LogDir" | awk '{if(($NF*1000)>10) print $11}' | sort | uniq -c | sort -rn  | head -n 5)
+
+    # 接口响应时间
+    # 当前访问url
+    JustUrl=$(cat "$LogDir" | tail -n 1 | awk '{print $5}')
+    # Controller响应信息
+    ControllerTimer=$(grep "性能日志 Controller类" "$InfoDir" | tail -n 1 | awk '{for(i=8;i<=NF;i++) printf $i""FS;print ""}')
+    # DB 响应信息
+    DBTimer=$(grep "性能日志 UserService类" "$InfoDir" | tail -n 1 | awk '{for(i=8;i<=NF;i++) printf $i""FS;print ""}' )
+    # Nginx 页面传输时间
+    NginxCreateWebTimer=$(cat "$LogDir" | tail -n 1 | awk '{print $NF * 1000"ms"}')
+    # 内存
+    # 空闲内存 NR>2{print p}{p=$1}:去掉最后一行和第一行
+    FreeMem=$(free -m | awk -F : '{print $2}' |awk '{print $3}' | awk 'NR>2{print p}{p=$1}')
+    # 空闲swap内存 END{print}: 取最后一行
+    FreeSwap=$(free -m | awk -F : '{print $2}' |awk '{print $3}' |  awk 'END{print}')
+
+    # 网卡状态
+    STATUS="fine"
+
+    # 获取当前时刻网口接收与发送的流量
+    RXpre=$(cat /proc/net/dev | grep $eth | tr : " " | awk '{print $2}')
+    TXpre=$(cat /proc/net/dev | grep $eth | tr : " " | awk '{print $10}')
+
+    # 获取1秒后网口接收与发送的流量
+    sleep 1
+    RXnext=$(cat /proc/net/dev | grep $eth | tr : " " | awk '{print $2}')
+    TXnext=$(cat /proc/net/dev | grep $eth | tr : " " | awk '{print $10}')
+    clear
+
+    # 获取这1秒钟实际的进出流量
+    RX=$((${RXnext}-${RXpre}))
+    TX=$((${TXnext}-${TXpre}))
+    # 判断接收流量如果大于MB数量级则显示MB单位,否则显示KB数量级
+    if [[ $RX -lt 1024 ]];then
+      RX="${RX}B/s"
+    elif [[ $RX -gt 1048576 ]];then
+      RX=$(echo $RX | awk '{print $1/1048576 "MB/s"}')
+      $STATUS="busy"
+    else
+      RX=$(echo $RX | awk '{print $1/1024 "KB/s"}')
+    fi
+
+    # 判断发送流量如果大于MB数量级则显示MB单位,否则显示KB数量级
+    if [[ $TX -lt 1024 ]];then
+      TX="${TX}B/s"
+      elif [[ $TX -gt 1048576 ]];then
+      TX=$(echo $TX | awk '{print $1/1048576 "MB/s"}')
+    else
+      TX=$(echo $TX | awk '{print $1/1024 "KB/s"}')
+    fi
+# 打印信息
+    echo -e "==================================="
+    echo -e "TomCat 监控工具"
+    echo -e "version 1.0"
+    echo -e "==================================="
+    echo -e "System: $OS_NAME"
+    echo -e "DateTime:   `date +%F`  `date +%k:%M:%S`"
+    echo -e "MemFree:${FreeMem}M SwapFree:${FreeSwap}M"
+    echo -e "Status: $STATUS"
+    status
+    echo -e  " \t     RX \tTX"
+    echo "------------------------------"
+    # 打印实时流量
+    echo -e "$eth \t $RX   $TX "
+    echo "===== $LogName ====="
+    echo "----- 最近一次接口响应数据 -----"
+    echo "访问url: $JustUrl"
+    echo -e "Controller信息:\t $ControllerTimer"
+    echo -e "DB接口信息: \t $DBTimer"
+    echo "------------------------------"
+    echo -e "\t Top10 ip"
+    echo "访问次数 IP"
+    echo "$TopIp10"
+    echo "------------------------------"
+    echo -e "\t Top5 页面"
+    echo "访问次数 页面"
+    echo "$TopUrl5"
+    echo "------------------------------"
+    echo -e "\t Top5 传输时间大于10ms的页面"
+    echo "统计次数 页面"
+    echo "$TopTime"
+    echo "------------------------------"
+    echo -e "\t Top5 并发(每分钟)"
+    echo -e " 并发数 时间"
+    echo "$TopTime5"
+    echo "------------------------------"
+    # 退出信息
+    echo -e "Press 'Ctrl+C' to exit"
+      done
+}
+
+case $1 in
+    monitor)
+    Monitor
+;;
+    # 如果没有匹配到 输出echo语句
+    *)
+    echo "请在脚本后添加正确的执行参数:monitor"
+esac
+
+
+
+
+
