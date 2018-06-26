@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 普通RMI
+    &lt;!&ndash; 数据层 &ndash;&gt;
+    <bean id="serverDao"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:9090/ServerDao"/>
+        <property name="serviceInterface" value="com.jnshu.service.ServiceDao"/>
+        &lt;!&ndash; 连接出错时自动重连 &ndash;&gt;
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        &lt;!&ndash; 不在容器启动的时候创建与Server端的连接 &ndash;&gt;
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    &lt;!&ndash; OSS 阿里云 &ndash;&gt;
+    <bean id="serverALiYunOSS"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="rmi://127.0.0.1:9090/ServerALiYunOSS"/>
+        <property name="serviceInterface" value="com.jnshu.service.ServiceOSS"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    &lt;!&ndash; OSS 七牛云 &ndash;&gt;
+    <bean id="serverQiNiuYunOSS"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="rmi://127.0.0.1:9090/ServerQiNiuYunOSS"/>
+        <property name="serviceInterface" value="com.jnshu.service.ServiceOSS"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    &lt;!&ndash; Mail SendCloudMail &ndash;&gt;
+    <bean id="serverMailSendCloud"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="rmi://127.0.0.1:9090/ServerMailSendCloud"/>
+        <property name="serviceInterface"
+                  value="com.jnshu.service.ServiceMail"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    &lt;!&ndash; SMS 容联短信 &ndash;&gt;
+    <bean id="serverSMSRLian"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="rmi://127.0.0.1:9090/ServerSMSRLian"/>
+        <property name="serviceInterface" value="com.jnshu.service.ServiceSMS"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    &lt;!&ndash; 缓存 MemCached &ndash;&gt;
+    <bean id="serverCachedMem"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl"
+                  value="rmi://127.0.0.1:9090/ServerCachedMem"/>
+        <property name="serviceInterface"
+                  value="com.jnshu.service.ServiceCache"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>-->
+
+    <!-- 使用github https://github.com/winsnlife/cluster4spring 项目-->
+    <!-- 负载均衡 RMI -->
+    <bean id="rmiClientSetting" abstract="true">
+        <!-- 是否启动时加载stub -->
+        <property name="refreshEndpointsOnStartup" value="false" />
+        <!-- 调用异常时，将重新加载stub -->
+        <property name="refreshEndpointsOnConnectFailure" value="true" />
+        <!-- 调用失败时是否切换到其他服务端 -->
+        <property name="switchEndpointOnFailure" value="true" />
+        <!-- 追踪拦截器启用 -->
+        <property name="registerTraceInterceptor" value="true" />
+        <!-- 缓存stub 继承AbstractRmiShortFormProxyFactoryBean才有-->
+        <property name="cacheEndpoints" value="true" />
+    </bean>
+    <!-- 数据层 DAO -->
+    <bean id="serverDao"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.jnshu.service.ServiceDao"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerDao</value>
+                <value>rmi://127.0.0.1:9091/ServerDao</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <!-- OSS 阿里云 -->
+    <bean id="serverALiYunOSS"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.jnshu.service.ServiceOSS"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerALiYunOSS</value>
+                <value>rmi://127.0.0.1:9091/ServerALiYunOSS</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <!-- OSS 七牛云 -->
+    <bean id="serverQiNiuYunOSS"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.jnshu.service.ServiceOSS"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerQiNiuYunOSS</value>
+                <value>rmi://127.0.0.1:9091/ServerQiNiuYunOSS</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <!-- SMS 容联短信 -->
+    <bean id="serverSMSRLian"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.jnshu.service.ServiceSMS"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerSMSRLian</value>
+                <value>rmi://127.0.0.1:9091/ServerSMSRLian</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+
+    <!-- Mail SendCloudMail -->
+    <bean id="serverMailSendCloud"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.jnshu.service.ServiceMail"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerMailSendCloud</value>
+                <value>rmi://127.0.0.1:9091/ServerMailSendCloud</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <!-- Memcached 缓存-->
+    <bean id="serverCachedMem"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.jnshu.service.ServiceCache"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerCachedMem</value>
+                <value>rmi://127.0.0.1:9091/ServerCachedMem</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+
+    <!-- 计算器测试 -->
+    <!--<bean id="calculatorRMIServer"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        &lt;!&ndash; 远程服务对象接口类 &ndash;&gt;
+        <property name="serviceInterface" value="com.jnshu.service.CalculatorInterface"/>
+        &lt;!&ndash; 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果&ndash;&gt;
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:8099/CalculatorRMIService</value>
+            </list>
+        </property>
+        &lt;!&ndash; 调用时选择那个url的策略 &ndash;&gt;
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>-->
+
+    <bean id="calculatorRMIServer" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:8099/CalculatorRMIService"/>
+        <property name="serviceInterface" value="com.jnshu.service.CalculatorInterface"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+</beans>

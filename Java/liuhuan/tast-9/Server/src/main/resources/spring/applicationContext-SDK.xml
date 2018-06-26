@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sdkTools" class="com.jnshu.tools.SdkTools" />
+
+    <!-- 容联短信 SDK -->
+    <bean id="sendSMSSDK" class="com.jnshu.tools.SmsApiRLian">
+        <constructor-arg name="accountSid" value=""/>
+        <constructor-arg name="accountToken" value=""/>
+        <constructor-arg name="AppId" value="" />
+    </bean>
+
+    <!-- SendCloudMail SDK -->
+    <bean id="sendMailSDK" class="com.jnshu.tools.MailApiSendCloud">
+        <constructor-arg name="apiUser" value="" />
+        <constructor-arg name="apiKey" value="" />
+        <constructor-arg name="apiUrl" value="http://api.sendcloud.net/apiv2/mail/send" />
+    </bean>
+
+    <!-- 七牛云 SDK-->
+    <bean id="qiNiuSDK" class="com.jnshu.tools.OssApiQiNiuYun">
+        <constructor-arg name="accessKeyId" value="" />
+        <constructor-arg name="accessKeySecret" value="" />
+        <constructor-arg name="bucketname" value=""/>
+        <!-- oss地区不同 api接口地址不同 七牛已经将其地区地址封装到方法中了 这里使用反射调用其封装好的方法 -->
+        <constructor-arg name="endpoint" value=""/>
+        <!-- 存储时SDK提供的buck域名 -->
+        <constructor-arg name="fileUrl" value="http://p9kpdscob.bkt.clouddn.com/" />
+    </bean>
+
+    <!-- 阿里云 -->
+    <bean id="aliyuanOss" class="com.jnshu.tools.OssApiALiYun" >
+        <constructor-arg name="accessKeyId" value="" />
+        <constructor-arg name="accessKeySecret" value="" />
+        <constructor-arg name="bucketname" value="" />
+        <!-- oss 对应的api接口域名 类似七牛的 zone -->
+        <constructor-arg name="endpoint" value="" />
+        <constructor-arg name="fileUrl" value="" />
+    </bean>
+</beans>

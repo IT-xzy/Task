@@ -1,0 +1,34 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://service"
+           name="ServiceComponent" >
+
+    <component name="ServerComponent">
+        <implementation.spring location="/spring/applicationContext.xml"/>
+        <!--<implementation.java class="com.jnshu.service.impl.ServiceDaoImpl" />-->
+        <service name="serverDao">
+            <interface.java interface="com.jnshu.service.ServiceDao"/>
+            <tuscany:binding.rmi uri="rmi://93.179.100.194:9091/serverDao"/>
+        </service>
+        <service name="serverALiYunOSS">
+            <interface.java interface="com.jnshu.service.ServiceOSS"/>
+            <tuscany:binding.rmi uri="rmi://93.179.100.194:9091/serverALiYunOSS"/>
+        </service>
+        <service name="serverQiNiuYunOSS">
+            <interface.java interface="com.jnshu.service.ServiceOSS"/>
+            <tuscany:binding.rmi uri="rmi://93.179.100.194:9091/serverQiNiuYunOSS"/>
+        </service>
+        <service name="serverMailSendCloud">
+            <interface.java interface="com.jnshu.service.ServiceMail"/>
+            <tuscany:binding.rmi uri="rmi://93.179.100.194:9091/serverMailSendCloud"/>
+        </service>
+        <service name="serverSMSRLian">
+            <interface.java interface="com.jnshu.service.ServiceSMS"/>
+            <tuscany:binding.rmi uri="rmi://93.179.100.194:9091/serverSMSRLian"/>
+        </service>
+        <service name="serviceCacheMem">
+            <interface.java interface="com.jnshu.service.ServiceCache"/>
+            <tuscany:binding.rmi uri="rmi://93.179.100.194:9091/serverCachedMem"/>
+        </service>
+    </component>
+</composite>

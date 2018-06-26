@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jnshuDB.dao.StudentDao">
+    
+    <resultMap id="StudentResult" type="org.jnshuDB.entity.Student">
+        <id property="s_id" column="s_id"/>
+        <result property="s_name" column="s_name"/>
+        <result property="s_qq" column="s_qq"/>
+        <result property="s_type" column="s_type"/>
+        <result property="s_time" column="s_time"/>
+        <result property="s_school" column="s_school"/>
+        <result property="s_link" column="s_link"/>
+        <result property="s_words" column="s_words"/>
+        <result property="s_brother" column="s_brother"/>
+        <result property="s_know" column="s_know"/>
+        <result property="create_at" column="create_at"/>
+        <result property="update_at" column="update_at"/>
+    </resultMap>
+    
+    <select id="countAll" resultType="int">
+        select count(*) c from t_stu;
+</select>
+
+    <select id="selectAll" resultMap="StudentResult">
+        select * from t_stu order by s_name asc
+</select>
+
+    <insert id="insert" parameterType="org.jnshuDB.entity.Student">
+        insert into t_stu(s_id,s_name,s_qq,s_type,s_time,s_school,s_link,s_words,s_brother,s_know,create_at,update_at)
+        values(#{s_id},#{s_name},#{s_qq},#{s_type},#{s_time},#{s_school},#{s_link},#{s_words},#{s_brother},#{s_know},#{create_at},#{update_at})
+</insert>
+
+    <update id="update" parameterType="org.jnshuDB.entity.Student">
+        update t_stu set s_name = #{s_name},s_qq = #{s_qq},s_type = #{s_type},s_time = #{s_time},s_school = #{s_school},s_link = #{s_link},s_words = #{s_words},s_brother = #{s_brother},s_know = #{s_know},create_at = #{create_at},update_at = #{update_at} where s_id = #{s_id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from t_stu where s_id = #{s_id}
+</delete>
+
+    <select id="findByS_id" parameterType="int" resultType="org.jnshuDB.entity.Student">
+        select * from t_stu where s_id = #{s_id}
+
+
+</select>
+</mapper>
