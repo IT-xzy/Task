@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+</body>
+<script src="../../resource/state-machine.min.js"></script>
+<script>
+  var fsm = new StateMachine({
+    init: 'solid',
+    transitions: [
+      { name: 'melt',     from: 'solid',  to: 'liquid' },
+      { name: 'freeze',   from: 'liquid', to: 'solid'  },
+      { name: 'vaporize', from: 'liquid', to: 'gas'    },
+      { name: 'condense', from: 'gas',    to: 'liquid' }
+    ],
+    methods: {
+      onMelt:     function() { console.log('I melted')    },
+      onFreeze:   function() { console.log('I froze')     },
+      onVaporize: function() { console.log('I vaporized') },
+      onCondense: function() { console.log('I condensed') }
+    }
+  });
+</script>
+<script>
+  var fsm = new StateMachine({
+    init:'stop',
+    transitions:[
+      {name:'startFan',    from:'stop',  to:'start'    },
+      {name:'startCool',   from:'start', to:'cool'     },
+      {name:'stopCool',    from:'cool',  to:'start' },
+      {name:'stopFan', from:'start',  to:'stop' },
+      {name:'stopFan', from:'cool',  to:'stop' },
+    ],
+    methods:{
+      onStartFan:     function(){console.log("start fan")  },
+      onStartCool:     function(){console.log("start cool")  },
+      onStopFan:      function(){console.log("stop fan")   },
+      onStopCool:  function(){console.log("stop cool")  }
+      }
+  });
+  fsm.startFan();
+  // fsm.startCool();
+  console.log(fsm.allStates());
+
+  fsm.stopFan();
+</script>
+<script>
+
+  var airCon = {
+    state:0,
+    power:function(){
+      if(this.state == 0){
+        this.state = 1;
+        console.log("start fan");
+      }
+      else if(this.state == 1){
+        this.state = 0;
+        console.log("stop fan");
+      }
+      else{
+        this.state = 0;
+        console.log("stop fan");
+      }
+    },
+    cool:function(){
+      if(this.state == 0){
+        console.log("nothing");
+
+      }
+      else if(this.state == 1){
+        this.state = 2;
+        console.log("start cool");
+
+      }
+      else{
+        this.state = 1;
+        console.log("stop cool");
+      }
+    }
+  }
+
+</script>
+
+</html>

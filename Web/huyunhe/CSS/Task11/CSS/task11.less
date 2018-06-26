@@ -1,0 +1,102 @@
+@body-background-color:#eff0f4;
+@header-background-color:#5fc0cd;
+@forget-password-text-color:@header-background-color;
+@border-color:#eaedee;
+@input-text-color:#eaedee;
+@normal-size:3.2rem;
+@title-size:3.6rem;
+
+
+html{
+  font-size: 62.5%;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+body{
+  margin: 0;
+  padding: 0;
+  background-color: @body-background-color;
+  font-size: 1rem;
+}
+
+header{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4%;
+  color: white;
+  background-color: @header-background-color;
+  box-sizing: border-box;
+  a{
+    font-size: @normal-size;
+  }
+  span{
+    font-size: @title-size;
+  }
+}
+
+section{
+  div{
+    position: relative;
+    margin: 2.7% 0;
+  }
+  font-size: @normal-size;
+  i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 1em;
+    width: 1em;
+    margin: 0 4rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .icon-user{
+    background-image: url(../resource//登陆-assets/iphone.png);
+  }
+  .icon-password{
+    background-image: url(../resource/登陆-assets/locked.png);
+  }
+  .border{
+    position: absolute;
+    top: 50%;
+    left: 10rem;
+    transform: translateY(-50%);
+    height: 1.8em;
+    width: 1px;
+    border-right: 2px solid @border-color;
+  }
+  input{
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 13rem;
+    padding-top: 2.7%;
+    padding-bottom: 2.7%;
+    font-size: @normal-size;
+    outline: none;
+    &::-webkit-inner-spin-button,::-webkit-outer-spin-button{
+      appearance: none;
+      -webkit-appearance: none;
+    }
+  }
+}
+button{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4%;
+  border: 0;
+  margin: 2.7% 0 ;
+  background-color: @header-background-color;
+  color: white;
+  font-size: @title-size;
+}
+.forget-password{
+  text-align: right;
+  font-size: @normal-size;
+  color: @forget-password-text-color;
+}
+input::-webkit-input-placeholder{
+  color: @input-text-color;
+}
