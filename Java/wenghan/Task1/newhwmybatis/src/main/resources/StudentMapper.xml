@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.student.DAO.StudentInterfaceMapper">
+    <select id="selectAllStudent"  resultType="com.student.DAO.Student">
+        select name,id,create_at,update_at from student
+    </select>
+
+    <insert id="insertOneStudent" keyProperty="id" useGeneratedKeys="true" parameterType="com.student.DAO.Student">
+        INSERT INTO student (name,create_at,update_at )
+        VALUES (#{name},#{create_at},#{update_at})
+    </insert>
+
+    <delete id="deleteOneStudentForId" parameterType="int">
+        DELETE from student where id=#{id}
+    </delete>
+
+    <update id="updateOneStudentForId" parameterType="com.student.DAO.Student">
+        UPDATE student SET name=#{name},create_at=#{create_at},update_at=#{update_at}
+        WHERE id =#{id}
+    </update>
+</mapper>
