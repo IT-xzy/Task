@@ -1,0 +1,77 @@
+@import "../../common/all";
+@import "mystyle";
+body {
+    background: $blue;
+}
+
+// 顶部按钮
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @extend %head;
+    border-bottom: 1px solid $grey-f0;
+    .arrow {
+        @include arrow(.16rem, .16rem, .03rem, #fff, 225deg);
+        margin-left: .2rem;
+        cursor: pointer;
+    }
+    .close {
+        margin-right: .2rem;
+        font-size: .28rem;
+    }
+    .title {
+        font-size: .2rem;
+    }
+}
+
+#position {
+    @extend %position;
+    z-index: 1;
+}
+
+.go {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: .7rem;
+    background: $blue;
+    #go {
+        width: 80%;
+        margin-left: 10%;
+        @extend %button;
+    }
+}
+
+.big-box {
+    margin: .7rem 0;
+    .little-box {
+        @include flex(center);
+        float: left;
+        width: 33.33%;
+        height: 33.33vw;
+        margin-bottom: .15rem;
+    }
+    .yellow-box {
+        width: 70%;
+        height: 70%;
+        background-color: #f5c97b;
+        border: .02rem solid #fff;
+        .inner-top {
+            @include flex(center);
+            height: 80%;
+            & span {
+                font-size: .18rem;
+            } //身份名
+        }
+        .inner-bottom {
+            @include flex(center);
+            height: 20%;
+            background-color: #83b09a;
+            & span {
+                color: #fff;
+                font-size: .13rem;
+            }
+        }
+    }
+}

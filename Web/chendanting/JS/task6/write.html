@@ -1,0 +1,75 @@
+<div class="ui-view">
+    <div class="add-artical" >
+        <div class="add-title">
+            <strong>{{vm.titleWarp}}</strong>
+        </div>
+        <form class="artical-warp" name="myForm">
+            <div class="line" ng-class="{'has-error': myForm.title.$dirty&&myForm.title.$invalid}">
+                <strong>标题名称</strong>
+                <input type="text" ng-model="vm.title" name="title" required="true" class="form-control">
+            </div>
+            <div class="line">
+                <strong>类&emsp;&emsp;型</strong>
+                <!-- 类型下拉框 -->
+                <div class="btn-group" ng-class="{'has-error': myForm.type.$dirty&&myForm.type.$invalid}">
+                    <select class="form-control" ng-model="vm.type" name="type" required="true">
+                        <option value="">全部</option>
+                        <option value="0">首页banner</option>
+                        <option value="1">找职业banner</option>
+                        <option value="2">找精英banner</option>
+                        <option value="3">行业大图</option>
+                    </select>
+                </div>
+                <!-- 行业 -->
+                <div class="btn-group" ng-class="{'has-error': myForm.industry.$dirty&&myForm.industry.$invalid}">
+                    <select class="form-control" ng-model="vm.industry" name="industry" ng-if="vm.type == 3" required="true">
+                        <option value="">请选择</option>
+                        <option value="0">移动互联网</option>
+                        <option value="1">电子商务</option>
+                        <option value="2">企业服务</option>
+                        <option value="3">O2O</option>
+                        <option value="4">教育</option>
+                        <option value="5">金融</option>
+                        <option value="6">游戏</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line"> 
+                <strong>说&emsp;&emsp;明</strong>
+                <div type="text" id="editor"></div> 
+            </div>
+            <div class="line" ng-class="{'has-error': myForm.url.$dirty&&myForm.url.$invalid}">
+                <strong>跳转链接</strong>
+                <input type="text" ng-model="vm.url" name="url" class="form-control" required="true">
+            </div>
+            <div class="line">
+                <strong>配&emsp;&emsp;图</strong>
+                <label class="btn btn-primary" for="img">选择文件</label>
+                <input id="img" style="display: none" type="file" onchange="angular.element(this).scope().vm.click()">
+                <br>
+                {{files}}
+                <span id="text"></span>
+                <br>
+                <!-- 进度条 -->
+                <div class="progressWarp">
+                    <strong>进度条</strong>
+                    <div class="progressBar">
+                        <uib-progressbar value="progress" type="success" ng-if="vm.showProgress">{{vm.progress}}%</uib-progressbar>
+                    </div>
+                </div>
+                <!-- 图片预览 -->
+                <img id="preview" ng-src={{vm.imgurl}} alt="配图预览" ng-if="vm.showImg" style="margin-bottom: 30px; max-width: 95%;">
+                <br>
+                <div class="line text-center">
+                    <button class="btn btn-success" ng-click=vm.upload()>上传</button>
+                    <button class="btn btn-danger" ng-click=vm.clear()>删除</button>
+                </div>
+            </div>
+            <line class="line">
+                <button type="button" class="btn btn-success" ng-click="vm.online()" ng-disabled="myForm.title.$invalid||myForm.type.$invalid||myForm.industry.$invalid||myForm.url.$invalid">立即上线</button>
+                <button type="button" class="btn btn-success" ng-click="vm.draft()" ng-disabled="myForm.title.$invalid||myForm.type.$invalid||myForm.industry.$invalid||myForm.url.$invalid">存为草稿</button>
+                <button type="button" class="btn btn-default" ui-sref="backstage.list">取消</button>
+            </line>
+        </form>
+    </div>
+</div>

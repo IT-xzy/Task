@@ -1,0 +1,133 @@
+@footer-padding:10px;
+@footer-left-margin:10px;
+@footer-li-margin:5px;
+@background-color:#1ba36e;
+
+//base rule start
+html{
+  font-size: 62.5%;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+
+li{
+  list-style: none;
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+//base rule end
+
+//layout rule
+.clearfix{
+  &::after{
+    display: block;
+    content: "";
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+//layout rule end
+footer{
+  position: relative;
+
+  background-color: @background-color;
+}
+.footer{
+  position: relative;
+  max-width: 120rem;
+  padding: @footer-padding;
+  margin: auto;
+  background-color: @background-color;
+  color: white;
+}
+.footer-left{
+  float: left;
+  min-width: 30rem;
+  margin: 0 -@footer-left-margin;
+  li{
+    float: left;
+    padding: 0 @footer-left-margin;
+    margin: @footer-li-margin 0;
+    font-size: 1.4rem;
+    a{
+      vertical-align: 0;
+    }
+  }
+  .connect{
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+  }
+}
+.footer-right{
+  display: inline-block;
+  li{
+    float: left;
+    width: 50%;
+    margin: @footer-li-margin 0;
+    font-size: 1.4rem;
+  }
+}
+.footer-link{
+  margin: 35px 0;
+}
+.footer-weblink{
+  font-size: 1.6rem;
+  margin: 3rem 0 @footer-li-margin 0;
+}
+.footer-title{
+  padding-left: @footer-left-margin;
+  margin: 3rem 0;
+  font-size: 1.6rem;
+}
+.footer-barcode{
+  float: right;
+  position: relative;
+  top: -1rem;
+  color: white;
+}
+.footer-text{
+  font-size: 1.4rem;
+  text-align: center;
+  margin: @footer-li-margin;
+}
+.footer-copyright{
+  padding: 5px;
+  border-top: 1px solid lighten(@background-color,10%);
+  color: white;
+  background-color:@background-color;
+  text-align: center;
+
+}
+
+@media screen and (max-width:768px){
+  .footer-barcode{
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+  }
+  .footer-link{
+    margin: 1rem 0;
+    li{
+      padding-right: 5px;
+    }
+  }
+  .footer-title{
+    margin: 1rem 0;
+  }
+  .footer-weblink{
+    margin: 1rem 0;
+  }
+  .footer-right{
+    li{
+      width: 35%;
+    }
+  }
+}

@@ -1,0 +1,204 @@
+$nav-blue:#5fc0cd;
+$gary:#c9cacb;
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+}
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: 16px;
+    margin: 0;
+}
+
+ul,
+li,
+p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include flex-center;
+    justify-content: center;
+    height: .88rem;
+    font-size: .32rem;
+    background: $nav-blue;
+    .bottom {
+        @include flex-center;
+        width: 2.86rem;
+        height: .7rem;
+        font-size: .34rem;
+        background: #55a8b3;
+        border-radius: 5px;
+        div {
+            width: 1.44rem;
+            height: .7rem;
+            line-height: .7rem;
+            text-align: center;
+            border-radius: 5px;
+        }
+        div:nth-child(1) {
+            color: #fff;
+            background: #55a8b3;
+        }
+        div:nth-child(2) {
+            color: $nav-blue;
+            background: #fff;
+        }
+    }
+    img {
+        position: absolute;
+        top: .44rem;
+        right: .31rem;
+        width: 0.44rem;
+        margin-top: -.22rem;
+    }
+}
+
+nav {
+    position: fixed;
+    top: .88rem;
+    left: 0;
+    right: 0;
+    @include flex-center;
+    height: .8rem;
+    font-size: .28rem;
+    color: $gary;
+    background: #fff;
+    border-bottom: 1px solid $gary;
+    z-index: 1;
+    div {
+        position: relative;
+        width: 33.33%;
+        border-right: 1px solid $gary;
+        text-align: center;
+        ul {
+            display: none;
+            position: absolute;
+            top: .6rem;
+            left: 0;
+            width: 100%;
+            color: #333;
+            text-align: center;
+            background: $nav-blue;
+            li:hover {
+                background: $gary;
+            }
+        }
+        &:hover ul {
+            display: inline-block;
+        }
+        &:after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: .12rem;
+            border: {
+                top: .08rem solid $gary;
+                left: .08rem solid transparent;
+                right: .08rem solid transparent;
+            }
+        }
+    }
+    div:nth-child(3) {
+        border: none;
+    }
+}
+
+main {
+    margin: .88+.8rem 0 .99rem 0;
+    ul {
+        padding: .3rem;
+        border-bottom: 1px solid $gary;
+        li {
+            @include flex-center;
+            font-size: .26rem;
+            img {
+                height: .26rem;
+                margin-right: .15rem;
+            }
+            &:nth-child(odd) {
+                color: $gary;
+            }
+            &:nth-child(2n) {
+                justify-content: space-between;
+                padding: .2rem .32rem .2rem .26+.15rem;
+                font-size: .28rem;
+                p {
+                    color: #333;
+                    font-weight: bold;
+                    width: 5rem;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+                div {
+                    @include flex-center;
+                    width: 1.8rem;
+                    white-space: nowrap;
+                }
+                span {
+                    color: #e63b0e;
+                }
+                .arrows {
+                    width: .2rem;
+                    height: .2rem;
+                    border: {
+                        top: 2px solid $nav-blue;
+                        right: 2px solid $nav-blue;
+                    }
+                    transform: rotate(45deg)
+                }
+            }
+        }
+    }
+}
+
+footer {
+    position: fixed;
+    @include flex-center;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: .99rem;
+    font-size: .2rem;
+    color: $nav-blue;
+    border-top: 1px solid $gary;
+    background: #f8fafb;
+    div {
+        &:nth-child(2n) {
+            width: .41rem;
+        }
+        &:nth-child(2) {
+            @include flex-center;
+            justify-content: center;
+            width: .94rem;
+            height: .94rem;
+            margin: 0 2rem;
+            line-height: .94rem;
+            border-radius: 50%;
+            background: $nav-blue;
+            text-align: center;
+        }
+        &:nth-child(3) {
+            color: $gary;
+        }
+        p {
+            text-align: center;
+        }
+        img {
+            width: .4rem;
+        }
+    }
+}

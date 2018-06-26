@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.redis.MemberDao">
+
+
+<select id="addId" parameterType="com.redis.Member" >
+    insert into member (id,nickname) values (#{id},#{nickname})
+</select>
+    <select id="findAll" resultType="com.redis.Member" >
+        select * from member
+    </select>
+
+    <select id="findById" parameterType="int" resultType="com.redis.Member">
+        select * from member where id=#{id}
+    </select>
+
+    <update id="updateId" parameterType="com.redis.Member">
+        update  member set nickname=#{nickname} where id=#{id}
+    </update>
+    <delete id="deleteId" parameterType="int">
+        delete from member where id=#{id}
+    </delete>
+</mapper>

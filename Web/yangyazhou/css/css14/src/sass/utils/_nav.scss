@@ -1,0 +1,108 @@
+nav{
+    min-height: 50px;
+    background: $bg-color;
+}
+.nav-header{
+    float: left;
+    .logo{
+        float: left;
+        margin-top: 25px;
+        height: 50px;
+    }
+    button{
+        float: right;
+        display: none;
+        padding: 6px;
+        border-radius: 4px;
+        background: $green-2;
+        &:hover, &.active{
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .icon-bar{
+            display: block;
+            margin: 4px;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+            background: #888;
+        }
+    }
+    &::after{
+        display: block;
+        content: '';
+        clear: both;
+    }
+}
+
+.nav-menu{
+    ul{
+        float: right;
+    }
+    li{
+        float: left;
+    }
+    a{
+        display: block;
+        height: 100px;
+        width: 100px;
+        border-bottom: 4px solid $bg-color;
+        color: $bf-color;
+        text-align: center;
+        line-height: 96px;
+        text-decoration: none;
+        &:hover{
+            border-bottom: 4px solid $bf-color;
+            color: $bf-color;
+        }
+        &.active{
+            border-bottom: 4px solid $bf-color;
+        }
+    }
+}
+
+@media only screen and (max-width:767px){
+    nav{
+        .container{
+            padding: 0;
+        }
+    }
+    .nav-header{
+        float: none;
+        .logo{
+            margin: 0;
+            padding: 5px;
+            img{
+                height: 100%;
+            }
+        }
+        button{
+            display: block;
+            margin-top: 8px;
+            margin-right: 15px;
+        }
+    }
+    .nav-menu{
+        display: none;
+        ul{
+            float: none;
+        }
+        li{
+            float: none;
+        }
+        a{
+            height: 40px;
+            width: 100%;
+            border: none;
+            line-height: 40px;
+            text-align: center;
+            &:hover{
+                border: none;
+                color: $bf-color;
+                background: $green-3;
+            }
+            &.active{
+                border: none;
+            }
+        }
+    }
+}

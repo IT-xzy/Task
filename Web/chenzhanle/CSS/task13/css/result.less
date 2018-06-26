@@ -1,0 +1,125 @@
+@import "variable-mixin.less";
+
+a {text-decoration: none;}
+// header 
+header {
+  border-bottom: 1px solid lighten(@bg-darkblue,5%);
+  background-color: @bg-blue;
+  .middle {
+    font-size: 1.2em;
+    text-align: center;
+    letter-spacing: 6px;
+    color: @font-white;
+  }
+  .left {
+    a {
+      display: inline-block;
+      width: 25px;
+      height: 21px;
+      margin-left: 20px;
+      background: url(../img/head.png) 0 -24px;
+      background-size: 67px 45px;
+    }
+  }  //left
+  .right {
+    a {
+      float: right;
+      width: 20px;
+      height: 20px;
+      margin-right: 20px;
+      background: url(../img/head.png) -32px -24px;
+      background-size: 67px 45px;
+    }
+  }
+}
+
+main {
+  position: relative;
+  top: 66px;
+  margin-bottom: 80px;
+}
+.top {
+  padding-bottom: 5px;
+  color: @font-white;  
+  background-color: @bg-blue;
+  text-align: center;
+  > span {
+    display: inline-block;
+    height: 80px;
+    margin: 10px 30px;
+    text-align: left;
+    font-size: 1.2em;
+    color: @font-yellow200;
+  }
+}
+.vict {
+  height: 160px;
+  background: url(../img/victory.png) no-repeat center bottom;
+  background-size: auto 90%;
+  > span {
+    display: inline-block;
+    padding-top: 112px;
+    font-size: 1.8em;
+  }
+}
+.total {
+  padding-left:  30px;
+  margin: 10px 0;
+  text-align: left;
+  li {margin: 5px 0;}
+  span {
+    margin-right: 10px;
+  }
+}
+.content {
+  padding: 0;
+  margin: 0;
+  li {
+    padding: 0 30px 10px 30px;
+    border-bottom: 1px solid darken(@bg-grey,10%);
+  }
+  p {
+    margin: 5px 0;
+    font-size: .9em;
+    color: lighten(@font-grey,10%);
+  }
+  .colmn {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    span {
+      &:first-child {
+        font-size: 1.2em;
+        color: darken(@font-black,15%);
+      }
+      &:last-child {
+        align-self: flex-end;
+        font-size: .8em;
+        color: lighten(@font-grey,20%);
+      }
+    }
+  }
+}
+
+
+footer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 10px 0;
+  background-color: rgba(153, 223, 240, 0.5);
+  a {
+    flex: 0 0 40%;
+    padding: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+    color: @font-white;
+    &:first-child {
+      background-color: @bg-red;
+    }
+    &:last-child {
+      background-color: @bg-yellow;
+    }
+  }
+}

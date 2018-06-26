@@ -1,0 +1,190 @@
+@import '../helpers/mixin';
+@mixin select-icon {
+    .select-icon {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        width: 20px;
+        height: 24px;
+        background-color: #1D7AD9;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 8px;
+            right: 5px;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top: 10px solid #fff;
+        }
+    }
+}
+
+@mixin h4-style {
+    display: flex;
+    align-items: center;
+    background: $gray;
+    height: 45px;
+    color: #1D7AD9;
+    border-top: 1px solid #E7E7E7;
+    border-bottom: 1px solid #E7E7E7;
+    background: rgba(244, 244, 244, 1);
+    &::before {
+        content: "";
+        margin: 0 18px;
+        display: inline-block;
+    }
+}
+
+$gray:#F4F4F4;
+.selection-box {
+    border: 1px solid #E8E8E8;
+    h4:nth-of-type(1) {
+        @include h4-style();
+        &::before {
+            background: url(../I/box@2x.png)no-repeat;
+            width: 23px;
+            height: 19px;
+        }
+    } //选择箱型图标
+    h4:nth-of-type(2) {
+        @include h4-style();
+        &::before {
+            background: url(../I/Ruler@2x.png)no-repeat;
+            width: 23px;
+            height: 19px;
+        }
+    } //确定尺寸图标
+    h4:nth-of-type(3) {
+        @include h4-style();
+        &::before {
+            background: url(../I/Cut\ _\ Scissors@2x.png)no-repeat;
+            width: 23px;
+            height: 19px;
+        }
+    } //选择箱型图标
+    >div {
+        @include d-space-between;
+        flex-wrap: wrap;
+        background: #FBFCFF;
+    }
+}
+
+.select-round-style {
+    padding: 28px 0;
+    display: flex;
+    @media (max-width: 991px) {
+        display: block;
+    }
+    input {
+        display: none;
+        &:checked+label::before {
+            content: "";
+            background-color: #fff;
+            border: 6px solid #1D7AD9;
+        }
+        &:active+label::before {
+            border-color: blue;
+            box-shadow: 0 0 10px rgba(81, 203, 238, 1);
+        }
+    }
+    label {
+        @include d-vertical-center;
+        flex-shrink: 0;
+        margin: 0;
+        &::before {
+            content: "";
+            margin: 0 18px 0 35px;
+            width: 16px;
+            height: 16px;
+            background-color: #e8e8e8;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        @media (max-width: 991px) {
+            margin-bottom: 10px;
+        }
+    }
+} //改变input样式
+.drop-menu {
+    position: relative;
+    @media (max-width: 991px) {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 10px;
+    }
+    >div {
+        @include d-vertical-center;
+        position: relative;
+        justify-content: start;
+        padding-left: 15px;
+        margin-right: 20px;
+        width: 126px;
+        height: 36px;
+        font-size: 14px;
+        color: #999;
+        border: 1px solid #E8E8E8;
+        cursor: pointer; //查看详情
+        @include select-icon(); //图标
+    }
+    &:hover ul>li {
+        display: block;
+    }
+    ul {
+        position: absolute;
+        top: 36px;
+        @media(max-width: 991px) {
+            right: 20px;
+        }
+        li {
+            display: none; // display: block;
+            background: $white;
+            width: 126px;
+            box-shadow: 1px 1px 1px #E1E5E7;
+            cursor: pointer;
+            &:hover {
+                background: #1D7AD9;
+            }
+        }
+    } //隐藏内容
+} //下拉菜单
+.input-width {
+    display: flex;
+    align-items: center;
+    margin: 28px 0;
+    @media (max-width: 991px) {
+        display: block;
+    }
+    form {
+        padding: 0;
+    }
+    input {
+        width: 50px;
+        background-color: #FBFCFF;
+        border: 1px solid #E8E8E8;
+        outline: none;
+    }
+    .input-box-gap span {
+        margin-left: 20px;
+        @media (max-width: 991px) {
+            display: block;
+            margin-bottom: 10px;
+        }
+    }
+} //确定尺寸框
+.next-button {
+    border: 1px solid #E8E8E8;
+    border-top: none;
+    margin-bottom: 10px;
+    @include d-vertical-center;
+    height: 200px;
+    background: $white;
+    button {
+        cursor: pointer;
+        width: 178px;
+        height: 45px;
+        color: #fff;
+        background-color: #e15053;
+        border-radius: 5px;
+    }
+}//按钮

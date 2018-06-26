@@ -1,0 +1,46 @@
+<div class="detail-putin-box">
+    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+        <div class="row"></div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>图片名</th>
+                    <th>文件大小</th>
+                    <th>进度</th>
+                    <th>操作</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr></tr>
+                <tr ng-show="detailDataShow">
+                    <td>{{theName}}</td>
+                    <td>{{theSize}}</td>
+                    <td>
+                        <div class="progress" style="margin-bottom: 0;" ng-hide="detailOldProgress"></div>
+                        <div ng-show="detailNewProgress">
+                            <uib-progressbar value="val" type="null">{{val}}%</uib-progressbar>
+                        </div>
+                    </td>
+                    <td>
+                        <div ng-show="detailTips">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success" ng-click="detailUpDown()" ng-disabled="detailUp">
+                            <span class="glyphicon glyphicon-upload"></span>&nbsp;上传
+                        </button>
+                        <button type="button" class="btn btn-danger" ng-click="detailDelete()">
+                            <span class="glyphicon glyphicon-trash"></span>&nbsp;删除
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.longhang" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/testdd?useUnicode=true&amp;characterEncoding=utf8" />
+        <property name="username" value="root" />
+        <property name="password" value="123456" />
+        <!-- 可同时连接的最大的连接数 -->
+        <property name="maxActive" value="20" />
+        <!-- 最大的空闲的连接数 -->
+        <property name="maxIdle" value="60" />
+        <!-- 最小的空闲的连接数，低于这个数量会被创建新的连接，默认为0 -->
+        <property name="minIdle" value="5" />
+        <!-- 连接池启动时创建的初始化连接数量，默认值为0 -->
+        <property name="initialSize" value="1" />
+        <!-- 等待连接超时时间，毫秒，默认为无限 -->
+        <property name="maxWait" value="30000" />
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.longhang.stuDao" />
+    </bean>
+
+    <!-- redis config start -->
+    <!-- 配置JedisPoolConfig实例 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="300" />
+        <property name="maxTotal" value="600" />
+        <property name="maxWaitMillis" value="1000" />
+        <property name="testOnBorrow" value="true" />
+    </bean>
+
+    <!-- 配置JedisConnectionFactory -->
+    <bean id="jedisConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="127.0.0.1" />
+        <property name="port" value="6379" />
+        <!-- <property name="password" value="${redis.pass}" /> -->
+        <property name="database" value="0" />
+        <property name="poolConfig" ref="poolConfig" />
+    </bean>
+
+    <!-- 配置RedisTemplate -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+    </bean>
+
+    <!-- 配置RedisCacheManager -->
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="redisOperations" ref="redisTemplate" />
+        <property name="defaultExpiration" value="3000" />
+    </bean>
+
+    <!-- 配置RedisCacheConfig -->
+    <bean id="redisCacheConfig" class="com.longhang.util.RedisCacheConfig">
+        <constructor-arg ref="jedisConnectionFactory" />
+        <constructor-arg ref="redisTemplate" />
+        <constructor-arg ref="redisCacheManager" />
+    </bean>
+
+    <!-- 配置jedispool缓存存取验证信息 -->
+    <bean id="jedispool" class=" redis.clients.jedis.JedisPool">
+    </bean>
+    <!-- redis config end -->
+
+    <bean id="aliyunEmail" class="com.longhang.util.AliyunEmail">
+        <constructor-arg index="0" value="LTAIKnqIIeA3uHck"/>
+        <constructor-arg index="1" value="JSoSk7dfaEz8aq7QLLKjkzQ2WWEHvH"/>
+    </bean>
+    <!-- 阿里云Sms -->
+    <bean id="smsDemo" class="com.longhang.util.SmsDemo">
+        <constructor-arg index="0"  value="LTAIKnqIIeA3uHck"/>
+        <constructor-arg index="1" value="JSoSk7dfaEz8aq7QLLKjkzQ2WWEHvH"/>
+    </bean>
+    <!--<OOS设置>-->
+    <!--<context:property-placeholder location="classpath:*.properties"/>-->
+    <context:property-placeholder location="classpath:oos.properties" ignore-unresolvable="true"/>
+    <!-- OOS -->
+    <bean id="oosUtil" class="com.longhang.util.OOSUtil">
+        <constructor-arg index="0" value="${endpoint}"/>
+        <constructor-arg index="1" value="${accessKeyId}"/>
+        <constructor-arg index="2" value="${accessKeySecret}"/>
+        <constructor-arg index="3" value="${bucketName}"/>
+        <constructor-arg index="4" value="${folderName}"/>
+    </bean>
+    <!-- 迁移数据 -->
+    <context:property-placeholder   location="classpath:uploadOOS.properties" ignore-unresolvable="true"/>
+    <bean id="uploadOOS" class="com.longhang.util.UploadOOS">
+        <constructor-arg index="0" value="${aliyunEndpoint}"/>
+        <constructor-arg index="1" value="${aliyunAccessKeyId}"/>
+        <constructor-arg index="2" value="${aliyunAccessKeySecret}"/>
+        <constructor-arg index="3" value="${aliyunBucketName}"/>
+        <constructor-arg index="4" value="${qiniuyunEndpoint}"/>
+        <constructor-arg index="5" value="${qiniuyunAccessKeyId}"/>
+        <constructor-arg index="6" value="${qiniuyunAccessKeySecret}"/>
+        <constructor-arg index="7" value="${qiniuyunBucketName}"/>
+        <constructor-arg index="8" value="${folderName}"/>
+    </bean>
+
+
+</beans>

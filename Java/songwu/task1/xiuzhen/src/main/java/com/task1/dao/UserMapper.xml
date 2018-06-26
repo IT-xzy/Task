@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task1.dao.UserMapper">
+    <insert id="insert" parameterType="User"  useGeneratedKeys="true" keyProperty="id" keyColumn="id" >
+     insert into Test(name,qq,type,admissionTime,school,onlineNum,dailyLink,declaration,elder,knewFrom,createAt,updateAt)
+   values(#{name},#{qq},#{type},#{admissionTime},#{school},#{onlineNum},#{dailyLink},#{declaration},#{elder},#{knewFrom},#{createAt},#{updateAt})
+    </insert>
+    <delete id="deleteById" parameterType="long">
+        delete from Test where id=#{id}
+    </delete>
+    <update id="updateById" parameterType="User">
+        update Test set type=#{type},onlineNum=#{onlineNum},elder=#{elder},updateAt=#{updateAt} where id=#{id}
+    </update>
+    <select id="selectById" parameterType="long" resultType="User">
+        select * from Test where id=#{id}
+    </select>
+    <select id="selectAll" resultType="User">
+        select * from Test
+    </select>
+    <select id="selectByOnlineNum" parameterType="String" resultType="User">
+        select * from Test where onlineNum=#{onlineNum}
+    </select>
+    <select id="selectByName" parameterType="String" resultType="User">
+        select * from Test where name like concat('%',#{0},'%')
+    </select>
+    <insert id="insertBatch" parameterType="java.util.List" >
+        insert into test(name,qq,type,admissionTime,school,onlineNum,dailyLink,declaration,elder,knewFrom,createAt,updateAt)
+        values
+        <foreach collection="list" item="test" index="index" separator=",">
+            (#{test.name},#{test.qq},#{test.type},#{test.admissionTime},#{test.school},#{test.onlineNum},#{test.dailyLink},#{test.declaration},#{test.elder},#{test.knewFrom},#{test.createAt},#{test.updateAt})
+        </foreach>
+    </insert>
+
+</mapper>

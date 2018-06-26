@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="CategoryService" >
+
+    <component name="CategoryServiceComponent">
+        <implementation.java class="com.ssm_yl.serviceImpl.CategoryServiceImpl" />
+
+        <service name="CategoryServiceImpl">
+            <interface.java interface="com.ssm_yl.service.CategoryService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8098/CategoryServiceRMI"/>
+        </service>
+
+        <reference name="deleteInterface" target="DeleteComponent"/>
+        <reference name="insertCategoryInterface" target="InsertCategoryComponent"/>
+        <reference name="pageInterface" target="PageComponent"/>
+        <reference name="selectInterface" target="SelectComponent"/>
+        <reference name="updateInterface" target="UpdateComponent"/>
+    </component>
+
+    <component name="DeleteComponent">
+        <implementation.java class="com.ssm_yl.serviceImpl.DeleteImpl" />
+    </component>
+    <component name="InsertCategoryComponent">
+        <implementation.java class="com.ssm_yl.serviceImpl.InsertCategoryImpl" />
+    </component>
+    <component name="PageComponent">
+        <implementation.java class="com.ssm_yl.serviceImpl.PageImpl" />
+    </component>
+    <component name="SelectComponent">
+        <implementation.java class="com.ssm_yl.serviceImpl.SelectImpl" />
+    </component>
+    <component name="UpdateComponent">
+        <implementation.java class="com.ssm_yl.serviceImpl.UpdateImpl" />
+    </component>
+
+</composite>

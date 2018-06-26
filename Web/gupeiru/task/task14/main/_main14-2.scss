@@ -1,0 +1,217 @@
+%line-height {
+    line-height: .7rem;
+}
+
+main {
+    // 首页行
+    .index {
+        width: 100%;
+        margin: 0 .15rem;
+        @extend %line-height;
+        border-bottom: 1px solid #ccc;
+        a {
+            font-size: .15rem;
+        }
+        .word-green {
+            color: $green-29;
+        }
+    } // 三角按钮
+    .triangle {
+        display: none;
+        width: 0;
+        height: 0;
+        margin-left: .15rem;
+        margin-top: .1rem;
+        margin-bottom: .1rem;
+        border-left: .12rem solid $green-29;
+        border-bottom: .1rem solid transparent;
+        border-top: .1rem solid transparent;
+        transition: all .5s;
+        @media (max-width: 600px) {
+            display: block;
+        }
+    }
+    .list-button {
+        display: none;
+        &:checked+.triangle {
+            //三角按钮点击旋转90度
+            transform: rotate(90deg);
+        }
+        &:checked~.job {
+            //三角按钮点击后列表向下弹出
+            height: 1.8rem;
+        }
+    }
+    .job {
+        //职业方向列表
+        display: flex;
+        width: 100%;
+        margin: 0 .15rem;
+        border-bottom: 1px solid #edf1f2;
+        transition: height 1s;
+        .grey {
+            color: $grey-999;
+        }
+        li {
+            padding-right: .12rem;
+            line-height: .6rem;
+            text-align: center;
+            a {
+                padding: .07rem;
+                &:hover {
+                    color: $white;
+                    background: $green-29;
+                }
+            }
+        } //600px下列表隐藏
+        @media (max-width: 600px) {
+            height: 0;
+            overflow: hidden;
+            flex-direction: column;
+            li {
+                flex-basis: 100%;
+                height: .3rem;
+                line-height: .3rem;
+                padding-right: 0;
+                a {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                    padding: 0;
+                }
+            }
+        }
+    } //职业方向标题
+    .title {
+        width: 100%;
+        margin: 0 .15rem .3rem;
+        @extend %line-height;
+        font-weight: bold;
+        font-size: .15rem;
+        border-bottom: 1px solid #ccc;
+    }
+    .job-introduce {
+        //职业介绍
+        margin: .2rem 0;
+        &:hover .iso {
+            //鼠标放在表格上显示iso介绍
+            top: 0;
+            bottom: 0;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            visibility: visible;
+        }
+        .iso {
+            //iso介绍，隐藏
+            display: flex;
+            flex-direction: column;
+            
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            bottom: 50%;
+            left: .15rem;
+            right: .15rem;
+            padding: 0 .35rem;
+            line-height: .3rem;
+            color: transparent;
+            visibility: hidden;
+            background: rgba(0, 0, 0, 0);
+            transition: all 1s;
+            z-index: 1;
+            h3 {
+                line-height: .4rem;
+                text-align: center;
+            }
+        }
+        table {
+            //职业介绍表格
+            background-color: #fff;
+            border-collapse: collapse;
+            box-shadow: 0 0 .08rem #ccc;
+            td {
+                padding: .15rem .1rem;
+                border: .01rem solid #edf1f2;
+                .star {
+                    //五角星图标
+                    @include sprite(.15rem, .16rem, -.26rem);
+                    margin-left: .1rem;
+                    margin-bottom: -.01rem;
+                    transform: scale(1.01);
+                }
+                p {
+                    word-break: break-all;
+                } //表格中灰色，红色，加粗字体
+                .word-red {
+                    color: #f01400;
+                }
+                .big-word {
+                    font-weight: bold;
+                    font-size: .16rem;
+                }
+                .right {
+                    float: right;
+                }
+            }
+            .word-grey {
+                color: #999;
+                .spacing {
+                    word-spacing: .1rem;
+                }
+            }
+            .tr-height {
+                height: 0;
+                th {
+                    padding: 0;
+                }
+                .th-one {
+                    width: 40%;
+                }
+                .th-two {
+                    width: 10%;
+                }
+            }
+            .word-center {
+                color: #999;
+                text-align: center;
+            }
+            .td-one {
+                .job-img {
+                    //头像
+                    float: left;
+                    margin-right: .1rem;
+                    transform: scale(.9);
+                    @media (max-width: 992px) {
+                        width: 1rem;
+                    }
+                    @media (max-width: 400px) {
+                        width: .7rem;
+                    }
+                }
+                .name-box {
+                    margin-top: .1rem;
+                    .job-name {
+                        font-weight: bold;
+                    }
+                }
+            }
+            @media (max-width:768px) {
+                td {
+                    padding: .05rem .05rem;
+                }
+            }
+        }
+    }
+    @media (max-width:768px) {
+        //768px下行高和边距缩小
+        %line-height {
+            line-height: .4rem;
+        }
+        .title {
+            margin-bottom: .2rem;
+        }
+        .job-introduce {
+            margin: .1rem 0;
+        }
+    }
+}

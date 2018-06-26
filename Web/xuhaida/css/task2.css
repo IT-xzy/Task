@@ -1,0 +1,37 @@
+/*外框容器*/
+.mod-container {
+    width:100px;
+    height:60px;
+    border:1px solid #000;
+    margin:20px;
+    background:#fff;
+}
+/*小三角部分*/
+.mod-triangle {
+    display:block;
+    position:relative;
+    left:-23px;
+    top:18px;
+    z-index:20;
+}
+.mod-triangle .t-border,
+.mod-triangle .t-inset{
+    left:0;
+    top:0;
+    width:0;
+    height:0;
+    font-size:0;
+    overflow:hidden;
+    position:absolute;
+    border-width:12px;
+    /*可在此处更改小三角方向：上-右-下-左（solid的位置）*/
+    border-style:dashed solid dashed dashed;
+}
+/*小三角的边框，如果不需要，可将颜色值改变*/
+.mod-triangle .t-border{
+    border-color:transparent #000 transparent transparent;
+    left:-1px;
+}
+.mod-triangle .t-inset{
+    border-color: transparent #fff transparent transparent;
+}

@@ -1,0 +1,71 @@
+@charset "UTF-8";
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div[class^="col"] {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+@for $i from 1 through 12 {
+    .col-xs-#{$i} {
+        float: left;
+        width: 8.33333333% * $i;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    /*当宽度大于768px时触发*/
+    .container {
+        width: 750px;
+    }
+    @for $i from 1 through 12 {
+        .col-sm-#{$i} {
+            float: left;
+            width: 8.33333333% * $i;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    /*当宽度大于992px时触发*/
+    .container {
+        width: 970px;
+    }
+    @for $i from 1 through 12 {
+        .col-md-#{$i} {
+            float: left;
+            width: 8.33333333% * $i;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    /*当宽度大于1200px时触发*/
+    .container {
+        width: 1170px;
+    }
+    @for $i from 1 through 12 {
+        .col-lg-#{$i} {
+            float: left;
+            width: 8.33333333% * $i;
+        }
+    }
+}
