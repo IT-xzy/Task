@@ -1,0 +1,422 @@
+@fullwidth: 100%;
+@fullheight: 100%;
+@base: #29bde0;
+@font-size: 22px;
+
+html {
+  font-size: 62.5%;
+}
+
+body, p {
+  margin: 0;
+  padding: 0;
+  background-color: @base;
+}
+
+header {
+  width: @fullwidth;
+  height: 8em;
+  background-color: @base;
+  line-height: 8em;
+  text-align: center;
+
+  p {
+    display: inline-block;
+    font-size: @font-size+12;
+    color: white;
+  }
+
+  .item {
+    float: left;
+    position: relative;
+    top: 2rem;
+    left: 5%;
+  }
+  .error {
+    float: right;
+    position: relative;
+    top: 2rem;
+    right: 5%;
+  }
+}
+
+main {
+  width: @fullwidth;
+  background-color: @base;
+
+  .task {
+    display: flex;
+    width: @fullwidth;
+    height: 8em;
+    line-height: 8em;
+    background-color: #b9e9f5;
+    justify-content: space-between;
+    padding: 0 6%;
+    p {
+      display: inline-flex;
+      font-size: @font-size+4;
+      background-color: #b9e9f5;
+      color: #67767a;
+
+    }
+    .player {
+      display: inline-flex;
+      width: 5.5em;
+      height: 5.5em;
+      margin-top: 1.2em;
+    }
+  }
+
+  .text {
+    width: @fullwidth;
+    height: 7em;
+    background-color: @base;
+    line-height: 7em;
+    display: flex;
+    padding: 0 5%;
+
+    .triangle {
+      display: inline-flex;
+      width: 0;
+      height: 0;
+      border-width: 2em 1em;
+      border-style: solid;
+      border-color: #b9e9f5 @base @base @base;
+
+    }
+    p {
+      display: inline-flex;
+      font-size: @font-size+2;
+      color: white;
+    }
+
+  }
+
+  .cont {
+    padding:0 6%;
+    .box {
+      text-align: center;
+      width: 32%;
+      float: left;
+      margin:1em .5em;
+
+      .top {
+        width: 100%;
+        height: 56%;
+        background-color: #f5c97b;
+        line-height: 10rem;
+        color: #746b5c;
+        font-size: @font-size+8;
+        border: 5px solid white;
+        border-bottom: none;
+      }
+      .mid {
+        width: 100%;
+        height: 20%;
+        background-color: #83b09a;
+        font-size: @font-size;
+        color: white;
+        border: 5px solid white;
+        border-top: none;
+      }
+
+      .big {
+
+        height: 3rem;
+        text-align: left;
+        margin: 1.5em 0;
+        opacity: 0;
+
+        .small-1 {
+          width: 3rem;
+          height: 100%;
+          background-color: white;
+          display: inline-block;
+          background-image: url("../img/img1/icon.png");
+          background-position: -5px  -33px;
+        }
+        .small-2 {
+          .small-1;
+          background-position: -5px  -73px;
+
+        }
+        .small-3 {
+          .small-1;
+          background-position: -5px -116px;
+        }
+        .small-4 {
+          .small-1;
+          background-position: 0 0;
+        }
+      }
+      &:hover .big {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media (min-width: 500px) and (max-width: 770px) {
+  main {
+    width: @fullwidth;
+    background-color: @base;
+
+    .task {
+      display: flex;
+      width: @fullwidth;
+      height: 8em;
+      line-height: 8em;
+      background-color: #b9e9f5;
+      justify-content: space-between;
+      padding: 0 6%;
+      p {
+        display: inline-flex;
+        font-size: @font-size+4;
+        color: #67767a;
+
+      }
+      .player {
+        display: inline-flex;
+        width: 5.5em;
+        height: 5.5em;
+        margin-top: 1.2em;
+      }
+
+    }
+
+    .text {
+      width: @fullwidth;
+      height: 7em;
+      background-color: @base;
+      line-height: 7em;
+      display: flex;
+      padding: 0 5%;
+
+      .triangle {
+        display: inline-flex;
+        width: 0;
+        height: 0;
+        border-width: 2em 1em;
+        border-style: solid;
+        border-color: #b9e9f5 @base @base @base;
+
+      }
+      p {
+        display: inline-flex;
+        font-size: @font-size+2;
+        color: white;
+      }
+
+    }
+
+    .container {
+      width: @fullwidth;
+      background-color: @base;
+      text-align: center;
+
+      .row {
+
+        .col-md-4 {
+          width: 33.3%;
+
+          .top {
+            height: 10rem;
+            background-color: #f5c97b;
+            line-height: 10rem;
+            color: #746b5c;
+            font-size: @font-size+13;
+            border: 5px solid white;
+            border-bottom: none;
+          }
+          .mid {
+            height: 3rem;
+            background-color: #83b09a;
+            line-height: 3rem;
+            font-size: @font-size;
+            color: white;
+            border: 5px solid white;
+            border-top: none;
+          }
+
+          .big {
+            text-align: left;
+            margin-top: 1.5em;
+            opacity: 0;
+
+            .small-1 {
+              width: 22%;
+              height: 3rem;
+              background-color: white;
+              display: inline-block;
+              background-image: url("../img/img1/icon.png");
+              background-position: -5px  -33px;
+            }
+            .small-2 {
+              .small-1;
+              background-position: 0  -73px;
+
+            }
+            .small-3 {
+              .small-1;
+              background-position: 0 -116px;
+            }
+            .small-4 {
+              .small-1;
+              background-position: 5px 0;
+            }
+          }
+          &:hover .big {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 320px) and(max-width: 500px) {
+  main {
+    width: @fullwidth;
+    background-color: @base;
+
+    .task {
+      display: flex;
+      width: @fullwidth;
+      height: 8em;
+      line-height: 8em;
+      background-color: #b9e9f5;
+      justify-content: space-between;
+      padding: 0 6%;
+      p {
+        display: inline-flex;
+        font-size: @font-size/2+4;
+        color: #67767a;
+
+      }
+      .player {
+        display: inline-flex;
+        width: 5.5em;
+        height: 5.5em;
+        margin-top: 1.2em;
+      }
+    }
+    .text {
+      width: @fullwidth;
+      height: 7em;
+      background-color: @base;
+      line-height: 7em;
+      display: flex;
+      padding: 0 5%;
+
+      .triangle {
+        display: inline-flex;
+        width: 0;
+        height: 0;
+        border-width: 2em 1em;
+        border-style: solid;
+        border-color: #b9e9f5 @base @base @base;
+
+      }
+      p {
+        display: inline-flex;
+        font-size: @font-size+2;
+        color: white;
+      }
+
+    }
+
+    .container {
+      width: @fullwidth;
+      background-color: @base;
+      text-align: center;
+
+      .row {
+
+        .col-md-4 {
+          width: 33.3%;
+          padding: 0 5px;
+
+          .top {
+            height: 10rem;
+            background-color: #f5c97b;
+            line-height: 10rem;
+            color: #746b5c;
+            font-size: @font-size+6;
+            border: 5px solid white;
+            border-bottom: none;
+          }
+          .mid {
+            height: 3rem;
+            background-color: #83b09a;
+            line-height: 3rem;
+            font-size: @font-size;
+            color: white;
+            border: 5px solid white;
+            border-top: none;
+          }
+
+          .big {
+            text-align: left;
+            margin-top: 1.5em;
+            opacity: 0;
+
+            .small-1 {
+              width: 20%;
+              height: 2.5rem;
+              background-color: white;
+              display: inline-block;
+              background-image: url("../img/img1/icon.png");
+              background-position: -5px  -16px;
+              background-size: 30px;
+            }
+            .small-2 {
+              .small-1;
+              background-position: -3px  -142px;
+
+            }
+            .small-3 {
+              .small-1;
+              background-position: -2px -169px;
+            }
+            .small-4 {
+              .small-1;
+              background-position: 2px 5px;
+            }
+          }
+          &:hover .big {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 10em;
+  line-height: 10em;
+  background: #29bde0;
+  display: block;
+  text-align: center;
+
+  a {
+    display: inline-block;
+    width: 60%;
+    line-height: 5rem;
+    background-color: #fbb435;
+    font-size: 40px;
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: white;
+      text-decoration: none;
+    }
+
+  }
+
+}
+
