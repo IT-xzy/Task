@@ -1,0 +1,236 @@
+@import "../_style.scss";
+@import"../_mixin.scss";
+@import"../_popup.scss";
+$nav-height: .75rem;
+body {
+    background: #f0f0f0;
+}
+
+header {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include flex-between;
+    height: $nav-height;
+    padding: 0 .23rem;
+    background: $nav-blue;
+    font-size: .34rem;
+    color: #fff;
+    .back {
+        width: .25rem;
+        height: .25rem;
+        border: {
+            top: 2px solid #fff;
+            left: 2px solid #fff;
+        }
+        transform: rotate(-45deg);
+    }
+    .close {
+        width: .4rem;
+        height: .4rem;
+        text-align: center;
+        position: relative;
+        &::before,
+        &::after {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            right: .4/2-.02rem;
+            width: .04rem;
+            height: .42rem;
+            background: #fff;
+        }
+        &::before {
+            transform: rotate(-45deg);
+        }
+        &::after {
+            transform: rotate(45deg);
+        }
+    }
+}
+
+main {
+    margin: $nav-height .2rem 1.2rem .2rem;
+    overflow: auto;
+    .days {
+        margin-top: .2rem;
+        .day {
+            height: .84rem;
+            font-size: .3rem;
+            font-weight: bold;
+            line-height: .84rem;
+            text-align: center;
+            color: $nav-blue;
+            border: 1px solid #C9C9C9;
+            background: #fff;
+        }
+        .flow-style {
+            display: block;
+            position: relative;
+            margin-top: .2rem;
+            padding: 0.21rem*2 .21rem 0.21rem*2 1.17rem-0.49rem;
+            background: #fff;
+            border: 1px solid #C9C9C9;
+            &::before {
+                display: inline-block;
+                content: "";
+                position: absolute;
+                top: -0.3rem;
+                left: 50%;
+                margin-left: -0.25rem;
+                border: {
+                    bottom: .3rem solid #fff;
+                    left: .25rem solid transparent;
+                    right: .25rem solid transparent;
+                }
+            }
+            .flow {
+                border-left: 1px solid #C9C9C9;
+                padding-left: 0.49rem;
+                li {
+                    position: relative;
+                    @include flex-between;
+                    flex-wrap: wrap;
+                    margin: .21rem 0;
+                    p {
+                        flex: 1 0 90%;
+                        font-size: .3rem;
+                        color: #fff;
+                        text-align: center;
+                        line-height: .76rem;
+                        background: #24A7C6;
+                    }
+                    i {
+                        border: {
+                            right: .2rem solid #24A7c6;
+                            top: .15rem solid transparent;
+                            bottom: .15rem solid transparent;
+                        }
+                    }
+                }
+                .gurad{
+                    margin-top:0;
+                    &::before{
+                        display: inline-block;
+                        content:"";
+                        position: absolute;
+                        top:0;
+                        left: -0.49rem-0.3rem-0.03rem;
+                        width: .6rem;
+                        height: .6rem;   
+                        background: url(../../../image/黑夜.png) no-repeat 8px #fff;
+                        background-size: 50%;  
+                        border: 1px solid #C9C9C9;
+                        border-radius: 50%;
+                    }
+                }
+                .vote{
+                    margin-bottom: 0;
+                }
+                .the-dead{
+                    &::before{
+                        display: inline-block;
+                        content:"";
+                        position: absolute;
+                      
+                        left: -0.49rem-0.3rem-0.03rem;
+                        width: .6rem;
+                        height: .6rem;
+                        
+                        background: url(../../../image/白天.png) no-repeat 8px #fff;
+                        background-size: 50%;
+                      
+                        border: 1px solid #C9C9C9;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+    }
+}
+footer {
+    @include flex-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.2rem;
+    background: rgba(41, 189, 224, 0.5);
+    button {
+        height: .7rem;
+        width: 40%;
+        font-size: .3rem;
+        color: #fff;
+        border-radius: 7px;
+        background: #fdbc48;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

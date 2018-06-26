@@ -1,0 +1,27 @@
+<nav role="navigation" >
+    <button type="button" class="navbar-toggle" ng-click="vm.navOpen()">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <p class="text-center">后台管理系统</p>
+    <div class="collapse navbar-collapse" uib-collapse="vm.open"  style="padding: 0">
+        <ul>
+            <li class="first text-center" ng-repeat="x in vm.sidebar"   >
+                <button ng-click="vm.toggleList($index)" ng-class="{current:vm.first ==$index}">
+                    <i class="glyphicon glyphicon-pencil icon"></i>
+                    {{x.first}}
+                    <span class="glyphicon pull-right arrow"
+                          ng-class="(vm.first ==$index)?  'glyphicon-chevron-down': 'glyphicon-chevron-left'"></span>
+                </button>
+                <ul class="animateUl" ng-if="vm.first== $index">
+                    <li class="second text-center" ng-repeat="y in x.second"  ng-class="{active: vm.second === y.title}" >
+                        <a ui-sref="{{y.url}}"
+                           ng-click="vm.currentList(y.title ,$parent.$index);vm.navOpen()">{{y.title}} </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

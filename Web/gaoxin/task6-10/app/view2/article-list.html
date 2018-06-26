@@ -1,0 +1,118 @@
+<div class="search" >
+    <div class="row searchbox">
+        <form class="row">
+            <div class="col-lg-4 col-md-6">
+                <label>修改时间起始</label>
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               uib-datepicker-popup
+                               ng-model="dateStart" is-open="startPopup"
+                               ng-change="dateChange()"
+                               datepicker-options="startDateOptions">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default"
+                                  ng-click="startOpen()">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                        </span>
+                    </p>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label>截&emsp;&emsp;止</label>
+                <p class="input-group">
+                    <input type="text" class="form-control"
+                           uib-datepicker-popup
+                           ng-model="dateEnd" is-open="endPopup"
+                           ng-change="dateChange()"
+                           datepicker-options="endDateOptions">
+                    <span class="input-group-btn">
+                          <button type="button" class="btn btn-default"
+                                  ng-click="endOpen()">
+                              <i class="glyphicon glyphicon-calendar"></i>
+                          </button>
+                        </span>
+                </p>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label>类&emsp;&emsp;型</label>
+                <select  class="form-control"
+                          ng-model="searchType"
+                          ng-options="x.value as x.text for x in picktype">
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label>状&emsp;&emsp;态</label>
+                <select   class="form-control"
+                          ng-model="searchStatus"
+                          ng-options="x.value as x.text for x in pickstatus"
+                          style="margin-bottom: 1rem">
+                </select>
+            </div>
+        </form>
+        <div >
+            <button ng-click="search(dateStart,dateEnd)"
+                    class="btn btn-success pull-right"
+                    style="margin-left: 20px">搜索</button>
+            <button ng-click="clear()" class="btn btn-danger pull-right" >清空</button>
+
+        </div>
+    </div>
+</div>
+<div class=" list">
+    <div class="row panel panel-default">
+        <div class="panel-heading">Article列表
+            <button class="btn btn-success pull-right" ng-click="details()">+新增</button>
+        </div>
+        <div class="panel-body table-responsive">
+            <table class="table table-hover table-striped ">
+                <thead>
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">图片预览</th>
+                    <th class="text-center">名称</th>
+                    <th class="text-center">类型</th>
+                    <th class="text-center">发布时间</th>
+                    <th class="text-center">修改时间</th>
+                    <th class="text-center">发布者</th>
+                    <th class="text-center">状态</th>
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="list in lists | orderBy:'updateAt':true ">
+                    <td class="text-center">{{$index+1}}</td>
+                    <td class="  text-center">
+                        <img alt="配图预览" ng-src="{{list.img}}"  style="max-width:100px ;height: 50px">
+                    </td>
+                    <td class="text-center "  style="max-width:150px ; word-break: break-all; white-space: pre-line;" >{{list.title}}</td>
+                    <td class="text-center">{{list.type | typefilter}}</td>
+                    <td class="text-center">{{list.createAt | date:'yyyy-MM-dd HH:mm:ss '}}</td>
+                    <td class="text-center">{{list.updateAt | date:'yyyy-MM-dd HH:mm:ss '}}</td>
+                    <td class="text-center">{{list.author}}</td>
+                    <td class="text-center">{{list.status  | statusfilter }}</td>
+                    <td  class="text-center">
+                        <a class="btn-sm"  href="" ng-click="change_status(list.id,list.status) ">{{list.status  | afilter }}</a>
+                        <a class="btn-sm" href="" ng-click="edit(list.id)" >编辑</a>
+                        <!--<a class="btn-sm" ui-sref="backstage.details({ id:list.id})" >编辑</a>-->
+                        <a class="btn-sm" href=""  ng-click="delete(list.id)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="pull-right"  style="margin-bottom:1rem  ">
+    <ul uib-pagination
+        total-items="totalItems"
+        ng-model="currentPage"
+        max-size="maxSize" first-text="第一页"
+        previous-text="上一页" next-text="下一页" last-text="最后页"
+        ng-change="change()"
+        boundary-links="true" boundary-link-numbers="true">
+    </ul>
+</div>
+
+<header></header>
+<main></main>
+<footer></footer>

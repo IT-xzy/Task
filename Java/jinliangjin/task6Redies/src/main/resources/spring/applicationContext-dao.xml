@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--启用注解方式配置bean-->
+    <context:annotation-config></context:annotation-config>
+    <!--扫描除了controller层之外的包-->
+    <context:component-scan base-package="com.ptt">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--在DES加密工具类中注入配置文件DESPassword.properties中的秘钥-->
+    <context:property-placeholder location="classpath:DESPassword.properties" ignore-unresolvable="true"/>
+    <!--sessionId、loginName-->
+    <context:property-placeholder location="classpath:session.properties" ignore-unresolvable="true"/>
+    <!--maxAge、path-->
+    <context:property-placeholder location="classpath:cookieUtil.properties" ignore-unresolvable="true"/>
+    <!--salt、cookieName-->
+    <context:property-placeholder location="classpath:userService.properties" ignore-unresolvable="true"/>
+    <!--数据库连接池-->
+    <context:property-placeholder location="classpath:aliJdbc.properties" ignore-unresolvable="true"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--整合Spring和MyBatis-->
+    <!--配置MyBatis会话工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据库连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--注入映射文件-->
+        <property name="mapperLocations" value="classpath:mybatis/*Mapper.xml"/>
+        <!--定义别名-->
+        <property name="typeAliasesPackage" value="com.ptt.pojo"/>
+    </bean>
+    <!--配置mapper-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--注入会话工厂的实例-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--注入接口-->
+        <property name="basePackage" value="com.ptt.mapper"/>
+    </bean>
+    <import resource="classpath:spring/applicationContext-redis.xml"/>
+</beans>

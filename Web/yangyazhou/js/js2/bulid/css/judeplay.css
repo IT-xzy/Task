@@ -1,0 +1,177 @@
+html {
+  height: 100%; }
+
+body {
+  margin: 0; }
+
+html {
+  height: 100%; }
+
+body {
+  margin: 0; }
+
+header {
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 0.88rem;
+  border-bottom: .01rem solid #74d4eb;
+  font-size: 0.34rem;
+  color: #fff;
+  background: #29bde0;
+  z-index: 2; }
+  header i {
+    display: inline-block; }
+    header i:first-child {
+      width: .3rem;
+      height: .3rem;
+      border-left: .05rem solid;
+      border-bottom: .05rem solid;
+      transform: rotate(45deg);
+      margin-left: 0.2rem; }
+    header i:last-child {
+      position: relative;
+      width: .5rem;
+      height: .4rem;
+      margin-right: 0.2rem; }
+      header i:last-child::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: .05rem;
+        background: currentColor;
+        transform: translateY(-50%) rotate(45deg); }
+      header i:last-child::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: .05rem;
+        background: currentColor;
+        transform: translateY(-50%) rotate(-45deg); }
+
+main .game-container .change .moon, main .game-container .change .sun {
+  box-sizing: border-box;
+  width: .6rem;
+  height: .6rem;
+  border: solid 0.02rem #C9C9C9;
+  border-radius: 50%;
+  background: #F7F7F7 no-repeat center;
+  z-index: 1;
+  transform: translateX(-50%); }
+
+body {
+  background: #f0f0f0; }
+
+main {
+  margin: 1.4rem .1rem .5rem;
+  font-size: .3rem; }
+  main h4 {
+    margin: 0;
+    margin-bottom: 0;
+    border: solid 0.01rem #C9C9C9;
+    line-height: .85rem;
+    text-align: center;
+    color: #24A7C6;
+    background: #F7F7F7; }
+  main .game-container {
+    display: flex;
+    position: relative;
+    margin-bottom: .2rem;
+    border: solid 0.01rem #C9C9C9;
+    max-height: 0;
+    margin-top: .2rem;
+    background: #F7F7F7;
+    transition: all 2s;
+    overflow: hidden; }
+    main .game-container::before {
+      content: "";
+      position: absolute;
+      top: -0.28rem;
+      left: 50%;
+      right: auto;
+      bottom: auto;
+      border-bottom: solid 0.32rem #F7F7F7;
+      border-right: solid 0.22rem transparent;
+      border-left: solid 0.22rem transparent;
+      transform: translateX(-50%); }
+    main .game-container .change {
+      position: relative;
+      width: .78rem; }
+      main .game-container .change::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0.29rem;
+        right: auto;
+        bottom: auto;
+        width: .14rem;
+        height: .08rem;
+        background: #C9C9C9;
+        border-radius: 0 0.07rem 0.07rem/0 0 0.08rem 0.08rem; }
+      main .game-container .change::after {
+        content: "";
+        position: absolute;
+        top: auto;
+        left: 0.36rem;
+        right: auto;
+        bottom: auto;
+        width: .01rem;
+        height: 100%;
+        background: #C9C9C9; }
+      main .game-container .change .moon {
+        position: absolute;
+        top: 0.58rem;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        background-image: url(../img/moon.png); }
+      main .game-container .change .sun {
+        position: absolute;
+        top: 1.54rem;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        background-image: url(../img/sun.png); }
+    main .game-container ul {
+      list-style: none;
+      flex-basis: 75%;
+      padding-left: .16rem;
+      margin: 0; }
+      main .game-container ul li {
+        position: relative;
+        line-height: .76rem;
+        background: #24A7C6;
+        text-align: center;
+        color: #fff; }
+        main .game-container ul li .arrow {
+          border-right: solid 0.16rem #24A7C6;
+          border-bottom: solid 0.11rem transparent;
+          border-top: solid 0.11rem transparent;
+          position: absolute;
+          top: 50%;
+          left: -0.15rem;
+          right: auto;
+          bottom: auto;
+          transform: translateY(-50%); }
+        main .game-container ul li:first-child {
+          margin-top: .51rem;
+          margin-bottom: .2rem; }
+        main .game-container ul li:nth-child(n+2) {
+          margin: .2rem 0; }
+        main .game-container ul li.kill-result, main .game-container ul li.vote-result {
+          color: initial;
+          line-height: .4rem;
+          background: initial;
+          border: none; }
+          main .game-container ul li.kill-result::before, main .game-container ul li.vote-result::before {
+            content: "";
+            border: none; }
+        main .game-container ul li .arrow-selected {
+          border-right-color: #898989; }
+      main .game-container ul .step-selected {
+        background: #898989; }

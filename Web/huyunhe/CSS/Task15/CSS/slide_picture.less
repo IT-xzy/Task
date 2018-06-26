@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.slide-component {
+  overflow: hidden;
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.slide-component {
+  position: relative;
+}
+
+.slider-container {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.slider {
+  height: 100%;
+  width: 800%;
+  animation: change 10s linear infinite;
+}
+
+.slider-item {
+  float: left;
+  height: 100%;
+  width: 12.5%;
+}
+
+.mark {
+  position: absolute;
+  z-index: 100;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mark__unit {
+  position: relative;
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  border: 1px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.mark__unit::after {
+  position: absolute;
+  left: 0.5px;
+  top: 0.5px;
+  content: "";
+  height: 0.9rem;
+  width: 0.9rem;
+  border-radius: 50%;
+  background-color: hsl(194, 87%, 64%);
+  opacity: 0;
+}
+
+#unit1::after {
+  animation: unit1-display 10s linear infinite;
+}
+
+input:checked+label {}
+
+input {
+  display: none;
+}
+
+#input1:checked~.slider {
+  animation-name: change1;
+  margin-left: 0;
+}
+
+#input2:checked~.slider {
+  animation-name: change2;
+  margin-left: -100%;
+}
+
+#input3:checked~.slider {
+  animation-name: change3;
+  margin-left: -200%;
+}
+
+@keyframes change1 {
+  0% {
+    margin-left: 0;
+  }
+  20% {
+    margin-left: 0;
+  }
+  30% {
+    margin-left: -100%;
+  }
+  50% {
+    margin-left: -100%;
+  }
+  60% {
+    margin-left: -200%;
+  }
+  80% {
+    margin-left: -200%;
+  }
+  90% {
+    margin-left: -300%;
+  }
+  100% {
+    margin-left: -300%;
+  }
+}
+
+@keyframes change2 {
+  0% {
+    margin-left: -100%;
+  }
+  20% {
+    margin-left: -100%;
+  }
+  30% {
+    margin-left: -200%;
+  }
+  50% {
+    margin-left: -200%;
+  }
+  60% {
+    margin-left: -300%;
+  }
+  80% {
+    margin-left: -300%;
+  }
+  90% {
+    margin-left: -400%;
+  }
+  100% {
+    margin-left: -400%;
+  }
+}
+
+@keyframes change3 {
+  0% {
+    margin-left: -200%;
+  }
+  20% {
+    margin-left: -200%;
+  }
+  30% {
+    margin-left: -300%;
+  }
+  50% {
+    margin-left: -300%;
+  }
+  60% {
+    margin-left: -400%;
+  }
+  80% {
+    margin-left: -400%;
+  }
+  90% {
+    margin-left: -500%;
+  }
+  100% {
+    margin-left: -500%;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .mark__unit {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+}

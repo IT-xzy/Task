@@ -1,0 +1,253 @@
+@import "./frame.less";
+
+
+@title-size: 1.8rem;
+@normal-size: 1.6rem;
+@small-size: 1.4rem;
+@xsmall-size:1.2rem;
+@text-color: #999999;
+@main-color: #1db176;
+@red-color:#f01400;
+@border-color:#d0d6d9;
+@circle-radius: 3.5rem;
+
+//layout
+.vertical-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.horizontal-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.all-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//theme
+#last-col{
+  border: none;
+}
+#last-row{
+  border: none;
+}
+#first-row{
+  border-top: 1px solid @border-color;
+}
+.bold-red{
+  font-weight: bold;
+  color: @red-color;
+}
+.text-red{
+  color: @red-color;
+}
+
+//overwriting
+.mycol-sm-4{
+  position: relative;
+}
+.myrow{
+  margin: 2rem 0;
+}
+
+
+//normal
+header .service {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 5px 15px;
+  max-width: 120rem;
+  color: @main-color;
+  font-size: @small-size;
+}
+
+main {
+  background-color: darken(#fafafa, 5%);
+}
+
+.sub-nav {
+  margin: 2rem 0;
+  font-size: @normal-size;
+}
+
+.active-green {
+  color: @main-color;
+}
+
+.direction__title{
+  float: left;
+  color: @text-color;
+  font-size: @small-size;
+}
+.direction__item{
+  float: left;
+  margin: 0 1rem;
+  font-size: @small-size;
+
+  &:hover{
+    background-color: @main-color;
+  }
+  a{
+    color: black;
+    &:hover{
+      color: white;
+    }
+  }
+}
+.front__unit{
+  border: 1px solid @border-color;
+  background-color: white;
+  font-size: @xsmall-size;
+  color: @text-color;
+}
+
+.front__title{
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid @border-color;
+  font-size: @normal-size;
+  font-weight: bold;
+}
+
+.front__head{
+  float: left;
+  img{
+    display: block;
+  }
+}
+.front__intro,
+.front__divide-2,
+.front__divide-3{
+  &:after{
+    content: "";
+    clear: both;
+    display: block;
+  }
+}
+.front__intro{
+  padding: 1.5rem 1rem;
+}
+.front__head{
+  padding-right: 0.5rem;
+}
+.front__intro-detail{
+  margin-top: 1rem;
+  overflow: hidden;
+}
+.front__name{
+  color: black;
+  font-size: @normal-size;
+  font-weight: bold;
+}
+
+.front__divide-2,
+.front__divide-3{
+  border-bottom: 1px solid @border-color;
+}
+
+.front__cell-2,
+.front__cell-3{
+  border-right: 1px solid @border-color;
+  box-sizing: border-box;
+}
+
+.front__cell-2{
+  float: left;
+  width: 50%;
+  padding: 1rem ;
+}
+.front__cell-3{
+  position: relative;
+  float: left;
+  width: 33.33333%;
+  min-height: 11rem;
+  text-align: center;
+  div{
+    padding: 1rem 0;
+    border-bottom: 1px solid @border-color;
+  }
+}
+.front__salary{
+  display: block;
+  position: absolute;
+  .all-center;
+  width: 100%;
+}
+.front__number{
+  border-bottom: 1px solid @border-color;
+  padding: 1rem;
+}
+.front__prompt{
+  padding: 1rem;
+}
+.hover{
+  display: none;
+  position: absolute;
+  top:0;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
+  font-size: @normal-size;
+  color: white;
+  background-color: rgba(61, 61, 61, 0.9);
+  box-sizing: border-box;
+}
+.hover__title{
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+.hover__content{
+  padding: 2rem 4rem;
+  line-height: 2.5rem;
+  text-align: justify;
+}
+
+
+//effect
+.front__unit:hover + .hover,.hover:hover{
+  display: block;
+}
+
+
+//media query
+@media screen and (max-width:600px){
+  .mycontainer{
+    padding: 5px;
+  }
+  .myrow{
+    margin: 1rem 0;
+  }
+  .sub-nav{
+    margin: 0;
+  }
+  .direction{
+    padding: 0;
+  }
+  .direction__title,
+  .direction__item{
+    float: none;
+    text-align: center;
+  }
+  .direction__title{
+    display: none;
+  }
+  .direction__item{
+    padding: 5px 0;
+  }
+  .hover__title{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+  .hover__content{
+    padding-top: 0;
+  }
+}
