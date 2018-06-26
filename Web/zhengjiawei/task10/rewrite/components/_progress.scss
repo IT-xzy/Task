@@ -1,0 +1,41 @@
+.progress {
+    @include d-right-alignment;
+    @media (max-width: 767px) {
+        // display: block;
+    }
+    &>div {
+        padding: 40px 0 50px 0;
+        text-align: center;
+        margin-left: -3px;//
+        >span:nth-child(1) {
+            @include d-vertical-center;
+            margin-bottom: 30px;
+            height: 5px;
+            border-radius: 4px;
+            background: #ccc;
+            span {
+                color: $white;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background: #ccc;
+                @include d-vertical-center;
+            }
+        } //图标
+        >span:nth-child(2) {
+            padding: 0 15px;
+            font-size: .14rem;
+            color: #CCC;
+        }//段落
+    }
+}
+
+.progress-hover {
+    &:hover span:nth-child(1) {
+        background: #FF7F02;
+        color: $white;
+    }
+    &:hover :last-child {
+        color: #FF7F02;
+    }
+} //hover效果
