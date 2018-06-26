@@ -1,0 +1,71 @@
+@import '../components/variables';
+@mixin vertical-middle {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+main {
+    @include vertical-middle();
+    padding: 90px 0;
+    background: $header-blue;
+    .lookCard {
+        position: relative;
+        @include vertical-middle();
+        align-items: center;
+        width: 80vw;
+        height: 50vh;
+        background: #ffedc5;
+        border: 5px solid $white;
+        .lookCardPhoto {
+            display: inline-block;
+            background: url(../../img/狼人杀-logo/baichi.jpg) no-repeat;
+            background-size: cover;
+            width: 150px;
+            height: 150px;
+        }
+        .lookCardPhoto-two {
+            margin-bottom: 20px;
+            background: url(../../img/look.png) no-repeat;
+            width: 150px;
+            height: 150px;
+            background-size: cover;
+        }
+        #identityWord {
+            flex-basis: 100%;
+            text-align: center;
+            font-size: .2rem;
+            color: $header-blue;
+        }/* 身份字体 */
+        #lookNumber {
+            position: absolute;
+            top: 0;
+            margin-top: -20px;
+            @include vertical-middle();
+            align-items: center;
+            font-size: .2rem;
+            color: red;
+            width: 40px;
+            height: 40px;
+            background: $white;
+            border: 1px solid #f7bd4a;
+            border-radius: 50%;
+        }
+    }
+}
+
+footer {
+    text-align: center;
+    background: $header-blue;
+    padding-bottom: 30px;
+    button {
+        font-size: .2rem;
+        font-weight: 300;
+        color: $white;
+        width: 90vw;
+        height: .5rem;
+        border-radius: .1rem;
+        background: #f7bd4a;
+    }
+}
