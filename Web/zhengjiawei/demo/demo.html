@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="../jquery/jquery.js"></script>
+  <script src="../javascript-state-machine/dist/state-machine.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script type="text/javascript">
+    $(function () {
+      // 使用bind为页面初始化时为ul中li元素绑定hover事件
+      //*
+      $("ul li").bind('click', function () {
+        $(this).css({
+          'background': 'green'
+        });
+        // 新添加的此元素不具备点击的能力
+        $(this).parent().append(
+          "<li>I don't  know how call me comeing. If you click my body , i cant do anything.</li>");
+      });
+
+      // 使用on为页面初始化时为ul中li元素绑定hover事件
+      // $("ul").on('click', 'li', function(){
+      //     $(this).css({'background': 'green'});
+      //     // 新添加的此元素具备点击的能力
+      //     $(this).after("<li>I don't  know how call me comeing. If you click my body , i cant anything</li>");
+      // });
+
+    });
+  </script>
+
+  <ul>
+    <li>I'm first node. If you click my body , I well change my body to green and pull a new node in below.</li>
+  </ul>
+
+
+</body>
+
+</html>

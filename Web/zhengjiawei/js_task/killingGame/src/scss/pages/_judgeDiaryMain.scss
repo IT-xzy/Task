@@ -1,0 +1,65 @@
+@import '../components/variables';
+@mixin layout {
+    background: $header-blue;
+    display: flex;
+}
+
+body {
+    background: $header-blue;
+}
+
+main {
+    @include layout;
+    margin-bottom: 70px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    $width: 100%/3;
+    .box {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 25px 0;
+        width: $width;
+        .square {
+            width: 25vw;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            span:nth-child(1) {
+                height: 18vw;
+                background: #fdedc5;
+            }
+            span:nth-child(2) {
+                height: 7vw;
+                background: #bff2ff;
+            }
+        }
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include layout;
+    padding: 15px;
+    justify-content: center;
+    button {
+        width: 80vw;
+        height: 40px;
+        background: $playerRatioYellow;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px #f0f0f0;
+        span {
+            color: $white;
+            font-size: 18px;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+    }
+}

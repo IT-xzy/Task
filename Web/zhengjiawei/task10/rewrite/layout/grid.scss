@@ -1,0 +1,73 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.container {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+$size:(576px:540px, 768px:720px, 992px:960px, 1200px:1140px);
+@mixin max-width ($size-map) {
+    @each $min-width,
+    $max-width in $size-map {
+        @media (min-width: $min-width) {
+            .container {
+                max-width: $max-width;
+            }
+        }
+    }
+}
+
+@include max-width($size);
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+$value: 100%/12;
+$text2: (null:null, sm:576px, md:768px, lg:992px, xl:1200px); //声明一个map
+@mixin text2($map) {
+    @each $size,
+    $px in $map {
+        @if $size==null {
+            @for $i from 1 through 12 {
+                .col-#{$i} {
+                    display: flex;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    width: 100%;
+                    position: relative;
+                    min-height: 1px;
+                    flex: 0 0 $value*$i;
+                    max-width: $value*$i;
+                }
+            }
+        }
+        @else {
+            @media screen and (min-width: $px) {
+                @for $i from 1 through 12 {
+                    .col-#{$size}-#{$i} {
+                        display: flex;
+                        flex: 0 0 $value*$i;
+                        padding-right: 15px;
+                        padding-left: 15px;
+                        width: 100%;
+                        position: relative;
+                        min-height: 1px;
+                        max-width: $value*$i;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@include text2($text2);
