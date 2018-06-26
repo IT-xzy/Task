@@ -1,0 +1,37 @@
+<div class="login-warp">
+    <form class="login" name="myForm">
+        <span class="login-title">后台登陆</span>
+        <div>
+            <div ng-class="{'has-error': myForm.username.$dirty && myForm.username.$invalid }">
+                <div>
+                    <img src="img/man.png" alt="用户名图标">
+                    <input type="text" autocomplete="off" placeholder="请输入用户名" name="username" id="name" ng-model="vm.name" ng-minlength="5" ng-maxlength="10" required >
+                </div>
+                <!-- <div ng-show="myForm.username.$error.required" class="alert alert-danger help-block">
+                    用户名不能为空
+                </div> -->
+                <div ng-show="myForm.username.$error.maxlength" class="alert alert-danger help-block">      
+                    用户名长度不能超过10位
+                </div>
+                <div ng-show="myForm.username.$error.minlength" class="alert alert-danger help-block"> 
+                    用户名长度不能少于5位
+                </div>
+                <div>
+                    <img src="img/password.png" alt="密码图标">
+                    <input type="password" placeholder="请输入密码" name="password" id="password" ng-model="vm.password" ng-minlength="6" required>
+                </div>
+                <!-- <div ng-show="myForm.password.$error.required" class="alert alert-danger help-block">
+                    密码不能为空
+                </div> -->
+                <div ng-show="myForm.password.$error.minlength" class="alert alert-danger help-block">
+                    密码长度不能少于6位
+                </div>
+            </div>
+        </div>
+        <div id="tip">
+        </div>
+        <button id="login" ng-click="vm.login()" ng-disabled="myForm.username.$pristine || myForm.username.$invalid || myForm.password.$pristine || myForm.password.$invalid">
+            登陆
+        </button>
+    </form>
+</div>
