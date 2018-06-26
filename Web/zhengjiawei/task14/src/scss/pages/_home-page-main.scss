@@ -1,0 +1,349 @@
+@import '../helpers/mixin';
+@import '../helpers/variable';
+main {
+    padding-bottom: 90px;
+    background: $bg-color;
+    h3 {
+        margin-bottom: 50px;
+        width: 100%;
+        font-size: 18px;
+        text-align: center;
+        color: $black;
+    }
+    /* 通用样式 */
+}
+
+.section-one {
+    div {
+        margin: 70px 0 100px 0;
+        @media (max-width: 767px) {
+            margin: 20px 0;
+        }
+        @media (max-width: 575px) {
+            width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        span {
+            display: block;
+            @include flex-s-center;
+            margin-bottom: 10px;
+        }
+        /* 图标 */
+        h4 {
+            margin-bottom: 10px;
+            text-align: center;
+            color: $black;
+        }
+        /* 标题 */
+        p {
+            color: $gray;
+            letter-spacing: 2px;
+            @media (max-width: 575px) {
+                text-align: center;
+            }
+        }
+        /* 介绍文字 */
+    }
+    /* col 第一行div样式，因为只有子级有div，所以未使用子元素选择器*/
+    @mixin span-style {
+        height: 60px;
+    } // 图标高度
+    div:nth-child(1) {
+        span {
+            @include span-style();
+        }
+        i {
+            display: block;
+            background: url(../img/spritesheet.png)no-repeat -5px -738px;
+            width: 43px;
+            height: 62px;
+            transform: scale(.5);
+        }
+    }
+    div:nth-child(2) {
+        span {
+            @include span-style();
+        }
+        i {
+            display: block;
+            background: url(../img/spritesheet.png)no-repeat -5px -70px;
+            width: 60px;
+            height: 50px;
+            transform: scale(.5);
+        }
+    }
+    div:nth-child(3) {
+        span {
+            @include span-style();
+        }
+        i {
+            display: block;
+            background: url(../img/spritesheet.png)no-repeat -5px -5px;
+            width: 52px;
+            height: 55px;
+            transform: scale(.5);
+        }
+    } //i-图片
+    div:nth-child(4) {
+        padding: 22px 0 22px 20px;
+        border-left: 2px dashed #dedede;
+        @media (max-width: 575px) {
+            padding: 0 15px;
+            text-align: center;
+        }
+        span {
+            display: block;
+            width: 100%;
+            color: $green;
+        }
+        span::before {
+            content: "";
+            display: inline-block;
+            margin-right: 5px;
+            background: url(../img/spritesheet.png) no-repeat -5px -850px;
+            width: 13px;
+            height: 13px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    } //最后一列样式
+    /* 四列 */
+    /* 介绍 */
+}
+
+.section-two {
+    div {
+        @include flex-s-center;
+        justify-content: flex-start;
+        margin-bottom: 120px;
+        @media (max-width: 991px) {
+            justify-content: flex-start;
+            margin-bottom: 60px;
+        }
+        @media (max-width:767px) {
+            margin-bottom: 30px;
+        }
+        @media (max-width:575px) {
+            width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        /* 包裹每列的div */
+        span:nth-child(1) {
+            @include flex-s-center;
+            flex-shrink: 0;
+            margin-right: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: $white;
+            color: $green;
+            box-shadow: 1px 1px 1px #080103;
+            @media (max-width: 991px) {
+                margin-right: 15px;
+            }
+        }
+        /* 圆圈icon */
+        span:nth-child(2) {
+            margin-right: 10px;
+            color: $gray;
+            font-size: 14px;
+        }
+        i {
+            @media (max-width: 767px) {
+                display: none;
+            }
+            display: inline-block;
+            flex-shrink: 0;
+            background: url(../img/spritesheet.png)no-repeat -5px -810px;
+            width: 32px;
+            height: 30px;
+        }
+        /* 三角形图标 */
+    }
+    div:nth-child(3) {
+        i {
+            @media (max-width: 991px) {
+                display: none;
+            }
+        }
+    }
+    /* 在991px下隐藏第二列三角形 */
+    div:nth-child(4) {
+        i {
+            @media (max-width: 991px) {
+                margin-left: auto;
+            }
+        }
+        /* 在991px下让第三列布局和其他元素相同 */
+    }
+    div:nth-child(7) {
+        i {
+            @media (max-width: 991px) {
+                display: none;
+            }
+        }
+    }
+    /* 如何学习 */
+}
+
+.section-three {
+    padding-bottom: 20px;
+    @mixin head-photo {
+        display: inline-block;
+        width: 108px;
+        height: 108px;
+    }
+    >div {
+        padding: 15px 15px 30px 15px;
+        text-align: center;
+        >div {
+            background: $white;
+            padding: 20px;
+            box-shadow: 2px 2px 1px #e8e8e8;
+        }
+        /* 背景颜色 */
+    }
+    @mixin gap {
+        margin-bottom: 20px;
+    }
+    h4 {
+        @include gap();
+    }
+    i {
+        @include gap();
+    }
+    p {
+        @include gap();
+        text-align: left;
+    }
+    /* 设置框里面的下边距 */
+    div:nth-of-type(1) {
+        i {
+            @include head-photo();
+            background: url(../img/spritesheet.png)no-repeat -5px -130px;
+        }
+    }
+    div:nth-of-type(2) {
+        i {
+            @include head-photo();
+            background: url(../img/spritesheet.png)no-repeat -5px -248px;
+        }
+    }
+    div:nth-of-type(3) {
+        i {
+            @include head-photo();
+            background: url(../img/spritesheet.png)no-repeat -5px -366px;
+        }
+    }
+    div:nth-of-type(4) {
+        i {
+            @include head-photo();
+            background: url(../img/spritesheet.png)no-repeat -5px -484px;
+        }
+    }
+    /* 四个框的头像 */
+    div:nth-of-type(5) {
+        width: 100%;
+        text-align: center;
+        i {
+            display: inline-block;
+            margin: 0 20px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            box-shadow: 1px 1px 1px #e8e8e8;
+            background: $white;
+            &:hover {
+                background: $green;
+            }
+        }
+    }
+    /* 小圆点 */
+    /* 优秀学员展示 */
+}
+
+.section-four {
+    // padding-left: 15px;
+    // padding-right: 15px;
+    justify-content: space-between;
+    background: $white;
+    @media (max-width:991px) {
+    }
+    span {
+        width: 19%;
+        background: $white;
+        @media (max-width:991px) {
+            @include flex-s-center;
+            width: 100%!important;
+            margin-bottom: 10px;
+        }
+    }/* 装图片的容器 */
+    span:hover {
+        box-shadow: 2px 2px 2px $black;
+    }
+    @mixin photo-style {
+        display: inline-block;
+        width: 184px;
+        height: 74px;
+    }
+    span:nth-of-type(1)::after {
+        content: "";
+        @include photo-style();
+        background: url(../img/logo/alibaba.jpg) no-repeat;
+    }
+    span:nth-of-type(2)::after {
+        content: "";
+        @include photo-style();
+        background: url(../img/logo/huanxin.jpg) no-repeat;
+    }
+    span:nth-of-type(3)::after {
+        content: "";
+        @include photo-style();
+        background: url(../img/logo/jinshanyun.jpg) no-repeat;
+    }
+    span:nth-of-type(4)::after {
+        content: "";
+        @include photo-style();
+        background: url(../img/logo/qiniu.png) no-repeat;
+    }
+    span:nth-of-type(5)::after {
+        content: "";
+        @include photo-style();
+        background: url(../img/logo/yuntong.jpg) no-repeat;
+    }
+}/* 优秀学员展示 */
+
+.link-exchange {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 15px;
+    padding-right: 15px;
+    li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 10%;
+        margin-bottom: 10px;
+        @media (max-width:991px) {
+            width: 20%;
+        }
+        @media (max-width:575px) {
+            width: 50%;
+        }/* 在不同的屏幕下变化 */
+        &::before {
+            display: inline-block;
+            margin-right: 15px;
+            content: "";
+            width:4px;
+            height: 4px;
+            border-radius: 50%;
+            background: $gray;
+        }/* 点 */
+        a {
+            color: $gray;   
+        }
+    }
+}/* 友情链接 */
