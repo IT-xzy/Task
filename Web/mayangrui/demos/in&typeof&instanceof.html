@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<!--事件委托-->
+<ul id="ul1">
+    <li>
+        <div>
+            <p>dada</p>
+            <p>dada</p>
+            <p>dada</p>
+        </div>
+    </li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+<ul id="parent-list">
+    <li id="post-1">Item 1</li>
+    <li id="post-2">Item 2</li>
+    <li id="post-3">Item 3</li>
+    <li id="post-4">
+        <p>a</p>
+        <p>a</p>
+        <p>a</p>
+        <p>a</p>
+        <p>a</p>
+
+        Item 4
+    </li>
+    <li id="post-5">Item 5</li>
+    <li id="post-6">Item 6</li>
+</ul>
+</body>
+<script>
+    $("#parent-list").delegate("p", "click", function () {
+        // "$(this)" is the node that was clicked
+        alert($(this).html());
+        console.log("you clicked a link!", $(this));
+    });
+
+
+    //
+
+    <!--关于in运算符-->
+    //    var trees = new Array("redwood", "bay", "cedar", "oak", "maple");
+    //    console.log(0 in trees);
+    //    console.log(3 in trees);
+    //    console.log(5 in trees);
+    //    console.log('bay' in trees);
+    //    console.log('length' in trees);
+    //    console.log(trees);
+    //    console.log('PI' in Math);
+    //
+    //    var mycar = {make: "Honda", model: "Accord", year: 1998};
+    //    console.log('make' in mycar);
+    //    console.log('Honda' in mycar);
+    //
+    //    // var mydream=valueOf(mycar);
+    //    // console.log(mydream);
+    //    var color1 = new String("green");
+    //    console.log('length' in color1);
+    //
+    //    // var color2= "coral";
+    //    // console.log('length' in color2);
+    //
+    //    console.log('toString' in {});
+    //
+    //    // 关于valueOf
+    //
+    //    var array = ["ABC", true, 12, -5];
+    //    console.log(array.valueOf());
+    //    var date = new Date(2013, 7, 18, 23, 11, 59, 230);
+    //    console.log(date.valueOf());
+    //
+    //    var foo2 = new Function("x", "y", "return x + y;");
+    //    console.log(foo2.valueOf());
+    //
+    function MyNumberType(n) {
+        this.number = n;
+    }
+
+    // MyNumberType.prototype.valueOf = function () {
+    //     return this.number;
+    // };
+
+    var myObj = new MyNumberType(4);
+
+    console.log(myObj + 3);
+    //
+    //    function C() {
+    //    }
+    //
+    //    function D() {
+    //    }
+    //
+    //    var o = new C();
+    //    console.log(C.prototype);
+    //    console.log(C.prototype instanceof Object);
+    //
+    //    C.prototype = {};
+    //    var o2 = new C();
+    //
+    //    console.log(C.prototype);
+    //
+    //
+    //    var simpleStr = "This is a simple string";
+    //    var myString = new String();
+    //    var newStr = new String("String created with constructor");
+    //    var myDate = new Date();
+    //    var myObj = {};
+    //
+    //    function Car(make, model, year) {
+    //        this.make = make;
+    //        this.model = model;
+    //        this.year = year;
+    //    }
+    //
+    //    var mycar = new Car("Honda", "Accord", 1998);
+    //
+    //    console.log(mycar);
+    //
+    //    console.log(mycar instanceof Car);
+    //
+    //    //    event delegate
+    //
+    //    // window.onload = function () {
+    //    //
+    //    //     var oul = document.getElementById("ul1");
+    //    //     var ali = oul.getElementsByTagName("li");
+    //    //     for (var i = 0; i <ali.length; i++) {
+    //    //         ali[i].onclick = function () {
+    //    //             alert("hello bitches");
+    //    //         }
+    //    //     }
+    //    // }
+    //
+    //    window.onload = function () {
+    //        var oul = document.getElementById('ul1');
+    //        oul.onclick = function () {
+    //            alert("sada");
+    //        }
+    //    };
+    //json
+    var book = {
+        title: "professional JavaScript",
+        author: [
+            "nichalas C Zakas","brad matt","john wall"
+        ],
+        edition: 3,
+        year: 2011,
+        releaseDate: new Date(2011,11,1)
+    };
+    var jsonText = JSON.stringify(book, function (key, value) {
+        switch (key) {
+            case"author":
+                return value.join('-.-');
+            case"year":
+                return 5000;
+            case"edition":
+                return undefined;
+            case "title":
+                return value + " is fun";
+            default:
+                return value;
+        }
+    });
+    console.log(jsonText);
+    var jsonparce=JSON.parse(jsonText,function (key,value) {
+        if(key==='releaseDate'){
+            return new Date(value);
+        }
+        else{
+            return value;
+        }
+    });
+    console.log(jsonparce);
+    console.log(jsonparce.releaseDate.getFullYear());
+</script>
+</html>
