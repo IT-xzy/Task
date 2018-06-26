@@ -1,0 +1,216 @@
+@charset "UTF-8";
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+body {
+  margin: 0;
+}
+
+header .header-top {
+  height: 27px;
+  line-height: 27px;
+}
+
+.p-left {
+  color: #29b078;
+}
+
+.bg, .bg-qq, .bg-weibo, .bg-weixin {
+  float: right;
+  margin-top: 4px;
+}
+
+.bg-qq {
+  width: 23px;
+  height: 18px;
+  background: url("css_sprites.png") -10px -10px;
+}
+
+.bg-weibo {
+  width: 23px;
+  height: 18px;
+  background: url("css_sprites.png") -43px -10px;
+}
+
+.bg-weixin {
+  width: 31px;
+  height: 18px;
+  background: url(css_sprites.png) -10px -47px;
+}
+
+.nav-top {
+  background-color: #29b078;
+  height: 63px;
+  line-height: 63px;
+}
+
+.img-a {
+  position: relative;
+  bottom: -6px;
+}
+
+/* nav */
+.nav ul {
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+.nav li {
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+}
+
+.nav a {
+  padding: 7px 12px;
+  margin-bottom: 2px;
+  text-decoration: none;
+  color: white;
+  line-height: 100%;
+}
+
+.nav a:hover {
+  border-bottom: solid 3px white;
+  padding-bottom: 16px;
+}
+
+nav button {
+  display: none;
+}
+
+input {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  button label {
+    width: 39px;
+    height: 29px;
+    position: absolute;
+    right: 0;
+    top: 0px;
+  }
+  nav button {
+    border-radius: 5px;
+    border: 1px white solid;
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    margin: 13px;
+    background: transparent;
+  }
+  button span {
+    display: block;
+    width: 27px;
+    height: 4px;
+    margin: 4px 0;
+    background: #fafafa;
+  }
+  .nav-top ul {
+    background: #29b078;
+    width: 100%;
+    display: none;
+    transition: height 1s;
+    padding: 0;
+    /*离它的父元素的边界为0，所以可以位于父元素li的正下方*/
+  }
+  ul li {
+    width: 100%;
+  }
+  ul li a {
+    display: inline-block;
+    /*菜单项宽度未知，设置inline－block宽度为内容宽度*/
+    height: 30px;
+    width: 100%;
+    text-align: center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  input:checked ~ ul {
+    display: block;
+  }
+}
+
+footer {
+  background: #29b078;
+  margin-top: 50px;
+  display: inline-block;
+  width: 100%;
+}
+
+footer .p-size, footer .p-size-a {
+  color: white;
+}
+
+footer .p-size-a {
+  padding-top: 32px;
+}
+
+footer .p-bottom {
+  text-align: center;
+  color: white;
+  border-top: 1px solid white;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+
+@media (max-width: 600px) {
+  .img-a {
+    padding-left: 15px;
+  }
+  .container-a {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.col-md-3 .col-md-2 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (min-width: 992px) {
+  .col-md-3 {
+    width: 25%;
+    float: left;
+  }
+  .col-md-2 {
+    width: 16.666666666666664%;
+    margin-left: 25%;
+    display: inline-block;
+  }
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--自动扫描-->
+    <context:annotation-config/>
+    <aop:aspectj-autoproxy/>
+    <context:component-scan base-package="com.fgh.task2.service" >
+        <context:include-filter type="annotation"
+            expression="org.aspectj.lang.annotation.Aspect"/>
+    </context:component-scan>
+    <!--连接数据库-->
+    <context:property-placeholder location="classpath:db.properties" />
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value ="${driver}"/>
+        <property name="url" value ="${localUrl}"/>
+        <property name="username" value="${localUser}"/>
+        <property name="password" value="${password}"/>
+        <property name="maxActive" value="10"></property>
+        <property name="maxIdle" value="5"></property>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation"
+                  value="classpath:SqlMapConfig.xml"/>
+
+    </bean>
+    <!--mapper的扫描器，将包下边的mapper接口自动创建代理对象-->
+    <!--自动创建到spring容器中，bean的id是mapper的类名（首字母小写）-->
+    <bean id="Mapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.fgh.task2.dao.UserDao"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+</beans>
