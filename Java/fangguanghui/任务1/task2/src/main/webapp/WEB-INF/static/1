@@ -1,0 +1,62 @@
+#!/bin/bash
+
+. /etc/init.d/functions
+
+#set evn
+export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin
+export LANG=zh_CN.UTF8
+
+workPath=/usr/local/bin/deploy
+deployDir=/usr/local/tomcat7/webapps
+
+
+function del(){
+    echo "clean ${deployDir} ..."
+    #rm ${deployDir}/SSM2.war >/dev/null 2>&1
+    rm -rf ${deployDir}/SSM2 >/dev/null 2>&1
+    [ $? -eq 0 ]&&\
+    sleep 1
+    action "Item has been deleted." /bin/true
+    [ $? -eq 0 ]&&add
+    exit 1
+}
+
+
+function quit(){
+     action "drop out." /bin/true
+     exit 2
+}
+
+
+function add(){
+     echo "deploy..."
+     cp ${workPath}/SSM2.war ${deployDir} >/dev/null 2>&1
+     [ $? -eq 0 ]&& bash /usr/local/bin/tomcatd.sh restart
+     sleep 5
+     rm ${deployDir}/SSM2.war
+     echo "1"
+}
+
+
+function deploy(){
+    if [ -d ${deployDir} ]
+        then
+            echo " Whether to delete the item ? "
+            read -p "Y/N :" answer
+                case ${answer} in
+                     "Y"|"y")
+                      del
+                      ;;
+                      "N"|"n")
+                      quit
+                      ;;
+                      *)
+                      echo "please enter Y/N "
+                 esac
+
+    fi
+}
+
+
+deploy
+

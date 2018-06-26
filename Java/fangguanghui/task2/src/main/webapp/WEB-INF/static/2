@@ -1,0 +1,31 @@
+#!/bin/bash
+
+export PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin
+export LANG=zh_CN.UTF8
+
+accessLog=/usr/local/nginx/logs/host.access.log
+
+function Monitor() {
+TopIP=$(awk '{print $1}' "$accessLog" | sort | uniq -c | sort -rn | head -n 5)
+TopPage=$(awk '{print $7}' "$accessLog" | sort | uniq -c | sort -rn | head -n 10)
+
+free_Mem=$(free -m|awk 'NR==2'|awk '{print $4}')
+Use_Dev=$(df -hl|awk 'NR==2'|awk '{print $5}')
+
+
+echo "剩余内存 Free Mem = ${free_Mem} M"
+echo "剩余硬盘 USE% = ${Use_Dev}"
+echo ""
+echo  " 访问次数前5的IP："
+echo "访问次数      IP"
+echo "$TopIP"
+
+echo "-----------------------------------------------"
+echo ""
+echo " 访问次数前十的页面"
+echo "$TopPage"
+}
+
+Monitor
+
+

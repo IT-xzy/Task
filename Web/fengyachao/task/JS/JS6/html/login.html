@@ -1,0 +1,47 @@
+
+<main>
+    <div class="login_bg">
+        <div class="login_box">
+            <form name="loginForm" novalidate ng-submit="myLogin()">
+                <p class="head">后台登录</p>
+                <div class="userName">
+                    <img src="images/name.png">
+                    <input type="text"
+                           name="userName"
+                           ng-model="param.name"
+                           ng-minlength="3"
+                           ng-maxlength="10"
+                           placeholder="请输入用户名" required>
+                </div>
+                <!--帐号输入非法时错误信息提示内容-->
+                <div class="error" ng-if="!loginForm.userName.$touched"></div>
+                <div class="error" ng-messages="loginForm.userName.$error" ng-if="loginForm.userName.$touched">
+                    <span ng-message="minlength">用户名太短</span>
+                    <span ng-message="maxlength">用户名太长</span>
+                    <span ng-message="required">用户名必填</span>
+                </div>
+
+                <div class="userName">
+                    <img src="images/password.png">
+                    <input type="password"
+                           name="userPassword"
+                           ng-model="param.pwd"
+                           ng-minlength="6"
+                           ng-maxlength="16"
+                           placeholder="请输入密码" required>
+                </div>
+                <!--密码输入非法时错误信息提示内容-->
+                <div class="error" ng-if="!loginForm.userPassword.$touched"></div>
+                <div class="error" ng-messages="loginForm.userPassword.$error" ng-if="loginForm.userPassword.$touched">
+                    <span ng-message="minlength">密码太短</span>
+                    <span ng-message="maxlength">密码太长</span>
+                    <span ng-message="required">密码必填</span>
+                </div>
+
+                <p id="hint">{{_test}}</p>
+                <button id="login" type="submit" value="登录" ng-disabled="loginForm.$invalid">登录</button>
+            </form>
+        </div>
+    </div>
+</main>
+

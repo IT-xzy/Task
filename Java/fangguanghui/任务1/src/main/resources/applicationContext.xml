@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+         <!--开启注解 -->
+        <context:annotation-config/>
+        <!--自动扫描机制，在类路径底下寻找标注@Component,@Service,@Controller,@Repository注解的类，
+        把这些类纳入进spring容器中管理。 base-package为需要扫描的包（含所有子包）-->
+        <context:component-scan base-package="com.fgh.Mybatis.service" />
+        <!-- 加载配置文件 -->
+        <context:property-placeholder location="classpath:db.properties" />
+        <!-- 数据源，使用dbcp -->
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close">
+                <property name="driverClassName" value ="${driver}"/>
+                <property name="url" value ="${url}"/>
+                <property name="username" value="${localname}"/>
+                <property name="password" value="${password}"/>
+                <property name="maxActive" value="10"></property>
+                <property name="maxIdle" value="5"></property>
+        </bean>
+
+
+        <!--创建sqlSessionFactory
+        通过spring 注入的方式获得SqlSessionFactory
+        mybatis原先获得SqlSessionFactory 需要getResourceAsReader获取数据源
+        SqlMapConfig.xml(单Mybatis时，数据源配置其中)，通过SqlSessionFactoryBuilder().build()来
+        创建SqlSessionFactory-->
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+                <!-- 加载mybatis的配置文件 -->
+                <property name="configLocation" value="SqlMapConfig.xml"/>
+                <!-- 数据源 -->
+                <property name="dataSource" ref="dataSource"/>
+        </bean>
+
+        <!-- MapperScannerConfigurer：mapper的扫描器，将包下边的mapper接口自动创建代理对象
+       自动创建到spring容器中，bean的id是mapper的类名（首字母小写）-->
+        <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+                <property name="mapperInterface" value="com.fgh.Mybatis.dao.UserMapper"/>
+                <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        </bean>
+
+        <!--<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->
+        <!--<bean id="service" class="com.fgh.Mybatis.service.UserServiceImpl"/>-->
+
+
+
+        <!--依赖注入的方式-->
+        <!--constructor-arg：通过构造函数注入。-->
+        <!--property：通过setxx方法注入。-->
+
+        <!-- 原始Dao接口 通过bean创建的sqlSessionFactory注入
+        UserDaoImpl获得会话工厂，创建会话（sqlSession）
+        调用User.xml映射文件中的sql-->
+        <!--<bean id="UserDao" class="com.fgh.Mybatis.UserMapperImpl">-->
+                <!--<constructor-arg ref="sqlSessionFactory" />-->
+        <!--</bean>-->
+</beans>
+
+
+

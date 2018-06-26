@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.elements.user.model.UserDao">
+
+    <resultMap  id="StudentResult" type="com.elements.user.model.User" >
+        <id property="id" column="Id"/>
+        <result property="name" column="Name"/>
+        <result property="qq" column="Qq"/>
+        <result property="enrolment_time" column="Enrolment time"/>
+        <result property="learning_type" column="Learning type"/>
+        <result property="number" column="Number"/>
+        <result property="desire" column="Desire"/>
+        <result property="create_at" column="create_at"/>
+        <result property="update_at" column="update_at"/>
+    </resultMap>
+    <select id="getUserById" parameterType="int" resultMap="StudentResult">
+       select *
+        from `registration form`
+        where Id = #{id}
+    </select>
+    <select id="getUserByName" parameterType="com.elements.user.model.User" resultMap="StudentResult">
+        select *
+        from `registration form`
+        where Name = #{name} AND Number = #{number}
+    </select>
+
+
+    <insert id="addUser" parameterType="com.elements.user.model.User">
+        INSERT INTO `registration form`
+        (Id,`Name`,Qq,`Enrolment time`,`Learning type`,Number,
+        Desire,create_at,update_at)VALUES(#{id},#{name},#{qq},#{enrolment_time}
+        ,#{learning_type},#{number},#{desire},#{create_at},#{update_at})
+    </insert>
+    <update id="updataUser" parameterType="com.elements.user.model.User">
+        UPDATE `registration form`
+        <trim prefix="set">
+            <if test="name != null">
+                Name = #{name}
+            </if>
+            <if test="qq != null">
+                ,Qq = #{qq}
+            </if>
+        </trim>
+        WHERE id = #{id}
+        </update>
+<delete id="deleteUser" parameterType="int">
+DELETE FROM `registration form`WHERE id = #{id}
+</delete>
+
+        </mapper>

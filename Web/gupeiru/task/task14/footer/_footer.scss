@@ -1,0 +1,81 @@
+footer {
+    //页脚背景和字体颜色
+    background: $green-26;
+    color: $white;
+    a {
+        // 链接样式设置
+        display: inline-block;
+        margin-top: .15rem;
+        margin-right: .05rem;
+        font-size: .13rem;
+        word-spacing: .06rem;
+        line-height: .2rem;
+        color: $white;
+        border-bottom: 1px solid transparent;
+        &:hover {
+            border-bottom: 1px solid $white;
+        }
+        @media (max-width: 768px) {
+            margin-top: .05rem;
+        }
+    }
+    aside {
+        // 联系我们和旗下产品
+        padding-top: .18rem;
+        padding-bottom: .1rem;
+        .link-title {
+            @media (max-width: 500px) {
+                font-size: .13rem;
+            }
+        }
+        .contact {
+            // 联系我们
+            a {
+                margin-top: .5rem;
+                @media (max-width: 768px) {
+                    margin: .1rem 0;
+                }
+            }
+            .line::after {
+                content: "";
+                display: inline-block;
+                height: .13rem;
+                width: .01rem;
+                margin-left: .1rem;
+                vertical-align: text-bottom;
+                background: $white;
+            }
+        }
+        .code {
+            // 二维码
+            text-align: right;
+            span {
+                display: block;
+                margin-right: .1rem;
+                font-size: .12rem;
+            }
+            .qr-code {
+                @include sprite(.92rem, .92rem, -3.95rem);
+                transform: scale(.9);
+            }
+            @media (max-width: 768px) {
+                text-align: left;
+                span {
+                    padding-left: .1rem;
+                }
+            }
+        }
+    }
+    .copyright {
+        // 版权
+        display: block;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #32c086;
+        @media (max-width: 500px) {
+            span {
+                display: block;
+            }
+        }
+    }
+}
