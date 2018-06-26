@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/js3-3.css">
+<link rel="stylesheet" href="css/js3-4.css">
+<script type="text/javascript" src="js/jquery.min.js">  </script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script src="js/angular/angular.min.js"></script>
+<!-- <script src="js/bootbox/bootbox.js"></script> -->
+<!-- <script src="js/angular-animate/angular-animate.js"></script> -->
+<!-- <script src="js/angular-sanitize/angular-sanitize.js"></script> -->
+
+<script src="js/angular-file-upload/file-upload.js"></script>
+<script src="js/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="js/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+<script src="js/angular-locale_zh-cn.js"></script>
+<!-- <script src="js/ng-myPagination.js"></script> -->
+  <script type="text/javascript" src="js/js3-2.js"></script>
+<script type="text/javascript" src="js/wangEditor.js"></script>
+<script src="js/bootbox/bootbox.min.js"></script>
+  <title>后台管理</title>
+</head>
+<body  ng-controller="nav-list">
+  <div class="header row">
+    <div class="col-md-3 title-left "><p ng-click="return()">萝卜多后台管理系统</p></div>
+    <div class="col-md-9 title-right">
+      <ul>
+        <li><a href="">猎头</a></li>|
+        <li><a href="">user</a></li>|
+        <li><img src="images/js3-2-1.png" alt=""></li>
+      </ul>
+    </div>
+  </div>
+  <div class="content row "  >
+    <div class="col-md-3 content-left" >
+      <ul >
+        <li>
+          <img class="img-1" src="images/js3-2-2.png" alt="">
+          信息管理
+        <img class="img-2" src="images/js3-2-3.png" alt="">
+        </li>
+        <li ng-click="toggle()" >
+          <img class="img-1" src="images/js3-2-2.png"  alt="">
+          Article管理
+        <img class="img-2 father" src="images/js3-2-3.png" ng-class="{show:listToggle==true}" alt="">
+        </li>
+        <div  ui-sref="list"  ng-show="listToggle" ng-class="{grey:listToggle==true}" >
+        Article列表
+      </div>
+        <li>
+          <img class="img-1" src="images/js3-2-2.png" alt="">
+          人才管理
+        <img class="img-2" src="images/js3-2-3.png" alt="">
+        </li>
+        <li>
+          <img class="img-1" src="images/js3-2-2.png" alt="">
+          推荐管理
+        <img class="img-2" src="images/js3-2-3.png" alt="">
+        </li>
+        <li>
+          <img class="img-1" src="images/js3-2-2.png" alt="">
+          信息管理
+        <img class="img-2" src="images/js3-2-3.png" alt="">
+        </li>
+        <li>
+          <img class="img-1" src="images/js3-2-2.png" alt="">
+          后台管理
+        <img class="img-2" src="images/js3-2-3.png" alt="">
+        </li>
+        <li>
+          <img class="img-1" src="images/js3-2-2.png" alt="">
+          用户管理
+        <img class="img-2" src="images/js3-2-3.png" alt="">
+        </li>
+        <li>
+          <img class="img-1" src="images/js3-2-2.png" alt="">
+          内容管理
+        <img class="img-2" src="images/js3-2-3.png" alt="">
+      </li>
+      </ul>
+    </div>
+    <div class=" content-right"  ui-view>
+      <p>Welcome!</p>
+    </div>
+  </div>
+<!--
+<div ng-app="">
+ 	<p>名字 : <input type="text" ng-model="name"></p>
+ 	<h1>Hello {{name}}</h1>
+</div> -->
+
+
+</body>
+</html>

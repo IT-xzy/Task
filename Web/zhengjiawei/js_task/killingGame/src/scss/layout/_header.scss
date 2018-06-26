@@ -1,0 +1,49 @@
+@import '../components/variables';
+header {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    height: 40px;
+    background: $header-blue;
+    border-bottom: 1px solid $white;
+    .close-box {
+        display: flex;
+        align-items: center;
+        height: 30px;
+    }
+    .back {
+        width: 20px;
+        height: 20px;
+        border-top: 3px solid $white;
+        border-right: 3px solid $white;
+        transform: rotate(-135deg);
+    }
+    .header-title {
+        font-size: .2rem;
+        font-weight: 300;
+        color: $white;
+    }
+    @mixin close-icon {
+        width: 30px;
+        height: 2px;
+        background: $white;
+        font-size: 0;
+        vertical-align: middle;
+    }
+    .header-close {
+        @include close-icon();
+        -webkit-transform: rotate(45deg);
+        &:after {
+            content: "";
+            display: inline-block;
+            @include close-icon();
+            -webkit-transform: rotate(-90deg);
+        }
+    }
+}

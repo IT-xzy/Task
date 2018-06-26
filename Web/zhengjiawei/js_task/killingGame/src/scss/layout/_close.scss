@@ -1,0 +1,42 @@
+.popup {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(000, 000, 000, .5);
+    /* 弹窗定位拉伸 */
+    @mixin bg-border {
+        background: #fff;
+        border-radius: 10px;
+    }
+    div {
+        @include bg-border();
+        border: 1px solid #f0f0f0;
+        box-shadow: 1px 1px 1px #f0f0f0;
+        /* 弹窗 */
+        span {
+            @include bg-border();
+            padding: 25px 40px;
+            display: block;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        /* 请输入正确的人数 */
+        button {
+            @include bg-border();
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 40px;
+            border: none;
+            border-bottom: 1px solid #f0f0f0;
+            outline: none;
+            cursor: pointer;
+        }
+        /* 点击确定、点击取消 */
+    }
+}
