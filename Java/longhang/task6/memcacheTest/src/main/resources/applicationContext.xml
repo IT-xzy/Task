@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.longhang" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/testdd?useUnicode=true&amp;characterEncoding=utf8" />
+        <property name="username" value="root" />
+        <property name="password" value="123456" />
+        <!-- 可同时连接的最大的连接数 -->
+        <property name="maxActive" value="20" />
+        <!-- 最大的空闲的连接数 -->
+        <property name="maxIdle" value="60" />
+        <!-- 最小的空闲的连接数，低于这个数量会被创建新的连接，默认为0 -->
+        <property name="minIdle" value="5" />
+        <!-- 连接池启动时创建的初始化连接数量，默认值为0 -->
+        <property name="initialSize" value="1" />
+        <!-- 等待连接超时时间，毫秒，默认为无限 -->
+        <property name="maxWait" value="30000" />
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.longhang.stuDao" />
+    </bean>
+
+    <!--<缓存>-->
+    <bean name="server1" class="java.net.InetSocketAddress">
+        <constructor-arg><value>localhost</value></constructor-arg>
+        <constructor-arg><value>11211</value></constructor-arg>
+    </bean>
+    <!--定义XMemcachedClientBuilder实例-->
+    <bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+        <constructor-arg name="addressList" value="localhost:11211">
+        </constructor-arg>
+        <!--连接超时-->
+        <property name="connectTimeout"><value>3000</value></property>
+        <!--SASL验证开启 ,如果没有相关环境,请关闭 start-->
+        <property name="authInfoMap"><map> <entry key-ref="server1">
+            <bean class="net.rubyeye.xmemcached.auth.AuthInfo" factory-method="plain">
+            <constructor-arg name="username"><value>xxx</value></constructor-arg>
+            <constructor-arg name="password"><value>123</value></constructor-arg>
+             </bean></entry></map></property>
+        <!--SASL验证开启 end--> <!--设置线程池-->
+        <property name="connectionPoolSize" value="2"></property>
+        <!--使用二进制协议-->
+        <property name="commandFactory">
+        <bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory"></bean></property>
+        <!--设置序列化方式-->
+        <property name="transcoder">
+        <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"></bean></property>
+        <!--设置一致性哈希--> <property name="sessionLocator">
+        <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"></bean> </property></bean>
+    <!--定义memcachedClient，通过memcachedClientBuilder的build方法-->
+    <bean name="memcachedClient" factory-bean="memcachedClientBuilder" factory-method="build" destroy-method="shutdown">
+    </bean>
+
+</beans>

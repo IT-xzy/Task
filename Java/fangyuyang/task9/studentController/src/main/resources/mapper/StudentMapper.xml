@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.student.dao.StudentDao">
+  <resultMap id="BaseResultMap" type="com.student.model.Student">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+    <result column="entry_time" jdbcType="BIGINT" property="entryTime" />
+    <result column="come_from" jdbcType="VARCHAR" property="comeFrom" />
+    <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+    <result column="e_mail" jdbcType="VARCHAR" property="email" />
+    <result column="head_portrait" jdbcType="VARCHAR" property="headPortrait" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="intro" jdbcType="VARCHAR" property="intro" />
+    <result column="activated" jdbcType="INTEGER" property="activated" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_at, update_at, name, sex, qq, major, entry_time, come_from,cellphone,e_mail,head_portrait,salt,password,intro,activated
+  </sql>
+
+  <!--<select id="getEmailByCellphone"-->
+  <select id="randomSelectStudent" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM student_list1 ORDER BY RAND() LIMIT 4;
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student_list1
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <select id="getAll"  resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM student_list1
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student_list1
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectIdByName" parameterType="java.lang.String" resultType="java.lang.Long">
+    select
+    id
+    from student_list1
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student_list1
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.student.model.Student">
+    insert into student_list1 (id, create_at, update_at,
+    name, sex, qq, major,
+    entry_time, come_from,cellphone,e_mail,head_portrait,salt,password,intro,activated)
+    values (#{id,jdbcType=BIGINT}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT},
+    #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR},
+    #{entryTime,jdbcType=BIGINT}, #{comeFrom,jdbcType=VARCHAR},#{cellphone,jdbcType=VARCHAR},#{email,jdbcType=VARCHAR},#{headPortrait,jdbcType=VARCHAR},
+    #{salt,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{intro,jdbcType=VARCHAR},#{activated,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.student.model.Student">
+    insert into student_list1
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+      <if test="entryTime != null">
+        entry_time,
+      </if>
+      <if test="comeFrom != null">
+        come_from,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        #{entryTime,jdbcType=BIGINT},
+      </if>
+      <if test="comeFrom != null">
+        #{comeFrom,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.student.model.Student" >
+    update student_list1
+    <set>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        major = #{major,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        entry_time = #{entryTime,jdbcType=BIGINT},
+      </if>
+      <if test="comeFrom != null">
+        come_from = #{comeFrom,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.student.model.Student" >
+    update student_list1
+    set create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      major = #{major,jdbcType=VARCHAR},
+      entry_time = #{entryTime,jdbcType=BIGINT},
+      come_from = #{comeFrom,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      e_mail = #{email,jdbcType=VARCHAR},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      salt=#{salt,jdbcType=VARCHAR},
+      password=#{password,jdbcType=VARCHAR},
+      intro=#{intro,jdbcType=VARCHAR},
+      activated=#{activated,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

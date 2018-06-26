@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longhang.stuDao.StuDao">
+    <insert id="insert" parameterType="com.longhang.model.Student">
+      insert into student (id,name,qq,wish,major,create_at,update_at,picture,goodwork,graduation,goodstu,email,phone) values(#{id} , #{name} , #{qq} , #{wish},#{major},#{create_at},#{update_at},#{picture},#{goodwork},#{graduation},#{goodstu},#{email},#{phone})
+        </insert>
+    <update id="update" parameterType="com.longhang.model.Student">
+       update student set name=#{name},qq=#{qq},wish=#{wish},major=#{major},update_at=#{update_at},picture=#{picture},goodwork=#{goodwork},graduation=#{graduation},goodstu=#{goodstu} ,email=#{email},phone=#{phone} where id=#{id}
+       </update>
+    <delete id="delete" parameterType="Long">
+         delete from student where id=#{id}
+        </delete>
+    <select id="select" parameterType="Long" resultType="com.longhang.model.Student">
+          select * from student where id=#{id}
+         </select>
+    <select id="getAll" resultType="com.longhang.model.Student">
+          select * from student
+         </select>
+    <select id="getAllExcellent" resultType="com.longhang.model.Student">
+          select * from student where goodstu=true
+         </select>
+    <select id="getCount" resultType="int">
+          select count(*) from student
+         </select>
+    <select id="getCountG" resultType="int">
+          select count(*) from student where goodwork=true
+         </select>
+    <select id="getMajor" resultType="int"  parameterType="String">
+          select count(*) from student <where>graduation=false and major like #{major}</where>
+                  </select>
+    <update id="updatePicture" >
+        update student set picture=#{picture} where name=#{name}
+    </update>
+    <select id="getPicture" resultType="String">
+         select picture from student
+         </select>
+</mapper>

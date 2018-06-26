@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.*"/>
+
+    <!--<import resource="spring-memcached.xml"/>-->
+
+    <context:property-placeholder location="classpath:/jdbc.properties"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+        <property name="maxPoolSize" value="30"/>
+        <property name="minPoolSize" value="10"/>
+        <property name="autoCommitOnClose" value="false"/>
+        <property name="checkoutTimeout" value="10000"/>
+        <property name="acquireIncrement" value="2"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.ptteng.entity"/>
+        <property name="mapperLocations" value="classpath:/mapper/*.xml"/>
+    </bean>
+
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ptteng.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- redis config start -->
+    <!-- 配置JedisPoolConfig实例 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="300"/>
+        <property name="maxTotal" value="600"/>
+        <property name="maxWaitMillis" value="1000"/>
+        <property name="testOnBorrow" value="true"/>
+    </bean>
+    <!-- 配置JedisConnectionFactory -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="··" p:port="6379" p:password="root" p:pool-config-ref="poolConfig"/>
+
+
+    <!-- 配置RedisTemplate -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+
+    <!-- 配置RedisCacheManager -->
+    <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+        <constructor-arg name="redisOperations" ref="redisTemplate"/>
+        <property name="defaultExpiration" value="3000"/>
+    </bean>
+
+    <!-- 配置RedisCacheConfig -->
+    <bean id="redisCacheConfig" class="com.ptteng.utils.redisCache.RedisCacheConfig">
+        <constructor-arg ref="jedisConnectionFactory"/>
+        <constructor-arg ref="redisTemplate"/>
+        <constructor-arg ref="redisCacheManager"/>
+    </bean>
+    <!-- redis config end -->
+
+
+
+    <!--阿里云邮件-->
+    <bean id="receiveDemo" class="com.ptteng.utils.aliyunAPI.ReceiveDemo">
+        <property name="endpoint" value="cn-hangzhou"/>
+        <property name="accessKeyId" value="··"/>
+        <property name="accessKeySecret" value="··"/>
+    </bean>
+
+    <!--阿里云信息-->
+    <bean id="SMSSend" class="com.ptteng.utils.aliyunAPI.SMSSend">
+        <property name="accessKeyId" value="··"/>
+        <property name="accessKeySecret" value="··"/>
+        <property name="connectTimeout" value="10000"/>
+        <property name="readTimeout" value="10000"/>
+    </bean>
+<!--七牛云图片上传-->
+    <bean id="qiniuyunImage" class="com.ptteng.utils.qiniuyunAPI.QiNiuYunImage">
+        <constructor-arg index="0" value="··"/>
+        <constructor-arg index="1" value="··"/>
+        <constructor-arg index="2" value="··"/>
+    </bean>
+<!--阿里云文件-->
+    <bean id="helloOSS" class="com.ptteng.utils.aliyunAPI.HelloOSS">
+        <constructor-arg index="0" value="http://oss-cn-shenzhen.aliyuncs.com"/>
+        <constructor-arg index="1" value="··"/>
+        <constructor-arg index="2" value="··"/>
+        <constructor-arg index="3" value="··"/>
+    </bean>
+
+    <bean id="context" class="com.ptteng.utils.strategy.concreteStrategy.Context">
+        <constructor-arg  ref="QiNiuConfig"/>
+    </bean>
+    <bean name="ALiConfig" class="com.ptteng.utils.strategy.concreteStrategy.ALiConfig"/>
+    <bean name="QiNiuConfig" class="com.ptteng.utils.strategy.concreteStrategy.QiNiuConfig"/>
+</beans>

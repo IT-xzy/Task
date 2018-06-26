@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--扫描controller层-->
+    <context:component-scan base-package="com.task2.controller"></context:component-scan>
+
+    <!-- Spring MVC不处理静态资源 -->
+
+    <mvc:default-servlet-handler/>
+
+    <!-- 静态资源解析，包括js,css,img... -->
+
+
+
+    <!--<mvc:resources location="/img" mapping="/img/**"></mvc:resources>-->
+
+    <!-- 一个配置解决映射器和适配器的配置注解配置 -->
+    <mvc:annotation-driven enable-matrix-variables="true"></mvc:annotation-driven>
+
+    <!--对模型视图添加前后缀-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+    >
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+
+        <!--p:prefix="WEB-INF/pages/" p:suffix=".jsp"-->
+
+    </bean>
+
+</beans>
