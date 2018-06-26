@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!--
+  - This is the Cocoon web-app configurations file
+  -
+  - $Id$
+  -->
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <!-- 防止中文乱码 最好放在最上面 防止没拦截到 -->
+    <filter>
+        <filter-name>CharacterEncoding</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- SpringMvc前端控制器，rest配置 -->
+    <servlet>
+        <servlet-name>springmvc_rest</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/spring/spring-mvc.xml</param-value>
+        </init-param>
+        <!-- 加载顺序为1 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springmvc_rest</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- SpringMvc前端控制器，rest配置 -->
+
+    <!-- log4j配置，文件路径，因为是跟随项目启动 -->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>WEB-INF/config/log/log4j.xml</param-value>
+    </context-param>
+    <!-- 配置log4j.xml变量，如果需要动态的就使用下面方式，使用方法${name} -->
+    <context-param>
+        <param-name>controller</param-name>
+        <param-value>controller-log</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>loggingLevel</param-name>
+        <param-value>info</param-value>
+    </context-param>
+    <!-- 加载log4j配置文件 -->
+    <listener>
+        <!-- 在Spring 4.2.1中已经将其标记为过时了.如果使用spring4.2.1以上的版本又会造成不兼容
+Log4jConfigListener必须要在Spring的Listener之前。 -->
+        <listener-class>org.springframework.web.util.Log4jConfigListener
+        </listener-class>
+    </listener>
+
+    <!-- 加载 spring 容器-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/config/spring/applicationContext-*.xml
+        </param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!-- springMVC前端控制器 -->
+    <servlet>
+        <!--  定义servlet的名字-->
+        <servlet-name>springMybaits</servlet-name>
+        <!--    servlet类型   -->
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <!-- init-param是配置Servlet的初始化参数。比如你的servlet里面有个属性为int total=0，默认是0，你想让他初始 -->
+        <init-param>
+            <!-- contextConfigLocation配置springmvc加载的配置文件(配置处理器映射器，适配器等)如果不配置contextConfigLoaction，默认加载的是/WEB-INF/servlet名称-servlet.xml(springmvc-servlet.xml)-->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/config/spring/spring-mvc.xml</param-value>
+        </init-param>
+    </servlet>
+
+    <!-- 端拦截器控制器 -->
+    <servlet-mapping>
+        <servlet-name>springMybaits</servlet-name>
+        <!-- 该servlet名为mvc-dispatcher（名称可修改），用于拦截请求（url-pattern为 / ，说明拦截所有请求），
+             并交由Spring MVC的后台的 处理器映射器 来根据请求的url来处理这一个请求。这一项配置是必须的。 -->
+        <!-- 第一种:*.action。访问以.action结尾由DispatcherServlet进行解析；
+         第二种:/，所有访问的地址都由DispatcherServlet进行解析，对于静态文件的解析，
+         我们要配置不让DispatcherServlet进行解析。使用此种方法可以实现RESTful风格的url；
+         第三种:/*，这样配置不对，使用这种配置，最终要转发到一个jsp页面时，仍然会由
+         DispatcherServlet进行解析jsp地址，它不能根据jsp页面找到Handler，会报错-->
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
+
+    <!-- 解析 DELETE 和 PUT 请求,前端借助_method属性 -->
+    <filter>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter
+        </filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- jsp自定义tags, 前端jsp时间格式转换 -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/datetag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+    <!-- 配置默认页面 -->
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/jsp/login.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
+
+
