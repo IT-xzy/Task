@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?><!--声明xml的版本和使用的编码表-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="db.properties"/><!--加载db.properties文件,获得与数据库连接的信息-->
+
+    <environments default="development">
+        <environment id="development">
+            <!--使用jdbc事务管理-->
+            <transactionManager type="JDBC" />
+            <!--数据库连接池-->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--通过resource引用mapper映射文件-->
+    <mappers>
+        <mapper resource="StudentMapper.xml"/>
+    </mappers>
+
+</configuration>
