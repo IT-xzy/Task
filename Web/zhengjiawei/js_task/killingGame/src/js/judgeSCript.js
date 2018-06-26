@@ -68,7 +68,7 @@ $(function () {
                     default:
                         alert("请点击下一天的操作");
                 }
-            },
+            }
         }
     }) /* 创建一个状态机 */
 
@@ -90,10 +90,10 @@ $(function () {
         window.location.href = "judgeDiary.html";
     }) /* 返回法官日记 */
 
-    $('.header-close').click(function () {
-        sessionStorage.clear();
-        window.location.href = "playerRatio.html";
-    }) /* 点击关闭按钮 */
+    // $('.header-close').click(function () {
+    //     sessionStorage.clear();
+    //     window.location.href = "playerRatio.html";
+    // }) /* 点击关闭按钮 */
 
     var step = JSON.parse(sessionStorage.getItem('step')); /* 这个变量是为了判断运行到第几步了 */
     log(step);
