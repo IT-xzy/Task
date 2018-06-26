@@ -1,0 +1,91 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+$blue:#5fc0cd;
+$white:#ffffff;
+$gray:#eff0f4;
+$height:29px;
+$left-right:2%;
+* {
+  outline: none;
+}
+html {
+  background-color: $gray;
+}
+body {
+  padding-bottom: $height*2;
+}
+.header {
+  position: fixed;
+  width: 100%;
+  height: $height*2;
+  padding-top: 23px;
+  background-color: $blue;
+  input {
+    font-size: $height;
+    color: $white;
+    background-color: $blue;
+    border: 0;
+    padding: 0;
+  }
+  .login {
+    position: absolute;
+    top: 23px;
+    left: calc(50% - 29px);
+  }
+  .left {
+    float: left;
+    margin-left: $left-right;
+  }
+  .right {
+    float: right;
+    margin-right: $left-right;
+  }
+}
+
+.content {
+  padding-top: 80px;
+  .phone {
+    display: flex;
+    align-items: center;
+    height: $height*2.5;
+    background-color: $white;
+    margin-top: 20px;
+    img {
+      padding-left: $height;
+      padding-right: $height;
+      border-right: $gray solid 1px;
+    }
+    form {
+      width: 100%;
+      input {
+        width: calc(100% - 29px);
+        height: $height;
+        padding-left: $height;
+        font-size: 20px;
+        border: 0;
+      }
+    }
+  }
+  .password {
+    @extend .phone;
+    margin-bottom: 70px;
+  }
+}
+
+.footer {
+  @extend .header;
+  .mid {
+    display: block;
+    margin: 0 auto;
+  }
+  .right {
+    position: relative;
+    top: 30px;
+    color: $blue;
+    background-color: transparent;
+  }
+}

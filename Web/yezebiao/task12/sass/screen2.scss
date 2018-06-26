@@ -1,0 +1,205 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+$blue: #5fc0cd;
+$white: #ffffff;
+$gray: #b6b6b6;
+$red: #e26163;
+$height: 100px;
+$font: 28px;
+
+@mixin mid {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+@mixin overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@mixin head {
+  position: relative;
+  height: $height - 30;
+  width: 30%;
+  font-size: $font + 6;
+  border-radius: 10px;
+}
+@mixin  select {
+  text-indent: calc(50% - 30px);
+  top: 88px;
+  height: $height - 20;
+  width: 33.33%;
+  font-size: $font - 2;
+  color: $gray;
+  border: 0;
+  border-right: #e1e5e7 solid 1px;
+  border-bottom: #e1e5e7 solid 1px;
+}
+
+* {
+  outline: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+input {
+  background-color: transparent;
+  border: 0;
+}
+
+.head {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  .header {
+    @include mid;
+    height: $height - 12;
+    background: {
+      color: $blue;
+    }
+    .btn-boss {
+      @include head;
+      left: 10px;
+      color: $white;
+      background-color: #55a8b3;
+    }
+    .btn-nurse {
+      @include head;
+      right: 10px;
+      color: #55a8b3;
+      background-color: $white;
+    }
+    .btn-ads {
+      position: absolute;
+      top: 20px;
+      right: 4%;
+      height: 46px;
+      width: 55px;
+      background: url("../img/icon.png") no-repeat -46px -53px;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  padding: {
+    top: 88px;
+    bottom: $height;
+  }
+  .cont-bar {
+    @include mid;
+    height: 80px;
+    select {
+      @include select;
+    }
+    .list-info {
+      border-right: 0;
+    }
+  }
+  .cont-main {
+    .main {
+      border-bottom: #e1e5e7 solid 1px;
+      padding: {
+        left: 6%;
+        right: 6%;
+      }
+      .main-date {
+        @include overflow;
+        margin-top: 35px;
+        background: url("../img/icon.png") no-repeat -63px -117px;
+        padding-left: 40px;
+        width: 30%;
+        height: $font + 2;
+        font-size: $font;
+        color: $gray;
+      }
+      .main-time {
+        @include overflow;
+        display: inline-block;
+        width: 50%;
+        font-size: $font;
+        margin: {
+          top: 25px;
+          bottom: 25px;
+          left: 40px;
+        }
+      }
+      .main-price {
+        background: url("../img/icon.png") no-repeat -91px -179px;
+        float: right;
+        width: 190px;
+        height: 35px;
+        color: $red;
+        font-size: $font + 2;
+        margin: {
+          top: 25px;
+          bottom: 25px;
+        }
+      }
+      .main-ads {
+        @include overflow;
+        background: url("../img/icon.png") no-repeat -50px -445px;
+        padding-left: 40px;
+        margin-bottom: 35px;
+        width: 40%;
+        height: $font;
+        color: $gray;
+        font-size: $font - 2;
+      }
+    }
+  }
+}
+
+.foot {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  .footer {
+    @include mid;
+    height: $height - 1;
+    border-top: 1px;
+    border: #e2eaec solid 1px;
+    background-color: #f8fafb;
+    .home-box {
+      position: relative;
+      margin-right: 20%;
+      height: 80px;
+      width: 44px;
+      text-align: center;
+      input {
+        height: 44px;
+        width: 44px;
+        background: url("../img/icon.png") no-repeat -381px -60px;
+      }
+      span {
+        display: inline-block;
+        margin-top: 15px;
+        color: $blue;
+      }
+    }
+    .btn-write {
+      height: 95px;
+      width: 95px;
+      background: url("../img/icon.png") no-repeat -247px -232px;
+    }
+    .peo-box {
+      @extend .home-box;
+      margin-left: 20%;
+      margin-right: 0;
+      cursor: pointer;
+      input {
+        background: url("../img/icon.png") no-repeat -50px -175px;
+      }
+      span {
+        color: $gray;
+      }
+    }
+  }
+}
