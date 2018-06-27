@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+        version="3.0">
+
+   <!--post防乱码过虑器 -->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <async-supported>true</async-supported>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <!--application-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:application.xml</param-value>
+  </context-param>
+
+  <!--ContextLoaderListener作用就是在启动WEB容器时，自动装配application的配置信息-->
+  <!--在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。-->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+
+
+
+  <servlet>
+    <servlet-name>springmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!---配置springmvc-servlet.xml作为mvc的配置文件 -->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:springmvc-servlet.xml</param-value>
+    </init-param>
+    <!--load-on-startup元素标记容器是否在启动的时候就加载这个servlet-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!--所有请求都会被springmvc拦截,/代表可以应答所有请求,由springDispatcherServlet处理 -->
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+    <!-- jsp自定义tags, 前端jsp时间格式转换 -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/datetag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+  <!--<filter>过滤器-->
+  <!--filter可以认为是servlet的一种加强版，主要用于对用户请求request进行预处理，-->
+  <!--也可以对response进行后处理，是个典型的处理链。使用filter的完整流程是，filter对用户请求进行预处理，-->
+  <!--接着将请求HttpServletRequest交给Servlet处理并生成响应。-->
+  <!--最后Filter再对服务器响应HttpServletResponse进行后处理。-->
+  <!--Servlet与Servlet具有完全相同的生命周期，而Filter也可以通过<init-para>进行初始化参数的配置，-->
+  <!--并通过FilterConfig传送给filter-->
+
+  <!--字符过滤器-->
+  <!--<filter>-->
+    <!--<filter-name>encode</filter-name>-->
+    <!--<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>-->
+    <!--<init-param>-->
+      <!--<param-name>encoding</param-name>-->
+      <!--<param-value>UTF-8</param-value>-->
+    <!--</init-param>-->
+    <!--<init-param>-->
+      <!--<param-name>forceEncoding</param-name>-->
+      <!--<param-value>true</param-value>-->
+    <!--</init-param>-->
+  <!--</filter>-->
+  <!--filter-mapping位于filter元素之后Serlvet元素之前。必须提供filter-name元素和url-pattern元素-->
+  <!--url-pattern 指定过滤器应用的URL。servlet-name  指定过滤器拦截的servlet名称，-->
+  <!--单个filter-mapping只能使用一个servlet-name，可使用多个filter-mapping-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>encode</filter-name>-->
+    <!--<url-pattern>/</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!-- 配置把post请求转化成PUT或DELETE请求 -->
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+</web-app>

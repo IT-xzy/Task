@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="spring.dao.UserDao">
+    <insert id="add" parameterType="spring.demo.User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO game1(age,name,createdate,up) VALUE (#{age},#{name},#{createdate},#{up})
+    </insert>
+
+    <delete id="delete" >
+        DELETE FROM game1 WHERE id=#{id}
+    </delete>
+
+    <update id="update" >
+        UPDATE game1 SET id=#{id},name=#{name},age=#{age},up=#{up} WHERE id=#{id}
+    </update>
+
+    <select id="select" resultType="spring.demo.User">
+        SELECT id,name,age,createdate,up FROM game1 WHERE id=#{id}
+    </select>
+    <select id="selectByName" resultType="spring.demo.User">
+        SELECT id,name,age,createdate,up FROM game1 WHERE name=#{name}
+    </select>
+    <select id="query" resultType="spring.demo.User">
+        SELECT * FROM game1
+    </select>
+</mapper>

@@ -1,0 +1,491 @@
+@charset "UTF-8";
+/**公共部分**/
+body {
+    font-size: 62.5%;
+    margin: 0;
+    background-color: #fafafa !important;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-xs-4,
+.col-xs-6,
+.col-xs-12,
+.col-sm-4,
+.col-sm-8,
+.col-md-3,
+.col-md-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+}
+
+.container:after {
+    display: table;
+    content: " ";
+    clear: both;
+}
+
+/**轮播图**/
+.carousel {
+    position: relative;
+    margin-bottom: 6rem;
+}
+
+.carousel .carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    z-index: 15;
+    width: 60%;
+    padding-left: 0;
+    margin-left: -30%;
+    text-align: center;
+    list-style: none;
+}
+
+.carousel .carousel-indicators li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #000 \9;
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+
+.carousel .carousel-indicators .active {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    background-color: #fff;
+}
+
+.carousel-inner > .item {
+    position: relative;
+    display: none;
+}
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+    .carousel-inner > .item {
+        transition: transform .6s ease-in-out;
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
+}
+
+.carousel-inner > .item.next,
+.carousel-inner > .item.active.right {
+    left: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+}
+
+.carousel-inner > .item.prev,
+.carousel-inner > .item.active.left {
+    left: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+}
+
+.carousel-inner > .item.next.left,
+.carousel-inner > .item.prev.right,
+.carousel-inner > .item.active {
+    left: 0;
+    transform: translate3d(0, 0, 0);
+}
+
+.carousel-inner > .active,
+.carousel-inner > .next,
+.carousel-inner > .prev {
+    display: block;
+}
+
+.carousel-inner > .next,
+.carousel-inner > .prev {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.carousel-inner > .next {
+    left: 100%;
+}
+
+.carousel-inner > .prev {
+    left: -100%;
+}
+
+.carousel-inner > .next.left,
+.carousel-inner > .prev.right {
+    left: 0;
+}
+
+.carousel-inner > .active.left {
+    left: -100%;
+}
+
+.carousel-inner > .active.right {
+    left: 100%;
+}
+
+.carousel-img {
+    width: 100%;
+    max-height: 500px;
+}
+
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 15%;
+    font-size: 30px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0);
+    opacity: .5;
+}
+
+.carousel-control.right {
+    right: 0;
+}
+
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    right: 50%;
+    margin-right: -10px;
+}
+
+
+/**描述信息**/
+
+p {
+    text-align: center;
+}
+
+h4 {
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.line{
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+}
+
+.circle-number {
+    margin-bottom: 4rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+@media screen and (min-width: 768px) {
+    .content {
+        flex-direction: row;
+    }
+}
+
+.line-center{
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    text-align: center;
+}
+
+.home-tag-icon7 {
+    padding-top: 30px;
+    padding-left: 20px;
+    border-left: 1px dashed #bdbdbd;
+}
+
+@media screen and (max-width: 768px) {
+    .home-tag-icon7 {
+        border: none;
+    }
+}
+
+.home-tag-icon {
+    float: left;
+}
+
+.icon5, .icon6 {
+    height: 62px;
+}
+
+.icon7 {
+    margin-bottom: 5px;
+}
+
+.number {
+    font-size: 14px;
+    color: #29b078;
+}
+
+
+/*如何学习*/
+
+.return-to-zero {
+    position: relative;
+    min-height: 1px;
+    float: left;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.icon-word3 {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 3rem;
+}
+
+.icon-skill {
+    width: 16rem;
+    height: 50px;
+    font-size: 12px;
+    margin-top: 15px;
+    color: #999999;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 1px 1px 1px #e6e5e6;
+    color: #29b078;
+    background-color: #ffffff;
+}
+
+.study-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .study-box {
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+.icon8-pic {
+    margin-top: 10px;
+    border: 1px solid #fafafa;
+}
+
+.h-word {
+    margin-top: 15px;
+}
+
+/*优秀学院展示-轮播*/
+
+.student-icon {
+    padding: 30px;
+    margin: 1rem 1rem;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px 1px #e6e5e6;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+}
+
+.student-box {
+    margin: 2rem 0;
+}
+
+.icon9,
+.icon10,
+.icon11,
+.icon12 {
+    margin-bottom: 15px;
+}
+
+.carousel-indicators .active {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+    background-color: #29b078;
+}
+
+.carousel-indicators2 {
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    z-index: 15;
+    width: 60%;
+    padding-left: 0;
+    margin-left: -30%;
+    text-align: center;
+    list-style: none;
+}
+
+@media screen and (min-width: 768px) {
+    .carousel-indicators {
+        bottom: -10px;
+    }
+}
+
+.dot {
+    box-shadow: 0 1px 1px 1px #888888;
+}
+
+/*战略合作企业*/
+
+.line4 {
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.line8 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+@media screen and (min-width: 768px) {
+    .line8 {
+        flex-direction: row;
+    }
+}
+
+.bottom-img {
+    padding-right: 0;
+    padding-left: 0;
+    margin: 2px 1px;
+    border: 2px solid #ffffff;
+}
+
+.company {
+    margin-bottom: 20px;
+    margin-left: -2px;
+    margin-right: -2px;
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+.bottom-img:hover {
+    border: 2px solid #e2e2e2;
+}
+
+.icon13,
+.icon14,
+.icon15,
+.icon16,
+.icon17 {
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .line8 {
+        width: 90%;
+        margin-left: 5%;
+    }
+}

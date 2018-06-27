@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyq.dao.StudentDao">
+    <insert id="insert" parameterType="com.zyq.domain.Student">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            <!-- 将插入数据的主键返回，返回到student对象中 -->
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into student values (#{id},#{name},#{qq},#{profession},#{university},#{number},
+        #{daily},#{senior},#{from},#{createTime},#{updateTime})
+    </insert>
+
+    <delete id="deleteById" parameterType="com.zyq.domain.Student">
+        delete from student where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.zyq.domain.Student">
+        update student set
+        update_time = #{updateTime}
+        where name = #{name}
+    </update>
+    
+    <resultMap id="studentResultMap" type="com.zyq.domain.Student">
+        <id column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectById" resultMap="studentResultMap">
+        select * from student where id = #{value}
+    </select>
+
+    <select id="selectByNameAndNum" resultMap="studentResultMap">
+        select * from student where NAME =#{0} and number = #{1}
+    </select>
+</mapper>

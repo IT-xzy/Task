@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!-- Definitions for Tiles documentation -->
+<tiles-definitions>
+    <!--定义基础模块-->
+    <definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
+        <!--  定义模板-->
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+        <put-attribute name="main" value="" />
+        <put-attribute name="recommend" value="" />
+        <put-attribute name="profession" value="" />
+    </definition>
+    <!--继承了基础模板布局-->
+    <definition name="main" extends="base.definition" template="/WEB-INF/jsp/layout.jsp">
+        <!--    //放入属性body值-->
+        <put-attribute name="main" value="/WEB-INF/jsp/body.jsp" />
+    </definition>
+
+    <definition name="recommend" extends="base.definition" template="/WEB-INF/jsp/layout.jsp">
+        <!--    //放入属性body值-->
+        <put-attribute name="recommend" value="/WEB-INF/jsp/recommend.jsp" />
+    </definition>
+    <definition name="profession" extends="base.definition" template="/WEB-INF/jsp/layout.jsp">
+        <!--    //放入属性body值-->
+        <put-attribute name="profession" value="/WEB-INF/jsp/profession.jsp" />
+    </definition>
+
+</tiles-definitions>

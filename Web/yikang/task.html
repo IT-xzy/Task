@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务列表</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.min.js"></script>
+
+<body ng-app="demo">
+<div ng-controller="first">
+    {{role.name}}
+</div>
+<div ng-controller="second">
+    {{role.name}}
+</div>
+</body>
+    <script>
+        angular.module("demo",[])
+            .service("demoService",function(){
+                this.actor={
+                    name:"大雄",
+                    sex:"男"
+                };
+                this.actress={
+                    name:"静香",
+                    sex:"女"
+                }
+            })
+            .controller("first",function ($scope,demoService) {
+                $scope.role=demoService.actor;
+                $scope.updatePublic=function () {
+                    demoService.actor={
+                        name:"胖虎",
+                        sex:"男"
+                    };
+                    $scope.role=demoService.actor;
+                }
+            })
+            .controller("second",function ($scope,demoService) {
+                $scope.role=demoService.actress;
+                $scope.update=function () {
+                    $scope.role=demoService.actor;
+                }
+            })
+    </script>
+
+
+
+<!--//第二个例子-->
+<!--<body ng-app="demo">-->
+<!--<div ng-controller="all">-->
+    <!--{{name}}-->
+    <!--<div ng-controller="first">-->
+        <!--{{name}}-->
+    <!--</div>-->
+    <!--<p ng-controller="second">-->
+        <!--{{name}}-->
+    <!--</p>-->
+<!--</div>-->
+<!--</body>-->
+<!--<script>-->
+    <!--angular.module("demo",[])-->
+        <!--.controller('first',function ($scope) {-->
+            <!--$scope.name="胖虎";-->
+        <!--})-->
+        <!--.controller('second',function ($scope) {-->
+            <!--$scope.name="大雄";-->
+        <!--})-->
+        <!--.controller('all',function ($scope) {-->
+            <!--$scope.name="小夫";-->
+        <!--})-->
+<!--</script>-->
+
+
+
+
+
+
+
+
+<!--<body ng-app="demo">-->
+<!--<p ng-controller="second">-->
+    <!--{{name}}-->
+<!--</p>-->
+<!--<div ng-controller="first">-->
+    <!--{{name}}-->
+<!--</div>-->
+
+<!--<script>-->
+    <!--angular.module("demo",[])-->
+        <!--.controller('first',function ($scope) {-->
+            <!--$scope.name="胖虎";-->
+        <!--})-->
+        <!--.controller('second',function ($scope) {-->
+            <!--$scope.name="大雄";-->
+        <!--})-->
+<!--</script>-->
+<!--</body>-->
+
+
+
+
+
+
+
+    <!--第二个例子-->
+
+
+
+
+
+</html>

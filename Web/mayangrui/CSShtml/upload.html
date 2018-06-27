@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-3.3.1.js"></script>
+</head>
+<style>
+    .hide {
+        display: none;
+    }
+    #img1{
+        width:100px;
+    }
+</style>
+<body>
+<form id="myForm">
+    <input type="file" id="pics">
+    <input type="submit" value="上传" id="submit" >
+    <input type="text" value="姓名">
+    <img src="" alt="" id="img1" class="hide">
+</form>
+</body>
+<script>
+    $("#pics").change(function () {
+        var objUrl = getObjectURL(this.files[0]);
+        console.log("objUrl = " + objUrl);
+        console.log();
+        if (objUrl) {
+            $("#img1").attr("src", objUrl);
+            $("#img1").removeClass("hide");
+        }
+    });
+    $('#submit').on('click',function() {
+        var formData = new FormData(document.querySelector('#myForm'));
+        $.ajax({
+            url:'url',
+            data:formData,
+            type: "POST",
+            succuss:function(res){
+                console.log(res);
+                debugger;
+            },
+            fail:function(){
+                console.log(arguments)
+                debugger;
+            },
+            complete:function(){
+                console.log(arguments)
+                debugger;
+            }
+        })
+    })
+
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) { // basic
+            url = window.createObjectURL(file);
+        }
+        else if (window.URL != undefined) {
+            // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        }
+        else if (window.webkitURL != undefined) {
+            // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+</script>
+</html>

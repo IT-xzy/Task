@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method = "close" >
+        <!--数据库的基本信息-->
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1"  />
+        <property name="username" value="root"  />
+        <property name="password" value="123456"  />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"  />
+        <!--初始化、最大、最小连接并发数量-->
+        <property name="initialSize" value="10"/>
+        <property name="minIdle" value="30"/>
+        <property name="maxActive" value="300"/>
+        <!--获得连接池等待超过时间,时间单位都为毫秒-->
+        <property name="maxWait" value="3600000"/>
+        <!--隔多久进行一次检测，关闭空闲连接-->
+        <property name="timeBetweenEvictionRunsMillis" value="6000"/>
+        <!--配置一个连接在池中的最小生存时间-->
+        <property name="minEvictableIdleTimeMillis" value="30000"/>
+        <property name="validationQuery" value="SELECT 'x' FROM dual"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:MybatisConfig.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="studentDAO" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.mojorjoe.web.dao.StudentDAO"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="timeLogger" class="com.mojorjoe.web.aspect.TimeLogger" />
+
+    <!-- 采用自动扫描的方式交给spring管理 -->
+    <context:component-scan base-package="com.mojorjoe.web"/>
+
+</beans>

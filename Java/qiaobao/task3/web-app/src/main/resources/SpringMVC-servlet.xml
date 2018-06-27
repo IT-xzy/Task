@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <mvc:annotation-driven/>
+
+    <context:annotation-config/>
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.majorjoe.web.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--配置视图解析器-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!--异常处理-->
+    <bean class="com.majorjoe.web.exception.StudentExceptionResolver"/>
+
+
+    <!-- 采用自动扫描的方式交给spring管理 -->
+    <context:component-scan base-package="com.mojorjoe.web"/>
+
+    <!-- 启动@aspectj的自动代理支持-->
+    <aop:aspectj-autoproxy />
+
+    <!--AOP Controller访问时间切面-->
+    <aop:config>
+        <aop:pointcut id="ControllerTime" expression="execution(* com.majorjoe.web.controller.StudentController.*(..))"/>
+
+        <!--切面定义，日志功能，advice-->
+        <aop:aspect id="timeLogger" ref="timeLogger">
+            <aop:around pointcut-ref="ControllerTime" method="controllerTime"/>
+        </aop:aspect>
+
+    </aop:config>
+
+    <!--AOP数据库访问时间切面-->
+    <aop:config >
+        <aop:pointcut id="loggerDataAccess" expression="execution(* com.mojorjoe.web.service.ServiceImpl.*(..))"/>
+
+        <!--切面定义，日志功能，advice-->
+        <aop:aspect id="timeLogger" ref="timeLogger">
+            <aop:around pointcut-ref="loggerDataAccess" method="dataAccessTime"/>
+        </aop:aspect>
+
+    </aop:config>
+
+
+</beans>

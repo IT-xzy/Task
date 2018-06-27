@@ -1,0 +1,549 @@
+body,label,ul,label{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 625%;
+}
+body{
+    font-size: .16rem;
+}
+a{
+    outline: none;
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+/* 顶部按钮 */
+.head{
+    line-height: 40px;
+    height: 40px;
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: #1d7ad9;
+}
+.head span{
+    font-size: .14rem;
+    color: #fff;
+}
+.head-button{
+    float: right;
+}
+.login,.regsiter{
+    width: 55px;
+    text-align: center;
+    color: #fff;
+    border-left: 1px solid #fff;
+    transition: 1s;
+}
+.regsiter{
+    border-right: 1px solid #fff;
+}
+.login:hover,.regsiter:hover{
+    width: 105px;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+}
+input[type="radio"]:checked + .head-button{
+    width: 105px;
+    color: #333;
+    background-color: #fff;
+}
+input[type="radio"] {
+    position: absolute;
+    display: none;
+}
+/* 导航栏 */
+.nav{
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 15%;
+    background-color: #f9f9f9;
+}
+.nav-list{
+    float: right;
+    list-style: none;
+}
+.nav-list li{
+    display: inline-block;
+    margin-left: 30px;
+}
+.nav-list li a:focus,
+.nav-list li a:hover{
+    color: #fff;
+    background-color: #1d7ad9;
+}
+.nav-list li a{
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    line-height: 45px;
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: 8px;
+    color: #333;
+    box-shadow: 0 0 5px 1px #ccc;
+}
+.nav input:checked~.nav-list{
+    display: block;
+}
+.nav input:checked~label svg{
+    transform: rotate(90deg);
+}
+.nav label{
+    display: none;
+}
+.nav .nav-toggle{
+    display: none;
+}
+.main{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+/* 步骤进度条 */
+.step-box{
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+}
+.step-box p{
+    padding-top: 20px;
+}
+.line{
+    height: 3px;
+    width: 10vw;
+    border-radius: 2px;
+    background-color: #cccccc;
+    min-width: 71px;
+}
+.circle{
+    position: relative;
+    top: 13px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    line-height: 22px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #cccccc;
+    text-align: center;
+    z-index: 1;
+}
+/* 选择提示栏 */
+.message{
+    line-height: 40px;
+    font-weight: bold;
+    font-size: .18rem;
+}
+.message span::before{
+    content: "";
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 5px;
+    height: .18rem;
+    width: 3px;
+    border-radius: 2px;
+    background-color: #1d7ad9;
+}
+/* 选择项 */
+.choose{
+    position: relative;
+    padding-left:35px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 0.18rem;
+    font-weight: bold;
+    color: #1d7ad9;
+    background-color: #f3f3f3;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+}
+.choose .word-box::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    width: 15px;
+    height: 13px;
+    background: url(images/box.png) 0/contain no-repeat;
+}
+.choose .word-size::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    width: 15px;
+    height: 13px;
+    background: url(images/size.png) 0/contain no-repeat;
+}
+.choose .word-material::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    width: 15px;
+    height: 13px;
+    background: url(images/scissors.png) 0/contain no-repeat;
+}
+.choose-box{
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fbfcff;
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
+    border-bottom: 1px solid #e8e8e8;
+    z-index: 1;
+}
+.box-one,.box-two,.box-three{
+    display: inline-block;
+    margin-left: 30px;
+}
+.choose-material>div:nth-child(-n+5){
+    display: inline-block;
+    margin-left: 30px;
+}
+.choose-size{
+    position: relative;
+    padding-top: 30px;
+    background-color: #fbfcff;
+    border: 1px solid #e8e8e8;
+    z-index: 1;
+}
+.size-box{
+    display: flex; 
+    padding-bottom: 30px;
+}
+.number-box{
+    margin-left: 30px;
+}
+.number-box label{
+    vertical-align: top;
+}
+.choose-material{
+    position: relative;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #fbfcff;
+    border: 1px solid #e8e8e8;
+    z-index: 1;
+}
+input[type="number"]{
+    padding: 0;
+    height: 22px;
+    width: 60px;
+    outline: none;
+    border: none;
+    border: 1px solid #ccc;
+}
+.size-one,.size-two{
+    margin-left: 30px;
+}
+label{
+    font-weight: normal;
+    cursor: pointer;
+}
+input[type="radio"] + .choice::before {
+    content: "";
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-right: 12px;
+    vertical-align: text-top;
+    border-radius: 50%;
+    border: 1px solid #d6d6d6;
+    background-color: #f8f9fb;
+}
+input[type="radio"]:checked + .choice::before {
+    background: url(images/circle.png) 0/contain no-repeat;
+    border: none;
+}
+/* 下拉选框 */
+.select-box{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%); 
+    background: #fff;
+}
+.cate_drop ul{
+    background-color: #fff;
+}
+.cate_drop ul li:hover{
+    background-color: #1d7ad9;
+    color: #fff;
+}
+#cate,#bate,#date {
+	height: 32px;
+    line-height: 32px;
+    text-indent: 10px;
+}
+ .cate_wrp {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+ .cate_inp {
+    float: left;
+    height: 32px;
+    line-height: 32px;
+    width: 120px;
+    color: #ccc;
+	border: 1px solid #e8e8e8;
+}
+ a.cate_tri:link,a.cate_tri:visited {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+	width:20px;
+	height:22px;
+	background: #1d7ad9 ;
+}
+ .cate_wrp a::before{
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.cate_drop {
+	background:#E2E2E2;
+    border-radius: 2px;
+    box-shadow: 0 0 8px #ccc;
+}
+ .cate_drop li:hover {
+    cursor: pointer;
+}
+.next-box{
+    padding-top: 120px;
+    padding-bottom: 70px;
+    margin-bottom: 50px;
+    border: 1px solid #e8e8e8;
+    border-top: none;
+}
+.next{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 170px;
+    height: 45px;
+    color: #fff;
+    font-size: .18rem;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background-color: #e15053;
+}
+/* 联系链接 */
+.contact-box{
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: #999;
+    background-color: #f9f9f9;
+}
+.link{
+    margin-right: -30px;
+}
+.link a{
+    margin-right: 30px;
+    font-size: .13rem;
+    text-decoration: none;
+    color: #999;
+}
+.link a:hover{
+    color: #1d7ad9;
+}
+.contact p{
+    display: inline-block;
+    font-size: .13rem;
+    line-height: 30px;
+    vertical-align: middle;
+}
+/* 底部 */
+.foot{
+    line-height: 16px;
+    text-align: center;
+    padding-left: 15%;
+    padding-right: 15%;
+    background-color: #1d7ad9;
+}
+.foot span{
+    font-size: .12rem;
+    color: #fff;
+}
+.foot span:first-child{
+    margin-right: 10px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: textfield;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+/* 1230px以下选择材质按钮竖向排列 */
+@media screen and (max-width: 1230px){
+    .choose-material>div:nth-child(-n+5){
+        display: block;
+        margin-left: 30px;
+        margin-bottom: 5px;
+    }
+    .material-five + .select-box{
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        transform: translateY(0); 
+        background: #fff;
+    }
+}
+/* 1100px以下联系链接两列布局 */
+@media screen and (max-width: 1100px){
+    .contact-box{
+        display: block;
+    }
+    .number-box{
+        margin-left: 10px;
+    }
+    .contact{
+        float: right;
+        margin-top: -80px;
+    }
+    .link{
+        margin-bottom: 5px;
+    }
+}
+/* 880px以下确定尺寸按钮竖向排列 */
+@media screen and (max-width: 880px){
+    .size-box{
+        display: block; 
+    }
+    .text-box{
+        margin-top: 5px;
+    }
+    .size-box + .select-box{
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        transform: translateY(0);  
+        background: #fff;
+    }
+    .next-box{
+        padding-top: 50px;
+        padding-bottom: 30px;
+        border: 1px solid #e8e8e8;
+        border-top: none;
+    }
+    .foot span:nth-child(1){
+        display: block;
+    }
+    .number-box{
+        margin-left: 30px;
+    }
+}
+/* 767px以下字体缩小 */
+@media screen and (max-width: 767px){
+	html{
+        font-size: 545%;
+    }
+    .head,.nav,.main,.contact-box,.foot{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .contact-box{
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+    .number-box{
+        margin: 5px 30px;
+    }
+ }
+/* 620px以下选择箱型按钮竖向排列 */
+@media screen and (max-width: 620px){
+    .choose-box div{
+        display: block;
+    }
+    label{
+        font-size: .16rem;
+    }
+    .select-box{
+        position: absolute;
+        top: 30px;
+        right: 10px;
+        transform: translateY(0);  
+        background: #fff;
+    } 
+}
+/* 510px以下导航变按钮折叠导航栏 */
+@media screen and (max-width: 510px){
+    .head span{
+        font-size: .13rem;
+    }
+    input[type="radio"]:checked + .head-button{
+        width: 55px;
+    }
+    .login:hover,.regsiter:hover{
+        width: 55px;
+    }
+    .nav{
+        padding-top: 9px;
+        padding-bottom: 6px;
+    }
+    .nav-list{
+        display: none;
+        width: 100%;
+    }
+    .nav label{
+        display: block;
+    }
+    .nav-list li{
+        display: block;
+        margin-left: 0;
+        margin: 8px;
+        text-align: center;
+    }
+    .nav-list li a{
+        height: 32px;
+        width: 100%;
+        line-height: 32px;
+        font-size: .16rem;
+    }
+    .step-box{
+        font-size: .15rem;
+    }
+    .message span{
+        font-size: .16rem;
+    }
+    .contact{
+        float: left;;
+        margin-top: 0;
+    } 
+    .message span::before{
+        vertical-align: -3px;
+    }
+    .foot span:nth-child(-n+2){
+        display: block;
+    }
+    .cate_inp{
+        height: 28px;
+        width: 100px;
+        line-height: 28px;
+    }
+}

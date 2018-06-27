@@ -1,0 +1,201 @@
+@charset "UTF-8";
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input,
+button {
+  padding: 0;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: .5rem;
+  color: #fff;
+  background-color: #74d4eb;
+  z-index: 1;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input {
+  border: none;
+  background: none;
+  outline: none;
+}
+
+@media (max-width: 500px) {
+  body {
+    font-size: .14rem;
+  }
+}
+
+/* 顶部按钮 */
+header {
+  border-bottom: none;
+}
+
+body {
+  background: #f0f0f0;
+}
+
+#position {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: #74d4eb;
+  z-index: 1;
+}
+#position img {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20vh;
+}
+#position p {
+  margin-top: 65vh;
+  font-weight: bold;
+  color: #fff;
+  font-size: .2rem;
+}
+
+/* 按钮点击使导航栏侧滑显示 */
+.menu {
+  display: none;
+}
+.menu:checked + .container nav {
+  width: 45%;
+}
+.menu:checked + .container main {
+  box-shadow: 0 0 .03rem .02rem #ccc;
+}
+
+.container {
+  display: flex;
+  margin-top: .5rem;
+  /* 导航栏 */
+}
+.container nav {
+  flex-shrink: 0;
+  width: 0;
+  overflow: hidden;
+  background: #fff;
+  transition: width .8s;
+}
+.container nav ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #74d4eb;
+  line-height: .4rem;
+  padding: 0 20px;
+  border-bottom: .01rem solid #ccc;
+  /* 小箭头 */
+}
+.container nav ul li span {
+  display: inline-block;
+  width: .1rem;
+  height: .1rem;
+  border: 1px solid #74d4eb;
+  border-width: .02rem .02rem 0 0;
+  transform: rotate(45deg);
+}
+
+/* 主体按钮 */
+.box {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  padding: .2rem 5% 0;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+.continue {
+  position: relative;
+  color: #9a9a9a;
+  line-height: .5rem;
+  font-size: .17rem;
+  background: #fff;
+  border: 1px solid #c9c9c9;
+}
+.continue a {
+  position: absolute;
+  right: .2rem;
+  top: .17rem;
+  display: inline-block;
+  width: 0.16rem;
+  height: 0.16rem;
+  border-top: 0.03rem solid #ccc;
+  border-right: 0.03rem solid #ccc;
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+
+.main-content {
+  margin-top: .1rem;
+  padding-bottom: .1rem;
+  background: #fff;
+  border: 0.01rem solid #c9c9c9;
+}
+.main-content .next {
+  content: "";
+  position: absolute;
+  right: 5%;
+  top: 50%;
+}
+.main-content .title {
+  display: block;
+  width: 100%;
+  line-height: .45rem;
+  font-size: .17rem;
+  color: #ffc865;
+  border-bottom: 0.01rem solid #ffc865;
+}
+.main-content a {
+  display: block;
+  width: 80%;
+  line-height: .5rem;
+  font-size: .17rem;
+  margin: .15rem auto;
+  color: #fff;
+  background: #74d4eb;
+}
+.main-content .grey-word {
+  line-height: .15rem;
+  color: #838383;
+}
+.main-content .circle-box {
+  height: .2rem;
+}
+.main-content .circle-box i:first-child {
+  background: #74d4eb;
+}
+.main-content .circle-box i {
+  content: "";
+  display: inline-block;
+  height: 0.1rem;
+  width: 0.1rem;
+  background: #f0f0f0;
+  border-radius: 50%;
+}

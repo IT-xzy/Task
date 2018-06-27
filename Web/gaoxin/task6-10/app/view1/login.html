@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="css/login.css">
+<div  ng-controller="loginCtrl" class="fjac" style="height: 100vh">
+    <div class="login fjac" >
+        <form  name="myForm">
+        <span>后台登录</span>
+        <div style="position: relative">
+            <input ng-model="account" type="text" name="account" class="account" placeholder="请输入账号"
+                   ng-blur="accountFocus=true" ng-focus="accountFocus=false"
+                   ng-pattern="/^[a-zA-Z0-9_-]*$/"  ng-minlength="4"  required>
+            <img class="img1" src="img/task6-p6.png" height="25" width="25"/>
+            <div>&nbsp;
+                <span ng-show="myForm.account.$dirty  && myForm.account.$invalid">
+                        <span style="color:red;" ng-show="myForm.account.$error.required">请输入用户名</span>
+                        <span style="color:red;" ng-show="myForm.account.$error.pattern && accountFocus">用户名格式不正确</span>
+                     <span style="color:red;" ng-show="myForm.account.$error.minlength && accountFocus ">用户名过短</span>
+                    </span>
+            </div>
+        </div>
+        <div style="position: relative">
+        <input ng-model="password" type="password"  placeholder="请输入密码" class="password"   name="password"
+               ng-blur="passwordFocus=true" ng-focus="passwordFocus=false"  ng-minlength="4"  required>
+        <img  class="img2" src="img/task11-locked.png" height="25" width="22"/>
+            <div>&nbsp;
+                <span  ng-show="myForm.account.$dirty  && myForm.password.$invalid">
+                        <!--<span style="color:red;" ng-show="myForm.password.$error.required">请输入密码</span>-->
+                        <span style="color:red;" ng-show="myForm.password.$error.pattern && passwordFocus">密码格式不正确</span>
+                       <span style="color:red;" ng-show="myForm.password.$error.minlength && passwordFocus ">密码过短</span>
+                    </span>
+            </div>
+        </div>
+            <div>&nbsp;<span > &nbsp;{{info}}</span></div>
+        <button  class="btn"  ng-click="login() " ng-disabled="!myForm.$valid" >登    录</button>
+        </form>
+    </div>
+</div>
+

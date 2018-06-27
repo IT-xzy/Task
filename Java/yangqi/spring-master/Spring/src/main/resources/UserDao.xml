@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="model.Userdao">
+    
+    <resultMap id="resultMap" type="po.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="QQ" column="QQ"/>
+        <result property="major" column="major"/>
+        <result property="startTime" column="startTime"/>
+        <result property="school" column="school"/>
+        <result property="onlint_id" column="onlint_id"/>
+        <result property="daily_linke" column="daily_linke"/>
+        <result property="desire" column="desire"/>
+        <result property="bre" column="bre"/>
+        <result property="know_from" column="know_from"/>
+        <result property="create_at" column="create_at"/>
+        <result property="update_at" column="update_at"/>
+    </resultMap>
+
+
+    <!-- 查询 -->
+    <select id="getUserById" parameterType="int"
+            resultType="po.User">
+        select * from USER where id = #{id}
+    </select>
+
+    <!-- 用户插入 -->
+    <insert id="getinsertUser" parameterType="po.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into user (name,QQ,major,startTime,school,onlint_id,daily_linke,desire,bre,know_from,create_at,update_at)
+        values (#{name},#{qq},#{major},#{startTime},#{school},#{onlint_id},#{daily_linke},#{desire},#{bre},#{know_from},#{create_at},#{update_at})
+    </insert>
+
+    <!-- 用户删除 -->
+    <delete id="deleteId" parameterType="po.User">
+        delete from user where id=#{id}
+    </delete>
+
+    <!-- 查询全部id -->
+    <select id="findAllId" resultType="po.User">
+        select * from user
+    </select>
+
+    <!-- 用户更新 要求:传入的user对象中包括 id属性值 -->
+    <update id="UpdateUser" parameterType="po.User">
+        update user  set name=#{name},QQ=#{QQ},major=#{major},startTime=#{startTime},school=#{school},onlint_id=#{onlint_id},daily_linke=#{daily_linke},desire=#{desire},bre=#{bre},know_from=#{know_from},create_at=#{create_at},update_at=#{update_at} where id=#{id}
+    </update>
+
+
+
+    <select id="findName" parameterType="java.lang.String" resultType="po.User">
+        select * from user where name=#{name} AND major=#{major}
+    </select>
+
+</mapper>

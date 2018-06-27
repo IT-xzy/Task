@@ -1,0 +1,143 @@
+
+@import "showHead";
+$body-bgcolor:#f0f0f0;
+$blue:#24A7C6!default;
+$border-color:#C9C9C9!default;
+$setp-bgcolor: #F7F7F7!default;
+$selected-bgcolor:#898989;
+
+@mixin border($border,$width:.01rem,$color:$border-color){
+    #{$border}:solid $width $color;
+}
+@mixin position($top:auto,$right:auto,$bottom:auto,$left:auto){
+    position: absolute;
+    top:$top;
+    left:$left;
+    right: $right;
+    bottom: $bottom;
+}
+%left-icon{
+    box-sizing: border-box;
+    width: .6rem;
+    height: .6rem;
+    @include border(border,.02rem );
+    border-radius: 50%;
+    background: $setp-bgcolor  no-repeat center;
+    z-index: 1;
+    transform: translateX(-50%);
+}
+body{
+    background: $body-bgcolor;
+}
+main{
+    margin: 1.4rem .1rem .5rem;
+    font-size: .3rem;
+    h4{
+        margin:0;
+        margin-bottom: 0;
+        @include border(border);
+        line-height: .85rem;
+        text-align: center;
+        color: $blue;
+        background: $setp-bgcolor;
+    }
+    
+    .game-container {
+        display: flex;
+        position: relative;
+        margin-bottom: .2rem;
+        @include border(border);
+        max-height: 0;
+        margin-top: .2rem;
+        background: $setp-bgcolor;
+        transition: all 2s;
+        overflow: hidden;
+        &::before{
+            content: "";            
+            @include position(-.28rem, auto, auto,50% );
+            @include border(border-bottom, .32rem,$setp-bgcolor);
+            @include border(border-right, .22rem,transparent);
+            @include border(border-left, .22rem,transparent);
+            transform: translateX(-50%);
+        }
+        .change{
+            position: relative;
+            width: .78rem;
+            &::before {
+                content: "";
+                @include position( 0, auto, auto, .29rem); 
+                width: .14rem;
+                height: .08rem;
+                background: $border-color;
+                border-radius: 0 0.07rem 0.07rem/0 0 0.08rem 0.08rem;
+            }
+            &::after{
+                content: "";
+                @include position( auto, auto, auto, .36rem); 
+                width: .01rem;
+                height: 100%;
+                background: $border-color;
+            }
+            .moon{
+                @include position(.58rem,auto ,auto ,50% );
+                @extend %left-icon;
+                background-image: url(../img/moon.png);
+            }
+            .sun{
+                @include position(1.54rem,auto ,auto ,50% );
+                @extend %left-icon;
+                background-image: url(../img/sun.png);
+                
+            }
+        }
+        
+        ul{
+            list-style: none;
+            flex-basis: 75%;
+            padding-left: .16rem;
+            margin: 0;
+           
+            li{
+                position: relative;
+                line-height: .76rem;
+                background: $blue;
+                text-align: center;
+                color:#fff;
+                .arrow{
+                    @include border(border-right, .16rem,$blue);
+                    @include border(border-bottom, .11rem,transparent);
+                    @include border(border-top, .11rem,transparent);
+                    @include position(50%,auto , auto ,-.15rem );
+                    transform: translateY(-50%);
+                }
+                &:first-child{
+                    margin: {
+                        top:.51rem;
+                        bottom: .2rem;
+                    }
+                }
+                &:nth-child(n+2){
+                    margin: .2rem 0;
+                }
+                &.kill-result,&.vote-result{
+                    color:initial;
+                    line-height: .4rem;
+                    background: initial;
+                    border: none;
+                    &::before{
+                        content: "";
+                        border: none;
+                    }
+                }
+                .arrow-selected{
+                    border-right-color: $selected-bgcolor;
+                }    
+
+            }    
+            .step-selected{
+                background: $selected-bgcolor;
+            }
+        }
+    }
+
+}

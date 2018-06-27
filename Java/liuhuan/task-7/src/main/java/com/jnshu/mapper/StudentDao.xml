@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.StudentDao">
+    <!-- sql片段块  -->
+    <!-- 判断属性是否为空,为空不设置该属性-->
+    <sql id="value_not_null">
+        <trim suffixOverrides=",">
+            <!-- and不能大写  -->
+            <if test="stuName!='' and stuName!=null">stuName=#{stuName},
+            </if>
+            <if test="stuQq!='' and stuQq!=null">stuQq=#{stuQq},</if>
+            <if test="stuMail!='' and stuMail!=null">stuMail=#{stuMail},</if>
+            <if test="stuTelephone!=0 and stuTelephone!=null">
+                stuTelephone=#{stuTelephone},
+            </if>
+            <if test="stuProfession!='' and stuProfession!=null">
+                stuProfession=#{stuProfession},
+            </if>
+            <if test="join_date!='' and join_date!=null">
+                join_date=#{join_date},
+            </if>
+            <if test="stuSchool!='' and stuSchool!=null">
+                stuSchool=#{stuSchool},
+            </if>
+            <if test="online_id!='' and online_id!=null">
+                online_id=#{online_id},
+            </if>
+            <if test="daily_url!='' and daily_url!=null">
+                daily_url=#{daily_url},
+            </if>
+            <if test="declaration!='' and declaration!=null">
+                declaration=#{declaration},
+            </if>
+            <if test="isSuper!='' and isSuper!=null">
+                isSuper=#{isSuper},
+            </if>
+            <if test="counselor!='' and counselor!=null">
+                counselor=#{counselor},
+            </if>
+            <if test="isWork!='' and isWork!=null">
+                isWork=#{isWork},
+            </if>
+            <if test="headurl!='' and headurl!=null">
+                headurl=#{headurl},
+            </if>
+            <if test="stuTitle!='' and stuTitle!=null">
+                stuTitle=#{stuTitle},
+            </if>
+            <if test="update_time!='' and update_time!=null">
+                update_time=#{update_time},
+            </if>
+            <if test="update_by!='' and update_by!=null">
+                update_by=#{update_by},
+            </if>
+        </trim>
+    </sql>
+    <!-- sql片段块end -->
+
+    <!-- 根据id查找 -->
+    <select id="findStudentCustomById" resultType="studentCustom"
+            parameterType="Integer">
+        SELECT * FROM tb_students WHERE id = #{id}
+    </select>
+
+
+    <!-- 根据传入参数查找 -->
+    <select id="findStudentCustomMore" resultType="studentCustom"
+            parameterType="StudentQV">
+        SELECT * FROM tb_students
+        <if test="studentCustom!=null">
+            <where>
+                <if test="studentCustom.id!=0 and studentCustom.id!=null">AND
+                    id = #{studentCustom.id}
+                </if>
+                <if test="studentCustom.stuName!='' and studentCustom.stuName!=null">
+                    AND stuName LIKE '%${studentCustom.stuName}%'
+                </if>
+                <if test="studentCustom.stuMail!='' and studentCustom.stuMail!=null">
+                    AND stuMail = #{studentCustom.stuMail}
+                </if>
+                <if test="studentCustom.stuTelephone!=0 and studentCustom.stuTelephone!=null">
+                    AND
+                    id = #{studentCustom.stuTelephone}
+                </if>
+                <if test="studentCustom.stuQq!='' and studentCustom.stuQq!=null">
+                    AND
+                    stuQq LIKE '%${studentCustom.stuQq}%'
+                </if>
+                <if test="studentCustom.stuProfession!='' and studentCustom.stuProfession!=null">
+                    AND stuProfession LIKE '%${studentCustom.stuProfession}%'
+                </if>
+                <if test="studentCustom.join_date!='' and studentCustom.join_date!=null">
+                    AND join_date = #{studentCustom.join_date}
+                </if>
+                <if test="studentCustom.stuSchool!='' and studentCustom.stuSchool!=null">
+                    AND
+                    stuSchool LIKE '%${studentCustom.stuSchool}%'
+                </if>
+                <if test="studentCustom.online_id!='' and studentCustom.online_id!=null">
+                    AND online_id = #{studentCustom.online_id}
+                </if>
+                <if test="studentCustom.daily_url!='' and studentCustom.daily_url!=null">
+                    AND daily_url LIKE '%${studentCustom.daily_url}%'
+                </if>
+                <if test="studentCustom.declaration!='' and studentCustom.declaration!=null">
+                    AND declaration LIKE '%${studentCustom.declaration}%'
+                </if>
+                <if test="studentCustom.isSuper!=null">
+                    AND
+                    isSuper = #{studentCustom.isSuper}
+                </if>
+                <if test="studentCustom.counselor!='' and studentCustom.counselor!=null">
+                    AND counselor LIKE '%${studentCustom.counselor}%'
+                </if>
+                <if test="studentCustom.isWork!=null">
+                    AND
+                    isWork = #{studentCustom.isWork}
+                </if>
+                <if test="studentCustom.headurl!=0 and studentCustom.headurl!=null">
+                    AND
+                    headurl = #{studentCustom.headurl}
+                </if>
+                <if test="studentCustom.stuTitle!=0 and studentCustom.stuTitle!=null">
+                    AND
+                    stuTitle = #{studentCustom.stuTitle}
+                </if>
+                <if test="studentCustom.create_time!='' and studentCustom.create_time!=null">
+                    AND create_time = #{studentCustom.create_time}
+                </if>
+                <if test="studentCustom.update_time!='' and studentCustom.update_time!=null">
+                    AND update_time = #{studentCustom.update_time}<!-- order by
+                    update_time asc-->
+                </if>
+                <if test="studentCustom.create_by!='' and studentCustom.create_by!=null">
+                    AND create_by = #{studentCustom.create_by}
+                </if>
+                <if test="studentCustom.update_by!='' and studentCustom.update_by!=null">
+                    AND update_by = #{studentCustom.update_by}
+                </if>
+            </where>
+        </if>
+        <!-- id倒序 -->
+    </select>
+    <!-- 根据传入参数查找end -->
+
+    <!-- 插入用户 -->
+    <!-- insert into tb_students(id,stuName,stuQq,stuProfession,join_date,stuSchool,online_id,daily_url,declaration,counselor,create_time,update_time) value(2,"赵四","554564","web","2018123654","北","1554","www.baidu.com","jiayou","老王","201554633","46546")-->
+    <!-- 插入时创建时间与更新时间一致 -->
+    <insert id="insertStudentCustom" parameterType="studentCustom">
+        INSERT INTO tb_students(
+        stuName,stuMail,stuTelephone,stuQq,stuProfession,join_date,stuSchool,online_id,daily_url,declaration,isSuper,counselor,isWork,headurl,stuTitle,create_time,update_time,create_by,update_by)
+        VALUE (
+        #{stuName},#{stuMail},#{stuTelephone},#{stuQq},#{stuProfession},#{join_date},#{stuSchool},#{online_id},#{daily_url},#{declaration},#{isSuper},#{counselor},#{isWork},#{headurl},#{stuTitle},#{create_time},#{create_time},#{create_by},#{create_by})
+        <!-- 将返回的主键id 赋值给studentCustom.id -->
+        <selectKey keyProperty="id" order="AFTER"
+                   resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <!-- 插入用户end -->
+
+    <!-- 删除用户 delete接口的返回类型设为Integer， 不需要在<delete></delete>中 定义resultType，即可自动返回受影响的行数。 -->
+    <!-- jdbc:mysql://${jdbc.host}/${jdbc.db}?useAffectedRows=true 添加?useAffectedRows=true获取真实的收影响条数-->
+    <delete id="deleteStudentCustom" parameterType="java.lang.Integer">
+        DELETE FROM tb_students WHERE id=#{id}
+    </delete>
+    <!-- 删除用户end-->
+
+    <!-- 修改用户-->
+    <update id="updateStudentCustom" parameterType="studentCustom">
+        UPDATE tb_students SET
+        <include refid="value_not_null"/>
+        WHERE id=#{id}
+    </update>
+    <!-- 修改用户end-->
+
+    <!-- 查找优秀学员 -->
+    <select id="superStudent" resultType="studentCustom">
+        SELECT * FROM tb_students WHERE isSuper=1
+    </select>
+
+    <select id="countStudent" resultType="Integer">
+        SELECT COUNT(id) id FROM tb_students
+    </select>
+    <select id="countWork" resultType="Integer">
+        SELECT COUNT(isWork) isWork FROM tb_students WHERE isWork=1
+    </select>
+
+    <insert id="updateEmail" parameterType="studentCustom">
+        UPDATE tb_students SET
+        <if test="stuMail!='' and stuMail!=null">
+            stuMail=#{stuMail}, stuMailState= #{stuMailState}
+        </if>
+        WHERE id = #{id}
+    </insert>
+    <insert id="updateTelephone" >
+        UPDATE tb_students SET stuTelephone=#{1}
+        WHERE id = #{0}
+    </insert>
+</mapper>

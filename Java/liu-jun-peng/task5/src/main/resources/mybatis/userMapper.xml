@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oto.dao.userDao">
+
+    <!--登录-->
+    <select id="selectByName"  parameterType="String" resultType="com.oto.pojo.user">
+        select * FROM tb_user where username = #{username}
+    </select>
+
+    <!--注册-->
+    <insert id="addUser"  parameterType="com.oto.pojo.user">
+        insert into tb_user (id,username,password,salt) values (#{id},#{username},#{password},#{salt})
+    </insert>
+
+</mapper>

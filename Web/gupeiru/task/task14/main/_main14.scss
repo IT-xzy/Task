@@ -1,0 +1,204 @@
+@for $i from 1 through 8 {
+    //步骤前添加圆圈
+    .row-step {
+        & .col-md-3:nth-child(#{$i}) .circle {
+            @include circle(.5rem, .5rem, $white);
+            flex-shrink: 0;
+            text-align: center;
+            line-height: .5rem;
+            color: $green-29;
+            box-shadow: 0 0 10px #ccc;
+        }
+    }
+}
+
+main {
+    margin-top: .6rem;
+    h3 {
+        font-weight: bold;
+        text-align: center;
+    }
+    .title {
+        //标题间距设置
+        margin: .4rem 0;
+        @media (max-width: 576px) {
+            margin: .08rem 0;
+        }
+    }
+    .row-one {
+        // 第一行介绍
+        .col-md-3 {
+            margin: .4rem 0;
+            text-align: center;
+            @media (max-width: 767px) {
+                margin: .08rem 0;
+                padding: 0 15%;
+            }
+            p {
+                display: inline-block;
+                margin: .1rem 0;
+                text-align: justify;
+                color: $grey-999;
+            }
+            span {
+                text-align: left;
+                line-height: .23rem;
+                color: $green-29;
+            }
+            // 小图标
+            .icon-rocket {
+                @include sprite(.62rem, .49rem, -2rem);
+            }
+            .icon-book {
+                @include sprite(.55rem, .61rem, -3.27rem);
+                margin-top: .08rem;
+            }
+            .icon-people {
+                @include sprite(.62rem, .52rem, -2.66rem);
+            }
+            .icon-head {
+                margin-bottom: -.02rem;
+                @include sprite(.14rem, .13rem, 0);
+            }
+        }
+        .number {
+            // 学习人数
+            border-left: 2px dashed #ccc;
+            p {
+                margin: .05rem 0;
+            }
+            div {
+                margin-top: .4rem;
+                margin-left: .1rem;
+                text-align: left;
+            }
+            @media (max-width: 768px) {
+                border: none;
+                div {
+                    display: inline-block;
+                    margin: {
+                        top: 0;
+                        left: .3rem;
+                    }
+                }
+            }
+        }
+    }
+    .row-title {
+        margin: .4rem 0;
+    }
+    .row-step {
+        // 步骤
+        align-items: center;
+        .col-md-3 {
+            @include flex(start);
+            margin: .3rem 0;
+            // 边距自适应
+            @media (max-width: 767px) {
+                margin: .08rem 0;
+            }
+            @media (max-width: 577px) {
+                margin: .08rem 6%;
+            }
+            p {
+                flex-shrink: 0;
+                flex-basis: 60%;
+                margin-left: .08rem;
+                margin-right: .03rem;
+                text-align: justify;
+                color: $grey-999;
+            }
+            .icon-arrow {
+                // 绿色箭头
+                flex-shrink: 0;
+                @include sprite(.26rem, .28rem, -1.62rem);
+            }
+            .hidden {
+                // 步骤四箭头768px下显示
+                display: none;
+                @media (max-width: 768px) {
+                    display: block;
+                }
+            }
+        }
+    }
+    // 优秀学员
+    .row-students {
+        margin-top: .6rem;
+        @media (max-width: 577px) {
+            margin-top: .2rem;
+        }
+        .col-sm-6 {
+            padding: 0;
+            .inner {
+                // 内部人物介绍
+                margin: 5%;
+                padding: 8%;
+                text-align: center;
+                background: $white;
+                box-shadow: 0 0 10px #ccc;
+                @media (max-width: 767px) {
+                    padding: 8% 18%;
+                }
+                @media (max-width: 577px) {
+                    margin: 2% 8%;
+                }
+                p {
+                    margin-top: .2rem;
+                    color: #999;
+                    text-align: justify;
+                }
+                // 人物头像
+                .icon-one {
+                    @include sprite(1.09rem, 1.12rem, -7.44rem);
+                }
+                .icon-two {
+                    @include sprite(1.09rem, 1.14rem, -8.74rem);
+                }
+                .icon-three {
+                    @include sprite(1.09rem, 1.11rem, -6.15rem);
+                }
+                .icon-four {
+                    @include sprite(1.08rem, 1.08rem, -4.97rem);
+                }
+            }
+        }
+        // 圆点
+        .col-dot {
+            text-align: center;
+            margin: .2rem 0;
+            .dot {
+                @include circle(.1rem, .1rem, #ccc);
+            }
+            .green {
+                background-color: $green-29;
+            }
+        }
+    }
+    // 合作企业
+    .company {
+        .col {
+            line-height: 1.6rem;
+            text-align: center;
+            padding: 2px;
+            @media (max-width: 1250px) {
+                // 1250px下分行显示
+                flex-basis: 30%;
+                padding: .1rem;
+            }
+            @media (max-width:768px) {
+                // 768px下单行显示
+                flex-basis: 100%;
+            }
+            .img {
+                // 公司tup阴影和hover效果
+                background: $white;
+                box-shadow: 0 0 .1rem #ccc;
+                &:hover{
+                    box-shadow: 0 0 .1rem #999;
+                    transform: scale(1.01);
+                }
+            }
+        }
+    }
+}

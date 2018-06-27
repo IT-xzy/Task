@@ -1,0 +1,156 @@
+@import "variables.less";
+@import "mixins.less";
+
+
+main {
+  min-width: 320px;
+  background-color: darken(@white, 4%);
+  .clearfix();
+  p {
+    color: lighten(@black, 50%);
+  }
+}
+
+[class*="row"] {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  >h4 {
+    text-align: center;
+  }
+}
+
+/* row1 */
+
+.row1 {
+  .content {
+    height: 250px;
+  }
+  .icon {
+    height: 80px;
+  }
+  span {
+    color: @green;
+  }
+}
+@media (min-width: 768px) {
+  .content-left {
+    justify-content: center;
+    border-left: 1px dashed lighten(@black, 50%);
+    >p {
+      align-self: flex-start;
+      padding-left: 2rem;
+      margin: .5rem;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .content-left {
+    justify-content: center;
+    
+    >p {
+      align-self: flex-start;
+      padding-left: 2rem;
+      margin: .5rem;
+    }
+  }
+}
+
+
+/* row2 */
+
+.row2 {
+  .content {
+    height: 80px;
+    >span {
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+      border-radius: 50%;
+      background-color: @white;
+      text-align: center;
+      line-height: 3rem;
+    }
+    >p {
+      flex: 3;
+    }
+  }
+}
+
+/* row3 */
+
+.row3 {
+  .content {
+    padding: 1rem 2rem;
+    background-color: @white;
+  }
+  img {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+  }
+}
+
+.circle {
+  text-align: center;
+  >span {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: 10px 5px;
+    border-radius: 50%;
+    background-color: @white;
+    &:first-child {
+      background-color: @green;
+    }
+  }
+}
+
+/* row4 */
+
+.row4 {
+  .inner { margin: 0 1rem;}
+  .content {
+    margin: 2rem 0;
+    background-color: @white;
+    text-align: center;
+    &:hover {
+      position: relative;
+      z-index: 1;
+      box-shadow: -2px 0px 5px lighten(@black, 5%), 2px 2px 5px lighten(@black, 5%);
+    }
+  }
+  img {
+    width: 100%;
+    max-width: 230px;
+    height: auto;    
+  }
+}
+
+/* row5 */
+
+.row5 {
+  margin-bottom: 0;
+  background-color: @white;
+  .clearfix();
+  &::before {
+    content: "";
+    display: table;
+  }
+  .content {
+    .max-width();
+  }
+  ul {
+    .clearfix();
+  }
+  li {
+    float: left;
+    width: 100px;
+    margin: 0 10px;
+  }
+  a {
+    color: lighten(@black, 50%);
+    &:hover {
+      text-decoration: underline @green;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--IOC和DI的注解扫描-->
+    <!--<context:component-scan base-package="com.spring" ></context:component-scan>-->
+    
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="jdbc:mysql://119.29.17.188/jnshu?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="root"></property>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+    </bean>
+
+    <bean id="jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!---->
+    <!--</bean>-->
+
+    <bean id="userService" class="com.jdbctemplate.daoservice.UserDaoImpl">
+        <property name="jdbctemplate" ref="jdbctemplate"/>
+        <!--<constructor-arg name="jdbctemplate" value="jdbctemplate"/>-->
+    </bean>
+
+
+
+
+</beans>

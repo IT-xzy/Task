@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div ng-app="app">
+        <div ng-controller="ctrl">
+          
+        </div>
+    </div>
+    <script src="bower_components/angular/angular.js"></script>
+    <script> 
+        var log=console.log;
+    </script>
+    <script>
+       (function() {
+           'use strict';
+       
+           var app=angular.module('app', [
+           ]);
+           app.controller('ctrl',function($scope){
+               $scope.person={
+                   name:'jack'
+               }
+           });
+           app.controller('child',function($scope){
+              log($scope.person); //{name:'jack'}
+              $scope.person.age=20;  
+           })
+
+
+
+
+       })();
+    
+    </script>
+</body>
+
+</html>

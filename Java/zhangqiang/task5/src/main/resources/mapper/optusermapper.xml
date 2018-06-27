@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.opt.dao.mapper.OptUserMapper">
+
+    <resultMap id="userModel" type="com.opt.model.OptUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="head_ico" property="head_ico"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="create_at" property="create_at"/>
+        <result column="update_at" property="update_at"/>
+    </resultMap>
+
+
+
+    <sql id="userColumn" >
+        id,username,password,head_ico,phone,email,create_at,update_at
+    </sql>
+
+    <select id="findById" parameterType="int" resultType="OptUser">
+      SELECT
+      <include refid="userColumn"/>
+        FROM opt_user WHERE id = #{id}
+    </select>
+    <select id="findByName" parameterType="String" resultType="OptUser">
+        SELECT
+        <include refid="userColumn"/>
+        FROM opt_user WHERE username = #{username}
+    </select>
+    <select id="findByPhone" parameterType="long" resultType="OptUser">
+        SELECT
+        <include refid="userColumn"/>
+        FROM opt_user WHERE phone = #{phone}
+    </select>
+    <select id="findByEmail" parameterType="String" resultType="OptUser">
+        SELECT
+        <include refid="userColumn"/>
+        FROM opt_user WHERE email = #{email}
+    </select>
+    <select id="findCountTotal" resultType="int" >
+        SELECT COUNT (0) FROM opt_user
+    </select>
+
+    <select id="findByUser" parameterType="OptUser" resultMap="userModel" >
+        SELECT
+        <include refid="userColumn"/>
+        FROM opt_user
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id!=null and id!=0">
+                AND id = #{id}
+            </if>
+            <if test="create_at!=null and create_at!=0">
+                AND create_at = #{create_at}
+            </if>
+            <if test="update_at!=null and update_at!=0">
+                AND update_at = #{update_at}
+            </if>
+            <if test="username!=null">
+                AND username like '%${username}%'
+            </if>
+            <if test="phone!=null and phone!=0">
+                AND phone like '%${phone}%'
+            </if>
+            <if test="email!=null">
+                AND email like '%${email}%'
+            </if>
+        </trim>
+    </select>
+
+    <insert id="insert" parameterType="OptUser" useGeneratedKeys="true" keyColumn="id" keyProperty="id"  >
+        INSERT INTO opt_user
+        (create_at,update_at,username,password,phone,email,head_ico)
+        values
+        (#{create_at,jdbcType=BIGINT},
+        #{update_at,jdbcType=BIGINT},
+        #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},
+        #{phone,jdbcType=BIGINT},
+        #{email,jdbcType=VARCHAR},
+        #{head_ico,jdbcType=VARCHAR})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+
+    <!--修改数据-->
+    <update id="update" parameterType="OptUser" >
+        UPDATE opt_user
+        SET
+        update_at=#{update_at},username=#{username},password=#{password},phone=#{phone},head_ico=#{head_ico},email=#{email},school=#{school},stu_num=#{stuNum},daily_link=#{dailyLink},pro=#{pro},brother=#{brother},user_id=#{userId} WHERE id=#{id}
+    </update>
+
+</mapper>
