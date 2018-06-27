@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <style>
+        body,div,ul{
+            margin: 0;
+            padding: 0;
+        }
+        input[type=checkbox]{
+            display: none;
+        }
+        ul{
+            display: none;
+        }
+        input[type=checkbox]:checked ~ul {
+            display: block
+        }
+        a{
+            text-decoration: none;
+            color: #999;
+        }
+        .flex-input{
+            display: flex;
+            align-items: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            font-size: 16px;
+            color: #FFF;
+            height: 4rem;
+            flex: 1;
+        }
+        .dropdown label {
+            box-sizing: border-box;
+            display: inline-block;
+            width: 100%;
+            color: #999;
+            font-size: 14px;
+            background-color: #fff;
+            line-height: 4rem;
+            border-right: 1px solid #e1e5e7;
+            border-bottom: 1px solid #e1e5e7;
+            cursor: pointer;
+            text-align: center;
+            -webkit-user-select: none;
+        }
+        label::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #e1e5e7;
+            position: absolute;
+            right: 10px;
+            top: 27px;
+        }
+        .dropdown ul {
+            box-sizing: border-box;
+            position: absolute;
+            list-style: none;
+            text-align: left;
+            width: 100%;
+            z-index: 1;
+            padding: 0;
+            display: none;
+            border-top: none;
+        }
+        .dropdown ul li:hover{
+            background-color: #5fc0cd;
+        }
+        .dropdown ul li:hover  > a{
+            color: #FFF;
+        }
+        .dropdown ul li {
+            box-sizing: border-box;
+            list-style: none;
+            padding: 15px;
+            background-color: #fff;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #e1e5e7;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-input">
+    <div class="dropdown">
+        <input type="checkbox" id="city">
+        <label for="city">所在地</label>
+        <ul>
+            <li><a href="#">北京</a></li>
+            <li><a href="#">上海</a></li>
+            <li><a href="#">深圳</a></li>
+        </ul>
+    </div>
+    <div class="dropdown">
+        <input type="checkbox" id="board">
+        <label for="board">食宿</label>
+        <ul>
+            <li><a href="#">包吃</a></li>
+            <li><a href="#">包住</a></li>
+            <li><a href="#">包吃住</a></li>
+        </ul>
+    </div>
+    <div class="dropdown">
+        <input type="checkbox" id="state">
+        <label for="state" style="border-right: none;">病人情况</label>
+        <ul>
+            <li><a href="#">一般</a></li>
+            <li><a href="#">良好</a></li>
+            <li><a href="#">严重</a></li>
+        </ul>
+    </div>
+    </div>
+</body>
+</html>
