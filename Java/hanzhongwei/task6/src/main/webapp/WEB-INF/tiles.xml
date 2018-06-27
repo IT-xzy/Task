@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- definition name 为Controller 返回的页面名称 这里定义一个基础模板页 -->
+    <definition name="home" template="/WEB-INF/jsps/layout.jsp">
+        <put-attribute name="title" value="首页" />
+        <put-attribute name="header" value="/WEB-INF/jsps/tiles/header.jsp" />
+        <put-attribute name="body" value="/WEB-INF/jsps/tiles/home.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsps/tiles/footer.jsp" />
+    </definition>
+
+    <definition name="company" extends="home">
+        <put-attribute name="title" value="合作企业"/>
+        <put-attribute name="body" value="/WEB-INF/jsps/tiles/company.jsp"/>
+    </definition>
+
+    <definition name="profession" extends="home">
+        <put-attribute name="title" value="职业"/>
+        <put-attribute name="body" value="/WEB-INF/jsps/tiles/profession.jsp"/>
+    </definition>
+
+    <definition name="login" extends="home">
+        <put-attribute name="title" value="登录"/>
+        <put-attribute name="body" value="/WEB-INF/jsps/tiles/login.jsp" />
+    </definition>
+
+    <definition name="register" extends="home">
+        <put-attribute name="title" value="注册"/>
+        <put-attribute name="body" value="/WEB-INF/jsps/tiles/register.jsp" />
+    </definition>
+
+    <definition name="registerError" extends="home">
+        <put-attribute name="title" value="登录错误"/>
+        <put-attribute name="body" value="/WEB-INF/jsps/tiles/registerError.jsp"/>
+    </definition>
+</tiles-definitions>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite
+        xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+        xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+        targetNamespace="http://hzw.service.StudentService"
+        name="StudentService">
+    <!--这里注意命名空间需要加上接口的路劲，后面的name是接口的名字-->
+
+    <!-- 元件 SCA基本组成部分
+    <component name="AddComponent">
+        &lt;!&ndash; 这里会标红 查看http://docs.oasis-open.org/ns/opencsa/sca/200912 并无此参数..&ndash;&gt;
+        <implementation.java class="service.impl.add"/>
+    </component>
+    <component name="SubtractComponent">
+        <implementation.java class="service.impl.sub"/>
+    </component>
+    <component name="MultiplyComponent">
+        <implementation.java class="service.impl.multi"/>
+    </component>
+    <component name="DivideComponent">
+        <implementation.java class="service.impl.divi"/>
+    </component>-->
+
+
+     <!--定义 计算器服务组成部分   Component组成-->
+    <component name="RmiServiceComponent">
+        <!--组件对应实现类-->
+        <!--<implementation.java class="hzw.service.impl.StudentRmiImpl" />-->
+        <implementation.spring location="applicationContext.xml"/>
+        <service name="StudentRmi">
+            <!--在客户端也需要实现此接口才行-->
+            <interface.java interface="hzw.service.StudentRmi"/>
+            <!--绑定RMI服务-->
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8888/StudentRmi"/>
+        </service>
+    </component>
+
+    <!-- 定义 计算器服务组成部分   Component组成-->
+    <component name="StudentServiceComponent">
+        <!--组件对应实现类-->
+        <implementation.spring location="applicationContext.xml"/>
+        <!--注意与spring里面注册的bean的名字一致。-->
+        <service name="StudentService">
+            <!--在客户端也需要实现此接口才行-->
+            <interface.java interface="hzw.service.StudentService"/>
+            <!--绑定RMI服务-->
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8888/StudentService"/>
+        </service>
+    </component>
+</composite>
