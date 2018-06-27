@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hzw.mapper.StudentMapper">
+
+    <!--<resultMap id="studentMapper" type="com.hzw.pojo.Student">-->
+        <!--<id property="s_id" column="s_id" jdbcType="BIGINT"></id>-->
+        <!--<result property="s_name" column="s_name" jdbcType="VARCHAR"></result>-->
+        <!--<result property="s_qq" column="s_qq" jdbcType="INT"></result>-->
+        <!--<result property="s_type" column="s_type" jdbcType="VARCHAR"></result>-->
+        <!--<result property="s_num" column="s_num" jdbcType="INT"></result>-->
+        <!--<result property="create_at" column="create_at" jdbcType="BIGINT"></result>-->
+        <!--<result property="update_at" column="update_at" jdbcType="BIGINT"></result>-->
+    <!--</resultMap>-->
+
+    <!--插入数据-->
+    <insert id="addStu" parameterType="Student">
+        /*返回自增id*/
+        <selectKey resultType ="java.lang.Long" keyProperty= "s_id"
+                   order= "AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey >
+        INSERT INTO student(s_name,s_qq,s_type,s_num,create_at,update_at)
+        VALUES
+        (#{s_name},#{s_qq},#{s_type},#{s_num},#{create_at},#{update_at})
+    </insert>
+
+    <!--删除数据，返回boolean值-->
+    <delete id="deleteStu" parameterType="long" flushCache="false" >
+        DELETE FROM student WHERE s_id=#{s_id}
+    </delete>
+
+    <!--更新数据，返回boolean值-->
+    <update id="updateStu" parameterType="Student" flushCache="false">
+        UPDATE student SET s_name=#{s_name},s_qq=#{s_qq},s_type=#{s_type},
+        s_num=#{s_num},update_at=#{update_at} WHERE s_id=#{s_id}
+    </update>
+
+    <!--查询数据id-->
+    <select id="getId" parameterType="long" resultType="Student">
+        SELECT * FROM student WHERE s_id=#{s_id}
+    </select>
+
+    <!--查询数据name-->
+    <select id="getName" parameterType="Student" resultType="Student">
+        SELECT * FROM student WHERE s_name=#{s_name} AND s_num=#{s_num}
+    </select>
+
+    <!--查询全部数据-->
+    <select id="getAll" resultType="Student">
+        SELECT * FROM student
+    </select>
+</mapper>

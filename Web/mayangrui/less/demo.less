@@ -1,0 +1,35 @@
+@charset "utf-8";
+//less库
+@import "z";
+@import "css3";
+//公用的变量
+html{
+  font-size:625%;
+}
+.mixin (dark, @color) {
+  color: darken(@color, 10%);
+}
+.mixin (light, @color) {
+  color: lighten(@color, 40%);
+}
+.mixin (@_, @color) {
+  display: block;
+}
+
+
+@switch: light;
+
+.box{
+  .mixin(@switch, #888);
+  padding-bottom: 200px;
+  width:200px;
+  background-color: khaki;
+  color:red;
+}
+.box1{
+  padding-bottom: 200px;
+  width:200px;
+  background-color: khaki;
+  color:red;
+}
+

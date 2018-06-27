@@ -1,0 +1,125 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Angularjs分页控件</title>
+    <script src="js/angular/angular.min.js"></script>  <!-- 引入angularjs文件，而且是1.x版本的 -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- 控制器 -->
+<div ng-controller="myCtrl">
+
+    <!-- 分页控件指令 ，可以是元素 或者 属性 -->
+    <my-pagination page-option="option"></my-pagination>
+
+</div>
+
+<script type="text/javascript">
+angular.module('myModule', []).directive('myPagination', function () {
+  return {
+      restrict: 'E',
+      replace: true,
+      scope: {
+          option: '=pageOption'
+      },
+      template: '<ul class="pagination">' +
+      '<li ng-click="pageClick(p)" ng-repeat="p in page" class="{{option.curr==p?\'active\':\'\'}}">' +
+      '<a href="javascript:;">{{p}}</a>' +
+      '</li>' +
+      '</ul>',
+      link: function ($scope) {
+          //容错处理
+          // if (!$scope.option.curr || isNaN($scope.option.curr) || $scope.option.curr < 1) $scope.option.curr = 1;
+          // if (!$scope.option.all || isNaN($scope.option.all) || $scope.option.all < 1) $scope.option.all = 1;
+          // if ($scope.option.curr > $scope.option.all) $scope.option.curr = $scope.option.all;
+          // if (!$scope.option.count || isNaN($scope.option.count) || $scope.option.count < 1) $scope.option.count = 10;
+          //得到显示页数的数组
+          $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
+
+          //绑定点击事件
+          $scope.pageClick = function (page) {
+            if (page == '««') {
+              page = parseInt($scope.option.curr) - parseInt($scope.option.curr)
+            }
+            if (page == '»»') {
+              page = $scope.option.all
+            }
+              if (page == '«') {
+                  page = parseInt($scope.option.curr) - 1;
+              } else if (page == '»') {
+                  page = parseInt($scope.option.curr) + 1;
+              }
+              if (page < 1) page = 1;
+              else if (page > $scope.option.all) page = $scope.option.all;
+              //点击相同的页数 不执行点击事件
+              if (page == $scope.option.curr) return;
+              if ($scope.option.click && typeof $scope.option.click === 'function') {
+                  $scope.option.click(page);
+                  $scope.option.curr = page;
+                  $scope.page = getRange($scope.option.curr, $scope.option.all, $scope.option.count);
+              }
+          };
+
+          //返回页数范围（用来遍历）
+          function getRange(curr, all, count) {
+              //计算显示的页数
+              curr = parseInt(curr);
+              all = parseInt(all);
+              count = parseInt(count);
+              var from = curr - parseInt(count / 2);
+              var to = curr + parseInt(count / 2) + (count % 2) - 1;
+              //显示的页数容处理
+              if (from <= 0) {
+                  from = 1;
+                  to = from + count - 1;
+                  if (to > all) {
+                      to = all;
+                  }
+              }
+              if (to > all) {
+                  to = all;
+                  from = to - count + 1;
+                  if (from <= 0) {
+                      from = 1;
+                  }
+              }
+              var range = [];
+              for (var i = from; i <= to; i++) {
+                  range.push(i);
+              }
+                range.push('»');
+              range.push('»»');
+
+              range.unshift('«');
+              range.unshift('««');
+              return range;
+          }
+
+      }
+  }
+});
+</script>
+<script type="text/javascript">
+//引入 'myModele' 模块
+var app = angular.module('app', ['myModule']);
+
+app.controller('myCtrl', function($scope){
+
+  //设置分页的参数
+  $scope.option = {
+      curr: 1,  //当前页数
+      all: 20,  //总页数
+      count: 10,  //最多显示的页数，默认为10
+
+      //点击页数的回调函数，参数page为点击的页数
+      click: function (page) {
+          console.log(page);
+          //这里可以写跳转到某个页面等...
+      }
+  }
+});
+</script>
+</body>
+</html>

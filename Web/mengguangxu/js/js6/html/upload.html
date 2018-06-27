@@ -1,0 +1,60 @@
+<div class="art-form1">
+    <div class="col-md-2 col-sm-2 col-xs-2 art-left">
+        配 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图
+    </div>
+    <div  class="col-md-10 col-sm-10 col-xs-10 art-r">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <label for="file" class="btn btn-primary">选择文件</label>
+            <input type="file"
+                   id="file"
+                   accept="image/png,image/gif"
+                   name="file"
+                   onchange="angular.element(this).scope().fileChanged(this)"
+                   style="display: none;"
+                   required/>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <img ng-src="{{src}}" alt="配图预览" class="art-img" width="100%"/>
+        </div>
+        <div class="col-md-8 col-sm-8 col-xs-8">
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        图片名
+                    </th>
+                    <th>
+                        文件大小
+                    </th>
+                    <th>
+                        进度
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                    <th>
+                        操作
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-if="fileName">
+                    <td>{{fileName}}</td>
+                    <td>{{fileSize|number:2}}MB</td>
+                    <td>
+                        <uib-progressbar value="progress" style="margin-bottom: 0;" type="null" animate="true" >{{progress}}%</uib-progressbar>
+                    </td>
+                    <td>
+                        <span class="glyphicon glyphicon-ok" ng-show="okIcon"></span>
+                        <span class="glyphicon glyphicon-remove" ng-show="removeIcon"></span>
+                    </td>
+                    <td>
+                        <button class="art-up" data-ng-click="upload()" ng-disabled="progress">上传</button>
+                        <button class="art-del" data-ng-click="delete()">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

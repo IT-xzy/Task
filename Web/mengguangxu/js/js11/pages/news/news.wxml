@@ -1,0 +1,13 @@
+<view class="news-container">
+  <view class="title">
+    <text>试试什么职业最适合你</text>
+  </view>
+  <view wx:for="{{useData}}" wx:for-item="item" wx:key="key">
+    <picker range="{{item.array}}" range-key="name" value="{{index}}" bindchange="change" data-id='{{index}}'>
+      <text class="list">{{item.title}}：{{item.array[item.index1].name}}</text>
+    </picker>
+  </view>
+  <view class="btn">
+    <button bindtap="nextTap">选好了，点击查看</button>
+  </view>
+</view>

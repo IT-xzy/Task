@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组深拷贝和浅拷贝</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    <!--JQuery$.extend方法-->
+    var x = {
+        a: 1,
+        b: {f: {g: 1}},
+        c: [1, 2, 3]
+    };
+
+    // var y = $.extend({}, x);
+    z = $.extend(true, {}, x)
+    .b.f = {g: 2};
+    console.log(x);z
+//    object.assign
+    var array1=[0,1,2,3];
+    var array2=Object.assign([],array1);
+    array2[0] = 100;
+    console.log(array1); // [0,1,2,3] <-- 沒被改到
+    console.log(array2); // [100,1,2,3]
+</script>
+</html>

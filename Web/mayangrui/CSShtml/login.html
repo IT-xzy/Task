@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .content {
+        width: 400px;
+        padding:50px 50px;
+        margin: 100px auto;
+        background-color: #0d99a5;
+        height: 400px;
+        border-radius: 50px;
+    }
+    .form-group{
+        margin-top: 50px;
+    }
+    .alert{
+        color: gold;
+    }
+</style>
+<body>
+<div class="content">
+    <form role="form">
+        <div class="form-group">
+            <input type="text" class="form-control" id="name" placeholder="请输入手机号码" onchange="test()" value="">
+            <p class="alert"></p>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="code" placeholder="请输入验证码">
+            <input type="button" class="btn btn-default" id="btn" style="margin-top:50px" onclick="sendemail()" value="发送验证码">
+        </div>
+    </form>
+</div>
+<script>
+    var countdown=60;
+    function sendemail(){
+        var obj = $("#btn");
+        settime(obj);
+        var phone=$("#name").val();
+        $.ajax({
+            type:"GET",
+            url:"url",
+            datatype:'html',
+            data:phone,
+            success:function(data){
+                console.log(data);
+            }
+        })
+    }
+    function test(){
+        var phone=$("#name").val();
+        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+        if(!myreg.test(phone))
+        {
+            $(".alert").html("请输入有效的手机号");
+            return false;
+        }
+    }
+    function settime(obj) { //发送验证码倒计时
+        if (countdown == 0) {
+            obj.attr('disabled',false);
+            //obj.removeattr("disabled");
+            obj.val("免费获取验证码");
+            countdown = 60;
+            return;
+        } else {
+            obj.attr('disabled',true);
+            obj.val("重新发送(" + countdown + ")");
+            countdown--;
+        }
+        setTimeout(function() {
+                settime(obj) }
+            ,1000)
+    }
+</script>
+</body>
+</html>

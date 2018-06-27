@@ -1,0 +1,200 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+@import "compass/reset";
+* {
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+input {
+  background-color: transparent;
+  border: 0;
+}
+
+$blue: #5fc0cd;
+$white: #ffffff;
+$gray: #b6b6b6;
+$red: #e26163;
+$height: 100px;
+$font: 36px;
+
+@mixin hf {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  background-color: $blue;
+  font-size: $font;
+  color: $white;
+}
+@mixin mid {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.head {
+  width: 100%;
+  position: fixed;
+  .header {
+    @include hf;
+    height: 80px;
+    .btn_back {
+      margin-left: 4%;
+      height: 80px;
+      width: 24px;
+      background: url("../img/btn_back_pic.png") no-repeat center center;
+    }
+    .title {
+      position: absolute;
+      top: 22px;
+      left: calc(50% - 72px);
+    }
+  }
+}
+
+.content {
+  padding: {
+    top: 80px;
+    bottom: 168px;
+  }
+  height: 1000px;
+  .content_head {
+    height: 327px;
+    width: 100%;
+    background: url("../img/content_background.jpg") no-repeat center;
+    background-size: cover;
+    color: $white;
+    span {
+      display: inline-block;
+      float: left;
+    }
+    .avatar {
+      float: left;
+      margin: {
+        top: 79px;
+        left: 4%;
+      }
+    }
+    .name {
+      font-size: $font;
+      margin: {
+        top: 114px;
+        left: $font;
+      }
+    }
+    .old {
+      display: block;
+      font-size: $font - 8;
+      margin: {
+        top: 120px;
+        left: $font - 6;
+      }
+    }
+    .clear_div {
+      width: 100%;
+      height: 170px;
+    }
+    .address_pic {
+      float: left;
+      margin-left: $font;
+    }
+    .address {
+      font-size: $font - 12;
+      margin-left: 10px;
+    }
+  }
+  .content_main {
+    ul {
+      @include mid;
+      padding-top: 30px;
+      padding-bottom: 30px;
+      font-size: $font;
+      border-bottom: $gray solid 1px;
+      .list {
+        margin-left: 6%;
+        padding-right: 20px;
+        border-right: $gray solid 1px;
+        color: $gray;
+      }
+      .year,.time,.price,.int {
+        padding-left: 20px;
+      }
+    }
+    .skills {
+      .skills_border {
+        margin-left: 4%;
+        width: 3px;
+        height: 26px;
+        background-color: #5fc0cd;
+        border-radius: 5px;
+      }
+      .skills_title {
+        margin-left: 15px;
+        font-weight: bold;
+      }
+    }
+    .info {
+      .star_pic1,.star_pic2 {
+        margin-right: 15px;
+      }
+      .star_pic1 {
+        margin-left: 6%;
+      }
+      .star_pic2 {
+        margin-left: 15px;
+      }
+      .home {
+        padding-right: 20px;
+        border-right: $gray solid 1px;
+      }
+      .no_meal {
+        margin-left: 0;
+      }
+    }
+    .work_price {
+      color: $red;
+    }
+    .self_int {
+      .tself_int {
+        flex-shrink: 0;
+      }
+      .int {
+        font-size: 28px;
+        color: #333333;
+      }
+    }
+  }
+}
+
+.foot {
+  @extend .head;
+  bottom: 0;
+  .footer {
+    @include hf;
+    height: 168px;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    background-color: $white;
+    input {
+      width: 42%;
+      height: 88px;
+      font-size: $font;
+      border-radius: 10px;
+      border: $blue solid 1px;
+    }
+    .btn_message {
+      color: $blue;
+      margin-left: 4%;
+    }
+    .btn_phone {
+      background-color: $blue;
+      color: $white;
+      margin-right: 4%;
+    }
+  }
+}

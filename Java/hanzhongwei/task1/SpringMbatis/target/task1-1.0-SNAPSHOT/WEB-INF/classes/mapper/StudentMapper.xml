@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hzw.mapper.StudentMapper">
+
+    <!--增-->
+    <insert id="addStu" parameterType="Student">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="s_id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO student
+        VALUES (null,#{s_name},#{s_qq},#{s_type},#{s_num},#{create_at},#{update_at})
+    </insert>
+
+    <!--删-->
+    <delete id="deleteStu" parameterType="long">
+        DELETE FROM student WHERE s_id=#{s_id}
+    </delete>
+<!--
+        flushCache="false"
+-->
+    <!--改-->
+    <update id="updateStu" parameterType="Student">
+        UPDATE student SET s_name=#{s_name},s_qq=#{s_qq},s_type=#{s_type},s_num=#{s_num},update_at=#{update_at}
+        WHERE s_id=#{s_id}
+    </update>
+
+    <!--查-->
+    <select id="getId" parameterType="long" resultType="Student">
+        SELECT * FROM student WHERE s_id=#{s_id}
+    </select>
+
+    <!--综合查询-->
+    <select id="getName" parameterType="Student" resultType="Student">
+        SELECT * FROM student WHERE s_name=#{s_name} AND s_num=#{s_num}
+    </select>
+
+    <!--查所有-->
+    <!--修改getAll，根据当有分页信息的时候，进行分页查询
+        增加total sql语句 -->
+    <select id="getAll" resultType="Student">
+        SELECT * FROM  student
+       <!-- <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>-->
+    </select>
+
+    <!--<select id="total" resultType="int">
+        SELECT COUNT(*) FROM student
+    </select>-->
+
+</mapper>

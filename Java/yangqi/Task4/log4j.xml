@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<!--log4j.xml 配置文件 优先于 log4j.properties 配置文件 -->
+<!-- * 1. 一个appender子元素定义一个日志输出目的地 * 2. 一个logger子元素定义一个日志写出器 -->
+<!-- ========================== 自定义输出格式说明================================ -->
+<!-- %p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL -->
+<!-- %r 输出自应用启动到输出该log信息耗费的毫秒数 -->
+<!-- %c 输出所属的类目，通常就是所在类的全名 -->
+<!-- %t 输出产生该日志事件的线程名 -->
+<!-- %n 输出一个回车换行符，Windows平台为“/r/n”，Unix平台为“/n” -->
+<!-- %d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS} -->
+<!-- 输出类似：2002年10月18日 22：10：28，921 -->
+<!-- %l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10) -->
+<!-- ========================================================================== -->
+
+<!-- ========================== 输出方式说明================================ -->
+<!-- Log4j提供的appender有以下几种: -->
+<!-- org.apache.log4j.ConsoleAppender(控制台), -->
+<!-- org.apache.log4j.FileAppender(文件), -->
+<!-- org.apache.log4j.DailyRollingFileAppender(每天产生一个日志文件), -->
+<!-- org.apache.log4j.RollingFileAppender(文件大小到达指定尺寸的时候产生一个新的文件), -->
+<!-- org.apache.log4j.WriterAppender(将日志信息以流格式发送到任意指定的地方) -->
+<!-- ========================================================================== -->
+<log4j:configuration>
+    <!-- 输出到控制台 -->
+    <!-- 可以配置多个appender来对应不同的输出，如文件输出，sql输出，控制台输出，邮件输出等 -->
+    <!-- [控制台STDOUT] 不同的输出类型对应着不同的calss，如控制台输出class对应着 org.apache.log4j.ConsoleAppender -->
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout"><!-- loyout表示输出方式，可以多种，class值区分，PatternLayout表示自定义格式 -->
+            <param name="ConversionPattern"
+                   value="%d{ISO8601} 耗时：%r 日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m %n"/>
+        </layout>
+    </appender>
+
+    <!-- 指定类appender 输出指定类日志到指定位置 -->
+    <appender name="LOGDEBUG"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="encoding" value="UTF-8"/>
+        <param name="File"
+               value="${webapp.root}/logs/controller/debug-log.log"/>
+        <param name="DatePattern" value="'debug_'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss.SSS} %t %5p %c:%L - %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="LOGINFO" class="org.apache.log4j.DailyRollingFileAppender">
+        <!-- <param name="Threshold" value="INFO" /> -->
+        <param name="encoding" value="UTF-8"/>
+        <param name="File" value="${webapp.root}/logs/controller/info-log.log"/>
+        <param name="DatePattern" value="'info_'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{ISO8601} 耗时：%r 日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m %n"/>
+        </layout>
+        <!--限制输出级别 -->
+        <!-- filter过滤器设置输出的级别:ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF
+            如果levelMax为warn则输出的是debug到warn不会有error和fatal -->
+        <!-- 输出所有日志 ALL  -->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <appender name="LOGERROR" class="org.apache.log4j.DailyRollingFileAppender">
+        <!-- <param name="Threshold" value="ERROR" /> -->
+        <param name="encoding" value="UTF-8"/>
+        <param name="File"
+               value="${webapp.root}/logs/controller/error-log.log"/>
+        <param name="DatePattern" value="'error_'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{ISO8601} 耗时：%r 日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m %n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="ERROR"/>
+            <param name="LevelMax" value="ERROR"/>
+        </filter>
+    </appender>
+
+    <!-- 指定类appender 输出指定类日志到指定位置 -->
+    <appender name="controller"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="encoding" value="UTF-8"/>
+        <param name="File"
+               value="${webapp.root}/logs/local/UserController-log.log"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{ISO8601} 耗时：%r 日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m %n"/>
+        </layout>
+    </appender>
+
+    <!-- additivity="false" 不继承root-->
+    <category name="com.jnshu.controller.controller" additivity="false">
+        <!-- 输出所有级别日志 -->
+        <level value="ALL"/>
+        <appender-ref ref="controller"/>
+        <!-- 输出到控制台 -->
+        <appender-ref ref="CONSOLE"/>
+    </category>
+
+
+    <!-- 日志的总开关设置 包括日志级别和 appender -->
+    <!-- logger的作用： 1.[name属性]:指定你定义Logger对象时候的name -->
+    <!-- 2. additivity : children-logger是否使用 rootLogger的配置, additivity在log4j默认为true。 -->
+    <!-- 这解释了为什么有些时候，一个日志信息在屏幕上会有多次输出。 -->
+    <!-- 3.还可以指定level(输出级别)、appender-ref(指定哪个append) -->
+    <root>
+        <!-- ALL < DEBUG < INFO < WARN < ERROR < FATAL < OFF -->
+        <!-- all为输出所有级别日志-->
+        <level value="DEBUG"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="LOGDEBUG"/>
+        <appender-ref ref="LOGINFO"/>
+        <appender-ref ref="LOGERROR"/>
+    </root>
+
+</log4j:configuration>

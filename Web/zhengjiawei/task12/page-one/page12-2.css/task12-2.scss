@@ -1,0 +1,200 @@
+html {
+    font-size: 625%;
+}
+
+body {
+    font-size: .14rem;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    line-height: .44rem; // 页眉样式
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    background-color: #5FC0CD;
+    color: #fff;
+    font-size: .18rem; // 页眉内容
+    span::before {
+        content: "";
+        position: absolute;
+        left: .17rem;
+        top: 50%;
+        display: inline-block;
+        width: .1rem;
+        height: .1rem;
+        border: solid transparent;
+        border-left: .03rem solid #fff;
+        border-top: .03rem solid #fff;
+        transform: translateY(-50%) rotate(-45deg);
+    } // 返回箭头
+    // }
+}
+
+.people-info {
+    display: flex;
+    align-items: center;
+    margin-top: .44rem;
+    height: 1.63rem;
+    background: url(../I/background.png) no-repeat;
+    background-size: cover; // 内容信息栏背景图
+    .head-portrait {
+        background: url(../I/spritesheet.png)no-repeat;
+        width: 85px;
+        height: 85px;
+        background-position: -5px -49px;
+        margin: 0 .15rem 0 .2rem;
+    } // 头像
+    .people-info-word {
+        div:nth-child(1) {
+            span:nth-child(1) {
+                color: #fff;
+                font-size: .18rem;
+                font-weight: 300;
+                margin-right: .15rem;
+            }
+            span:nth-child(2) {
+                color: #fff;
+                font-size: .14rem;
+            }
+        } // 头像右边的上面字体
+        div:nth-child(2) {
+            span {
+                display: flex;
+                align-items: center;
+                color: #fff;
+                font-size: .12rem;
+            }
+            span::before {
+                content: "";
+                display: inline-block;
+                background: url(../I/spritesheet.png)no-repeat;
+                width: 9px;
+                height: 12px;
+                background-position: -5px -5px;
+                margin-right: .07rem;
+            }
+        } // 头像右边的下面字体
+    }
+}
+
+main {
+    @mixin border {
+        border-bottom: 1px solid #E1E5E7;
+    } // 下边框样式
+    ul:nth-child(1) {
+        li:nth-child(1) {
+            padding: .15rem;
+            @include border;
+            span {
+                font-size: .16rem;
+                color: #333;
+                border-left: 0.02rem solid #5fc0cd;
+                padding: 0 0 0 .2rem;
+            } // 第一行span样式
+        } // 第一行表格
+        li:nth-child(2) {
+            padding: .17rem;
+            @include border();
+            span {
+                color: #333;
+                font-size: .16rem;
+            } //第二行通用样式
+            span:nth-child(1) {
+                padding-right: .1rem;
+                margin-right: .1rem;
+                border-right: 1px solid #E1E5E7;
+            } //第二行表格文字样式
+            @mixin star-icon {
+                content: "";
+                display: inline-block;
+                background: url(../I/spritesheet.png)no-repeat;
+                width: 12px;
+                height: 12px;
+                background-position: -5px -27px;
+                margin-right: .05rem;
+            }
+            span:nth-child(1)::before {
+                @include star-icon;
+            }
+            span:nth-child(2)::before {
+                @include star-icon;
+            }
+        } // 第二行表格文字前面的图标
+    } // 前两行表格
+    .sheet-samestyle {
+        li {
+            display: flex;
+            align-items: center;
+            padding: .17rem;
+            @include border(); // 第三行表格开始通用样式
+            span:nth-child(1) {
+                display: block;
+                flex-basis: 11%;
+                white-space: nowrap;
+                padding-right: .13rem;
+                margin-right: .13rem;
+                font-size: .16rem;
+                color: #999;
+                border-right: 1px solid #E1E5E7;
+            } // 通用样式的左边
+            span:nth-child(2) {
+                display: block;
+                color: #333;
+                font-size: .16rem;
+            } // 表格右边
+        }
+        li:nth-child(3) {
+            span:nth-child(2) {
+                font-weight: 500;
+                color: #E26163;
+            } //  红色字体
+        }
+        li:nth-child(4) {
+            margin-bottom: .6rem;
+        } //最后一行和底部footer的距离
+    }
+}
+
+footer {
+    button {
+        outline: none;
+        border: none;
+    }
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: .1rem 0;
+    background: #fff; // height: 1.13rem;
+    @mixin button-style {
+        font-size: .17rem;
+        width: 35%;
+        height: .44rem;
+        border-radius: 5px;
+    }
+    button:nth-child(1) {
+        @include button-style;
+        background-color: #fff;
+        border: 1px solid #5FC0CD;
+        a {
+            text-decoration: none;
+            color: #5FC0CD;
+        }
+    }
+    button:nth-child(2) {
+        @include button-style();
+        background: #5FC0CD;
+        color: #fff;
+    }
+}
