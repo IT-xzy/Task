@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dao.UserDao">
+
+    <resultMap  id="resultMap" type="cn.User.User" >
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="qq" column="qq"/>
+        <result property="kemu" column="kemu"/>
+        <result property="startTime" column="startTime"/>
+        <result property="school" column="school"/>
+        <result property="xuehao" column="xuehao"/>
+        <result property="ribao" column="ribao"/>
+        <result property="xinyuan" column="xinyuan"/>
+        <result property="shixiong" column="shixiong"/>
+
+    </resultMap>
+    <!--根据id 查找-->
+
+    <select id="getUserById" parameterType="int" resultMap="resultMap">
+        select * from xiuzhenyuan where id=#{id}
+</select>
+
+<!-- 插入数据           useGeneratedKeys="true" keyColumn="id" keyProperty="id"  用于 返回 当前插入id           -->
+
+    <insert id="getinsertUser" parameterType="cn.User.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into xiuzhenyuan (name,qq,kemu,startTime,school,xuehao,ribao,xinyuan,shixiong) values(#{name},#{qq},#{kemu},#{startTime},#{school},#{xuehao},#{ribao},#{xinyuan},#{shixiong});
+    </insert>
+
+    <!--删除 -->
+    <delete id="deleteId" parameterType="int">
+        delete from xiuzhenyuan where id=#{id }
+    </delete>
+    <!--修改数据-->
+    <update id="UpdateUser" parameterType="cn.User.User">
+        update xiuzhenyuan set name=#{name},qq=#{qq} where id=#{id}
+    </update>
+
+<!--查询整张表的数据-->
+    <select id="findAllId" resultMap="resultMap">
+        select * from  xiuzhenyuan
+    </select>
+    <!--根据学生姓名 和学号 来查询-->
+
+    <select id="findname" parameterType="cn.User.User" resultMap="resultMap">
+        select * from xiuzhenyuan where name=#{name} AND xuehao=#{xuehao}
+    </select>
+
+</mapper>

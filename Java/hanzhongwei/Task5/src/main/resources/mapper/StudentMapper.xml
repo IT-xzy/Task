@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hzw.mapper.StudentMapper">
+
+    <!--增-->
+    <insert id="addStu" parameterType="Student">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="stuId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO student1
+        VALUES (null,#{stuName},#{stuQQ},#{stuType},#{stuNum},#{create_at},#{update_at})
+    </insert>
+
+    <!--删-->
+    <delete id="deleteStu" parameterType="long">
+        DELETE FROM student1 WHERE stuId=#{stuId}
+    </delete>
+
+    <!--改-->
+    <update id="updateStu" parameterType="Student">
+        UPDATE student1 SET stuName=#{stuName},stuQQ=#{stuQQ},stuType=#{stuType},stuNum=#{stuNum},update_at=#{update_at}
+        WHERE stuId=#{stuId}
+    </update>
+
+    <!--查-->
+    <select id="getId" parameterType="long" resultType="Student">
+        SELECT * FROM student1 WHERE stuId=#{stuId}
+    </select>
+
+    <!--综合查询-->
+    <select id="getName" parameterType="Student" resultType="Student">
+        SELECT * FROM student1 WHERE stuName=#{stuName} AND stuNum=#{stuNum}
+    </select>
+
+    <!--查所有-->
+    <!--修改getAll，根据当有分页信息的时候，进行分页查询
+        增加total sql语句 -->
+    <select id="getAll" resultType="Student">
+        SELECT * FROM  student1
+    </select>
+
+</mapper>

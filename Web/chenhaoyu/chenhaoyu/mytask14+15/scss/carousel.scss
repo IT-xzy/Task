@@ -1,0 +1,96 @@
+@charset "utf-8";
+/*轮播图*/
+.viewport {
+  position: relative;
+  overflow: hidden;
+}
+.wrap {
+  position: relative;
+  width: 400vw;
+  overflow: hidden;
+  transition: transform 1s ease;
+}
+.viewport img {
+  width: 100vw;
+  float: left;
+}
+.main-page1 {
+  input[type="radio"] {
+    display: none;
+  }
+  h3 {
+    text-align: center;
+  }
+}
+
+.arrow {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-right: 5px solid #909090;
+  border-bottom: 5px solid #909090;
+  cursor: pointer;
+}
+.ar-right,
+.ar-left  {
+  display: none;
+}
+.carousel {
+  position: absolute;
+  bottom: 5%;
+  right: 50%;
+  transform: translateX(50%);
+  label {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin: 0 1rem;
+    border-radius: 50%;
+    transition: all .5s;
+    cursor: pointer;
+    background-color: #909090;
+  }
+}
+/*radio选中后，底部指示器相应的label标签背景颜色发生变化*/
+input:nth-of-type(1):checked ~ .viewport .carousel label:nth-of-type(1),
+input:nth-of-type(2):checked ~ .viewport .carousel label:nth-of-type(2),
+input:nth-of-type(3):checked ~ .viewport .carousel label:nth-of-type(3),
+input:nth-of-type(4):checked ~ .viewport .carousel label:nth-of-type(4),
+.carousel label:hover{
+  background-color: black;
+}
+#pic1:checked ~ .viewport .wrap {
+  transform: translateX(0);
+}
+#pic2:checked ~ .viewport .wrap {
+  transform: translateX(-100vw);
+}
+#pic3:checked ~ .viewport .wrap {
+  transform: translateX(-200vw);
+}
+#pic4:checked ~ .viewport .wrap {
+  transform: translateX(-300vw);
+}
+
+/*右箭头*/
+input:nth-of-type(1):checked ~.viewport .ar label:nth-of-type(6),
+input:nth-of-type(2):checked ~.viewport .ar label:nth-of-type(7),
+input:nth-of-type(3):checked ~.viewport .ar label:nth-of-type(8),
+input:nth-of-type(4):checked ~.viewport .ar label:nth-of-type(5) {
+  position: absolute;
+  top: 50%;
+  right: 5rem;
+  transform: rotate(-45deg) translateY(-50%);
+  display: block;
+}
+/*左箭头*/
+input:nth-of-type(1):checked ~.viewport .ar label:nth-of-type(4),
+input:nth-of-type(2):checked ~.viewport .ar label:nth-of-type(1),
+input:nth-of-type(3):checked ~.viewport .ar label:nth-of-type(2),
+input:nth-of-type(4):checked ~.viewport .ar label:nth-of-type(3) {
+  position: absolute;
+  top: 50%;
+  left: 5rem;
+  transform: rotate(135deg) translateY(50%);
+  display: block;
+}

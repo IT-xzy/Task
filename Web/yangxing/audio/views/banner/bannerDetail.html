@@ -1,0 +1,36 @@
+<div class="row pd-top-2">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <strong ng-if="!vm.params.id">新增banner</strong>
+            <strong ng-if="vm.params.id">编辑banner</strong>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="myform">
+
+                <div class="row form-group">
+                    <label class="col-md-2 control-label word-spacing-25">配图</label>
+                    <div class="col-md-10 padding-0">
+                        <simple-upload ng-model="vm.banner.img"
+                                       multi=false></simple-upload>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label word-spacing-25">URL</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="vm.banner.url" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-success" ng-click="vm.updateBanner()"
+                                ng-disabled="myform.$invalid||vm.banner.img==undefined"
+                        >立即上线
+                        </button>
+                        <button type="button" class="btn btn-default" ng-click="vm.cancel()">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

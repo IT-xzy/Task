@@ -1,0 +1,122 @@
+<div ng-controller="list">
+    <div class="ctt-head">
+        <div class="ctt-head-time">
+            <h4>修改时间</h4>
+            <div class="input-time">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup ng-model="dt1" is-open="popup1.opened" min-date="minStartDate"
+                                max-date="maxStartDate" datepicker-options="dateOptions" ng-required="true" close-text="关闭" current-text="今天"
+                                clear-text="清除" alt-input-formats="altInputFormats" ng-change="time1()" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <span>—</span>
+            <div class="input-time">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened" min-date="minEndDate"
+                                max-date="maxEndDate" datepicker-options="dateOptions" ng-required="true" close-text="关闭" current-text="今天"
+                                clear-text="清除" alt-input-formats="altInputFormats" ng-change="time1()" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 下拉列表框 -->
+        <div class="ctt-head-sel">
+            <h4>状态类型</h4>
+            <select class="page1-sel1" ng-model="a" ng-options="x.value as x.text for x in state">
+                <option value="">全部</option>
+            </select>
+            <select class="page1-sel2" ng-model="b" ng-options="y.value as y.text for y in type">
+                <option value="">类型</option>
+            </select>
+        </div>
+
+        <button class="clear" ng-click="clearS()">清空</button>
+        <button class="search" ng-click="search()">搜索</button>
+    </div>
+    <!-- 列表 -->
+    <div class="ctt-main">
+        <div class="ttadd">
+            <h4>Article列表</h4>
+            <button ng-click="addItem()" ui-sref=".Page2">
+                <i class="fa fa-plus-square"></i>新增</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="th5">ID</th>
+                    <th class="th10">图片</th>
+                    <th class="th15">名称</th>
+                    <th class="th15">类型</th>
+                    <th class="th10">发布者</th>
+                    <th class="th10">发布时间</th>
+                    <th class="th10">修改时间</th>
+                    <th class="th5">状态</th>
+                    <th class="th20">操作</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr ng-repeat="tablelist in tablelists">
+                    <td class="th5">{{$index+1}}</td>
+                    <td class="th10">
+                        <img class="list-img" data-ng-src="{{tablelist.img}}">
+                    </td>
+                    <td class="th15">{{tablelist.title}}</td>
+                    <td class="th15">{{tablelist.type| types}}</td>
+                    <td class="th10">{{tablelist.author}}</td>
+                    <td class="th10">
+                        <!-- 时间过滤器 -->
+                        <p class="">{{tablelist.createAt| date:'yy-MM-dd'}}</p>
+                        <p class="">{{tablelist.createAt| date:'HH:mm:ss'}}</p>
+                    </td>
+                    <td class="th10">
+                        <p class="">{{tablelist.updateAt| date:'yy-MM-dd'}}</p>
+                        <p class="">{{tablelist.updateAt| date:'HH:mm:ss'}}</p>
+                    </td>
+                    <td class=" th5">{{tablelist.status| statuses}}</td>
+                    <td class=" th20">
+                        <button type="button" class="btn btn-warning" ng-click="on()">{{tablelist.status| btns}}</button>
+                        <button type="button" class="btn btn-success" ng-click="edit()">编辑</button>
+                        <button type="button" class="btn btn-danger" ng-click="delete()">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="paging">
+            <div>每页显示
+                <input type="text" ng-model="pagenum">条
+            </div>
+            <ul uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm ullist" previous-text="&lsaquo;"
+                next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="page()" items-per-page="size" force-ellipses="true" max-size="5">
+            </ul>
+            <div>去第
+                <input type="text" ng-model="gopage">页
+            </div>
+            <button type="button" ng-click="pagesure()">确定</button>
+        </div>
+    </div>
+</div>

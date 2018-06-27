@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>玩家配比</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/task2-2.css">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="hd-box">
+                    <a class="icon-left" onclick="back()"></a>
+                    <h6>参 数 设 置</h6>
+                    <img class="icon-right" src="../image/img5.png">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="top">
+                    <div class="top-l">
+                        <span>玩<br>家<br>配<br>比</span>
+                    </div>
+                    <div class="top-r">
+                        <div class="top-allot">
+                            <div class="top-box1">
+                                <div></div>
+                                <p>杀手</p> <span id="killer"></span> <p>人</p>
+                            </div>
+                            <div class="top-box2">
+                                <div></div>
+                                <p>平民</p> <span id="people"></span> <p>人</p>
+                            </div>
+                        </div>
+                        <div class="top-bt">
+                            <a onclick="push()">
+                                <span>点击设置</span>
+                                <img src="../image/img6.png">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <form>
+                    <input type="text" placeholder="水民词组" />
+                        <input type="text" placeholder="幽灵词组"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="bottom">
+                    <span>玩家人数&nbsp;<input type="text" id="inputNumber" onchange="getNumber()" value="4" maxlength="2"/>&nbsp;人</span>
+                    <div class="bottom-box">
+                        <input type="button" class="img7" onclick="btLeft()">
+                        <input type="range" id="rangeNumber" onchange="change()" name="change" value="4" min="4" max="18" step="1" >
+                        <input type="button" class="img8" onclick="btRight()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <button onclick="start()">
+                    <span>去发牌</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="../js/task2-2.js"></script>
+</body>
+</html>

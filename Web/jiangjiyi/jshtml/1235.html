@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signalLight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+<body>
+
+<a href="/" onClick="gotoit(1)" target="_blank"><u>请先点击这里</u></a>
+
+<a href="javascript:gotoit(num)"><u>这是正常链接</u></a>
+
+
+<script language="JavaScript">
+    var num = 2;
+    var mypage = '/tools';
+    var pissoff = ' 请先点击上面链接 ';
+    allow = Array();
+    allow[num] = 2;
+    function gotoit(link){
+        if (link != num){
+            allow[link] = 2;
+        } else {
+            for (i=1;i<=num;i++){
+                if (allow[i] != 2){
+                    i = num + 1;
+                    lemmeIn = 0;
+                } else {
+                    lemmeIn = 1;
+                }
+            }
+            if (lemmeIn == 1){
+                window.location = mypage;
+            } else {
+                alert(pissoff);
+            }
+        }
+    }
+
+</body>
+</html>
