@@ -1,0 +1,160 @@
+* {
+  margin:0;
+  padding:0;
+}
+
+ul {
+
+  list-style:none;
+  overflow: hidden;
+
+}
+
+#wrap {
+  position:relative;
+  width:100%;
+  /*height:auto;*/
+  margin:0 auto;
+  //border:1px solid #9cc5ef;
+  overflow:hidden;
+}
+
+#slider {
+  width:300%;
+  /*height: auto;*/
+  font:100px/400px Microsoft Yahei;
+  text-align:center;
+  color:#fff;
+  margin-left:0;
+  -webkit-animation:slide1 9s ease-out infinite;
+}
+
+#slider li {
+  /*position: relative;*/
+  float:left;
+  width:33.333333%;
+  overflow: hidden;
+
+  /*height: auto;*/
+
+}
+
+.carouselImg {
+  float: left;
+  max-width: 100%;
+  min-width: 100%;
+  height: auto;
+  margin: 0;
+}
+#slider li:nth-child(1) {
+  //background-color: red;
+  /*background: url("img/carousel1.jpeg");*/
+
+}
+
+#slider li:nth-child(2) {
+  //background-color: blue;
+  /*background: url("img/carousel2.png");*/
+}
+
+#slider li:nth-child(3) {
+  /*background: url("img/carousel3.jpg");*/
+}
+
+/*创建三种动画策略*/
+@-webkit-keyframes slide1 {
+  0% { margin-left:0;}
+  23% { margin-left:0;}
+  33% { margin-left:-100%;}
+  56% { margin-left:-100%;}
+  66% { margin-left:-200%;}
+  90% { margin-left:-200%;}
+  100% {margin-left:0;}
+}
+
+@-webkit-keyframes slide2 {
+  0% { margin-left:-100%;}
+  23% { margin-left:-100%;}
+  33% { margin-left:-200%;}
+  56% { margin-left:-200%;}
+  66% { margin-left:0;}
+  90% { margin-left:0;}
+  100% {margin-left:-100%;}
+}
+
+@-webkit-keyframes slide3 {
+  0% { margin-left:-200%;}
+  23% { margin-left:-200%;}
+  33% { margin-left:0;}
+  56% { margin-left:0;}
+  66% { margin-left:-100%;}
+  90% { margin-left:-100%;}
+  100% {margin-left:-200%;}
+}
+
+
+/*修改动画名称*/
+#l01:checked ~ #wrap #slider {
+  -webkit-animation-name:slide1;
+}
+
+#l02:checked ~ #wrap #slider {
+  -webkit-animation-name:slide2;
+}
+
+#l03:checked ~ #wrap #slider {
+  -webkit-animation-name:slide3;
+}
+
+
+/*短暂地取消动画名称，模拟重启动画*/
+#l01:active ~ #wrap #slider {
+  -webkit-animation-name:none;
+  margin-left:0;
+}
+
+#l02:active ~ #wrap #slider {
+  -webkit-animation-name:none;
+  margin-left:-100%;
+}
+
+#l03:active ~ #wrap #slider {
+  -webkit-animation-name:none;
+  margin-left:-200%;
+}
+
+
+#opts {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 1rem;
+  width:100%;
+  height:1rem;
+  margin:auto;
+  color:#fff;
+  text-align:center;
+  font:20px/40px Microsoft Yahei;
+}
+
+#opts label {
+  width: 1rem;
+  height: 1rem;
+  margin-right:4px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  /*background: #ff7f02;*/
+  cursor:pointer;
+}
+@media (max-width: 767.99px) {
+  #opts label {
+    display: none;
+  }
+}
+
+
+/* 隐藏Input按钮*/
+#l01, #l02, #l03 {
+  display:none;
+}
+
