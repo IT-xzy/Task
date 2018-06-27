@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/sca
+                           http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="org.wyq.task"/>
+    <!--获取数据库配置文件-->
+    <context:property-placeholder location="classpath:config/db.properties"/>
+
+    <!--设置数据源c3p0-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxPoolSize" value="50"/>
+        <property name="minPoolSize" value="2"/>
+        <property name="maxIdleTime" value="60"/>
+    </bean>
+
+    <!--sqlsessionFactory bean-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:config/mybatis/SqlMapConfig.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <!--<property name="mapperLocations" value="classpath:org/wyq/task/mapper/*.xml"/>-->
+    </bean>
+
+    <!--自己主动扫描mapper接口。并注入sqlsession-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.wyq.task.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSession"/>
+    </bean>
+
+    <sca:service name="BaseService" type="org.wyq.task.service.BaseService" target="schoolService"/>
+    <!--注解和bean二选一-->
+    <!--<bean id="schoolService" class="org.wyq.task.service.SchoolService"/>-->
+
+    <!--放入这边会一直重复执行-->
+    <!--<bean class="org.wyq.task.tuscany.Service" init-method="startService"/>-->
+</beans>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oto.dao.UserDao">
+
+    <resultMap type="com.oto.pojo.User" id="userResult" >
+        <id column="id" javaType="string" />
+        <result column="name" javaType="string" />
+        <result column="QQ" javaType="string" />
+        <result column="rxtime" javaType="string"/>
+    </resultMap>
+
+    <sql id="userColumn"> id, name, QQ</sql>
+
+    <!--查找全部-->
+    <select id="findAll"  resultType="com.oto.pojo.User">
+        select * from user
+    </select>
+
+    <!--分页查询-->
+    <select id="getUserByPage"  resultType="com.oto.pojo.User" >
+        select * from user limit #{0},#{1}
+    </select>
+
+
+
+    <!-- 需求：通过id查询用户 -->
+    <select id="findUserById" parameterType="int" resultType="com.oto.pojo.User">
+               select * from user where id = #{id}
+        </select>
+
+    <!--&lt;!&ndash;名字查询&ndash;&gt;-->
+    <!--<select id="findUserByName" parameterType="java.lang.String" resultType="com.oto.pojo.User">              select * from user where name like '%${value}%'-->
+    <!--</select>-->
+
+    <!--&lt;!&ndash;批量添加&ndash;&gt;-->
+    <!--<insert id="insertUsers" parameterType="java.util.List">-->
+        <!--insert into user(name,QQ,xztype,rxtime)values-->
+        <!--<foreach collection="list" item="item" index="index" separator=",">-->
+            <!--(#{item.name},#{item.QQ},#{item.xztype},#{item.rxtime})-->
+        <!--</foreach>-->
+
+        <!--<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">-->
+            <!--select last_insert_id()-->
+        <!--</selectKey>-->
+    <!--</insert>-->
+
+    <!--单个增加-->
+    <insert id="addUser" parameterType="com.oto.pojo.User">
+        insert into user(name,QQ,rxtime) values (#{name},#{QQ},#{rxtime})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+                delete from user where id=#{id}
+    </delete>
+
+    <!--修改-->
+    <update id="updateUser" parameterType="com.oto.pojo.User">
+        update user set name=#{name},QQ=#{QQ} where id=#{id}
+    </update>
+
+</mapper>
+
+

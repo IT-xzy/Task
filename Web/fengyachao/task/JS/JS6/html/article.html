@@ -1,0 +1,139 @@
+
+
+
+<div class="artMain">
+    <div class="options">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="col-md-4">修改时间</span>
+                    <div class="col-md-8">
+                        <p class="input-group">
+                            <input type="text"
+                                   id="testDate1"
+                                   class="form-control"
+                                   uib-datepicker-popup="{{formatStart}}"
+                                   ng-model="param.startAt"
+                                   is-open="popupStart.opened"
+                                   datepicker-options="dateOptions"
+                                   ng-required="true"
+                                   close-text="Close"
+                                   alt-input-formats="altInputFormats"
+                            />
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openStart()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <span class="to col-md-4">——</span>
+                    <div class="col-md-8">
+                        <p class="input-group">
+                            <input type="text"
+                                   id="testDateEnd"
+                                   class="form-control"
+                                   uib-datepicker-popup="{{formatEnd}}"
+                                   ng-model="param.endAt"
+                                   is-open="popupEnd.opened"
+                                   datepicker-options="dateOptions"
+                                   ng-required="true"
+                                   close-text="Close"
+                            />
+                            <span class="input-group-btn">
+                                   <button type="button" class="btn btn-default" ng-click="openEnd()">
+                                       <i class="glyphicon glyphicon-calendar"></i>
+                                   </button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <span class="col-md-4">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>
+                    <div class="col-md-8">
+                        <select ng-options="t.value as t.name for t in typeData" ng-model="param.type" class="form-control">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="type col-md-4">
+                    <span class="col-md-4">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</span>
+                    <div class="col-md-8">
+                        <select ng-options="s.value as s.name for s in statusData" ng-model="param.status" class="form-control">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="operation">
+                        <button class="clear" ng-click="clear()">清空</button>
+                        <button class="search" ng-click="search()">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="article">
+        <div class="title">
+            <p>Article列表</p>
+            <button ng-click="add()">+新增</button>
+        </div>
+        <div class="tables">
+            <!--table-striped隔行变色-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>图片</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="lis in lists">
+                    <td>{{$index+1}}</td>
+                    <td class="titleLength">{{lis.title}}</td>
+                    <td><img ng-src={{lis.img}} class="artPicture"></td>
+                    <td>{{lis.type|changeType}}</td>
+                    <td>{{lis.createAt|date:"yyyy-MM-dd"}}</td>
+                    <td>{{lis.updateAt|date:'yyyy-MM-dd'}}</td>
+                    <td>{{lis.author}}</td>
+                    <td>{{lis.status|changeStatus}}</td>
+                    <td>
+                        <div>
+                            <a ng-click="afk()">{{lis.status|changeAfk}}</a>
+                            <a ng-click="compile()">编辑</a>
+                            <a ng-click="delete()">删除</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="Pagination">
+        <ul uib-pagination
+            first-text="首页"
+            last-text="末页"
+            previous-text="上一页"
+            next-text="下一页"
+            total-items="total"
+            ng-model="param.page"
+            max-size="maxSize"
+            class="pagination-sm"
+            boundary-links="true"
+            rotate="false"
+            ng-change="page(param.page)"></ul>
+    </div>
+</div>

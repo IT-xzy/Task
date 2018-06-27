@@ -1,0 +1,104 @@
+.img-welcome {
+    // 欢迎图片
+    width: 100%;
+    height: 16vw;
+}
+
+main {
+    .index {
+        //首页行
+        line-height: .5rem;
+        .word-green {
+            color: $green-29;
+        }
+    }
+    .content-left {
+        // 左侧公司列表
+        margin: 0 .15rem .2rem;
+        width: 2.5rem;
+        height: 14*.4rem;
+        background-color: $white;
+        box-shadow: 0 0 .1rem #ccc;
+        .list-title {
+            // 列表标题
+            display: block;
+            text-align: center;
+            line-height: .5rem;
+            font-weight: bold;
+            font-size: .15rem;
+            border-bottom: .01rem solid #ededed;
+        }
+        .company-list {
+            // 列表
+            padding-left: 33%;
+            padding-top: .1rem;
+            a {
+                line-height: .4rem;
+                color: $green-29;
+                &::before {
+                    //文字前添加圆圈
+                    @include circle(.12rem, .12rem, none);
+                    margin-right: .05rem;
+                    margin-bottom: -.01rem;
+                    border: .01rem solid #ff650e;
+                }
+                &:hover,
+                &:focus {
+                    //鼠标移动和点击使文字和圆圈变色
+                    color: #ff650e;
+                    &::before {
+                        background: #ff650e;
+                    }
+                }
+            }
+        }
+        @media (max-width: 750px) {
+            //750px下列表宽度100%，分四列
+            width: 100%;
+            height: auto;
+            .company-list {
+                padding: 0;
+                li {
+                    float: left;
+                    width: 25%;
+                    padding-left: 5%;
+                    @media (max-width: 450px) {
+                        // 450px下分两列
+                        width: 50%;
+                        padding-left: 15%;
+                    }
+                }
+            }
+        }
+    }
+    .content-right {
+        // 右侧文章
+        flex: 1;
+        margin: 0 .15rem .2rem;
+        color: $grey-999;
+        box-shadow: 0 0 10px #ccc;
+        background-color: $white;
+        .abstract {
+            // 上部摘要
+            padding: .2rem .3rem;
+            overflow: hidden;
+            border-bottom: 1px solid #e6e6e6;
+            img {
+                float: left;
+                padding: 6%;
+            }
+            p {
+                line-height: .25rem;
+            }
+        }
+        .body {
+            // 正文
+            padding: .3rem .3rem .5rem;
+            line-height: .25rem;
+            p {
+                margin-bottom: .2rem;
+                text-indent: 2em;
+            }
+        }
+    }
+}

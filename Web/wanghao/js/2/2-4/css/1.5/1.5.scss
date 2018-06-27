@@ -1,0 +1,192 @@
+@import "../_mixin.scss";
+@import"../_style.scss";
+body{
+    background:  rgb(236, 230, 230);;
+}
+header{
+    @include flex-between;
+    height: $header-height;
+    padding-left: .3rem;
+    background: $nav-blue;
+    i{
+        width: .25rem;
+        height: .25rem;
+        border: {
+            top: 3px solid #fff;
+            left:3px solid #fff;
+        }
+        transform: rotate(-45deg);
+    }
+}
+main{
+    padding: .1rem .3rem 0 .3rem;
+    margin-bottom: 1.5rem;
+   h3{
+       margin: 0;
+       line-height: 1rem;
+       font-weight: 100;
+       text-align: center;
+       box-shadow: 0 1px 1px #999;
+       
+    }
+    .main{
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        margin-top: .2rem;
+        height: 6rem;
+        box-shadow: 0 .5px 1px #999;
+        div{
+            @include flex-align;
+            flex: 0 0 40%;
+            height: 1.5rem;
+            padding: 0 0 0 .5rem ;
+            font-size: .25rem;
+            img{
+                height: 1rem;
+                border-radius: 50%;
+                margin-right: .3rem;
+            }
+        }
+    }
+    .space{
+        @include flex-alignCenter;
+        height: 10vh;
+        margin: .2rem 0 0 0;
+        box-shadow: 0 0 1px #999;
+        color: #fcc671 ;
+        font-size: .4rem;
+        font-weight: bold;
+        #range{
+            outline: none;
+            width: 85%;
+           
+            
+        }
+        p{
+            width: .5rem;
+            height: .5rem;
+            padding: 0 .2rem;
+            margin:0 .1rem;
+            text-align: center;
+            line-height: .5rem;
+        }
+        
+    }
+    .peopleNum{
+        @include flex-alignCenter;
+       
+        margin: .2rem 0 1.3rem 0;
+        height: 1rem;
+        box-shadow: 0 0 1px #999;
+        :nth-child(1){
+            font-size: .4rem;
+        }
+        :nth-child(3){
+            font-size: .2rem;
+            color: orange;
+        }
+       #num{
+        height: .4rem;
+        width: .8rem;
+        margin: 0 .1rem 0 .1rem;
+        background: #999;
+        border: none;
+        border-radius: .1rem;
+        text-align: center;
+        font-size: .4rem;
+        color: orange;
+        outline: none;
+       
+        }
+    }
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: .2rem .3rem .5rem .3rem;
+   background: rgb(236, 230, 230);
+   box-sizing: border-box;
+   
+    p{
+     
+    line-height: .8rem;
+    font-size: .5rem;
+    color: #fff;
+    text-align: center;
+    background: orange;
+    }
+    
+}
+.tanchuang{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  
+    display: none;
+    background:rgba(9, 9, 9, 0.5);
+    >div{
+        margin: 40% auto;
+        display: flex;
+        flex-wrap: wrap;
+        width: 6rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 2px #333;
+        >div{
+            flex: 0 0 100%;
+            padding-top: 1rem;
+            text-align: center;
+            line-height: 1rem;
+            font-size: .5rem;
+            font-weight: bold;
+        }
+        >p{
+            flex: 0 0 50%;
+            text-align: center;
+            font-size: 0.4rem;
+            color: #999;
+            line-height: .8rem;
+            border-top: 1px solid #999;
+            box-sizing: border-box;
+           
+        }
+        :nth-child(2){
+            border-right: 1px solid #999;
+        }
+    }
+}
+/*横条样式*/
+input[type=range] {
+    -webkit-appearance: none;
+    /*清除系统默认样式*/
+    width: 100%;
+    // margin: 0 20px;
+    background: -webkit-linear-gradient(90deg, #61bd12, #61bd12) no-repeat,#ece6e6;
+    /*设置左边颜色为#61bd12，右边颜色为#ddd*/
+    height: 10px;
+    border-radius: 5px;
+    /*横条的高度*/
+}
+input[type=range]::-webkit-slider-runnable-track{
+   height: -2px;
+}
+/*拖动块的样式*/
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /*清除系统默认样式*/
+    height: 25px;
+    /*拖动块高度*/
+    width: 40px;
+    /*拖动块宽度*/
+    background:url(../../../image/滑块.png) no-repeat;
+    background-size: 100%;
+    /*拖动块背景*/
+   
+  
+}
+

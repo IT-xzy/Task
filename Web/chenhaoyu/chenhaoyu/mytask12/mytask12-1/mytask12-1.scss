@@ -1,0 +1,150 @@
+@charset "utf-8";
+//变量
+$width_default: 100vw;
+$white: #fff;
+$blue: #5fc0cd;
+$gray: #999;
+//占位符
+%reset_b {
+  margin: 0;
+  padding: 0;
+}
+%reset_h {
+  font-size: 62.5%;
+}
+//混合宏
+@mixin bgc($bg,$c) {
+  background-color: $bg;
+  color: $c;
+}
+@mixin none {
+  outline: none;
+  border: none;
+}
+@mixin f_h($fs,$lh) {
+  font-size: $fs;
+  line-height: $lh;
+}
+@mixin shape($width,$height) {
+  width: $width;
+  height: $height;
+}
+@mixin btn_com {
+  @include shape(45vw,4rem);
+  border-radius: 6px;
+  text-align: center;
+  @include f_h(1.5rem,4rem);
+}
+@mixin flex_ai {
+  display: flex;
+  align-items: center;
+}
+//继承
+
+//reset
+body {
+  @extend %reset_b;
+}
+html {
+  @extend %reset_h;
+}
+header {
+  position: fixed;
+  top: 0;
+  text-align: center;
+  @include bgc($blue,$white);
+  width: $width_default;
+  padding: 1.2rem 0;
+}
+button {
+  position: absolute;
+  display: block;
+  float: left;
+  margin-left: 1rem;
+  @include none;
+  @include f_h(2rem,2rem);
+  @include bgc($blue,$white);
+}
+.index {
+  @include f_h(1.5rem,2rem);
+}
+.button-left {
+  @include btn_com;
+  border: .15rem solid $blue;
+  @include bgc($white,$blue);
+}
+.button-right {
+  @include btn_com;
+  @include bgc($blue,$white);
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  @include flex_ai;
+  justify-content: space-around;
+  @include shape($width_default,5.4rem);
+  background-color:rgba(255,255,255,0.65);
+}
+.picture-BG {
+  position: relative;
+  background: {
+    image: url("../image/BG-1.png");
+    size: cover;
+  };
+  z-index: -1;
+  height: 20rem;
+}
+.women {
+  position: absolute;
+  top: 8rem;
+  left:1.5rem;
+  border-radius: 50%;
+  background: {
+    image: url("../image/woman.png");
+    size: contain;
+    repeat: no-repeat;
+  };
+  @include shape(8rem,8rem);
+}
+.message {
+  color: $white;
+  position: absolute;
+  top:9.6rem;
+  left: 12rem;
+}
+p {
+  margin: 0.5rem;
+}
+.text1 {
+  font-size: 1.5rem;
+}
+.text2 {
+  background: {
+    image: url("../image/Shape.png");
+    repeat: no-repeat;
+    size: contain;
+  };
+  text-indent: 1rem;
+}
+ul {
+  padding: 0;
+  li {
+    list-style: none;
+    @include flex_ai;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-bottom: .1rem solid $gray;
+  }
+}
+span {
+  color: $gray;
+  margin-right: 1.5rem;
+  letter-spacing: .2rem;
+}
+.box {
+  white-space: nowrap;/*禁止换行*/
+}
+main {
+  margin-top: 4.4rem;
+  overflow-x: hidden;
+}

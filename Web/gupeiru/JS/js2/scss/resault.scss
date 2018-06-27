@@ -1,0 +1,101 @@
+@import "../../common/all"; //引用共用样式
+@import "mystyle";
+// 顶部样式和按钮
+body {
+    background: #74d4eb;
+}
+
+header {
+    @extend %head;
+    text-align: center;
+    line-height: .5rem;
+    font-size: .2rem;
+    border-bottom: 1px solid $grey-f0;
+    .icon-home {
+        position: absolute;
+        left: .1rem;
+        top: .125rem;
+        @include icon(.25rem, .25rem, "../image/home.png");
+    }
+}
+
+// 胜利图片和下面文字
+main {
+    width: 80%;
+    margin: .7rem auto .1rem; // 胜利图片
+    .victory {
+        margin: .1rem auto;
+        height: 1rem;
+        width: 1.6rem;
+        text-align: center;
+        background: url(../image/victory.png) 0 0/contain no-repeat;
+        span {
+            display: inline-block;
+            line-height: 0;
+            margin-top: .75rem;
+            font-size: .18rem;
+            color: #fff;
+        }
+        &+p {
+            display: inline-block;
+            position: relative;
+            @include center(50%, 0, -50%, 0);
+            height: .9rem;
+            text-align: justify;
+            font-size: .16rem;
+            font-weight: bold;
+            color: $orange;
+        }
+    }
+    .main-top {
+        word-spacing: .10rem;
+        color: #fff;
+        p {
+            line-height: .25rem;
+        }
+        .number {
+            display: flex;
+            & span {
+                flex-basis: 33.3%;
+            }
+        }
+    }
+}
+
+// 游戏结果
+.box {
+    margin: 0 auto;
+    padding-bottom: .6rem;
+    border-top: .01rem solid #ccc;
+    .day {
+        padding: {
+            left: 10%;
+            right: 10%;
+        }
+        border-bottom: .01rem solid #ccc;
+        background-color: #fff; 
+        li {
+            line-height: .3rem;
+        }
+        .moon,.sun{
+            font-size: .14rem;
+            color: #ccc;
+        }
+    }
+}
+
+// 底部按钮
+footer {
+    @extend %foot;
+    background: rgba(41, 189, 224, 0.5); //背景半透明
+    #again,
+    #share {
+        @extend %button;
+    }
+    #again {
+        background-color: #fbb435;
+    }
+    #share {
+        background-color: #f66f6f;
+    }
+}

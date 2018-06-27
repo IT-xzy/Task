@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="service.UserService">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+        insert into db_user ( name ,password) values (#{name},#{password})
+    </insert>
+
+    <delete id="delete" parameterType="pojo.User" >
+        delete from db_user where id= #{id}
+    </delete>
+
+    <select id="select" parameterType="int" resultType="pojo.User">
+        select * from   db_user  where id= #{id}
+    </select>
+
+        <!--模糊查询，通过姓名查询数据-->
+    <select id="selectByName" resultType="pojo.User" >
+        select * from db_user where name like '%${value}%'
+    </select>
+
+    <update id="update" parameterType="pojo.User" >
+        update db_user set name=#{name},password=#{password} where id=#{id}
+    </update>
+
+  <!--&lt;!&ndash;  &lt;!&ndash; 配置resultMap属性，进行表字段与实体类属性映射 &ndash;&gt;-->
+    <!--<select id="selectByIdAndName" parameterType="pojo.User"  resultType="pojo.User" >-->
+    <!--   SELECT * FROM db_user-->
+    <!--   <where>-->
+    <!--    <if test="name !=null and name!=''">-->
+                <!--name like CONCAT(CONCAT('%',#{name},'%'))-->
+    <!--    </if>-->
+    <!--    <if test="password !=null and password !=''">-->
+                <!--password like CONCAT(CONCAT('%',#{password},'%'))-->
+    <!--&lt;!&ndash;  <bind name="pattern1" value="'%'+_parameter.id+'%'"/>;&ndash;&gt;-->
+        <!--&lt;!&ndash;AND id LIKE #{pattern1}&ndash;&gt;-->
+
+        <!--  </if>-->
+         <!--</where>-->
+        <!--</select>&ndash;&gt;-->
+
+</mapper>

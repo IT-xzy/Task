@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:conmtext="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <conmtext:annotation-config />
+
+    <!--自动扫描，定位业务类和切面类-->
+    <context:component-scan base-package="hzw.service" />
+    <context:component-scan base-package="hzw.aspect"/>
+    <!--加载数据资源属性文件 -->
+    <context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:memcached.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+    <!--<context:property-placeholder location="classpath:SMS.properties" ignore-unresolvable="true" file-encoding="UTF-8"/>-->
+    <context:property-placeholder location="classpath:SMS.properties" ignore-unresolvable="true"/>
+
+    <!--找到被注解了的切面类，进行切面配置-->
+    <aop:aspectj-autoproxy/>
+
+    <!--&lt;!&ndash; 配置数据源 &ndash;&gt;
+    <bean id="dataSource" class="${dataSource}" init-method="init" destroy-method="close">
+        &lt;!&ndash; 基本属性 url、user、password &ndash;&gt;
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${driverClassName}" />
+        &lt;!&ndash; 配置初始化大小、最小、最大 &ndash;&gt;
+        <property name="initialSize" value="3" />
+        <property name="minIdle" value="3" />
+        <property name="maxActive" value="20" />
+
+        &lt;!&ndash; 配置获取连接等待超时的时间 &ndash;&gt;
+        <property name="maxWait" value="60000" />
+
+        &lt;!&ndash; 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 &ndash;&gt;
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        &lt;!&ndash; 配置一个连接在池中最小生存的时间，单位是毫秒 &ndash;&gt;
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        &lt;!&ndash; 打开PSCache，并且指定每个连接上PSCache的大小 &ndash;&gt;
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+    </bean>
+
+    &lt;!&ndash; 配置sessionfactory &ndash;&gt;
+    &lt;!&ndash;扫描存放SQL语句的StudentMapper.xml&ndash;&gt;
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="hzw.model"/>
+        <property name="dataSource" ref="dataSource"/>
+        &lt;!&ndash;用于配置mapper映射xml&ndash;&gt;
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>-->
+
+    <!-- 装配dao接口 -->
+    <!-- 创建数据映射器-->
+    <!-- 扫描Mapper，并将其生命周期纳入Spring的管理-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="hzw.mapper"/>
+    </bean>-->
+
+    <!-- Memcached配置 -->
+    <bean id="memCachedPool" class="com.whalin.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize" destroy-method="shutDown">
+
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+
+        <property name="servers">
+            <list>
+                <value>${memcached.server}</value>
+            </list>
+        </property>
+        <property name="initConn">
+            <value>${memcached.initConn}</value>
+        </property>
+        <property name="minConn">
+            <value>${memcached.minConn}</value>
+        </property>
+        <property name="maxConn">
+            <value>${memcached.maxConn}</value>
+        </property>
+        <property name="maintSleep">
+            <value>${memcached.maintSleep}</value>
+        </property>
+        <property name="nagle">
+            <value>${memcached.nagle}</value>
+        </property>
+        <property name="socketTO">
+            <value>${memcached.socketTO}</value>
+        </property>
+    </bean>
+
+    <bean id="memCachedClient" class="com.whalin.MemCached.MemCachedClient">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+    </bean>
+
+    <!--Redis配置-->
+    <!-- redis连接池 -->
+    <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!-- redis连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="password" value="${redis.password}"/>
+        <property name="poolConfig" ref="jedisConfig"/>
+    </bean>
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--     如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务-->
+        <!--<property name="enableTransactionSupport" value="true"/>-->
+    </bean>
+
+    <bean id="redisUtil" class="hzw.util.RedisUtil" >
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
+    <bean id="smsUtil" class="hzw.util.SMSUtil">
+        <constructor-arg name="accessKeyId" value="${sms.accessKeyId}"/>
+        <constructor-arg name="accessKeySecret" value="${sms.accessKeySecret}"/>
+        <constructor-arg name="SignName" value="${sms.SignName}"/>
+        <constructor-arg name="TemplateCode" value="${sms.TemplateCode}"/>
+    </bean>
+
+    <bean id="sendMailSDK" class="hzw.util.SendMailSDK">
+    </bean>
+
+    <bean name="rmiService" class="hzw.util.RMIServer"/>
+
+    <!-- 设置上传文件最大值   1M=1*1024*1024(B)=1048576 bytes -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1048576" />
+    </bean>
+
+    <bean id="getStudentRmi" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/StudentRmi"/>
+        <property name="serviceInterface" value="hzw.service.StudentRmi"/>
+        <!-- 连接出错时自动重连 -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!-- 不在容器启动的时候创建与Server端的连接 -->
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean id="getStudentService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/StudentService"/>
+        <property name="serviceInterface" value="hzw.service.StudentService"/>
+        <!-- 连接出错时自动重连 -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!-- 不在容器启动的时候创建与Server端的连接 -->
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean id="getStudentRmi1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:9999/StudentRmi"/>
+        <property name="serviceInterface" value="hzw.service.StudentRmi"/>
+        <!-- 连接出错时自动重连 -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!-- 不在容器启动的时候创建与Server端的连接 -->
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean id="getStudentService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:9999/StudentService"/>
+        <property name="serviceInterface" value="hzw.service.StudentService"/>
+        <!-- 连接出错时自动重连 -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!-- 不在容器启动的时候创建与Server端的连接 -->
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <!-- 使用github https://github.com/winsnlife/cluster4spring 项目-->
+    <!-- 负载均衡 RMI -->
+    <!--<bean id="rmiClientSetting" abstract="true">
+        &lt;!&ndash; 是否启动时加载stub &ndash;&gt;
+        <property name="refreshEndpointsOnStartup" value="false" />
+        &lt;!&ndash; 调用异常时，将重新加载stub &ndash;&gt;
+        <property name="refreshEndpointsOnConnectFailure" value="true" />
+        &lt;!&ndash; 调用失败时是否切换到其他服务端 &ndash;&gt;
+        <property name="switchEndpointOnFailure" value="true" />
+        &lt;!&ndash; 追踪拦截器启用 &ndash;&gt;
+        <property name="registerTraceInterceptor" value="true" />
+        &lt;!&ndash; 缓存stub 继承AbstractRmiShortFormProxyFactoryBean才有&ndash;&gt;
+        <property name="cacheEndpoints" value="true" />
+    </bean>
+
+    <bean id="clientRmiDAO"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <property name="serviceURLs" >
+            <list>
+                <value>rmi://127.0.0.1:8888/StudentService</value>
+                <value>rmi://127.0.0.1:9999/StudentService</value>
+            </list>
+        </property>
+        <property name="serviceInterface" value="hzw.service.StudentService"/>
+         &lt;!&ndash;调用时选择那个url的策略 &ndash;&gt;
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+
+    <bean id="clientRmiService"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <property name="serviceURLs" >
+            <list>
+                <value>rmi://127.0.0.1:8888/StudentRmi</value>
+                <value>rmi://127.0.0.1:9999/StudentRmi</value>
+            </list>
+        </property>
+        <property name="serviceInterface" value="hzw.service.StudentRmi"/>
+        &lt;!&ndash; 调用时选择那个url的策略 &ndash;&gt;
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>-->
+</beans>

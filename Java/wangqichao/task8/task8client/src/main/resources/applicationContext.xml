@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <import resource="spring-redis.xml" />
+    <context:annotation-config />
+    <context:component-scan base-package="com.task.service"/>
+    <context:component-scan base-package="com.task.cache"/>
+    <context:component-scan base-package="com.task.utils"/>
+    <context:component-scan base-package="com.task.rmi"/>
+
+
+    <!--RMI客户端-->
+    <!--<bean id="rmiDemo" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://localhost:9090/helloWorld"/>-->
+        <!--<property name="serviceInterface" value="com.task.service.HelloWorldService"/>-->
+        <!--&lt;!&ndash; 当连接失败时是否刷新远程调用stub &ndash;&gt;-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <!--RMI客户端-->
+    <bean id="rmiUserA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <!--需要连接服务端的url，为"rmi://服务器ip:端口号/服务名"-->
+        <property name="serviceUrl" value="rmi://116.62.18.233:9090/user"/>
+        <!--需要连接服务端的service层接口-->
+        <property name="serviceInterface" value="com.task.service.UserService"/>
+        <!-- 当连接失败时是否刷新远程调用stub -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="rmiProfessionA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://116.62.18.233:9090/profession"/>
+        <property name="serviceInterface" value="com.task.service.ProfessionService"/>
+        <!-- 当连接失败时是否刷新远程调用stub -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="rmiStudentA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://116.62.18.233:9090/student"/>
+        <property name="serviceInterface" value="com.task.service.StudentService"/>
+        <!-- 当连接失败时是否刷新远程调用stub -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="rmiUserB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://116.62.18.233:9091/user"/>
+        <property name="serviceInterface" value="com.task.service.UserService"/>
+        <!-- 当连接失败时是否刷新远程调用stub -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="rmiProfessionB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://116.62.18.233:9091/profession"/>
+        <property name="serviceInterface" value="com.task.service.ProfessionService"/>
+        <!-- 当连接失败时是否刷新远程调用stub -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="rmiStudentB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://116.62.18.233:9091/student"/>
+        <property name="serviceInterface" value="com.task.service.StudentService"/>
+        <!-- 当连接失败时是否刷新远程调用stub -->
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <context:property-placeholder location="classpath:email.properties"  />
+    <!--配置邮件属性-->
+    <bean id="emailUtil" class="com.task.utils.EmailUtil">
+        <constructor-arg index="0" type="java.lang.String" value="${email.region}"></constructor-arg>
+        <constructor-arg index="1" type="java.lang.String" value="${email.accessKey}"></constructor-arg>
+        <constructor-arg index="2" type="java.lang.String" value="${email.accessSecret}"></constructor-arg>
+        <constructor-arg index="3" type="java.lang.String" value="${email.AccountName}"></constructor-arg>
+        <constructor-arg index="4" type="java.lang.String" value="${email.FromAlias}"></constructor-arg>
+        <constructor-arg index="7" type="int" value="${email.AddressType}"></constructor-arg>
+        <constructor-arg index="5" type="java.lang.String" value="${email.TagName}"></constructor-arg>
+        <constructor-arg index="8" type="boolean" value="${email.ReplyToAddress}"></constructor-arg>
+        <constructor-arg index="6" type="java.lang.String" value="${email.Subject}"></constructor-arg>
+    </bean>
+
+</beans>

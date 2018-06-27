@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrap {
+            width: 600px;
+            min-height:400px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel {
+            position: absolute;
+            transition: all 0.5s ease-in 0s;
+        }
+        img {
+            width: 100%;
+        }
+        .carousel div {
+            float: left;
+            text-align: center;
+        }
+        .button {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <div class="carousel">
+        <div><img src="http://b204.photo.store.qq.com/psu?/41e4346e-5d60-4a3e-8af9-0492dd6f0e56/DAx8jd*wHkeZfn2KFFIozuCId3oyygApuIabRH0huoI!/b/Ydkzp3nFfQAAYrelonkwfwAA&bo=ngL2AQAAAAABAEw!" /></div>
+        <div><img src="http://b206.photo.store.qq.com/psu?/41e4346e-5d60-4a3e-8af9-0492dd6f0e56/ajO.4FllSbmZVzpKUjPuydfO50ov0WWQ6cE0k0LIrOw!/b/Yci2zXo*cwAAYgFU0nokCAAA&bo=YwLqAQAAAAABAK0!&rf=viewer_4" /></div>
+        <div><img src="http://b206.photo.store.qq.com/psu?/41e4346e-5d60-4a3e-8af9-0492dd6f0e56/0HDFCiFDzavtBxpA.3J3bzxmEzO2MqmnCO*9Us*s5PA!/b/YU5U1XoGcQAAYn3J0HqhcQAA&bo=TgKlAQAAAAABAM8!&rf=viewer_4" /></div>
+    </div>
+</div>
+<div class="button"><button class="pre">上一张</button><button class="next">下一张</button></div>
+
+<script>
+    (function () {
+        var carousel = document.querySelector(".carousel");
+        var img = carousel.querySelectorAll("div");
+        var len = img.length;
+        [].forEach.call(img, function (item) {
+            item.style.width = (100 / len) + "%";
+        });
+        carousel.style.left = "0%";
+        carousel.style.width = (100 * len) + "%";
+        var pre = document.querySelector(".pre");
+        var next = document.querySelector(".next");
+        var i = 0;
+        next.onclick = function () {
+            var left = carousel.style.left;
+            if (i < len - 1) {
+                carousel.style.left = (parseInt(left) - 100) + "%";
+                i++;
+            }
+            else if (i == len - 1) {
+                carousel.style.left = "0%";
+                i = 0;
+            }
+        };
+        pre.onclick = function () {
+            var left = carousel.style.left;
+            if (i > 0) {
+                carousel.style.left = (parseInt(left) + 100) + "%";
+                i--;
+            } else if (i == 0) {
+                carousel.style.left = -parseInt(carousel.style.width) + 100 + "%";
+                i = len - 1;
+            }
+        };
+    }());
+</script>
+</body>
+</html>

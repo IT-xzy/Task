@@ -1,0 +1,112 @@
+@charset "utf-8";
+//less库
+@import "z";
+@import "css3";
+//公用的变量
+@import "bl";
+html{
+  font-size:625%;
+}
+
+body{
+  .bgcolor(@body_bgc);
+}
+
+//两分布局
+.main{
+  .rel;
+  .slidebar{
+    width:3rem;
+    margin-left:-3rem;
+    .abs;
+    height:10rem;
+    .fl;
+    .bgcolor(white);
+    div{
+      border-bottom: 1px solid lightgrey;
+      height:1rem;
+      .flex;
+      align-items: center;
+      justify-content: space-between;
+      padding:0 0.3rem;
+      .w100;
+      .font-s(0.3rem);
+      color:@main_bgc;
+    }
+  }
+  .maincontent{
+    width:100%;
+    .bgcolor(#f0f0f0);
+    height:10rem;
+    .head{
+     .w100;
+     .bgcolor(@main_bgc);
+     height:0.78rem;
+      line-height: 0.78rem;
+      padding-left:0.2rem;
+   }
+    .btnb{
+      width:89%;
+      height:1.15rem;
+      .bgcolor(white);
+      border:0.01rem solid #cdcdcd;
+      .font-s(3vw);
+      line-height: 1.15rem;
+      color:#c0c0c0;
+      .db;
+      background:#ffffff url("../img/icon1.png") right center no-repeat ;
+      @media screen and (max-width: 320px){
+        .font-s(0.15rem);
+      }
+      margin: 0.3rem auto;
+      img{
+        .fr;
+      }
+    }
+    .mainb{
+      width:89%;
+      margin:0 auto;
+      .bgcolor(white);
+      .tc;
+      .font-s(3vw);
+      .ghost{
+        .font-s(2.1vw);
+        color:#fcbd4e;
+        padding:0.2rem 0 0.2rem 0;
+        border-bottom: 1px solid #fcbd4e;
+      }
+      .btn{
+          width:80%;
+          .bgcolor(#69d1e9);
+         height:0.8rem;
+        .font-s(2.1vw);
+        color:white;
+        .border-radius(0);
+      }
+      p{
+        .font-s(0.15rem);
+        color:#cdcdcd;
+      }
+      .yuanquan{
+        width:60px;
+        margin:0.1rem auto;
+        padding-bottom: 0.2rem;
+        .flex;
+        justify-content: space-around;
+         .circle1{
+           width:10px;
+           height:10px;
+           border-radius: 50%;
+           .bgcolor(#69d1e9);
+         }
+        .circle{
+          width:10px;
+          height:10px;
+          border-radius: 50%;
+          .bgcolor(white);
+          border:0.01rem solid lightgrey;
+        }
+      }
+    }
+  }
+}

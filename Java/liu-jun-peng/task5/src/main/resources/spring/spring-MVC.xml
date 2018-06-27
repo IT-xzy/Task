@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 启动注解 -->
+    <mvc:annotation-driven />
+
+    <!--扫描contoller包下所有的comtroller注解,，并创建对象放到springmvc容器中。 -->
+    <context:component-scan base-package="com.oto.controller"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+
+    <!--配置tiles模板-->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+    </bean>
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- prefix：前缀 -->
+        <property name="prefix" value="/WEB-INF/jsps/"></property>
+        <!-- suffix：后缀 -->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+    <context:component-scan base-package="com.oto.advice"/>
+
+    <context:annotation-config></context:annotation-config>
+
+    <!--contoroller层aop，输出操作的执行时间-->
+    <aop:config>
+        <aop:pointcut id="controllerPointcut" expression="execution(* com.oto.controller.*.*(..))"/>
+        <aop:aspect id="controllerAdvice" ref="controllerAdvice">
+            <aop:before method="before" pointcut-ref="controllerPointcut"/>
+            <aop:after method="after" pointcut-ref="controllerPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/u/recom"/>
+            <bean class="com.oto.util.Interceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+
+</beans>

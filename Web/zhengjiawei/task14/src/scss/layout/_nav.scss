@@ -1,0 +1,37 @@
+/* 导航栏 */
+
+@import '../helpers/mixin';
+@import '../helpers/variable';
+/* 折叠导航 */
+
+@import '../components/collapse-btn';
+nav {
+    background: $green;
+    .row {
+        justify-content: flex-end;
+        /* 菜单向右对齐 */
+        @media (max-width: 767px) {
+            display: block;
+        }
+        a {
+            display: inline-block;
+            padding: 42px 15px;
+            border-bottom: 4px solid transparent;
+            color: $white;
+            letter-spacing: 5px;
+            font-weight: 300;
+            &:hover {
+                border-bottom: 4px solid $white;
+            }
+            @media(max-width:767px) {
+                @include flex-s-center;
+                padding: 0;
+                height: 0;
+                overflow: hidden;
+                border: none;
+                margin: 0 15px;
+                transition: all 1s;
+            }
+        }
+    }
+}

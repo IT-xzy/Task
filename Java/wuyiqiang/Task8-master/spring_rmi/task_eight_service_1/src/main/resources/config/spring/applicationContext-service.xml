@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       xmlns:aop="http://www.springframework.org/schema/aop">
+
+    <!--扫描service-->
+    <!--<context:component-scan base-package="org.wyq.task.service"/>-->
+
+    <!--&lt;!&ndash;启用spring的一些annotation &ndash;&gt;-->
+    <!--<context:annotation-config/>-->
+
+    <bean name="schoolService" class="org.wyq.task.service.SchoolService"/>
+    <bean name="serviceRmiTest" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="schoolService"/>
+        <property name="serviceName" value="serviceRmi"/>
+        <property name="serviceInterface" value="org.wyq.task.service.BaseService"/>
+        <property name="registry" ref="registry"/>
+        <!--<property name="registryPort" value="8084"/>-->
+        <!--<property name="alwaysCreateRegistry" value="true"/>-->
+    </bean>
+
+    <!--Spring使用服务器webapp的类加载器创建了RMIRegistry。 然后，在重新启动服务器时，RMIRegistry不会关闭。 重新启动后，注册表将其引用保存到不存在的旧存根中。-->
+    <!--有两种解决方案：-->
+    <!--1）在没有服务器应用程序类路径的独立进程中启动rmiregistry。-->
+    <!--2）（更好的方法）让Spring通过RmiRegistryFactoryBean启动RMIRegistry，它会正确关闭它。-->
+    <bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean">
+        <property name="port" value="8086"/>
+    </bean>
+
+</beans>

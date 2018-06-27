@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.token.dao.ProfessionMapper">
+    <select id="getAll" resultType="Profession">
+        select * from occupation
+    </select>
+    <insert id="addProfession" parameterType="Profession">
+        insert into occupation
+        (type,introduce,threshold,level,period,required,salary1,salary2,salary3,learning,language1,language2,language3,create_at,update_at,img_path)
+        values
+        (#{type},#{introduce},#{threshold},#{level},#{period},#{required},#{salary1},#{salary2},#{salary3},#{learning},#{language1},
+        #{language2},#{language3},#{create_at},#{update_at},#{img_path})
+    </insert>
+</mapper>

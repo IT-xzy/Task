@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.dao.UserMapper">
+    <insert id="addUser" parameterType="User">
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into students2
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">name,</if>
+            <if test="number!=null">number,</if>
+            <if test="qq!=null">qq,</if>
+            <if test="type!=null">type,</if>
+            <if test="university!=null">university,</if>
+            <if test="time!=null">time,</if>
+            <if test="daily_link!=null">daily_link,</if>
+            <if test="pledge!=null">pledge,</if>
+            <if test="senior!=null">senior,</if>
+            <if test="locality!=null">locality,</if>
+            <if test="create_at!=null">create_at,</if>
+            <if test="update_at!=null">update_at,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">#{name},</if>
+            <if test="number!=null">#{number},</if>
+            <if test="qq!=null">#{qq},</if>
+            <if test="type!=null">#{type},</if>
+            <if test="university!=null">#{university},</if>
+            <if test="time!=null">#{time},</if>
+            <if test="daily_link!=null">#{daily_link},</if>
+            <if test="pledge!=null">#{pledge},</if>
+            <if test="senior!=null">#{senior},</if>
+            <if test="locality!=null">#{locality},</if>
+            <if test="create_at!=null">#{create_at},</if>
+            <if test="update_at!=null">#{update_at},</if>
+        </trim>
+    </insert>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from students2 where id=#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update students2
+        <trim prefix="set" suffixOverrides="," suffix="where id=#{id}">
+            <if test="name!=null">name=#{name},</if>
+            <if test="number!=null">number=#{number},</if>
+            <if test="qq!=null">qq=#{qq},</if>
+            <if test="type!=null">type=#{type},</if>
+            <if test="university!=null">university=#{university},</if>
+            <if test="time!=null">time=#{time},</if>
+            <if test="daily_link!=null">daily_link=#{daily_link},</if>
+            <if test="pledge!=null">pledge=#{pledge},</if>
+            <if test="senior!=null">locality=#{locality},</if>
+            <if test="update_at!=null">update_at=#{update_at},</if>
+        </trim>
+    </update>
+
+    <select id="getById" parameterType="int" resultType="User">
+        select * from students2 where id=#{id}
+    </select>
+    <select id="getAll" resultType="User">
+        select * from students2
+    </select>
+</mapper>

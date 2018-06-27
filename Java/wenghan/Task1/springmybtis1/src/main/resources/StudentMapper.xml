@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：命名空间，对sql进行一个分类管理 -->
+<!-- 注意：namespace在mapper代理时，具有重要且特殊的作用
+    对应mapper接口的全限定名
+-->
+<mapper namespace="com.DAO.StudentMapper">
+
+    <select id="findStudentById" parameterType="int" resultType="com.Student.Student">
+         SELECT * FROM student WHERE id = #{id}
+     </select>
+
+    <select id="findStudentByname" parameterType="String" resultType="com.Student.Student">
+        SELECT * FROM student WHERE name = #{name}
+    </select>
+
+    <select id="selectAllStudent" resultType="com.Student.Student">
+         SELECT * FROM student
+    </select>
+
+    <insert id="addStudent" keyProperty="id" useGeneratedKeys="true" parameterType="com.Student.Student">
+        INSERT INTO student (name,age,qq )
+        VALUES (#{name},#{age},#{qq})
+    </insert>
+
+    <delete id="deleteStudnetById" parameterType="int">
+        DELETE from student where id=#{id}
+    </delete>
+
+    <update id="updateStudnet" parameterType="com.Student.Student">
+        UPDATE student SET name=#{name},age=#{age},qq=#{qq}  WHERE id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,150 @@
+
+<div class="addMain">
+    <div class="head">{{head}}</div>
+    <form class="content" name="myForm">
+        <span class="col-md-3">标题名称</span>
+        <div class="col-md-9">
+            <input type="text"
+                   name="title"
+                   ng-model="param.title"
+                   class="form-control"
+                   required>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-9 error">
+            <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
+                <span ng-message="required">请输入标题</span>
+            </div>
+        </div>
+        <span class="col-md-3">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>
+        <div class="col-md-9">
+            <select ng-options="t.value as t.name for t in typeData"
+                    ng-model="param.type"
+                    class="form-control"
+                    name="typeParent"
+                    required>
+                <option value="">请选择</option>
+            </select>
+            <select ng-options="i.value as i.name for i in industryData"
+                    ng-model="param.industry"
+                    ng-if="param.type === 3"
+                    class="form-control"
+                    name="typeSun"
+                    required>
+                <option value="">请选择</option>
+            </select>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-9 error">
+            <div ng-messages="myForm.typeParent.$error" ng-if="myForm.typeParent.$touched">
+                <span ng-message="required">请选择类型</span>
+            </div>
+            <div ng-messages="myForm.typeSun.$error" ng-if="myForm.typeSun.$touched">
+                <span ng-message="required">请选择子类型</span>
+            </div>
+        </div>
+        <span class="col-md-3">说&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;明</span>
+        <div class="col-md-9">
+            <div id="wEditor" ng-model="param.content"></div>
+        </div>
+        <span class="col-md-3">跳转链接</span>
+        <div class="col-md-9">
+            <input type="url"
+                   ng-model="param.url"
+                   class="form-control"
+                   name="url"
+                   ng-messages="url"
+                   required>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-9 error">
+            <div ng-messages="myForm.url.$error" ng-if="myForm.url.$touched">
+                <span ng-message="required">请输入跳转链接</span>
+                <span ng-message="url">请输入正确的链接地址</span>
+            </div>
+        </div>
+        <span class="col-md-3">配&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图</span>
+        <div class="col-md-9">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="btn btn-primary" for="filePicture">选择文件</label>
+                    <input id="filePicture"
+                           style="display: none"
+                           type="file"
+                           nv-file-select
+                           uploader="uploader"
+                    >
+                    <img alt="配图预览" class="img-responsive" src="{{imageSrc1}}">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="table-responsive padding-0">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>图片名</th>
+                            <th>文件大小</th>
+                            <th>进度</th>
+                            <th>操作</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="item in uploader.queue">
+                            <td>{{item.file.name}}</td>
+                            <td>{{item.file.size/1024/1024|number: 2}}MB</td>
+                            <td ng-show="uploader.isHTML5">
+                                <div class="progress">
+                                    <div class="progress-bar"
+                                         role="progressbar"
+                                         ng-style="{'width':item.progress+'%'}"></div>
+                                </div>
+                            </td>
+                            <td>
+                                <span ng-show="item.isSuccess">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </span>
+                                <span ng-show="item.isCancel">
+                                    <i class="glyphicon glyphicon-ban-circle"></i>
+                                </span>
+                                <span ng-show="item.isError">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </span>
+                            </td>
+                            <td nowrap>
+                                <button type="button"
+                                        class="btn btn-success btn-xs"
+                                        ng-click="item.upload()"
+                                        ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                    <span class="glyphicon glyphicon-upload"></span>
+                                    上传
+                                </button>
+                                <button type="button"
+                                        class="btn btn-danger btn-xs"
+                                        ng-click="item.remove();remove1()">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    删除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <button type="button"
+                    class="btn btn-success"
+                    ng-click="online()"
+                    ng-disabled="!myForm.$valid||imageSrc1==undefined"
+                    disabled="disabled">立即上线</button>
+            <button type="button"
+                    class="btn btn-success"
+                    ng-click="draft()"
+                    ng-disabled="!myForm.$valid||imageSrc1==undefined"
+                    disabled="disabled">存为草稿</button>
+            <button ng-click="cancel()" class="btn btn-default">取消</button>
+        </div>
+    </form>
+</div>

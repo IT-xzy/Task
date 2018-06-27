@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <mvc:annotation-driven/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+    <context:component-scan base-package="com.ptt.controller"/>
+    <context:component-scan base-package="com.ptt.advice"/>
+    <context:property-placeholder location="classpath:com.ptt/studySteps.properties" ignore-unresolvable="true"/>
+    <context:annotation-config></context:annotation-config>
+
+    <!--注意这里要与tiles的视图解析器分开配置-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--tiles视图解析器，InternalResourceViewResolver是UrlBasedViewResolver的子类-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <aop:config>
+        <!--注意*和后面包之间有空格-->
+        <aop:pointcut expression="execution(* com.ptt.controller.*.*(..))" id="controllerPointcut"/>
+        <!--<aop:pointcut id="servicePointcut" expression="execution(* com.restful.service.*.*(..))"/>-->
+        <aop:aspect id="controllerAdvice" ref="controllerAdvice">
+            <aop:before method="before" pointcut-ref="controllerPointcut"/>
+            <!--AspectJ自动代理aop after-->
+            <aop:after method="after" pointcut-ref="controllerPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

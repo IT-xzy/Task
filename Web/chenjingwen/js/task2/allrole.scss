@@ -1,0 +1,102 @@
+$blue:#29bde0;
+$lightorange:#ffedc5;
+$orange:#fbb435;
+$yellow:#f5c97b;
+$green:#83b09a;
+$red:#f67489;
+$white:#fff;
+@mixin fixedwidth{
+    min-width: 320px;
+    max-width: 768px;
+}
+@mixin size($width,$height){
+    width:$width;
+    height:$height;
+}
+body{
+    @include fixedwidth;
+    margin:0 auto;
+}
+header{
+    @include fixedwidth;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    padding: .5rem;
+    font-size: 1rem;
+    color:$white;
+    background-color:$blue;
+    text-align: center;
+    box-sizing: border-box;   
+    .header-left{
+        float:left;
+        img{
+            width:.6rem;
+        }
+    }
+    .header-right{
+        float:right;
+        img{
+            width:1rem;
+        }
+    }
+}
+.squares{
+    @include fixedwidth;
+    min-height: 100vh;
+    padding:4rem 5% 6rem;
+    background-color:$blue;
+    box-sizing: border-box;
+    .square{
+        display: inline-block;
+        width:25%;
+        margin:3.35%;
+        border:2px solid $white;
+        box-sizing: border-box;
+        .upper{
+            padding:25%;
+            text-align: center;
+            font-size: 1rem;
+            background-color: $yellow;
+        }
+        .lower{
+            padding:10% ;
+            text-align: center;
+            font-size:0.6rem;
+            background-color:$green;
+        }
+    }
+}
+@media screen and (max-width:550px){
+    .squares{
+        .square{
+            box-sizing: border-box;
+            .upper{
+                padding:17%;
+            }
+            .lower{
+                padding:8%
+            }
+        }
+    }
+}
+
+footer{
+    position:fixed;
+    bottom:0;
+    @include fixedwidth;
+    width: 100%;
+    padding:2rem;
+    text-align: center;
+    background:$blue;
+    box-sizing: border-box;
+    button{
+        @include size(80%,3rem);
+        border:none;
+        font-size:1.2rem;
+        text-align: center;
+        outline:none;
+        color:$white;
+        background-color:$orange;
+    }
+}

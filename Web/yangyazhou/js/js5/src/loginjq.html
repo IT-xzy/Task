@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录页</title>
+</head>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_683135_0is3ng5aihog8pvi.css">
+<link rel="stylesheet" href="css/login.css">
+
+<body>
+    <canvas id="canvas"></canvas>
+    <main>
+        <div class="form-container">
+            <h4>后台登陆</h4>
+            <form action="" id="form">
+                <div class="user-box">
+                    <label for="user">
+                        <i class="iconfont icon-user1"></i>
+                    </label>
+                    <input type="text" id="user" placeholder="请输入用户名" name="name">
+                </div>
+                <div class="pwd-box">
+                    <label for="password">
+                        <i class="iconfont icon-lock"></i>
+                    </label>
+                    <input type="password" id="password" placeholder="请输入密码" maxlength="20" name="pwd"> 
+                </div>
+                <p class="error-show"></p>
+                <button class="login" type="button" id="login">登录</button>
+            </form>
+        </div>
+    </main>
+
+
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <script >
+        //使用jquer进行传参
+        $('#login').on('click',function(){
+            //保证输入密码
+            userVal=$('#user').val();
+            pwdVal=$('#password').val();
+            if(userVal ==''){
+                $('.error-show').text('请输入用户名');
+                return;
+            }else if(userVal && pwdVal==''){
+                $('.error-show').text('请输入密码');
+                return;
+            }
+       
+
+            $.ajax({
+                type:'post',
+                url:'/carrots-admin-ajax/a/login',
+                data:$('#form').serialize(),
+                dataType:'json',
+            
+                success:function(data,stausText){
+                    if(data.code===0){
+                        // $(location).attr('href','result.html');第一种跳转方式
+                        // $(location).prop('href','result.html');//第二种跳转方式
+                        $(window).attr('location','result.html');//第三种跳转方式
+                    }else{
+                        $('.error-show').text(data.message);
+                    }
+                },
+                error:function(xhr,stausText){
+                    console.log(stausText)
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

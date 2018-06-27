@@ -1,0 +1,57 @@
+#!/bin/sh
+tomcat_home=/usr/local/tomcat9
+SHUTDOWN=$tomcat_home/bin/shutdown.sh  
+STARTTOMCAT=$tomcat_home/bin/startup.sh  
+# 后缀
+suffix=".war"
+# war包的存放路径
+war_path="/data/home/"
+
+# tomcat的名字和webapp中存放的项目名字,要和war包名字项目
+  
+case $1 in    
+start)    
+echo "启动$tomcat_home"  
+$STARTTOMCAT
+;; 
+deploy)  
+rm  /data/home/ROOT/* -rf
+echo "将$2$suffix解压到ROOT目录下"
+unzip $2$suffix -d /data/home/ROOT
+sleep 1s
+echo y
+;;
+stop)      
+echo "关闭$tomcat_home"  
+$SHUTDOWN
+pidlist=`ps -ef |grep tomcat  |grep -v "grep"|awk '{print $2}'`   
+kill -9 $pidlist  
+  
+#删除日志文件，如果你不先删除可以不要下面一行  
+rm  $tomcat_home/logs/* -rf  
+#删除tomcat的临时目录  
+rm  $tomcat_home/work/* -rf    
+;;     
+restart)    
+echo "关闭$tomcat_home"  
+$SHUTDOWN
+pidlist=`ps -ef |grep tomcat  |grep -v "grep"|awk '{print $2}'`   
+kill -9 $pidlist  
+  
+#删除日志文件，如果你不先删除可以不要下面一行  
+rm  $tomcat_home/logs/* -rf  
+#删除tomcat的临时目录  
+rm  $tomcat_home/work/* -rf  
+  
+sleep 5  
+echo "启动$tomcat_home"  
+$STARTTOMCAT
+#看启动日志  
+#tail -f $tomcat_home/logs/catalina.out  
+;;  
+logs)  
+cd /usr/local/tomcat9/logs  
+  
+tail -f catalina.out  
+;;     
+esac        

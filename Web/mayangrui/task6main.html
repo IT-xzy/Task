@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery-3.3.1.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="js/bootbox/bootbox.js"></script>
+    <link rel="stylesheet" href="css/task6login.css"/>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/angular/angular.js"></script>
+    <script src="js/angular-file-upload/angular-file-upload.js"></script>
+    <script src="js/angular-animate/angular-animate.js"></script>
+    <script src="js/angular-sanitize/angular-sanitize.js"></script>
+    <script src="js/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="js/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <!--ui-router-->
+    <script src="js/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="js/app.js"></script>
+    <!--表单验证-->
+    <script src="js/angular-messages/angular-messages.js"></script>
+
+    <!--控制器过滤器等等-->
+    <script src="js/controller.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/factory.js"></script>
+    <script src="js/filters.js"></script>
+    <script src="js/wangEditor.min.js"></script>
+    <script src="js/ajax.js"></script>
+    <title>login</title>
+    <style type="text/css">
+        .toolbar {
+            border: 1px solid #ccc;
+        }
+
+        .text {
+            border: 1px solid #ccc;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 nav" ng-controller="list">
+            <h1>洋芋多后台管理系统</h1>
+            <div>
+                <div class="panel-default title" open>
+                    <div ng-click="oops1()">信息管理 <i class="pull-right glyphicon"
+                                 ng-class="{'glyphicon-chevron-down': !showMe1, 'glyphicon-chevron-right':showMe1}"></i>
+                    </div>
+                    <ul class="body">
+                        <li sliderbar>公司列表</li>
+                        <li sliderbar>职位列表</li>
+                        <li sliderbar>职位列表</li>
+                        <li sliderbar>职位列表</li>
+                    </ul>
+                </div>
+                <div class="panel-default title" open>
+                    <div ng-click="oops()">article管理 <i class="pull-right glyphicon"
+                                      ng-class="{'glyphicon-chevron-down':!showMe, 'glyphicon-chevron-right': showMe}"></i>
+                    </div>
+                    <ul class="body">
+                        <li ui-sref="article" sliderbar>Article列表</li>
+                        <li sliderbar>文章管理</li>
+                        <li sliderbar>文章管理</li>
+                        <li sliderbar>文章管理</li>
+                    </ul>
+                </div>
+                <div class="panel-default title" open>
+                    <div ng-click="oops2()">用户管理 <i class="pull-right glyphicon"
+                                 ng-class="{'glyphicon-chevron-down': !showMe2, 'glyphicon-chevron-right': showMe2}"></i>
+                    </div>
+                    <ul class="body">
+                        <li sliderbar>用户管理</li>
+                        <li sliderbar>用户管理</li>
+                        <li sliderbar>用户管理</li>
+                        <li sliderbar>用户管理</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 main">
+            <ol class="breadcrumb" ng-controller="off">
+                <li><a href="#">管理员</a></li>
+                <li><a href="#">admin</a></li>
+                <li><span class="glyphicon glyphicon-off" ng-click="loginout()"></span></li>
+            </ol>
+            <ui-view></ui-view>
+        </div>
+    </div>
+</div>
+</body>
+</html>

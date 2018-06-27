@@ -1,0 +1,105 @@
+<div class="right-box" ng-controller="myCtrl">
+  <div class="right-box-top ">
+    <div class="row">
+      <span class="span col-md-2">发布时间</span>
+      <div class="col-md-2 date">
+        <div>
+          <p class="form-group ">
+            <div class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" value="1" ng-model="params.startAt" is-open="popup1.opened" ng-required="true" close-text="关闭" clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </p>
+        </div>
+      </div>
+      <span class="span col-md-2">——</span>
+      <div class="col-md-2 date">
+        <div>
+          <p class="form-group ">
+            <div class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="params.endAt" is-open="popup2.opened" ng-required="true" close-text="关闭" clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </p>
+        </div>
+      </div>
+      <span class="span col-md-2">类&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp型</span>
+      <div class="btn-group col-md-2">
+        <select class="form-control" ng-model="params.type">
+                  <option value="">全部</option>
+                  <option value="0">首页banner</option>
+                  <option value="1">找职位banner</option>
+                  <option value="2">找精英banner </option>
+                  <option value="3">行业大图</option>
+                </select>
+      </div>
+    </div>
+    <span class="span span1 col-md-2">状&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp态</span>
+    <div class="btn-group  col-md-2">
+      <select class="form-control" ng-model="params.status">
+                <option value="">全部</option>
+                <option value="1">草稿</option>
+                <option value="2">上线</option>
+              </select>
+    </div>
+    <div class="anniu col-md-12">
+      <button type="button" class=" anniu1 btn btn-default" ng-click="reset()">清空</button>
+      <button type="button" class=" anniu2 btn btn-default" ng-click="search()">搜索</button>
+    </div>
+  </div>
+  <div class="right-box-bottom">
+    <div class="title">
+      <p>Article列表</p>
+      <button type="button" class="btn-xs btn btn-default " ui-sref="new">+新增</button>
+    </div>
+    <div class="main">
+      <table>
+        <tr class="row">
+          <th class="th1">名称</th>
+          <th class="th2">ID</th>
+          <th class="th3">类型</th>
+          <th class="th4">发布时间</th>
+          <th class="th5">修改时间</th>
+          <th class="th6">发布者</th>
+          <th class="th7">状态</th>
+          <th class="last">操作</th>
+        </tr>
+        <tr ng-repeat="item in items" class="row" ng-class-even="'even'">
+          <td class="">{{item.title}}</td>
+          <td class="">{{item.id}}</td>
+          <td class="">{{item.type|typeChange}}</td>
+          <td class="">{{item.createAt|date:"yyyy-MM-dd hh:mm:s"}}</td>
+          <td class="">{{item.updateAt|date:"yyyy-MM-dd hh:mm:s"}}</td>
+          <td class="">{{item.author}}</td>
+          <td class="">{{item.status|statusChange}}</td>
+          <td><span ng-click="status(item.id,item.status)" ><a href="#">{{item.status|statusChange1}}</a></span>
+            <span ng-click="change(item.title)" ><a href="#">编辑</a></span>
+            <span ng-click="remove(item.id)" ><a href="#" >删除</a></span>
+          </td>
+        </tr>
+      </table>
+      <div>
+        <div class="row ">
+          <div class="col-md-2 height"><span>每页{{pagination.size}}条</span></div>
+          <!-- <my-pagination page-option="option"></my-pagination> -->
+          <ul class="col-md-5" uib-pagination total-items="pagination.total" ng-model="params.page" first-text="首页" last-text="末页" previous-text="<" next-text=">" ng-change="goTo(goPage)" max-size="maxSize" class="pagination-md" boundary-links="true" force-ellipses="true"></ul>
+          <div class="col-md-3 row  height">
+            <span class=" col-md-3">去第</span>
+            <div class="col-md-3 "><input class="form-control " type="text" ng-change="goTo()" ng-model="params.page"></div>
+            <span class=" col-md-5 ">页   共{{pagination.total|upNumber}}页</span>
+          </div>
+
+        </div>
+      </div>
+      <!-- 控制器 -->
+
+
+      <!--
+<div ng-app="">
+ 	<p>名字 : <input type="text" ng-model="name"></p>
+ 	<h1>Hello {{name}}</h1>
+</div> -->

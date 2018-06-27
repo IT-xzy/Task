@@ -1,0 +1,129 @@
+<div class="ddd" ng-controller="myCtrl">
+    <!--<div ng-repeat="x in vbn">-->
+    <div class="strong"><b>新增Article</b></div>
+    <div class="pd1">
+        <form name="myForm">
+            <label>
+                标题名称
+            </label>
+            <input type="text" class="wid40" ng-model="title">
+            <br><br>
+            <label>类&#12288;&#12288;型</label>
+            <select ng-model="type" class="trade">
+                <option value=""></option>
+                <option value="0">首业Banner</option>
+                <option value="1">找职位Banner</option>
+                <option value="2">找精英Banner</option>
+                <option value="3">行业大图</option>
+            </select>
+            <br>
+            <select class="trad" ng-show="type==3" ng-model="industry">
+                <option value="">请选择</option>
+                <option value="0">移动互联网</option>
+                <option value="1">电子商务</option>
+                <option value="2">企业服务</option>
+                <option value="3">教育</option>
+                <option value="4">金融</option>
+                <option value="5">游戏</option>
+            </select>
+            <br><br>
+            <label>
+                说&#12288;&#12288;明
+            </label>
+            <div id="editor">
+                <p> <b>说明不是必填</b></p>
+            </div>
+            <br><br>
+            <label>
+                跳转连接
+            </label>
+            <input type="text" class="wid40" ng-model="url">
+            <br><br>
+            <label>
+                配&#12288;&#12288;图
+            </label>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+                        <label class="inp" for="asd">
+                            选择文件
+                        </label>
+                        <input id="asd" type="file" nv-file-select="" uploader="uploader" multiple class="blue"
+                               style="display:none;"/><br/>
+                    </div>
+                    <br><br>
+                    <div class="col-md-8" style="margin-bottom: 40px">
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th width="50%">图片名</th>
+                                <th ng-show="uploader.isHTML5">文件大小</th>
+                                <th ng-show="uploader.isHTML5">进度</th>
+                                <th>操作</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td>
+                                    <strong>{{ item.file.name }}</strong>
+                                    <!-- Image preview -->
+                                    <!--auto height-->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                    <!--auto width-->
+                                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    <!--fixed width and height -->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                </td>
+                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar"
+                                             ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <!--<td class="text-center">-->
+                                    <!--<span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>-->
+                                    <!--<span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>-->
+                                    <!--<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>-->
+                                <!--</td>-->
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                                            ng-disabled="item.isReady || item.isUploading ||myForm item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()"
+                                            ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <img src="" alt="" ng-src="">
+                    </div>
+                </div>
+            </div>
+            <div><img src="" alt="" ng-src="{{img}}" ng-model="img"></div>
+            <div class="box3">
+                <div>
+                    <button class="time" ui-sref="two" ng-disabled="img===undefined||myForm.$invalid" ng-model="state"
+                            ng-click="edit(2)">立即上线
+                    </button>
+                    <button class="time" ui-sref="two" ng-disabled="img===undefined||myForm.$invalid" ng-model="state"
+                            ng-click="edit(1)">存为草稿
+                    </button>
+                </div>
+                <div style="text-align: right;">
+                    <button class="fff">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>

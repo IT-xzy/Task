@@ -1,0 +1,135 @@
+@import "reset";
+$bg-blue: #29bde0;
+$bg-gary: #a9a9a9;
+$bg-s-bluse: #e7fbff;
+@mixin flex-start-center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin flex-between-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+header {
+    @include flex-between-center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    font-size: .18rem;
+    background: $bg-blue;
+    .head-left {
+        background: url("../img/小房子.png") no-repeat;
+        background-size: 100% auto;
+        width: .25rem;
+        height: .21rem;
+        margin-left: .1rem;
+    }
+    .head-right {
+        background: url("../img/提示.png") no-repeat;
+        background-size: 100% auto;
+        width: .25rem;
+        height: .25rem;
+        margin-right: .1rem;
+    }
+}
+
+main {
+    width: 80%;
+    margin: .6rem auto 0 auto;
+    color: #fff;
+    background: $bg-blue;
+    .img-box {
+        background: url("../img/游戏胜利.png") no-repeat;
+        background-size: 100%;
+        width: 2.2rem;
+        padding-top: 1.4rem;
+        margin: 0 auto;
+    }
+    .p1 {
+        color: #ffc865;
+        font-size: .19rem;
+        font-weight: bold;
+        margin-bottom: .3rem;
+    }
+    .p2 {
+        font-size: .16rem;
+    }
+    .tips1 {
+        font-size: .16rem;
+        @include flex-start-center;
+        flex-wrap: wrap;
+        margin: .05rem 0;
+        >span {
+            flex: 0 0 33.33%
+        }
+    }
+    .tips2 {
+        font-size: .16rem;
+        margin-bottom: .2rem;
+    }
+}
+
+article {
+    background: #fff;
+    padding-bottom: 1rem;
+    .list {
+        border-bottom: 1px solid $bg-gary;
+        .wrap {
+            width: 80%;
+            padding: .1rem;
+            margin: 0 auto;
+            .title {
+                @include flex-between-center;
+                padding-bottom: .1rem;
+                .day {
+                    font-size: .18rem;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                }
+                .time {
+                    font-size: .14rem;
+                    color: $bg-gary;
+                }
+            }
+            >p {
+                color: $bg-gary;
+                margin: .02rem 0;
+            }
+        }
+    }
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(105,209,233,.7);
+    @include flex-start-center;
+    .again,.push{
+        width: 40%;
+        line-height: .4rem;
+        margin: 5%;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 22px;
+        text-align: center;
+    }
+}
+
+.again{
+    background-color: #f66f6f;
+}
+.push{
+    background-color: #fbb435;
+}

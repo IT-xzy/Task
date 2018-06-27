@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="css/login.css">
+
+<div ng-controller="login">
+    <form name="loginForm" class="loginForm" novalidate="novalidate">
+        <h3 class="loginTitle">后台登陆</h3>
+        <div class="wrap">
+            <img src="img/username.png" oncontextmenu="return false" ondragstart="return false" alt="">
+            <input type="text" name="username" ng-model="user" ng-minlength="5" ng-maxlength="12" placeholder="用户名" autocomplete="off"
+                required>
+        </div>
+
+        <div class="wrap">
+            <img src="img/password.png" ondragstart="return false" alt="">
+            <input type="password" name="password" ng-model="pwd" ng-minlength="6" ng-maxlength="10" placeholder="请输入密码" required>
+        </div>
+
+        <!--用户提示info -->
+        <div class="loginInfo">
+            <div ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched">
+                <div ng-message="required">用户名不能为空</div>
+                <div ng-message="minlength">用户名长度至少为5</div>
+                <div ng-message="maxlength">用户名长度不能超过12</div>
+                <h4 ng-model="info">{{info}}</h4>
+            </div>
+        </div>
+
+        <!-- 密码提示info -->
+        <!-- <div class="error" ng-messages="loginForm.password.$error" ng-if="loginForm.password.touched" >
+            <div ng-message="required">请输入密码</div>
+            <div ng-message="minlength">密码长度至少为6</div>
+            <div ng-message="maxlength">密码长度不能超过10</div>
+        </div> -->
+
+        <button class="submit" type="submit" ng-click="submit()">登陆</button>
+    </form>
+</div>
+
+</html>

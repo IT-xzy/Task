@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hzw.DAO.StudentDao">
+
+    <select id="findByIdStudent" resultType="StundetCustom" parameterType="Integer">
+        SELECT * FROM tb_students WHERE id = #{id}
+    </select>
+    <select id="findListStudent" resultType="StundetCustom">
+        SELECT stuName,stuTitle,stuIntroduction,isWork,isSuper FROM tb_students
+    </select>
+    <insert id="insertStudent" parameterType="StundetCustom">
+    </insert>
+    <delete id="deleteStrudent" parameterType="Integer">
+    </delete>
+
+    <update id="updateStudent" parameterType="StundetCustom">
+    </update>
+
+    <select id="countStudent" resultType="Integer">
+        SELECT COUNT(id) id FROM tb_students
+    </select>
+    <select id="countWork" resultType="Integer">
+        SELECT COUNT(isWork) isWork FROM tb_students WHERE isWork != 0
+    </select>
+</mapper>

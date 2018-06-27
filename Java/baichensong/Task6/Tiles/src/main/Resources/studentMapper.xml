@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Dao.StudentDao">
+<!--任务四-->
+<select id="findAll" resultType="com.model.Student">
+    select *
+    from student
+</select>
+<select id="findAlls" resultType="com.model.zhiwei">
+    select *
+    from zhiwei
+</select>
+
+<select id="findName" resultType="int">
+    select count(name)
+    from zhiwei
+    where name = 'IOS工程师'
+</select>
+
+
+
+
+
+<!--页面时间显示用-->
+
+<select id="addlist" parameterType="com.model.zhiwei">
+    insert into zhiwei (name, introduction, companyCount, URL, title, xiangqing, create_at, update_at)
+    values (#{name}, #{introduction},
+            #{companyCount}, #{URL}, #{title}, #{xiangqing}, #{create_at}, #{update_at})
+</select>
+
+
+<!--任务五的登陆-->
+<select id="login" resultType="com.model.Login">
+    select * from login
+</select>
+<select id="findTime" parameterType="com.model.Login">
+    update login
+    set landtime = #{landtime}
+    where username = #{username}
+</select>
+
+
+<!--任务六-->
+
+<select id="findUserById" parameterType="int" resultType="com.Xmemcached.Cached">
+    select *
+    from memcached
+    where id = #{id}
+</select>
+
+<select id="findAllId" resultType="com.Xmemcached.Cached">
+    select *
+    from memcached
+</select>
+
+<update id="updateById" parameterType="com.Xmemcached.Cached">
+    update memcached
+    set name = #{name}, qq = #{qq}, kemu = #{kemu}, created_at = #{created_at}, updated_at = #{updated_at}
+    where id = #{id}
+</update>
+
+</mapper>

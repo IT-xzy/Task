@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--扫描contoller包下所有的comtroller注解,，并创建对象放到springmvc容器中。 -->
+    <context:component-scan base-package="com.oto.controller"/>
+    <!--扫描service注解 ,并创建对象放到springmvc容器中-->
+    <context:component-scan base-package="com.oto.service"/>
+    <!--校验器-->
+    <!--<bean id="userValidator" class="until.UserValidator"/>-->
+
+    <!--<mvc:annotation-driven validator="UserValidator"/>-->
+
+
+    <!-- 启动注解 -->
+    <mvc:annotation-driven />
+
+    <!--提供对JSon数据格式的支持;-->
+    <mvc:annotation-driven />
+
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- prefix：前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <!-- suffix：后缀 -->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+</beans>

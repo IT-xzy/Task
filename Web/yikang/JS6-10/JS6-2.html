@@ -1,0 +1,124 @@
+<div  ng-controller="myOne" class="mg2">
+<div class="mag1" >
+    <div class="mag2">
+        <lable><b>发布时间</b></lable>
+        <!--//第一个日历的html-->
+        <div >
+            <p class="form-group">
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       uib-datepicker-popup="{{format}}"
+                       ng-model="startAt"
+                       is-open="popup1.opened"
+                       ng-required="true"
+                       close-text="关闭"
+                       clear-text="清空"
+                       current-text="今天"
+                       alt-input-formats="altInputFormats"/>
+                <span
+                        class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-default"
+                            ng-click="open1()">
+                        <i class="glyphicon glyphicon-calendar">
+                        </i>
+                    </button>
+                </span>
+            </div>
+            </p>
+        </div>
+        <!--//第二个日历的html-->
+        <lable><b>结束时间</b></lable>
+        <div>
+            <p class="form-group">
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       uib-datepicker-popup="{{format}}"
+                       ng-model="endAt"
+                       is-open="popup1.opened2"
+                       ng-required="true"
+                       close-text="关闭"
+                       clear-text="清空"
+                       current-text="今天"
+                       alt-input-formats="altInputFormats"/>
+                <span
+                        class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-default"
+                            ng-click="open2()">
+                        <i class="glyphicon glyphicon-calendar">
+                        </i>
+                    </button>
+                </span>
+            </div>
+            </p>
+        </div>
+        <lable><b>类型</b></lable>
+        <select ng-model="type" >
+            <option value="">全部</option>
+            <option value="0">首业Banner</option>
+            <option value="1">找职位Banner</option>
+            <option value="2">找精英Banner</option>
+            <option value="3">行业大图</option>
+        </select>
+        <br><br>
+        <lable><b>状&#12288;&#12288;态</b></lable>
+        <select ng-model="status" >
+            <option value="">全部</option>
+            <option value="2">上线</option>
+            <option value="1">草稿</option>
+        </select>
+        <br>
+        <div class="float">
+            <button class="red">清空</button>
+            <button class="green" ng-click="one()">搜索</button>
+        </div>
+    </div>
+</div>
+<br>
+    <div class="list"><div><b style="padding-left: 1em;">Article列表</b></div> <button class="new" ui-sref="three" style="margin-right:1.8em">+ 新增</button></div>
+<div>
+    <div class="data">
+        <div>
+            <table class="wid100">
+                <tr style="background-color:#fff">
+                    <td class="td1">ID</td>
+                    <td class="td2">名称</td>
+                    <td class="td3">类型</td>
+                    <td class="td4">发布时间</td>
+                    <td class="td5">修改时间</td>
+                    <td class="td6">发布者</td>
+                    <td class="td7">状态</td>
+                    <td class="td8">操作</td>
+                </tr>
+            </table>
+        </div>
+
+        <table>
+            <tr ng-repeat="item in datum">
+                <td class="td1">{{ $index+1 }}</td>
+                <td class="td2">{{ item.title }}</td>
+                <td class="td3">{{ item.type |else}}</td>
+                <td class="td4">{{ item.createAt|date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td class="td5">{{ item.updateAt|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td class="td6">{{ item.author }}</td>
+                <td class="td7">{{ item.status|reverse}}</td>
+                <td class="td8"><a ng-click="line(item.id,item.status)">{{item.status|online}}</a> <a ng-click="omit(item.id)">删除</a> <a ng-click="edit(item.id)">编辑</a></td>
+            </tr>
+        </table>
+    </div>
+    <div style="float:right">
+        <ul uib-pagination ng-change="one()"
+            ng-model="currentPage"
+            total-items="totalItems"
+            first-text="第一页"
+            previous-text="上一页"
+            next-text="下一页"
+            last-text="最后页"
+            boundary-links="true"
+            boundary-link-numbers="true"></ul>
+    </div>
+</div>
+</div>

@@ -1,0 +1,116 @@
+$bgc:#fafafa;
+$green:#26a26f;
+$white:#fff;
+$grey:#dedede;
+$deepgrey:#afafaf;
+$orange:#f9a372;
+html{
+  font-size:100px;
+}
+body{
+  margin:0;
+  box-sizing: border-box;
+  font-size:.12rem;
+  background-color: #fafafa;
+
+}
+@mixin size($width,$height){
+  width:$width;
+  height:$height;
+}
+@mixin fixedpad{
+  padding-left:.5rem;
+  padding-right:.5rem;
+}
+@mixin padding($top,$bottom){
+  padding-top:$top;
+  padding-bottom:$bottom;
+}
+.nav{
+  height:.3rem;
+  @include fixedpad;
+  @include padding(.1rem,.1rem);
+  font-size: .15rem;
+  background-color:green;
+  .link{
+    float:left;
+    img{
+      display: inline-block;
+      height:.3rem;
+    }
+  }
+  .navbar{
+    .nav-btn{
+      display: none;
+      float:right;
+      @include size(.2rem,.02rem);
+      border-top: .02rem solid white;
+      border-bottom: .02rem solid white;
+      background-color: white;
+      padding: .05rem 0;
+      background-clip: content-box;
+    }
+    .nav-list{
+      float:right;
+      padding:0;
+      margin:0;
+      list-style:none;
+      li{
+        position:relative;
+        display: inline-block;
+        padding-left:.3rem;
+        &:hover .nav-hover{
+          display: block;
+        }
+        .nav-link{
+          color:white;
+          text-decoration: none;
+          outline: none;
+          &:active{
+            color:white;
+          }
+          &:visited{
+            color:white;
+          }
+        }
+        .nav-hover{
+          display: none;
+          position: absolute;
+          top:.34rem;
+          left:.15rem;
+          @include size(.5rem,.03rem);
+          background-color: white;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width:768px){
+  .nav{
+    .navbar{
+      .nav-btn{
+        display: block;
+      }
+      .nav-list{
+        display: block;
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+
+        .li{
+          display:block;
+          width:100%;
+          text-align: center;
+          .nav-link{
+            display: block;
+          }
+        }
+        .nav-hover{
+          width:100%;
+        }
+      }
+    }
+  }
+}
+

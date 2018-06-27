@@ -1,0 +1,302 @@
+html {
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #5fc0cd;
+    width: 100%;
+    height: 3rem;
+    min-height: 3rem;
+
+}
+
+footer {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafb;
+    /*background-color: red;*/
+    height: 3.2rem;
+    min-height:3.2rem ;
+}
+
+main {
+    flex: 1;
+    overflow: auto;
+
+}
+
+.buttonTop {
+display: flex;
+
+ }
+
+button {
+    outline: none;
+}
+.buttonTopLeft {
+    background-color: #55a8b3;
+    color: #fff;
+    border: #55a8b3;
+    height: 2rem;
+    width: 4rem;
+    border-radius: 0.3rem;
+    padding-left: 0.5rem;
+    margin-right: 0;
+    /*z-index: 1;*/
+}
+.buttonTopRight {
+    background-color: #fff;
+    color: #5fc0cd;
+    border: #55a8b3;
+    height: 2rem;
+    width: 4rem;
+    border-radius: 0.3rem;
+    padding-left: 0.5rem;
+    margin-left: -0.3rem;
+}
+
+.buttonBottomLeft {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    left: 20%;
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+}
+.buttonBottomLeft a ,
+.buttonBottomRight a
+{
+    color: #5fc0cd;
+    font-size: 0.7rem;
+    text-decoration: none;
+}
+
+.buttonBottomCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+    background: #5fc0cd;
+
+    border-radius: 1.5rem;
+
+}
+.buttonBottomRight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    right: 20%;
+    width: 2.5rem;
+    height: 2.5rem;
+    text-align: center;
+}
+
+.map {
+
+    position: absolute;
+    right: 1rem;
+    width: 21px;
+    height: 22px;
+    background: url("../img/sprite.png") -41px -0px;
+    /*background-position: -41px -0px;*/
+    background-size: 85px 22px;
+    /*background-image: url("../img/sprite.png");*/
+}
+
+.write {
+    width: 20px;
+    height: 20px;
+    background: url("../img/sprite.png") 0 0 #5fc0cd;
+    background-size: 85px 22px;
+
+}
+
+.people {
+    margin-bottom: 0.2rem;
+    width: 21px;
+    height: 20px;
+    background: url("../img/sprite.png") -20px -0px;
+    background-size: 85px 22px;
+}
+
+.home {
+    margin-bottom: 0.2rem;
+    width: 23px;
+    height: 20px;
+    /*background-position: -124px -0px;*/
+    background: url("../img/sprite.png") -62px -0px;
+    background-size: 85px 22px;
+}
+.triangle-down1,
+.triangle-down2,
+.triangle-down3
+{
+    width: 0;
+    height: 0;
+    border-left: 0.5rem solid transparent;
+    border-right: 0.5rem solid transparent;
+    border-top: 0.5rem solid #afbac0;
+    position: fixed;
+
+
+}
+.triangle-down1 {
+    left: calc(33.333333% - 2rem);
+    top: 4rem;
+}
+.triangle-down2 {
+    left: calc(66.666666% - 2rem);
+    top: 4rem;
+}
+.triangle-down3 {
+    left: calc(100% - 2rem);
+    top: 4rem;
+}
+
+#menu {
+    width: 100%;
+    overflow: hidden;
+}
+
+#menu, #menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu li {
+    float: left;
+    width: 33.333333%;
+    border-bottom: thin solid #e1e5e7;
+}
+#menu li ul {
+    width: 33.333333%;
+}
+#menu li ul li {
+    width: 100%;
+}
+
+#menu li a {
+    display: block;
+    padding: 10px 15px;
+    color: #a0a0a0;
+    text-decoration: none;
+    border-right: 1px solid #FFF;
+}
+#menu li a:hover {
+    background: white;
+}
+
+#menu li ul li {
+    float: none;
+}
+
+#menu li ul li a {
+    border-top: 1px solid #FFF;
+}
+
+#menu li ul {
+    display: none;
+    position: absolute;
+}
+
+#menu li:hover ul {
+    display: block;
+    background-color: white;
+    z-index: 1;
+}
+
+a {
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+}
+
+.liBorder {
+    border-right: 1px solid #e1e5e7;
+    box-sizing: border-box;
+
+}
+.list-group-address,
+.list-group-times,
+.list-group-time,
+.list-group-item {
+    padding-left: 1rem;
+    border: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0;
+}
+.list-group-time {
+    font-size: 1rem;
+    list-style: square url("../img/time.png") inside;
+}
+.list-group-times {
+    padding-left: 2.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items:center ;
+    padding-right: 1rem;
+}
+.period{
+    flex: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;       /* 溢出省略号*/
+
+}
+
+.page-right{
+    border-right: 2px solid #5fc0cd;
+    border-top: 2px solid #5fc0cd;
+    height: 0.8rem;
+    width: 0.8rem;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    border-left: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    display: inline-block;
+    /*margin: 5px;*/
+}
+
+.list-group-address{
+    font-size: 1rem;
+    list-style: square url("../img/address.png") inside;
+}
+
+.list-group {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+    border-bottom: thin solid #e1e5e7;
+}
+.price {
+    color: #e63b0e;
+
+}

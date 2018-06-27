@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)https://it-xzy.github.io/WEB-NEW/2018-4-29-B%E7%BB%84-js1.html#/2/1 -->
+<html class=" js no-mobile desktop no-ie chrome chrome67 web-new-section gradient rgba opacity textshadow multiplebgs boxshadow borderimage borderradius cssreflections csstransforms csstransitions no-touch no-retina fontface domloaded w-602 gt-240 gt-320 gt-480 lt-640 lt-768 lt-800 lt-1024 lt-1280 lt-1440 lt-1680 lt-1920 portrait no-landscape" id="2018-4-29-b%e7%bb%84-js1-page"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="./葡萄藤PPT_files/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="./葡萄藤PPT_files/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="./葡萄藤PPT_files/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? './css/reveal/print/pdf.css' :
+            '../css/reveal/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script><link rel="stylesheet" type="text/css" href="./葡萄藤PPT_files/paper.css">
+    <style>
+        .reveal pre code {
+            background-color: #120;
+        }
+    </style><script type="text/javascript" src="./葡萄藤PPT_files/marked.js"></script><script type="text/javascript" src="./葡萄藤PPT_files/markdown.js"></script><script type="text/javascript" src="./葡萄藤PPT_files/notes.js"></script><script type="text/javascript" src="./葡萄藤PPT_files/highlight.js"></script>
+</head>
+
+<body>
+    <img src="./葡萄藤PPT_files/logo.png" alt="" usemap="#pttmap" class="base-logo">
+    <map name="pttmap">
+        <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com/" alt="" target="_blank">
+    </map>
+    <div class="reveal center slide" role="application" data-transition-speed="default" data-background-transition="fade">
+        <div class="slides" style="width: 960px; height: 700px; left: 50%; top: 50%; bottom: auto; right: auto; transform: translate(-50%, -50%) scale(0.564375);">
+            <section class="past" style="top: 87.5px; display: block;" hidden="" aria-hidden="true">
+                <h2>【JS-01】</h2>
+                <h2>主题：简述JS中执行环境与作用域的关系？</h2>
+                <h3>小课堂【上海】</h3>
+                分享人：杨亚洲
+            </section>
+            <section style="line-height: 0.7rem; top: 30.5px; display: block;" class="past" hidden="" aria-hidden="true">
+                目录
+                <p>
+
+                    1.背景介绍
+                </p>
+
+
+                <p>
+
+                    2.知识剖析
+                </p>
+
+
+                <p>
+
+                    3.常见问题
+                </p>
+
+
+                <p>
+
+                    4.解决方案
+                </p>
+
+
+                <p>
+
+                    5.编码实战
+                </p>
+
+
+                <p>
+
+                    6.扩展思考
+                </p>
+
+
+                <p>
+
+                    7.参考文献
+                </p>
+
+
+                <p>
+
+                    8.更多讨论
+                </p>
+
+
+                <p>
+
+
+                </p>
+
+            </section>
+
+            <section class="stack present" style="top: 0px; display: block;" data-previous-indexv="1">
+                <section class="past" style="top: 267px; display: block;" hidden="" aria-hidden="true">
+                    <h3>1.背景介绍</h3>
+                </section>
+                <section class="present" style="top: 176.5px; display: block;">
+                    <h5>什么是执行环境？</h5>
+                    <p>
+                        执行环境（execution context，为简单起见，有时也称为“环境”）是JavaScript 中最为重要的一个概念。执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。——《JavaScript高级程序设计（第3版）》
+                    </p>
+
+                </section>
+               
+
+               
+                
+            </section>
+            <section class="stack future" style="top: 0px; display: block;" data-previous-indexv="0" hidden="" aria-hidden="true">
+                <section class="" style="top: 267px; display: block;" aria-hidden="true">
+                    <h3>2.知识剖析</h3>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 176.5px; display: block;">
+                        <h5>每个函数都有一个自己的执行环境。</h5>
+                        <p>某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在其中的所有变量和函数定义也随之销毁（全局执行环境直到应用程序退出——例如关闭网页或浏览器——时才会被销毁）</p>
+                    </section>
+                    <section class="future" aria-hidden="true" hidden="" style="top: .515rem; display: none;">
+                        <p>
+                            变量对象
+                        </p>
+                        <p style="text-align: left">每个执行环境都有一个与之关联的变量对象（variable object），环境中定义的所有变量和函数都保存在这个对象中。虽然我们编写的代码无法访问这个对象，但解析器在处理数据时会在后台使用它。函数的又称为活动对象（activation object）——《J3》</p>
+                    </section>
+                    <section class="future" aria-hidden="true" hidden="" style="top: .515rem; display: none;">
+                        <p>
+                            作用域链
+                        </p>
+                        <p style="text-align: left">当代码进入到某个执行环境，准备执行时，会为该执行环境对应的变量对象创建一个作用域链。作用域链其实就相当于一个变量对象的集合，其第一个元素是当前执行环境的变量对象，最后一个元素是全局执行环境的变量对象（在浏览器中即window对象）。</p>
+                    </section>
+                    <section class="future" aria-hidden="true" hidden="" style="top: .515rem; display: none;">
+                            <p>
+                                标识符查询
+                            </p>
+                            <p style="text-align: left">标识符解析是沿着作用域链一级一级地搜索标识符的过程。——《J3》。</p>
+                            <p style="text-align: left">标识符解析说白了就是查找变量（包括函数定义）。而且这个查找过程是按照作用域链的顺序走的，也就是先搜索当前执行环境的变量对象，找到就终止，没找到就继续搜索上一层执行环境的变量对象，一直搜索到顶层的window对象。</p>
+                        </section>
+                    <section class="future" aria-hidden="true" hidden="" style="top: .515rem; display: none;">
+                            <p>
+                                额外的提醒
+                            </p>
+                            <p style="text-align: left">ES5只有函数作用域和全局作用域，并没有块级作用域。但ES6中有块级作用域</p>
+                        </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                    <p>不能光说不练，来让我举个栗子吧，直接进行代码演示</p>
+                    <img src="./葡萄藤PPT_files/threea.jpg" width="500px" alt="">
+                </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                  
+                    <img src="./葡萄藤PPT_files/one.png" width="500px" alt="">
+                </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                  
+                    <img src="./葡萄藤PPT_files/two.png" width="900px" alt="">
+                </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                  
+                    <img src="./葡萄藤PPT_files/three.png" width="1000px" alt="">
+                </section>
+               
+            </section>
+            <section class="stack future" style="top: 0px; display: block;" data-previous-indexv="1" hidden="" aria-hidden="true">
+
+                <section class="stack past" style="top: 0rem; display: none;" data-previous-indexv="0" hidden="" aria-hidden="true">
+                    <section class="future" style="top: 330px; display: block;" aria-hidden="true">
+                        <h3>3.常见问题</h3>
+                        <p>在ES5中没有块级作用域,具体指的什么？ES6的块级作用域又有哪些表现?</p>
+                    </section>
+                    <code>
+                            for(var i=0;i&lt;5;i++){
+                                log(i);
+                            }
+                            log(i);
+                           
+                    </code>
+                    <br>
+                    <code>
+                         if(true){
+                                var color='red';
+                            }
+                            log(color);
+                    </code>
+                </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                    <p>
+                            如果是在Java、C语言中，上面的i会在for语句执行完后就被销毁，但在JavaScript中，for语句中的变量声明会将变量添加到当前的执行环境（if语句也是），这里就是全局环境，所以即使是for循环执行完了，变量i也会存在循环外部的执行环境中。
+                    </p>
+                </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                    <p style="">为什么需要块级作用域?</p>
+
+                </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                    <p>
+                        1、内层变量可能会覆盖外层变量
+                    </p>
+                    <p>
+                        2、用来记数的循环变量，可能会泄露为全局变量
+                    </p>
+                </section>
+                <section style="width: 110%; top: 3.3rem; display: none;" class="future" aria-hidden="true" hidden="">
+                    <p style="">块级作用域的表现</p>
+                    <p>1、允许任意多个块级作用域的嵌套，而且外层作用域无法读取内层作用域的变量</p>
+                    <p>2、内层作用域可以定义外层作用域的同名变量</p>
+                    <p>3、可以让ES5中得到广泛应用IIFE(立即执行函数退休)</p>
+                </section>
+               
+            </section>
+            
+
+            <section class="stack future" style="top: 0px; display: none;" data-previous-indexv="0" hidden="" aria-hidden="true">
+                <section class="" style="top: 266.5px; display: none;" aria-hidden="true">
+                    <h3>5.编码实战</h3>
+                </section>
+            </section>
+            <section class="stack future" style="top: 0px; display: none;" data-previous-indexv="0" hidden="" aria-hidden="true">
+                <section class="" style="top: 266.5px; display: none;" aria-hidden="true">
+                    <h3>6.扩展思考</h3>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 267px; display: none;">
+                    <p>执行环境和作用域是一回事吗？</p>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 83.5px; display: none;">
+                    <p>作用域和执行环境是两个完全不同的概念，我们试图给他俩分别一个明确的定义，发现很难，因为你很难定义一个概念“是什么”，但是我们可以搞清楚他们分别起什么作用。另一个令人迷惑的地方就是js中的this关键字。其实执行环境就是this的值。总的来说，作用域是相对于函数来讲的，因为ES5 里没有块级作用域，只有函数才能形成新的作用域。而且作用域在函数声明时就定义好了。作用域里声明的变量和函数，外部无法访问，注意，是外部。而执行环境在函数被调用时才生成。</p>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 244px; display: none;">
+                    <p>函数作用域中的变量一定访问不到？即局部变量访问不到吗？</p>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 211.5px; display: none;">
+                    <p>按道理说，局部变量在全局环境中访问不到的，<mark>但是</mark>闭包的出现打破了这个定律</p>
+                    <p>请看代码示例：</p>
+                </section>
+               
+            </section>
+            <section class="stack future" style="top: 0px; display: none;" data-previous-indexv="0" hidden="" aria-hidden="true">
+                <section class="present" style="top: 266.5px; display: none;">
+                    <h3>7.参考文献</h3>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 234px; display: none;">
+                    <p>参考一：JS高程73-78页
+                       
+                    </p>
+                    <p>参考二：ES6会计作用域部分
+                    </p>
+                </section>
+            </section>
+            <section class="stack future" style="top: 0px; display: none;" data-previous-indexv="0" hidden="" aria-hidden="true">
+                <section class="" style="top: 234px; display: none;" aria-hidden="true">
+                    <h3>8.更多讨论</h3>
+                    <p>块级作用的缺点在哪里？</p>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 128.5px; display: none;">
+                    块级作用域，对javascript是一个巨大提升，但是它也有一个显而易的缺点，就是块级作用域没有返回值。
+                    本质上块级作用域是一个语句，将多个操作封装在一起，没有返回值。
+                    <br>
+                    <code>
+                        {
+                            let a=1;
+                            a++;
+                        }
+                    </code>
+                    <p>
+                        上面的代码中，块级作用域将两个语句封装在一起，但是在块级作用外，没有办法得到a的值，因为块级作用域不返回值，除非a是全局变量。
+                    </p>
+                </section>
+                <section class="future" aria-hidden="true" hidden="" style="top: 121.5px; display: none;">
+                   <p>
+                       如何解决呢？
+                   </p>
+                   <p>
+                       现在有一个提案，是的块级作用域可以变成表达式，既可以返回值，办法就是在块级作用域之前加上do，是他变成do表达式。
+
+                   </p>
+                   <code>
+                        let x= <mark>do</mark> {
+                            let a=1;
+                            a++;
+                        }
+                   </code>
+                   <p>上述代码中，变量x会得到整个块级作用域的返回值.</p>
+                </section>
+                <section class="future" style="top: 112.5px; display: none;" aria-hidden="true">
+
+
+                </section>
+            </section>
+            <section hidden="" aria-hidden="true" class="future" style="top: 224.5px; display: none;">
+                <h4>鸣谢</h4>
+                <h4>感谢大家观看</h4>
+                <small>BY : 杨亚洲</small>
+            </section>
+        </div>
+        <div class="backgrounds"><div class="slide-background past" data-loaded="true" style="display: block;"></div><div class="slide-background past" data-loaded="true" style="display: block;"></div><div class="slide-background stack present" data-loaded="true" style="display: block;"><div class="slide-background past" style="display: block;" data-loaded="true"></div><div class="slide-background present" data-loaded="true" style="display: block;"></div></div><div class="slide-background stack future" style="display: block;" data-loaded="true"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack future" style="display: block;" data-loaded="true"><div class="slide-background stack present" style="display: none;"></div><div class="slide-background future"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;"><div class="slide-background present" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;"><div class="slide-background present" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;"><div class="slide-background present" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background stack future" style="display: none;"><div class="slide-background present" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div></div><div class="slide-background future" style="display: none;"></div></div>
+        <div class="progress" style="display: block;">
+            <span style="width: 58.2581px;"></span>
+        </div>
+        <aside class="controls" style="display: block;">
+            <button class="navigate-left enabled" aria-label="previous slide"></button>
+            <button class="navigate-right enabled" aria-label="next slide"></button>
+            <button class="navigate-up enabled" aria-label="above slide"></button>
+            <button class="navigate-down" aria-label="below slide"></button>
+        </aside>
+        <div class="slide-number" style="display: none;"></div>
+        <div class="speaker-notes" data-prevent-swipe=""></div>
+        <div class="pause-overlay"></div>
+        <div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: .01rem; width: .01rem; overflow: hidden; clip: rect(.01rem .01rem .01rem .01rem);">
+                    什么是执行环境？
+                    
+                        执行环境（execution context，为简单起见，有时也称为“环境”）是JavaScript 中最为重要的一个概念。执行环境定义了变量或函数有权访问的其他数据，决定了它们各自的行为。——《JavaScript高级程序设计（第3版）》
+                    
+
+                </div>
+    </div>
+
+    <script src="./葡萄藤PPT_files/head.min.js"></script>
+    <script src="./葡萄藤PPT_files/reveal.js"></script>
+
+    <script>
+        // 以下为常见配置属性的默认值
+        // {
+        // 	controls: true, // 是否在右下角展示控制条
+        // 	progress: true, // 是否显示演示的进度条
+        // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+        // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+        // 	keyboard: true, // 是否启用键盘快捷键来导航
+        // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+        // 	center: true, // 是否将幻灯片垂直居中
+        // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+        // 	loop: false, // 是否循环演示
+        // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+        // 	fragments: true, // 全局开启和关闭碎片。
+        // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+        // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+        // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+        // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+        // }
+        // 初始化幻灯片
+        Reveal.initialize({
+            history: true,
+            dependencies: [{
+                    src: './plugin/markdown/marked.js'
+                },
+                {
+                    src: './plugin/markdown/markdown.js'
+                },
+                {
+                    src: './plugin/notes/notes.js',
+                    async: true
+                },
+                {
+                    src: './plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function () {
+                        hljs.initHighlightingOnLoad();
+                    }
+                }
+            ]
+        });
+    </script>
+
+
+
+
+<st-div id="__selection-translator__"> <st-div class="__st-box__" style="display: none; position: fixed; z-index: 99999; left: 0px; top: 0px; transform: translateX(522px) translateY(315px);"> <st-header> <st-span class="st-icon-pin" title="固定"></st-span> <st-span class="st-icon-down-open" title="展开"></st-span> <st-span class="st-icon-cog" title="设置"></st-span> </st-header> <st-div class="__query-form__" style="display: none;"> <st-div> <textarea placeholder="输入要翻译的句子或单词"></textarea> </st-div> <st-div> <select> <option value="">自动判断</option> <option value="zh">中文</option><option value="zh-CN">中文(简体)</option><option value="zh-HK">中文(香港)</option><option value="zh-TW">中文(繁体)</option><option value="en">英语</option><option value="ja">日语</option><option value="ko">朝鲜语</option><option value="de">德语</option><option value="fr">法语</option><option value="ru">俄语</option><option value="th">泰语</option><option value="af">南非语</option><option value="ar">阿拉伯语</option><option value="az">阿塞拜疆语</option><option value="be">比利时语</option><option value="bg">保加利亚语</option><option value="ca">加泰隆语</option><option value="cs">捷克语</option><option value="cy">威尔士语</option><option value="da">丹麦语</option><option value="dv">第维埃语</option><option value="el">希腊语</option><option value="eo">世界语</option><option value="es">西班牙语</option><option value="et">爱沙尼亚语</option><option value="eu">巴士克语</option><option value="fa">法斯语</option><option value="fi">芬兰语</option><option value="fo">法罗语</option><option value="gl">加里西亚语</option><option value="gu">古吉拉特语</option><option value="he">希伯来语</option><option value="hi">印地语</option><option value="hr">克罗地亚语</option><option value="hu">匈牙利语</option><option value="hy">亚美尼亚语</option><option value="id">印度尼西亚语</option><option value="is">冰岛语</option><option value="it">意大利语</option><option value="ka">格鲁吉亚语</option><option value="kk">哈萨克语</option><option value="kn">卡纳拉语</option><option value="kok">孔卡尼语</option><option value="ky">吉尔吉斯语</option><option value="lt">立陶宛语</option><option value="lv">拉脱维亚语</option><option value="mi">毛利语</option><option value="mk">马其顿语</option><option value="mn">蒙古语</option><option value="mr">马拉地语</option><option value="ms">马来语</option><option value="mt">马耳他语</option><option value="nb">挪威语(伯克梅尔)</option><option value="nl">荷兰语</option><option value="ns">北梭托语</option><option value="pa">旁遮普语</option><option value="pl">波兰语</option><option value="pt">葡萄牙语</option><option value="qu">克丘亚语</option><option value="ro">罗马尼亚语</option><option value="sa">梵文</option><option value="se">北萨摩斯语</option><option value="sk">斯洛伐克语</option><option value="sl">斯洛文尼亚语</option><option value="sq">阿尔巴尼亚语</option><option value="sv">瑞典语</option><option value="sw">斯瓦希里语</option><option value="syr">叙利亚语</option><option value="ta">泰米尔语</option><option value="te">泰卢固语</option><option value="tl">塔加路语</option><option value="tn">茨瓦纳语</option><option value="tr">土耳其语</option><option value="ts">宗加语</option><option value="tt">鞑靼语</option><option value="uk">乌克兰语</option><option value="ur">乌都语</option><option value="uz">乌兹别克语</option><option value="vi">越南语</option><option value="xh">班图语</option><option value="zu">祖鲁语</option> </select> <st-div class="__exchange__"> <st-span class="st-icon-exchange"></st-span> </st-div> <select> <option value="">自动选择</option> <option value="zh">中文</option><option value="zh-CN">中文(简体)</option><option value="zh-HK">中文(香港)</option><option value="zh-TW">中文(繁体)</option><option value="en">英语</option><option value="ja">日语</option><option value="ko">朝鲜语</option><option value="de">德语</option><option value="fr">法语</option><option value="ru">俄语</option><option value="th">泰语</option><option value="af">南非语</option><option value="ar">阿拉伯语</option><option value="az">阿塞拜疆语</option><option value="be">比利时语</option><option value="bg">保加利亚语</option><option value="ca">加泰隆语</option><option value="cs">捷克语</option><option value="cy">威尔士语</option><option value="da">丹麦语</option><option value="dv">第维埃语</option><option value="el">希腊语</option><option value="eo">世界语</option><option value="es">西班牙语</option><option value="et">爱沙尼亚语</option><option value="eu">巴士克语</option><option value="fa">法斯语</option><option value="fi">芬兰语</option><option value="fo">法罗语</option><option value="gl">加里西亚语</option><option value="gu">古吉拉特语</option><option value="he">希伯来语</option><option value="hi">印地语</option><option value="hr">克罗地亚语</option><option value="hu">匈牙利语</option><option value="hy">亚美尼亚语</option><option value="id">印度尼西亚语</option><option value="is">冰岛语</option><option value="it">意大利语</option><option value="ka">格鲁吉亚语</option><option value="kk">哈萨克语</option><option value="kn">卡纳拉语</option><option value="kok">孔卡尼语</option><option value="ky">吉尔吉斯语</option><option value="lt">立陶宛语</option><option value="lv">拉脱维亚语</option><option value="mi">毛利语</option><option value="mk">马其顿语</option><option value="mn">蒙古语</option><option value="mr">马拉地语</option><option value="ms">马来语</option><option value="mt">马耳他语</option><option value="nb">挪威语(伯克梅尔)</option><option value="nl">荷兰语</option><option value="ns">北梭托语</option><option value="pa">旁遮普语</option><option value="pl">波兰语</option><option value="pt">葡萄牙语</option><option value="qu">克丘亚语</option><option value="ro">罗马尼亚语</option><option value="sa">梵文</option><option value="se">北萨摩斯语</option><option value="sk">斯洛伐克语</option><option value="sl">斯洛文尼亚语</option><option value="sq">阿尔巴尼亚语</option><option value="sv">瑞典语</option><option value="sw">斯瓦希里语</option><option value="syr">叙利亚语</option><option value="ta">泰米尔语</option><option value="te">泰卢固语</option><option value="tl">塔加路语</option><option value="tn">茨瓦纳语</option><option value="tr">土耳其语</option><option value="ts">宗加语</option><option value="tt">鞑靼语</option><option value="uk">乌克兰语</option><option value="ur">乌都语</option><option value="uz">乌兹别克语</option><option value="vi">越南语</option><option value="xh">班图语</option><option value="zu">祖鲁语</option> </select> </st-div> <st-div> <select> <option value="YouDao">有道翻译</option> <option value="BaiDu">百度翻译</option> <option value="Google">谷歌翻译</option> <option value="GoogleCN">谷歌翻译（国内）</option> </select> <st-div class="__action-list__"> <st-div class="__button__ __btn-translate__">翻译 <st-span class="st-icon-down-dir"></st-span> </st-div> <st-div class="__expand__"> <st-div class="__button__">朗读</st-div> <st-div class="__button__">复制</st-div> </st-div> </st-div> </st-div> </st-div> <st-div class="__translate-result__" style="display: none;">正在查询，请稍候……</st-div> <st-div class="__translate-result__"> <st-div style="display: none;"> <st-span></st-span> <st-span class="__retry__">重试</st-span> </st-div> <st-div> <st-div class="__phonetic__"> <st-span style="display: none;"></st-span> <st-span class="__copy-and-read__"> <st-span>朗读</st-span> <st-span style="display: none;">复制</st-span> </st-span> </st-div> <st-div style="display: none;"> <st-ul>  </st-ul> <st-div class="__copy-and-read__"> <st-span class="__copy-and-read__">复制</st-span> </st-div> </st-div> <st-div style="display: none;">  <st-div class="__copy-and-read__"> <st-span class="__copy-and-read__">朗读</st-span> <st-span class="__copy-and-read__">复制</st-span> </st-div> </st-div> </st-div> </st-div> <st-footer> <st-span style="">via <a target="_blank" href="https://it-xzy.github.io/WEB-NEW/2018-4-29-B%E7%BB%84-js1.html">百度翻译</a></st-span> </st-footer> </st-div> <st-div class="__st-btn__" style="display: none; position: fixed; z-index: 99999; left: 0px; top: 0px; transform: translateX(522px) translateY(315px);">译</st-div> </st-div></body></html>

@@ -1,0 +1,172 @@
+@import "variables.less";
+@import "mixins.less";
+main {
+  margin-bottom: 100px;
+  background-color: darken(@white, 2%);
+}
+
+h5 {
+  margin: 0 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid darken(@white, 10%);
+  >a+a::before {
+    content: '>';
+    color: @black;
+  }
+  a {
+    &:first-child {
+      color: @black;
+    }
+    &:last-child {
+      color: @green;
+    }
+  }
+}
+
+.subnav {
+  padding: 1rem 0;
+  margin: 0 1rem;
+  border-bottom: 1px solid darken(@white, 10%);
+  color: lighten(@black, 50%);
+  a {
+    margin: 0 10px;
+    color: lighten(@black, 10%);
+    &:hover {
+      color: @white;
+      background-color: @green;
+    }
+  }
+  .nav-focus {
+    color: @white;
+    background-color: @green;
+  }
+}
+
+[id] {
+  padding: 1rem 0;
+  margin: 0 1rem;
+  border-bottom: 1px solid darken(@white, 10%);
+}
+
+.row {
+  .clearfix();
+}
+
+.dev {
+  position: relative;
+  font-size: .8em;
+  margin: 2rem 1rem;
+  border: 1px solid darken(@white, 10%);
+  background-color: @white;
+}
+
+.summary {
+  padding: 20px 10px;
+  img {
+    float: left;
+    width: 40%;
+    padding-right: 10px;
+  }
+  h4 {
+    padding: 10px 0;
+    margin: 0;
+  }
+  p {
+    margin: 0;
+    word-break: break-all;
+  }
+}
+
+.info-list {
+  padding-left: 0;
+  list-style: none;
+  li {
+    border-top: 1px solid darken(@white, 10%);
+    overflow: hidden; //清除浮动
+    &:last-child,
+    &:nth-last-child(2) {
+      padding: 10px;
+    }
+  }
+}
+
+.div-half {
+  >span {
+    box-sizing: border-box;
+    float: left;
+    width: 50%;
+    padding: 10px;
+    &:last-child {
+      border-left: 1px solid darken(@white, 10%);
+    }
+  }
+  img {
+    vertical-align: bottom;
+    margin-left: 5px;
+  }
+}
+
+.div-four {
+  display: flex;
+  align-items: stretch;
+  div {
+    &:first-child {
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.income {
+  flex: 1;
+  border-left: 1px solid darken(@white, 10%);
+  p {
+    margin: 0;
+    padding: 10px;
+    &:first-child,
+    &:nth-child(2) {
+      border-bottom: 1px solid darken(@white, 10%);
+    }
+  }
+}
+
+.fl-right {
+  float: right;
+}
+
+.offset {
+  margin-right: 5px;
+}
+
+.font-color {
+  color: @red;
+}
+
+/* hover效果 */
+
+.dev-hov {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  height: 100%;
+  color: @white;
+  background-color: lighten(@black, 30%);
+  opacity: 0;
+  transition: all .35s ease;
+  h4 {
+    margin: 100px 0 40px;
+    text-align: center;
+    color: @white;
+  }
+  p {
+    padding: 40px;
+    text-indent: 2em;
+  }
+}
+
+.dev:hover .dev-hov {
+  opacity: .8;
+  transition-delay: .5s;
+}

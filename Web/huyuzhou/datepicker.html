@@ -1,0 +1,24 @@
+<!doctype html>
+<html ng-app="ui.bootstrap.demo">
+  <head>
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script>
+     angular.module('ui.bootstrap.demo', [ 'ui.bootstrap']);
+angular.module('ui.bootstrap.demo')
+.controller('PaginationDemoCtrl', function ($scope, $log) {
+  $scope.maxSize = 5;
+  $scope.bigTotalItems = 175;
+  $scope.bigCurrentPage = 1;
+});
+</script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div ng-controller="PaginationDemoCtrl">
+      <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage"
+      max-size="maxSize" class="pagination-sm" boundary-links="true" force-ellipses="true">
+      </ul>
+    </div>
+  </body>
+</html>
