@@ -1,0 +1,143 @@
+<!doctype html>
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default sss">
+            <div class="panel-heading">
+                {{articlename}}
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" name="myForm">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">标题名称</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="heading" ng-model="params.title">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">类型</label>
+                        <div class="col-lg-2">
+                            <select class="form-control" ng-model="params.type">
+                                <option value="5">请选择</option>
+                                <option value="0">首页banner</option>
+                                <option value="1">找职位banner</option>
+                                <option value="2">找精英banner</option>
+                                <option value="3">行业大图banner</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2" ng-show="params.type==3">
+                            <select class="form-control">
+                                <option>请选择</option>
+                                <option>移动互联网</option>
+                                <option>电子商务</option>
+                                <option>企业服务</option>
+                                <option>020</option>
+                                <option>教育</option>
+                                <option>金融</option>
+                                <option>游戏</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">说明</label>
+                        <div class="col-lg-10">
+                            <div id="div1" class="toolbar">
+                            </div>
+                            <div id="div2" class="text"> <!--可使用 min-height 实现编辑区域自动增加高度-->
+                                <p id="content">请输入内容</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">跳转链接</label>
+                        <div class="col-lg-10">
+                            <input type="text" name="myurl" class="form-control" id="jump" ng-model="params.url" ng-pattern="/^((ht|f)tps?):\/\/[\w\-]+(\.[\w\-]+)+([\w\-\.,@?^=%&:\/~\+#]*[\w\-\@?^=%&\/~\+#])?$/">
+                        </div>
+                        <div ng-messages="myForm.myurl.$error" style="color:maroon" role="alert">
+                            <div ng-message="pattern" style="margin-left:240px">请输入正确的url</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">配图</label>
+                        <div class="col-lg-10">
+                            <a href="javascript" class="file">
+                                <input type="file" id="inputfile" nv-file-select="" uploader="uploader">选择文件
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-10">
+                            <img src="" alt="配图预览" class="img-responsive" ng-if="imgreview"
+                                 ng-src="{{imgreview}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>
+                        <div class="col-lg-10">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>图片名</th>
+                                    <th>文件大小</th>
+                                    <th>进度</th>
+                                    <th>操作</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in uploader.queue">
+                                    <td ng-show="uploader.isHTML5">{{item.file.name}}
+                                    </td>
+                                    <td ng-show="uploader.isHTML5">{{item.file.size/1024/1024|number:2 }}MB</td>
+                                    <td>
+                                        <div class="progress" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar"
+                                                 ng-style="{'width': item.progress + '%' }"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                        <span ng-show="item.isCancel"><i
+                                                class="glyphicon glyphicon-ban-circle"></i></span>
+                                        <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                    </td>
+                                    <td nowrap>
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                                                ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                            <span class="glyphicon glyphicon-upload"></span> 上传
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()"
+                                                ng-disabled="!item.isUploading">
+                                            <span class="glyphicon glyphicon-ban-circle"></span> 取消
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                            <span class="glyphicon glyphicon-trash"></span> 移除
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"></label>
+                        <div class="col-lg-10">
+                            <button class="btn btn-success" ng-disabled="imgreview === undefined || myForm.$invalid"
+                                    ng-click="upload(2)">立即上线
+                            </button>
+                            <button class="btn btn-success" ng-disabled="imgreview === undefined || myForm.$invalid"
+                                    ng-click="upload(1)">存为草稿
+                            </button>
+                            <button class="btn pull-right" ui-sref="article">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor1 = new E('#div1', '#div2');  // 两个参数也可以传入 elem 对象，class 选择器
+    editor1.create()
+</script>

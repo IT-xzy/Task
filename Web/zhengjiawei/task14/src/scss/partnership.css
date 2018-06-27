@@ -1,0 +1,843 @@
+@charset "UTF-8";
+/*
+@file:技能树主页
+@author:郑佳威
+@update:
+@copyright:
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box; }
+
+html {
+  box-sizing: border-box;
+  font-size: 625%;
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%; }
+
+body {
+  font-size: .16rem;
+  margin: 0; }
+
+p {
+  margin: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
+a {
+  color: #007bff;
+  text-decoration: none; }
+
+ul, li {
+  list-style: none;
+  padding: 0; }
+
+img {
+  vertical-align: middle;
+  border-style: none; }
+
+table {
+  border-collapse: collapse; }
+
+/*设置为粗体*/
+b, strong {
+  font-weight: bolder; }
+
+[hidden] {
+  display: none !important; }
+
+/*栅格系统*/
+.container {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto; }
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px; } }
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px; } }
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px; } }
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px; } }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -15px;
+  margin-right: -15px; }
+
+.col-1 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 8.3333333333%;
+  max-width: 8.3333333333%; }
+
+.col-2 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 16.6666666667%;
+  max-width: 16.6666666667%; }
+
+.col-3 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 25%;
+  max-width: 25%; }
+
+.col-4 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 33.3333333333%;
+  max-width: 33.3333333333%; }
+
+.col-5 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 41.6666666667%;
+  max-width: 41.6666666667%; }
+
+.col-6 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+.col-7 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 58.3333333333%;
+  max-width: 58.3333333333%; }
+
+.col-8 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 66.6666666667%;
+  max-width: 66.6666666667%; }
+
+.col-9 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 75%;
+  max-width: 75%; }
+
+.col-10 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 83.3333333333%;
+  max-width: 83.3333333333%; }
+
+.col-11 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 91.6666666667%;
+  max-width: 91.6666666667%; }
+
+.col-12 {
+  padding-right: 15px;
+  padding-left: 15px;
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  flex: 0 0 100%;
+  max-width: 100%; }
+
+@media screen and (min-width: 576px) {
+  .col-sm-1 {
+    flex: 0 0 8.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 8.3333333333%; }
+
+  .col-sm-2 {
+    flex: 0 0 16.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 16.6666666667%; }
+
+  .col-sm-3 {
+    flex: 0 0 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 25%; }
+
+  .col-sm-4 {
+    flex: 0 0 33.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 33.3333333333%; }
+
+  .col-sm-5 {
+    flex: 0 0 41.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 41.6666666667%; }
+
+  .col-sm-6 {
+    flex: 0 0 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 50%; }
+
+  .col-sm-7 {
+    flex: 0 0 58.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 58.3333333333%; }
+
+  .col-sm-8 {
+    flex: 0 0 66.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 66.6666666667%; }
+
+  .col-sm-9 {
+    flex: 0 0 75%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 75%; }
+
+  .col-sm-10 {
+    flex: 0 0 83.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 83.3333333333%; }
+
+  .col-sm-11 {
+    flex: 0 0 91.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 91.6666666667%; }
+
+  .col-sm-12 {
+    flex: 0 0 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 100%; } }
+@media screen and (min-width: 768px) {
+  .col-md-1 {
+    flex: 0 0 8.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 8.3333333333%; }
+
+  .col-md-2 {
+    flex: 0 0 16.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 16.6666666667%; }
+
+  .col-md-3 {
+    flex: 0 0 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 25%; }
+
+  .col-md-4 {
+    flex: 0 0 33.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 33.3333333333%; }
+
+  .col-md-5 {
+    flex: 0 0 41.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 41.6666666667%; }
+
+  .col-md-6 {
+    flex: 0 0 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 50%; }
+
+  .col-md-7 {
+    flex: 0 0 58.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 58.3333333333%; }
+
+  .col-md-8 {
+    flex: 0 0 66.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 66.6666666667%; }
+
+  .col-md-9 {
+    flex: 0 0 75%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 75%; }
+
+  .col-md-10 {
+    flex: 0 0 83.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 83.3333333333%; }
+
+  .col-md-11 {
+    flex: 0 0 91.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 91.6666666667%; }
+
+  .col-md-12 {
+    flex: 0 0 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 100%; } }
+@media screen and (min-width: 992px) {
+  .col-lg-1 {
+    flex: 0 0 8.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 8.3333333333%; }
+
+  .col-lg-2 {
+    flex: 0 0 16.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 16.6666666667%; }
+
+  .col-lg-3 {
+    flex: 0 0 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 25%; }
+
+  .col-lg-4 {
+    flex: 0 0 33.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 33.3333333333%; }
+
+  .col-lg-5 {
+    flex: 0 0 41.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 41.6666666667%; }
+
+  .col-lg-6 {
+    flex: 0 0 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 50%; }
+
+  .col-lg-7 {
+    flex: 0 0 58.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 58.3333333333%; }
+
+  .col-lg-8 {
+    flex: 0 0 66.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 66.6666666667%; }
+
+  .col-lg-9 {
+    flex: 0 0 75%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 75%; }
+
+  .col-lg-10 {
+    flex: 0 0 83.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 83.3333333333%; }
+
+  .col-lg-11 {
+    flex: 0 0 91.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 91.6666666667%; }
+
+  .col-lg-12 {
+    flex: 0 0 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 100%; } }
+@media screen and (min-width: 1200px) {
+  .col-xl-1 {
+    flex: 0 0 8.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 8.3333333333%; }
+
+  .col-xl-2 {
+    flex: 0 0 16.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 16.6666666667%; }
+
+  .col-xl-3 {
+    flex: 0 0 25%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 25%; }
+
+  .col-xl-4 {
+    flex: 0 0 33.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 33.3333333333%; }
+
+  .col-xl-5 {
+    flex: 0 0 41.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 41.6666666667%; }
+
+  .col-xl-6 {
+    flex: 0 0 50%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 50%; }
+
+  .col-xl-7 {
+    flex: 0 0 58.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 58.3333333333%; }
+
+  .col-xl-8 {
+    flex: 0 0 66.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 66.6666666667%; }
+
+  .col-xl-9 {
+    flex: 0 0 75%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 75%; }
+
+  .col-xl-10 {
+    flex: 0 0 83.3333333333%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 83.3333333333%; }
+
+  .col-xl-11 {
+    flex: 0 0 91.6666666667%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 91.6666666667%; }
+
+  .col-xl-12 {
+    flex: 0 0 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    max-width: 100%; } }
+header {
+  background: #fff;
+  padding: 10px 0; }
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    @media (max-width: 575px) {
+      header .container {
+        justify-content: flex-end; } }
+    header .container span {
+      color: #29B078;
+      /*call-word*/ }
+      @media (max-width: 575px) {
+        header .container span {
+          display: none; } }
+    header .container div {
+      display: flex;
+      align-items: center;
+      /* right-logo */ }
+      header .container div a {
+        display: inline-block;
+        margin-left: 15px;
+        /* 图标样式 */ }
+      header .container div a:nth-child(1) {
+        background: url(../img/spritesheet.png) no-repeat -5px -873px;
+        width: 25px;
+        height: 24px; }
+      header .container div a:nth-child(2) {
+        background: url(../img/spritesheet.png) no-repeat -5px -602px;
+        width: 25px;
+        height: 24px; }
+      header .container div a:nth-child(3) {
+        background: url(../img/spritesheet.png) no-repeat -5px -907px;
+        width: 25px;
+        height: 24px; }
+
+/* 导航栏 */
+/* 折叠导航 */
+/* 三条横线按钮 */
+input {
+  display: none;
+  /* 取消input样式 */ }
+
+input:checked ~ a {
+  height: 45px !important; }
+
+/* 点击后列表显示 */
+.nav-toggle {
+  display: none; }
+  .nav-toggle span {
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px 15px 10px 10px;
+    width: 30px;
+    height: 19px;
+    border-top: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    background-color: #fff;
+    padding: 5px 0;
+    background-clip: content-box;
+    /* 导入按钮 */ }
+  @media (max-width: 767px) {
+    .nav-toggle {
+      display: block;
+      text-align: right;
+      /* 向右对齐 */ } }
+
+nav {
+  background: #29B078; }
+  nav .row {
+    justify-content: flex-end;
+    /* 菜单向右对齐 */ }
+    @media (max-width: 767px) {
+      nav .row {
+        display: block; } }
+    nav .row a {
+      display: inline-block;
+      padding: 42px 15px;
+      border-bottom: 4px solid transparent;
+      color: #fff;
+      letter-spacing: 5px;
+      font-weight: 300; }
+      nav .row a:hover {
+        border-bottom: 4px solid #fff; }
+      @media (max-width: 767px) {
+        nav .row a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 0;
+          height: 0;
+          overflow: hidden;
+          border: none;
+          margin: 0 15px;
+          transition: all 1s; } }
+
+.bg-scope {
+  width: 100vw; }
+
+main {
+  background: #fafafa;
+  padding-bottom: 30px; }
+
+.title {
+  margin: 30px 0; }
+  .title a:nth-child(1) {
+    color: #333; }
+  .title a:nth-child(2) {
+    color: #29B078; }
+
+.sidebar {
+  padding: 0;
+  background: #fff; }
+  @media (max-width: 767px) {
+    .sidebar {
+      width: 100%;
+      margin-bottom: 20px; } }
+  @media (max-width: 575px) {
+    .sidebar {
+      margin-left: 15px;
+      margin-right: 15px; } }
+  .sidebar h4 {
+    text-align: center;
+    margin: 20px 0; }
+  .sidebar li {
+    margin: 30px 0; }
+  .sidebar li::before {
+    display: inline-block;
+    content: "";
+    margin-left: 70px;
+    margin-right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid #FF5C00; }
+    @media (max-width: 991px) {
+      .sidebar li::before {
+        margin-left: 40px; } }
+  .sidebar li:hover::before {
+    background-color: #FF5C00; }
+  .sidebar li:hover {
+    color: #FF5C00;
+    cursor: pointer; }
+
+.introduce {
+  display: flex;
+  padding: 20px;
+  background: #fff;
+  border-bottom: 1px solid #E6E6E6; }
+  @media (max-width: 575px) {
+    .introduce {
+      display: block;
+      margin-left: 15px;
+      margin-right: 15px; } }
+  .introduce i {
+    display: inline-block;
+    flex-shrink: 0;
+    margin: 10px;
+    background: url(../img/tudou-logo.png) no-repeat;
+    width: 134px;
+    height: 122px; }
+
+.section {
+  padding: 20px;
+  background: #fff; }
+  @media (max-width: 575px) {
+    .section {
+      margin-left: 15px;
+      margin-right: 15px; } }
+  .section p {
+    text-indent: 1cm;
+    margin: 38px 0; }
+
+footer {
+  background: #29B078; }
+
+.footer-style > div {
+  margin: 35px 0; }
+  @media (max-width: 991px) {
+    .footer-style > div {
+      width: 100%;
+      margin: 10px 0;
+      padding: 0 15px; } }
+.footer-style h4 {
+  color: #fff;
+  font-weight: 300; }
+.footer-style a {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 300; }
+.footer-style div:nth-child(1) h4 {
+  margin-bottom: 80px; }
+  @media (max-width: 991px) {
+    .footer-style div:nth-child(1) h4 {
+      margin-bottom: 40px; } }
+.footer-style div:nth-child(2) h4 {
+  margin-bottom: 32px; }
+.footer-style div:nth-child(2) span {
+  display: flex;
+  align-items: center; }
+  .footer-style div:nth-child(2) span a {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 25px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent; }
+    .footer-style div:nth-child(2) span a:hover {
+      border-bottom: 2px solid #fff; }
+    @media (max-width: 991px) {
+      .footer-style div:nth-child(2) span a {
+        margin-bottom: 15px; } }
+.footer-style div:nth-child(3) {
+  text-align: right; }
+  @media (max-width: 991px) {
+    .footer-style div:nth-child(3) {
+      text-align: left; } }
+  .footer-style div:nth-child(3) h4 {
+    margin-bottom: 20px; }
+  .footer-style div:nth-child(3) i {
+    display: inline-block;
+    background: url(../img/qrcode.png);
+    width: 92px;
+    height: 92px; }
+
+/*# sourceMappingURL=partnership.css.map */

@@ -1,0 +1,134 @@
+@import "reset";
+@import "mixin";
+@import "variable";
+$blue: #29BDE0;
+header {
+    padding: .15rem;
+    @include position-style;
+    top: 0;
+    @include vertical-center;
+    justify-content: space-between;
+    background: $blue;
+    border-bottom: 1px solid #74d4eb;
+    div:nth-child(1) {
+        background: url(../I/I-2/home.png)no-repeat;
+        background-size: 100%;
+        width: .25rem;
+        height: .21rem;
+    }
+    span {
+        color: $white;
+        letter-spacing: $spacing-gap;
+        font-weight: 300;
+    }
+    div:nth-child(3) {
+        background: url(../I/I-2/info.png)no-repeat;
+        background-size: 100%;
+        width: .2rem;
+        height: .2rem;
+    }
+}
+$main-padding :.1rem .3rem;
+// 页眉
+main {
+    margin-top: .53rem;
+}
+.main-top-content {
+    background: $blue;
+    padding: $main-padding;
+    >div {
+        @include vertical-center;
+        >div {
+            @include vertical-center;
+            align-items: flex-end;
+            background: url(../I/I-2/win.png)no-repeat;
+            background-size: 100%;
+            width: 1.75rem;
+            height: 1.02rem;
+        }
+    }
+    span {
+        margin-bottom: .04rem;
+        font-size: .24rem;
+        color: $white;
+    }
+    >p {
+        font-size: .17rem;
+        color: #FFC865;
+        margin: .3rem 0 .2rem;
+    }
+    >ul {
+        color: $white;
+        font-size: .13rem;
+        font-weight: 300;
+        >li {
+            margin-bottom: .05rem;
+        }
+        >ul {
+            overflow: hidden;
+            li {
+                float: left;
+                margin: .05rem .22rem .05rem 0;
+            }
+        }
+    }
+}
+// 内容区上部分
+$gray:#C7C7C7;
+.main-bottom-content{
+    padding: $main-padding;
+    border-bottom: 1px solid #ddd;
+    >div{
+        @include vertical-center;
+        justify-content: space-between;
+        margin-bottom: .14rem;
+        :first-child {
+            font-size: .15rem;
+            color: $gray;
+        }
+        :last-child{
+            font-size: .1rem;
+            color: #C7C7C7;
+        }
+    }
+    p {
+        font-size: .13rem;
+        color: #A6A6A6;
+        margin-bottom: .05rem;
+    }
+}
+// 内容区下部分
+@mixin footer-button {
+    padding: .15rem 0;
+    width: 35%;
+    font-size: .2rem;
+    font-weight: 300;
+    color: #fff;
+}
+
+.bottom-gap {
+    margin-bottom: .73rem;
+}
+
+footer {
+    @include vertical-center;
+    @include position-style;
+    bottom: 0;
+    justify-content: space-around;
+    padding: .1rem;
+    background-color: rgba($color: $blue, $alpha: 0.4);
+    a {
+        text-decoration: none;
+    }
+    a:nth-child(1) {
+        @include vertical-center;
+        @include footer-button;
+        background: #F66F6F;
+    }
+    a:nth-child(2) {
+        @include vertical-center;
+        @include footer-button;
+        background: #FBB435;
+    }
+}
+// 页脚

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=divice-width,initial-scale=1.0,user-scalable=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<head>
+	<title>配比页面</title>
+	<link rel="stylesheet" type="text/css" href="css/js2-2.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/public.css">
+	<script src="js/js2-2.js"></script>
+</head>
+<body>
+	<header>
+		<img src="images/js2-1.png" class="h-img1" onclick="window.location='js2-1.html'">
+		<h1>参数设置</h1>
+		<img src="images/js2-2.png" class="h-img2">
+	</header>
+	<div class="container">
+		<div class="player">
+			<div class="player-1">
+				<p>玩家配比</p>
+			</div>
+			<div class="player-2">
+				<ul id="oUl">
+					
+				</ul>	
+				<p class="set" onclick="setting()">点击设置<img src="images/js2-3.png"></p>
+			</div>		
+		</div>
+		<div class="word">
+			<input type="text" placeholder="平民词组">
+			<input type="text" placeholder="幽灵词组">
+		</div>
+		<div class="people">
+			<p>玩家人数<input id="people" value="8" max-length="2" onchange="changeOne();over()">人</p>
+			<div class="p-span1"><span onclick="minus()" >-</span></div>
+			<input class="line" id="Slider" type="range" value="8" min="4" max="18" oninput="changeTwo()">
+			<div class="p-span2"><span onclick="add()" >+</span ></div>
+		</div>
+		<button id="next">去发牌</button>
+	</div>
+</body>
+</html>
