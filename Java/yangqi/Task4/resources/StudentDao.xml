@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.mapper.StudentDao">
+    <select id="findAll" resultType="com.jnshu.entity.student">
+        select * from student
+    </select>
+
+    <select id="findAlls" resultType="com.jnshu.entity.profession">
+        select * from profession
+    </select>
+
+    <select id="findName" resultType="int">
+        select count(name ) from profession where name='IOS工程师'
+    </select>
+
+    <select id="addlist" parameterType="com.jnshu.entity.profession">
+        insert into profession(name,picture_tx,profession_zy,proCompany)values (#{name},#{picture_tx},#{profession_zy},#{proCompan})
+    </select>
+    
+<!--    <select id="findUser" parameterType="com.jnshu.entity.user" resultType="java.lang.Boolean">
+        SELECT count(*) FROM user WHERE password = #{password} AND name = #{name}
+    </select>-->
+<!--
+    <insert id="addUser" parameterType="com.jnshu.entity.user">
+        insert into user(id,name,password)value (#{id},#{name},#{password})
+    </insert>
+
+    <select id="findUserByNameAndPwd" parameterType="map" resultType="com.jnshu.entity.user">
+        select t.name,t.password from user t where name =#{name} and password=#{password}
+    </select>-->
+
+
+    <!-- 登录 注册 -->
+    <select id="AuUser" parameterType="com.jnshu.entity.user" resultType="java.lang.Boolean">
+        SELECT COUNT (*) FROM user where name =#{name} AND password =#{password}
+    </select>
+    <select id="login" resultType="com.jnshu.entity.user">
+        select * from user where name=#{name}
+    </select>
+
+    <insert id="register" parameterType="com.jnshu.entity.user">
+        insert into user (name,password,salt,despwd) value (#{name},#{password},#{salt},#{despwd})
+    </insert>
+
+    <select id="findUserByid" resultType="java.lang.Boolean" parameterType="Integer">
+        SELECT COUNT (*) FROM user WHERE id = #{id}
+    </select>
+
+
+    <select id="findUserByname" parameterType="String" resultType="com.jnshu.entity.user">
+        select * from user where name =#{name }
+    </select>
+</mapper>

@@ -1,0 +1,45 @@
+@import '../helpers/mixin';
+@import '../helpers/variable';
+header {
+    background: $white;
+    padding: 10px 0;
+    .container {
+        @include flex-s-between;
+        @media (max-width: 575px) {
+            justify-content: flex-end;
+        }
+        span {
+            color: $green;
+            /*call-word*/
+            @media (max-width: 575px) {
+                display: none; // height: 0;
+            }
+        }
+        div {
+            display: flex;
+            align-items: center;
+            a {
+                display: inline-block;
+                margin-left: 15px;
+                /* 图标样式 */
+            }
+            @mixin logo-group {
+                width: 25px;
+                height: 24px;
+            }
+            a:nth-child(1) {
+                background: url(../img/spritesheet.png)no-repeat -5px -873px;
+                @include logo-group();
+            }
+            a:nth-child(2) {
+                background: url(../img/spritesheet.png)no-repeat -5px -602px;
+                @include logo-group();
+            }
+            a:nth-child(3) {
+                background: url(../img/spritesheet.png)no-repeat -5px -907px;
+                @include logo-group();
+            }
+            /* right-logo */
+        }
+    }
+}

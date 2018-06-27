@@ -1,0 +1,140 @@
+// 变量:背景颜色(主调性)
+$bg-color: #5fc0cd;    
+// 变量:box边框 
+$border:1px #999999 solid;  
+// 混合:flex垂直居中
+@mixin y-center {display: flex;align-items: center;}  
+// 混合:footer按钮通用样式
+@mixin ft-btn {
+    padding: 0;
+    outline: none;
+    border: 1px solid #5fc0cd;
+    border-radius: .1rem;
+    width: 48%;
+    height: .40rem;
+    font-size: .18rem;
+}
+//清除a标签默认样式
+a {color: #ffffff;text-decoration: none; }
+
+
+html { font-size: 625%;}
+
+body {
+    margin: .40rem 0 .50rem ;
+    padding: 0;
+    font-size: .18rem;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    text-align: center;
+    line-height: .40rem;
+    width: 100%;
+    color: #ffffff;
+    background: $bg-color;
+    a {
+        position: absolute;
+        left: 0;
+        padding: 0 .15rem;
+    }
+}
+
+main {
+    margin: .40rem 0 .50rem 0;
+
+    .background {
+        color: #ffffff;
+        @include y-center;
+        justify-content: flex-start;
+        height: 2rem;
+        background: url(../images/background.png) no-repeat ;
+        background-size: cover;
+
+        div {
+            width: .80rem;
+            height: .80rem;
+            padding: 0 .30rem;
+        }
+
+        .dingwei {
+            position: relative;
+            top: .08rem;
+            transform: scale(0.6);
+        }
+
+        span {font-size: .12rem;}
+
+        img {max-width: 100%;max-height: 100%;}
+    }
+
+    >p {
+        margin-left: .18rem;
+        padding-left: .18rem;
+        border-left: 2px solid $bg-color;
+    }
+
+    .list {
+        padding: 0 .18rem;
+
+        .red {
+            color: #e26163;
+            font-weight: 500;
+        }
+
+        .left-text-first {
+            color: black;
+            padding-right: .20rem;
+            margin-right: .20rem;
+            border-right: $border;
+        }
+
+        .left-text {
+            color: #999999;
+            width: 1.12rem;
+            padding: 0 .20rem;
+            margin-right: .20rem;
+            border-right: $border;
+            white-space: nowrap;
+        }
+
+        .last {
+            display: flex;
+            align-items: center;
+
+            .myself {
+                color: #999999;
+                position: absolute;
+                width: 1.12rem;
+                border-right: $border;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            .oneself {margin-left: 1.35rem;}
+        }
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    @include y-center;
+    justify-content: space-around;
+    height: .50rem;
+    width: 100%;
+    background: #ffffff;
+
+    .btn-left {
+        @include ft-btn;
+        color: $bg-color;
+        background: #ffffff;
+    }
+
+    .btn-right {
+        @include ft-btn;
+        color: #ffffff;
+        background: $bg-color;
+    }
+}

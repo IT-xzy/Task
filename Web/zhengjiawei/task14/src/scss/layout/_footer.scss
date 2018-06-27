@@ -1,0 +1,70 @@
+@import '../helpers/mixin';
+@import '../helpers/variable';
+footer {
+    background: $green;
+}
+
+.footer-style {
+    >div {
+        margin: 35px 0;
+        @media (max-width:991px) {
+            width: 100%;
+            margin: 10px 0;
+            padding: 0 15px;
+        }
+    }
+    h4 {
+        color: $white;
+        font-weight: 300;
+    }
+    a {
+        font-size: 14px;
+        color: $white;
+        font-weight: 300;
+    }
+    div:nth-child(1) {
+        h4 {
+            margin-bottom: 80px;
+            @media(max-width: 991px) {
+               margin-bottom: 40px; 
+            }
+        }
+    }    
+    div:nth-child(2) {
+        h4 {
+            margin-bottom: 32px;
+        }
+        span {
+            display: flex;
+            align-items: center;
+            a {
+                display: inline-block;
+                margin-right: 30px;
+                margin-bottom: 25px;
+                padding-bottom: 5px;
+                border-bottom: 2px solid transparent;
+                &:hover {
+                    border-bottom: 2px solid $white;
+                }
+                @media (max-width:991px) {
+                    margin-bottom: 15px;
+                }
+            }
+        }
+    }
+    div:nth-child(3) {
+        text-align: right;
+        @media (max-width:991px) {
+            text-align: left;
+        }
+        h4 {
+            margin-bottom: 20px;
+        }
+        i {
+            display: inline-block;
+            background: url(../img/qrcode.png);
+            width: 92px;
+            height: 92px;
+        }
+    }
+}

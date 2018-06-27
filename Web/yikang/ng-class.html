@@ -1,0 +1,52 @@
+<html>
+<head>
+    <title>angular集成wangEditor</title>
+    <meta charset="utf-8">
+    <script src="js/angular.min.js"></script>
+    <script src="js/wangEditor.min.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div id="editor" ng-model="sendPromt"></div>
+<button ng-click="getContent()">获取html</button> <br />
+<button ng-click="getContent2()">获取text</button> <br />
+<script type="text/javascript">
+    var app = angular.module('myApp',[]);
+    app.controller('myCtrl',['$scope',function($scope){
+        //配置wangEditor
+        var E, editor;
+        E = window.wangEditor;
+        editor = new E('#editor'); //id一定要一致
+        editor.customConfig.menus = [
+            'head',  // 标题
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'link',  // 插入链接
+            'list',  // 列表
+            'justify',  // 对齐方式
+            'image',  // 插入图片
+            'table',  // 表格
+            'video',  // 插入视频
+            'code',  // 插入代码
+            'undo'  // 撤销
+        ];
+        //如果需要使用 base64 编码直接将图片插入到内容中，可参考一下示例配置
+        editor.customConfig.uploadImgShowBase64 = true;
+        // 将图片大小限制为 10M
+        editor.customConfig.uploadImgMaxSize = 10* 1024 * 1024;
+        editor.create();
+        //获取内容的方式
+        $scope.getContent = function(){
+            alert(editor.txt.html())
+        }
+        $scope.getContent2 = function(){
+            alert(editor.txt.text())
+        }
+    }]);
+</script>
+</body>
+</html>

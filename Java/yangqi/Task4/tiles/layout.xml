@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+
+    <!-- 项目 -->
+    <definition name="home" template="/WEB-INF/tiles/mainLayout.jsp">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/tiles/head.jsp" />
+
+        <put-attribute name="top" value="/WEB-INF/jsp/tiles/top.jsp"/>
+
+        <put-attribute name="nav" value="/WEB-INF/jsp/tiles/Nav.jsp"/>
+
+        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp"/>
+
+        <put-attribute name="foot" value="/WEB-INF/jsp/tiles/foot.jsp" />
+
+        <!-- 跳转页面 -->
+        <put-attribute name="dumpPage" value="profession"/>
+    </definition>
+    <definition name="profession" extends="home">
+        <put-attribute name="title" value="职业"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/profession.jsp"/>
+
+        <put-attribute name="dumpPage" value="home"/>
+    </definition>
+
+
+    <!-- 登录模版页面 -->
+    <definition name="login" template="/WEB-INF/jsp/tiles/loginTem.jsp">
+        <put-attribute name="title" value="登录"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/login.jsp"/>
+    </definition>
+
+    <!-- 注册模板 -->
+    <definition name="test" template="/WEB-INF/jsp/tiles/loginTem.jsp">
+        <put-attribute name="title" value="注册"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/test.jsp"/>
+    </definition>
+
+    <!--项目-->
+</tiles-definitions>

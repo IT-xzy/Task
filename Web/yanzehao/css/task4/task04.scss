@@ -1,0 +1,95 @@
+@charset "utf-8";
+
+$btn-color:#5fc0cd;
+$bg-color:#eff0f4;
+$border-left:solid 1px #eaedee;
+
+// 一个简单的按钮样式
+
+@mixin btn-style {
+	width: 100%;
+	height: 4rem;
+	border: 0;
+	font-size:1.6rem;
+	color: #ffffff;
+	outline: none;
+	background-color: $btn-color;
+}
+
+
+body{
+	margin: 0;
+	padding: 0;
+	overflow:hidden;overflow-y:auto;
+	font-size: 62.5%;
+	background-color:$bg-color;
+	font-size:1.6rem;
+}
+
+header{
+	display: flex;
+	justify-content: space-between;
+	background-color: $btn-color;
+	padding: 1rem;
+}
+
+header a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+
+.bodyone{
+	padding: 1rem 0;
+	margin: 1rem 0 ;
+	background-color: #ffffff;
+	height: 2rem;
+	overflow: hidden;
+} 
+
+// 通过extend选择器来继承bodyone的样式
+
+.bodytwo{
+	@extend .bodyone;
+}
+
+input{
+	position: relative;
+	left: 3rem;
+	bottom: 0.4rem;
+	padding-left: 3rem;
+	border: 0px;
+	border-left: $border-left;
+	height: 2rem;
+	width: 50%;
+	color: #000000;
+	font-size: 1.6rem;
+	outline: none;
+}
+
+input::-webkit-input-placeholder{
+    color:#eaedee;
+}
+
+img{
+	display: inline-block;
+	max-width: 100%;
+	max-height: 100%;
+	position: relative;
+	left: 1.8rem;
+}
+
+button{
+	@include btn-style;
+}
+
+footer{
+	text-align: right;
+	margin: 1rem;
+}
+
+p{color:#ffffff;
+}
+
+a{color: $btn-color;
+}

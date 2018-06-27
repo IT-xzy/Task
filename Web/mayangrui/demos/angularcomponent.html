@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+</head>
+<body ng-app="heroApp">
+<div ng-controller="MainCtrl as ctrl">
+    <b>Hero</b><br>
+    <hero-detail hero="ctrl.hero"></hero-detail>
+</div>
+</body>
+<script>
+    angular.module('heroApp', []).controller('MainCtrl', function MainCtrl() {
+        this.hero = {
+            name: 'Spawn'
+        };
+    });
+
+    function HeroDetailController() {
+
+    }
+    angular.module('heroApp').component('heroDetail', {
+        templateUrl: 'herohtml.html',
+        controller: HeroDetailController,
+        bindings: {
+            hero: '='
+        }
+    });
+</script>
+</html>

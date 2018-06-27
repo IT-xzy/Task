@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hzw.mapper.StudentsMapper">
+
+    <insert id="addStudents" parameterType="Students">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="stuId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tb_students
+        VALUES (null,#{stuName},#{stuIntroduction},#{stuWork},#{stuSuper},#{stuProfession},
+        #{stuPortrait},#{create_at},#{update_at})
+    </insert>
+
+    <delete id="deleteStudents" parameterType="java.lang.Long">
+        DELETE FROM tb_students WHERE stuId = #{stuId}
+    </delete>
+
+    <update id="updateStudents" parameterType="Students">
+        UPDATE tb_students SET stuName = #{stuName},stuIntroduction = #{stuIntroduction},
+        stuWork = #{stuWork},stuSuper = #{stuSuper},stuProfession = #{stuProfession},
+        stuPortrait = #{stuPortrait},create_at = #{create_at},update_at = #{update_at}
+        WHERE stuId = #{stuId}
+    </update>
+
+    <select id="findIdStudents" parameterType="java.lang.Long" resultType="Students">
+        SELECT * FROM tb_students WHERE stuId = #{stuId}
+    </select>
+
+    <select id="findNameStudents" parameterType="String" resultType="Students">
+        SELECT * FROM tb_students WHERE stuName = #{stuName}
+    </select>
+
+    <select id="findListStudents" resultType="Students">
+        SELECT * FROM tb_students
+    </select>
+
+    <select id="countStudent" resultType="Integer">
+        SELECT COUNT(stuId) stuId FROM tb_students
+    </select>
+    <select id="countWork" resultType="Integer">
+        SELECT COUNT(stuWork) stuWork FROM tb_students WHERE stuWork != 0
+    </select>
+</mapper>
