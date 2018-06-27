@@ -1,0 +1,128 @@
+html,body,ul,li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+$bg-color: #29b078 !default;
+$float-left: left !default;
+$nav-li-hover-color: #cacaca !default;
+$padding-top:15px !default;
+$padding-left:15px !default;
+
+.navbar-self {     
+    background-color: $bg-color;    
+}
+.navbar-self::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.xs-hidden-btn {
+    float: right;    
+    display: none;
+    border: 1px solid #fff;
+    
+    border-radius: 5px;
+    text-align: center;
+    margin: 8px;
+    background-color: $bg-color;    
+}
+.xs-hidden-btn span{
+    margin: 5px;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+}
+.nav-drop-menu li {
+    padding: $padding-top $padding-left;
+    list-style: none;
+    float: $float-left;
+    background-color: $bg-color;    
+}
+.nav-drop-menu li:hover {
+    background-color: $nav-li-hover-color;    
+}
+.nav-drop-menu {    
+    padding: 0;
+    text-align: center;
+    float: right;
+    clear: both;
+}
+#nav-btn {
+    display: none;
+}         
+#nav-btn:checked ~ .nav-drop-menu {
+    display: block;
+}
+@media screen and (min-width:768px) {
+    .xs-hidden-btn { 
+        display: none;
+    }            
+    .nav-drop-menu {
+        margin-right: 15px;
+        margin-top: 0;
+        display: block;
+        float: right;
+    }
+    .nav-drop-menu li {
+        float: $float-left;
+    }
+} 
+@media screen and (max-width:600px) {
+    .xs-hidden-btn {    
+        display: block;
+    }
+    .nav-drop-menu {        
+        display: none;
+        float: none;               
+    }
+    .nav-drop-menu li {
+        float: none;
+    }            
+    
+}
+
+
+
+.drop-group::after {
+    content: "";
+    display: block;
+    clear: both;    
+}
+.dropdown-self {
+    position: relative;
+    float: left;
+    text-align: center;   
+}
+.dropdowm-toggle{
+    padding: 10px;
+    width: 100%;    
+    outline: none;
+    background: #fff;
+    border: none;
+}
+.dropdown-menu,
+#dropdown-btn {
+    display: none;
+}
+#dropdown-btn:checked ~ ul {
+    position: absolute;
+    display: block;
+    width: 100%;
+}
+#dropdown-btn1 {
+    display: none;
+}
+#dropdown-btn1:checked ~ ul {
+    position: absolute;
+    display: block;
+    width: 100%;
+}#dropdown-btn2 {
+    display: none;
+}
+#dropdown-btn2:checked ~ ul {
+    position: absolute;
+    display: block;
+    width: 100%;
+}

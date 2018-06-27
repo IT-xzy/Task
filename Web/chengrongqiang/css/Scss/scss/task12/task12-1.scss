@@ -1,0 +1,164 @@
+@mixin padding ($top-p:.15rem,$top-l:.15rem) {
+    padding: $top-p $top-l;
+}
+@mixin border($bd-color:#e1e5e7) {
+    border:1px solid $bd-color;
+}
+@mixin border-radius ($bd-radius:5px){
+    border-radius: $bd-radius;
+}
+@mixin bg-color($bg-color: #5fc0cd) {
+    background-color: $bg-color;
+}
+@mixin f-color($f-color: #fff) {
+    color:$f-color;
+}
+@mixin r-margin($r-margin:15px){
+    margin-left: $r-margin;
+
+}
+@mixin fixed {
+    position: fixed;
+    left: 0;
+}
+$font-size: 16px;
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+html {        
+    font-size: 100px;
+    }
+header {
+    @include padding(.11rem,.15rem );
+    @include bg-color;
+    @include fixed;
+    top: 0;    
+    width: 100%;
+    font-size: $font-size;    
+    img {
+        float: left;    
+    }
+    div {
+        @include bg-color;
+        @include f-color;
+        margin-right: .45rem;
+        text-align: center;
+    }
+}
+main {    
+    font-size: $font-size;
+    margin: .4rem 0 1.5rem;
+       
+    .introduce {
+        @include padding(.4rem, .15rem); 
+        @include f-color;
+        background: url(../../.././favicon.ico/task12/cover.png) no-repeat;
+        background-size: cover;        
+        img {
+            float: left;    
+        }           
+    }
+    .name-age {
+        padding: .16rem 0 .16rem 1.03rem;
+        .name {
+            margin-bottom: .06rem;
+            text-align: left;
+            font-size: .18rem;
+        }
+        .adress {
+            @extend .name;
+            font-size: .1rem;
+            i {
+                display: inline-block;
+                width: .09rem;
+                height: .12rem;
+                background: url(../../.././task/task12/adress.png) no-repeat;
+            }
+        }
+    }
+    .skill {
+        padding:.13rem 0 .13rem .28rem;         
+        border-bottom: 1px solid #e1e5e7;    
+    }
+    .accom-diet{
+        padding: .13rem 0;         
+        .accom {
+            @include r-margin(.1rem);
+            border-right: 1px solid  #e1e5e7;
+            padding-left: .45rem;
+            padding-right: .1rem;            
+            background: url(../../.././task/task12/star.png) no-repeat .28rem .05rem;           
+        }
+        .diet {
+            @extend .accom;
+            margin-left: -.22rem;
+            border: none;  
+        }
+     }
+     .inf-worker {        
+        li {
+            @include padding(.15rem); 
+            margin-left:.15rem;
+            border-bottom: 1px solid #e1e5e7;
+            &:first-child {
+                border-top: 1px solid #e1e5e7;
+            }
+            p{
+                display: inline-block;
+                padding-right: .11rem;
+                @include f-color(#999);                
+            }
+            span {               
+                border-left: 1px solid #e1e5e7;            
+                padding-left: .11rem;
+            }
+            .emolument{
+                color:#e26163;
+                font-weight: 700;
+            }
+        }   
+    }
+     .introduce-self {
+         
+         border-bottom: 1px solid #e1e5e7;
+         padding:.15rem .15rem .15rem .3rem;
+        p{
+            float: left;            
+            border-right: 1px solid #e1e5e7; 
+            padding-right: .12rem; 
+            @include f-color(#999);   
+        }
+        span {
+            display: block;
+            overflow: hidden;
+            padding-left:.15rem ;
+        }    
+    }
+}
+footer {
+    word-spacing: .2rem;       
+    font-size:$font-size;  
+    @include fixed;
+    bottom: .2rem;    
+    width: 100%;   
+    text-align: center;
+    button {
+        display: inline-block;
+        @include border(#5fc0cd);
+        @include border-radius;        
+        width: 43%;
+        padding: .13rem;          
+    }
+    .message {
+        color: #5fc0cd;
+        background:#fff;           
+    }
+    .telephone-contact {        
+        color: #fff;
+        background: #5fc0cd;
+    }
+}
+
+
