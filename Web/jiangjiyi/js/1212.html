@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signalLight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .star{
+            width: 30vw;
+            height: 30vw;
+            border-radius: 50%;
+            background: green;
+        }
+        .content{
+            display: flex;
+            justify-content: space-between;
+            width: 30vw;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+<div class="star"  >
+</div>
+<div class="content">
+    <button class="go">绿灯</button>
+    <button class="warn">黄灯</button>
+    <button class="stop">红灯</button>
+</div>
+<p class="msg"></p>
+
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="state-machine.js"></script>
+<script >
+    var fsm = new StateMachine({
+        init: 'green',
+        transitions: [
+            { name: 'warn',     from: 'green',  to: 'yellow' },
+            { name: 'stop',     from: 'yellow',  to: 'red' },
+            { name: 'go',     from: 'yellow',  to: 'green' },
+            { name: 'warn',     from: 'red',  to: 'yellow' },
+        ],
+        methods: {
+            onGo: function () {
+                $(".star").css("background-color", "green");
+            },
+
+            //允许为每个事件指定两个回调函数，
+            onBeforeWarn:function () {
+                console.log("warn事件发生之前触发");
+            },
+            onWarn: function () {
+                $(".star").css("background-color", "yellow");
+                console.log("warn事件发生之后触发");
+            },
+            onStop: function () {
+                $(".star").css("background-color", "red");
+                console.log(fsm.state);
+            },
+            // 它也允许为每个状态指定两个回调函数，以green状态为例：
+            onEnterGreen:function () {
+                $(".msg").text("允许通行")
+            },
+            onEnterYellow:function () {
+                $(".msg").text("警告！信号灯即将变化")
+            },
+            onEnterRed:function () {
+                $(".msg").text("禁止通行")
+            }
+        }
+    });
+
+    //添加点击事件
+    $(document).ready(function(){
+        $(".go").click(function () {
+            fsm.go();
+
+        });
+        $(".warn").click(function () {
+
+            fsm.warn();
+
+        });
+        $(".stop").click(function () {
+
+            fsm.stop();
+
+        });
+    });
+
+</script>
+</body>
+</html>

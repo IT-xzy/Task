@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Title</title>
+    <style>
+        .loop-wrap {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        .loop-images-container{
+            position: absolute;
+            left: 0; top: 0;
+            width: 500%; /* 横向排列 5张图片 宽度应为主容器5倍 */
+            height: 100%;
+            font-size: 0;
+        }
+
+        .loop-image{
+            width: 500px;
+            height: 300px;
+        }
+
+        .loop-images-container{
+            position: absolute;
+            left: 0; top: 0;
+            width: 500%;
+            height: 100%;
+            font-size: 0;
+            transform: translate(0,0); /* 初始位置位移 */
+            animation: loop 10s linear infinite;
+        }
+
+        /* 创建loop动画规则 */
+        /*
+           轮播5张，总耗时10s，单张应为2s(20%)
+           单张切换动画耗时500ms，停留1500ms
+        */
+        @keyframes loop {
+            0% {transform: translate(0,0);}
+            15% {transform: translate(0,0);} /* 停留1500ms */
+
+            20% {transform: translate(-20%,0);} /* 切换500ms 位移-20% */
+            35% {transform: translate(-20%,0);}
+
+            40% {transform: translate(-40%,0);}
+            55% {transform: translate(-40%,0);}
+
+            60% {transform: translate(-60%,0);}
+            75% {transform: translate(-60%,0);}
+
+            80% {transform: translate(-80%,0);}
+            95% {transform: translate(-80%,0);}
+
+            100% {transform: translate(0,0);} /* 复位到第一张图片 */
+        }
+
+
+    </style>
+</head>
+<body>
+    <<div class="loop-wrap">
+        <div class="loop-images-container">
+            <img src="image/卧底胜利.png" alt="" class="loop-image">
+            <img src="image/卧底胜利.png" alt="" class="loop-image">
+            <img src="image/卧底胜利.png" alt="" class="loop-image">
+            <img src="image/卧底胜利.png" alt="" class="loop-image">
+            <img src="image/卧底胜利.png" alt="" class="loop-image">
+        </div>
+    </div>
+</body>
+</html>

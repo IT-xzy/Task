@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            font-size: 62.5%;
+        }
+        .viewport {
+            position: relative;
+            overflow: hidden;
+        }
+        .wrap {
+            position: relative;
+            width: 300vw;
+            overflow: hidden;
+
+        }
+        .wrap img {
+            display: inline-block;
+            width: 100vw;
+            height: auto;
+            float: left;
+        }
+
+        #pic1:checked ~ .wrap {
+            left: 0;
+            transition: 2s linear;
+        }
+        #pic2:checked ~ .wrap {
+            left: -100vw;
+            transition: 2s linear;
+        }
+        #pic3:checked ~ .wrap {
+            left: -200vw;
+            transition: 2s linear;
+        }
+
+        .arrow label {
+            display: none;/*不显示*/
+            width: 2rem;
+            height: 2rem;
+            border-top: 1rem solid #000;
+            border-right: 1rem solid #000;
+            transform: rotate(-135deg);
+        }
+
+        #pic1:checked ~ .arrow label:nth-of-type(3),
+        #pic2:checked ~ .arrow label:nth-of-type(1),
+        #pic3:checked ~ .arrow label:nth-of-type(2) {
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 5rem;
+        }
+    </style>
+</head>
+<body>
+<div class="viewport">
+    <input type="radio" name="slider" id="pic1" checked>
+    <input type="radio" name="slider" id="pic2">
+    <input type="radio" name="slider" id="pic3">
+    <div class="wrap">
+        <img src="image/卧底胜利.png" alt="">
+        <img src="image/cnav.png" alt="">
+        <img src="image/卧底胜利.png" alt="">
+    </div>
+    <div class="page">
+        <label for="pic1"></label>
+        <label for="pic2"></label>
+        <label for="pic3"></label>
+    </div>
+    <div class="arrow">
+        <!--左箭头-->
+        <label for="pic1"></label>
+        <label for="pic2"></label>
+        <label for="pic3"></label>
+    </div>
+</div>
+</body>
+</html>

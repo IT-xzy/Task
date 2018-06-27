@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+        <!--导入数据库配置-->
+    <context:property-placeholder location="spring/db.properties"/>
+    <!--打开连接-->
+    <context:annotation-config/>
+    <!--查找所有路径下的Dao方法-->
+    <context:component-scan base-package="com.jnshu.service.impl"/>
+    <!--连接数据库操作，不需要时断开-->
+    <bean id="dataSource"  class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+        <property name="driverClassName" value="${driver}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${db_username}" />
+        <property name="password" value="$(db_password}" />
+        <!--设置连接数-->
+        <property name="maxActive" value="10" />
+        <!--最小连接数-->
+        <property name="minIdle" value="5" />
+    </bean>
+    <!--创建工厂，传入Dao中-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+        <!--定义使用数据源-->
+        <property name="dataSource" ref="dataSource" />
+        <!--导入mybatis配置，接管sqlSessionFactory-->
+        <property name="configLocation" value="mybatis/mybatis-config.xml" />
+    </bean>
+    <!--将sql的连接传递给通过读取映射文件的对象，进行数据库的操作-->
+<bean id="userDao"  class="org.mybatis.spring.mapper.MapperFactoryBean" >
+    <property name="mapperInterface" value="com.jnshu.dao.UserDao"/>
+    <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+</bean>
+</beans>
