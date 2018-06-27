@@ -1,0 +1,171 @@
+$border-gray: 0.1rem solid #d0d6d9;
+.backhome {
+  div {
+    padding: 1rem 0;
+    margin-left: 1%;
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    span {
+      color: #29b078;
+    }
+  }
+}
+.direction {
+  div {
+    padding: 1rem 0;
+    margin-left:1%;
+    border-bottom: $border-gray;
+    border-top: $border-gray;
+    button {
+      border-style: none;
+      width: 8rem;
+      text-align: center;
+      background-color: #fafafa;
+    }
+    button:hover {
+      background-color: #29b078;
+    }
+  }
+}
+.form-tt{
+  margin-left:1%;
+  text-align: left;
+}
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+
+}
+.form-item {
+  position: relative;
+  width: 80%;
+  margin: 0 10%;
+  border: $border-gray;
+  box-sizing: border-box;
+  border-radius: 2rem;
+  background-color: #fff;
+}
+@media (min-width: 768px) {
+  .form-item {
+    width: 48%;
+    margin: 0 1%;
+  }
+}
+@media (min-width: 992px) {
+  .form-item {
+    width: 31.33%;
+    margin: 0 1%;
+  }
+}
+.form-header {
+  display: flex;
+  align-items: center;
+  img {
+    width: 10rem;
+    height: 10rem;
+    margin: 1rem 1rem;
+  }
+  .form-header-right {
+    display: flex;
+    flex-direction: column;
+
+    span {
+      padding:0;
+      margin-left:0.5rem;
+    }
+    p {
+      margin: 1rem 0.5rem;
+      font-size: 1.2rem;
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+  }
+}
+// 表格占据50%宽度部分
+.form-half {
+  float: left;
+  width: 50%;
+  padding: 0.7rem 0;
+  box-sizing: border-box;
+  span {
+    padding-left: 0.6rem;
+  }
+}
+// 表格占据40%宽度部分
+.form-forty {
+  float: left;
+  width: 40%;
+  padding: 4.4rem 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+// 表格占据60%宽度部分
+.form-sixty {
+  float: left;
+  width: 60%;
+  height: 10.5rem;
+  text-align: center;
+  box-sizing: border-box;
+  p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.5rem;
+    padding:0 0.7rem;
+    
+    box-sizing: border-box;
+  }
+}
+// 清除以上几行浮动
+.clearfloat:after{
+  display:block;
+  content:"";
+  visibility: hidden;
+  height: 0;
+  clear:both;
+}
+.clearfloat{
+  zoom: 1;
+}
+// 表格占满部分
+.form-full{
+   width: 100%;
+   padding: 1rem 0 1rem 1rem;
+   word-wrap: break-word;
+   word-break: break-all;
+   box-sizing: border-box;
+   span{
+     color:red;
+   }
+}
+.border-bottom {
+  border-bottom: $border-gray;
+}
+.border-right {
+  border-right: $border-gray;
+}
+.form-hover{
+  position: absolute;
+  top:0;
+  left:0;
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  height:100%;
+  border-radius: 2rem;
+  color:#fff;
+  background-color: #333;
+  opacity: 0;
+  p:first-child{
+    text-align: center;
+  }
+  p{
+    margin:2rem;
+  }
+}
+.form-item:hover .form-hover{
+  opacity: 0.8;
+}

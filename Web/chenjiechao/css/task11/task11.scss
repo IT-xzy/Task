@@ -1,0 +1,95 @@
+$whi: #fff;
+$blu: #5fc0cd;
+$border-gra: #eaedee;
+$color-gra: #e1e5e7;
+$bod: 0.1rem;
+html {
+  font-size: 62.5%;
+}
+body {
+  width: 100%;
+  margin: 0;
+  background-color: $color-gra;
+}
+@mixin big {
+    width: 100%;
+    color: $whi;
+    text-align: center;
+}
+header {
+  @include big;
+  height: $bod*44;
+  line-height: $bod*44;
+  background-color: $blu;
+  p {
+    float: left;
+    width: 100%;
+    margin: 0;
+    font-size: $bod*18;
+  }
+  a {
+    float: left;
+    width: 30%;
+    text-decoration: none;
+    font-size: $bod*16;
+    color: $whi;
+  }
+  .header-left {
+    margin-left: -95%;
+    text-align: left;
+  }
+  .header-right {
+    margin-left: -35%;
+    text-align: right;
+  }
+}
+main {
+  div {
+    display: flex;
+    align-items: center;
+    margin: 0.8rem 0;
+    background-color: $whi;
+    img {
+      width: 1.5rem;
+      height: 2rem;
+      padding: 0.5rem 1.5rem;
+      border-right: $bod solid $border-gra;
+      margin: 1rem 0;
+    }
+    input {
+      width: 100%*0.4;
+      height: 3rem;
+      margin: 1rem;
+      border: none;
+      outline: none;
+      font-size: $bod*16;
+    }
+    :-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: $color-gra;
+    }
+    ::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: $color-gra;
+    }
+    input:-ms-input-placeholder {
+      color: $color-gra;
+    }
+    input::-webkit-input-placeholder {
+      color: $color-gra;
+    }
+  }
+  button { 
+      @include  big;
+      height:5rem;
+      border:none;
+      font-size: $bod*18;
+      background-color: $blu;
+  }
+  p {
+      float:right;
+      margin-right:1.5rem;
+      font-size:$bod*16;
+      color:$blu;
+  }
+}

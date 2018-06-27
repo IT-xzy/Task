@@ -1,0 +1,151 @@
+$white: #fff;
+$blue: #5fc0cd;
+$gray: #999;
+$red:#e63b0e;
+$word: 1.2rem;
+$border: 0.1rem;
+
+html {
+  font-size: 62.5%;
+}
+body {
+  width: 100%;
+  margin: 0;
+  background-color: $white;
+}
+@mixin fix($top,$blue) {
+  position: fixed;
+  width: 100%;
+  height: $word * 4;
+  #{$top}: 0;
+  background-color: $blue;
+}
+@mixin flex-align {
+  display: flex;
+  align-items: center;
+
+}
+header {
+  @include fix(top,#5fc0cd);
+  text-align: center;
+  line-height: $word * 4;
+  font-size: $word * 1.5;
+  color: $white;
+  .homepage {
+    float: left;
+    width: 100%;
+    margin: 0;
+  }
+  a {
+    float: left;
+    width: 30%;
+    margin-left: -98%;
+    text-align: left;
+    text-decoration: none;
+    color: $white;
+  }
+}
+main {
+  margin: $word * 4 0;
+}
+.pic {
+  @include flex-align;
+  background: url(img/background.png) no-repeat;
+  background-size: cover;
+  color: $white;
+  .pic-headpor {
+    width: 8.5rem;
+
+    margin: 2.75rem 1rem;
+    img {
+      width: 8.5rem;
+    }
+  }
+  .pic-word {
+    .pic-word-top {
+      margin: $word * 0.5;
+      font-size: $word * (4/3);
+    }
+    .pic-word-bottom {
+      margin: $word * 0.5;
+      img {
+        width: 0.8rem;
+      }
+    }
+  }
+}
+.text {
+  .text-first {
+    border-bottom: $border solid $gray;
+
+    p {
+      height: 2.6rem;
+      margin: $word;
+      line-height: 2.6rem;
+      padding-left: $word;
+      border-left: $border solid $blue;
+      font-size: $word * (4/3);
+      
+    }
+  }
+  .text-same {
+    @include flex-align;
+    height: 5rem;
+    margin: 0 0 0 $word * (5/4);
+    border-bottom: $border solid $gray;
+    .star {
+      width: 1rem;
+      padding: 0 0.5rem;
+    }
+    span {
+      padding: 0 0.8rem;
+      font-size: $word;
+    }
+    .span-border {
+      border-right: $border solid $gray;
+    }
+    .gray {
+      color: $gray;
+      border-right: $border solid $gray;
+    }
+    .red{
+      color:$red;
+    }
+  }
+  .text-last {
+    @include flex-align;
+
+    border-bottom: $border solid $gray;
+    .text-last-left {
+      padding: 0 0.8rem 0 0.8rem + $word * (5/4);
+      margin: auto 0;
+      font-size: $word;
+      position: absolute;
+      color: $gray;
+      border-right: $border solid $gray;
+    }
+    .text-last-right {
+      padding: $word 9rem;
+      font-size: $word;
+    }
+  }
+}
+footer {
+  @include flex-align();
+  @include fix(bottom,#fff);
+  .leaveword {
+    width: 40%;
+    height: 3.2rem;
+    margin: 0.8rem 4%;
+    border: $border solid $blue;
+    border-radius: 0.8rem;
+    font-size: $word;
+    color: $blue;
+    background-color: $white;
+  }
+  .telephone{
+    @extend .leaveword;
+    color:$white;
+    background-color: $blue;
+  }
+}

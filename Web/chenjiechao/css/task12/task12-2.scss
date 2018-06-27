@@ -1,0 +1,208 @@
+$blue: #5fc0cd;
+$gray: #a6a6a6;
+$white: #fff;
+$red: #e63b0e;
+html {
+  font-size: 62.5%;
+}
+body {
+  margin: 0;
+}
+@mixin fix($top, $height, $blue) {
+  position: fixed;
+  #{$top}: 0;
+  width: 100%;
+  height: $height;
+  text-align: center;
+  background-color: $blue;
+}
+header {
+  @include fix(top, 4.45rem, #5fc0cd);
+  z-index: 100;
+}
+@mixin header-button($right, $left, $white, $blue) {
+  width: 7.2rem;
+  height: 3.6rem;
+  margin: 0.4rem $right 0.4rem $left;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: 1.5rem;
+  color: $white;
+  background-color: $blue;
+}
+.header-button-left {
+  @include header-button(-0.5rem, 0, #fff, #55a8b3);
+}
+.header-button-right {
+  @include header-button(0, -0.5rem, #55a8b3, #fff);
+}
+.header-img {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  width: 2rem;
+}
+// foot部分// foot部分// foot部分// foot部分// foot部分// foot部分// foot部分// foot部分// foot部分
+footer {
+  @include fix(bottom, 5rem, #f8fafb);
+  @mixin foot($width, $align, $margin) {
+    float: left;
+    width: $width;
+    height: 5rem;
+    text-align: $align;
+    margin-left: $margin;
+  }
+  .foot-middle {
+    @include foot(100%, center, 0);
+    .a1 {
+      display: inline-block;
+      border-radius: 5rem;
+      background-color: $blue;
+    }
+    .write {
+      width: 2rem;
+      height: 2rem;
+      margin: 1.5rem;
+    }
+  }
+  .foot-left {
+    @include foot(30%, end, -100%);
+  }
+  .foot-right {
+    @include foot(30%, left, -30%);
+  }
+}
+.home {
+  width: 2.3rem;
+  height: 2rem;
+  margin: 0.4rem 0 0.9rem;
+}
+@mixin foot-text($left, $right) {
+  margin: 0 $left 0.7rem $right;
+  font-size: 1rem;
+  color: $blue;
+}
+.foot-left-text {
+  @include foot-text(0.18rem, 0);
+}
+.foot-right-text {
+  @include foot-text(0, 0.18rem);
+}
+// main部分 main部分 main部分 main部分 main部分 main部分 main部分 main部分 main部分 main部分 main部分 main部分
+main {
+  position: relative;
+  width: 100%;
+  margin: 4.45rem 0 6rem 0;
+}
+.list {
+  width: 100%;
+  height: 4rem;
+}
+.list-one {
+  position: relative;
+  float: left;
+  width: 33.333%;
+  height: 4rem;
+  overflow: hidden;
+  border-right: 1px solid #e1e5e7;
+  border-image: -webkit-linear-gradient(#fff, #e1e5e7, #fff) 0.1 30;
+  border-image: -moz-linear-gradient(#fff, #e1e5e7, #fff) 0.1 30;
+  border-image: linear-gradient(#fff, #e1e5e7, #fff) 0.1 30;
+  select {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none;
+  }
+  div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    line-height: 4rem;
+    text-align: center;
+    border-bottom: 1px solid #e1e5e7;
+    z-index: 10;
+  }
+  img{
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    transform: translate(-50%, -50%);
+    width:1rem;
+    height:1rem;
+  }
+  ul {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    padding: 0;
+    border: 0.1rem solid $gray;
+    list-style: none;
+    text-align: center;
+    background-color: $white;
+    z-index: 10;
+
+    li {
+      line-height: 4rem;
+      height: 4rem;
+      cursor: pointer;
+    }
+    li:hover {
+      background-color: $gray;
+    }
+  }
+}
+.list-one:hover {
+  overflow: visible;
+}
+
+// 上为列表框 下为主要内容// 上为列表框 下为主要内容// 上为列表框 下为主要内容// 上为列表框 下为主要内容
+.content {
+  width: 100%;
+  height: 9.1rem;
+  border-bottom: 1px solid #e1e5e7;
+}
+@mixin flex {
+  display: flex;
+  align-items: center;
+}
+.serve {
+  @include flex;
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1rem;
+  }
+  p {
+    margin: 0;
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.date {
+  @include flex;
+  justify-content: space-between;
+  .date-text {
+    margin: 0 0 0 5.45rem;
+  }
+  div {
+    @include flex;
+    justify-content: space-between;
+    width: 30%;
+    .date-img {
+      width: 1rem;
+      height: 1.6rem;
+      margin: 0 1rem;
+    }
+    .date-div-text {
+      margin: 0;
+      color:$red;
+    }
+  }
+}
