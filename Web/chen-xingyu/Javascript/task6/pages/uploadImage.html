@@ -1,0 +1,51 @@
+<div>
+    <div class="row">
+        <p class="col-sm-4 col-xs-4">配&emsp;&emsp;图</p>
+        <div class="col-sm-6 col-xs-12">
+            <label class="btn btn-primary" for="uploadImg">
+                选择文件
+            </label>
+            <input id="uploadImg"
+                   type="file"
+                   style="visibility: hidden;width: 0;height: 5px"
+                   ng-model="FileInput"
+                   accept="image/png,image/gif"
+                   onchange="angular.element(this).scope().uploadImage(this)">
+            <img  id="previewImg" ng-src="{{img}}" alt="配图预览">
+        </div>
+    </div>
+    <div class="row">
+        <table style="display: table" class="btn-block">
+            <tr>
+                <td>图片名</td>
+                <td>文件大小</td>
+                <td>进度</td>
+                <td>操作</td>
+                <td>操作</td>
+            </tr>
+            <tr ng-if="file">
+                <td>{{fileName}}</td>
+                <td>{{(fileSize/1024/1024).toFixed(2)}}MB</td>
+                <td>
+                    <div class="progress" style="margin-bottom: 0!important;">
+                        <div style="width:{{progress}}%;background-color: #337ab7;border-radius: 3px;"
+                             ng-bind="progress+'%'"
+                             class="progress-bar">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="glyphicon glyphicon-ok" ng-show="progress==100"></span>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-success" ng-click="upload()" ng-disabled="progress">
+                        <span class="glyphicon glyphicon-upload"></span>上传
+                    </button>
+                    <button class="btn btn-sm btn-danger" ng-click="deleteImg()">
+                        <span class="glyphicon glyphicon-trash"></span>删除
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

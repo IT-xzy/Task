@@ -1,0 +1,113 @@
+<div class="details">
+    <div class=" panel panel-default">
+        <div class="panel-heading">
+            <h4 >{{headText}}Article</h4>
+        </div>
+        <form class="form-horizontal" role="form" name="myForm">
+            <div class="form-group">
+                <label class="col-sm-2 ">标题名称</label>
+                <div class="col-sm-8">
+                    <input id="title" type="text" class="form-control" ng-model="add_title" name="title"  required placeholder="请输入标题" >
+                    <span>&nbsp;</span>
+                    <span style="color:red;" ng-show="myForm.title.$dirty  && myForm.title.$invalid">
+                        <span ng-show="myForm.title.$error.required">标题是必填项</span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2  ">类 &nbsp; &nbsp; &nbsp; &nbsp;型</label>
+                <div class="col-sm-8 col-md-3 ">
+                    <select   class="form-control"
+                              ng-model="add_type"
+                              name="type"  required
+                              ng-options="y.value as y.text for y in picktype_add">
+                        <option value="" selected hidden>请选择</option>
+                    </select>
+                 </div>
+                <div class="col-sm-8 col-md-3  ">
+                    <select   class="form-control"
+                              ng-if="add_type===3"
+                              ng-model="$parent.add_industry"
+                              name="industry" required
+                              ng-options="y.value as y.text for y in pick_industry">
+                        <option value="" selected hidden>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 ">说 &nbsp; &nbsp; &nbsp; &nbsp;明</label>
+                <div class="col-sm-8">
+                    <div  id="wang">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2   ">跳转链接</label>
+                <div class="col-sm-8">
+                    <input type="url"  class="form-control" ng-model="add_url"   name="link"
+                           ng-blur="focus=true" ng-focus="focus=false" required placeholder="请输入跳转链接">
+                    <span>&nbsp;</span>
+                    <span  style="color:red;" ng-show="myForm.link.$dirty  && myForm.link.$invalid">
+                        <span ng-show="myForm.link.$error.required  && focus">跳转链接是必填项</span>
+                        <span ng-show="myForm.link.$error.url && focus">非法url</span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label  class="col-sm-2 ">配图</label>
+                <div class="col-sm-10">
+                    <button class="btn btn-primary">选择文件</button>
+                <input class="file" style="width: 100px" type="file" file-model="myFile"
+                       nv-file-select uploader="uploader"
+                       ng-click="clearItems()"  accept="image/*" >
+                <img alt="配图预览" ng-src="{{imgSrc}}" class="img-responsive ">
+                <div class="table-responsive col-md-12 padding-0">
+                    <table class="table" >
+                        <thead>
+                        <tr><th class="text-center">图片名</th>
+                            <th class="text-center">文件大小</th>
+                            <th ng-show="uploader.isHTML5">进程</th>
+                            <th>状态</th>
+                            <th class="text-center">操作</th>
+                        </tr></thead>
+                        <tbody>
+                        <tr ng-repeat="item in uploader.queue">
+                            <td class="text-center">{{item.file.name }}</td>
+                            <td class="text-center">{{ item.file.size/1024/1024|number:2 }} MB</td>
+                            <td ng-show="uploader.isHTML5">
+                                <div class="progress" style="margin-bottom: 0;">
+                                    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                            </td>
+                            <td nowrap class="text-center" >
+                                <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                <span class="glyphicon glyphicon-upload"></span> 上传
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs"  ng-click="item.remove();removeSrc()">
+                                    <span class="glyphicon glyphicon-trash"></span> 移除
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
+            <div class=" col-sm-10">
+                <button class="btn  btn-success"
+                    ng-click="submit(2)"
+                    ng-disabled=" !myForm.$valid || !imgSrc" >立即上线
+                </button>
+                 <button class="btn btn-success" ng-click="submit(1)" ng-disabled=" !myForm.$valid || !imgSrc"  >存为草稿</button>
+                <button class="btn btn-default btn-danger pull-right" ng-click="goBack()">取消</button>
+            </div>
+            </div>
+        </form>
+    </div>
+</div>

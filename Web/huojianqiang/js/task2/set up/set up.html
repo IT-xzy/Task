@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="set up.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <img onclick="tiaozhuan()" class="img-one" src="left.png" alt=""> 参数设置
+        <img class="img-two" src="qustion.png" alt="">
+    </header>
+    <main>
+        <div class ="large">
+            <div class="small">
+                <p class="p-game">
+                    玩家匹配
+                </p>
+            </div>
+            <div class="small-two">
+                <ul id="box">
+                </ul>
+                <button onclick="Appear()" style="margin-bottom: -4px;">
+                    点击设置
+                    <img src="pencil.png" alt="">
+                </button>
+            </div>
+        </div>
+        <div class="main-div-two">
+            <input type="text" placeholder="水民词组">
+            <input type="text" placeholder="幽灵词组">
+        </div>
+        <div class="main-div-three" style="text-align: center">
+            <p style="text-align: left">玩家人数
+                <input onchange="Obtain()" type="number" max="18" min="6" id="display" value="6" class="input-people" onkeypress='return( /[\d]/.test(String.fromCharCode(event.keyCode) ) )'>人</p>
+            <img id="img-one" onclick="Reduce()" src="Minus-sign.png" alt="">
+            <input id="slider" type="range" step="1" value="6" min="6" max="18" onchange="Obtain_two()">
+            <img id="img-two" onclick="Enlarge()" src="plus.png" alt="">
+        </div>
+    </main>
+    <footer>
+        <button onclick="Licensing()">
+            去发牌
+        </button>
+    </footer>
+    <script src="set up.js"></script>
+</body>
+</html>

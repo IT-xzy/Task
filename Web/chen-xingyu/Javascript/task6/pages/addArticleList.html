@@ -1,0 +1,99 @@
+<div class="addArticle">
+    <form name="myForm">
+        <div ng-model="Title" class="title row">{{titleA}}</div>
+        <div class="includeTable row">
+            <div class="row">
+                <span class="col-sm-4 col-xs-4">标题名称</span>
+                <input class="col-sm-6 col-xs-12" ng-model="title" type="text" required>
+            </div>
+            <div class="row">
+                <span class="col-sm-4 col-xs-4">类&emsp;&emsp;型</span>
+                <select class="col-sm-6 col-xs-12"
+                        ng-model="currentType"
+                        ng-options="y.name for (x,y ) in Types"
+                        ng-change="statusChange(x.type)"
+                        required>
+                    <option value="">请选择</option>
+                </select>
+
+            </div>
+            <div class="row" ng-if="currentType.type===3">
+                <span class="col-sm-4 col-xs-4">所属行业</span>
+                <select class="col-sm-6 col-xs-12"
+                        ng-model="currentIndustry"
+                        ng-options="y for (x,y) in Industry"
+                        required>
+                    <option value="">请选择</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <span class="col-sm-4 col-xs-4">说&emsp;&emsp;明</span>
+                <div class="ueditor col-sm-6 col-xs-12" ng-model="content" type="text"></div>
+                <!--<script id="ueContainer" name="ueContainer" type="text/javascript"></script>-->
+            </div>
+            <div class="row">
+                <span class="col-sm-4 col-xs-4">跳转链接</span>
+                <input id="myEditor" class="col-sm-6 col-xs-12" ng-model="url" type="text" required>
+            </div>
+            <!--<div class="row">-->
+                <!--<p class="col-sm-4 col-xs-4">配&emsp;&emsp;图</p>-->
+                <!--<div class="col-sm-6 col-xs-12">-->
+                    <!--<label class="btn btn-primary" for="uploadImg">-->
+                        <!--选择文件-->
+                    <!--</label>-->
+                    <!--<input id="uploadImg"-->
+                           <!--type="file"-->
+                           <!--style="visibility: hidden;width: 0;height: 5px"-->
+                           <!--ng-model="FileInput"-->
+                           <!--accept="image/png,image/gif"-->
+                           <!--onchange="angular.element(this).scope().uploadImage(this)">-->
+                    <!--<img  id="previewImg" ng-src="{{img}}" alt="配图预览">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+                <!--<table style="display: table" class="btn-block">-->
+                    <!--<tr>-->
+                        <!--<td>图片名</td>-->
+                        <!--<td>文件大小</td>-->
+                        <!--<td>进度</td>-->
+                        <!--<td>操作</td>-->
+                        <!--<td>操作</td>-->
+                    <!--</tr>-->
+                    <!--<tr ng-if="file">-->
+                        <!--<td>{{fileName}}</td>-->
+                        <!--<td>{{(fileSize/1024/1024).toFixed(2)}}MB</td>-->
+                        <!--<td>-->
+                            <!--<div class="progress" style="margin-bottom: 0!important;">-->
+                                <!--<div style="width:{{progress}}%;background-color: #337ab7;border-radius: 3px;"-->
+                                     <!--ng-bind="progress+'%'"-->
+                                     <!--class="progress-bar">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</td>-->
+                        <!--<td>-->
+
+                        <!--</td>-->
+                        <!--<td>-->
+                            <!--<button class="btn btn-sm btn-success" ng-click="upload()" ng-disabled="progress">上传</button>-->
+                            <!--<button class="btn btn-sm btn-danger" ng-click="deleteImg()">删除</button>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+
+            <!--</div>-->
+            <img-Upload></img-Upload>
+            <div class="row newThree">
+                <div>
+                    <button class="btn btn-success"
+                            ng-click="online()"
+                            ng-disabled="myForm.$invalid||img===undefined">立即上线</button>
+                    <button class="btn btn-success"
+                            ng-click="sketch()"
+                            ng-disabled="myForm.$invalid||img===undefined">存为草稿</button>
+                    <button class="btn btn-default pull-right" ng-click="cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

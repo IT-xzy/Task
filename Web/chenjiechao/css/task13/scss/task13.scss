@@ -1,0 +1,250 @@
+@charset "utf-8";
+/*  
+  Document   : CSS样式初始化  
+  Created on : 2016. 8. 7,09:41:00  
+  Author :  
+  Description:  
+  CSS样式表的初始化，全局样式设置。部分样式属性请根据具体页面重置其属性  
+      导入方式：<link href="css/common.css" rel="stylesheet" type="text/css" /> */
+
+/* reset */
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+textarea,
+p,
+blockquote,
+th,
+td,
+input,
+select,
+textarea,
+button {
+  margin: 0;
+  padding: 0;
+} /* 初始化标签在所有浏览器中的margin、padding值 */
+fieldset,
+img {
+  border: 0 none;
+} /* 重置fieldset（表单分组）、图片的边框为0*/
+dl,
+ul,
+ol,
+menu,
+li {
+  list-style: none;
+} /* 重置类表前导符号为none,menu在HTML5中有效 */
+blockquote,
+q {
+  quotes: none;
+} /* 重置嵌套引用的引号类型 */
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+} /* 重置嵌套引用*/
+input,
+select,
+textarea,
+button {
+  vertical-align: middle;
+} /* 重置表单控件垂直居中*/
+button {
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer;
+} /* 重置表单button按钮效果 */
+body {
+  background: #fff;
+} /* 重置body 页面背景为白色 */
+body,
+th,
+td,
+input,
+select,
+textarea,
+button {
+  font-size: 12px;
+  line-height: 1;
+  font-family: "微软雅黑", "黑体", "宋体";
+  color: #666;
+} /* 重置页面文字属性 */
+a {
+  color: #666;
+  text-decoration: none;
+} /* 重置链接a标签 */
+a:active,
+a:hover {
+  text-decoration: none;
+} /* 重置链接a标签的鼠标滑动效果 */
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+var {
+  font-style: normal;
+  font-weight: normal;
+} /* 重置样式标签的样式 */
+caption {
+  display: none;
+} /* 重置表格标题为隐藏 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+} /* 重置table属性 */
+img {
+  vertical-align: top;
+} /* 图片在当前行内的垂直位置 */
+
+/* 页面设置 */
+
+/* 取消a标签点击后的虚线框 */
+// a {outline: none;}
+// a:active {star:expression(this.onFocus=this.blur());}
+
+/* 设置页面文字等在拖动鼠标选中情况下的背景色与文字颜色 */
+/*   
+::selection {color: #fff;background-color: #4C6E78;}      
+::-moz-selection {color: #fff;background-color: #4C6E78;}   
+*/
+
+/*清除浮动*/
+// .clear{clear: both;}
+
+/*清除浮动--推荐使用*/
+// .clearfix:before,.clearfix:after{content: '';display: table;}
+// .clearfix:after{clear: both;}
+
+$blue: #29bde0;
+$white: #fff;
+$yellow: #fbb435;
+$gray: #9a9a9a;
+$background: #f0f0f0;
+html {
+  font-size: 62.5%;
+}
+body {
+  background-color: $background;
+}
+header {
+  width: 100%;
+  height: 4.4rem;
+  background: $blue;
+}
+.menu {
+  display: inline-block;
+  width: 1.7rem;
+  height: 1.3rem;
+  padding: 0.35rem 0;
+  margin: 1.35rem 0 1.35rem 1rem;
+  border-top: 0.2rem solid $white;
+  border-bottom: 0.2rem solid $white;
+  line-height: 4.4rem;
+  box-sizing: border-box;
+  background-clip: content-box;
+  background-color: $white;
+}
+main {
+    margin-bottom:5rem;
+}
+@mixin triangle($border, $gray) {
+  position: absolute;
+  top: 50%;
+  right: 2rem;
+  display: inline-block;
+  width: 1.6rem;
+  height: 1.6rem;
+  box-sizing: border-box;
+  border-top: $border solid $gray;
+  border-right: $border solid $gray;
+  transform: rotate(45deg) translateY(-71%);
+}
+.lastgame {
+  position: relative;
+  height: 6rem;
+  margin: 1.5rem 10%;
+  border: 0.1rem solid $gray;
+  text-align: center;
+  color: $gray;
+  background-color: $white;
+  span {
+    font-size: 1.7rem;
+    line-height: 6rem;
+  }
+  .arrow {
+    @include triangle(0.2rem, #9a9a9a);
+  }
+}
+
+@mixin version {
+  display: inline-block;
+  width: 80%;
+  height: 6.8rem;
+  margin: 1.5rem 10%;
+  text-align: center;
+  line-height: 6.8rem;
+  color: $white;
+  background-color: $blue;
+}
+.choose {
+  margin: 0 10%;
+  border: 0.1rem solid $gray;
+  text-align: center;
+  background-color: $white;
+  .choose-tt {
+    font-size: 1.9rem;
+    line-height: 4.5rem;
+    color: $yellow;
+    border-bottom: 0.1rem solid $yellow;
+  }
+  .simple {
+    @include version();
+  }
+  .choose-middle {
+    position: relative;
+    .yellow-triangle {
+      @include triangle(0.8rem, #fbb435);
+      border-bottom: 0.8rem solid transparent;
+      border-left: 0.8rem solid transparent;
+    }
+  }
+}
+.dot {
+    display: flex;
+    justify-content: space-around;
+    width:7rem;
+  margin: 0.5rem auto;
+  .dot-blue {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 0.45rem;
+    background-color: $blue;
+  }
+  .dot-gray{
+      @extend .dot-blue;
+      background-color: $gray;
+
+  }
+}

@@ -1,0 +1,257 @@
+@import "./frame.less";
+@import "./slide_picture.less";
+@import "./click_slide.less";
+@title-size: 1.8rem;
+@normal-size: 1.6rem;
+@small-size: 1.4rem;
+@text-color: #999999;
+@main-color: #1db176;
+@circle-radius: 3.5rem;
+//component
+.learn__circle {
+  padding: 3rem @circle-radius;
+  border-radius: 50%;
+  font-size: @title-size;
+  color: @main-color;
+  background-color: white;
+  box-shadow: 0 3px 8px #999;
+}
+
+//layout
+.myrow {
+  position: relative;
+}
+
+.mycol-tsm-2 {
+  position: relative;
+  min-height: 18rem;
+}
+
+.vertical-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.horizontal-center {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.all-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//normal
+header .service {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 5px 15px;
+  max-width: 120rem;
+  color: @main-color;
+  font-size: @small-size;
+}
+
+.service__icon img {
+  margin: 0 2px;
+}
+
+main {
+  padding: 20px;
+  background-color: darken(#fafafa,5%);
+}
+
+.learn__title,
+.student__title,
+.link__title,
+.coperation__title {
+  margin: 12rem 0 5rem 0;
+  font-size: @title-size;
+  font-weight: bold;
+}
+
+.specialty__unit {
+  position: relative;
+  min-height: 22rem;
+}
+
+.specialty__icon {
+  display: inline-block;
+  position: relative;
+  width: 6.5rem;
+  height: 6.5rem;
+  img {
+    position: absolute;
+    bottom: 0;
+    .horizontal-center;
+  }
+}
+
+.specialty__title {
+  margin: 3.3rem 0;
+  font-size: @title-size;
+  font-weight: bold;
+}
+
+.specialty__text {
+  margin: 1.5rem 0 3rem 0;
+  font-size: @normal-size;
+  color: @text-color;
+}
+
+.specialty__statistics {
+  position: absolute;
+  .all-center;
+  font-size: @normal-size;
+}
+
+.specialty__number {
+  font-size: @normal-size;
+  color: @main-color;
+}
+
+.learn__unit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.learn__text {
+  margin: 0 1rem;
+  font-size: @normal-size;
+  color: @text-color;
+}
+
+.student__unit {
+  padding: 3rem;
+  background-color: white;
+  box-shadow: 0 2px 5px #999;
+}
+
+.student__name {
+  margin: 2rem 0;
+  font-size: @normal-size;
+  font-weight: bold
+}
+
+.student__intro {
+  text-align: justify;
+  font-size: @normal-size;
+  color: @text-color;
+}
+
+.coperation {
+  overflow: visible;
+}
+
+.coperation__sets {
+  background-color: white;
+  box-shadow: 0 0 10px #999;
+}
+
+.coperation__logo {
+  position: absolute;
+  .all-center;
+}
+
+.mycol-tsm-2 {
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 10px #999;
+  }
+}
+
+.link__list {
+  padding: 1rem;
+  cursor: pointer;
+
+  li {
+    float: left;
+    position: relative;
+    width: 10%;
+    font-size: @small-size;
+    text-align: center;
+    box-sizing: border-box;
+    border-bottom: 1px solid transparent;
+    &::before {
+      content: "";
+      position: absolute;
+      .vertical-center;
+      left: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: black;
+    }
+    &:hover{
+      border-bottom: 1px solid @main-color;
+    }
+  }
+}
+
+#statistics{
+  border-left: 1px dashed #999999;
+}
+
+@media screen and (max-width:768px) {
+  .specialty__statistics {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  .learn__unit{
+    position: relative;
+    justify-content: flex-start;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+  .learn__text{
+    margin: 0 5rem;
+  }
+  .learn__arrow{
+    position: absolute;
+    right:2%;
+  }
+
+  .link__list{
+    li{
+      width: 20%;
+      margin: 5px 0;
+    }
+  }
+  #switch1{
+    left: 45%;
+  }
+  #switch2{
+    left: 55%;
+  }
+
+  #statistics{
+    border:none;
+  }
+}
+
+@media screen and (max-width:426px){
+  .link__list{
+    li{
+      width: 50%;
+    }
+  }
+  .learn__unit{
+    position: relative;
+    justify-content: flex-start;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+  .learn__text{
+    margin: 0 4rem 0 2rem;
+  }
+}

@@ -1,0 +1,305 @@
+html {
+    font-size: 625%;
+}
+
+body {
+    margin: 0;
+    font-size: .14rem;
+    background-color: #fff;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border-style: none;
+    background-color: #f8fafb;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 0.45rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #5FC0CD;
+    z-index: 2;
+}
+main {
+    margin-top: 0.45rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    height: 0.5rem;
+    width: 100%;
+    background-color: #f8fafb;
+}
+
+
+
+/* --------------header------------- */
+
+.div-width {
+    width: 100%;
+}
+
+.map {
+    position: absolute;
+    right: .15rem;
+    background: url(../I/spritesheet.png) no-repeat;
+    width: 21px;
+    height: 22px;
+    background-position: -3px -48px;
+}
+/* 页眉图标 */
+.header-btn {
+    width: 25%;
+    padding: .07rem;
+    font-size: .17rem;
+    font-weight: 200;
+    border-radius: .07rem;
+}
+
+.button-left {
+    background-color: #55a8b3;
+    color: #ffffff;
+    margin: -0.1rem;
+}
+
+.button-right {
+    background-color: #ffffff;
+    color: #5FC0CD;
+}
+
+/* -------------menu---------------- */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+}
+/* 定位下拉内容 */
+
+.dropbtn {
+    /* position: relative; */
+    font-size: .14rem;
+    color: #999999;
+    border: none;
+    cursor: pointer;
+}
+/* 一级菜单样式 */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 100%;
+    color: #999999;
+    background-color: #f9f9f9;
+}
+/* 二级菜单默认隐藏，设置为absolute是避免显示的时候不影响别的元素 */
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+/* hover效果，当鼠标放在二级菜单元素上时显示的是块级元素，把默认隐藏的元素显示~ */
+
+.dropdown-content a {
+    display: block;
+    padding: .1rem;
+    color: #999999;
+    text-decoration: none;
+}
+/* 二级菜单的内容样式 */
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+/* 鼠标放在二级菜单内容上后的样式 */
+
+
+.menu-style {
+    display: flex;
+    justify-content: space-around;
+    height: .4rem;
+    line-height: .4rem;
+    border-bottom: .01rem solid #e1e5e7;
+}
+/* 菜单栏的样式 */
+
+.nav-line {
+    border-left: 1px solid #e1e5e7;
+    border-right: 1px solid #e1e5e7;
+}
+/* 菜单栏中间的竖线 ，放在中间的块级元素上*/
+
+.nav-icon {
+    position: absolute;
+    top: .16rem;
+    right: .05rem;
+    content: " ";
+    display: inline-block;
+    border-top: solid .06rem #afbac0;
+    border-left: solid .04rem transparent;
+    border-right: solid .04rem transparent;
+    /* vertical-align: 3px; */
+    /* margin-left: 10px; */
+}
+/* 三角形、位置 vertival使元素对齐 */
+
+/* ------------content---------- */
+
+ul {
+    margin: 0;
+    padding: 0;
+    border-bottom: .01rem solid #e1e5e7;
+    padding: .15rem 0;
+    position: relative;
+}
+
+ul li {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendar {
+    background: url(../I/spritesheet.png) no-repeat;
+    width: 12px;
+    height: 12px;
+    background-position: -3px -129px;
+    position: absolute;
+    left: .1rem;
+    top: .17rem;
+}
+/* 日历图标的样式和位置 */
+
+.content-map {
+    background: url(../I/spritesheet.png) no-repeat;
+    width: 10px;
+    height: 12px;
+    background-position: -3px -3px;
+    position: absolute;
+    left: .1rem;
+    top: .75rem;
+}
+/* 内容栏里地图图标样式和位置 */
+
+.content-font-left {
+    /* float: left; */
+    margin-left: .3rem;
+    font-size: .10rem;
+    clear: left;
+    color: #999999;
+}
+/* 内容栏里左边部分的字体样式 */
+
+.content-left {
+    float: left;
+    /* margin-left: 0.4rem;  */
+    margin: .1rem 0 .1rem .4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+/* 内容栏里左边部分的字体样式 */
+
+
+.content-right {
+    /* float: right; */
+    margin: .1rem .35rem .1rem 0;
+    font-size: .15rem;
+    color: #e63b0e;
+    white-space: nowrap;
+}
+/* 内容栏里右边部分的字体样式 */
+
+.arrow3 {
+    width: .1rem;
+    height: .1rem;
+    border-top: .016rem solid #5fc0cd;
+    border-right: .016rem solid #5fc0cd;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 0.46rem;
+    right: 0.2rem;
+}
+/* 箭头图标 */
+
+.content-bottom {
+    margin-bottom: .7rem;
+}
+/* main和footer的距离，不设置的话内容拉不下来 */
+
+/* -------------footer---------------- */
+
+
+.footer-home {
+    background: url(../I/spritesheet.png) no-repeat;
+    width: 23px;
+    height: 20px;
+    background-position: -3px -76px;
+    float: left;
+    margin-bottom: 0.04rem;
+}
+/* 页脚的房子图标 */
+
+.footer-font {
+    float: left;
+    clear: left;
+    font-size: 0.1rem;
+    color: #5fc0cd;
+}
+/* 房子图标下的字体 */
+
+.footer-write-style {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    float: left;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #5fc0cd;
+    border-radius: 50%;
+}
+/* 页脚中间包含图标的正方形变成圆形 */
+
+.footer-write {
+    float: left;
+    margin: .14rem;
+    background: url(../I/spritesheet.png) no-repeat;
+    width: 20px;
+    height: 21px;
+    background-position: -3px -21px;
+}
+/* 中间的图标 */
+
+.footer-people {
+    float: left;
+    margin-bottom: 0.04rem;
+    background: url(../I/spritesheet.png) no-repeat;
+    width: 21px;
+    height: 21px;
+    background-position: -3px -102px;
+}
+/* 页脚右边的图标 */
+
+.footer-font-right {
+    float: left;
+    clear: left;
+    font-size: 0.1rem;
+    color: #999999;
+}

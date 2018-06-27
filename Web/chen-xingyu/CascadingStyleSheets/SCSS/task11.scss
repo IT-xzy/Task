@@ -1,0 +1,87 @@
+@mixin h{
+  height: .5rem;
+  line-height: .5rem;
+        }
+$mt: .1rem;
+$h: .5rem;
+@mixin color-couple {
+  color: #ffffff;
+  background: #5ac0ce;
+}
+html {
+  font-size: 625%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  background: #eff0f4;
+}
+a {
+  text-decoration: none;
+}
+header {
+  &{
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    @include h;
+    @include color-couple;
+  }
+  a {
+    padding: 0 $mt*2;
+  }
+  span {
+    font-size: 18px;
+        }
+}
+form {
+  & {
+    padding-top: $mt*5;
+    padding-bottom: $mt*4;
+  }
+  label {
+    img {
+      width: .72rem;
+    }
+    input {
+      height: $h*1.2;
+      padding: 0;
+      border: none;
+      outline-style: none;
+      font-size: 20px;
+      &::-webkit-input-placeholder {
+        font-size: 18px;
+        color: #cdcdcd;
+      }
+      }
+    &{
+      display: flex;
+      height: $h*1.2;
+      background: #fff;
+    }
+  }
+}
+button {
+  width: 100%;
+  height: $h*1.2;
+  line-height: $h*1.2;
+  border-style: none;
+  font-size: 18px;
+  @include color-couple;
+}
+.tail {
+  a {
+    padding: 0 $mt*2;
+    color: #5ac0ce;
+  }
+  & {
+    float: right;
+    line-height: $h*.8;
+  }
+}
+
+

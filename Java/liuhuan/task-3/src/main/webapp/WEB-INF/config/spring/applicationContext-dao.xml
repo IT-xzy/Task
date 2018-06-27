@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 导入数据库配置 -->
+    <context:property-placeholder
+            location="WEB-INF/config/other/db.properties"/>
+
+    <!-- 数据源 使用dbcp 使用完毕后自动关闭 destroy-method="close"  -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- maxActive:最大连接数据库连接数,设 0 为没有限制   -->
+        <property name="maxActive" value="30"/>
+        <!-- maxIdle:最大的空闲连接数,设 0 为没有限制  -->
+        <property name="maxIdle" value="5"/>
+        <!-- MaxWait是最大等待秒钟数，取值-1，表示无限等待，直到超时为止，如果超过此时间将接到异常，也可取值9000，表示9秒后超时。 -->
+    </bean>
+
+    <!-- sqlSessionFactory -->
+    <bean id="sqlSessionFactory"
+          class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 加载MyBatis全局配置 -->
+        <property name="configLocation"
+                  value="WEB-INF/config/mybatis/mybatis-config.xml"/>
+    </bean>
+
+    <!-- mappering 扫描器 -->
+    <!-- mapper批量扫描，从mapper包中扫描出mapper接口，自动创建代理对象并且在spring容器中注入遵循规范:将mapper.java和mapper.xml映射文件名称保持一致，且在一个目录中.自动扫描出来的mapper的bean的id为mapper类名(首字母小写)-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描包的路径, 如果需要扫描多个包,中间使用半角逗号隔开 -->
+        <property name="basePackage" value="com.jnshu.mapper"/>
+        <!-- 使用sqlSessionFactory -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+</beans>
