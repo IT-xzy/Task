@@ -1,0 +1,351 @@
+@charset "utf-8";
+@import "basis";
+html{
+  font-size: 625%;
+}
+body{
+  padding: .5rem 0 .6rem 0;
+  font-size: .14rem;
+  font-family: STHeiti,"Microsoft Yahei",Arial,SimSun;
+}
+.index-body{
+  padding-top: .8rem;
+}
+header{
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  @include flex-all-center;
+  height: .5rem;
+  color: white;
+  background-color:#5ac0ce;
+  *{font-size: .18rem;}
+
+  img{
+    position: absolute;
+    @include position-vertically-center;
+    right: .2rem;
+    height: .3rem;
+
+  }
+  button{
+    width: .8rem;
+    height: .35rem;
+    border-radius: .08rem;
+    &:hover{
+      z-index: 1;
+    }
+    &:nth-of-type(1){
+      color: white;
+      background-color: #4ca3b0;
+    }
+    &:nth-of-type(2){
+      color:#5ac0ce;
+      background-color: white;
+      margin-left: -.1rem;
+    }
+  }
+  .back{
+    @include position-vertically-center;
+    left: .4rem;
+    display: block;
+    width: .15rem;
+    height: .15rem;
+    border:{
+      right: 2px solid white;
+      bottom: 2px solid white;
+    }
+    transform: rotate(135deg) translateY(.12rem);
+  }
+}
+@media all and(max-width: 380px) {
+  header img{
+    display: none;
+  }
+}
+main .select--container{
+  z-index: 1;
+  position: fixed;
+  top:.5rem;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  font-size: 0;//清除行间元素的空隙
+  select{//清除样式
+    box-sizing: content-box;
+    height: 100%;
+    font-size: .14rem;
+    color:#979797;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    &::-ms-expand{
+      display: none;
+    }
+  }
+  .select--style--left select{padding: 0 calc(50% - .22rem);}
+  .select--style--mid select{padding: 0 calc(50% - .22rem);}
+  .select--style--right select{padding:0 calc(50% -  .30rem);}
+  >div{//select--style
+    position: relative;
+    display: inline-block;
+    width: calc( 100%/3);
+    height: .3rem;
+    border-bottom: 1px solid #d5d5d5;
+    &::after{
+      content: '';
+      @include position-vertically-center;
+      right: .15rem;
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 4px solid #c2c2c2;
+      border-right: 3px solid transparent;
+      border-left: 3px solid transparent;
+    }
+    &::before{
+      content: "";
+      @include position-vertically-center;
+      display: block;
+      width: 1px;
+      height: .2rem;
+      background-color: #d5d5d5;
+    }
+    &:nth-of-type(1)::before{
+      content: "";
+      display: none;
+    }
+  }
+}
+main .content--container >li{
+  position: relative;
+  font-size: .14rem;
+  color: #8b8b8b;
+  border-bottom:1px solid #d5d5d5;
+  &:after{
+    content: '';
+    @include position-vertically-center;
+    right: .2rem;
+    display: block;
+    width: .15rem;
+    height: .15rem;
+    border-bottom: 2px solid #5ac0ce;
+    border-right: 2px solid #5ac0ce;
+    transform: rotate(-45deg) translateY(-50%);
+  }
+}
+main .content--container >li .content--row{
+  li{
+    position: relative;
+    padding: .05rem .25rem;
+    &:nth-of-type(1)::before{
+      content: "";
+      @include position-vertically-center;
+      left: .1rem;
+      display: block;
+      width: .12rem;
+      height: .13rem;
+      background-image: url("../img/23.png");
+      background-size: 100% 100% ;
+    }
+  &:nth-of-type(3)::before{
+      content: "";
+      @include position-vertically-center;
+      left: .1rem;
+      display: block;
+      width: .12rem;
+      height: .14rem;
+      background-image: url("../img/warring.png");
+      background-size: 100% 100% ;
+    }
+    &:nth-of-type(2){
+      @include flex-justify-between;
+      padding-right: .5rem;
+      font-weight: bold;
+      span{
+        overflow-x: hidden;
+        white-space: nowrap;
+        text-overflow:ellipsis ;
+      }
+      span:nth-of-type(2){
+        color: red;
+      }
+    }
+  }
+}
+//以下是main页面内容
+main .main-head{
+  @include flex-vertical-center;
+  width: 100%;
+  height: 2rem;
+  background: url("../img/bj.png") no-repeat;
+  background-size:cover;
+  >img{
+    width: 1rem;
+    height: 1rem;
+    margin: 0 6%;
+  }
+  >div{
+    color: white;
+    >span{
+      font-size: .16rem;
+      >span{
+        font-size: .14rem;
+      }
+    }
+    div{
+      margin: .05rem 0;
+      img{
+        transform: scale(.8);
+        margin-right: .05rem;
+      }
+    }
+  }
+}
+h4{
+  position: relative;
+  padding-left: .3rem;
+  line-height: .5rem;
+  font-size: .16rem;
+  font-weight: normal;
+  border-bottom:1px solid #d5d5d5;
+  &::before{
+    content: "";
+    @include position-vertically-center;
+    left: .15rem;
+    display: block;
+    width: 2px;
+    height: .16rem;
+    background-color: #5ac0ce;
+  }
+}
+.main-ul--skill{
+  padding: 0 .15rem;
+  color: #8b8b8b;
+  li{
+    @include flex-vertical-center;
+    padding: .15rem .15rem;
+    line-height: .15rem;
+    border-bottom:1px solid #d5d5d5;
+    vertical-align:bottom;
+
+    span:nth-of-type(1){
+      position: relative;
+      margin-right: .3rem;
+      flex-shrink: 0;
+    }
+    span:nth-of-type(1)::after{//分隔符
+      content: '';
+      position: absolute;
+      top: .022rem;
+      right: -.18rem;
+      display: inline-block;
+      width: 1px;
+      height: .12rem;
+      background-color: #d5d5d5;
+    }
+    p{
+      display: inline-block;
+      padding: .1rem 0;
+    }
+  }
+  .skill_li--line1{
+    color: black;
+    span::before{
+      content: '';
+      display: inline-block;
+      margin:0 .05rem;
+      width: .14rem;
+      height: .15rem;
+      background: url("../img/star.png");
+      background-size:  cover;
+      position: relative;
+      top: .02rem;
+    }
+  }
+}
+
+.main-footer{
+  @include position-fixed-bottom;
+  @include flex-vertical-center;
+  height: .5rem;
+  background-color: white;
+  a{
+    @include flex-all-center;
+    width: 45%;
+    margin: 0 auto;
+    height: .4rem;
+    background-color: red;
+    border-radius: .05rem;
+    &:hover{
+      font-size: .18rem;
+      transition: 200ms ease;
+    }
+    &:nth-of-type(1){
+      background-color: white;
+      border: 1px solid #5ac0ce;
+      color: #5ac0ce;
+    }
+    &:nth-of-type(2){
+      background-color:#5ac0ce;
+      border: 1px solid #5ac0ce;
+      color:white;
+    }
+  }
+
+}
+.price{
+  color: red;
+}
+footer{
+  font-size: .14rem;
+  background-color:#f9fafc ;
+  border-top: 1px solid #d5d5d5;
+  @include position-fixed-bottom;
+  @include flex-justify-around;
+  align-items: center;
+  height: .6rem;
+  a:hover img{
+    transform: scale(1.1);
+    transition: 200ms ease;
+  }
+  a:nth-of-type(1){
+    @include flex-column;
+    align-items: center;
+    width: .3rem;
+    color: #5ac0ce;
+    img{
+      width: .3rem;
+      margin-bottom: .05rem;
+    }
+  }
+  a:nth-of-type(2){
+    @include flex-all-center;
+    width: .5rem;
+    height: .5rem;
+    background: #5ac0ce;
+    border-radius: 50%;
+    img{
+      width: .3rem;
+      height: .3rem;
+      position: relative;
+      bottom:.02rem;
+      left: .02rem;
+    }
+  }
+  a:nth-of-type(3){
+    @include flex-column;
+    align-items: center;
+    width: .3rem;
+    color: black;
+    img{
+      width: .3rem;
+      height: .26rem;
+      margin-bottom: .05rem;
+    }
+  }
+
+}

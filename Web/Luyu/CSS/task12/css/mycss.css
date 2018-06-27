@@ -1,0 +1,438 @@
+@charset "UTF-8";
+/*
+  Document   : CSS样式初始化
+  Created on : 2016. 8. 7,09:41:00
+  Author :
+  Description:
+  CSS样式表的初始化，全局样式设置。部分样式属性请根据具体页面重置其属性
+      导入方式：<link href="css/common.css" rel="stylesheet" type="text/css" /> */
+/* reset */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button {
+  margin: 0;
+  padding: 0; }
+
+/* 初始化标签在所有浏览器中的margin、padding值 */
+fieldset, img {
+  border: 0 none; }
+
+/* 重置fieldset（表单分组）、图片的边框为0*/
+dl, ul, ol, menu, li {
+  list-style: none; }
+
+/* 重置类表前导符号为onne,menu在HTML5中有效 */
+blockquote, q {
+  quotes: none; }
+
+/* 重置嵌套引用的引号类型 */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+/* 重置嵌套引用*/
+input, select, textarea, button {
+  vertical-align: middle; }
+
+/* 重置表单控件垂直居中*/
+button {
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none; }
+
+/* 重置表单button按钮效果 */
+body {
+  background: #fff; }
+
+/* 重置body 页面背景为白色 */
+a {
+  color: #666;
+  text-decoration: none; }
+
+/* 重置链接a标签 */
+a:active, a:hover {
+  text-decoration: none; }
+
+/* 重置链接a标签的鼠标滑动效果 */
+address, caption, cite, code, dfn, em, var {
+  font-style: normal;
+  font-weight: normal; }
+
+/* 重置样式标签的样式 */
+caption {
+  display: none; }
+
+/* 重置表格标题为隐藏 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed; }
+
+/* 重置table属性 */
+img {
+  vertical-align: top; }
+
+/* 图片在当前行内的垂直位置 */
+label {
+  margin-bottom: 0;
+  font-weight: unset; }
+
+/* 页面设置 */
+/* 取消a标签点击后的虚线框 */
+a {
+  outline: none; }
+
+a:active {
+  star: expression(this.onFocus=this.blur()); }
+
+/* 设置页面文字等在拖动鼠标选中情况下的背景色与文字颜色 */
+/*
+::selection {color: #fff;background-color: #4C6E78;}
+::-moz-selection {color: #fff;background-color: #4C6E78;}
+*/
+/*清除浮动*/
+.clear {
+  clear: both; }
+
+/*清除浮动--推荐使用*/
+.clearfix:before, .clearfix:after {
+  content: '';
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+html {
+  font-size: 625%; }
+
+body {
+  padding: .5rem 0 .6rem 0;
+  font-size: .14rem;
+  font-family: STHeiti,"Microsoft Yahei",Arial,SimSun; }
+
+.index-body {
+  padding-top: .8rem; }
+
+header {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: .5rem;
+  color: white;
+  background-color: #5ac0ce; }
+  header * {
+    font-size: .18rem; }
+  header img {
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: .2rem;
+    height: .3rem; }
+  header button {
+    width: .8rem;
+    height: .35rem;
+    border-radius: .08rem; }
+    header button:hover {
+      z-index: 1; }
+    header button:nth-of-type(1) {
+      color: white;
+      background-color: #4ca3b0; }
+    header button:nth-of-type(2) {
+      color: #5ac0ce;
+      background-color: white;
+      margin-left: -.1rem; }
+  header .back {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: .4rem;
+    display: block;
+    width: .15rem;
+    height: .15rem;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(135deg) translateY(0.12rem); }
+
+@media all and (max-width: 380px) {
+  header img {
+    display: none; } }
+main .select--container {
+  z-index: 1;
+  position: fixed;
+  top: .5rem;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  font-size: 0; }
+  main .select--container select {
+    box-sizing: content-box;
+    height: 100%;
+    font-size: .14rem;
+    color: #979797;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none; }
+    main .select--container select::-ms-expand {
+      display: none; }
+  main .select--container .select--style--left select {
+    padding: 0 calc(50% - .22rem); }
+  main .select--container .select--style--mid select {
+    padding: 0 calc(50% - .22rem); }
+  main .select--container .select--style--right select {
+    padding: 0 calc(50% -  .30rem); }
+  main .select--container > div {
+    position: relative;
+    display: inline-block;
+    width: calc( 100%/3);
+    height: .3rem;
+    border-bottom: 1px solid #d5d5d5; }
+    main .select--container > div::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: .15rem;
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 4px solid #c2c2c2;
+      border-right: 3px solid transparent;
+      border-left: 3px solid transparent; }
+    main .select--container > div::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+      width: 1px;
+      height: .2rem;
+      background-color: #d5d5d5; }
+    main .select--container > div:nth-of-type(1)::before {
+      content: "";
+      display: none; }
+
+main .content--container > li {
+  position: relative;
+  font-size: .14rem;
+  color: #8b8b8b;
+  border-bottom: 1px solid #d5d5d5; }
+  main .content--container > li:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: .2rem;
+    display: block;
+    width: .15rem;
+    height: .15rem;
+    border-bottom: 2px solid #5ac0ce;
+    border-right: 2px solid #5ac0ce;
+    transform: rotate(-45deg) translateY(-50%); }
+
+main .content--container > li .content--row li {
+  position: relative;
+  padding: .05rem .25rem; }
+  main .content--container > li .content--row li:nth-of-type(1)::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: .1rem;
+    display: block;
+    width: .12rem;
+    height: .13rem;
+    background-image: url("../img/23.png");
+    background-size: 100% 100%; }
+  main .content--container > li .content--row li:nth-of-type(3)::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: .1rem;
+    display: block;
+    width: .12rem;
+    height: .14rem;
+    background-image: url("../img/warring.png");
+    background-size: 100% 100%; }
+  main .content--container > li .content--row li:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between;
+    padding-right: .5rem;
+    font-weight: bold; }
+    main .content--container > li .content--row li:nth-of-type(2) span {
+      overflow-x: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+    main .content--container > li .content--row li:nth-of-type(2) span:nth-of-type(2) {
+      color: red; }
+
+main .main-head {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  background: url("../img/bj.png") no-repeat;
+  background-size: cover; }
+  main .main-head > img {
+    width: 1rem;
+    height: 1rem;
+    margin: 0 6%; }
+  main .main-head > div {
+    color: white; }
+    main .main-head > div > span {
+      font-size: .16rem; }
+      main .main-head > div > span > span {
+        font-size: .14rem; }
+    main .main-head > div div {
+      margin: .05rem 0; }
+      main .main-head > div div img {
+        transform: scale(0.8);
+        margin-right: .05rem; }
+
+h4 {
+  position: relative;
+  padding-left: .3rem;
+  line-height: .5rem;
+  font-size: .16rem;
+  font-weight: normal;
+  border-bottom: 1px solid #d5d5d5; }
+  h4::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: .15rem;
+    display: block;
+    width: 2px;
+    height: .16rem;
+    background-color: #5ac0ce; }
+
+.main-ul--skill {
+  padding: 0 .15rem;
+  color: #8b8b8b; }
+  .main-ul--skill li {
+    display: flex;
+    align-items: center;
+    padding: .15rem .15rem;
+    line-height: .15rem;
+    border-bottom: 1px solid #d5d5d5;
+    vertical-align: bottom; }
+    .main-ul--skill li span:nth-of-type(1) {
+      position: relative;
+      margin-right: .3rem;
+      flex-shrink: 0; }
+    .main-ul--skill li span:nth-of-type(1)::after {
+      content: '';
+      position: absolute;
+      top: .022rem;
+      right: -.18rem;
+      display: inline-block;
+      width: 1px;
+      height: .12rem;
+      background-color: #d5d5d5; }
+    .main-ul--skill li p {
+      display: inline-block;
+      padding: .1rem 0; }
+  .main-ul--skill .skill_li--line1 {
+    color: black; }
+    .main-ul--skill .skill_li--line1 span::before {
+      content: '';
+      display: inline-block;
+      margin: 0 .05rem;
+      width: .14rem;
+      height: .15rem;
+      background: url("../img/star.png");
+      background-size: cover;
+      position: relative;
+      top: .02rem; }
+
+.main-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  height: .5rem;
+  background-color: white; }
+  .main-footer a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    margin: 0 auto;
+    height: .4rem;
+    background-color: red;
+    border-radius: .05rem; }
+    .main-footer a:hover {
+      font-size: .18rem;
+      transition: 200ms ease; }
+    .main-footer a:nth-of-type(1) {
+      background-color: white;
+      border: 1px solid #5ac0ce;
+      color: #5ac0ce; }
+    .main-footer a:nth-of-type(2) {
+      background-color: #5ac0ce;
+      border: 1px solid #5ac0ce;
+      color: white; }
+
+.price {
+  color: red; }
+
+footer {
+  font-size: .14rem;
+  background-color: #f9fafc;
+  border-top: 1px solid #d5d5d5;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: .6rem; }
+  footer a:hover img {
+    transform: scale(1.1);
+    transition: 200ms ease; }
+  footer a:nth-of-type(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: .3rem;
+    color: #5ac0ce; }
+    footer a:nth-of-type(1) img {
+      width: .3rem;
+      margin-bottom: .05rem; }
+  footer a:nth-of-type(2) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: .5rem;
+    height: .5rem;
+    background: #5ac0ce;
+    border-radius: 50%; }
+    footer a:nth-of-type(2) img {
+      width: .3rem;
+      height: .3rem;
+      position: relative;
+      bottom: .02rem;
+      left: .02rem; }
+  footer a:nth-of-type(3) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: .3rem;
+    color: black; }
+    footer a:nth-of-type(3) img {
+      width: .3rem;
+      height: .26rem;
+      margin-bottom: .05rem; }
+
+/*# sourceMappingURL=mycss.css.map */
