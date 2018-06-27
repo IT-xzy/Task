@@ -1,0 +1,125 @@
+@import "_global";
+body {background: #f0f0f0;}
+header {
+  background: $col-2;
+  line-height: .40rem;
+  color: #ffffff;
+  font-size: .16rem;
+}
+//去发牌按钮
+main{
+  >button {
+    bottom: 0;
+    display: block;
+    font-size: .20rem;
+    color: #ffffff;
+    width: calc(100% - .20rem);
+    height: .70rem;
+    margin: .10rem;
+    background: #fab344;
+  }
+}
+//玩家配比展示页面
+.setting {
+  position: relative;
+  height: 2.3rem;
+  margin: .10rem;
+  background: #ffffff;
+  >p:first-of-type {
+    float: left;
+    display: flex;
+    align-items: center;
+    border-right: 1px #f0f0f0 solid;
+    letter-spacing: .20rem;
+    text-align: right;
+    width: .60rem;
+    height: 100%;
+    font-size: .20rem;
+  }
+  >ul {
+    height: 2rem;
+    overflow: scroll;
+    font-size: .13rem;
+    >li {
+      display: inline-block;
+      width: 49%;
+      line-height: .40rem;
+      text-align: center;
+      letter-spacing: .10rem;
+      color: #999999;
+    }
+  }
+  >p:last-of-type {
+    border-top: 1px #f0f0f0 solid;
+    line-height: .30rem;
+    margin-left: .60rem;
+    text-align: center;
+    color: #29bde0;
+  }
+}
+//水民词组和幽灵词组
+.enter {
+  margin: .10rem;
+  padding-left: .20rem;
+  height: 1rem;
+  background: #ffffff;
+  >input {
+    border: 0;
+    border-bottom: 1px #f0f0f0 solid;
+    width: 100%;
+    height: .40rem;
+    outline: none;
+  }
+}
+//设置玩家数量
+.players {
+  margin: .10rem;
+  height: .70rem;
+  padding: .15rem;
+  background: #ffffff;
+  >div {
+    padding: .20rem .10rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    >input[type="range"] {//滑动条样式修改
+      -webkit-appearance: none;
+      outline: none;
+      margin: 0 .10rem;
+      width: 100%;
+      background: -webkit-linear-gradient(left, #fab344, #fab344) no-repeat, #ffe6be;/*设置左边颜色为#fab344，右边颜色为#ffe6be*/
+      background-size: 0;//这里很关键,防止页面刷新时滑动条颜色跳动;
+      height:3px;
+    }
+    >input[type="range"]::-webkit-slider-thumb 
+    {//滑动块样式修改
+      -webkit-appearance: none;
+      height: .18rem;
+      width: .30rem;
+      background:url(../images/thumb.png);
+      background-size: 100% 100%;
+    }
+    >button {//加减按钮样式
+      border: 1px #f0f0f0 solid;
+      border-radius: 2px;
+      width: .27rem;
+      height: .27rem;
+      line-height: .27rem;
+      text-align: center;
+      font-size: .27rem;
+      color: #fab344;
+    }
+  }
+}
+//玩家人数输入框
+.value {
+  border: 0;
+  margin: 0 .05rem;
+  width: .20rem;
+  height: .14rem;
+  text-align: center;
+  color: #fab344;
+  background: #f0f0f0;
+}
+
+input::-webkit-inner-spin-button {-webkit-appearance: none;}//这是取消上下小箭头的
