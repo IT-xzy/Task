@@ -1,0 +1,43 @@
+<view class="backcolor">
+
+  <view class='tittle '> 最适合你的职业推荐? </view>
+
+  <view class="box" wx:for="{{data}}" >
+    <span class="banner {{index==current?'click':''}}"     bindtap="banner"
+     data-current="{{index}}">{{item}}</span>
+  </view>
+  
+
+   <view  wx:for="{{arr}}" wx:if="{{index==current}}">
+    <view class="content">
+    <view>职业门槛</view>
+      <view class="contright">{{arr[current][0].career}}</view>  
+    </view>
+
+    <view class="content">
+    <view>难易程度</view>
+      <view class="contright">{{arr[current][0].Difficulty}}</view>
+    </view>
+
+    <view class="content">
+    <view>成长周期</view>
+      <view class="contright">{{arr[current][0].growth}}</view> 
+    </view>
+
+    <view class="content">
+    <view>求贤企业</view>
+      <view class="contright">{{arr[current][0].company}}</view>     
+    </view>
+
+    <view class="content">
+    <view>入学基础</view>
+      <view class="contright">{{arr[current][0].edu}}</view>  
+    </view>
+
+    <view class="content">
+    <view>薪资待遇</view>
+      <view class="contright">{{arr[current][0].money}}</view>
+    </view>
+  </view> 
+  
+</view>
