@@ -1,0 +1,167 @@
+html {
+    font-size: 625%;
+}
+
+body {
+    font-size: .16rem;
+    color: #999999;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+main {
+    background: #fafafa;
+}
+
+h4 {
+    text-align: center;
+    color: #000000;
+    font-weight: 550;
+}
+
+h2,h3 {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+a { 
+    text-decoration:none; 
+    color:#ffffff; 
+} 
+
+/*页眉*/
+
+.header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: .40rem;
+    color: #29b078;
+}
+
+/*导航栏*/
+
+nav {
+    color: #ffffff;
+    background: #29b078;
+}
+
+.nav-two {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1rem;
+}
+
+.btn-group a {
+    display: inline-block;
+    text-align: center;
+    line-height: 1rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.hanbao {
+    float: right;
+    display: none;
+    border: 0;
+    outline: none;
+    width: 1rem;
+    height: 1rem;
+    background: #29b078;
+}
+
+.submenu div {
+    width: 100%;
+    height: .60rem;
+    color: #ffffff;
+    border-top: 1px #999999 solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.submenu {
+    background: #29b078;
+    position: absolute;
+    top: 1.4rem;
+    left: 0;
+    width: 100%;
+    height: 2.4rem;
+    z-index: 9999;
+    background: rgba(0,0,0,.50);
+    display: none;
+}
+
+.hanbao:hover + .nav-two {margin-bottom: 2.4rem;}
+.hanbao:hover {background: rgba(0,0,0,.30);}
+.hanbao:hover .submenu {display: inline-block;}
+.btn-group a:hover {border-bottom: 5px #ffffff solid;}
+
+/*页脚*/
+
+footer {
+    color: #ffffff;
+    background: #29b078;
+    width: 100%;
+}
+
+.note {
+    padding-top: .30rem;
+}
+
+.weixin {
+    float: right;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.qr-code {
+    float: right;
+}
+
+.wx-qr {
+    margin-bottom: .20rem;
+}
+
+.about-we {
+    white-space: nowrap;
+    margin-top: .32rem;
+}
+
+.under-note {
+    color: #ffffff;
+    font-size: .12rem;
+    height: .30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #32c086;
+}
+
+
+/*媒体查询*/
+
+@media screen and (max-width: 768px) {
+    .weixin {
+        float: left;
+    }
+
+    .qr-code {
+        float: left;
+    }
+
+    .about-we {
+        margin-top: 0;
+    }
+
+    .hanbao {
+        display: inline-block;
+    }
+
+    .btn-group button {
+        display: none;
+    }
+
+}
