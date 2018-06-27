@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.UserDao">
+    <resultMap id="User" type="User">
+    <result property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="qq" column="qq"/>
+    <result property="type" column="type"/>
+    <result property="entranceTime" column="entranceTime"/>
+    <result property="school" column="school"/>
+    <result property="onLineNum" column="onLineNums"/>
+    <result property="dailyLink" column="dailyLink"/>
+    <result property="wish" column="wish"/>
+    <result property="brother" column="brother"/>
+    <result property="whereKnow" column="whereKnow"/>
+    <result property="creat_at" column="creat_at"/>
+    <result property="update_at" column="update_at"/>
+</resultMap>
+    <insert id="insertUser" parameterType="User">
+        insert into user( name,qq,type,entranceTime,school,onlineNum,dailyLink,wish,brother,whereKnown,create_at,update_at)
+        VALUES ( #{name},#{qq},#{type},#{entranceTime},#{school},#{onlineNum},#{dailyLink},#{wish},#{brother},#{whereKnown},#{create_at},#{update_at})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        delete from user where id=#{id}
+    </delete>
+<update id="updateUser" parameterType="User">
+  update User set name=#{name},qq=#{qq},type=#{type},entranceTime=#{entranceTime},school=#{school},onlineNum=#{onlineNum},
+        dailyLink=#{dailyLink},wish=#{wish},brother=#{brother},whereKnown=#{whereKnown},create_at=#{create_at},update_at=#{update_at} where id=#{id}
+
+</update>
+<select id="findUserAll" resultMap="User">
+  select *  from User
+</select>
+<select id="findUserById" parameterType="Int" resultType="User">
+            select * from user where id=#{id}
+    </select>
+    <select id="findUserByNameAndNum" parameterType="User" resultType="User">
+        select * from User where name =#{name} and onLineNum=#{onLineNum}
+    </select>
+    <select id="findUserByCondition" parameterType="java.lang.String" resultType="User">
+           select * from User where name like  concat('%', #{name}, '%')
+    </select>
+</mapper>
+
