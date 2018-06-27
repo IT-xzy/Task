@@ -1,0 +1,258 @@
+@charset "UTF-8";
+html {
+  height: 100%;
+  max-width: 768px;
+  min-width: 320px;
+  margin: 0 auto; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 768px;
+  min-width: 320px;
+  margin: 0 auto;
+  background-color: #f0f0f0; }
+
+header {
+  width: 100%;
+  height: 3rem;
+  max-height: 3rem;
+  margin: 0;
+  padding: 0;
+  background-color: #29bde0; }
+
+main {
+  flex: 1;
+  overflow: auto; }
+
+.lastTime {
+  display: flex;
+  justify-content: center;
+  width: calc(100% - 2rem);
+  margin: 1rem;
+  padding: 1rem 0;
+  background-color: #fff; }
+
+.lastTimeColor {
+  color: #9a9a9a;
+  font-size: 1.2rem; }
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: calc(100% - 2rem);
+  margin: 0 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: .25rem;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box; }
+
+.catchBuffy {
+  border-bottom: 1px solid #fdd793;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #fbb435; }
+
+.gameChose {
+  margin: 0.5rem 1.5rem 0 1.5rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #69d1e9; }
+
+.play {
+  line-height: 2rem;
+  padding-top: 0.5rem; }
+
+.right-arrow {
+  /* css右向空心箭头*/
+  display: inline-block;
+  position: relative;
+  left: calc(50% - 6rem);
+  height: 1rem;
+  width: 1rem;
+  margin-right: 20px; }
+
+.right-arrow::after {
+  /* css右向箭头*/
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  display: inline-block;
+  height: 1rem;
+  width: 1rem;
+  margin-top: -9px;
+  border-width: 4px 4px 0 0;
+  border-color: #c7c7cc;
+  border-style: solid;
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0); }
+
+p {
+  text-align: center; }
+
+div[class~="card-body"] p[class~="pt-3"] {
+  font-size: 0.8rem; }
+
+.circlesBox {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.5rem; }
+
+.circles {
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 0.3rem;
+  background-color: #F0F0F0; }
+
+/*选择状态圆圈*/
+.circlesCheck {
+  height: 0.6rem;
+  width: 0.6rem;
+  border-radius: 0.3rem;
+  background-color: #69d1e9; }
+
+.arrow-right {
+  /*黄色右向三角形箭头*/
+  position: absolute;
+  right: 0.1rem;
+  top: calc(50% - 1rem);
+  height: 0;
+  width: 0;
+  border-bottom: 0.8rem solid transparent;
+  /* 下边框的高 */
+  border-top: 0.8rem solid transparent;
+  /* 上方边框的高 */
+  border-left: 1rem solid #fbb435;
+  /* 左边框的长度|宽度，以及背景色 */
+  /*font-size: 0;*/
+  /*line-height: 0;*/ }
+
+.menuThree {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  width: 24px;
+  height: 4px;
+  border-top: 12px double;
+  border-bottom: 4px solid; }
+
+.menu-icon {
+  position: absolute;
+  /* */
+  top: 1.2rem;
+  left: 1rem;
+  width: 1.2rem;
+  height: 0.9375rem;
+  /*高度为border 5倍*/
+  padding: 3px 0;
+  border-top: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  background-color: #fff;
+  background-clip: content-box; }
+
+a {
+  text-decoration: none; }
+
+a:link {
+  text-decoration: none; }
+
+　　 a:active {
+  text-decoration: blink; }
+
+　　 a:hover {
+  text-decoration: underline; }
+
+　　 a:visited {
+  text-decoration: none; }
+
+.icon {
+  overflow: hidden;
+  position: absolute;
+  left: 1rem;
+  top: 0.8rem;
+  height: 2rem;
+  width: 2rem;
+  vertical-align: -0.15em;
+  fill: white; }
+
+/*隐藏checked复选框*/
+#sidemenu {
+  display: none; }
+
+#sidemenu:checked + aside {
+  /*为被选中的sidemenu后的aside设置属性（紧邻）*/
+  left: 0;
+  /*点击按钮即选中checked后,侧边栏位置变为贴着左边,配合ease-out使用,有渐变滑出的效果*/ }
+
+#sidemenu:checked ~ #wrap {
+  /*为被选中的sidemenu后的wrap设置属性（非紧邻）*/
+  padding-left: calc(50%);
+  margin-right: calc(-50%); }
+
+aside {
+  /*侧边栏,初始位置为-200px，即隐藏效果*/
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(-50%);
+  width: 50%;
+  background: #fff;
+  transition: 0.2s ease-out;
+  z-index: -1;
+  /*动画效果的执行方式是ease-out，即侧边栏滑动效果为渐变式，而不是生硬的突然变化*/ }
+  aside img {
+    height: 2rem;
+    width: 2rem; }
+
+h2 {
+  text-align: center;
+  font-size: 2em;
+  color: white; }
+
+/*控制侧边栏进出的按钮（外部包裹）*/
+#wrap {
+  transition: 0.2s ease-out; }
+
+/*控制侧边栏进出的按钮（内部文字样式）*/
+label {
+  /*控制侧边栏进出的按钮*/
+  display: inline-block;
+  height: 1.5em;
+  width: 1.5em;
+  line-height: 1.5em;
+  cursor: pointer;
+  border-radius: 70px;
+  font-family: Courier New;
+  font-size: 2em;
+  text-align: center;
+  color: #fff; }
+
+a {
+  text-decoration: none; }
+
+aside {
+  color: #29bde0; }
+  aside div {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    border-bottom: 1.5px solid #f0f0f0; }
+    aside div img {
+      height: 1.5rem;
+      width: 1.5rem; }
+    aside div span {
+      flex: 1;
+      margin-left: 0.5rem; }
+
+.bodyLeft {
+  overflow: hidden;
+  position: relative; }
+
+/*# sourceMappingURL=css.css.map */

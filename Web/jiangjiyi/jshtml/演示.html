@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function() {
+
+
+            let {log} = console;
+//
+//
+//
+//             var color = "blue";
+//
+//             function changecolor() {
+//                 if (color === "blue") {
+//
+//             // if里面的color是沿着作用域链往上查找，在全局中找到了这个变量
+//                     color = "red";
+//
+//                 }
+//                 else {
+//                     color = "blue";
+//                 }
+//
+//
+//             }
+//             changecolor();
+//             alert("color is now " + color)
+            //     为什么是红色，这个函数已经执行过了。
+            /////////////////////
+            //
+
+            // var color = "blue";
+            // function changecolor() {
+            //     var anothercolor = "red";
+            //
+            //     function swapcolor() {
+            //         var tempcolor = anothercolor; //red
+            //
+            //         anothercolor = color;  //bule
+            //
+            //         color = tempcolor; // red;
+            //     }
+            //     swapcolor();
+            // }
+            // changecolor();
+            // alert("color is now "+ color)
+            // ////////////////////
+
+
+
+            //没有块级作用域，的表现。会污染掉。
+
+            // for (var i = 0; i<5; i++) {
+            //     log(i);
+            // }
+            // log(i);
+            // if (true) {
+            //     var color = "red";
+            //
+            // }
+            // log(color);
+
+             // let 的作用域
+           // for (let  n =1 ; n<4; n++) {
+           //
+           // }
+           // log(n);
+
+            // 一个函数里面有另一个函数。
+            function close() {
+                var mei = "sb";
+                return function () {
+                    return mei = mei + "or nosb"
+                }
+            }
+
+            var las =close();
+
+            log(las());
+        }
+    </script>
+</head>
+<body>
+
+
+
+</body>
+</html>

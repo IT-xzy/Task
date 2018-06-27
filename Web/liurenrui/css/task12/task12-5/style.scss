@@ -1,0 +1,158 @@
+$white:#fff;
+$blue:#5FC0CD;
+$gray:#ADADAD;
+$l:left;
+$r:right;
+$fixed:fixed;
+$ab:absolute;
+$re:relative;
+@mixin head{
+		z-index:1;
+		font-size:2rem;
+		height:4rem;
+		line-height:4rem;
+		width:100%;
+		text-align:center;
+}
+@mixin btn{
+	width:46%;
+	height:4rem;
+	font-size:2rem;		
+	border-radius:7px;
+}
+%min{
+	min-width:320px;
+}
+
+
+
+html{
+	font-size:62.5%;
+}
+body{
+	margin:0;
+	@extend %min;
+}
+header{
+	position:$fixed;
+	@include head;
+	top:0;
+	background:$blue;
+	color:$white;
+
+	a{
+		text-decoration:none;
+		float:$l;
+		position:$ab;
+		left:1rem;
+		span{
+			color:$white;
+		}
+	}
+}
+.bgimg{
+	@extend %min;
+	width: 100%;
+    height:19rem;
+    position:$re;
+    background-image: url(bgimg.png);
+    background-size: cover;
+    &>img{
+	width:8rem;
+	position:$ab;
+	left:1.5rem;
+	bottom:5rem;
+	}
+	p{
+	position:$ab;
+	left:11rem;
+	bottom:5rem;
+	color:$white;
+	font-size:2rem;
+	line-height:2rem;
+		.address{
+			font-size:1.5rem;
+			}
+		img{
+		width:1rem;
+		}
+	}
+}
+main{
+	@extend %min;
+	padding-bottom:5rem;
+	&>p{
+		font-size:1.5rem;
+		margin:0;
+		padding:1rem 0;
+		border-bottom:1px solid $gray;
+		span.mark{			
+		border-right:3px solid $blue;
+		margin:0 0.5rem;
+		}
+	}
+	ul{
+		margin:0;
+		padding:0;
+		font-size:1.5rem;
+		li{
+			display:flex;
+			margin-left:1rem;
+			padding:1rem 0;
+			list-style: none;
+			align-items: center;
+			border-bottom:1px solid $gray;
+			img{
+				width:1rem;
+				height:1rem;
+				margin-left:1rem;
+			}
+			div.left{
+				color:#ADADAD;
+				min-width:5rem;
+				padding:0 1rem;
+				align-items:center;
+				margin-right:1rem;
+				border-right:1px solid $gray;
+			}
+		}
+	}
+}
+.right,p,.first-li{
+	 white-space:nowrap;
+}
+.right,.right-last{
+	padding-left:1rem;
+}
+.wage{
+	color:red;
+}
+
+footer{
+	position:$fixed;
+	bottom:0;
+	@include head;
+	div.message button{	
+		@include btn;			
+		border:0.2rem solid $blue;
+		background:$white;
+		margin-left:2%;
+		float:$l;
+		& a{
+			color:$blue;
+			text-decoration:none;
+		}		
+	}
+	.call button{
+		@include btn;		
+		background:$blue;
+		margin-right:2%;
+		border:0;
+		float:$r;
+				& a{
+			color:$white;
+			text-decoration:none;
+		}		
+	}
+
+}

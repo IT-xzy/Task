@@ -1,0 +1,285 @@
+$gray: #999;
+$green: #29b078;
+$white: #fff;
+
+// 轮播图组件
+.frame {
+  width: 100%;
+  position: relative;
+}
+.slide,
+.slide-item {
+  padding-bottom: 31%;
+}
+.slide-item {
+  width: 100%;
+  position: absolute;
+  animation-timing-function: linear;
+  animation-name: fade;
+  animation-iteration-count: infinite;
+  animation-duration: 12s;
+  background-size: 100%;
+}
+// 轮播图 图片路径
+.slide-item-1 {
+  background-image: url(../img/po.png);
+}
+.slide-item-2 {
+  background-image: url(../img/po2.png);
+}
+.slide-item-3 {
+  background-image: url(../img/po3.jpg);
+}
+.slide-item-4 {
+  background-image: url(../img/po4.png);
+}
+// 轮播图时间淡入淡出及过程时间设定
+@mixin fade($opacity, $index) {
+  opacity: $opacity;
+  z-index: $index;
+}
+@keyframes fade {
+  0% {
+    @include fade(0, 2);
+  }
+  5% {
+    @include fade(1, 1);
+  }
+  25% {
+    @include fade(1, 1);
+  }
+  30% {
+    @include fade(0, 0);
+  }
+  100% {
+    @include fade(0, 0);
+  }
+}
+.slider-item + .slider-item {
+  opacity: 0;
+}
+.slide-item-1 {
+  animation-delay: -1s;
+}
+.slide-item-2 {
+  animation-delay: 2s;
+}
+.slide-item-3 {
+  animation-delay: 5s;
+}
+.slide-item-4 {
+  animation-delay: 8s;
+}
+// flex布局块
+@mixin flex($row, $justify, $align) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: $row;
+  justify-content: $justify;
+  align-items: $align;
+}
+// 介绍部分组件
+.contact {
+  @include flex(row, center, center);
+  margin-top: 8rem;
+}
+
+.contact-item {
+  @include flex(column, flex-start, center);
+  height: 22rem;
+  padding: 0 3rem;
+  img {
+    width: 5rem;
+    height: 5rem;
+  }
+  .contact-p {
+    width: 17rem;
+    text-align: left;
+  }
+}
+.contact-right {
+  border-left: none;
+}
+@media (min-width: 768px) {
+  .contact-right {
+    border-left: 0.1rem dotted $gray;
+  }
+}
+.contact-inner {
+  @include flex(column, flex-start, center);
+  margin-top: 3rem;
+  img {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  p {
+    margin: 0.5rem 0;
+  }
+}
+@media (min-width: 768px) {
+  .contact-inner {
+    align-items: flex-start;
+  }
+}
+// 如何学习组件
+.way {
+  @extend .contact;
+}
+.margin-way {
+  margin-bottom: 5rem;
+}
+.way-item {
+  @include flex(row, center, center);
+  flex-wrap: nowrap;
+  margin: 2rem 0;
+  padding-right: 0;
+  p {
+    width: 50%;
+    margin: 0 0.8rem;
+    font-size: 1.4rem;
+  }
+  @media (min-width: 768px) {
+    p {
+      width: 12rem;
+      margin: 0 1.5rem;
+    }
+  }
+  @media (min-width: 992px) {
+    p {
+      width: 12rem;
+      margin: 0 0.6rem;
+    }
+  }
+  @media (min-width: 1200px) {
+    p {
+      width: 15rem;
+      margin: 0 1.5rem;
+    }
+  }
+  @media (min-width: 768px) {
+    .way-item {
+      padding-right: 0.6rem;
+    }
+  }
+  .circle {
+    width: 7rem;
+    height: 7rem;
+    border-radius: 3.5rem;
+    text-align: center;
+    line-height: 7rem;
+    font-size: 1.6rem;
+    color: $green;
+    background-color: $white;
+  }
+}
+// 优秀学员展示组件
+.show {
+  @extend .contact;
+}
+.show-item {
+  height: 34rem;
+  padding: 1rem;
+
+  .show-border {
+    @include flex(column, center, center);
+    height: 32rem;
+    border-radius: 2rem;
+    background-color: $white;
+    p {
+      margin: 0 2rem;
+    }
+  }
+}
+.dot {
+  width: 10rem;
+  margin: 3rem auto;
+  text-align: center;
+  .dot-blue {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 0.65rem;
+    margin: 0.4rem;
+    background-color: $green;
+  }
+  .dot-white {
+    @extend .dot-blue;
+    background-color: $white;
+  }
+}
+//战略合作企业组件
+.main-firm {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+.firm {
+  text-align: center;
+  .firm-item {
+    display: inline-block;
+    width: 18.3rem;
+    height: 10rem;
+    margin: 0.4rem;
+    text-align: center;
+    background-color: $white;
+    img {
+      width: 18.36rem;
+      height: 10rem;
+    }
+    .width {
+      width: 15rem;
+      margin-right: 3.5rem;
+    }
+    .height {
+      width: 14rem;
+      height: 5rem;
+      margin: 2.5rem 0;
+    }
+  }
+}
+.firm-item:hover {
+  box-shadow: 0 0 4px 4px $gray;
+}
+// 友情链接组件
+.firend-link {
+  background-color: $white;
+}
+.main-link {
+  padding: 1rem 0 3rem 0;
+  text-align: center;
+
+  ul {
+    width: 20rem;
+    padding: 0;
+    margin: auto;
+  }
+  @media (min-width: 768px) {
+    ul {
+      width: 46rem;
+    }
+  }
+  @media (min-width: 992px) {
+    ul {
+      width: 94rem;
+    }
+  }
+}
+.main-link li {
+  display: inline-block;
+  width: 7.4rem;
+  margin: 1rem 0.7rem;
+  text-align: left;
+}
+@media (min-width: 992px) {
+  .main-link li {
+    width: 7.4rem;
+    text-align: center;
+  }
+}
+.dot-gray {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin: 0.3rem 0;
+  border-radius: 0.35rem;
+  background-color: $gray;
+}

@@ -1,0 +1,253 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+header {
+  background-color:  #1d7ad9;
+  color: #fff;
+}
+/* 去掉跑默认外边距 */
+header p {
+  margin-bottom: 0;
+  word-spacing: -5px;
+}
+header p span {
+  display: inline-block;
+  padding: 10px 5px;
+}
+header a {
+  display: inline-block;
+  border-right: 1px solid #fff;
+  padding: 10px 15px;
+  color: #fff;
+}
+.login-container > p :first-child {
+  border-left: 1px solid #fff;
+}
+header a:hover {
+  color: #000;
+  background-color: #fff;
+  text-decoration: none;
+}
+/* 小于768时改变注册的左右内边距 */
+@media screen and (max-width: 768px) {
+  .login-container a {
+    padding: 10px 5px;
+  }
+  .login-container {
+    padding-left: 0;
+  }
+}
+main {  
+  margin-bottom: 100px;
+}
+/* 按钮对其方式 */
+nav {
+  background-color: #f9f9f9;
+  color: #000;
+}
+.group-btn {
+  display: block;
+  margin-bottom: 0;
+  padding: 15px 15px 15px 0;
+  text-align: right;
+}
+.group-btn li {
+  display: inline-block;
+  margin-left: 15px;
+}
+@media screen and (max-width: 400px) {
+  .group-btn li {
+    margin-left: 5px;
+  }
+  .group-btn :first-child {
+    margin-left: 0px;
+  }
+  .group-btn {
+    padding-right: 0;
+    text-align: center;
+  }
+}
+/* 按钮样式 */
+.group-btn button {
+  background-color: #fff;
+  box-shadow: 1px 1px 1px #e6e6e6;
+}
+.group-btn button:hover {
+  color: #fff;
+  background-color: #1d7ad9;
+}
+/* 流程图 */
+/* 流程图三个组件 */
+.first-step-ct span {
+  display: inline-block;
+}
+.line {
+  vertical-align: bottom;
+  height: 1px;
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 2px;
+}
+.num {
+  position: relative;
+  top: -11px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  background-color: #ccc;
+}
+.first-step-ct-name {
+  color: #ccc;
+}
+/* 流程图hover效果 */
+.first-step1 .line,.first-step1 .num{
+  border-color: #ff7f02;  
+  background-color: #ff7f02;  
+}.first-step1 .first-step-name{
+  color: #ff7f02;
+}
+
+/* 流程图对其分布位置 */
+.first-step-ct {
+  padding-top: 20px;
+  padding-bottom: 30px;
+  text-align: right;
+}
+.first-step {
+  display: inline-block;
+  margin-left: -5px;
+}
+/* 大于992时流程图对其方式 */
+@media screen and (min-width: 992px) {
+  .first-step {
+    width: 15%;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 992px) {
+  .first-step {
+    width: 25%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .first-step {
+    width: 50%;
+  }
+}
+
+/* 表单开始 */
+form {
+  color: #666;
+}
+.form-title {
+  padding: 10px 10px 10px 10px;
+  background: url(../.././favicon.ico/task10/blue-line.png) no-repeat left;
+}
+.slect-box1 {
+  margin-bottom: 0;
+  border: 1px solid #e8e8e8;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 10px 0 10px 40px;
+  background: #f3f3f3 url(../.././favicon.ico/task10/box.png) no-repeat 10px
+    12px;
+  color: #1d7ad9;
+}
+.slect-box2 {
+  background-image: url(../.././favicon.ico/task10/Ruler.png); 
+}
+.slect-box3 {
+  background-image: url(../.././favicon.ico/task10/CutScissors.png); 
+}
+/* 单选按钮样式 */
+.box-type {
+  padding-left: 30px;
+}
+input[type="radio"] {
+  display: none;
+}
+
+label[class="radio-type"] {
+  position: relative;
+  top: 10px;
+  display: inline-block;
+  border: 1px solid #d6d6d6;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f8f9fb;
+}
+input[type="radio"]:checked + label {
+  border: 1px solid #1d7ad9;
+  background-color: #1d7ad9;
+}
+input[type="radio"]:checked + label::after {
+  position: relative;
+  top: 7px;
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+/*  */
+.view-detail {
+  display: none;
+}
+.box-types {
+  position: relative;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 15px 0;
+  background-color: #fbfcff;
+}
+/* 清除select默认箭头样式，主要是 -webkit-appearance: none;作用 */
+select {
+  position: absolute;
+  top: 15px;
+  right: 0;
+  -webkit-appearance: none;
+  padding: 5px 35px 5px 5px;
+  background: url(../.././favicon.ico/task10/1.png) no-repeat right;
+  width: 100px;
+  margin: 0;
+  margin-right: 30px;
+  z-index: 9999;
+}
+input[type="text"] {
+  max-width: 40px;
+  border: 1px solid#e8e8e8;
+}
+.box-type2 {
+  padding-top: 6px;
+  padding-left: 30px;
+}
+.boder-r-no {
+  border-radius: 0;
+}
+.box-material {
+  padding-top: 53px;
+  padding-bottom:53px;
+}
+.select2 {
+  top: 45px;
+}
+.select3 {
+  top: 55px;
+}
+.btn1 {
+  margin-bottom: 100px;
+  padding: 10px;
+  width: 20%;
+  color: #fff;
+  background-color: #e15053;
+  border: 1px solid #e15053;
+  border-radius: 5px;
+
+}
