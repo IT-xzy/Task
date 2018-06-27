@@ -1,0 +1,262 @@
+@charset "UTF-8";
+$color-1: #5FC0CD;
+$color-2: #ffffff;
+$word-size: 15px;
+$border-color: 1px solid #E1E5E7;
+@mixin position-fixed {
+  position: fixed;
+}
+@mixin display-flex {
+  display: flex;
+}
+@mixin word-height{
+  justify-content: center;
+  line-height: 50px;
+}
+@mixin word-space{
+  white-space: nowrap;
+}
+@mixin word-weight{
+  font-weight: 400;
+}
+@mixin main-top{
+  top: 50%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%;
+  background: $color-2;
+  /*头部header*/
+  header {
+    @include position-fixed;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 1;
+    background-color: $color-1;
+    .btn-back {
+      position: absolute;
+      margin-top: 10px;
+      margin-left: 3%;
+      height: 26px;
+    }
+    .word {
+     @include display-flex;
+      @include word-height;
+      font-size: 20px;
+      font-weight: 900;
+      color: $color-2;
+    }
+  }
+
+  /*中部main*/
+  main {
+    /*背景图片栏*/
+    .img-background {
+      background-image: url(images/background.jpg);
+      background-size: cover;
+      position: relative;
+      margin-top: 50px;
+      height: 180px;
+      color: $color-2;
+    }
+    .head-portrait {
+      position: absolute;
+      float: left;
+      transform: translate(0, -50%);
+      height: 80px;
+      @include main-top;
+      margin-left: 25px;
+    }
+    .name {
+      position: absolute;
+      margin-left: 130px;
+      transform: translate(0, 50%);
+      top: 12%;
+    }
+    .word1 {
+      @include display-flex;
+      @include word-space;
+      @include word-height;
+      font-size: 16px;
+      @include word-weight;
+      color: $color-2;
+    }
+    .address {
+      position: absolute;
+      @include word-space;
+      width: 150px;
+      height: 20px;
+      margin-top: 15%;
+      transform: translate(0, 50%);
+      top: 30%;
+    }
+    .orientation {
+      float: left;
+      margin-right: 5%;
+    }
+    .garden {
+      line-height: 20px;
+      margin-top: 0;
+      height: 20px;
+      @include word-weight;
+    }
+    /*文字介绍栏*/
+    .part1 {
+      height: 30px;
+      margin-top: 15px;
+      padding-bottom: 15px;
+      border-bottom: $border-color;
+    }
+
+    .box1 {
+      position: relative;
+      width: 180px;
+      height: 25px;
+    }
+
+    .skill {
+      @include word-space;
+      margin-top: 25px;
+      margin-left: 25px;
+      padding-left: 25px;
+      font-size: 18px;
+      @include word-weight;
+      border-left: solid $color-1;
+    }
+
+    .star-1 {
+      margin-left: 18%;
+      position: absolute;
+      @include main-top;
+      transform: translateY(-50%);
+    }
+
+    .home {
+      position: absolute;
+      @include main-top;
+      transform: translateY(-50%);
+      font-size: 14px;
+      padding-left: 36%;
+    }
+
+    .star-2 {
+      position: absolute;
+      @include main-top;
+      transform: translateY(-50%);
+      padding-left: 55%;
+    }
+
+    .food {
+      position: absolute;
+      @include main-top;
+      transform: translateY(-50%);
+      padding-left: 75%;
+      font-size: $word-size;
+    }
+
+    .part3 {
+      margin: 20px;
+      @include display-flex;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: $border-color;
+    }
+
+    .time {
+      float: left;
+      @include word-space;
+      margin-left: 35px;
+      margin-right: 30px;
+      padding-right: 30px;
+      font-size: $word-size;
+      @include word-weight;
+      border-right: $border-color;
+      color: #E1E5E7;
+    }
+
+    .year {
+      @include word-space;
+      font-size: $word-size;
+      @include word-weight;
+    }
+
+    .day {
+      @extend .time;
+    }
+
+    .one {
+      white-space: nowrap;
+      font-size: $word-size;
+      @include word-weight;
+    }
+
+    .price {
+      @extend .time;
+    }
+
+    .per {
+      display: inline;
+      @include word-space;
+      font-size: $word-size;
+      @include word-weight;
+      color: #E26163;
+    }
+
+    .self {
+      @include word-space;
+      margin-left: 35px;
+      padding-right: 30px;
+      font-size: $word-size;
+      @include word-weight;
+      border-right: $border-color;
+      color: #E1E5E7;
+    }
+
+    .introduce {
+      padding-top: 2%;
+      padding-bottom: 2%;
+      margin-left: 30px;
+      font-size: 14px;
+      @include word-weight;
+    }
+
+    .part2 {
+      justify-content: flex-start;
+      padding-top: 50px;
+      width: 100%;
+      height: 30px;
+      margin-top: 10px;
+    }
+  }
+
+  /*底部footer*/
+  footer {
+    @include position-fixed;
+    width: 100%;
+    bottom: 0;
+    @include display-flex;
+    justify-content: space-around;
+    background-color: $color-2;
+    .button1,
+    .button2 {
+      width: 45%;
+      height: 50px;
+      margin-bottom: 2%;
+      font-size: 18px;
+      border-radius: 5px;
+      outline: 0;
+      border: 1px solid $color-1;
+    }
+    .button1 {
+      background-color: $color-2;
+      color: $color-1;
+    }
+    .button2 {
+      background-color: $color-1;
+      color: $color-2;
+    }
+  }
+
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptteng.dao.UserMapperLogin">
+
+    <select id="selectUserLogin" parameterType="String" resultType="com.ptteng.entity.UserLogin">
+        SELECT * FROM task_student where account=#{account}
+    </select>
+    <select id="selectUserLoginById" parameterType="int" resultType="com.ptteng.entity.UserLogin">
+        SELECT * FROM task_student WHERE id=#{id}
+    </select>
+
+
+<insert id="insertUserLogin" parameterType="com.ptteng.entity.UserLogin">
+        insert into task_student (account,password,salt,phone) values(#{account},#{password},#{salt},#{phone})
+    </insert>
+<insert id="insertUserLoginPhoneCode" parameterType="com.ptteng.entity.UserLogin">
+        insert into task_student (account,password,salt,phone,code) VALUES (#{account},#{password},#{salt},#{phone},#{code})
+    </insert>
+<insert id="insertUserLoginEmailCode" parameterType="com.ptteng.entity.UserLogin">
+        insert into task_student (account,password,salt,email,code) VALUES (#{account},#{password},#{salt},#{email},#{code})
+    </insert>
+<insert id="insertUserLoginEmailCodeTemporary" parameterType="com.ptteng.entity.UserLogin">
+        insert into task_student (email,code) VALUES (#{email},#{code})
+    </insert>
+<update id="updateUserLoginImage" parameterType="com.ptteng.entity.UserLogin">
+        UPDATE  task_student SET photo=#{photo} WHERE account=#{account}
+</update>
+
+</mapper>

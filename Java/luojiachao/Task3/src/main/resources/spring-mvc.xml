@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                         http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--<mvc:default-servlet-handler/>-->
+
+    <!--启用spring的一些annotation -->
+    <context:annotation-config/>
+
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="task2.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--HandlerMapping 无需配置，SpringMVC可以默认启动-->
+
+    <!--静态资源映射-->
+    <!--本项目把静态资源放在了WEB-INF的子目录下，资源映射如下-->
+    <!--<mvc:resources mapping="/css/**" location="WEB-INF/css/"/>-->
+    <!--<mvc:resources mapping="/js/**" location="WEB-INF/js/"/>-->
+    <!--<mvc:resources mapping="/image/**" location="WEB-INF/image/"/>-->
+
+    <!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
+    <task:annotation-driven/>
+    <mvc:annotation-driven />
+    <context:annotation-config/>
+    <mvc:default-servlet-handler/>
+
+    <!--对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
+    <!--默认的视图解析器在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <!--设置JSP文件的目录位置-->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--SpringMVC文件上传需要配置的节点-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="20971500"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="resolveLazily" value="true"/>
+    </bean>
+
+    <!--&lt;!&ndash;支持返回json，用来处理json格式转换，避免IE执行ajax时，返回json出现下载文件 &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+    <!--<property name="messageConverters">-->
+    <!--<list >-->
+    <!--<ref bean="mappingJacksonHttpMessageConverter" />-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <!--自动搜索切面类-->
+    <context:component-scan base-package="task2"/>
+    <!--启动@AspectJ支持 默认是false。
+    proxy-target-class强制类代理，可以避免无接口类的代理失败，因为我还要统计Controller层的方法,所以此处强制使用类代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--<bean id="userService" class="task2.service.UserService"/>-->
+    <bean id="loggerAspect" class="task2.aop.LoggerTime"/>
+    <!--<aop:config>-->
+    <!--<aop:aspect id="logAspect" ref="loggerAspect">-->
+    <!--<aop:pointcut id="login" expression="execution(* task2.service.UserServiceImpl.login(..))"/>-->
+    <!--<aop:before method="login" pointcut-ref="login"/>-->
+    <!--<aop:after method="login" pointcut-ref="login"/>-->
+    <!--</aop:aspect>-->
+    <!--</aop:config>-->
+    <aop:config>
+        <aop:pointcut id="loggerCutpointCon" expression="execution(* task2.controller.StudentController.*(..))"/>
+        <aop:aspect id="logAspect" ref="loggerAspect">
+            <aop:around pointcut-ref="loggerCutpointCon" method="logCon"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

@@ -1,0 +1,96 @@
+@import '../helpers/mixin';
+@import '../helpers/variable';
+.bg-scope {
+    width: 100vw;
+}
+
+main {
+    background: $bg-color;
+    padding-bottom: 30px;
+}
+
+.title {
+    margin: 30px 0; // 标题
+    a:nth-child(1) {
+        color: $black;
+    }
+    a:nth-child(2) {
+        color: $green;
+    }
+}//标题
+
+@mixin margin-15px {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.sidebar {
+    padding: 0;
+    background: $white;
+    @media(max-width: 767px) {
+        width: 100%;
+        margin-bottom: 20px;
+    } //小于767px后变侧栏宽度变化
+    @media (max-width:575px) {
+        @include margin-15px(); //小于575px左右边距
+    }
+    h4 {
+        text-align: center;
+        margin: 20px 0;
+    }//小标题样式-合作企业
+    li {
+        margin: 30px 0;
+    }//标签边距
+    li::before {
+        display: inline-block;
+        content: "";
+        margin-left: 70px;
+        margin-right: 8px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: 1px solid #FF5C00;
+        @media (max-width: 991px) {
+            margin-left: 40px;
+        }
+    }//菜单小圆点，设置margin达到稍微居中的效果
+    li:hover::before {
+        background-color: #FF5C00;
+    }
+    li:hover {
+        color: #FF5C00;
+        cursor: pointer;
+    }//hover效果
+} //侧栏
+@mixin section-style {
+    padding: 20px;
+    background: $white;
+}//给段落加上边距和背景
+
+.introduce {
+    display: flex;
+    @include section-style();
+    border-bottom: 1px solid #E6E6E6;
+    @media (max-width: 575px) {
+        display: block;
+        @include margin-15px();
+    }
+    i {
+        display: inline-block;
+        flex-shrink: 0;
+        margin: 10px;
+        background: url(../img/tudou-logo.png)no-repeat;
+        width: 134px;
+        height: 122px;
+    }//土豆网logo
+} //介绍详情页
+.section {
+    @include section-style();//内边距和背景
+    @media (max-width: 575px) {
+        @include margin-15px(); //小于575px左右边距
+    }
+    p {
+        text-indent: 1cm;
+        margin: 38px 0;
+    }//正文段落
+}

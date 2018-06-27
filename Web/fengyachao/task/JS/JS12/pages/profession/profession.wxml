@@ -1,0 +1,111 @@
+<!--职业推荐页面-->
+<view class='main'>
+  <text>最适合你的职业推荐</text>
+</view>
+<!--tab选项卡-->
+<view class='swiper-tab'>
+  <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current='0' bindtap='clickTab'>{{occupations1.name}}</view>
+  <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current='1' bindtap='clickTab'>{{occupations2.name}}</view>
+  <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current='2' bindtap='clickTab'>{{occupations3.name}}</view>
+</view>
+<swiper current='{{currentTab}}' duration='300' bindchange='swiperTab'>
+  <swiper-item>
+    <view class='list'>
+      <text decode='true' class='list-left'>职业门槛 :&emsp;</text>
+      <text>{{occupations1.threshold}}星</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>难易程度 :&emsp;</text>
+      <text>{{occupations1.difficult}}星</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>成长周期 :&emsp;</text>
+      <text>{{occupations1.cycle}}</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>求贤企业 :&emsp;</text>
+      <text>{{occupations1.company}}家</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>入学基础 :&emsp;</text>
+      <text>{{occupations1.basis}}</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>薪资待遇 :&emsp;</text>
+      <view class='list-right'>
+        <text wx:for='{{occupations1.salary}}' wx:key='time'>
+          {{item.time}}: {{item.salary}}K
+        </text>
+      </view>
+    </view>
+    <view class='people'>
+      <text>{{occupations1.onlineUserCount}}人在学</text>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='list'>
+      <text decode='true' class='list-left'>职业门槛 :&emsp;</text>
+      <text>{{occupations2.threshold}}星</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>难易程度 :&emsp;</text>
+      <text>{{occupations2.difficult}}星</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>成长周期 :&emsp;</text>
+      <text>{{occupations2.cycle}}</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>求贤企业 :&emsp;</text>
+      <text>{{occupations2.company}}家</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>入学基础 :&emsp;</text>
+      <text>{{occupations2.basis}}</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>薪资待遇 :&emsp;</text>
+      <view class='list-right'>
+        <text wx:for='{{occupations2.salary}}' wx:key='time'>
+          {{item.time}}: {{item.salary}}K
+        </text>
+      </view>
+    </view>
+    <view class='people'>
+      <text>{{occupations2.onlineUserCount}}人在学</text>
+    </view>
+  </swiper-item>
+  <swiper-item>
+    <view class='list'>
+      <text decode='true' class='list-left'>职业门槛 :&emsp;</text>
+      <text>{{occupations3.threshold}}星</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>难易程度 :&emsp;</text>
+      <text>{{occupations3.difficult}}星</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>成长周期 :&emsp;</text>
+      <text>{{occupations3.cycle}}</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>求贤企业 :&emsp;</text>
+      <text>{{occupations3.company}}家</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>入学基础 :&emsp;</text>
+      <text>{{occupations3.basis}}</text>
+    </view>
+    <view class='list'>
+      <text decode='true' class='list-left'>薪资待遇 :&emsp;</text>
+      <view class='list-right'>
+        <text wx:for='{{occupations1.salary}}' wx:key='time'>
+          {{item.time}}: {{item.salary}}K
+        </text>
+      </view>
+    </view>
+    <view class='people'>
+      <text>{{occupations3.onlineUserCount}}人在学</text>
+    </view>
+  </swiper-item>
+</swiper>

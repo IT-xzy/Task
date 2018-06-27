@@ -1,0 +1,139 @@
+html {
+  font-size: 62.5%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+nav {
+  background-color: #1ba36e;
+}
+li {
+  font-size: 1.6rem;
+}
+input[type="checkbox"] {
+  display: none;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+.nav-btn {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  border: 1px solid white;
+  border-radius: 10%;
+}
+.nav-btn .nav-bar {
+  height: 4px;
+  width: 30px;
+  margin: 5px;
+  background-color: white;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+.nav {
+  position: relative;
+  background-color: #1ba36e;
+}
+.nav .nav-header {
+  min-height: 60px;
+  background-color: #1ba36e;
+}
+.nav .nav-logo {
+  position: relative;
+  width: 200px;
+  top: 10px;
+}
+.nav .nav-logo img {
+  width: 100%;
+  height: 100%;
+  margin-left: 2rem;
+}
+.nav .list-wrapper {
+  overflow: hidden;
+}
+.nav ul {
+  display: block;
+  padding: 0;
+}
+.nav li {
+  color: white;
+  list-style: none;
+  text-align: center;
+}
+@media screen and (min-width: 769px) {
+  .nav {
+    position: relative;
+    max-width: 120rem;
+    margin: auto;
+  }
+  .nav .nav-btn {
+    display: none;
+  }
+  .nav .nav-header {
+    float: left;
+  }
+  .nav .nav-logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 200px;
+    height: auto;
+  }
+  .nav .nav-logo img {
+    width: 100%;
+    height: 100%;
+  }
+  .nav .list-wrapper {
+    float: right;
+  }
+  .nav ul {
+    position: relative;
+    float: right;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+  .nav li {
+    float: left;
+    line-height: 36px;
+    padding: 30px;
+    border-bottom: 4px solid transparent;
+    color: white;
+    list-style: none;
+    cursor: pointer;
+  }
+  .nav li:hover {
+    border-color: white;
+  }
+}
+@media screen and (max-width: 769px) {
+  nav ul.drop-down {
+    transition: margin-top 1s ease;
+  }
+  nav ul.drop-down li {
+    cursor: pointer;
+  }
+  nav ul.drop-down a {
+    vertical-align: -5px;
+  }
+  nav ul.drop-down li:hover a {
+    background: white;
+    color: #1ba36e;
+  }
+  nav ul.drop-down li:hover {
+    background-color: white;
+  }
+  nav input:checked ~ ul {
+    margin-top: -10.5rem;
+  }
+}

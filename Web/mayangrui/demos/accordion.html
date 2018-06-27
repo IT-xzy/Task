@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="myApp" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular-animate/angular-animate.js"></script>
+    <script src="../js/angular-sanitize/angular-sanitize.js"></script>
+    <script src="../js/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="../js/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <link rel="stylesheet" href="../js/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+    <script src="accordion.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .title {
+            background-color: #00dd1c;
+            color: white;
+            text-align: center;
+            border-radius: 15px;
+            margin: 10px;
+            height: 50px;
+            line-height: 50px;
+            width: 200px;
+        }
+        .red{
+            color:red;
+            background-color: #0d99a5;
+        }
+    </style>
+</head>
+<body ng-controller="myCtrl">
+<div ng-repeat="item in sidebar">
+    <div class="title" ng-click="go($index)">{{item.sidebartitle}}</div>
+    <div ng-repeat="y in item.sidebarcontent" ng-show="title==$parent.$index"
+         ng-click="goo(y.sidebarName,$parent.$index)" ng-class="{'red':content===y.sidebarName}">{{y.sidebarName}}
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<link rel="stylesheet" href="../../../VX/weui-1.1.2/dist/style/weui.css">
+<div class="list-box" ng-controller="listCtrl">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="list-choose">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-4">
+                                <div class="list-putin-box">
+                                    <div class="col-xs-12 col-sm-12 col-md-5">
+                                        发布时间
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-7">
+                                        <input  type="text"
+                                                ng-click="open1()"
+                                                ng-model="listDateStart"
+                                                class="list-putin-input"
+                                                uib-datepicker-popup="yyyy-MM-dd"
+                                                datepicker-options="{maxDate:listDateEnd,showWeeks:false}"
+                                                is-open="popup1.opened"
+                                                ng-required="true"
+                                                close-text="关闭"
+                                                clear-text="清空"
+                                                current-text="今天"
+                                                alt-input-formats="yyyy-MM-dd"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="list-putin-box">
+                                    <div class="col-xs-12 col-sm-12 col-md-5">
+                                        ────
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-7">
+                                        <input type="text"
+                                               ng-model="listDateEnd"
+                                               ng-click="open2()"
+                                               class="list-putin-input"
+                                               uib-datepicker-popup="yyyy-MM-dd"
+                                               datepicker-options="{minDate:listDateStart,showWeeks:false}"
+                                               is-open="popup2.opened"
+                                               ng-required="true"
+                                               close-text="关闭"
+                                               clear-text="清空"
+                                               current-text="今天"
+                                               alt-input-formats="yyyy-MM-dd"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="list-putin-box">
+                                    <div class="col-xs-12 col-sm-12 col-md-5">
+                                        类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-7">
+                                        <select class="select-box" name="" ng-model="listTheType">
+                                            <option value="">全部</option>
+                                            <option ng-repeat="(x,y) in types" value="{{x}}">{{y}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="list-putin-box">
+                                    <div class="col-xs-12 col-sm-12 col-md-5">
+                                        状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-7">
+                                        <select class="select-box" name="" ng-model="listTheStatus">
+                                            <option value="">全部</option>
+                                            <option ng-repeat="(x,y) in status" value="{{x}}">{{y}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="list-putin-box">
+                                    <div class="col-md-4 col-md-offset-8 pull-right text-right">
+                                        <button type="button" class="btn btn-danger" ng-click="listClear()">清除</button>
+                                        <button type="button" class="btn btn-success" ng-click="listSearch()">搜索</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="list-data">
+                    <div class="panel list-panel">
+                        <div class="panel-heading list-panel-heading">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 pull-left text-left">
+                                        <strong>Article列表</strong>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 pull-right text-right">
+                                        <button type="button" class="btn btn-success" ng-click="listToDetail()">+新增</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body list-panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="list-table-box">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>发布时间</th>
+                                                        <th>修改时间</th>
+                                                        <th>发布者</th>
+                                                        <th>状态</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="list in articleList">
+                                                        <td>{{$index + 1}}</td>
+                                                        <td>{{list.title}}</td>
+                                                        <td>{{list.type | typeFilter}}</td>
+                                                        <td>{{list.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                        <td>{{list.updateAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                                        <td>{{list.author}}</td>
+                                                        <td>{{list.status | statusFilter}}</td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default" ng-click="listUpDown()">{{list.status | statusChange}}</button>
+                                                            <button type="button" class="btn btn-default" ng-click="listEdit()">编辑</button>
+                                                            <button type="button" class="btn btn-default" ng-click="listDelete()">删除</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="list-pagination">
+                                                每页显示<input type="text"
+                                                              class="list-pagebox"
+                                                              ng-model="currentSize"
+                                                              pattern="[0-9]*">条
+                                                <ul uib-pagination
+                                                    total-items="totalItems"
+                                                    ng-model="currentPage"
+                                                    max-size="3"
+                                                    items-per-page="currentSize"
+                                                    force-ellipses="true"
+                                                    first-text="首页"
+                                                    previous-text="<"
+                                                    next-text=">"
+                                                    last-text="末页"
+                                                    boundary-links="true"
+                                                    boundary-link-numbers="true"
+                                                    ng-click="listPickPage()">
+                                                </ul>
+                                                去第<input type="text" class="list-pagebox"
+                                                           ng-model="listPagePicker"
+                                                           pattern="[0-9]*">页
+                                                <button type="button" class="btn btn-default" ng-click="listToShow()">确定</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

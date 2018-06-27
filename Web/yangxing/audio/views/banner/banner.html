@@ -1,0 +1,64 @@
+<div class="row pd-top-2">
+    <!--banner列表-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>banner列表</strong>
+                </div>
+                <div class="panel-heading clearfix">
+                    <buttont class="btn btn-default pull-right" style="margin-right: 20px" ui-sref="field.bannerDetail">
+                        新增
+                    </buttont>
+                </div>
+                <div class="list-replace" ng-if="vm.bannerList.length==0">
+                    <div class="list-replace-text">暂无任何数据</div>
+                </div>
+                <div class="panel-body panel-body-noMax" ng-if="vm.bannerList.length>0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>图片</th>
+                                <th>编辑时间</th>
+                                <th>状态</th>
+                                <th class="width10">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="li in vm.bannerList track by $index" class="text-center break-all">
+                                <td>{{$index+1}}</td>
+                                <td>
+                                    <img src="{{li.img}}" style="width: 200px!important;">
+                                </td>
+                                <td>{{li.updateAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td>{{li.status|statusFilter}}</td>
+                                <td>
+                                    <button
+                                            ng-class="{1:'btn-warning',0:'btn-success'}[li.status]"
+                                            class="btn btn-xs"
+                                            ng-bind="(li.status==1?0:1)|statusFilter"
+                                            ng-click="vm.updateBanStatus(li)">
+                                    </button>
+                                    </button>
+                                    <button class="btn btn-primary btn-xs"
+                                            ui-sref="field.bannerDetail({id:li.id})">
+                                        编辑
+                                    </button>
+                                    <button class="btn btn-danger btn-xs"
+                                            ng-click="vm.bannerDel(li.id)"
+                                            ng-disabled="li.status===1">
+                                        删除
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<page ng-if="vm.totalPage" total-page="{{vm.totalPage}}"></page>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/aop
+   http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--1.配置资源-->
+    <bean id="dataSource"
+          class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close" >
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db?characterEncoding=utf8"/>
+        <property name ="username" value="root"/>
+        <property name="password" value="123456789"/>
+        <!--连接池一些属性设置-->
+        <property name="minIdle" value="80" />
+        <property name="initialSize" value="1"/>
+        <property name="maxActive" value="1000" />
+        <property name="maxWait" value="500" />
+    </bean>
+
+        <!--2. 配置sqlSessionFactory-->
+    <bean id ="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描mapper.xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+        <!--3.通过扫描方式配置CategoryMapper,接口类需使用注解@Repository-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="service"/>
+        <!--<property name="annotationClass" value="org.springframework.stereotype.Repository"/>-->
+        <!--<property name="markerInterface" value="mapper.UseService"/>-->
+    </bean>
+
+        <!-- 4.(事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!--注入jdbcTemplate-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="UserServiceImpl" class="service.UserServiceImpl">
+    </bean>
+
+</beans>

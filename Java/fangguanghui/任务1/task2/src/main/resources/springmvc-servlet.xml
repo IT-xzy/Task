@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+    <!--数据绑定支持，@NumberFormatannotation支持，@DateTimeFormat支持，-->
+    <!--@Valid支持，读写XML的支持（JAXB），读写JSON的支持（Jackson）。-->
+    <mvc:annotation-driven/>
+
+    <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+
+    <context:component-scan base-package="com.fgh.task2.controller"/>
+
+    <!--声明编码格式，避免配置produces = "application/json;charset=UTF-8"-->
+    <!--<mvc:annotation-driven>-->
+        <!--<mvc:message-converters register-defaults="true">-->
+            <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+                <!--<constructor-arg value="UTF-8"/>-->
+            <!--</bean>-->
+            <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+                <!--<property name="objectMapper">-->
+                    <!--<bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">-->
+                        <!--<property name="failOnEmptyBeans" value="false"/>-->
+                    <!--</bean>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</mvc:message-converters>-->
+    <!--</mvc:annotation-driven>-->
+
+
+    <!-- 自定义参数绑定 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!-- 转换器 -->
+        <property name="converters">
+            <list>
+                <!-- 日期类型转换 -->
+                <bean class="com.fgh.task2.tool.Convert"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--静态资源处理-->
+    <!--<mvc:resources mapping="/static/**" location="/WEB-INF/static/"/>-->
+    <mvc:default-servlet-handler/>
+
+    <!--视图解析器-->
+    <bean  id="internalResourceViewResolver"
+           class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- prefix ，对应的是JSP文件所在目录-->
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+</beans>

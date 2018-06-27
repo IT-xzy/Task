@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longhang.stuDao.OkDao">
+    <insert id="insert" >
+    insert into users (name,password,create_at,logintime)  values (#{name},#{password},#{create_at},#{logintime})
+        </insert>
+    <update id="update">
+       update users set name=#{name},password=#{password} where id=#{id}
+       </update>
+    <!--<delete id="delete" parameterType="Long">-->
+         <!--delete from student where id=#{id}-->
+        <!--</delete>-->
+    <update id="updateByName">
+       update users set logintime=#{logintime} <where> name like #{name} </where>
+       </update>
+    
+    <select id="selectByName" parameterType="String" resultType="String">
+          select password from users where name=#{name}
+         </select>
+
+    <select id="loginTimeByName" parameterType="String" resultType="Long">
+          select logintime from users where name=#{name}
+         </select>
+
+    <select id="getAllName" resultType="String">
+          select name from users
+    </select>
+
+    <select id="selects" resultType="com.longhang.model.User">
+          select * from users where name=#{name}
+         </select>
+
+</mapper>

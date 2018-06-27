@@ -1,0 +1,79 @@
+@charset "UTF-8";
+html,
+body {
+  margin: 0;
+  padding: 0; }
+
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+.box {
+  position: relative;
+  width: 100%;
+  padding-bottom: 31.25%;
+  /* 父容器的高度撑起来,如果用px或者别的单位的话，当屏幕缩小的话会有多余的宽度，会影响布局！ */
+  overflow: hidden;
+  /* 图片left后，并排，但是屏幕只能让一张图片显示出来，所以要用hidden； */ }
+
+#inner-box {
+  width: 600%;
+  position: absolute;
+  /* 这里可不可以不用position？？
+  大概这里用absolute的原因就是创建一个新的层叠上下文，让点击事件和左右按钮能够在图片中! */
+  left: 0; }
+
+#inner-box li {
+  float: left;
+  /* 浮动，让图片并排 */
+  width: 16.6666666667%;
+  /* 总共6张图片，每张图片的占比 */ }
+
+img {
+  width: 100%;
+  /* 让图片宽度百分百显示，师兄说可以设置图片的最大宽度和高度 */
+  vertical-align: top; }
+
+.btn {
+  /* 左右按钮 */ }
+  .btn span {
+    width: 50px;
+    height: 70px;
+    background: #4a4a4a;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    line-height: 70px;
+    font-size: 30px;
+    opacity: .4;
+    cursor: pointer; }
+    .btn span:hover {
+      opacity: 1;
+      color: #fff; }
+  .btn .left {
+    left: 0;
+    top: 50%;
+    margin-top: -35px; }
+  .btn .right {
+    right: 0;
+    top: 50%;
+    margin-top: -35px; }
+
+#ol {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -25px;
+  /* 点击事件圆点 */ }
+  #ol li {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    float: left;
+    margin: 0 4px; }
+
+/*# sourceMappingURL=carousel.css.map */

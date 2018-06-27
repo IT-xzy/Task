@@ -1,0 +1,47 @@
+@import "variable-mixin.less";
+
+.page {
+  position: relative;
+  min-width: 320px;
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+header {
+  @switch: top;
+  .mixin(@switch);
+  z-index: 100;
+  width: 100%;
+  min-width: 320px;
+  max-width: 768px;
+}
+
+header {
+  .clearfix();
+  .middle,
+  .left,
+  .right {
+    float: left;
+    padding: 20px 0;
+  }
+  .middle {
+    width: 100%;
+  }
+  .left {
+    width: 100px;
+    margin-left: -100%;
+  }
+  .right {
+    width: 100px;
+    margin-left: -100px;
+  }
+}
+
+footer {
+  @switch: bottom;
+  .mixin(@switch);
+  z-index: 100;
+  width: 100%;
+  min-width: 320px;
+  max-width: 768px;
+}

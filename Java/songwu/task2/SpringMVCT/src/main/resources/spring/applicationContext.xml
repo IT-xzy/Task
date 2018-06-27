@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties"></property>
+    </bean>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
+        <property name="driverClassName" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="username" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="initialSize" value="${InitialPoolSize}"></property>
+        <property name="maxActive" value="${MaxActive}"></property>
+        <property name="maxIdle" value="${MaxIdleTime}"></property>
+        <property name="defaultAutoCommit" value="false"></property>
+        <!--最后一个属性设置为defaultAutoCommit为false，这样数据库进行操作时就不会每进行一个数据库操作就自动提交一次事务了。-->
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="typeAliasesPackage" value="com.task2.pojo"></property>
+        <!--Mapper.xml文件与mapper接口在同一个包下时可以不用注入-->
+        <!--<property name="mapperLocations" value="classpath*:com/task2/mapper/UserMapper.xml"></property>-->
+    </bean>
+
+    <!--指定扫描的包名，如果有多个包就用逗号隔开-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描映射文件mapper-->
+        <property name="basePackage" value="com.task2.mapper"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+
+    </bean>
+    <bean id="page" class="com.task2.pojo.Page">
+
+
+    </bean>
+
+
+    <bean id="userServiceImpl" class="com.task2.service.UserServiceImpl">
+
+    </bean>
+
+
+    <bean id="timeInterceptor" class="com.task2.aspectJ.TimeInterceptor"></bean>
+
+    <aop:config>
+        <aop:aspect id="aspect" ref="timeInterceptor">
+            <aop:pointcut id="point1" expression="execution(* com.task2.mapper.UserMapper.*(..))"/>
+
+            <aop:pointcut id="point2" expression="execution(* com.task2.controller.UserController.*(..))"/>
+
+            <aop:around method="doAroundDB" pointcut-ref="point1"  ></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+    <aop:config>
+        <aop:aspect id="aspect" ref="timeInterceptor">
+
+            <aop:pointcut id="point2" expression="execution(* com.task2.controller.UserController.*(..))"/>
+
+            <aop:around method="doAroundCT" pointcut-ref="point2"  ></aop:around>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>

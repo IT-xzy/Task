@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>addEventlistener</title>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-grid.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script>
+</head>
+<style>
+    div {
+        background-color: coral;
+        border: 1px solid;
+        padding: 50px;
+    }
+</style>
+<body>
+<div id="myDiv">
+    <p id="myP">点击该段落， 我是冒泡</p>
+</div>
+<br>
+<div id="myDiv2">
+    <p id="myP2">点击该段落， 我是捕获</p>
+</div>
+<p>{{data1}}</p>
+<p>{{data2}}</p>
+<p>{{data3}}</p>
+</body>
+<script>
+    document.getElementById("myDiv2").addEventListener('click', function () {
+            alert('你点击了div元素')
+        }, true
+    );
+    document.getElementById('myP2').addEventListener('click', function () {
+            alert('你点击了p元素')
+        }, true
+    )
+    // $('#myDiv2').on('click', function () {
+    //         alert('你点击了div元素')
+    //     }
+    // );
+    // $('#myP2').on('click', function () {
+    //         alert('你点击了p元素')
+    //     }
+    // );
+
+</script>
+</html>

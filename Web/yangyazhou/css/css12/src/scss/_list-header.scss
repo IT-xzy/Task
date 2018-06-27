@@ -1,0 +1,54 @@
+@charset "utf-8";
+//初始化变量
+$header-height:.88rem;
+$header-bgcolor:#5fc0cd;
+$text-color-white:#fff;
+// 两端的距离
+$justify-size:.35rem;
+$center-font-size:.34rem;
+@mixin translateY{
+    top:50%;
+    transform: translateY(-50%);
+}
+
+header {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    height: $header-height;
+    font-size: 0;
+    background: $header-bgcolor;
+    label{
+        position: relative;
+        display: inline-block;
+        width: 1.45rem;
+        line-height: .7rem;
+        margin-top: .09rem;
+        font-size: $center-font-size;
+        border-radius: .1rem;
+        color:#fff;
+        background: #55a8b3;
+        &:nth-child(4){
+            margin-left: -.05rem;
+        }
+    }
+    input{
+        width: 0;
+        &:checked+label {
+            z-index: 1;
+            color:#5fc0cd;
+            background: #fff;
+        }
+    }
+    img {
+        position: absolute;
+        right: 30px;
+        @include translateY;
+        width: .42rem;
+        height: .44rem;
+    }
+  
+    
+}
+

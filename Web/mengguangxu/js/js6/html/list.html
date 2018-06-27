@@ -1,0 +1,153 @@
+<!--搜索页-->
+<div class="list-body" data-ng-controller="listCtrl">
+    <div class="list-content">
+        <div class="row">
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="list-label">
+                    <div class="col-md-4 col-xs-12 col-sm-12"><h4 class="word">发布时间</h4></div>
+                    <div class="col-md-8 col-xs-12 col-sm-12">
+                        <div class="input-group form1">
+                            <!--开始日期-->
+                            <input type="text"
+                                   class="form-control"
+                                   uib-datepicker-popup="yyyy-MM-dd"
+                                   datepicker-options="{maxDate:endAt,showWeeks:false}"
+                                   ng-model="startAt"
+                                   is-open="startDatOpen"
+                                   close-text="关闭"
+                                   clear-text="清空"
+                                   current-text="今天"
+                                   alt-input-formats="['yyyy-M!-d!']"
+                                   ng-click="startDatPopup()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="list-label">
+                    <div class="col-md-4 col-xs-12 col-sm-12"><h4 class="icon1">——</h4></div>
+                    <div class="col-md-8 col-xs-12 col-sm-12">
+                        <div class="input-group form1">
+                            <!--结束日期-->
+                            <input type="text"
+                                   class="form-control"
+                                   uib-datepicker-popup="yyyy-MM-dd"
+                                   datepicker-options="{minDate:startAt,showWeeks:false}"
+                                   ng-model="endAt"
+                                   is-open="endDatOpen"
+                                   close-text="关闭"
+                                   clear-text="清空"
+                                   current-text="今天"
+                                   alt-input-formats="['yyyy-M!-d!']"
+                                   ng-click="endDatPopup()"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="list-label">
+                    <div class="col-md-4 col-xs-12 col-sm-12"><h4 class="word">类 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</h4></div>
+                    <div class="col-md-8 col-xs-12 col-sm-12">
+                        <select class="form" data-ng-model="type">
+                            <option value="">全部</option>
+                            <option data-ng-repeat="(x,y) in list" value="{{x}}">{{y}}</option>
+                            <!--(x,y）中x代表对象的key值，y代表value值。下拉选框中value设置的是{{x}}，当你选择其中某项时它的值就是对应的x值,实际展示的是y值。-->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-xs-12 col-sm-12">
+                <div class="list-label">
+                    <div class="col-md-4 col-xs-12 col-sm-12"><h4 class="word">状 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</h4></div>
+                    <div class="col-md-8 col-xs-12 col-sm-12">
+                        <select class="form" data-ng-model="status">
+                            <option value="">全部</option>
+                            <option data-ng-repeat="(x,y) in listStatus" value="{{x}}">{{y}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <div class="text-right">
+                    <button class="button-left" data-ng-click="clean()">清空</button>
+                    <button class="button-right" data-ng-click="searching()">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="list-body1">
+        <div class="list-top">
+            <h4>Article列表</h4>
+            <a href="" class="button-right1" data-ui-sref="backstage.article">+新增</a>
+        </div>
+        <div class="list-ct">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr data-ng-repeat="x in records">
+                    <td>{{$index+1}}</td>
+                    <td>{{x.title}}</td>
+                    <td>{{x.type | typeFilter}}</td>
+                    <td>
+                        {{x.createAt | date:'yyyy-MM-dd'}}<br>
+                        {{x.createAt | date:'hh:mm:ss'}}
+                    </td>
+                    <td>
+                        {{x.updateAt | date:'yyyy-MM-dd'}}<br>
+                        {{x.updateAt | date:'hh:mm:ss'}}
+                    </td>
+                    <td>{{x.author}}</td>
+                    <td>{{x.status | statusFilter}}</td>
+                    <td>
+                        <a href="" ng-click="down(x.id,x.status)">{{x.status |downFilter}}</a>
+                        <a href="" data-ui-sref="backstage.article({id: x.id})">编辑</a>
+                        <a href="" ng-click="delete(x.id)">删除</a>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="ft">
+            <div class="ft-f">
+                每页显示
+                <input type="number" class="ft-text" ng-model="paramsSize1">
+                条
+            </div>
+            <uib-pagination
+                    total-items="totalItems"
+                    ng-model="currentPage"
+                    max-size="5"
+                    first-text="首页"
+                    previous-text="<"
+                    next-text=">"
+                    last-text="末页"
+                    boundary-links="true"
+                    boundary-link-numbers="true"
+                    class="ft-c"
+                    items-per-page="paramsSize1"
+                    ng-click="listBt()">
+            </uib-pagination>
+            <div class="ft-f">
+                去第
+                <input type="number" class="ft-text" ng-model="toPage">
+                页
+                <button class="ft-r" ng-click="confirm()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+

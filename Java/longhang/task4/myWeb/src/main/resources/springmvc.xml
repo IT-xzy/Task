@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.longhang.controller" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <!-- 静态资源处理  css js imgs -->
+    <!--<mvc:resources location="classpath:" mapping="/resources"/>-->
+    <!--<aop:config proxy-target-class="true" />-->
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
+    <!-- tiles 标签  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/layout/" />
+        <property name="order" value="1"/>
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!--<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"-->
+          <!--id="tilesViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />-->
+        <!--<property name="prefix" value="/WEB-INF/layout/" />-->
+        <!--<property name="order" value="1"/>-->
+        <!--<property name="suffix" value=".jsp" />-->
+    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"
+          id="tilesConfigurer">
+        <property name="definitions">
+            <list>
+                <!-- Scan views directory for Tiles configurations -->
+                <value>/WEB-INF/tiles/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>

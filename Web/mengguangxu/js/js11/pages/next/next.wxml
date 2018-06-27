@@ -1,0 +1,63 @@
+<view class="next-container">
+  <view class="title">
+  <text>最适合你的职业推荐</text>
+  </view>
+  <!--导航条-->  
+<view class="navbar">  
+  <text wx:for="{{name}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>  
+</view>  
+  
+<!--第一个-->  
+<view hidden="{{currentTab!==0}}">   
+<text class="list">{{title[0]}}：{{newJob[0].threshold}}星</text>
+<text class="list">{{title[1]}}：{{newJob[0].difficult}}星</text>
+<text class="list">{{title[2]}}：{{newJob[0].cycle}}</text>
+<text class="list">{{title[3]}}：{{newJob[0].company}}</text>
+<view class="list1">
+<text class="list2">{{title[4]}}：</text>
+<text>{{newJob[0].basis}}</text>
+</view>
+<view class="list3">
+<view>{{title[5]}}：</view>
+<view>
+<view wx:for="{{newSalary[0]}}">{{item.time}} 约 {{item.salary}}K</view>
+</view>
+</view>
+</view>  
+  
+<!--第二个-->  
+<view hidden="{{currentTab!==1}}">  
+  <text class="list">{{title[0]}}：{{newJob[1].threshold}}星</text>
+<text class="list">{{title[1]}}：{{newJob[1].difficult}}星</text>
+<text class="list">{{title[2]}}：{{newJob[1].cycle}}</text>
+<text class="list">{{title[3]}}：{{newJob[1].company}}</text>
+<view class="list1">
+<text class="list2">{{title[4]}}：</text>
+<text>{{newJob[1].basis}}</text>
+</view>
+<view class="list3">
+<view>{{title[5]}}：</view>
+<view>
+<view wx:for="{{newSalary[0]}}">{{item.time}} 约 {{item.salary}}K</view>
+</view>
+</view>
+</view>  
+  
+<!--第三个-->  
+<view hidden="{{currentTab!==2}}">  
+  <text class="list">{{title[0]}}：{{newJob[2].threshold}}星</text>
+<text class="list">{{title[1]}}：{{newJob[2].difficult}}星</text>
+<text class="list">{{title[2]}}：{{newJob[2].cycle}}</text>
+<text class="list">{{title[3]}}：{{newJob[2].company}}</text>
+<view class="list1">
+<text class="list2">{{title[4]}}：</text>
+<text>{{newJob[2].basis}}</text>
+</view>
+<view class="list3">
+<view>{{title[5]}}：</view>
+<view>
+<view wx:for="{{newSalary[0]}}">{{item.time}} 约 {{item.salary}}K</view>
+</view>
+</view>
+</view>  
+</view>

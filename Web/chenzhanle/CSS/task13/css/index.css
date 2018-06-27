@@ -1,0 +1,167 @@
+body {
+  height: 100%;
+}
+/* 侧边栏效果 */
+#sidemenu {
+  display: none;
+}
+aside {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -200px;
+  width: 200px;
+  background-color: #ffffff;
+  transition: 0.5s ease-out;
+}
+aside li {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #bdbdbd;
+  background-color: #ffffff;
+}
+aside li img {
+  width: 20px;
+}
+aside li a {
+  color: #29bde0;
+  text-decoration: none;
+}
+#sideul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  max-width: 768px;
+  overflow: auto;
+  padding-bottom: 50px;
+  margin: 0 auto;
+  background-color: #f0f0f0;
+  transition: ease-in 0.5s;
+}
+/* 侧边栏滑出特效 */
+#sidemenu:checked + aside {
+  left: 0;
+}
+@media (min-width: 769px) {
+  #sidemenu:checked + aside {
+    left: calc((100% - 768px) / 2);
+  }
+}
+#sidemenu:checked ~ .page {
+  transform: translateX(220px);
+  background-color: #1eafd1;
+}
+#sidemenu:checked ~ .page .game-last {
+  border-color: #23a9c8;
+  border-radius: 10px;
+  background-color: #1f97b2;
+}
+#sidemenu:checked ~ .page .game-ver {
+  background-color: #b7e3ed;
+}
+/* 页面 */
+header {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  background-color: #29bde0;
+}
+header label {
+  display: inline-block;
+  width: 17px;
+  height: 13px;
+  margin: 20px;
+  background: url("../img/head.png") 0 0;
+  background-size: 67px 45px;
+  cursor: pointer;
+}
+main {
+  position: relative;
+  top: 50px;
+  padding: 20px;
+}
+.game-last {
+  padding: 1em 0;
+  margin: 0;
+  border: 1px solid #d7d7d7;
+  color: #9a9a9a;
+  background-color: #ffffff;
+  text-align: center;
+  font-size: 1.2em;
+}
+.game-last a {
+  float: right;
+  width: 1em;
+  height: 1.2em;
+  margin-right: 10px;
+  background: transparent url(../img/back.png) no-repeat center center;
+  background-size: contain;
+}
+.game {
+  margin-top: 20px;
+  border: 1px solid #d7d7d7;
+  background-color: #ffffff;
+  text-align: center;
+}
+.game h4 {
+  margin: 0;
+  padding: 1em 0;
+  border-bottom: 1px solid #fdd793;
+  font-size: 1.2em;
+  font-weight: normal;
+  letter-spacing: 6px;
+  color: #fbb435;
+}
+.game-ver {
+  padding-top: 20px;
+}
+.game-link {
+  padding: 0 40px;
+}
+.game-link span {
+  display: inline-block;
+  padding: 10px 0;
+  font-size: .8em;
+  text-align: left;
+  color: #787878;
+}
+.game-name a {
+  display: inline-block;
+  width: 100%;
+  padding: 20px 0;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #69d1e9;
+}
+.page-status span {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin: 5px;
+  border: 8px solid #f0f0f0;
+  border-radius: 50%;
+}
+.page-status span.active {
+  border-color: #69d1e9;
+}
+.next {
+  position: absolute;
+  top: 57.5%;
+  right: 30px;
+}
+.next::after {
+  content: '';
+  display: block;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 20px solid #fbb435;
+}

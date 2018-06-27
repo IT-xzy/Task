@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache updateCheck="false" name="defaultCache">
+    <!--     参数说明：
+            （0）diskStore： 临时缓存存放路径
+            （1）name：Cache的唯一标识。
+            （2）maxElementsInMemory：内存中最大缓存对象数。
+            （3）eternal：Element是否永久有效，一旦设置true，timeout将不起作用。
+            （4）timeToIdleSeconds：设置Element在失效前的允许闲置时间。仅当element不是永久有效时使用，可选属性，默认值是0，也就是可闲置时间无穷大。
+            （5）timeToLiveSeconds：设置Element在失效前允许存活时间。最大时间介于创建时间和失效时间之间。仅当element不是永久有效时使用，默认是0.，也就是element存活时间无穷大。
+            （6）overflowToDisk：配置此属性，当内存中Element数量达到maxElementsInMemory时，Ehcache将会Element写到磁盘中。
+            （7）maxElementsOnDisk：磁盘中最大缓存对象数，若是0表示无穷大。
+            （8） memoryStoreEvictionPolicy：当达到maxElementsInMemory限制时，Ehcache将会根据指定的策略 去清理缓存中的内容。默认策略是LRU（最近最少使用），你也可以设置为FIFO（先进先出）或是LFU（较少使用）
+     -->
+
+    <diskStore path="../temp/jeesite/ehcache" />
+
+    <!-- 默认缓存配置. -->
+    <defaultCache maxEntriesLocalHeap="100" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+                  overflowToDisk="true" maxEntriesLocalDisk="100000" />
+
+    <!-- 系统缓存 -->
+    <cache name="sysCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+
+    <!-- 用户缓存 -->
+    <cache name="userCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+
+    <!-- 工作流模块缓存 -->
+    <cache name="actCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/>
+
+    <!-- 内容管理模块缓存
+    <cache name="cmsCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true"/> -->
+
+    <!-- 系统活动会话缓存 -->
+    <cache name="activeSessionsCache" maxEntriesLocalHeap="10000" overflowToDisk="true"
+           eternal="true" timeToLiveSeconds="0" timeToIdleSeconds="0"
+           diskPersistent="true" diskExpiryThreadIntervalSeconds="600"/>
+
+    <!-- 简单页面缓存
+    <cache name="SimplePageCachingFilter" maxEntriesLocalHeap="100" eternal="false" overflowToDisk="true"
+        timeToIdleSeconds="120" timeToLiveSeconds="120" memoryStoreEvictionPolicy="LFU"/> -->
+
+</ehcache>

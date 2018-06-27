@@ -1,0 +1,27 @@
+@blue: rgb(95, 192, 205);
+@white: rgb(240,240,241);
+@black: rgb(51,51,51);
+@grey: rgb(153,153,153);
+@grey2: rgb(212,212,212);
+@red: rgb(226,97,99);
+@white2: rgb(255,255,255);
+.clr(@color) {color: @color;}
+.bgc(@color) {background-color: @color;}
+
+.fixed(@z-index:1) {
+  position: fixed;
+  z-index: @z-index;
+}
+
+.mixin(top) {  top: 0;}
+.mixin(bottom){ bottom: 0;}
+.mixin(@_ ) {.fixed;}
+
+header {
+  @switch: top;
+  .mixin(@switch);
+}
+footer {
+  @switch: bottom;
+  .mixin(@switch);
+}

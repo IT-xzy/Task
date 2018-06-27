@@ -1,0 +1,101 @@
+// 顶部公共样式
+%head {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: .5rem;
+    color: #fff;
+    background-color: $blue;
+    z-index: 1;
+}
+
+//清除input样式
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input {
+    border: none;
+    background: none;
+    outline: none;
+}
+
+@mixin icon($width, $height, $url) {
+    //图标
+    display: block;
+    width: $width;
+    height: $height;
+    border-radius: 50%;
+    background: url($url) 0 0/contain no-repeat;
+}
+
+%button {
+    //底部按钮
+    font-size: .18rem;
+    line-height: .5rem;
+    color: #fff;
+    background: $orange;
+}
+
+%position {
+    //弹窗样式
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    background: rgba(0, 0, 0, .3);
+    .window {
+        width: 2.5rem;
+        margin: 25vh auto;
+        background: #fff;
+        border-radius: .1rem;
+        box-shadow: 0 .02rem .05rem #333;
+        visibility: hidden;
+        transition: margin .6s;
+        p {
+            padding: .1rem;
+            line-height: .3rem;
+            text-align: center;
+            border-bottom: .01rem solid #ccc;
+        }
+        button {
+            display: inline-block;
+            width: 49%;
+            line-height: .45rem;
+        }
+        .border {
+            border-right: 1px solid #ccc;
+        }
+    }
+}
+
+%foot {
+    //底部
+    @include flex(space-around);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: .6rem;
+}
+
+%button {
+    //底部按钮
+    width: 45%;
+    line-height: .4rem;
+    font-size: .18rem;
+    color: #fff;
+    border-radius: .07rem;
+}
+
+body {
+    @media (max-width: 500px) {
+        font-size: .14rem;
+    }
+}
