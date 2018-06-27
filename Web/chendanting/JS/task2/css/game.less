@@ -1,0 +1,91 @@
+@blue: #29bde0;
+.main{
+    position: fixed;
+	top: 20rem;
+    bottom: 19rem;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+.day{
+	padding: 2rem;
+	text-align: center;
+	.date{
+		padding: 2rem;
+	    font-weight: bold;
+		color: @blue;
+		border: 5px solid gainsboro;
+	}
+	.game{
+		.triangle{
+			position: relative;
+			width: 0;
+		    height: 0;
+		    margin: auto;
+		    margin-top: -7rem;
+		    margin-bottom: -.5rem;
+		    border: 5rem solid transparent;
+		    border-bottom: 5rem solid #fff;
+		}
+		.step-warp{
+			padding: 10rem 0rem;
+			margin-top: 2rem;
+			border: 5px solid gainsboro;
+			.step{
+				padding-bottom: 5rem;
+			    margin-left: 10rem;
+	    		border-left: 5px solid gainsboro;
+			    .row{
+			    	display: flex;
+			    }
+			    .died{
+			    	padding-top: 4rem;
+				    padding-left: 5rem;
+			    }
+			    .triangle-left{
+				    width: 0;
+				    height: 0;
+				    border: 5rem solid transparent;
+				    border-right: 5rem solid @blue;
+				}
+				.content{
+					display: flex;
+					justify-content: center;
+					width: 62rem;
+					align-items: center;
+					color: #fff;
+					background-color: @blue;
+				}
+				#moon{
+				    &:before{
+				    	content: "";
+				    	width: 10rem;
+				    	margin-left: -5rem;
+				    	background-color: #fff;
+				    	background-image : url(../img/moon.png);
+				    	background-size: cover;
+						background-repeat: no-repeat;
+				    }
+				}
+				#sun{
+					&:before{
+				    	content: "";
+				    	width: 10rem;
+				    	margin-left: -5rem;
+				    	background-color: #fff;
+				    	background-image: url(../img/sun.png);
+				    	background-size: cover;
+						background-repeat: no-repeat;
+					}
+				}
+			}
+			.talk,.vote{
+				padding-left: 5rem;
+			}
+			.vote{
+			    padding-bottom: 0rem;
+			}
+		}
+	}
+}
+// footer

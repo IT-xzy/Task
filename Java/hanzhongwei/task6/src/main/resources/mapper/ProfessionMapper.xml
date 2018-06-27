@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hzw.mapper.ProfessionMapper">
+
+    <insert id="addProfession" parameterType="Profession">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="proId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tb_profession
+        VALUES (null,#{proName},#{proIntroduction},#{proThreshold},#{proDifficulty},#{proCompany},
+        #{proSalary1},#{proSalary2},#{proSalary3},#{proPrompt},#{create_at},#{update_at})
+    </insert>
+
+    <delete id="deleteProfession" parameterType="java.lang.Long">
+        DELETE FROM tb_profession WHERE proId = #{proId}
+    </delete>
+
+    <update id="updateProfession" parameterType="Profession">
+        UPDATE tb_profession SET proName = #{proName},proIntroduction = #{proIntroduction},
+        proThreshold = #{proThreshold},proDifficulty = #{proDifficulty},proCompany = #{proCompany},
+        proSalary1 = #{proSalary1},proSalary2 = #{proSalary2},proSalary3 = #{proSalary3},
+        proPrompt = #{proPrompt},create_at = #{create_at},update_at = #{update_at}
+        WHERE proId = #{proId}
+    </update>
+
+    <select id="findIdProfession" parameterType="java.lang.Long" resultType="Profession">
+        SELECT * FROM tb_profession WHERE proId = #{proId}
+    </select>
+
+    <select id="findNameProfession" parameterType="String" resultType="Profession">
+        SELECT * FROM tb_profession WHERE proName = #{proName}
+    </select>
+
+    <select id="findListProfession" resultType="Profession">
+        SELECT * FROM tb_profession
+    </select>
+</mapper>

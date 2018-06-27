@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.mapper.ITProfessionMapper">
+    <sql id="Base_Column_List">
+        id, profession, description, it_profession.type, students_num, entry_barrier, difficulty, growth_cycle, companies,
+        salaryZero, salaryOne, salaryThree, it_profession.count, attention, introduction
+    </sql>
+    <select id="selectAll" resultType="ITProfession">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM it_profession
+    </select>
+
+    <select id="selectFrontEndDevelop" parameterType="java.lang.String" resultType="ITProfession">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM it_profession WHERE it_profession.type LIKE CONCAT(CONCAT('%', #{_parameter}),'%')
+    </select>
+
+    <select id="selectBackEndDevelop" parameterType="java.lang.String" resultType="ITProfession">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM it_profession WHERE it_profession.type LIKE CONCAT(CONCAT('%', #{_parameter}),'%')
+    </select>
+
+    <select id="selectMobileDevelop" parameterType="java.lang.String" resultType="ITProfession">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM it_profession WHERE it_profession.type LIKE CONCAT(CONCAT('%', #{_parameter}),'%')
+    </select>
+
+    <select id="selectOperations" parameterType="java.lang.String" resultType="ITProfession">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM it_profession WHERE it_profession.type LIKE CONCAT(CONCAT('%', #{_parameter}),'%')
+    </select>
+
+    <select id="selectFullStackDevelop" parameterType="java.lang.String" resultType="ITProfession">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM it_profession WHERE it_profession.type LIKE CONCAT(CONCAT('%', #{_parameter}),'%')
+    </select>
+</mapper>

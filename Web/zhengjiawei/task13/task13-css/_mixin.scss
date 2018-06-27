@@ -1,0 +1,116 @@
+@mixin header {
+    padding: .14rem .3rem;
+    background: $main-bg;
+    @include vertical-center();
+    justify-content: space-between;
+}
+
+// header通用样式
+@mixin header-font {
+    color: $white;
+    font-size: .17rem;
+    font-weight: 300;
+    letter-spacing: $spacing-gap;
+}
+
+@mixin vertical-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// 垂直居中样式
+@mixin meunicon-border {
+    width: .26rem;
+    height: .26rem;
+    border: 1px solid $white;
+}
+
+// 菜单边框
+@mixin menuicon-line {
+    width: .16rem;
+    height: .14rem;
+    border-top: .02rem solid $white;
+    border-bottom: .02rem solid $white;
+    background: $white;
+    padding: .04rem 0;
+    background-clip: content-box;
+}
+
+// 菜单里的横线
+@mixin inline-reset {
+    line-height: 0;
+    font-size: 0;
+}
+
+@mixin close-icon-left {
+    @include inline-reset();
+    display: inline-block;
+    width: .26rem;
+    height: .02rem;
+    transform: rotate(45deg);
+    background: $white;
+}
+// 叉号
+
+@mixin close-icon-right {
+    content: "";
+    display: inline-block;
+    width: .26rem;
+    height: .02rem;
+    transform: rotate(-90deg);
+    background: $white;
+}
+// 叉号
+
+@mixin position-style {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+// 页面页脚定位
+
+// 关闭 叉 按钮
+@mixin play-button {
+    display: inline-block;
+    width: .26rem;
+    height: .26rem;
+    background: #FBB435;
+    border-radius: 50%;
+}
+
+// 播放按钮背景
+@mixin play-button-triangle {
+    content: "";
+    position: absolute;
+    top: 40%;
+    left: 36%;
+    margin-top: -.05rem;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border: .08rem solid transparent;
+    border-left: .1rem solid $white;
+}
+
+// 播放按钮小三角
+@mixin subnav {
+    position: relative;
+    padding: .1rem;
+    @include vertical-center();
+    justify-content: space-between;
+    background: $subnar-bg;
+}
+
+// 小导航栏样式
+@mixin subnav-triangle {
+    position: absolute;
+    bottom: -.18rem;
+    display: block;
+    width: 0;
+    height: 0;
+    border: .08rem solid transparent;
+    border-top: .12rem solid $subnar-bg;
+}
+
+// 小导航栏的小三角

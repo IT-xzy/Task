@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!-- http://tiles.apache.org/framework/config-reference.html -->
+<tiles-definitions>
+    <!-- tiles基础模板 -->
+    <definition name="baseTemplate" template="/WEB-INF/jsp/view/core/layout.jsp">
+        <put-attribute name="title" value="标题" />
+        <put-attribute name="cssresources" value="/WEB-INF/jsp/view/core/test-css.jsp" />
+        <put-attribute name="jsresources" value="/WEB-INF/jsp/view/core/test-js.jsp" />
+        <put-attribute name="header" value="/WEB-INF/jsp/view/core/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/jsp/view/core/menu.jsp"/>
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/view/core/footer.jsp" />
+    </definition>
+
+    <definition name="timeLong" extends="baseTemplate">
+        <put-attribute name="title" value="Long" />
+        <put-attribute name="body" value="/WEB-INF/jsp/view/core/date-long.jsp" />
+    </definition>
+
+    <definition name="timeDate" extends="baseTemplate">
+        <put-attribute name="title" value="Date" />
+        <put-attribute name="body" value="/WEB-INF/jsp/view/core/data-date.jsp" />
+    </definition>
+
+    <definition name="manage" extends="baseTemplate">
+        <put-attribute name="title" value="管理页" />
+        <put-attribute name="body" value="/WEB-INF/jsp/view/core/body-manage.jsp" />
+    </definition>
+
+    <definition name="welcome" extends="baseTemplate">
+        <put-attribute name="title" value="欢迎页" />
+        <put-attribute name="body" value="/WEB-INF/jsp/view/core/body-welcome.jsp" />
+    </definition>
+
+</tiles-definitions>

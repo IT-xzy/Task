@@ -1,0 +1,80 @@
+@import 'header';
+@mixin horizontal-center{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+$text-color:#f8bd4a;
+html {
+    height: 100%;
+}
+body {
+    font-size: 32px;
+    height: 100%;
+}
+main{
+    padding-top: .88rem;
+    h4{
+        margin: .1rem .4rem;
+        text-align: center;
+        line-height: .88rem;
+        box-shadow: .02rem .02rem  .02rem #d8d8d8; }   
+    .id-container {
+        display: flex;
+        height: 1.16rem;
+        align-items: center;
+        margin-top: .3rem;
+        img{
+            width: .6rem;
+            height: .6rem;
+            vertical-align: -.16rem;
+            border-radius: 50%;
+        }
+        div{
+            flex-basis: 50%;
+            margin-left: .2rem;
+            line-height: 1rem;
+        }
+        .players-num{
+            display: inline-block;
+            width: .3rem;
+            text-align: center;
+        }
+        
+       
+    }
+    .input-player {
+        @include horizontal-center();
+        white-space: nowrap;
+        bottom: 3.4rem;
+        label{
+            font-weight: bold;
+        }
+        input {
+            width: .5rem;
+            height: .5rem;
+            border:none;
+            padding-left: .15rem;
+            background: pink;
+            color: navy;
+            outline-color: currentColor;
+        }
+        small{
+            color:$text-color;
+        }
+    }
+}
+
+    button {
+        @include horizontal-center();        
+        bottom: .5rem;
+        width: 95%;
+        border: none;
+        line-height: 1rem;
+        text-align: center;
+        font-size: .5rem;
+        color: #fff;
+        background-color: $text-color;
+        outline: none;
+    }
+

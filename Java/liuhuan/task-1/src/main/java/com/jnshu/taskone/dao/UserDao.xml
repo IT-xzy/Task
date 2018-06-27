@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.taskone.dao.UserDao">
+    <!-- sql片段块  -->
+    <!-- 判断属性是否为空,为空不设置该属性-->
+    <sql id="value_not_null">
+      <trim suffixOverrides=",">
+          <!-- and不能大写  -->
+          <if test="username!='' and username!=null">username=#{username}, </if>
+          <if test="qq!='' and qq!=null">qq=#{qq}, </if>
+          <if test="profession!='' and profession!=null">profession=#{profession}, </if>
+          <if test="join_date!='' and join_date!=null">join_date=#{join_date}, </if>
+          <if test="school!='' and school!=null">school=#{school}, </if>
+          <if test="online_id!='' and online_id!=null">online_id=#{online_id}, </if>
+          <if test="daily_url!='' and daily_url!=null">daily_url=#{daily_url}, </if>
+          <if test="declaration!='' and declaration!=null">declaration=#{declaration}, </if>
+          <if test="counselor!='' and counselor!=null">counselor=#{counselor}, </if>
+          <if test="update_time!='' and update_time!=null">update_time=#{update_time}, </if>
+      </trim>
+    </sql>
+    <!-- sql片段块end -->
+
+    <!-- 查找所有用户 -->
+    <select id="findUserAll" resultType="User">
+        select * from taskone
+    </select>
+    <!-- 查找所有用户end -->
+
+    <!-- 根据传入参数查找 -->
+    <select id="findUserMore" resultType="User" parameterType="User">
+        SELECT * FROM taskone
+        <where>
+            <if test="id!=0 and id!=null">AND id=#{id} </if>
+            <if test="username!='' and username!=null">AND username=#{username}</if>
+            <if test="qq!='' and qq!=null">AND qq=#{qq}, </if>
+            <if test="profession!='' and profession!=null">AND profession=#{profession}</if>
+            <if test="join_date!='' and join_date!=null">AND join_date=#{join_date}</if>
+            <if test="school!='' and school!=null">AND school=#{school}</if>
+            <if test="online_id!='' and online_id!=null">AND online_id=#{online_id}</if>
+            <if test="daily_url!='' and daily_url!=null">AND daily_url=#{daily_url}</if>
+            <if test="declaration!='' and declaration!=null">AND declaration=#{declaration}</if>
+            <if test="counselor!='' and counselor!=null">AND counselor=#{counselor}</if>
+        </where>
+    </select>
+    <!-- 根据传入参数查找end -->
+
+    <!-- 插入用户 -->
+    <!-- insert into taskone(id,username,qq,profession,join_date,school,online_id,daily_url,declaration,counselor,create_time,update_time) value(2,"赵四","554564","web","2018123654","北","1554","www.baidu.com","jiayou","老王","201554633","46546")-->
+    <!-- 插入时创建时间与更新时间一致 -->
+    <insert id="insertUser" parameterType="User">
+        INSERT INTO taskone(
+        username,qq,profession,join_date,school,online_id,daily_url,declaration,counselor,create_time,update_time)
+        VALUE (
+        #{username},#{qq},#{profession},#{join_date},#{school},#{online_id},#{daily_url},#{declaration},#{counselor},#{create_time},#{create_time})
+        <!-- 将返回的主键id 赋值给user.id -->
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <!-- 插入用户end -->
+
+    <!-- 删除用户 delete接口的返回类型设为Integer， 不需要在<delete></delete>中 定义resultType，即可自动返回受影响的行数。 -->
+    <!-- jdbc:mysql://${jdbc.host}/${jdbc.db}?useAffectedRows=true 添加?useAffectedRows=true获取真实的收影响条数-->
+    <delete id="deleteUser" parameterType="int" >
+        DELETE FROM taskone WHERE id=#{id}
+    </delete>
+    <!-- 删除用户end-->
+
+    <!-- 修改用户-->
+    <update id="updateUser" parameterType="User">
+        UPDATE taskone SET
+        <include refid="value_not_null"/>
+        WHERE id=#{id}
+    </update>
+    <!-- 修改用户end-->
+
+</mapper>

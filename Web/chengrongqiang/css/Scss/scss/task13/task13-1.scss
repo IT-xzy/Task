@@ -1,0 +1,64 @@
+$m-orange:#fbbb49;
+$m-red:$m-orange;
+$m-black:#9e9e9e;
+@import "../../color.scss";
+@import "../../normal-css-style.scss";
+@import "../../pc-reset.scss";
+@import "../../user-self.scss";
+html {
+    font-size: 100px;
+}
+header{
+    padding: .11rem;
+}
+main {
+    padding: .15rem;
+}
+.last-game {
+    padding: .20rem;
+    border:1px solid #e8e8e8;
+    font-size: .2rem;
+    a {
+        margin: 0.04rem 0 0 -.2rem ;
+        width: .12rem;
+        height: .2rem;
+        background: url(../../../favicon.ico/task13/back-icon.png);     
+    }
+    margin-bottom: .13rem;
+}
+.ghosts-game {
+    border:1px solid #e8e8e8;
+    .game-title {
+        padding: .14rem;
+        font-size: .18rem;
+        border-bottom: 2px solid $m-red;
+    }
+    .version-select {
+        padding: .15rem .3rem;
+        .simplify{
+            border: 1px solid #e8e8e8;
+            padding: .25rem;
+            width: 100%;
+            font-size: .16rem;
+        }
+        .guessing,.idiot {
+            @extend .simplify;
+        }
+    }
+    .arrow{
+        @include arrow(right,.2rem,$m-red);
+        position: absolute;
+        top: 2.1rem;
+        right: .05rem;
+    }    
+    .game-info {
+        padding: .13rem;
+    }
+    i{        
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;        
+    }
+}
+
+

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html{
+    font-size: 62.5%;
+}
+body{
+    margin: 0;
+}
+header{
+    width: 100%;
+    height: 3.5rem;
+    background-color: #29bde0;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+}
+.t1{
+    margin: 1.05rem 0 1.05rem 1.1rem;
+}
+.last{
+    height: 6rem;
+    position: relative;
+    top: 3.5rem;
+    border: #c9c9c9 solid 1px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin: 0.9rem 1.5rem 1.35rem 1.5rem;
+
+}
+.p1{
+    margin: 0;
+    font-size: 1.742rem;
+    color: #e6e6e6;
+}
+.back{
+    position: absolute;
+    top: 1.75rem;
+    right: 2.5rem;
+}
+.last-game:hover{
+    color: #e6e6e6;
+}
+.select{
+    height: 38.8rem;
+    margin: 0 1.5rem 0rem 1.5rem;
+    position: relative;
+    top: 3.5rem;
+    border: #c9c9c9 solid 1px;
+}
+.game{
+    height: 4.5rem;
+    border-bottom: #fde1ae solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.select-0{
+    height: 6.7rem;
+    margin:1.55rem 2.7rem 0rem 2.7rem;
+    background-color: #69d1e9;
+
+}
+.select-1{
+    height: 6.7rem;
+    margin:0rem 2.7rem 0rem 2.7rem;
+    background-color: #69d1e9;
+}
+.p2{
+    font-size: 1.887rem;
+    color: #fbb435;
+    text-align: center;
+    line-height: 4.5rem;
+    margin: 0;
+    letter-spacing: 3px;
+}
+.p3{
+    font-size: 1.604rem;
+    color: #fff;
+    text-align: center;
+    line-height: 6.7rem;
+}
+.p4{
+    font-size: 1.2265rem;
+    color: #787878;
+    text-align: center;
+    margin:0;
+}
+.t2{
+    position: fixed;
+    top: 30.9rem;
+    right: 2.25rem;;
+}
+.s1{
+    height: 4.1rem;
+    text-align: center;
+    line-height: 4.1rem;
+}
+.dot-1{
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #c9c9c9;
+    background-color: #fff;
+    position: relative;
+    bottom: 2.5rem;
+}
+.dot-1:hover{
+    background: #29bde0;
+}
+        nav{
+            width: 100%;
+            height: 35px;
+            background-color: rgba(26,188, 156, 0.75);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+        }
+        #toggleMenu{
+            position: absolute;
+            height: 100%;
+            width: 50px;
+            left: 20px;
+            cursor: pointer;
+            -webkit-transition: transform 1s;
+            -moz-transition: transform 1s;
+            -ms-transition: transform 1s;
+            -o-transition: transform 1s;
+            transition: transform 1s;
+        }
+        #hide{
+            display: block;
+            height: 3px;
+            background-color: #FFF;
+            position: absolute;
+            top: 50%;
+            /* -webkit-transition: opacity .5s;
+            -moz-transition: opacity .5s;
+            -ms-transition: opacity .5s;
+            -o-transition: opacity .5s;
+            transition: opacity .5s; */
+        }
+        /* #show{
+            width: 20px;
+            left: 15px;
+            opacity: 0;
+        } */
+        #hide{
+            width: 30px;
+            left: 10px;
+            margin-top: -1.5px;
+        }
+        #hide::before,#hide::after{
+            content: "";
+            display: block;
+            height: 3px;
+            background-color: #FFF;
+            position: absolute;
+        }
+        #hide::before,#hide::after{
+            width: 30px;
+        }
+        /* #show::before,#show::after{
+            width: 25px;
+        } */
+        #hide::before,#show::before{
+            top: -10px;
+        }
+        #hide::after,#show::after{
+            top: 10px;
+        }
+        /* #show::before{
+             -webkit-transform: rotate(35deg) translateX(5px);
+             -moz-transform: rotate(35deg) translateX(5px);
+             -ms-transform: rotate(35deg) translateX(5px);
+             -o-transform: rotate(35deg) translateX(5px);
+             transform: rotate(35deg) translateX(5px);
+        }
+        #show::after{
+              -webkit-transform: rotate(-35deg) translateX(5px);
+             -moz-transform: rotate(-35deg) translateX(5px);
+             -ms-transform: rotate(-35deg) translateX(5px);
+             -o-transform: rotate(-35deg) translateX(5px);
+             transform: rotate(-35deg) translateX(5px);
+        } */
+        ul{
+            list-style: none;
+            background-color: #455552;
+            position: absolute;
+            top: 34px;
+            left: -200px;
+            width: 74px;
+            -webkit-transition: all .5s ease-in-out;
+            -moz-transition: all .5s ease-in-out;
+            -ms-transition: all .5s ease-in-out;
+            -o-transition: all .5s ease-in-out;
+            transition: all .5s ease-in-out;
+        }
+        li{
+            margin: 0;
+            padding: 0;
+            position: relative;
+            left: -40px;
+            text-align: center;
+            width: 112px;
+        }
+        a{
+            text-decoration: none;
+            color:#FFF;
+            display: inline-block;
+            height: 40px;
+            line-height: 40px; 
+        }
+        li:hover{
+            background-color: rgba(26,188, 156, 0.75);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div id="toggleMenu">
+            <span id="hide"></span>
+        </div>
+        <ul id="list">
+            <li>
+                <a href="#">首页</a>
+            </li>
+            <li>
+                <a href="#">问题</a>
+            </li>
+            <li>
+                <a href="#">文章</a>
+            </li>
+            <li>
+                <a href="#">关注</a>
+            </li>
+            <li>
+                <a href="#">发现</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- <header>
+            <img src="images/icon-2.png" class="t1">
+        </header> -->
+        <div class="last">
+            <a href="" class="last-game">
+               <a href="task7-2.html"><p class="p1">上次游戏：捉鬼猜词版</p></a> 
+            </a>
+            <a href="">
+                <!-- <img src="images/icon-back.png" class="back"> -->
+            </a>
+        </div>
+        <div class="select">
+            <!-- <img src="images/icon-1.png" class="t2"> -->
+            <div class="game">
+                <p class="p2">捉鬼游戏</p>
+            </div>
+            <div class="select-0">
+                <p class="p3">简化版</p>
+            </div>
+            <div class="s1">
+            <p class="p4">有1133个用户正在玩此款游戏</p>
+        </div>
+            <div class="select-1">
+                <p class="p3">
+                    猜词版
+                </p>
+            </div>
+            <div class="s1">
+            <p class="p4">有1133个用户正在玩此款游戏</p>
+        </div>
+            <div class="select-1">
+                <p class="p3">白痴版</p>
+            </div>
+            <div class="s1">
+            <p class="p4">有1133个用户正在玩此款游戏</p>
+            <a href="" class="dot-1"></a>
+            <a href="" class="dot-1"></a>
+            <a href="" class="dot-1"></a>
+            <a href="" class="dot-1"></a>
+        </div>
+        </div>
+   
+    </body>
+</html>

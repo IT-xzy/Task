@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.ptt.pojo.Student">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="tel" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="profile_photo" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="sex" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="qq" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="what_type" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="join_time" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="school" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="student_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="link" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="wishes" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="tutor_bro" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="know_from" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="create_at" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="update_at" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, password, tel, email, profile_photo, sex, qq, what_type, join_time, school,
+        student_id, link, wishes, tutor_bro, know_from, create_at, update_at
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from student
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.ptt.pojo.Student">
+        insert into student (id, name, password,
+        tel, email, profile_photo,
+        sex, qq, what_type, join_time,
+        school, student_id, link,
+        wishes, tutor_bro, know_from,
+        create_at, update_at)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{tel,jdbcType=BIGINT}, #{email,jdbcType=VARCHAR}, #{profilePhoto,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR}, #{qq,jdbcType=BIGINT}, #{whatType,jdbcType=VARCHAR}, #{joinTime,jdbcType=BIGINT},
+        #{school,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR},
+        #{wishes,jdbcType=VARCHAR}, #{tutorBro,jdbcType=VARCHAR}, #{knowFrom,jdbcType=VARCHAR},
+        #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.ptt.pojo.Student">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="profilePhoto != null">
+                profile_photo,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="whatType != null">
+                what_type,
+            </if>
+            <if test="joinTime != null">
+                join_time,
+            </if>
+            <if test="school != null">
+                school,
+            </if>
+            <if test="studentId != null">
+                student_id,
+            </if>
+            <if test="link != null">
+                link,
+            </if>
+            <if test="wishes != null">
+                wishes,
+            </if>
+            <if test="tutorBro != null">
+                tutor_bro,
+            </if>
+            <if test="knowFrom != null">
+                know_from,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=BIGINT},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="profilePhoto != null">
+                #{profilePhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=BIGINT},
+            </if>
+            <if test="whatType != null">
+                #{whatType,jdbcType=VARCHAR},
+            </if>
+            <if test="joinTime != null">
+                #{joinTime,jdbcType=BIGINT},
+            </if>
+            <if test="school != null">
+                #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="studentId != null">
+                #{studentId,jdbcType=VARCHAR},
+            </if>
+            <if test="link != null">
+                #{link,jdbcType=VARCHAR},
+            </if>
+            <if test="wishes != null">
+                #{wishes,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorBro != null">
+                #{tutorBro,jdbcType=VARCHAR},
+            </if>
+            <if test="knowFrom != null">
+                #{knowFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.ptt.pojo.Student">
+        update student
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=BIGINT},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="profilePhoto != null">
+                profile_photo = #{profilePhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                qq = #{qq,jdbcType=BIGINT},
+            </if>
+            <if test="whatType != null">
+                what_type = #{whatType,jdbcType=VARCHAR},
+            </if>
+            <if test="joinTime != null">
+                join_time = #{joinTime,jdbcType=BIGINT},
+            </if>
+            <if test="school != null">
+                school = #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="studentId != null">
+                student_id = #{studentId,jdbcType=VARCHAR},
+            </if>
+            <if test="link != null">
+                link = #{link,jdbcType=VARCHAR},
+            </if>
+            <if test="wishes != null">
+                wishes = #{wishes,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorBro != null">
+                tutor_bro = #{tutorBro,jdbcType=VARCHAR},
+            </if>
+            <if test="knowFrom != null">
+                know_from = #{knowFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.ptt.pojo.Student">
+    update student
+    set name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=BIGINT},
+      email = #{email,jdbcType=VARCHAR},
+      profile_photo = #{profilePhoto,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=BIGINT},
+      what_type = #{whatType,jdbcType=VARCHAR},
+      join_time = #{joinTime,jdbcType=BIGINT},
+      school = #{school,jdbcType=VARCHAR},
+      student_id = #{studentId,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      wishes = #{wishes,jdbcType=VARCHAR},
+      tutor_bro = #{tutorBro,jdbcType=VARCHAR},
+      know_from = #{knowFrom,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM student WHERE student.name = #{_parameter};
+    </select>
+    <delete id="deleteByName" parameterType="java.lang.String">
+    DELETE FROM student WHERE student.name = #{_parameter}
+    </delete>
+    <update id="updateByName" parameterType="student">
+        UPDATE student
+        <set>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=BIGINT},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="profilePhoto != null">
+                profile_photo = #{profilePhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                qq = #{qq,jdbcType=BIGINT},
+            </if>
+            <if test="whatType != null">
+                what_type = #{whatType,jdbcType=VARCHAR},
+            </if>
+            <if test="joinTime != null">
+                join_time = #{joinTime,jdbcType=BIGINT},
+            </if>
+            <if test="school != null">
+                school = #{school,jdbcType=VARCHAR},
+            </if>
+            <if test="studentId != null">
+                student_id = #{studentId,jdbcType=VARCHAR},
+            </if>
+            <if test="link != null">
+                link = #{link,jdbcType=VARCHAR},
+            </if>
+            <if test="wishes != null">
+                wishes = #{wishes,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorBro != null">
+                tutor_bro = #{tutorBro,jdbcType=VARCHAR},
+            </if>
+            <if test="knowFrom != null">
+                know_from = #{knowFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE student.name = #{name,jdbcType=VARCHAR}
+    </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student;
+    </select>
+    <select id="selectEmail" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT name FROM student WHERE email = #{_parameter} limit 1
+    </select>
+    <select id="selectTel" parameterType="java.lang.Long" resultType="java.lang.String">
+        SELECT name FROM student WHERE tel = #{_parameter} limit 1
+    </select>
+    <select id="selectName" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT id FROM student WHERE name = #{_parameter} limit 1
+    </select>
+</mapper>

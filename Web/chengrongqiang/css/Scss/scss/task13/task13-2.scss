@@ -1,0 +1,138 @@
+$bg-blue: #29bde0;
+$m-red: #f5c97b;
+$m-green: #83b09a;
+@import "../../color.scss";
+@import "../../normal-css-style.scss";
+@import "../../pc-reset.scss";
+@import "../../user-self.scss";
+html {
+  font-size: 100px;
+}
+header {
+  @include clearfix;
+  padding: 0.07rem 0.1rem;
+}
+.menu-box {
+  padding: 0 2px;
+  border: 2px solid #fff;
+}
+.close {
+  margin-top: 0.04rem;
+  width: 0.18rem;
+  height: 0.18rem;
+  background: url(../../.././favicon.ico/task13/close.png) no-repeat;
+  background-size: 100% auto;
+}
+.prompt {
+  $bg-blue: #b9e9f5;
+  padding: 0.13rem 0.23rem;
+  background-color: $bg-blue;
+  .audio-zycf {
+    display: none;
+  }
+  button {
+    border: none;
+    width: 0.26rem;
+    height: 0.26rem;
+    background: url(../../.././favicon.ico/task13/switch.png) no-repeat;
+  }
+}
+main {
+    margin-bottom: .8rem;
+}
+.notice {
+  padding: 0.12rem 0.25rem;
+}
+.arrow {
+  top: -0.25rem;
+  left: 0.1rem;
+  @include arrow(bottom, 5px, #b7e8f5);
+}
+.pepple-vote {
+  @include clearfix;
+  padding: 0.12rem 0;
+}
+.identity-group {
+  position: relative;
+  margin-left: 10%;
+  margin-bottom: 8%;
+  width: 20vw;
+  height: 20vw;
+  float: left;
+}
+.identity-num {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid $m-white;
+} 
+  .identity {
+    font-size: .14rem;
+    display: flex;
+    flex-basis: 70%;
+    align-items: center;
+    justify-content: center;
+  }
+  .num {
+    font-size: .10rem;
+    display: flex;
+    flex-basis: 30%;
+    align-items: center;
+    justify-content: center;
+  }
+  .action-list {
+    position: absolute;
+    top: 100%;
+    display: none;    
+    width: 20vw;
+    height: 4vw;
+    margin: 10% 0;  
+  }
+  @media screen and (max-width:350px) {
+    .action-list {
+      margin-top: 0;
+    }
+  }
+  .action-list li{
+    float: left;    
+    margin-left: 6.6%;
+  }
+  .identity-group:hover .action-list {
+    display: block; 
+  }
+  .action-list li.first-child {
+    margin-left: 0;
+  }
+  .action-list li {
+  i {
+    display: inline-block;
+    width: 4vw;
+    height: 4vw;
+    background: url(../../.././favicon.ico/task13/task7-2sprite.png) no-repeat;
+    background-size: auto 100%;
+  }
+  .find {
+    background-position: 33% 0;
+  }
+  .location {
+    background-position: 66% 0;
+  }
+  .treat {
+    background-position: 100% 0;
+  }
+}
+footer {
+    padding: .21rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 11;  
+    button{
+        padding: .13rem;
+        width: 60%;
+        background: #fbb435;        
+        border:none;
+    }
+}

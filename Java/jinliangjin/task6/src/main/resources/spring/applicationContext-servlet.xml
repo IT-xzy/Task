@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--注解映射器和处理器，配置校验器-->
+    <mvc:annotation-driven validator="validator"/>
+
+    <!--配置静态资源路径-->
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/css/**" location="/css/"/>
+
+    <!--注解bean-->
+    <context:annotation-config></context:annotation-config>
+    <!--扫描controller层-->
+    <context:component-scan base-package="com.ptt" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--扫描切面-->
+    <context:component-scan base-package="com.ptt.advice"/>
+
+    <!--视图解析器-->
+    <!--InternalResourceViewResolver视图解析器，默认最后使用此视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--tiles框架-->
+    <!--tiles视图解析器，InternalResourceViewResolver是UrlBasedViewResolver的子类，第一顺位-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+    <!--tiles配置文件-->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--aop-->
+    <!--统计controller层请求执行时间-->
+    <aop:config>
+        <!--定义切点-->
+        <aop:pointcut expression="execution(* com.ptt.controller.*.*(..))" id="controllerPointcut"/>
+        <!--定义切面-->
+        <aop:aspect id="controllerAdvice" ref="controllerAdvice">
+            <!--前置增强，输出执行请求的起始时间-->
+            <aop:before method="before" pointcut-ref="controllerPointcut"/>
+            <!--后置增强，输出执行请求的结束时间已经所用时间-->
+            <aop:after method="after" pointcut-ref="controllerPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--user校验器-->
+    <!--错误信息文件-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!--文件编码-->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!--如果有多个配置文件的话，可以为每一个配置文件单独指定编码-->
+        <property name="fileEncodings">
+            <props>
+                <prop key="classpath:userValidationMessage">UTF-8</prop>
+            </props>
+        </property>
+        <!--缓存时间180s-->
+        <property name="cacheSeconds" value="180"/>
+        <!--文件位置，格式默认为properties-->
+        <property name="basenames">
+            <list>
+                <value>classpath:userValidationMessage</value>
+            </list>
+        </property>
+    </bean>
+    <!--配置校验器-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!--注入校验器类，使用的是Hibernate校验器-->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!--注入错误信息文件-->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:session.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <!--登录拦截器-->
+        <mvc:interceptor>
+            <!--此拦截器拦截所有请求-->
+            <mvc:mapping path="/it/u/*"/>
+            <bean class="com.ptt.interceptor.UserInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--json-->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="order" value="1"/>
+        <property name="defaultViews">
+            <list>
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,43 @@
+    <div class="panel-body" ng-repeat="item in articleList">
+        <div class="panel-heading" >
+            <div  ng-click="goo($index)">{{item.title}}{{info}}{{info1}}</div>
+        </div>
+        <div  ng-show="infoShowIndex===$index" >
+            <div ng-click="go($index)" class="bos" ng-class="{'box':info,'box1':info1}">
+                <div style="margin-left:20%">{{item.two.title}}</div>
+            </div>
+            <div  ng-show="ShowIndex===$index" class="bos">
+                <div style="margin-left:40%">{{item.two.three.title}}</div>
+            </div>
+        </div>
+    </div>
+<style>
+    div{
+        line-height: 50px;
+    }
+.panel-body{
+    width: 30%;
+    text-align: center;
+    color: #fff;
+    background: black;
+    opacity: .8;
+}
+.bos:hover{
+    background: aqua;
+}
+    .box{
+        background: yellow;
+        color: black;
+    }
+    .box1{
+        background: black;
+        color: #fff;
+    }
+.boxs{
+    color: aqua;
+}
+</style>
+
+
+
+

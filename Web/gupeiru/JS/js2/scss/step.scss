@@ -1,0 +1,120 @@
+@import "../../common/all";
+@import "mystyle";
+body {
+    background: $grey-f0;
+}
+
+// 顶部按钮
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @extend %head;
+    border-bottom: 1px solid $grey-f0;
+    .arrow {
+        @include arrow(.16rem, .16rem, .03rem, #fff, 225deg);
+        margin-left: .2rem;
+        cursor: pointer;
+    }
+    .close {
+        margin-right: .2rem;
+        font-size: .28rem;
+    }
+    .title {
+        font-size: .2rem;
+    }
+}
+
+#position {
+    @extend %position;
+    z-index: 1;
+}
+
+main {
+    margin: .7rem 0;
+    padding: 0 2%;
+    text-align: center;
+}
+
+.days {
+    line-height: .4rem;
+    color: $blue-24;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.clear {
+    margin-bottom: .1rem;
+}
+
+.word-kill,
+.word-vote {
+    line-height: .1rem;
+    text-align: left;
+}
+
+.step {
+    position: relative;
+    margin-top: .1rem;
+    padding: .2rem .26rem .2rem;
+    background: #fff;
+    border: .01rem solid #ccc;
+    &::before {
+        position: absolute;
+        top: -.18rem;
+        margin-left: -.13rem;
+        content: "";
+        @include triangle( .2rem, .15rem, #fff);
+        transform: rotate(180deg);
+    }
+    ul {
+        border-left: .02rem solid #ccc;
+        padding-left: .45rem;
+        .style {
+            position: relative;
+            width: 100%;
+            margin: .15rem 0;
+            line-height: .35rem;
+            color: #fff;
+            background: $blue-24;
+            .triangle {
+                position: absolute;
+                top: .075rem;
+                left: -.2rem;
+                @include triangle( .2rem, .1rem, $blue-24);
+                transform: rotate(90deg);
+            }
+        }
+        .word-kill,
+        .word-vote {
+            font-size: .13rem;
+        }
+    }
+    .moon::after {
+        position: absolute;
+        top: 0;
+        left: -.6rem;
+        @include circle(.3rem, .3rem, #fff);
+        background: url(../image/moon.png) 50% 50%/55% no-repeat #fff;
+        border: 1px solid #ccc;
+    }
+    .sun::after {
+        position: absolute;
+        top: .02rem;
+        left: -.6rem;
+        @include circle(.3rem, .3rem, #fff);
+        background: url(../image/sun.png) 50% 50%/70% no-repeat #fff;
+        border: 1px solid #ccc;
+    }
+}
+
+footer {
+    //底部按钮
+    @extend %foot;
+    background: rgba(41, 189, 224, 0.5); //背景半透明
+    #over,
+    #log {
+        @extend %button;
+        background-color: #fbb435;
+    }
+}

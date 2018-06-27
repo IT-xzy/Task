@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 ，下面的项目继承此主布局-->
+    <definition name="layout" template="/WEB-INF/views/mainLayout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+        <!--注意这个body就是我们需要复用的部分，所以设置为空-->
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer1" value="/WEB-INF/views/footer1.jsp" />
+    </definition>
+    <!-- 主布局 -->
+    <!-- 项目1 ,主页，继承主布局，插入单独的body-->
+    <definition name="page01" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/homepage.jsp" />
+    </definition>
+
+    <!--项目2,职业页面-->
+    <definition name="page02" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/profession.jsp" />
+    </definition>
+
+    <!--项目3，推荐页面-->
+    <definition name="page03" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/recommend.jsp" />
+    </definition>
+
+    <!--项目4，修改密码-->
+    <definition name="page04" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/password.jsp" />
+    </definition>
+
+    <!--项目5，注册账号-->
+    <definition name="page05" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/register.jsp" />
+    </definition>
+    <!--项目6，加入内门-->
+    <definition name="page06" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/join.jsp" />
+    </definition>
+    <!--项目7，个人信息-->
+    <definition name="page07" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/info.jsp" />
+    </definition>
+    <!--项目8，绑定手机-->
+    <definition name="page08" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/telephone.jsp" />
+    </definition>
+    <!--项目9，验证验证码-->
+    <definition name="page09" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/verifycode.jsp" />
+    </definition>
+    <!--项目10，绑定邮箱-->
+    <definition name="page10" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/email.jsp" />
+    </definition>
+    <!--项目11，上传头像-->
+    <definition name="page11" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/views/image.jsp" />
+    </definition>
+</tiles-definitions>

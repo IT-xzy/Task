@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+			            http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+			      
+	 <!-- mybatis:scan会扫描org.fkit.dao包里的所有接口当作Spring的bean配置，之后可以进行依赖注入-->
+    <!--mybatis:scan base-package="org.jnshuDB.dao"/-->
+
+	 <!-- 扫描org.fkit包下面的java文件，有Spring的相关注解的类，则把这些类注册为Spring的bean -->
+    <context:component-scan base-package="org.jnshuDB"/>
+
+	<!--&lt;!&ndash; 使用PropertyOverrideConfigurer后处理器加载数据源参数 &ndash;&gt;-->
+	<!--<context:property-override location="classpath:db.properties"/>-->
+
+	<!-- 配置c3p0数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/student?serverTimezone=UTC"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="950508"></property>
+	</bean>
+
+	<!-- 配置SqlSessionFactory，org.mybatis.spring.SqlSessionFactoryBean是Mybatis社区开发用于整合Spring的bean -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!--注入数据库连接池-->
+	<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:Mapper.xml"/>
+</bean>
+	<!-- JDBC事务管理器 -->
+	<bean id="transactionManager"
+	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		 p:dataSource-ref="dataSource"/>
+
+	<!-- 启用支持annotation注解方式事务管理 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!--配置mapper接口包,动态实现mapper接口,注入到Spring容器-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--注入sqlSessionFactory,请注意不要使用sqlSessionFactoryBean,否则会出现注入异常-->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+		<!--给出要扫描的mapper接口-->
+		<property name="basePackage" value="org.jnshuDB.dao"/>
+	</bean>
+</beans>

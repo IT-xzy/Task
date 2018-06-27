@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- settings中的logImpl属性配置指定使用LOG4J2输出日志-->
+    <settings>
+        <setting name="logImpl" value="LOG4J2"/>
+    </settings>
+
+    <typeAliases>
+        <package name="tk.mybatis.simple.model"/>
+    </typeAliases>
+
+    <!-- 引入外部配置文件 -->
+    <!--properties resource="mysql.properties"></properties>
+
+    配置mybatis运行环境 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- type="JDBC" 代表使用JDBC的提交和回滚来管理事务 -->
+            <transactionManager type="JDBC">
+                <property name="" value=""/>
+            </transactionManager>
+
+            <!-- mybatis提供了3种数据源类型，分别是：POOLED,UNPOOLED,JNDI -->
+            <!-- POOLED 表示支持JDBC数据源连接池 -->
+            <!-- UNPOOLED 表示不支持数据源连接池 -->
+            <!-- JNDI 表示支持外部数据源连接池 -->
+            <dataSource type="UNPOOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/stu_info?useUnicode=true&amp;
+                characterEncoding=UTF8&amp;useSSL=false&amp;serverTimezone=Hongkong"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="cc/myhome/mybatis/mapper/Network1Mapper.xml"/>
+    </mappers>
+
+
+</configuration>

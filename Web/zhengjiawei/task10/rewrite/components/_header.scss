@@ -1,0 +1,39 @@
+@import '../helpers/mixin';
+$white:#fff;
+$blue:#1D7AD9;
+header {
+    background: $blue;
+}
+//页眉
+
+.header {
+    @include d-vertical-center;
+    @media (max-width: 576px) {
+        justify-content: flex-end;
+    }
+    div:nth-child(1) {
+        font-size: 14px;
+        color: $white;
+        @media (max-width: 576px) {
+            display: none;
+            width: 0;
+        }
+    }//左边
+    div:nth-child(2) {
+        @include d-right-alignment;
+        button:nth-child(2) {
+            border-right: 1px solid $white;
+        }
+        button {
+            cursor: pointer;
+            padding: 11.5px 15px;
+            background: $blue;
+            color: $white;
+            border-left: 1px solid $white ;
+        }
+        button:hover {
+            background: $white;
+            color: #333;
+        }
+    }//右边
+}

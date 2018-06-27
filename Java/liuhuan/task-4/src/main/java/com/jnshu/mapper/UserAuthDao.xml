@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.UserAuthDao">
+    <select id="userAuth" parameterType="userAuth" resultType="java.lang.Boolean">
+        SELECT COUNT(*) FROM tb_userauth WHERE au_username = #{au_username} AND au_password = #{au_password}
+    </select>
+    <select id="findUserAuthbyName" parameterType="String" resultType="userAuth">
+        SELECT * FROM tb_userauth WHERE au_username = #{au_username}
+    </select>
+    <select id="findUserAuthByid" resultType="java.lang.Boolean" parameterType="Integer">
+        SELECT COUNT(*) FROM tb_userauth WHERE id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,104 @@
+nav {
+    .nav {
+        align-items: center;
+        background: $green-29;
+        .nav-bar {
+            line-height: .7rem;
+        }
+        .toogle {
+            //导航按钮
+            position: absolute;
+            right: .15rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: none;
+            background-color: $green-47;
+            padding: .06rem;
+            border-radius: .04rem;
+            & :nth-child(n+2) {
+                margin-top: .06rem;
+            }
+            .icon-bar {
+                display: block;
+                width: .18rem;
+                height: .02rem;
+                border-radius: .02rem;
+                background: #33976d;
+            }
+        }
+        input {
+            //复选框，隐藏
+            display: none;
+            &:checked+.col-sm-6 label {
+                background: #218d60;
+                .icon-bar {
+                    background: #185c40;
+                }
+            }
+            &:checked~.col-sm {
+                //点击按钮列表弹出
+                height: 1.2rem;
+            }
+        }
+        .logo {
+            //左侧logo
+            width: 1.45rem;
+            height: .3rem;
+        }
+        .nav-list {
+            //导航栏
+            display: flex;
+            justify-content: flex-end;
+            padding: 0;
+            transition: height 1s;
+            li {
+                a {
+                    //链接字体颜色白色
+                    color: $white;
+                }
+                @media (min-width:577px) {
+                    //578px上列表hover出现底部白色边框
+                    &:hover {
+                        border-bottom: .02rem solid $white;
+                    }
+                    width: .6rem;
+                    border-bottom: .02rem solid transparent;
+                    text-align: center;
+                }
+            }
+        }
+        @media (min-width:577px) {
+            line-height: .7rem;
+        }
+        @media (max-width: 577px) {
+            //577px下导航变按钮响应式
+            .nav-bar {
+                line-height: .5rem;
+            }
+            .toogle {
+                display: block;
+            }
+            .nav-list {
+                //577px下列表消失，高度为0
+                flex-direction: column;
+                height: 0;
+                text-align: center;
+                overflow: hidden;
+                li {
+                    margin: 0;
+                    &:hover a {
+                        //列表hover链接字体变黑
+                        color: #333;
+                        background: rgba(255,255,255,.5);
+                    }
+                    a {
+                        display: inline-block;
+                        width: 100%;
+                        height: 100%;
+                        line-height: .29rem;
+                    }
+                }
+            }
+        }
+    }
+}

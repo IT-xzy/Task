@@ -1,0 +1,128 @@
+@import "_global";
+
+body {background: $col-1;overflow: hidden;}
+
+input[type=checkbox]:checked ~ aside {transform: translateX(0);transition: 0.2s ease-out;}
+input[type=checkbox]:checked + label {margin-top:.05rem ;transform: translateX(75vw);z-index: 9999;transition: 0.2s ease-out;}
+input[type=checkbox]:checked ~ header {transform: translateX(75vw);transition: 0.2s ease-out;}
+input[type=checkbox]:checked ~ nav {transform: translateX(75vw);transition: 0.2s ease-out;}
+input[type=checkbox]:checked ~ main {transform: translateX(75vw);transition: 0.2s ease-out;}
+
+label {
+    position: absolute;
+    top:.05rem ;
+    z-index: 9999;
+}
+
+input {
+    position: absolute;
+    opacity: 0;    
+}
+
+aside {
+    position: absolute;
+    height: 100%;
+    width: 75vw;
+    background: #ffffff;
+    box-shadow: 0 0 25px #9a9a9a;
+    z-index: 1;
+    transform: translateX(-75vw);
+    transition: 0.2s ease-out;
+
+    >ul {
+        line-height: .40rem;
+        font-size: .15rem;
+
+        >li {
+            display: flex;
+            justify-content: space-around;
+            align-content: center;
+            border-bottom: 1px $col-1 solid;
+            &:hover {background: #69d1e9;color: #ffffff;}
+        }
+    }
+}
+
+// 页眉模块
+header {
+    height: .40rem;
+    background: $col-2;
+}
+
+// 导航模块
+nav {
+    margin: .12rem .18rem;
+    border: 1px #c9c9c9 solid;
+    height: .60rem;
+    background: #ffffff;
+    white-space:nowrap; 
+    text-align: center;
+    transition: 0.2s ease-out;
+
+    span {
+        font-size: .16rem;
+        color: #9a9a9a;
+        line-height: .60rem;
+    }
+
+    img {
+        float: right;
+        position: relative;
+        top: .10rem;
+        right: .10rem;
+    }
+}
+// 主体内容
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 4rem;
+    margin: .12rem .18rem;
+    border: 1px #c9c9c9 solid;
+    color: #9a9a9a;
+    background: #ffffff;
+    transition: 0.2s ease-out;
+    // 向右三角形模块
+    >div {
+        position: absolute;
+        top: 3.05rem;
+        right: calc(5% - 12px);
+        position: absolute;
+        border-style: solid;
+        border-width: 20px;
+        border-color: transparent transparent transparent $col-3;
+    }
+    // 文字模块：捉鬼游戏
+    p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: .40rem;
+        margin: 0;
+        border-bottom: 1px solid $col-3;
+        font-size: .18rem;
+        color: $col-3;
+    }
+    // 版本选择模块
+    a {
+        margin: .12rem 0;
+        border: 0;
+        height: .70rem;
+        width: 80%;
+        text-align: center;
+        font-size: .15rem;
+        color: #ffffff;
+        background: #69d1e9;
+      
+        >span {line-height: .70rem;}
+    }
+    // 滚动圆点模块
+    span {transform: scale(2);span {color: $col-2}}
+}
+
+
+
+
+

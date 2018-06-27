@@ -1,0 +1,122 @@
+@import "../_mixin.scss";
+@import "../_style.scss";
+body{
+    background: $nav-blue;
+}
+header{
+    @include flex-alignCenter;
+    height: $header-height;
+    padding: 0 .2rem 0 .2rem;
+    border-bottom: 1px solid #fff;
+    font-size: .5rem;
+    color: #fff;
+    .arrows{
+       
+        width: .3rem;
+        height: .3rem;
+        border: {
+            top: 2px solid #fff;
+            left: 2px solid #fff;
+        }
+        transform: rotate(-45deg);
+    }
+    >span{
+        text-align: center;
+        flex: 1 0 80%;
+    }
+    .esc{
+        
+        width: .3rem;
+        height: .5rem;
+        &::before{
+            display: inline-block;
+            content: "";
+            width: 3px;
+            height: .5rem;
+            background: #fff;
+            transform: rotate(-45deg);
+           
+        }
+        &::after{
+            display: inline-block;
+            content: "";
+            margin-left: -1.5px;
+            width: 3px;
+            height: .5rem;
+            background: #fff;
+            transform: rotate(45deg);
+           
+        }
+        
+    }
+}
+main{
+    position: relative;
+    .circle{
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+       width: .6rem;
+       height: .6rem;
+       margin-top: -0.3rem;
+        margin-left: -0.3rem;
+       font-size: .3rem;
+       text-align: center;
+       line-height: .6rem;
+       border: 1px solid #ffedc5;
+       border-radius: 50%;
+       background: #fff;
+       color: red;
+    }
+    .front{
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        margin-left: -2.5rem;
+        width: 5rem;
+        height: 8rem;
+        font-size: .5rem;
+        color: blue;
+        border: 2px solid #fff;
+        background: #ffedc5;
+        .logo{
+            display: block;
+            width: 50%;
+            margin: 20% auto;
+            margin-bottom: .5rem;
+        }
+        p{
+            text-align: center;
+        }
+        
+    }
+    .back{
+      
+        position: absolute;
+        top: 1rem;
+        left: 50%;
+        margin-left: -2.5rem;
+        width: 5rem;
+        height: 8rem;
+        border: 2px solid #fff;
+    }
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 .5rem .5rem .5rem;
+    font-size: .5rem;
+    color: #fff;
+    text-align: center;
+    line-height: 1rem;
+   background: $nav-blue;
+    box-sizing: border-box;
+    p{
+         background: orange;
+    }
+
+}

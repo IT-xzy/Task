@@ -1,0 +1,36 @@
+<div  class="outsideForm">
+    <form name="form" class="form">
+        <div class="logo">
+            <img src="img/login-logo.png" alt="">
+        </div>
+        <div class="inputBox">
+            <label id="up" for="name" >
+                <img src="img/user.png" alt="">
+                <input id="name" name="uname" placeholder="账号" ng-minlength="3" ng-maxlength="8" ng-model="username" type="text" required>
+            </label>
+            <label id="down" for="pwd" >
+                <img src="img/pwd.png" alt="">
+                <input id="pwd" name="pwd" placeholder="密码" ng-minlength="6" ng-maxlength="20" ng-model="password" type="password" required>
+            </label>
+        </div>
+        <div id="loginMsg"   ng-model="loginMsg" >
+            {{loginMsg}}
+            <!--ng-messages="form.uname.$error"-->
+            <!--<div ng-message="required">用户名不能为空</div>-->
+            <!--<div ng-message="minlength">用户名长度不能小于5</div>-->
+            <!--<div ng-message="maxlength">用户名长度不能超过8</div>-->
+        </div>
+        <!--<div ng-messages="form.uname.$error" style="color: red" ng-messages-include="usernameErrors.html"></div>-->
+        <div ng-messages="form.uname.$error" style="color: red">
+            <div ng-message="required">用户名不能为空</div>
+            <div ng-message="minlength">用户名长度不能小于3</div>
+            <div ng-message="maxlength">用户名长度不能超过8</div>
+        </div>
+        <div ng-messages="form.pwd.$error" style="color: red">
+            <div ng-message="required">密码不能为空</div>
+            <div ng-message="minlength">密码长度不能小于6</div>
+            <div ng-message="maxlength">密码长度不能超过20</div>
+        </div>
+        <button class="loginBtn" id="btn"  type="submit" ng-click="login()">登陆</button>
+    </form>
+</div>
