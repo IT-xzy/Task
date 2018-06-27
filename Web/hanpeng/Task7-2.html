@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.js"></script>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./css/clearStyle.css">
+    <link rel="stylesheet" href="./css/Task7-2.css">
+	<title>投票(v-1.0)</title>
+</head>
+<body>
+	<header class="navbar navbar-default navbar-fixed-top clear-margin">
+		<button type="button" class="info clear-btn"></button>
+		<p class="clear-margin">投票</p>
+		<button type="button" class="shut clear-btn"></button>
+	</header>
+	<div class="main">
+		<div class="prompt">
+			<p class="clear-margin">发言讨论结束，大家请投票</p>
+			<button class="play clear-btn" onclick="playPause()"></button>
+			<audio id="audio1" src="./music/财富自由.mp3" type="audio/mpeg" >
+			</audio>
+			<div class="triangle"></div>
+		</div>
+		<div class="tip"><p class="clear-margin">点击得票数最多人的头像</p></div>
+		<div class="wrapper">
+			<div class="content">
+				<div class="row1">
+					<div class="player">
+						<div class="identity">
+							<div class="rank">水民</div>
+							<div class="num">1号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">水民</div>
+							<div class="num">2号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">警察</div>
+							<div class="num">3号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+				</div>
+				<div class="row1">
+					<div class="player">
+						<div class="identity">
+							<div class="rank">法官</div>
+							<div class="num">4号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">狙击手</div>
+							<div class="num">5号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">医生</div>
+							<div class="num">6号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+				</div>
+				<div class="row1">
+					<div class="player">
+						<div class="identity">
+							<div class="rank">杀手</div>
+							<div class="num">7号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">水民</div>
+							<div class="num">8号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">水民</div>
+							<div class="num">9号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+				</div>
+				<div class="row1">
+					<div class="player">
+						<div class="identity">
+							<div class="rank">杀手</div>
+							<div class="num">10号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">警察</div>
+							<div class="num">11号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+					<div class="player">
+						<div class="identity">
+							<div class="rank">杀手</div>
+							<div class="num">12号</div>
+						</div>
+						<div class="select">
+							<button class="kill"></button>
+							<button class="look"></button>
+							<button class="aim"></button>
+							<button class="save"></button>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<footer class="navbar navbar-default navbar-fixed-bottom">
+		<a href="./Task7-3.html">
+			<button type="button" class="vote btn btn-lg btn-warning">投死</button>
+		</a>
+	</footer>
+	<script>
+		var myAudio = document.getElementById("audio1");
+		function playPause (){
+			if(myAudio.paused){
+				myAudio.play();
+			}else{
+				myAudio.pause();
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+@charset "utf-8";
+@import "reset";
+@import "header";
+@import "footer";
+@import "nav";
+@import "carousel";
+$white: #fff;
+$gray: #909090;
+$black: #000;
+$f-size: 1.4rem;
+$type: screen;
+%Horizontally-center {
+  text-align: center;
+}
+%container-padding {
+  padding: 0 5vw;
+}
+@mixin line($c) {
+  border-bottom: .1rem solid $c;
+}
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin bgc($bg,$c) {
+  background-color: $bg;
+  color: $c;
+}
+@mixin shape($w,$h) {
+  width: $w;
+  height: $h;
+}
+@mixin flex-wrap {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+@mixin box-shadow($x,$y,$m,$c) {
+  box-shadow: $x $y $m $c;
+}
+.main-bg {
+  background-color: #fafafa;
+  input[type="radio"] {
+    display: none;
+  }
+}
+//第一个页面广告
+.container {
+  @extend %container-padding;
+}
+.advertisement {
+  display: flex;
+  flex: 1;
+  margin: 5rem 5vw;
+  font-size: $f-size;
+  @media #{$type} and (max-width: 992px){
+    flex-wrap: wrap;
+  }
+  @media #{$type} and (max-width: 768px) {
+     display: block;
+    text-align: center;
+  }
+}
+.text-center {
+  width: 25%;
+  @extend %Horizontally-center;
+  padding: 0 1.5rem;
+  @media #{$type} and (max-width: 992px){
+    padding: 3rem 0 0 0;
+    text-align: center;
+    width: 50%;
+    border: 0;
+  }
+  @media #{$type} and (max-width: 768px) {
+    width: 100%;
+  }
+}
+.content {
+  text-align: left;
+  display: inline-block;
+  color: #909090;
+}
+.top {
+  margin-top: 9rem;
+}
+.last {
+  width: 25%;
+  padding-top: 2rem;
+  padding-left: 5rem;
+  border-left: 1px dashed #dedede;
+  @media #{$type} and (max-width: 992px){
+    padding: 3rem 0 0 0;
+    text-align: center;
+    width: 50%;
+    border: 0;
+  }
+  @media #{$type} and (max-width: 768px) {
+    width: 100%;
+  }
+}
+//how to study
+.study {
+  font-size: $f-size;
+  img {
+    @include shape(1.6rem,1.6rem);
+  }
+  h3 {
+    @extend %Horizontally-center;
+  }
+}
+.study-content {
+  @include flex-wrap;
+}
+.study-set {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2%;
+  color: $gray;
+}
+.study-number {
+  @extend %Horizontally-center;
+  line-height: 4.5rem;
+  border: .1rem solid $white;
+  @include box-shadow(.2rem,.2rem,.2rem,$gray);
+  border-radius: 50%;
+  @include bgc($white,#29b078);
+  @include shape(4.5rem,4.5rem);
+}
+.study-text {
+  margin: 0;
+}
+.obscure {
+  visibility: hidden;
+}
+@media #{$type} and (max-width: 992px) {
+  .obscure {
+    visibility: visible;
+  }
+}
+
+//自己写的栅格三段式
+.col-4 {
+  width: 20%;
+  margin: 2.5%;
+}
+.col-5 {
+  width: 20%;
+}
+.hidden {
+  display: none;
+  @media #{$type} and (max-width: 992px) {
+    display: block;
+    background-color: $white;
+    @include box-shadow(.2rem,.2rem,.2rem,$gray)
+  }
+  @media #{$type} and (max-width: 768px) {
+    display: none;
+  }
+}
+@media #{$type} and (max-width: 1200px) {
+  .col-lg-2 {
+    width: 42%;
+    margin: 0 4%;
+  }
+}
+@media #{$type} and (max-width: 992px) {
+  .col-2 {
+    width: 30%;
+  }
+}
+
+@media #{$type} and (max-width: 768px) {
+  .col-1 {
+    width: 50%;
+    margin: 0 25%;
+  }
+}
+//display模块
+.display {
+  font-size: $f-size;
+  h3 {
+    @extend %Horizontally-center;
+  }
+}
+.display-content {
+  @include flex-wrap;
+}
+.pic {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.pic img {
+  @include shape(8rem,8rem);
+  display: block;
+  border-radius: 50%;
+}
+.text-color {
+  color: $gray;;
+}
+.excellent {
+  @include box-shadow(.2rem,.2rem,.2rem,$gray);
+  background-color: $white;
+}
+.page {
+  @include flex-center;
+  margin: 2rem 0;
+}
+.circular {
+  @include shape(1rem,1rem);
+  border-radius: 50%;
+  margin: 0 .5rem;
+  background-color: $white;
+}
+.line4-set{
+  @include flex-center;
+  background-color: $white;
+  @include box-shadow(.2rem,.2rem,.2rem,$gray);
+}
+//companies模块
+.companies {
+  font-size: $f-size;
+  h3 {
+    @extend %Horizontally-center;
+  }
+}
+.companies-content {
+  @include flex-wrap;
+  font-size: 0;
+}
+.logo-company {
+  @include flex-center;
+  background-color: $white;
+  @include box-shadow(.2rem,.2rem,.2rem,$gray);
+}
+//list模块
+.list {
+  background-color: $white;
+  margin: 10rem -5vw 0;
+  font-size: $f-size;
+  h3 {
+    @extend %Horizontally-center;
+  }
+}
+.list-set {
+  display: flex;
+  flex-wrap: wrap;
+}
+.list-set ul {
+  @include flex-wrap;
+  color: #999;
+  padding: 0;
+  width: 20%;
+  white-space: nowrap;
+  a {
+      color: #999;
+      text-decoration: none;
+  }
+}
+/*第二个页面*/
+.main-page2 {
+  font-size: 1.5rem;
+  padding-bottom: 10rem;
+}
+.banner img {
+  display: block;
+  width: 100%;
+}
+.contain {
+  @extend %container-padding;
+  a {
+    color: $black;
+  }
+  h4 {
+    @extend %container-padding;
+  }
+}
+.contain-list {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  @media #{$type} and (max-width: 992px){
+    display: block;
+  }
+}
+//左侧列表
+.list-left {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include box-shadow(.2rem,.2rem,.2rem,$gray);
+  background-color: $white;
+}
+.ul-left {
+  list-style: circle;
+  color: #ff640c;
+  padding: 0;
+  li{
+    padding: 1.5rem 0;
+    &:hover {
+      list-style: disc;
+    }
+    &:nth-child(3) {
+      list-style: disc;
+    }
+    a {
+      font-weight: 600;
+      &:hover {
+        color: #ff8a49;
+      }
+    }
+  }
+}
+.checked {
+  color: #ff8a49;
+}
+//右侧列表
+.list-right {
+  width: 60%;
+  @include bgc($white,$gray);
+  @include box-shadow(.2rem,.2rem,.2rem,$gray);
+  &>p{
+    padding: 2rem 3rem;
+    text-indent: 3rem;
+  }
+}
+.tudou {
+  display: flex;
+  @include line(#e6e6e6);
+  img {
+    display: inline-block;
+    @include shape(40%,100%);
+  }
+}
+.tudou-introduction {
+  text-indent: 2rem;
+  padding: 3rem;
+  flex: 1;
+}
+@media #{$type} and (max-width: 992px){
+  .list-left,
+  .list-right {
+    margin-top: 5rem;
+    width: 100%;
+  }
+}
+//第三个页面
+.topic {
+  padding: 3rem;
+  margin: 0;
+  @include line(#e2e2e2);
+}
+.main-page3 {
+  font-size: 1.5rem;
+  padding-bottom: 10rem;
+  a {
+    color: $black ;
+  }
+}
+.job-set {
+  display: flex;
+  flex-wrap: wrap;
+}
+.job {
+  position: relative;
+  width: 31%;
+  margin: 1%;
+  background-color: $white;
+  border: 1px solid #e2e2e2;
+  @media #{$type} and (max-width: 1200px){
+      width: 45%;
+      margin: 3rem 2%;
+  }
+}
+.job-img {
+  display: inline-block;
+  float: left;
+  padding: 1rem ;
+}
+.job-text {
+  margin-left: 15.9rem;
+}
+.job-head {
+  overflow: hidden;
+  padding: 0 1.5rem;
+  @include line(#e2e2e2);
+}
+.grid {
+  display: grid;
+  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-columns: 50% 50%;
+}
+.grid>div
+{
+  color: #a9a9bb;
+  border-bottom: 1px solid #e2e2e2;
+  border-left: 1px solid #e2e2e2;
+  padding: 0 1.5rem;
+}
+.item1,
+.item3,
+.item5 {
+  border-left: none!important;
+}
+
+.item5 {
+  grid-row-start: 3;
+  grid-row-end: 6;
+  @include flex-center;
+  color: #a9a9bb;
+}
+.item6,
+.item7,
+.item8
+{
+  display: flex;
+  justify-content: space-between;
+}
+.job>p {
+  margin: 0;
+  padding: 0 1.5rem;
+}
+.job-p {
+  @include line(#e2e2e2);
+}
+.announcement {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.5);
+  padding: 5rem 3rem;
+  color: $white;
+  opacity: 0;
+}
+.job:hover .announcement {
+  -webkit-animation: coming linear 5s infinite;
+}
+@keyframes coming {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: .5;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  95% {
+    opacity: .5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media #{$type} and (max-width: 900px){
+  .job-set {
+    justify-content: space-around;
+  }
+  .job {
+    width: 60%;
+    margin: 3rem 0;
+  }
+}
+.title{
+  padding: 3rem;
+  @include line(#d0d6d9);
+}
+.now {
+  @include bgc($white,#29b078);
+}
+.job-title {
+  padding: 3rem;
+  color: $black;
+  font-weight: 600;
+  @include line(#d0d6d9);
+}
