@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        ul {
+            list-style: none;
+        }
+        a {
+            text-decoration: none;
+            /*color: #3B3B3B;*/
+        }
+        .box {
+            width: 300px;
+            height: 50px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+            line-height: 50px;
+            font-size: 18px;
+        }
+        .box:hover {
+            overflow: visible;
+        }
+        .box::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+            position: absolute;
+            right: 10px;
+            top: 40%;
+        //动画过渡: 需要过渡的属性.过渡的持续时间 (单位可以是s 和 ms)
+        transition: all 0.1s;
+        //旋转动画
+        transform: rotate(45deg);
+        }
+        .box:hover::after {
+            transform: rotate(225deg);
+        }
+        .hide {
+            width: 300px;
+            height: 500px;
+            border: 1px solid #000;
+            margin-left: -1px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    &nbsp;游船出租
+    <div class="hide">
+        <ul>
+            <li><a href="#">皇家壹号</a></li>
+            <li><a href="#">皇家壹号</a></li>
+            <li><a href="#">皇家壹号</a></li>
+            <li><a href="#">皇家壹号</a></li>
+            <li><a href="#">皇家壹号</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
