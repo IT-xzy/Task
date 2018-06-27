@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        width: 200px;
+        height: 200px;
+        padding: 20px;
+    }
+
+    .one,
+    .two,
+    .three,
+    .four {
+        position: absolute;
+    }
+
+    .one {
+        background: #f00;
+        outline: 5px solid #000;
+        top: 100px;
+        left: 200px;
+        z-index: 10;
+    }
+
+    .two {
+        background: #0f0;
+        outline: 5px solid #000;
+        top: 50px;
+        left: 75px;
+        z-index: 100;
+    }
+
+    .three {
+        background: #0ff;
+        outline: 5px solid #000;
+        top: 125px;
+        left: 25px;
+        z-index: 150;
+    }
+
+    .four {
+        background: #00f;
+        outline: 5px solid #ff0;
+        top: 200px;
+        left: 700px;
+        /* left: 400px; */
+        z-index: 50;
+    }
+
+    span {
+        color: aliceblue;
+    }
+</style>
+
+<body>
+    <div class="one"> 第一个z-index:10
+        <div class="two">第二个z-index:100</div>
+        <div class="three">第一个z-index:150</div>
+    </div>
+    <div class="four">第四个z-index:50</div>
+    <br> 1、当第四个盒子和另外三个在一块后会出现什么情况？
+    <br> 2、把第四个盒子放在另外三个上面能被覆盖吗？
+    <br> 3、怎么做让第四个盒子被覆盖？
+    <span>
+        <br> 1. 对于同级元素，默认(或position:static)情况下文档流后面的元素会覆盖前面的。 2. 对于同级元素，position不为static且z-index存在的情况下z-index大的元素会覆盖z-index小的元素，即z-index越大优先级越高。
+        3. IE6/7下position不为static，且z-index不存在时z-index为0，除此之外的浏览器z-index为auto。 4. z-index为auto的元素不参与层级关系的比较，由向上遍历至此且z-index不为auto的元素来参与比较。</span>
+</body>
+
+</html>

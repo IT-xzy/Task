@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--读取.properties文件-->
+    <properties resource="mysql.properties"/>
+
+    <!--设置别名-->
+    <typeAliases>
+        <typeAlias type="com.hzw.pojo.Student" alias="Student" />
+    </typeAliases>
+
+    <!--环境配置-->
+    <environments default="hzwmybatis">
+        <environment id="hzwmybatis">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--映射。xml文件-->
+    <mappers>
+        <mapper resource="mapper/StudentMapper.xml"/>
+    </mappers>
+</configuration>

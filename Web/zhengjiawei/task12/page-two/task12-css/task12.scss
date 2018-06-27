@@ -1,0 +1,247 @@
+html {
+    font-size: 625%;
+}
+
+body {
+    font-size: .14rem;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    outline: none;
+    border: none;
+    color: none;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .1rem;
+    background-color: #5FC0CD;
+    @mixin button-style {
+        width: .72rem;
+        height: .35rem;
+        font-size: .17rem;
+        font-family: serif;
+        border-radius: .05rem;
+        font-weight: 300;
+    }
+    & :first-child {
+        @include button-style;
+        color: #fff;
+        background-color: #55A8B3;
+    } // 页眉左
+    & :nth-child(2) {
+        margin-left: -.05rem;
+        @include button-style;
+        color: #5FC0CD;
+        background-color: #fff;
+    } // 页眉中
+    & :last-child::before {
+        content: "";
+        position: absolute;
+        right: .35rem;
+        top: .165rem;
+        display: inline-block;
+        background: url(../I/page2.png)no-repeat;
+        width: 21px;
+        height: 22px;
+        background-position: 0 -33px;
+    } // 页眉右
+}
+
+// 页眉
+.nav-style {
+    display: flex;
+    justify-content: space-between;
+    margin-top: .55rem;
+    border-bottom: 1px solid #E1E5E7;
+    &>:nth-child(2) {
+        border-left: 1px solid #E1E5E7;
+        border-right: 1px solid #E1E5E7;
+    }
+} // 包含整个菜单栏的样式
+.navigation {
+    @mixin navigation-style {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: .03rem 0;
+        padding: .1rem 0;
+        color: #999;
+    } // 菜单栏三栏通用样式
+    @include navigation-style;
+    position: relative;
+    width: 100%;
+    span {
+        flex-basis: 80%;
+        text-align: center;
+    } // 导航栏样式
+    &:hover>.menu {
+        display: block;
+    } // 隐藏内容显现
+    & i::after {
+        content: "";
+        display: inline-block;
+        border: .04rem solid transparent;
+        border-top: .06rem solid #AFBAC0;
+        width: 0;
+        height: 0; // 下拉三角形
+    }
+    .menu {
+        position: absolute;
+        display: none;
+        top: .42rem;
+        width: 100%;
+        background: #fff; // 隐藏内容
+        span {
+            display: block;
+            box-shadow: 1px 1px 1px #E1E5E7;
+            padding: .1rem 0; // 显示内容后的样式
+            &:hover {
+                background-color: #5FC0CD;
+                color: #fff;
+            }
+        }
+    }
+}
+
+// 每栏菜单样式
+.main-content-style {
+    display: flex;
+    justify-content: space-between;
+    padding: .05rem .15rem;
+    border-bottom: 1px solid #E1E5E7;
+    span {
+        display: block;
+    }
+    .sheet-left {
+        overflow: hidden;
+        span {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        @mixin font-style {
+            color: #999;
+            font-size: .13rem;
+            margin: .1rem 0;
+        }
+        span:nth-child(1) {
+            @include font-style;
+        } // 表格左第一行字体
+        span:nth-child(1)::before {
+            content: "";
+            margin-right: .07rem;
+            background: url(../I/page2.png)no-repeat;
+            width: 12px;
+            height: 12px;
+            background-position: 0 -113px;
+            display: inline-block;
+        } // 表格左第一行图标
+        span:nth-child(2) {
+            margin-left: .19rem;
+            font-size: .14rem;
+            color: #333;
+        } // 表格左 第二行
+        span:nth-child(3) {
+            @include font-style;
+        } // 表格左第三行
+        span:nth-child(3)::before {
+            content: "";
+            margin-right: .07rem;
+            background: url(../I/page2.png)no-repeat;
+            width: 10px;
+            height: 12px;
+            background-position: 0 0;
+            display: inline-block;
+        } // 表格左第三行图标
+    } // 表格左
+    .sheet-right {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        span {
+            display: flex;
+            align-items: center;
+            color: #E63B0E;
+            font-size: .15rem;
+        } // 表格右字体
+        span::after {
+            content: "";
+            margin-left: .1rem;
+            background: url(../I/page2.png)no-repeat;
+            width: 10px;
+            height: 17px;
+            background-position: 0 -96px;
+            display: inline-block;
+        } // 表格右图标
+    }
+}
+
+.bottom-footer-gap {
+    margin-bottom: .7rem;
+}
+
+// 最后一行表格和页脚的距离，页脚设置了fixed定位
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: .06rem 0;
+    background-color: #F8FAFB; // 页脚样式
+    .footer-left {
+        text-align: center;
+        i:before {
+            content: "";
+            display: inline-block;
+            background: url(../I/page2.png)no-repeat;
+            width: 23px;
+            height: 20px;
+            background-position: 0 -55px;
+        }
+        span {
+            a {
+                color: #5FC0CD;
+                text-decoration: none;
+            }
+        }
+    } // 页脚左边文字和图标
+    .footer-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: .57rem;
+        height: .57rem;
+        border-radius: 50%;
+        background-color: #5FC0CD;
+        i::before {
+            content: '';
+            display: inline-block;
+            background: url(../I/page2.png)no-repeat;
+            width: 20px;
+            height: 21px;
+            background-position: 0 -12px;
+        }
+    } // 页脚中间文字和图标
+    .footer-end {
+        text-align: center;
+        i::before {
+            content: "";
+            display: inline-block;
+            background: url(../I/page2.png) no-repeat;
+            width: 21px;
+            height: 21px;
+            background-position: 0 -75px;
+        }
+    } // 页脚右边文字和图标
+}
