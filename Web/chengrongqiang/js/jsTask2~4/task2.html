@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task7-1</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="./css/首页.css"></link>
+</head>
+
+<body>
+    <!-- 头部部分 -->
+    <header>
+        <div class="return-menu"></div>
+    </header>
+    <main>
+        <!-- 上次游戏 -->
+        <button class="last-game">
+            <span>上次游戏：捉鬼猜词版</span>
+            <a href="#"></a>
+        </button>
+        <div class="container1">
+            <!-- 游戏名称 -->
+            <div class="ghosts-game">
+                捉鬼游戏
+            </div>
+            <!-- 版本选择 -->
+            <div class="version-selection">
+                <button id="version-simple" class="simplify">简化版</button>
+                <div>有1133个用户正在玩此游戏</div>
+                <div class="next-page"></div>
+                <button id="skip" onclick="skippage();" class="guessing">猜词版</button>
+                <div>有1133个用户正在玩此游戏</div>
+                <button class="idiot" onclick="skippage();">白痴版</button>
+                <div>有1133个用户正在玩此游戏</div>
+                <span class="dot">
+                    <i class="first"></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                </span>
+            </div>
+
+        </div>
+    </main>
+    <!-- 页面跳转 -->
+    <script>
+        var game1 = document.getElementById('version-simple');
+        game1.onclick = function() {
+            window.location.href = "./设置页面.html";
+        }
+
+        function skippage() {
+            window.location.href = "./task2投票.html";
+        }           
+    </script>
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="./js/bootstrap.js"></script>
+</body>
+
+</html>
