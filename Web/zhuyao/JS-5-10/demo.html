@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="angular-1.6.9/angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/danialfarid-angular-file-upload/12.2.13/ng-file-upload-shim.min.js"></script>
+    <script src="https://cdn.bootcss.com/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body ng-controller="my">
+<!--<button ng-click="checkStatus()">查看</button>-->
+<!--<input type = "checkbox" ng-model="selectAll" ng-checked="select" ng-click="changeAll()"/>全选/取消全选 <br/>-->
+<!--<table width="50%">-->
+    <!--<thead>-->
+    <!--<tr>-->
+        <!--<th>请选择</th>-->
+        <!--<th>姓名</th>-->
+        <!--<th>生日</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr ng-repeat="obj in list">-->
+        <!--<td>-->
+            <!--<input type = "checkbox" ng-checked="selectAll" ng-click="funcChange()" ng-model="obj.isSelected"/>-->
+        <!--</td>-->
+        <!--<td>{{obj.name}}</td>-->
+        <!--<td>{{obj.birthday}}</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+<!--</table>-->
+
+
+<label for="flag">全选
+    <input id="flag" type="checkbox" ng-model="select_all" ng-change="selectAll()">
+</label>
+<ul>
+    <li ng-repeat="i in list">
+        <input type="checkbox" ng-model="i.checked" ng-click="selectOne()">
+        <span>{{i.id}}</span>
+    </li>
+</ul>
+<script type="text/javascript">
+    var app = angular.module('myApp', []);
+    app.controller('my', function ($scope) {
+//        $scope.list = [
+//            {name:'Golde',birthday:'2000-01-10',isSelected:false},
+//            {name:'King',birthday:'1990-01-10',isSelected:false},
+//            {name:'Mark',birthday:'19890-01-10',isSelected:false},
+//            {name:'Marie',birthday:'2010-01-10',isSelected:false}
+//        ];
+//        $scope.checkStatus = function(){
+//            var str = '';
+//            angular.forEach($scope.list,function(value,key){
+//                if(value.isSelected){
+//                    str += value.name+"被选中了\n";
+//                }
+//            });
+//            if(str === ''){
+//                str = '都未选中';
+//            }
+//            alert(str);
+//        };
+//      对于对象进行操作的时候(点击)，会执行funcChange
+//      判断对象数组中isSelected 是否为 true或false，在决定select是否为true
+//        $scope.changeAll = function(){//全选/取消全选
+//            angular.forEach($scope.list,function(v,k){
+//                v.isSelected = $scope.selectAll;
+//            })
+//        };
+//
+//        $scope.funcChange = function(){// 当所有都选中时
+//            angular.forEach($scope.list,function(v,k){
+//               $scope.select = !v.isSelected
+//            });
+//        };
+        $scope.list = [
+            {'id': 101, checked: false},
+            {'id': 102, checked: false},
+            {'id': 103, checked: false},
+            {'id': 104, checked: false},
+            {'id': 105, checked: false},
+            {'id': 106, checked: false},
+            {'id': 107, checked: false}
+        ];
+        $scope.m = [];
+        $scope.checked = [];
+        $scope.selectAll = function () {
+            if($scope.select_all) {
+                $scope.checked = [];
+                angular.forEach($scope.list, function (i) {
+                    i.checked = true;
+                    $scope.checked.push(i.id);
+                })
+            }else {
+                angular.forEach($scope.list, function (i) {
+                    i.checked = false;
+                    $scope.checked = [];
+                })
+            }
+            console.log($scope.checked);
+        };
+        $scope.selectOne = function () {
+            angular.forEach($scope.list , function (i) {
+                var index = $scope.checked.indexOf(i.id);
+                if(i.checked && index === -1) {
+                    $scope.checked.push(i.id);
+                } else if (!i.checked && index !== -1){
+                    $scope.checked.splice(index, 1);
+                }
+            });
+            if ($scope.checked.length) {
+                $scope.select_all = true;
+            } else {
+                $scope.select_all = false;
+            }
+            console.log($scope.checked);
+        }
+    })
+</script>
+</body>
+
+</html>
