@@ -1,0 +1,13 @@
+<ul class="pagination pull-right" >
+    <li><a ng-disabled="isDisabled(1)" ng-click="goPage(1)">首页</a></li>
+    <li><a ng-if="isHavePrePage()" ng-click="goPage(activePage - 1)"> < </a></li>
+
+    <li ng-repeat="li in pageList track by $index" ng-class="{'active': isActive(li)}">
+        <a ng-disabled="isDisabled(li)" ng-click="goPage(li)"> {{li}} </a>
+    </li>
+
+    <li><a ng-if="isHaveNextPage()" ng-click="goPage(activePage + 1)"> > </a></li>
+    <li><a ng-disabled="isDisabled(total)" ng-click="goPage(total)">末页</a></li>
+
+    <li><a>总计{{total}}页</a></li>
+</ul>

@@ -1,0 +1,117 @@
+@charset "utf-8";
+//less库
+@import "z";
+@import "font-awesome";
+@import "css3";
+//公用的变量
+@import "blmatt";
+html{
+  font-size:625%;
+}
+body{
+  .bgcolor(@main_bgc);
+}
+
+//header
+header{
+  display: flex;
+  width:100%;
+  top:0;
+  left:0;
+  right:0;
+  .abs;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 2.5% 0 2.5%;
+  height:0.7rem;
+  .bgcolor(@main_bgc);
+  .font-s(0.34rem);
+  color:white;
+  span{
+    .dib;
+  }
+  button{
+    width:0.5rem;
+    height:0.5rem;
+    .abs;
+    opacity: 0;
+  }
+}
+//main
+.card {
+  margin-left: 0.1rem;
+  margin-bottom:2rem;
+  .w100;
+  padding-left: 6%;
+  padding-right: 6%;
+  margin-top: 3%;
+  .content {
+    .w100;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    .card1 {
+      height: 25vw;
+      margin-top: 6vw;
+      width: 25vw;
+      .font-s(0.17rem);
+      .tc;
+      &:hover {
+        .wrap {
+          display: flex;
+        }
+      }
+      border: 1vw solid white;
+      .name {
+        height: 70%;
+        .bgcolor(#f5c97b);
+        .font-s(0.17rem);
+        .flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .num {
+        height: 30%;
+        .bgcolor(#83b09a);
+        color: white;
+        .font-s(0.15rem);
+        .flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .wrap {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        height: 8vw;
+        margin-top: 1vw;
+        img {
+          width: 3vw;
+        }
+      }
+    }
+    .red{
+      .name{
+        .bgcolor(red);
+      }
+    }
+    .red1{
+      .name{
+        .bgcolor(red);
+      }
+    }
+  }
+}
+.start{
+  width:91%;
+  height:0.88rem;
+  .bgcolor(#fbb435);
+  color:white;
+  .font-s(0.4rem);
+  border:none;
+  .fix;
+  bottom:0;
+  margin-left:5%;
+}

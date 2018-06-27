@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>层叠上下文的作用</title>
+</head>
+    <style>
+        .div1{
+            width: 500px;
+            height: 500px;
+            /* opacity: .5; */
+            position: relative;
+            background: springgreen;
+            /* z-index: 2; */
+        }
+        .div2 {
+            width: 400px;
+            height: 400px;
+            position: relative;
+            z-index: -1;
+            background: yellow;
+            color: red;
+        }
+    </style>
+<body>
+    <div class="div1">
+        我是块级父元素，虽然我的子级设置了z-index形成了新的层叠上下文，但是它相对是HTML根元素，因为我还是正常文档流中，加上我是块级元素，结合上面的七阶图就知道为什么它被我覆盖了！
+        <div class="div2">
+           <br> 
+           <br> 
+           我是div2
+        </div>
+    </div>
+</body>
+</html>

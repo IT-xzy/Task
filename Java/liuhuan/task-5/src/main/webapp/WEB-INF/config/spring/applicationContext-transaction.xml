@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 事务管理
+         对mybatis操作数据库事务控制,spring使用jdbc的事务控制 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 数据源 在applicationContext-dao.xml中配置了 -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--&lt;!&ndash; 通知 &ndash;&gt;-->
+    <!--&lt;!&ndash; 这是作为公共使用的事务管理器Bean。这个会是事先配置好的，不需各个模块各自去配。 &ndash;&gt;-->
+    <!--&lt;!&ndash; advice（建议）的命名：由于每个模块都会有自己的Advice，所以在命名上需要作出规范，初步的构想就是模块名+Advice（只是一种命名规范）。&ndash;&gt;-->
+    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+        <!--&lt;!&ndash; 下面就开始配置各个模块所必须的部分，在各自的applicationContext-XXX-beans.xml配置的对于事务管理的详细信息。 &ndash;&gt;-->
+        <!--&lt;!&ndash;  tx:attribute标签所配置的是作为事务的方法的命名类型。 &ndash;&gt;-->
+        <!--<tx:attributes>-->
+            <!--&lt;!&ndash; 传播行为 &ndash;&gt;-->
+            <!--&lt;!&ndash; 其中*为通配符，即代表以save为开头的所有方法，即表示符合此命名规则的方法作为一个事务。 &ndash;&gt;-->
+            <!--&lt;!&ndash; REQUIRED：支持当前事务，如果当前没有事务，就新建一个事务。这是最常见的选择。  &ndash;&gt;-->
+            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="delete*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="update*" propagation="REQUIRED"/>-->
+            <!--<tx:method name="insert" propagation="REQUIRED"/>-->
+            <!--&lt;!&ndash; SUPPORTS：支持当前事务，如果当前没有事务，就以非事务方式执行。   &ndash;&gt;-->
+            <!--&lt;!&ndash; read-only="true" 该属性用于设置当前事务是否为只读事务，设置为true表示只读，false则表示可读写，默认值为false。 &ndash;&gt;-->
+            <!--<tx:method name="find*" propagation="SUPPORTS" read-only="true"/>-->
+            <!--<tx:method name="get*" propagation="SUPPORTS" read-only="true"/>-->
+            <!--<tx:method name="select*" propagation="SUPPORTS" read-only="true"/>-->
+            <!--&lt;!&ndash; propagation 其他属性值:&ndash;&gt;-->
+            <!--&lt;!&ndash; MANDATORY：支持当前事务，如果当前没有事务，就抛出异常。-->
+                 <!--REQUIRES_NEW：新建事务，如果当前存在事务，把当前事务挂起。-->
+                 <!--NOT_SUPPORTED：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。-->
+                 <!--NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。-->
+                 <!--NESTED：支持当前事务，如果当前事务存在，则执行一个嵌套事务，如果当前没有事务，就新建一个事务。-->
+                 <!--这个配置将影响数据存储，必须根据情况选择。-->
+            <!--&ndash;&gt;-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
+
+    <!--&lt;!&ndash; aop &ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--<aop:advisor advice-ref="txAdvice" pointcut="execution(* com.jnshu.service.impl.*.*(..))"/>-->
+    <!--</aop:config>-->
+    <!--&lt;!&ndash; aop end&ndash;&gt;-->
+
+</beans>

@@ -1,0 +1,207 @@
+user  nobody nobody;
+#nginx用户及组
+
+worker_processes  2;
+#工作进程：数目 通常是cpu数量或者2倍cpu
+
+error_log  logs/error.log;
+error_log  logs/error.log  notice;
+error_log  logs/error.log  info;
+#错误日志：存放路径
+
+pid        logs/nginx.pid;
+#进程表示符：存放路径
+
+
+worker_rlimit_nofile 32768;
+#指定进程可以打开的最大描述符：数目
+#指当一个nginx打开的最多文件描述符数目，理论值应该是最多打开文件数
+#(ulimit-n)与nginx进程相除，但是nginx分配请求并不是那么均匀，所以最好与ulimit -n 的值保持一致。
+
+
+# events模块中包含nginx中所有处理连接的设置
+events {
+
+# 使用epoll的I/O 模型。linux建议epoll，FreeBSD建议采用kqueue，window下不指定。
+# nginx针对不同的操作系统，有不同的事件模型
+# A）标准事件模型
+# select、poll属于标准时件模型，如果当前系统不更有效的方法，nginx会选择select或poll
+# B）高效事件模型
+# Kqueue、Epoll、/dev/poll
+     use epoll;
+
+#每个工程连接的最大数量。每个进程允许的最多连接数，理论上每台nginx服务器的最大连接数为。worker_processes*worker_connections
+    worker_connections  1024;
+
+
+
+
+}
+
+
+#设定http服务器，利用反向代理提供负载均衡支持
+http {
+
+    ####################################################################################
+    # 基本配置                                                                         #
+    ####################################################################################
+
+    include       mime.types;
+#设定mime类型,类型由mime.type文件定义
+
+    default_type  application/octet-stream;
+    # 如果在mime.types的配置中没有找到响应请求文件的格式，则走default_type
+
+    ####################################################################################
+    # 日志配置                                                                         #
+    ####################################################################################
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                     '"$http_user_agent" "$http_x_forwarded_for" "$request_time" ' ;
+
+    ####################################################################################
+    # http_proxy 设置，client相关配置                                                  #
+    server_names_hash_bucket_size 128;
+    #保存服务器名字的hash表是由指令server_names_hash_max和server_names_hash_bucket_size所控制的。
+    #参数hash bucket size总是等于hash表的大小，并且是一路处理器缓存大小的倍数，
+    #在减少内存中的存取次数后，使处理器加速查找hash表键值成为可能。
+    #如果hash bucket size等于一路处理器缓存的大小，那么在查找键的时候，最坏的情况下在内存中查找的次数为2。
+    #第一次是确定存储单元的地址，第二次是在存储单元中查找键值。
+    #因此，如果Nginx给出需要增大hash max size 或 hash bucket size的提示，那么首要的是增大前一个参数的大小.
+
+    client_header_buffer_size 4k;
+
+    client_max_body_size 10m;
+    #设定通过nginx上传文件大小
+
+    client_header_timeout 60;
+
+    client_body_timeout 60;
+
+    large_client_header_buffers 8 128K;
+    #客户请求头缓冲大小。nginx默认会用client_header_buffer_size这个butter
+    #来读取header值，如果header过大，它会使用large_client_header_buffer读取
+
+    open_file_cache max=102400 inactive=20s;
+    #指定缓存是否启用
+
+
+
+
+    ####################################################################################
+    # 高效文件传输                                                                     #
+    ####################################################################################
+
+    sendfile        on;
+    #nginx是否调用sendfile函数来输出文件，对于普通应用，必须为on
+    #如果用来进行下载等应用磁盘IO负载应用，可设置为off,
+    #平衡磁盘和网络IO处理速度，降低系统uptime
+
+
+    #此选项允许或禁止使用socke的TCP_CORK的选项，此选项仅在使用sendfile的时候生效
+    # TCP_NOPUSH是FreeBSD的一个socket选项，对应Linux的TCP_CORK，Nginx里统一用tcp_nopush来控制它
+    # 启用它之后，数据包会累计到一定大小之后才会发送，减小了额外开销，提高网络效率
+    tcp_nopush     on;
+
+
+    # 长连接的时间限制，http是基于tcp实现的，这个参数用于设置tcp长连接的时间长度
+    # 客户端可以设置http服务要不要走长连接，通过设置请求头Connection=keep-alive实现的，
+    # http1.0默认是关闭的，http1.1默认是打开的
+    # 谷歌浏览器同时最多有6个tcp连接
+    # keepalive_timeout时间不能设置太长，因为太长会长时间占用tcp连接不释放，导致服务器的tcp连接不够用；也不能太短，
+    # 如果太短会导致一些大文件上传接口因为上传一半而中断；
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+
+    ####################################################################################
+    # http_proxy 设置，client相关配置                                                  #
+    ####################################################################################
+
+    proxy_connect_timeout 60;
+    #后端服务器连接的超时时间，发起握手等待相应超时时间
+
+    proxy_send_timeout   75;
+    # 这个指定设置了发送请求给upstream服务器的超时时间。
+
+
+    # Upstream模块下server指令的参数，设置了某一个upstream后端失败了指定次数（max_fails）后，该后端不可操作的时间，默认为10秒
+
+    proxy_read_timeout 75;
+    # 该指令设置与代理服务器的读超时时间。它决定了nginx会等待多长时间来获得请求的响应。
+    # 这个时间不是获得整个response的时间，而是两次reading操作的时间,默认值60s
+
+    proxy_buffer_size 4K;
+    #设置从被代理服务器读取的第一部分应答缓冲区大小，
+    #常情况下这部分应答中包含一个小的应答头，默认情况下这个值的大小为指令proxy_buffers中指定的一个缓冲区的大小，
+    #不过可以将其设置为更小
+
+
+    proxy_buffers 4 32K;
+    # 设置读取应答(来自被代理服务器)的缓冲区数目和大小
+    # 默认情况也为分页大小，根据操作系统的不同可能是4k或者8k
+    # proxy_buffers缓冲区，4个缓存，每个大小限制为32k。
+
+
+    proxy_busy_buffers_size   64k;
+    # 高负荷下缓冲大小（proxy_buffers*2）
+
+
+    proxy_temp_file_write_size  64k; # 默认为1024M
+    # 当proxy_buffers放不下后端服务器的响应内容时，会将一部分保存到硬盘的临时文件中，这个值用来设置最大临时文件大小，默认1024M
+    # 它与proxy_cache没有关系，大于这个值，将从upstream服务器传回。设置为0禁用
+
+
+    proxy_temp_path   /usr/local/nginx/proxy_temp 1 2;
+    # 指定缓存写到那个目录
+
+    ####################################################################################
+    # gzip压缩功能设置                                                                   #
+    ####################################################################################
+    gzip  on;
+
+
+    ##################################################################################
+    # server虚拟主机配置                                                               #
+    ##################################################################################
+    server {
+        listen       80   ;
+        server_name 47.104.228.229;
+
+        root   /server/apps/oaapp;
+
+        charset UTF8;
+        # 设置http头信息的charset编码
+        index index.xml index.html index.jsp;
+
+        #access_log  logs/host.access.log  main;
+
+        location / {
+            root   html;
+            # root和alias都可以用来指定请求资源的真实路径。
+
+            index   index.jsp;
+
+            #被代理服务器IP
+            proxy_pass http://localhost:8080/;
+        }
+
+
+
+     location ~ .*\.(gif|jpg|jpeg|bmp|png|ico|txt|js|css)$
+                {
+                    root /apps/oaapp;
+
+                    expires      1h;
+                    # 对于站点中不经常修改的静态内容（如图片，JS，CSS），
+                    #可以在服务器中设置expires过期时间，控制浏览器缓存，达到有效减小带宽流量，降低服务器压力的目的
+                    break;
+                }
+
+
+
+
+    }
+}
+

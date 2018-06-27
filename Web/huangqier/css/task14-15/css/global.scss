@@ -1,0 +1,228 @@
+@charset "UTF-8";
+
+//重置页面默认样式开始
+* {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 62.5%;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+//重置页面默认样式结束
+
+//提取三个页面都复用很多的样式属性开始
+
+//flex布局
+@mixin middle-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin middle {
+  display: flex;
+  align-items: center;
+}
+
+@mixin center {
+  justify-content: center;
+}
+
+@mixin jc-sb {
+  justify-content: space-between;
+}
+
+@mixin jc-sa {
+  justify-content: space-around;
+}
+
+//盒子宽高
+@mixin box($width,$height) {
+  width: $width;
+  height: $height;
+}
+
+//边框
+@mixin border($border-color) {
+  border: 1px solid $border-color;
+}
+
+@mixin b-t($b-t-color) {
+  border-top: 1px solid $b-t-color;
+}
+
+@mixin b-r($b-r-color) {
+  border-right: 1px solid $b-r-color;
+}
+
+@mixin b-b($b-b-color) {
+  border-bottom: 1px solid $b-b-color;
+}
+
+@mixin b-l($b-l-color) {
+  border-left: 1px solid $b-l-color;
+}
+
+//字体样式
+@mixin text($size,$text-color) {
+  font-size: $size;
+  color: $text-color;
+}
+
+//头部和底部绝对定位
+@mixin p-t {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+@mixin p-b {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+}
+
+//媒体查询
+@mixin xs {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media screen and (min-width: 768px) and (max-width: 990px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media screen and (min-width: 991px) and (max-width: 1199px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@mixin sm-lg {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin md-lg {
+  @media screen and (min-width: 991px) {
+    @content;
+  }
+}
+
+//模拟bootstrap栅格布局
+
+.container {
+  overflow: hidden;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  @include sm {
+    width: 750px;
+  }
+  @include md {
+    width: 970px;
+  }
+  @include lg {
+    width: 1170px;
+  }
+}
+
+.col-xs-12 {
+  float: left;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.col-sm-6 {
+  @include sm {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 50%;
+  }
+}
+
+.col-md-3 {
+  @include md-lg {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 25%;
+  }
+}
+
+.col-md-4 {
+  @include md-lg {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 33.333333%;
+  }
+}
+
+.col-md-20 {
+  @include md-lg {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 20%;
+  }
+}
+
+.col-sm-4 {
+  @include sm-lg {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 33.333333%;
+  }
+}
+
+.col-sm-3 {
+  @include sm-lg {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 25%;
+  }
+}
+
+.col-sm-9 {
+  @include sm-lg {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 75%;
+  }
+}
+
+//提取三个页面都复用很多的样式属性结束
+
+
+
+
+
+
