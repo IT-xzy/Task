@@ -1,0 +1,35 @@
+$m-white: #fff!default;
+$m-black: #333!default;
+$m-green: green!default;
+$m-red: red!default;
+$m-gray:#f0f0f0!default;
+$m-blue: #69d1e9!default;
+@each $c-name, $color in (c-white, $m-white),
+        (c-black, $m-black),
+        (c-red, $m-red),
+        (c-green, $m-green), {
+  .#{$c-name} { 
+    color: $color;
+  }
+}
+
+@each $bg-name, $color in (bg-white, $m-white),
+        (bg-black, $m-black),
+        (bg-red, $m-red),
+        (bg-green, $m-green), 
+        (bg-gray,$m-gray),
+        (bg-blue,$m-blue),{
+  .#{$bg-name} {
+    background-color: $color;
+  }
+}
+
+@each $bd-name, $color in (bd-white, $m-white),
+        (bd-red, $m-red),
+        (bd-balck, $m-black),
+        (bd-green, $m-green), {
+  .#{$bd-name} {
+    border: 1px solid $color !important;
+  }
+}
+
