@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fml.mapper.VocationMapper">
+    <select id="getTotalCount" resultType="java.lang.Integer">
+        select count(*) from vocation
+    </select>
+
+
+    <select id="getByVocationId" parameterType="int" resultType="Vocation">
+        select * from vocation where voca_id = #{voca_id}
+    </select>
+
+
+
+    <select id="getAll" parameterType="int" resultType="com.fml.pojo.Vocation">
+        select * from vocation
+    </select>
+
+    <select id="getByVocationType" parameterType="string" resultType="Vocation">
+        select * from vocation where voca_type = #{voca_type,jdbcType=VARCHAR}
+    </select>
+</mapper>

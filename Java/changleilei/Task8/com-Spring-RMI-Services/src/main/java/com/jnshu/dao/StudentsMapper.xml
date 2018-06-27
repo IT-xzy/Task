@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.StudentsDao">
+    <resultMap id="BaseResultMap" type="com.jnshu.model.Students">
+        <id column="Id" jdbcType="INTEGER" property="id"/>
+        <result column="Name" jdbcType="CHAR" property="name"/>
+        <result column="Sex" jdbcType="CHAR" property="sex"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    Id, Name, Sex
+  </sql>
+    <select id="getByNameAndGender" parameterType="com.jnshu.model.Students" resultMap="BaseResultMap">
+        select * from students
+        <where>
+            <trim>
+                <if test="name!=null and name !='' ">
+                    and name=#{name}
+                </if>
+                <if test="sex != null and sex!=''">
+                    and sex=#{sex}
+                </if>
+            </trim>
+        </where>
+    </select>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from students where Id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from students
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from students where Id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.jnshu.model.Students">
+    insert into students (Id, Name, Sex) values (#{id,jdbcType=INTEGER}, #{name,jdbcType=CHAR}, #{sex,jdbcType=CHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.jnshu.model.Students">
+        insert into students
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                Id,
+            </if>
+            <if test="name != null">
+                Name,
+            </if>
+            <if test="sex != null">
+                Sex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=CHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByIdSelective" parameterType="com.jnshu.model.Students">
+        update students
+        <set>
+            <if test="name != null">
+                Name = #{name,jdbcType=CHAR},
+            </if>
+            <if test="sex != null">
+                Sex = #{sex,jdbcType=CHAR},
+            </if>
+        </set>
+        where Id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateById" parameterType="com.jnshu.model.Students">
+    update students set Name = #{name,jdbcType=CHAR}, Sex = #{sex,jdbcType=CHAR} where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       xmlns:aop="http://www.springframework.org/schema/aop">
+
+    <!--扫描service-->
+    <!--<context:component-scan base-package="org.wyq.task.service"/>-->
+
+    <!--&lt;!&ndash;启用spring的一些annotation &ndash;&gt;-->
+    <!--<context:annotation-config/>-->
+
+    <bean name="schoolService" class="org.wyq.task.service.SchoolService"/>
+    <bean name="serviceRmiTest" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="schoolService"/>
+        <property name="serviceName" value="serviceRmi"/>
+        <property name="serviceInterface" value="org.wyq.task.service.BaseService"/>
+        <property name="registryPort" value="1021"/>
+    </bean>
+
+</beans>

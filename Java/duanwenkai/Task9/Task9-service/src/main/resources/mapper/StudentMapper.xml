@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fml.mapper.StudentMapper">
+    <resultMap id="Student" type="com.fml.pojo.Student">
+        <id column="stu_id" jdbcType="BIGINT" property="stuId"/>
+        <result column="username" jdbcType="VARCHAR" property="userName"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="email_status" jdbcType="INTEGER" property="emailStatus"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="lesson_type" jdbcType="INTEGER" property="lessonType"/>
+        <result column="stu_status" jdbcType="INTEGER" property="stuStatus"/>
+        <result column="photo" jdbcType="VARCHAR" property="photo"/>
+        <result column="company" jdbcType="VARCHAR" property="company"/>
+        <result column="post" jdbcType="VARCHAR" property="post"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="create_at" jdbcType="BIGINT" property="createAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+    </resultMap>
+    
+    
+    <insert id="add" useGeneratedKeys="true" keyProperty="stuId" parameterType="com.fml.pojo.Student">
+        insert into student (username, email, email_status, phone, password, salt, lesson_type,
+        stu_status, company, post, description, create_at, update_at)
+        values (#{userName}, #{email}, #{emailStatus}, #{phone}, #{password}, #{salt}, #{lessonType},
+        #{stuStatus}, #{company}, #{post}, #{description}, #{createAt}, #{updateAt})
+    </insert>
+
+    <delete id="deleteById">
+        delete from student where stu_id = #{stuId}
+    </delete>
+
+    <delete id="deleteAll">
+        delete from student
+    </delete>
+
+    <update id="update" parameterType="com.fml.pojo.Student">
+        update student
+        <set>
+            <if test="userName != null">
+                username = #{userName},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="emailStatus != null">
+                email_status = #{emailStatus},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="lessonType != null">
+                lesson_type = #{lessonType},
+            </if>
+            <if test="stuStatus != null">
+                stu_status = #{stuStatus},
+            </if>
+            <if test="photo != null">
+                photo = #{photo},
+            </if>
+            <if test="company != null">
+                company = #{company},
+            </if>
+            <if test="post != null">
+                post = #{post},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+        </set>
+        where username = #{userName}
+    </update>
+
+    <select id="getById" parameterType="long" resultMap="Student">
+        select * from student where stu_id = #{stuId}
+    </select>
+
+    <!-- 别名为什么会失效 -->
+    <select id="getByPhone" parameterType="string" resultMap="Student">
+        select * from student where phone = #{phone}
+    </select>
+
+    <select id="getByUserName" parameterType="string" resultMap="Student">
+        select * from student where username = #{userName}
+    </select>
+
+    <select id="getByEmail" parameterType="string" resultMap="Student">
+        select * from student where email = #{email}
+    </select>
+
+    <select id="getByStatus" resultMap="Student">
+        select * from student where stu_status = 4
+    </select>
+
+    <select id="getTotalCount" parameterType="int" resultType="java.lang.Integer">
+        select count(*) from student
+    </select>
+
+    <select id="getWorkCount" parameterType="int" resultType="java.lang.Integer">
+        select count(*) from student where stu_status = 3 or stu_status = 4
+    </select>
+
+    <select id="getStudentByLesson" parameterType="int" resultType="java.lang.Integer">
+        select count(*) from student where lesson_type = #{lessonType}
+    </select>
+</mapper>

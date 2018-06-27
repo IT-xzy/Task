@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS5</title>
+    <link rel="stylesheet" href="JS5.css">
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+<div class="vessel">
+    <div class="enter">
+        <div class="color">
+            喝我水站后台登录
+        </div>
+        <!--<div class="center">-->
+            <!--<div class="border-left">-->
+                <!--<div class="text-center"><img src="images/JS5-1.png" alt=""></div>-->
+                <!--<div class="wid4"><input id="input-top" type="text" ng-model="name" value="用户名"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <form name="loginForm" novalidate >
+            <input class="ccc" type="text" name="uname" ng-model="name" ng-minlength="3" ng-maxlength="10" required />
+            <div class="error" ng-messages="loginForm.uname.$error" style="color: red;">
+                <div ng-message="required">用户名不能为空</div>
+                <div ng-message="minlength">用户名长度至少为3</div>
+                <div ng-message="maxlength">用户名长度不能超过10</div>
+            </div>
+        </form>
+        <br>
+                <div class="wid5"><input id="input-bot" type="text" ng-model="passworld" value="密码"></div>
+        <p>{{list}}</p>
+        <div class="submit"><button id="pd0"  ng-click="send()">提交</button></div>
+    </div>
+
+</div>
+</body>
+<script src="https://cdn.bootcss.com/angular.js/1.6.10/angular.min.js"></script>
+<script src="angular-messages/angular-messages.min.js"></script>
+<script src="JS7.js"></script>
+</html>

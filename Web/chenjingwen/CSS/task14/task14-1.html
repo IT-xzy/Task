@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0,  maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1.0,  maximum-scale=1">
+    <!--通过快捷方式打开时全屏显示-->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!--隐藏状态栏-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="blank" />
+    <!--iPhone会将看起来像电话号码的数字添加电话连接，应当关闭-->
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="./css/task14.css">
+    <title>task14-1</title>
+    <style type="text/css">
+        #container{
+            display: flex;
+            flex-wrap: nowrap;
+            position: relative;
+            width: 100%;
+            height: 30vw;
+            padding: 0;
+            overflow: hidden;
+        }
+        #list {
+            position: absolute;
+            z-index: 1;
+            left: -100%;
+            width: 500%;
+            /*height: 30rem;*/
+        }
+        #list img {
+            float: left;
+            width: 100vw;
+            /*height: 30rem;*/
+        }
+        #buttons{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            position: absolute;
+            left: 47.5vw;
+            bottom: 2vw;
+            z-index: 2;
+            height: 1vw;
+            width: 5vw;
+        }
+        #buttons span{
+
+            margin-right: 0.5vw;
+            width: 1vw;
+            height: 1vw;
+            border:1px solid white;
+            border-radius: 50%;
+            cursor:pointer;
+        }
+        #buttons .on{
+            background-color: white;
+        }
+        .arrow{
+            position: absolute;
+            top:48%;
+            z-index: 2;
+            width: 4vw;
+            height: 4vw;
+            font-size: 3.6vw;
+            font-weight: bold;
+            line-height: 4vw;
+            text-align: center;
+            color: #fff;
+            background-color:rgba(120,123,134,0);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .arrow:hover{
+            background-color: rgba(255,255,255,0);
+
+        }
+        #prev{
+            left:8vw;
+        }
+        #next{
+            right:8vw;
+        }
+        a:focus, a:hover {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+
+    <script type="text/javascript">
+        /* 知识点：        */
+        /*       this用法 */
+        /*       DOM事件 */
+        /*       定时器 */
+        window.onload = function () {
+            var container = document.getElementById('container');
+            var list = document.getElementById('list');
+            var buttons = document.getElementById('buttons').getElementsByTagName('span');
+            var prev = document.getElementById('prev');
+            var next = document.getElementById('next');
+            var index = 1;
+            var timer;
+            function animate(offset) {
+                //获取的是style.left，是相对左边获取距离，所以第一张图后style.left都为负值，
+                //且style.left获取的是字符串，需要用parseInt()取整转化为数字。
+                var newLeft = parseInt(list.style.left) + offset;
+                list.style.left = newLeft + 'vw';
+                //无限滚动判断
+                if (newLeft > -100) {
+                    list.style.left = -300 + 'vw';
+                }
+                if (newLeft < -300) {
+                    list.style.left = -100 + 'vw';
+                }
+            }
+            function play() {
+                //重复执行的定时器
+                timer = setInterval(function () {
+                    next.onclick();
+                }, 8000)
+            }
+            function stop() {
+                clearInterval(timer);
+            }
+            function buttonsShow() {
+                //将之前的小圆点的样式清除
+                for (var i = 0; i < buttons.length; i++) {
+                    if (buttons[i].className == "on") {
+                        buttons[i].className = "";
+                    }
+                }
+                //数组从0开始，故index需要-1
+                buttons[index - 1].className = "on";
+            }
+            prev.onclick = function () {
+                index -= 1;
+                if (index < 1) {
+                    index = 3
+                }
+                buttonsShow();
+                animate(100);
+            };
+            next.onclick = function () {
+                //由于上边定时器的作用，index会一直递增下去，我们只有5个小圆点，所以需要做出判断
+                index += 1;
+                if (index > 3) {
+                    index = 1
+                }
+                animate(-100);
+                buttonsShow();
+            };
+            for (var i = 0; i < buttons.length; i++) {
+                (function (i) {
+                    buttons[i].onclick = function () {
+                        /*  这里获得鼠标移动到小圆点的位置，用this把index绑定到对象buttons[i]上，去谷歌this的用法  */
+                        /*  由于这里的index是自定义属性，需要用到getAttribute()这个DOM2级方法，去获取自定义index的属性*/
+                        var clickIndex = parseInt(this.getAttribute('index'));
+                        var offset =100 * (index - clickIndex); //这个index是当前图片停留时的index
+                        animate(offset);
+                        index = clickIndex; //存放鼠标点击后的位置，用于小圆点的正常显示
+                        buttonsShow();
+                    }
+                })(i)
+            }
+            container.onmouseover = stop;
+            container.onmouseout = play;
+            play();
+        }
+    </script>
+
+</head>
+<body>
+<header class="header">
+    <div class="header_left">客服电话：010-594-78634</div>
+    <div class="header_right">
+        <a class="header_right_qq" href="http://www.jnshu.com/download"><img src="./img/3.png"></a>
+        <a class="header_right-weixin" href="#">
+            <img src="./img/2.png">
+            <img class="qr-code" src="./img/21.png">
+        </a>
+        <a class="header_right-xinlang" href="https://weibo.com/u/5619279280"><img src="./img/1.png"></a>
+    </div>
+</header>
+<div class="menu">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <img class="picture1" src="./img/4.png">
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="">
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="task14-1.html">首页</a></li>
+                    <li><a href="task14-2.html">职业</a></li>
+                    <li><a href="task14-3.html">推荐</a></li>
+                    <li><a href="#">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<div id="container">
+    <div id="list" style="left: -100vw;" >
+        <img src="http://jns.img.bucket.ks3-cn-beijing.ksyun.com/skill/1/d4511b09-f892-49e0-b9d1-ed73a185ce2e.jpeg" alt="1"/>
+        <img src="http://jns.img.bucket.ks3-cn-beijing.ksyun.com/skill/1/27386e39-3d1e-4b51-b9c9-b68e263831dd.jpg" alt="1"/>
+        <img src="http://jns.img.bucket.ks3-cn-beijing.ksyun.com/skill/1/716b4d3b-5e13-4bdd-ae6f-99b90ab2bd66.png" alt="2"/>
+        <img src="http://jns.img.bucket.ks3-cn-beijing.ksyun.com/skill/1/d4511b09-f892-49e0-b9d1-ed73a185ce2e.jpeg" alt="3"/>
+        <img src="http://jns.img.bucket.ks3-cn-beijing.ksyun.com/skill/1/27386e39-3d1e-4b51-b9c9-b68e263831dd.jpg" alt="3"/>
+    </div>
+    <div id="buttons">
+        <span index="1" class="on"></span>
+        <span index="2"></span>
+        <span index="3"></span>
+    </div>
+    <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+    <a href="javascript:;" id="next" class="arrow">&gt;</a>
+</div>
+
+<div class="page1-part2">
+    <div class="box">
+    <img src="./img/5.png">
+    <h4>高效</h4>
+    <p>将五到七年的成长时间，缩短到一年到三年。</p>
+    </div>
+    <div class="box">
+        <img src="./img/6.png">
+        <h4>规范</h4>
+        <p>标准的实践教程，不会走弯路。</p>
+    </div>
+    <div class="box">
+        <img src="./img/7.png">
+        <h4>人脉</h4>
+        <p>同班好友，同院学长，技术大师，入学就混入职脉圈，为以后铺平道路</p>
+    </div>
+    <div class="box-special">
+        <div class="number"><img src="./img/8.png">12400</div>
+        <p class="explain">累计在线学习人数</p>
+        <div class="number"><img src="./img/8.png">12400</div>
+        <p class="explain">学员已经找到满意工作</p>
+    </div>
+</div>
+<h5>如何学习</h5>
+<div class="page1-part3">
+    <div class="group">
+        <div class="order">1</div>
+        <p>匹配你现在的个人情况寻找适合自己的岗位</p>
+        <div class="icon"><img src="./img/18.png"></div>
+    </div>
+    <div class="group">
+        <div class="order">2</div>
+        <p>了解职业前景薪金待遇、竞争压力等</p>
+        <div class="icon"><img src="./img/18.png"></div>
+    </div>
+    <div class="group">
+        <div class="order">3</div>
+        <p><span class="special special-1">掌握行业内顶级技能</span></p>
+        <div class="icon"><img src="./img/18.png"></div>
+    </div>
+    <div class="group-less">
+        <div class="order">4</div>
+        <p><span class="special special-2">查看职业目标任务</span></p>
+        <div class="icon"></div>
+    </div>
+    <div class="group">
+        <div class="order">5</div>
+        <p>参考学习资源、掌握技能点逐个完成任务</p>
+        <div class="icon"><img src="./img/18.png"></div>
+    </div>
+    <div class="group">
+        <div class="order">6</div>
+        <p>加入班级，和小伙伴互帮互助，一块学习</p>
+        <div class="icon"><img src="./img/18.png"></div>
+    </div>
+    <div class="group">
+        <div class="order">7</div>
+        <p>选择导师，一路引导，加速自己成长</p>
+        <div class="icon"><img src="./img/18.png"></div>
+    </div>
+    <div class="group-less">
+        <div class="order">8</div>
+        <p>完成职业技能升级业界大牛</p>
+        <div class="icon"></div>
+    </div>
+</div>
+<h5>优秀学员展示</h5>
+<div class="page1-part4">
+    <div class="wrap">
+        <div class="block">
+            <img src="./img/9.png">
+            <h4>技术顾问：罗大佑</h4>
+            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理负责技术研发、团队管理与建设</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="block">
+            <img src="./img/10.png">
+            <h4>技术顾问：罗大佑</h4>
+            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理负责技术研发、团队管理与建设</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="block">
+            <img src="./img/11.png">
+            <h4>技术顾问：罗大佑</h4>
+            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理负责技术研发、团队管理与建设</p>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="block">
+            <img src="./img/12.png">
+            <h4>技术顾问：罗大佑</h4>
+            <p>百度技术总监：互联网基础服务领域，从事虚拟主机、云服务器、域名。曾任新网高级技术经理负责技术研发、团队管理与建设</p>
+        </div>
+    </div>
+</div>
+<h5>战略合作企业</h5>
+<div class="page1-part5">
+    <div class="co-operative"><img src="./img/13.png"></div><div class="co-operative"><img src="./img/14.png"></div><div class="co-operative"><img src="./img/15.png"></div><div class="co-operative"><img src="./img/16.png"></div><div class="co-operative"><img src="./img/17.png"></div>
+</div>
+
+<div class="page1-part6">
+    <h5 class="page1-link">友情链接</h5>
+    <ul>
+        <li><a href="#">手机软件</a></li><li><a href="#">教师招聘</a></li><li><a href="#">找工作</a></li><li><a href="#">手机软件</a></li><li><a href="#">教师招聘</a></li><li><a href="#">找工作</a></li><li><a href="#">手机软件</a></li><li><a href="#">教师招聘</a></li><li><a href="#">找工作</a></li><li><a href="#">教师招聘</a></li><li><a href="#">手机软件</a></li><li><a href="#">教师招聘</a></li><li><a href="#">找工作</a></li><li><a href="#">手机软件</a></li><li><a href="#">教师招聘</a></li><li><a href="#">找工作</a></li><li><a href="#">手机软件</a></li><li><a href="#">教师招聘</a></li><li><a href="#">找工作</a></li><li><a href="#">教师招聘</a></li>
+    </ul>
+</div>
+<footer class="footer">
+    <div class="footer_box">
+        <div class="footer_box-title">技能树—改变你我</div>
+        <div class="footer_box-content">关于我们 | 联系我们 | 合作企业</div>
+    </div>
+    <div class="footer_box">
+        <div class="footer_box-title">旗下网站</div>
+        <div class="footer_box-content">
+            <div>
+                <a href="#">草船云孵化器</a>
+                <a href="#">最强IT特训营</a>
+            </div>
+            <div>
+                <a href="#">葡萄藤轻游戏</a>
+                <a href="#">桌游精灵</a>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer_box-right">
+        <div class="footer_box-title">微信公众号</div>
+        <img src="./img/21.png">
+    </div>
+</footer>
+<div class="copyright">Copyright©2015技能树 www.jnshu.com All Rights Reserved | 京IPC备13005880号</div>
+<script src="../bootstrap/bootstrap.min.js"></script>
+<script src="../bootstrap/jquery.min.js"></script>
+</html>

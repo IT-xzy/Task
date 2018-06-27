@@ -1,0 +1,18 @@
+<div class="firstone">
+    <form class="login" ng-controller="login" ng-class="{ 'has-error' :myForm.user.$invalid && !myForm.user.$pristine }" name="myForm"
+          ng-submit="submitForm(userForm.$valid)" novalidate>
+        <!--去除系统的自带的表单验证-->
+        <img src="img/doghead.jpg" class="img-rounded">
+        <input type="text" class="form-control" id="user" name="user" ng-model="user" ng-minlength="3" ng-maxlength="8" required>
+        <span ng-show="myForm.user.$dirty && myForm.user.$invalid"></span>
+        <span ng-show="myForm.user.$error.required">登录名不能为空</span>
+        <span ng-show="myForm.user.$error.minlength">用户名太短啦</span>
+        <span ng-show="myForm.user.$error.maxlength">用户名太长啦</span>
+        <input type="text" class="form-control" name="code" id="code" ng-model="code" ng-minlength="3" ng-maxlength="8" required>
+        <p ng-show="myForm.code.$error.required">密码不能为空</p>
+        <p ng-show="myForm.code.$error.minlength||myForm.code.$error.maxlength">错误的密码长度</p>
+        <p class="text-danger"></p>
+        <button class="btn btn-success" ng-disabled="myForm.$invalid" ng-click="login()">登录</button>
+        <!--如果表单是invalid的，表单按钮将被禁用-->
+    </form>
+</div>

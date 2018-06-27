@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.alibaba.dao.CountMapper">
+    <resultMap id="BaseResultMap" type="com.alibaba.model.Count">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="online" jdbcType="VARCHAR" property="online"/>
+        <result column="workers" jdbcType="VARCHAR" property="workers"/>
+        <result column="user" jdbcType="VARCHAR" property="user"/>
+        <result column="pass" jdbcType="VARCHAR" property="pass"/>
+        <result column="md5" jdbcType="VARCHAR" property="md5" />
+        <result column="salt" jdbcType="VARCHAR" property="salt" />
+    </resultMap>
+
+<sql id="Base_Column_List">
+    id,online,workers,user,pass,md5,salt
+</sql>
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+         FROM count where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from count where id = #{id,jdbcType=INTEGER}
+</delete>
+    <!--<select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+        <!--select * from student where id = #{id}-->
+    <!--</select>-->
+    <insert id="insert" parameterType="com.alibaba.model.Count">
+    insert into count (id,online,workers,user,pass,md5,salt) values (#{id,jdbcType=INTEGER},#{online,jdbcType=VARCHAR},#{workers,jdbcType=VARCHAR},#{user,jdbcType=VARCHAR},#{pass,jdbcType=VARCHAR},#{md5,jdbcType=VARCHAR},#{salt,jdbcType=VARCHAR})
+</insert>
+    <insert id="insertSelective" parameterType="com.alibaba.model.Count">
+        insert into count
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                id,
+            </if>
+            <if test="online != null">
+                online,
+            </if>
+            <if test="workers != null">
+                workers,
+            </if>
+            <if test="pass != null">
+                pass,
+            </if>
+            <if test="pass != null">
+                md5,
+            </if>
+            <if test="pass != null">
+                salt,
+            </if>
+        </trim>
+        <trim prefix="value (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="online != null">
+                #{online,jdbcType=VARCHAR},
+            </if>
+            <if test="worker != null">
+                #{workers,jdbcType=VARCHAR},
+            </if>
+            <if test="user != null">
+                #{user,jdbcType=VARCHAR},
+            </if>
+            <if test="pass != null">
+                #{pass,jdbcType=VARCHAR},
+            </if>
+            <if test="md5 != null">
+                #{md5,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByIdSelective" parameterType="com.alibaba.model.Count" >
+        update count
+        <set>
+            <if test="online != null">
+                online = #{online,jdbcType=VARCHAR},
+            </if>
+            <if test="workers != null">
+                workers = #{workers,jdbcType = VARCHAR}
+            </if>
+            <if test="user != null">
+                user = #{user,jdbcType = VARCHAR}
+            </if>
+            <if test="pass != null">
+                pass = #{pass,jdbcType = VARCHAR}
+            </if>
+            <if test="md5 != null">
+                pass = #{md5,jdbcType = VARCHAR}
+            </if>
+            <if test="salt != null">
+                pass = #{salt,jdbcType = VARCHAR}
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+</update>
+    <update id="updateById" parameterType="com.alibaba.model.Count">
+        update count
+        set online = #{online,jdbcType=VARCHAR},
+        workers = #{workers,jdbcType=VARCHAR},
+        user = #{user,jdbcType=VARCHAR},
+        pass = #{pass,jdbcType=VARCHAR},
+         md5 = #{md5,jdbcType=VARCHAR},
+          salt = #{salt,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from count
+        WHERE user = #{user,jdbcType=VARCHAR}
+    </select>
+    <select id="countByName" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(user)  FROM count WHERE user = #{user,jdbcType=VARCHAR}
+    </select>
+</mapper>

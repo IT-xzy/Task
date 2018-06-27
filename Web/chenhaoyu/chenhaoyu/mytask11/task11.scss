@@ -1,0 +1,138 @@
+@charset "utf-8";
+//变量
+$bgc: #eff0f4;
+$value_w: 100vw;
+$value_h: 45px;
+$value: 11.5px;
+$color: #5fc0cd;
+$text: 宋体,sans-serif;
+//占位符
+%set_fixed {
+  position: fixed;
+}
+%set_absolute {
+  position: absolute;
+}
+%bg_color {
+  color: #fff;
+  background-color: $color;
+}
+%body_rest{
+  margin: 0;
+  padding: 0;
+}
+%margin_default {
+  margin: 0 auto;
+}
+%none {
+  border: none;
+  outline: none;
+}
+//混合宏
+@mixin btn {
+  @extend %none;
+  @extend %bg_color;
+}
+@mixin btn_com {
+  font-family: sans-serif;
+  line-height: $value*2;
+  @extend %set_absolute;
+  top: $value;
+}
+@mixin i_common {
+    width: $value_w;
+    height: 50px;;
+    float: right;
+    border-radius: 3px;
+    display: block;
+    margin-top: 10px;
+    text-indent: 60px;
+}
+@mixin img_bg {
+  background-size: 20px 30px;
+  background-position: 10px 10px;
+  background-repeat:no-repeat ;
+}
+@mixin shu {
+  width: 2px;
+  height: 24px;
+  @extend %set_absolute;
+  background-color: $bgc;
+  left: 42px;
+}
+@mixin com {
+  width: $value_w;
+  height: 50px;;
+  float: right;
+  border-radius: 3px;
+  display: block;
+  margin-top: 10px;
+  text-indent: 60px;
+}
+//这里开始：
+// reset
+body {
+  @extend %body_rest;
+  background-color: $bgc;
+  //header
+  .header {
+    width: $value_w;
+    height: $value_h;
+    @extend %set_fixed;
+    top:0;
+    @extend %bg_color;
+    z-index: 5;
+    .center-1 {
+      @include btn;
+      @include btn_com;
+      left: $value;
+    }
+    .center-2 {
+      width: 35px;
+      @extend %margin_default;
+      line-height: $value_h;
+    }
+    .center-3 {
+      @include btn;
+      @include btn_com;
+      right: $value;
+    }
+  }
+
+  form {
+    position: relative;
+    top: $value_h;
+    input{
+      @extend %none;
+      @include com;
+    }
+    .button {
+      width: $value_w;
+      height: 50px;
+      margin-top: 8px;
+      @include btn;
+    }
+    .box1 {
+      @include shu;
+      top: 24px;
+    }
+    .box2 {
+      top: 86px;
+    }
+    .img1 {
+      @include img_bg;
+      background-image: url("iphone1.png");
+    }
+    .img2 {
+      @include img_bg;
+      background-image: url("locked-2.png");
+    }
+  }
+  .end {
+    color: $color;
+    @extend %set_absolute;
+    right: 10px;
+    top: 240px;
+    font-family: $text;
+  }
+}

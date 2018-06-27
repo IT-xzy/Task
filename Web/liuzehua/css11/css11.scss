@@ -1,0 +1,78 @@
+$bgblue: #5fc0cd;
+@mixin flex-star-center{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: .6rem;
+    background: #fff;
+}
+html{
+    font-size: 625%;
+    body{
+        font-size: .16rem;
+        background: #eff0f4;
+        margin: 0;
+        header{
+            height: .6rem;
+            background-color: $bgblue;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .a-link{
+                margin: .2rem;
+            }
+            .c-link{
+                font-size: .18rem;
+            }
+        }
+        main{
+            .main1{
+                @include flex-star-center;
+                margin: .16rem 0 .14rem 0;
+                .iphone{
+                    display: block;
+                    width: 19px;
+                    height: 29px;
+                    padding: 0 5%;
+                    border-right: 2px solid #f7f7f8;
+                }
+            }
+            .main2{
+                @include flex-star-center;
+                margin-bottom: .4rem;
+                .locked{
+                    display: block;
+                    width: 20px;
+                    height: 30px;
+                    padding: 0 5%;
+                    border-right: 2px solid #f7f7f8;
+                }
+            }
+        }
+    }
+}
+input{
+    display: block;
+    border: none;
+    padding: 0;
+    outline: none;
+    padding-left: 5%;
+    flex: 1;
+}
+input::-webkit-input-placeholder{
+    color: #ccc;
+}
+footer{
+    line-height: .6rem;
+    text-align: center;
+    font-size: .2rem;
+    background: $bgblue;
+    color: white;
+}
+.forget{
+    display: block;
+    float: right;
+    color: $bgblue;
+    margin: .1rem;
+}

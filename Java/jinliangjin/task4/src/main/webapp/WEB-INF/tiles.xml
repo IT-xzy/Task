@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<!-- Definitions for Tiles documentation -->
+<tiles-definitions>
+    <!--定义基础模块-->
+    <definition name="base.definition" template="/jsp/layout.jsp">
+        <!--  定义模板-->
+        <put-attribute name="header" value="/jsp/header.jsp"/>
+        <put-attribute name="footer" value="/jsp/footer.jsp"/>
+        <put-attribute name="main" value=""/>
+        <put-attribute name="recommend" value=""/>
+        <put-attribute name="profession" value=""/>
+    </definition>
+
+    <!--继承了基础模块布局，header和footer跟基础模块一样-->
+    <!--主页-->
+    <definition name="homePage" extends="base.definition" template="/jsp/layout.jsp">
+        <!--放入属性body值-->
+        <put-attribute name="main" value="/jsp/body.jsp"/>
+    </definition>
+
+    <!--推荐页-->
+    <definition name="recommend" extends="base.definition" template="/jsp/layout.jsp">
+        <!--放入属性body值-->
+        <put-attribute name="recommend" value="/jsp/recommend.jsp"/>
+    </definition>
+
+    <!--全部职业页-->
+    <definition name="profession" extends="base.definition" template="/jsp/layout.jsp">
+        <!--放入属性body值-->
+        <put-attribute name="profession" value="/jsp/profession.jsp"/>
+    </definition>
+
+    <!--前端页-->
+    <definition name="profession_fe" extends="base.definition" template="/jsp/layout.jsp">
+        <put-attribute name="profession" value="/jsp/profession_fe.jsp"/>
+    </definition>
+    <!--后端页-->
+    <definition name="profession_be" extends="base.definition" template="/jsp/layout.jsp">
+        <put-attribute name="profession" value="/jsp/profession_be.jsp"/>
+    </definition>
+    <!--移动开发页-->
+    <definition name="professions_mobile" extends="base.definition" template="/jsp/layout.jsp">
+        <put-attribute name="profession" value="/jsp/professions_mobile.jsp"/>
+    </definition>
+    <!--运维页-->
+    <definition name="professions_op" extends="base.definition" template="/jsp/layout.jsp">
+        <put-attribute name="profession" value="/jsp/professions_op.jsp"/>
+    </definition>
+    <!--全站-->
+    <definition name="professions_fs" extends="base.definition" template="/jsp/layout.jsp">
+        <put-attribute name="profession" value="/jsp/professions_fs.jsp"/>
+    </definition>
+
+</tiles-definitions>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：命名空间，对sql进行一个分类管理 -->
+<!-- 注意：namespace在mapper代理时，具有重要且特殊的作用
+    对应mapper接口的全限定名
+-->
+<mapper namespace="SignMapper">
+
+    <select id="findUserById" parameterType="int" resultType="Sign">
+         SELECT * FROM sign WHERE id = #{id}
+     </select>
+
+    <!-- 模糊查找需要用正则表达式和like，用#{},只能通过确定查询 这一块的内容明天再学学 -->
+    <select id="findUserByName" parameterType="string" resultType="Sign">
+        select * FROM sign where  name like CONCAT('%', #{name}, '%')
+    </select>
+
+
+    <!-- 插入能返回值，插入成功，这个值会给Sign这个类接收，并且输出，这样能知道插入到了第几条数据，
+    前提是插入数据的时候，主键ID是自增的-->
+    <insert id="insertUser" parameterType="Sign" keyProperty="id" useGeneratedKeys="true"  >
+
+        INSERT INTO sign (name,city) VALUES (#{name },#{city});
+    </insert>
+
+    <delete id="deleteUserById" parameterType="int">
+        delete from sign where id=#{id}
+    </delete>
+
+    <!--  -->
+    <delete id="deleteUserByName" parameterType="String">
+        delete from sign where name=#{name}
+    </delete>
+
+    <update id="updateUserById" parameterType="Sign" >
+        UPDATE sign set name=#{name} ,city=#{city} where id=#{id}
+    </update>
+
+
+</mapper>
+

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ev.DAO.UserDAO">
+
+    <select id="findByName" parameterType="java.lang.String" resultType="User">
+        SELECT *
+        FROM user
+        WHERE name = '${value}'
+    </select>
+
+    <select id="findByEmail" parameterType="java.lang.String" resultType="User">
+        SELECT *
+        FROM user
+        WHERE email = '${value}'
+    </select>
+
+    <select id="findByPhoneNumber" parameterType="java.lang.String" resultType="User">
+        SELECT *
+        FROM user
+        WHERE phone_number = '${value}'
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultType="User">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        INSERT INTO user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="email!=null">
+                email,
+            </if>
+            <if test="phoneNumber">
+                phone_number,
+            </if>
+            <if test="keyValue!=null">
+                key_value,
+            </if>
+            <if test="salt!=null">
+                salt,
+            </if>
+            <if test="createAt!=null">
+                create_at,
+            </if>
+            <if test="updateAt!=null">
+                update_at,
+            </if>
+        </trim>
+        <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="email!=null">
+                #{email},
+            </if>
+            <if test="phoneNumber">
+                #{phoneNumber},
+            </if>
+            <if test="keyValue!=null">
+                #{keyValue},
+            </if>
+            <if test="salt!=null">
+                #{salt},
+            </if>
+            <if test="createAt!=null">
+                #{createAt},
+            </if>
+            <if test="updateAt!=null">
+                #{updateAt},
+            </if>
+        </trim>
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="setStatus" parameterType="int">
+        <set>
+            status=#{status}
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>
+

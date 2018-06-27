@@ -1,0 +1,114 @@
+@import "global.scss";
+html {
+  font-size: 625%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F0F0F0;
+}
+header {
+  @include position-top();
+  @include box (100vw,auto,#29BDE0);
+  line-height: .4rem;
+}
+.shu {
+  @include case (.5rem,.35rem);
+  padding: .1rem 0 .1rem .1rem;
+}
+nav {
+  padding: .2rem .2rem 0 .2rem;
+}
+/*标题*/
+.title {
+  @include box (100%,.6rem,#fff);
+  @include text (center,.6rem);
+  margin-top: .6rem;
+}
+$gray: #9A9A9A;
+.title-word {
+  font-size: .2rem;
+}
+.title-word {
+  a {
+    font-size: .2rem;
+    color: $gray;
+    text-decoration: none;
+  }
+}
+$border: 5px,solid,#E7E7E7;
+  .title-mark {
+    float: right;
+    margin-top: -.55rem;
+    margin-right: .1rem;
+    @include case (25px,25px);
+    border-top: $border;
+    border-right: $border;
+    border-bottom: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+main {
+  position: relative;
+  padding: 0 .2rem;
+}
+  /*游戏名*/
+  .name {
+    display: block;
+    @include box (100%,.6rem,#FFF);
+    margin-top: .3rem;
+    @include text (center,.6rem);
+    color: #FBB435;
+    font-size: .2rem;
+    border-bottom: 1px solid #FBB435;
+  }
+.image {
+  position: absolute;
+  right:.23rem;
+  top: 2.8rem;
+  @include display;
+  width: 3%;
+  height: .4rem;
+}
+  .subject {
+    @include display (flex,center,center);
+    flex-direction: column;
+    @include box (100%,auto,#fff);
+    margin-top: -.1rem;
+    margin-bottom: .4rem;
+  }
+  .box {
+    @include display (flex,center,center);
+    @include box (90%,1rem,#69D1E9);
+    margin: .2rem 0;
+  }
+  .box a {
+    text-decoration: none;
+  }
+  .version {
+    font-size: .2rem;
+    color: #FFF;
+  }
+  .version:hover {
+    color: #fff;
+  }
+  .number{
+    @include case (90%,.2rem);
+    @include text (center,.2rem);
+    font-size: .1rem;
+    color: #9B9B9B;
+  }
+  .icon {
+    @include display (flex,center,center);
+    @include case (30%,.2rem);
+  }
+  /*4个圆*/
+  .small-icon {
+    @include box (10px,10px,#E7E7E7);
+    margin: 0 .05rem;
+    border-radius: 50%;
+    @include cursor;
+  }
+  .small-icon:first-child {
+    background-color: #69D1E9;
+  }

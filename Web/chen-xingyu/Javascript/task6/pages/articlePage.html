@@ -1,0 +1,119 @@
+<div class="companySearch">
+    <div class="row">
+        <div ng-click="open()" class="col-sm-4 col-xs-12">
+            <span>
+                发布时间
+            </span>
+                <input type="text"
+                       class="form-control"
+                       uib-datepicker-popup="yyyy-MM-dd"
+                       ng-model="date"
+                       is-open="popup.opened"
+                       close-on-date-selection="true"
+                       datepicker-options={showWeeks:false,maxDate:dat1}
+                       ng-required="true"
+                       close-text="关闭"
+                       clear-text="清空"
+                       current-text="今天"
+                       alt-input-formats="altInputFormats" />
+        </div>
+        <div ng-click="open1()" class="col-sm-4 col-xs-12">
+            <span>—</span>
+            <input type="text"
+                   class="form-control"
+                   uib-datepicker-popup="yyyy-MM-dd"
+                   ng-model="date1"
+                   is-open="popup1.opened"
+                   close-on-date-selection="false"
+                   datepicker-options={showWeeks:false,minDate:dat}
+                   ng-required="true"
+                   close-text="关闭"
+                   clear-text="清空"
+                   current-text="今天"
+                   alt-input-formats="altInputFormats" />
+        </div>
+        <div class=" col-xs-12 col-sm-4">
+            <span>类&emsp;&emsp;型</span>
+            <select ng-model="currentType"
+                    ng-options="y.name for (x,y ) in Types"
+                    value="{{x.name}}">
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-xs-12">
+            <span>状&emsp;&emsp;态</span>
+            <select ng-model="currentStatus"
+                    ng-options="y.name for (x,y ) in Statuses"
+                    value="{{x}}">
+            </select>
+        </div>
+    </div>
+    <div class="row bottomRow">
+        <a class="pull-right btn-success btn-lg" ng-click="search()">搜索</a>
+        <a class="pull-right btn-danger btn-lg" ng-click="clear()">清空</a>
+    </div>
+    <div>{{dat|date:"yyyy-MM-dd HH:mm:ss"}}</div>
+    <div>{{dat1|date:"yyyy-MM-dd HH:mm:ss"}}</div>
+</div>
+<div class="companyList ">
+    <div class="listHeader">
+        <span> Article管理</span>
+        <button ng-click="addList()" class="pull-right btn-sm btn-success">新增+</button>
+    </div>
+    <div class="tableSurface">
+        <table class="companyDetail text-center table-striped">
+            <tr>
+                <th colspan="2" class="btn-sm">ID</th>
+                <th colspan="3" class="btn-sm">名称</th>
+                <th colspan="3" class="btn-sm">类型</th>
+                <th colspan="3" class="btn-sm">发布时间</th>
+                <th colspan="3" class="btn-sm">修改时间</th>
+                <th colspan="3" class="btn-sm">发布者</th>
+                <th colspan="2" class="btn-sm">状态</th>
+                <th colspan="3" class="btn-sm">操作</th>
+            </tr>
+            <tr ng-repeat="x in articleList">
+                <td colspan="2" class="btn-sm">{{$index+1}}</td>
+                <td colspan="3" class="btn-sm">{{x.title}}</td>
+                <td colspan="3" class="btn-sm">{{x.type|typeFilter}}</td>
+                <td colspan="3" class="btn-sm">{{x.createAt|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td colspan="3" class="btn-sm">{{x.updateAt|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+                <td colspan="3" class="btn-sm">{{x.author}}</td>
+                <td colspan="2" class="btn-sm">{{x.status|statusFilter}}</td>
+                <td colspan="3" class="btn-sm ">
+                    <div class="threeBtn">
+                        <a class="changeStatus" ng-click="changeStatus(x.id,x.status)" href="">{{x.status|upOrDown}}</a>
+                        <a ng-click="editArticle(x.id)" href="" >编辑</a>
+                        <a href="" ng-click="delete(x.id)">删除</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="pageModel">
+    <div class="bottomInput">
+        跳转到第
+        <input type="text" ng-model="setPage">
+        页
+        <a ng-click="getNewPage()">确定</a>
+    </div>
+    <ul uib-pagination
+        total-items="total"
+        ng-click="pageChange()"
+        ng-model="currentPage"
+        max-size="5"
+        first-text="第一页"
+        previous-text="上一页"
+        next-text="下一页"
+        last-text="最后页"
+        boundary-links="true"
+        boundary-link-numbers="true">
+    </ul>
+    <div class="bottomInput">
+        单页显示
+        <input type="text" ng-model="newSize">
+        条
+    </div>
+</div>

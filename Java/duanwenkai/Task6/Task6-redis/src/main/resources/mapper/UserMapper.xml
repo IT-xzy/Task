@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fml.mapper.UserMapper">
+
+    <select id="getById" parameterType="long" resultType="User">
+        select * from user where user_id = #{userId}
+    </select>
+
+    <select id="getByName" parameterType="string" resultType="User">
+        select * from user where user_name = #{userName}
+    </select>
+
+    <select id="getByEmail" parameterType="string" resultType="User">
+        select * from user where email = #{email}
+    </select>
+
+    <!--模糊查询 % 替代一个或多个字符    -->
+    <select id="getListByName" parameterType="string" resultType="User">
+        select * from user where user_name like concat('%',#{userName},'%')
+    </select>
+
+    <select id="getTotalCount" resultType="java.lang.Long">
+        select count(*) from user
+    </select>
+
+    <insert id="add" parameterType="com.fml.pojo.User">
+        insert into user (user_name, phone, email, password, salt,create_at, update_at)
+        values (#{userName}, #{phone}, #{email}, #{password}, #{salt}, #{createAt}, #{updateAt})
+    </insert>
+
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM user WHERE user_id = #{userId}
+    </delete>
+
+    <update id="update" parameterType="User">
+        update user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="salt != null">
+                salt = #{salt},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt},
+            </if>
+        </set>
+    </update>
+</mapper>

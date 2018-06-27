@@ -1,0 +1,106 @@
+$blue:#29bde0;
+$lightorange:#ffedc5;
+$orange:#fbb435;
+$red:#f67489;
+$white:#fff;
+@mixin fixedwidth{
+    min-width: 320px;
+    max-width: 768px;
+}
+@mixin size($width,$height){
+    width:$width;
+    height:$height;
+}
+body{
+    @include fixedwidth;
+    margin:0 auto;
+}
+header{
+    @include fixedwidth;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    padding: .5rem;
+    font-size: 1rem;
+    color:$white;
+    background-color:$blue;
+    text-align: center;
+    box-sizing: border-box;   
+    .header-left{
+        float:left;
+        img{
+            width:.6rem;
+        }
+    }
+    .header-right{
+        float:right;
+        img{
+            width:1rem;
+        }
+    }
+}
+.flop{
+    height:100vh;
+    padding-top:4rem;
+    background-color:$blue;
+    box-sizing: border-box;
+    .card{
+        position: relative;
+        @include size(15rem,18rem);
+        margin: 0 auto;
+        border:3px solid $white;
+        background-color:$lightorange;
+        .number{
+            position: absolute;
+            top:-1rem;
+            left:6.5rem;
+            z-index: 1;
+            @include size(2rem,2rem);
+            border:1px solid $lightorange;
+            border-radius: 50%;
+            font-size:1.5rem;
+            text-align: center;
+            color:$red;
+            background-color: $white;
+        }
+        .imagehide{
+            display: block;
+            @include size(8rem,8rem);
+            margin:0 auto;
+            margin-top:5rem;
+        }
+        .imageshow{
+            display: none;
+            @include size(8rem,8rem);
+            margin:0 auto;
+            margin-top:2rem;
+        }
+        p{
+            margin:0;
+            padding:2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            color:$red;
+        }
+    }
+    
+}
+footer{
+    position:fixed;
+    bottom:0;
+    @include fixedwidth;
+    width: 100%;
+    padding:2rem;
+    text-align: center;
+    background:$blue;
+    box-sizing: border-box;
+    button{
+        @include size(80%,3rem);
+        border:none;
+        font-size:1.2rem;
+        text-align: center;
+        outline:none;
+        color:$white;
+        background-color:$orange;
+    }
+}

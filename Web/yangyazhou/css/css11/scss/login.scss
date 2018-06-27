@@ -1,0 +1,54 @@
+@charset "utf-8";
+@import 'header';
+//给body初始字体尺寸，子级文字继承这个
+$body-bgcolor:#eff0f4;
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    font-size: .32rem;
+    background: $body-bgcolor;
+}
+
+$input-margin-top:.16rem;
+$input-height:100px;
+$input-bgcolor: #fff;
+$label-height: .5rem;
+form {
+    .phone,.lock {
+        display: flex;
+        align-items: center;
+        margin-top: $input-margin-top;
+        height: $input-height;
+        background: $input-bgcolor;
+    }
+    input {
+        width: 70%;
+        height: .5rem;
+        border: none;
+        outline: none;        
+    }
+    /*兼容浏览器placehold*/
+    input::-webkit-input-placeholder {
+        color:#e1e5e7;
+    }
+    input::-moz-placeholder {
+        color:#e1e5e7;        
+    }
+    input:-ms-input-placeholder {
+        color:#e1e5e7; 
+    }
+    label {
+        height: .5rem;
+        width: .72rem;
+    }
+    .la-phone {
+        background: url(../img/phone.png) no-repeat center right/.27rem .41rem ;
+    }
+    .la-lock {
+        background: url(../img/lock.png) no-repeat center right/.29rem .43rem ;
+    }
+    @import "component";
+}
+@import 'footer';

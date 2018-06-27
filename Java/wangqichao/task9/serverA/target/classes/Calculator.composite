@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="Calculator" >
+<!--组件名-->
+    <component name="CalculatorServiceComponent">
+        <!--组件对应实现类-->
+        <implementation.java class="com.task.tuscany.server.Calculator" />
+        <service name="ICalculator">
+            <!--在客户端也需要实现此接口才行-->
+            <interface.java interface="com.task.tuscany.server.ICalculator"/>
+            <!--客户端调用的uri，暴露ip,port,serviceName-->
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8099/CalculatorRMIService"/>
+        </service>
+        <!--<reference name="Add" target="AddComponent"/>-->
+    </component>
+    <!--二号组件-->
+    <component name="HelloWorldServiceComponent">
+        <implementation.java class="com.task.tuscany.server.HelloWord" />
+        <service name="IHelloWorld">
+            <!--在客户端也需要实现此接口才行-->
+            <interface.java interface="com.task.tuscany.server.IHelloWorld"/>
+            <!--客户端调用的uri，暴露ip,port,serviceName-->
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8099/HelloWorldRMIService"/>
+        </service>
+    </component>
+
+    <!--<component name="AddComponent">-->
+        <!--<implementation.java class="com.task.tuscany.server.Add"/>-->
+    <!--</component>-->
+
+</composite>

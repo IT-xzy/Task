@@ -1,0 +1,149 @@
+@charset "UTF-8";
+@bule-color: #29bde0;
+@white-color: #fff;
+@gray: #f0f0f0;
+@padding: 3rem;
+@margin: 2rem;
+@chai: #002FA7;
+.btn-contr(){
+	width: 3.6rem;
+    height: 3.6rem;
+    margin: 0rem 2rem;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+	box-shadow: 0rem 0rem .2rem;
+    border: none;
+    cursor: pointer;
+}
+body{
+	background-color: @gray;
+}
+.top{
+	display: flex;
+	margin: @margin;
+	background-color: @white-color;
+	.left{
+		writing-mode: vertical-lr;
+		padding: 8rem;
+		text-align: center;
+		font-size: 5rem;
+		border-right: solid gainsboro;
+	}
+	.right{
+		width: 100%;
+		ul{
+			display: flex;
+			flex-wrap: wrap;
+			padding: 9rem 0rem 9rem 9rem;
+			margin: 0rem;
+			li{
+				width: 50%;
+				list-style: square;
+				line-height: 9rem;
+				text-align: center;
+				text-indent: -5rem;
+				color: @bule-color;
+			}
+		}
+		#set{
+			padding: @margin;
+		    text-align: center;
+		    color: @bule-color;
+		    border-top: solid gainsboro;
+		    background-image: url(../img/pen.png);
+		    background-repeat: no-repeat;
+		    background-position: 47rem center;
+		    background-size: 3%;
+		}
+	}
+}
+.input{
+	margin: @margin;
+	padding-bottom: 5rem;
+	background-color: @white-color;
+	span{
+		padding-left: 8rem;
+	}
+	input{
+	    font-size: 4rem;
+	    padding: @padding;
+	    margin-left: @padding;
+	    margin-right: @padding;
+	    border: none;
+	    border-bottom: solid gainsboro;
+	}
+}
+.player{
+	padding: @padding;
+	margin: @margin;
+	background-color: @white-color;
+	#player{
+	    width: 7rem;
+		font-size: 4rem;
+		text-align: center;
+	    color: @chai;
+	    background-color: gainsboro;
+	    border: none;
+	}
+}
+.card{
+    width: 96%;
+	margin-left: 2rem;
+    margin-right: 2rem;
+	background-color: @chai;
+    border: none;
+	span{
+	    display: inline-block;
+		padding: 2rem;
+	    font-size: 5rem;
+	    color: #fff;
+	}
+}
+.range{
+	display: flex;
+	align-items: center;
+	padding: @padding;
+	margin: @margin;
+	background: @white-color;
+}
+// 滑动条的线条样式
+#range{ 
+
+    width: 100%;
+    height: 2rem;
+	border-radius: 1rem;
+    outline: none; /*去掉点击时出现的外边框*/
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; /*去掉原生滑块的那条线*/ 
+    background: @chai;
+
+ //    background: -webkit-linear-gradient(#059CFA, #059CFA) no-repeat;
+	// background-size: 0% 100%;
+}
+// 滑动条的滑块样式
+input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; /*//去掉滑块原有的默认样式*/
+    width: 6rem;
+    height: 3.6rem;
+    -webkit-box-shadow: 0rem 0rem .2rem; /*设置滑块的阴影*/
+    background: url("../img/range.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+//取消原始的控件获取到焦点时，会显示包裹整个控件的边框
+input[type=range]:focus{
+    outline: none;
+}
+// 滑动条的左右按钮
+.btn-sub{ 
+    background: url("../img/sub.png");
+ 	.btn-contr();
+}
+.btn-plus{ 
+    background: url("../img/add.png");
+	.btn-contr;
+}

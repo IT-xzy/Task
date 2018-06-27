@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>设置页面</title>
+    <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="./css/设置页面.css">
+</head>
+
+<body>
+    <header>
+        <a class="back-icon" onclick="backFirst()"></a>
+        <a class="help-icon"></a>
+        <p>参数设置</p>
+    </header>
+    <main>
+        <div class="container">
+            <div class="message clearfix">
+                <div class="m-left">玩
+                    <br> 家
+                    <br> 配
+                    <br> 比
+                </div>
+                <div class="m-right">
+                    <div class="m-right-top">
+                        <ul id="role-list" class="list-style row">
+
+                        </ul>
+                    </div>
+                    <button class="m-right-bottom" onclick="setPlayNum()">
+                        <span>点击设置
+                            <img src="./img/pencil.png" alt="">
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div class="words">
+                <input id="words1" type="text" placeholder="水民词组" onchange="matchWords()">
+                <input id="words2" type="text" placeholder="幽灵词组" onchange="matchWords()">
+            </div>
+            <div class="player-num">
+                <div class="player-num-text">玩家人数
+                    <input type="text" id="players" value="4" onchange="matchNum()">人</div>
+                <div class="num-range">
+                    <button class="reduce" onclick="reduceNum()"></button>
+                    <input type="range" id="slider" onchange="sliderChange()" value="4" min="4" max="18" step="1">
+                    <button class="increase" onclick="increaseNum()"></button>
+                </div>
+            </div>
+            <button class="send-card" onclick="sendingCard()">去发牌</button>
+        </div>
+    </main>
+    <footer></footer>
+    <script src="./js/设置页面.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="./js/bootstrap.js"></script>
+</body>
+
+</html>

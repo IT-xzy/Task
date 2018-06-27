@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+<!--扫描com.enroll.service中的@Componet注解-->
+    <context:component-scan base-package="com.jin.service"/>
+    <!--配置事务管理-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!--针对需要事务管理的每一个方法设置事务管理的具体属性-->
+            <tx:method name="insertAndSelectAll" propagation="REQUIRED" timeout="1000"/>
+            <tx:method name="query" propagation="REQUIRED" timeout="-1"/>
+            <tx:method name="selectByNumberOrString"/>
+            <tx:method name="insertCustomers"/>
+            <tx:method name="update"/>
+            <tx:method name="updateAddressById"/>
+            <tx:method name="deleteByNumber"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--使用aspectj自动代理，自动为匹配@AspectJ切面的Bean创建代理-->
+    <aop:aspectj-autoproxy/>
+    <aop:config>
+        <!--注意*和后面包之间有空格-->
+        <aop:pointcut expression="execution(* com.jin.service.*.*(..))" id="transactionPointcut"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut-ref="transactionPointcut"/>
+        <aop:aspect id="serviceAdvice" ref="studentServiceAdvice" order="1">
+            <aop:before method="beforeMethod" pointcut-ref="transactionPointcut"/>
+            <!--AspectJ自动代理aop after-->
+            <aop:after method="afterMethod" pointcut-ref="transactionPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>

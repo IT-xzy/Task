@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>参数设置</title>
+	<meta charset="utf-8" name="viewport" width=device-width, initial-scale=1.0, user-scalable=no>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/gameSet.css">
+</head>
+<body>
+	<div class="header">
+		<img src="img/back.png" onclick="backHome()">
+		<span>
+			参数设置
+		</span>
+		<img src="img/help.png">
+	</div>
+	<div class="top">
+		<div class="left">
+			玩 家 配 比
+		</div>
+		<div class="right">
+			<ul id="list">
+			</ul>
+			<div id="set" onclick="getRole()">点击设置</div> 
+		</div>
+	</div>
+	<!-- 玩家人数 -->
+	<div class="player">
+		玩家人数 <input type="number" id="player" value="8" min="4" max="18" onblur="inputChange()"> 人
+	</div>
+	<!-- 滑块 -->
+	<div class="range">
+		<button class="btn-sub" id="btnSub" onclick="less()">
+		</button>
+		<input type="range" name="points" id="range" value="8" min="4" max="18" step="1" onchange="moveChange()">
+		<button class="btn-plus" id="btnAdd" onclick="add()">
+		</button>
+	</div>
+	<!-- 发牌按钮 -->
+	<button class="card">
+		<span>去发牌</span>
+	</button>
+
+<script src="js/jquery-3.3.1.js"></script>
+<script src="js/gameSet.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.mapper.IGraduateStudentMapper">
+    <select id="getCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM graduateStudent
+    </select>
+    <select id="getGraduateStudent" resultType="GraduateStudent">
+        SELECT * FROM graduateStudent
+    </select>
+    <select id="getGraduateStudentById" parameterType="java.lang.Integer" resultType="GraduateStudent">
+        SELECT *FROM graduateStudent WHERE id=#{id}
+    </select>
+</mapper>

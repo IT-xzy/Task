@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--使用aspect注解的aop-->
+    <mvc:annotation-driven/>
+    <!--使用aspect注解的aop-->
+    <aop:aspectj-autoproxy/>
+<mvc:default-servlet-handler/>
+    <!-- 注解扫描包 -->
+    <!--控制器的扫描必须在spring-mvc.xml中，否则web.xml中的DispatcherServlet拦截器将无法访问到相应的控制器-->
+    <context:component-scan base-package="com.alibaba.*"/>
+
+
+    <bean id="AdvicesM" class="com.alibaba.aop.AdvicesM"/>
+    <aop:config proxy-target-class="true">
+        <aop:aspect ref="AdvicesM">
+            <aop:pointcut expression="execution(* com.alibaba.controller.ViewController.*(..))" id="pointcut2"/>
+            <aop:before method="before" pointcut-ref="pointcut2"/>
+            <aop:after method="after" pointcut-ref="pointcut2"/>
+        </aop:aspect>
+    </aop:config>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1">
+        <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+    </bean>
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions" value="/WEB-INF/tiles.xml"/>
+    </bean>
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截器拦截的URL格式 -->
+            <mvc:mapping path="/u/**" />
+            <mvc:exclude-mapping path="*.html" />
+            <mvc:exclude-mapping path="*.jsp" />
+            <!--处理拦截的具体实现类 -->
+            <bean class="com.alibaba.TestInterceptors.TestInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

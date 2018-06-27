@@ -1,0 +1,57 @@
+<html  ng-app='myApp'>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .change-box{
+            width:20vw;
+            height: 100px;
+            background-color: yellow;
+            color: #000;
+            font-size: 30px;
+        }
+        .show-box{
+            display: none;
+            width:20vw;
+            height: 200px;
+            background-color: red;
+            color: #000;
+            font-size: 30px;
+        }
+        .hihebox{
+            display: block;
+            
+        }
+    </style> 
+</head>
+<body>
+<div ng-controller="pageCtrl">
+    <div ng-repeat="x in aaa">
+        <div class="change-box" ng-init="pIndex=$index" ng-click="go(pIndex)">{{x.name}}</div>
+        <div ng-repeat="child in x.children" class="show-box" ng-class="{hihebox:cIndex==$index}">{{child.name}}</div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/angular.js/1.3.9/angular.js"></script>
+<script>
+    ngApp=angular.module('myApp',[]);
+    ngApp.controller('pageCtrl',function ($scope) {
+        $scope.aaa=[{
+            name:'信息管理',
+            children:[{name:'公司信息'},{name:'职位信息'}]
+        },{
+            name:'Article管理',
+            children:[{name:'Artice列表'},{name:'文章管理'},{name:'文章管理'}]
+        },{
+            name:'用户管理',
+            children:[{name:'用户管理'}]
+        }
+    ];
+        $scope.go=function(pIndex){
+          $scope.cIndex=pIndex;
+        }
+    })
+</script>
+
+</body>
+</html>

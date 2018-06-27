@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task.dao.StudentDao">
+
+    <!--是否使用resultMap 使用的话 驼峰命名的转换就可以使用了-->
+    <resultMap id="newStudent" type="com.task.entity.Student">
+        <id column="id" property="id" ></id>
+        <!--特别的情况下 还是需要jdbcType=""-->
+        <result column="location" property="location"></result>
+        <result column="level" property="level"></result>
+        <result column="lesson" property="lesson"></result>
+
+        <result column="name" property="name"></result>
+        <result column="qq" property="qq"></result>
+        <result column="job" property="job"></result>
+        <result column="start_time" property="startTime"></result>
+
+        <result column="university" property="university"></result>
+        <result column="number" property="number"></result>
+        <result column="link" property="link"></result>
+        <result column="target" property="target"></result>
+
+        <result column="brother" property="brother"></result>
+        <result column="source" property="source"></result>
+        <result column="create_at" property="createAt"></result>
+        <result column="update_at" property="updateAt"></result>
+    </resultMap>
+
+    <select id="findById" resultMap="newStudent" parameterType="int">
+        select * from student_info where id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="newStudent" parameterType="String">
+        select * from student_info where name = #{name}
+    </select>
+
+    <select id="findByNumber" resultMap="newStudent" parameterType="int">
+        select * from student_info where number = #{number}
+    </select>
+
+    <delete id="delete" parameterType="com.task.entity.Student">
+        delete from student_info where id=#{id}
+    </delete>
+
+    <select id="findByPage" resultMap="newStudent">
+        select * from   student_info order by id
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+
+    <select id="total" resultType="int">
+        select count(0) from student_info
+    </select>
+
+</mapper>

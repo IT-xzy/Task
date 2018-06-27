@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alibaba.dao.PositionMapper">
+    <resultMap id="BaseResultMap" type="com.alibaba.model.Position">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="Occupation" jdbcType="VARCHAR" property="occupation"/>
+        <result column="Duty" jdbcType="VARCHAR" property="duty"/>
+        <result column="threshold" jdbcType="VARCHAR" property="threshold"/>
+        <result column="Difficulty degree" jdbcType="VARCHAR" property="difficultyDegree"/>
+        <result column="Growth cycle" jdbcType="VARCHAR" property="growthCycle"/>
+        <result column="degree of scarcity" jdbcType="VARCHAR" property="degreeOfScarcity"/>
+        <result column="market demand" jdbcType="VARCHAR" property="marketDemand"/>
+        <result column="The minimum salary1" jdbcType="DECIMAL" property="theMinimumSalary1"/>
+        <result column="The minimum salary2" jdbcType="VARCHAR" property="theMinimumSalary2"/>
+        <result column="The minimum salary3" jdbcType="VARCHAR" property="theMinimumSalary3"/>
+        <result column="Maximum salary1" jdbcType="VARCHAR" property="maximumSalary1"/>
+        <result column="Maximum salary2" jdbcType="VARCHAR" property="maximumSalary2"/>
+        <result column="Maximum salary3" jdbcType="VARCHAR" property="maximumSalary3"/>
+        <result column="Experience requirement" jdbcType="VARCHAR" property="experienceRequirement"/>
+        <result column="In the number of students" jdbcType="INTEGER" property="inTheNumberOfStudents"/>
+        <result column="Prompt statement" jdbcType="VARCHAR" property="promptStatement"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,occupation,duty,threshold, difficultyDegree,growthCycle,degreeOfScarcity,
+        marketDemand,theMinimumSalary1,theMinimumSalary2,theMinimumSalary3,
+        maximumSalary1,maximumSalary2,maximumSalary3, experienceRequirement,
+        inTheNumberOfStudents,promptStatement
+    </sql>
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from position
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from position
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.alibaba.model.Position">
+        insert into position (id, occupation, duty,
+        threshold, difficultyDegree, growthCycle,
+        degreeOfScarcity,marketDemand,theMinimumSalary1,
+        theMinimumSalary2, theMinimumSalary3, maximumSalary1,
+        maximumSalary2, maximumSalary3, experienceRequirement,
+        inTheNumberOfStudents, promptStatement)
+        values (#{id,jdbcType=INTEGER}, #{occupation,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR},
+        #{threshold,jdbcType=VARCHAR}, #{difficultyDegree,jdbcType=VARCHAR}, #{growthCycle,jdbcType=VARCHAR},
+        #{degreeOfScarcity,jdbcType=VARCHAR}, #{marketDemand,jdbcType=VARCHAR}, #{theMinimumSalary1,jdbcType=DECIMAL},
+        #{theMinimumSalary2,jdbcType=VARCHAR}, #{theMinimumSalary3,jdbcType=VARCHAR}, #{maximumSalary1,jdbcType=VARCHAR},
+        #{maximumSalary2,jdbcType=VARCHAR}, #{maximumSalary3,jdbcType=VARCHAR}, #{experienceRequirement,jdbcType=VARCHAR},
+        #{inTheNumberOfStudents,jdbcType=INTEGER}, #{promptStatement,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.alibaba.model.Position">
+        insert into position
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="occupation != null">
+                occupation,
+            </if>
+            <if test="duty != null">
+                duty,
+            </if>
+            <if test="threshold != null">
+                threshold,
+            </if>
+            <if test="difficultyDegree != null">
+                difficultyDegree,
+            </if>
+            <if test="growthCycle != null">
+                growthCycle,
+            </if>
+            <if test="degreeOfScarcity != null">
+                degreeOfScarcity,
+            </if>
+            <if test="marketDemand != null">
+                marketDemand,
+            </if>
+            <if test="theMinimumSalary1 != null">
+                theMinimumSalary1,
+            </if>
+            <if test="theMinimumSalary2 != null">
+                theMinimumSalary2,
+            </if>
+            <if test="theMinimumSalary3 != null">
+                theMinimumSalary3,
+            </if>
+            <if test="maximumSalary1 != null">
+                maximumSalary1,
+            </if>
+            <if test="maximumSalary2 != null">
+                maximumSalary2,
+            </if>
+            <if test="maximumSalary3 != null">
+                maximumSalary3,
+            </if>
+            <if test="experienceRequirement != null">
+                experienceRequirement,
+            </if>
+            <if test="inTheNumberOfStudents != null">
+                inTheNumberOfStudents,
+            </if>
+            <if test="promptStatement != null">
+                promptStatement,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="occupation != null">
+                #{occupation,jdbcType=VARCHAR},
+            </if>
+            <if test="duty != null">
+                #{duty,jdbcType=VARCHAR},
+            </if>
+            <if test="threshold != null">
+                #{threshold,jdbcType=VARCHAR},
+            </if>
+            <if test="difficultyDegree != null">
+                #{difficultyDegree,jdbcType=VARCHAR},
+            </if>
+            <if test="growthCycle != null">
+                #{growthCycle,jdbcType=VARCHAR},
+            </if>
+            <if test="degreeOfScarcity != null">
+                #{degreeOfScarcity,jdbcType=VARCHAR},
+            </if>
+            <if test="marketDemand != null">
+                #{marketDemand,jdbcType=VARCHAR},
+            </if>
+            <if test="theMinimumSalary1 != null">
+                #{theMinimumSalary1,jdbcType=DECIMAL},
+            </if>
+            <if test="theMinimumSalary2 != null">
+                #{theMinimumSalary2,jdbcType=VARCHAR},
+            </if>
+            <if test="theMinimumSalary3 != null">
+                #{theMinimumSalary3,jdbcType=VARCHAR},
+            </if>
+            <if test="maximumSalary1 != null">
+                #{maximumSalary1,jdbcType=VARCHAR},
+            </if>
+            <if test="maximumSalary2 != null">
+                #{maximumSalary2,jdbcType=VARCHAR},
+            </if>
+            <if test="maximumSalary3 != null">
+                #{maximumSalary3,jdbcType=VARCHAR},
+            </if>
+            <if test="experienceRequirement != null">
+                #{experienceRequirement,jdbcType=VARCHAR},
+            </if>
+            <if test="inTheNumberOfStudents != null">
+                #{inTheNumberOfStudents,jdbcType=INTEGER},
+            </if>
+            <if test="promptStatement != null">
+                #{promptStatement,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByIdSelective" parameterType="com.alibaba.model.Position">
+        update position
+        <set>
+            <if test="occupation != null">
+                occupation = #{occupation,jdbcType=VARCHAR},
+            </if>
+            <if test="duty != null">
+                duty = #{duty,jdbcType=VARCHAR},
+            </if>
+            <if test="threshold != null">
+                threshold = #{threshold,jdbcType=VARCHAR},
+            </if>
+            <if test="difficultyDegree != null">
+                difficultyDegree = #{difficultyDegree,jdbcType=VARCHAR},
+            </if>
+            <if test="growthCycle != null">
+                growthCycle = #{growthCycle,jdbcType=VARCHAR},
+            </if>
+            <if test="degreeOfScarcity != null">
+                degreeOfScarcity = #{degreeOfScarcity,jdbcType=VARCHAR},
+            </if>
+            <if test="marketDemand != null">
+                marketDemand = #{marketDemand,jdbcType=VARCHAR},
+            </if>
+            <if test="theMinimumSalary1 != null">
+                theMinimumSalary1 = #{theMinimumSalary1,jdbcType=DECIMAL},
+            </if>
+            <if test="theMinimumSalary2 != null">
+                theMinimumSalary2 = #{theMinimumSalary2,jdbcType=VARCHAR},
+            </if>
+            <if test="theMinimumSalary3 != null">
+                theMinimumSalary3 = #{theMinimumSalary3,jdbcType=VARCHAR},
+            </if>
+            <if test="maximumSalary1 != null">
+                maximumSalary1 = #{maximumSalary1,jdbcType=VARCHAR},
+            </if>
+            <if test="maximumSalary2 != null">
+                maximumSalary2 = #{maximumSalary2,jdbcType=VARCHAR},
+            </if>
+            <if test="maximumSalary3 != null">
+                maximumSalary3 = #{maximumSalary3,jdbcType=VARCHAR},
+            </if>
+            <if test="experienceRequirement != null">
+                experienceRequirement = #{experienceRequirement,jdbcType=VARCHAR},
+            </if>
+            <if test="inTheNumberOfStudents != null">
+                inTheNumberOfStudents = #{inTheNumberOfStudents,jdbcType=INTEGER},
+            </if>
+            <if test="promptStatement != null">
+                promptStatement = #{promptStatement,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateById" parameterType="com.alibaba.model.Position">
+        update position
+        set occupation = #{occupation,jdbcType=VARCHAR},
+        duty = #{duty,jdbcType=VARCHAR},
+        threshold = #{threshold,jdbcType=VARCHAR},
+        difficultyDegree = #{difficultyDegree,jdbcType=VARCHAR},
+        growthCycle = #{growthCycle,jdbcType=VARCHAR},
+        degreeOfScarcity = #{degreeOfScarcity,jdbcType=VARCHAR},
+        marketDemand = #{marketDemand,jdbcType=VARCHAR},
+        theMinimumSalary1 = #{theMinimumSalary1,jdbcType=DECIMAL},
+        theMinimumSalary2 = #{theMinimumSalary2,jdbcType=VARCHAR},
+        theMinimumSalary3 = #{theMinimumSalary3,jdbcType=VARCHAR},
+        maximumSalary1 = #{maximumSalary1,jdbcType=VARCHAR},
+        maximumSalary2 = #{maximumSalary2,jdbcType=VARCHAR},
+        maximumSalary3 = #{maximumSalary3,jdbcType=VARCHAR},
+        experienceRequirement = #{experienceRequirement,jdbcType=VARCHAR},
+        inTheNumberOfStudents = #{inTheNumberOfStudents,jdbcType=INTEGER},
+        promptStatement = #{promptStatement,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="getAllPosition" resultType="com.alibaba.model.Position">
+        select * from position
+    </select>
+</mapper>

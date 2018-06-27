@@ -1,0 +1,159 @@
+$grey:#f0f0f0;
+
+$white:#fff;
+$orange:#fbb435;
+$blue:#69d1e9;
+$deepgrey:#787878;
+$fontsize:0.8rem !default;
+body{
+  margin: 0 auto;
+  min-width: 320px;
+  max-width: 768px;
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+
+@mixin pad($top,$bottom){
+  padding-top: $top;
+  padding-bottom:$bottom;
+}
+@mixin size($width,$height){
+  width:$width;
+  height:$height;
+}
+@mixin mar($mtop,$mbottom){
+  margin-top:$mtop;
+  margin-bottom: $mbottom;
+}
+@mixin aline {
+  border:none;
+  &:hover {
+    background-color: $white;
+  }
+  &:active {
+    background-color: $white;
+  }
+}
+.tab-bar{
+  background-color: $blue;
+}
+.left-small{
+  border:none;
+}
+.left-off-canvas-menu{
+  color:$blue;
+  background-color: $white;
+  .off-canvas-list{
+    li{
+      position:relative;
+      @include pad(0.3rem,0.3rem);
+      border-bottom:1px solid $grey;
+      font-size:0.8rem;
+      img{
+        padding-right:0.5rem;
+      }
+
+      a{
+        position:absolute;
+        top:-0.5rem;
+        right:-0.5rem;
+        @include aline;
+      }
+    }
+  }
+}
+.exit-off-canvas{
+  @include aline;
+}
+.inner-wrap{
+  background-color:$grey;
+}
+.main-section{
+  margin:1rem 1.5rem 3rem 1.5rem;
+  .title{
+    position: relative;
+    @include pad(1rem,1rem);
+    border:1px solid $deepgrey;
+    text-align: center;
+    font-size: $fontsize;
+    color:$deepgrey;
+    background-color: $white;
+    a{
+      position:absolute;
+      top:0.95rem;
+      right:0;
+      img{
+        @include size(auto,1.2rem);
+      }
+    }
+  }
+  @media screen and (min-width: 440px){
+    .title{
+      a{
+        right:2rem;
+      }
+    }
+  }
+  .game{
+    margin-top:1rem;
+    border:1px solid $deepgrey;
+    text-align: center;
+    background-color: $white;
+  }
+  .game_name{
+   @include  pad(0.5rem,0.5rem);
+    border-bottom:1px solid $orange;
+    font-size:$fontsize;
+    color:$orange;
+  }
+  .game_version{
+    width:80%;
+    @include pad(1rem,1rem);
+    margin:0 auto;
+    @include mar(0.5rem,0.5rem);
+    font-size:$fontsize;
+    color:$white;
+    background-color:$blue;
+  }
+  .guess{
+    position:relative;
+    .triangle{
+      position:absolute;
+      top:0.8rem;
+      right: -12%;
+      width: 0;
+      height: 0;
+      border-top: 1rem solid transparent;
+      border-left: 1rem solid #fbb435;
+      border-bottom: 1rem solid transparent;
+    }
+    @media screen and (min-width: 450px){
+      .triangle{
+        right:-1.5rem;
+      }
+    }
+  }
+  .game_person{
+    margin:0 auto;
+    font-size:0.7rem;
+    color:$deepgrey;
+  }
+  .dot{
+    display: flex;
+    justify-content: space-between;
+    width:3rem;
+    margin:0 auto;
+    div{
+      @include size(0.5rem,0.5rem);
+      @include mar(0.5rem,0.5rem);
+      border-radius: 50%;
+      background-color:$grey;
+      &:hover{
+        background-color:$blue;
+      }
+    }
+  }
+
+}
+

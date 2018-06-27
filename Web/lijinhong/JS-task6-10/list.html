@@ -1,0 +1,128 @@
+
+
+<div data-ui-view>
+	<div class="content">
+		<form class="form-inline" style="margin-top: 15px;">
+			<div class="form-group">
+				<label for='test'>发布时间</label>
+				<input type="text" class="form-control" id="test" ng-model="ctrlScope.startTime">
+		
+			</div>
+			<div class="form-group">
+				<label for="exampleInputEmail2">修改时间</label>
+				<input type="text" class="form-control" id="exampleInputEmail2" ng-model="ctrlScope.endTime">
+			</div>
+			
+			<span>类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>
+
+			<select class="form-control" style="width: 196px"  ng-model="ctrlScope.type" >
+				<option value=''>全部</option>	
+				<option value="0">首页banner</option>
+				<option value="1">找职位banner</option>
+				<option value="2">找精英banner</option>
+				<option value="3">行业大图</option>
+			</select>
+			
+			<div class="box2">
+				<span>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</span>
+				<select class="form-control" style="width: 196px;" ng-model="ctrlScope.status">
+					<option value="">全部</option>
+					<option value="1">草稿</option>
+					<option value="2">上线</option>
+				</select>
+			</div>
+		</form>
+		<button class="btn btn-default"  ng-click= search() id="button">搜索</button>
+		<button class="btn btn-default"  ng-click= eliminate() id="button1">清空</button>
+	</div>
+	<div class="liebiao">
+		<div class="lb-head">
+			<span>Article列表</span>
+			<a class="btn btn-default" href="#" role="button" id="button2"  ui-sref=".new">+新增</a>
+		</div>
+		<div class="lb-content">
+			<table class="table table-striped">
+				
+				<tr style="border-bottom: 2px solid #4F4F4F;">	
+					<th>ID</th>
+					<th>名称</th>
+					<th>类型</th>
+					<th>发布时间</th>
+					<th>修改时间</th>
+					<th>发布者</th>
+					<th>状态</th> 
+					<th style="padding-left: 65px;">操作</th>
+				</tr>
+				<tr ng-repeat="x in names">	
+
+					<td>{{x.id}}</td>
+					<td>{{x.title}}</td>
+					<td >{{x.type | typeFilter}}</td>
+					<td>
+						{{x.createAt|date:'yyyy-MM-dd'}} <br>
+						{{x.createAt|date:'HH:mm:ss'}}
+
+					</td>
+					<td class="td">
+						{{x.updateAt |date:'yyyy-MM-dd'}} <br>
+						{{x.updateAt|date:'HH:mm:ss'}}
+					</td>
+					<td>{{x.author}}</td>
+					<td>{{x.status | statusFilter}}</td>
+
+					<td data-idText="{{x.id}}" data-status="{{x.status}}">
+
+						<a type="button" class="btn btn-sm ng-binding" ng-click="change(x.id,x.status)">{{x.status | upDown}}</a>
+						<a type="button" class="btn btn-sm ng-binding" ng-click="edit(id)">编辑</a>
+						<a type="button" class="btn btn-sm ng-binding" ng-click="eradicate(x.id)">删除</a>
+
+					</td>
+				</tr>
+
+			</table>
+		</div>
+
+		<div class="fenye">
+			<div class="fenye">
+				<span>每页显示<input type="text" class="form-control" id="exampleInputEmail3" ng-model ="ctrlScope.size" style="width: 50px;display: inline;">条</span>
+
+				<button class="btn btn-default" ng-click=firstPage()>首页</button>
+				<ul class="pagination" style="position: relative;top: 34px;">
+					<li ng-repeat= "x in arr">
+						<a ui-sref="page.list({'page':$index+1})">{{$index+1}}</a>
+					</li>
+
+				</ul>
+				<button class="btn btn-default" ng-click="last()">末页</button>
+
+				去第几
+				<input type="text" class="form-control" id="exampleInputEmail3" ng-model ="ctrlScope.page" style="width: 50px;display: inline;">
+				页
+				<button class="btn btn-default" ng-click= go()>确定</button>
+			</div>  
+		</div>	
+	</div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#test").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showMonthAfterYear: true,
+            dateFormat: "yy-mm-dd"
+
+
+        });
+    });
+    $(function () {
+        $("#exampleInputEmail2").datepicker({ 
+            changeMonth: true,
+            changeYear: true,
+            showMonthAfterYear: true,
+            dateFormat: "yy-mm-dd"
+
+
+        });
+    })
+</script>
