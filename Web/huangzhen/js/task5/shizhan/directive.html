@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="new">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>创建一个新指令</title>
+    <!-- css -->
+    <link rel="stylesheet" href="./directive.css">
+</head>
+
+<body>
+    <h3>来源于angularjs实战-陶国荣</h3>
+    <div class="frame">
+        <ts-hello></ts-hello>
+        <div ts-hello></div>
+        <div class="ts-hello"></div>
+        <!-- 这里怎么注释行不通？只输出上面三行 -->
+        <!-- directive:ts-hello -->
+        <div></div>
+        <!-- 2 -->
+        <ts-tplfiles></ts-tplfiles>
+        <ts-tplscript></ts-tplscript>
+        <ts-tplcache></ts-tplcache>
+
+        <!-- 3 -->
+        <ts-tplscipt>{{text}}</ts-tplscipt>
+
+        <!-- 4 -->
+        <ts-tplscipt></ts-tplscipt>
+        <div class="tip">{{content}}</div>
+    </div>
+
+
+
+    <script src="angular.js"></script>
+    <!-- js，注意顺序 -->
+    <script type="text/javascript">
+        var app = angular.module('new', []);
+        app
+            .directive('tsHello', function () {
+                return {
+                    restrict: 'AEMC',
+                    template: '<h3>hello directive</h3>'
+                }
+            })
+
+            .run(function ($templateCache) {
+                // 2  run方法自动执行一个函数
+                $templateCache.put('cache', '<h3>模板内容来源于scirpt元素</h3>')
+            })
+
+            .directive('tsTplfiles', function () {
+                return {
+                    restrict: 'AEMC',
+                    templateUrl: 'tpl.html'
+                }
+            })
+
+            .directive('tsTplscript', function () {
+                return {
+                    // 通过id访问
+                    restrict: 'AEMC',
+                    templateUrl: 'tpl',
+                    replace: true
+                }
+            })
+
+            .directive('tsTplcache', function () {
+                return {
+                    restrict: 'AEMC',
+                    templateUrl: 'cache'
+                }
+            })
+
+
+            // .directive('tsTplscipt', function () {
+            //     return {
+            //         // 3
+            //         restrict: 'AEMC',
+            //         templateUrl: 'tpl3',
+            //         transclude: true
+            //     }
+            // })
+
+            .directive('tsTplscipt',function(){
+                return{
+                    // 4
+                    restrict:'AEMC',
+                    templateUrl:'tpl4',
+                    replace:true,
+                    link:function(scope,iEle,iAttrs){
+                        iEle.bind('click',function(){
+                            scope.$apply(function(){
+                                scope.content='点击之后显示的内容';
+                            })
+                            iAttrs.$$element[0].disabled='true';
+                        })
+                    }
+                }
+            })
+
+
+    </script>
+    <script type="text/ng-template" id="tpl">
+        <h3> 模板内容来源于scirpt元素 </h3>
+    </script>
+    <script type="text/ng-template" id="tpl3">
+        <div class="frame">
+            <input type="text" ng-model="text">
+            <div ng-transclude class="tip"></div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="tpl4">
+        <button>单机按钮</button>
+    </script>
+
+</body>
+
+</html>

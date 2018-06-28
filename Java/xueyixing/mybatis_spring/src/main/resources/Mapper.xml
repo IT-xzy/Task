@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.Dao">
+
+    <resultMap  id="StudentResult" type="com.entity.Person" >
+        <id property="id" column="Id"/>
+        <result property="name" column="Name"/>
+        <result property="QQ" column="QQ"/>
+        <result property="iesson_type" column="Iesson_type"/>
+        <result property="Enroiment_time" column="Enroiment_time"/>
+        <result property="Graduated_school" column="Graduated_school"/>
+        <result property="student_ID" column="Student_ID"/>
+        <result property="Daily_conection" column="Daily_conection"/>
+        <result property="wish" column="Wish"/>
+        <result property="brother_name" column="Brother_name"/>
+        <result property="Channel" column="Channel"/>
+    </resultMap>
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="ID">
+        insert into student (ID,name,QQ,iesson_type,Enroiment_time,
+            		Graduated_school,student_ID,Daily_conection,wish,brother_name,Channel)
+            		value (#{id},#{name},#{QQ},#{iesson_type},#{Enroiment_time},#{Graduated_school},
+                    #{student_ID},#{Daily_conection},#{wish},#{brother_name},#{Channel})
+    </insert>
+    
+    <delete id="deleteUser" parameterType="int">
+        delete from student where id=#{id}
+    </delete>
+    
+    <update id="updateUser">
+        update student set name=#{name},QQ=#{QQ},iesson_type=#{iesson_type},Enroiment_time=#{Enroiment_time},
+        Graduated_school=#{Graduated_school},student_ID=#{student_ID},Daily_conection=#{Daily_conection},wish=#{wish},
+        brother_name=#{brother_name},Channel=#{Channel} where id=#{id}
+    </update>
+    
+    <select id="findUserByName" resultType="com.entity.Person">
+        select * from student where name=#{name}
+    </select>
+
+    <select id="findUserById" parameterType="int" resultType="com.entity.Person">
+        select * from student where id=#{id}
+    </select>
+</mapper>
