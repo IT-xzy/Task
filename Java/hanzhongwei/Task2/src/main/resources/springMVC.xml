@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--扫描Controller,并将其生命周期纳入Spring管理-->
+    <context:annotation-config/>
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器  -->
+    <context:component-scan base-package="hzw.controller">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--注解驱动，以使得访问路径与方法的匹配可以通过注解配置-->
+    <!-- 1、配置映射器与适配器 -->
+    <!--<mvc:annotation-driven />-->
+    <mvc:annotation-driven >
+        <!-- 消息转换器,解决responseBody返回中外乱码问题 -->
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--<mvc:annotation-driven /> 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter
+        两个bean,是spring MVC为@Controllers分发请求所必须的。  -->
+    <!-- 静态页面，如html,css,js,images可以访问-->
+    <mvc:default-servlet-handler />
+
+    <!--  视图定位到/WEB-INF/jsp 这个目录下 -->
+    <!-- 2、视图解析器 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+</beans>

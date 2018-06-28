@@ -1,0 +1,97 @@
+<div class="row pd-top-2">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" id="blur">
+                <div class="form-group ">
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">媒介名称：</label>
+                        <div class="col-md-8">
+                            <input type="text"
+                                   class="form-control"
+                                   ng-model="vm.params.name"
+                                   maxlength="20"
+                                   placeholder="请输入媒介名称">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">状态搜索：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.status">
+                                <option value="">全部</option>
+                                <option value="0">已下架</option>
+                                <option value="1">已上架</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.clear()">重置</button>
+            </div>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.search()">搜索</button>
+            </div>
+        </div>
+    </div>
+    <!--数据列表-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <buttont class="btn btn-default pull-right" style="margin-right: 20px" ng-click="vm.add()">新增</buttont>
+                </div>
+                <div class="list-replace" ng-if="vm.mediumList.length === 0">
+                    <div class="list-replace-text">暂无任何数据</div>
+                </div>
+                <div class="panel-body panel-body-noMax" ng-if="vm.mediumList.length !== 0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>媒介名称</th>
+                                <th>url数量</th>
+                                <th>状态</th>
+                                <th>上架时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="li in vm.mediumList" class="text-center break-all">
+                                <td>{{li.id}}</td>
+                                <td>{{li.name}}</td>
+                                <td><a class="underline" ui-sref="field.link({mediumId: li.id})">{{li.linkCount}}</a></td>
+                                <td>{{li.status | statusFilter}}</td>
+                                <td>{{li.updateAt | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td>
+                                    <button class="btn btn-success btn-xs"
+                                            ng-if="li.status === 0"
+                                            ng-click="vm.upDown(li.id, 1)">
+                                      上架
+                                    </button>
+                                    <button class="btn btn-warning btn-xs"
+                                            ng-if="li.status === 1"
+                                            ng-click="vm.upDown(li.id, 0)">
+                                      下架
+                                    </button>
+                                    <button class="btn btn-primary btn-xs"
+                                            ng-click="vm.edit(li.id, li.name)">
+                                        编辑
+                                    </button>
+                                  <button class="btn btn-primary btn-xs"
+                                          ng-click="vm.goSort(li)"
+                                          >
+                                      重新排序
+                                  </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--分页-->
+                    <page ng-if="vm.totalPage" total-page="{{vm.totalPage}}"></page>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

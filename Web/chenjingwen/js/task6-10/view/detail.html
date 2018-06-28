@@ -1,0 +1,94 @@
+
+    <div class="table" ng-controller="typeCtrl">
+        <div class="table-title" ng-model="ttitle">{{ttitle}}</div>
+        <form name="myForm">
+        <div class="table-row">
+            <span class="table-row-name">标题名称</span>
+            <input class="inputbox" type="text" name="title" ng-model="param.title" required>
+        </div>
+        <div class="error" ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
+            <div ng-message="required">请输入标题名称</div>
+        </div>
+        <div class="table-row">
+            <span class="table-row-name">类 型</span>
+            <select class="inputbox" ng-model="param.type" name="type" ng-options="z.value as z.text for z in types" required>
+                <option value="" select hidden >请选择</option>
+            </select>
+            <select class="inputbox" ng-model="param.industry" name="industry" ng-if="param.type==3" ng-options="v.value as v.text for v in industrys" required>
+                <option value="" select hidden>请选择</option>
+            </select>
+        </div>
+        <div class="error" ng-messages="myForm.type.$error" ng-if="myForm.type.$touched">
+            <div ng-message="required">请选择类型</div>
+        </div>
+        <div class="error" ng-messages="myForm.industry.$error" ng-if="myForm.industry.$touched">
+            <div ng-message="required">请选择行业</div>
+        </div>
+        <div class="table-row">
+            <span  class="table-row-name">说 明</span>
+            <div class="inputbox" id="wEditor"></div>
+        </div>
+        <div class="table-row">
+            <span  class="table-row-name">跳转链接</span>
+            <input class="inputbox" type="url" name="url" ng-model="param.url" required>
+        </div>
+        <div class="error" ng-messages="myForm.url.$error" ng-if="myForm.url.$touched">
+            <div ng-message="required">请输入跳转链接</div>
+            <div ng-message="url">请输入正确的链接格式</div>
+        </div>
+        </form>
+        <div class="table-row table-row-special">
+            <span  class="table-row-name">配 图</span>
+            <label for="upload-file">选择文件</label>
+            <input type='file' id="upload-file" nv-file-select uploader="uploader">
+            <img alt="配图预览" class="preview" ng-src="{{imageSrc}}">
+        </div>
+
+        <div class="table-row">
+            <table>
+                <thead>
+                    <tr style="text-align: center;">
+                        <th style="width:15%;">图片名</th>
+                        <th style="width:15%;">文件大小</th>
+                        <th style="width:20%;">进度</th>
+                        <th style="width:20%;">操作</th>
+                        <th style="width:30%;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in uploader.queue">
+                        <td>{{item.file.name}}</td>
+                        <td>{{item.file.size/1024/1024|number:2}}MB</td>
+                        <td ng-show="uploader.isHTML5">
+                            <div class="progress" style="margin-left:15px;margin-right:15px;margin-bottom: 0;">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }" style="width: 100%;"></div>
+                            </div>
+                        </td>
+                        <td class="text-center">
+                            <span ng-show="item.isSuccess" style="display: none;"><i class="glyphicon"></i></span>
+                            <span ng-show="item.isCancel" style="display: none;"><i class="glyphicon"></i></span>
+                            <span ng-show="item.isError" style><i class="glyphicon"></i></span>
+                        </td>
+                        <td nowrap="">
+                            <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()"
+                             ng-disabled="item.isReady || item.isUploading || item.isSuccess" disabled="disabled">
+                                <span></span> 上传
+                            </button>
+                            <button type="button" class="btn btn-danger btn-xs" id="delbtn" ng-click="item.remove();item.cancel();clearImg()">
+                                <span></span> 删除
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-footer">
+            <div class="table-footer-left">
+                <button class="btn btn-default btn-success" ng-click="submit(param,imageSrc,1)" ng-disabled="!myForm.$valid||imageSrc==false||imageSrc==undefined" disabled="disabled">立即上线</button>
+                <button class="btn btn-default btn-success"ng-click="submit(param,imageSrc,2)" ng-disabled="!myForm.$valid||imageSrc==undefined||imageSrc==false" disabled="disabled">存为草稿</button>
+            </div>
+            <div class="table-footer-right">
+                <button ng-click="retreat()">取消</button>
+            </div>
+        </div>
+    </div>

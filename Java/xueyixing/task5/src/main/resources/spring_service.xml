@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--扫描service包下所有注解-->
+    <context:component-scan base-package="com.mvc.service"/>
+
+    <!--service调用实现-->
+    <bean id="PersonService" class="com.mvc.service.ServiceImpl"/>
+    <!--织入失败
+   在项目中，一般都会在spring mvc配置文件中配置全盘扫描Controller，在Spring配置文件中配置扫描其它需要的注解。因此，有可能你在spring配置文件中添加了<aop:aspectj-autoproxy/>能识别@Aspect且作用于其它层的aop能正常运行，但作用于Controller的aop却无法生效。
+   解决方法：在spring配置文件中也添加 <aop:aspectj-autoproxy />
+   首先我们得先了解一下，服务器启动时Webapp的web.xml中配置的加载顺序
+   启动一个WEB项目的时候，WEB容器会去读取它的配置文件web.xml，读取<listener>和<context-param>两个结点。
+   紧急着，容创建一个ServletContext（servlet上下文），这个web项目的所有部分都将共享这个上下文。
+   容器将<context-param>转换为键值对，并交给servletContext。
+   容器创建<listener>中的类实例，创建监听器。
+   加载顺序是：ServletContext -> context-param -> listener -> filter -> servlet
+   1. Spring是listener ，因此其配置文件会先于Spring mvc的servlet加载。
+   2. 执行Spring配置文件后，Spring会创建一个WebApplicationContext上下文，称为父上下文（父容器）;spring mvc可以同时配置多个，每个 DispatcherServlet有一个自己的上下文对象（WebApplicationContext），称为子上下文（子容器）。
+   3. 子上下文可以访问父上下文中的内容，但父上下文不能访问子上下文中的内容。
+   4. 因此父容器中的<aop:aspectj-autoproxy/> 不能作用到子容器才扫描的Controller。-->
+    <aop:aspectj-autoproxy />
+    <bean name="timeUserService" class="com.mvc.aop.TimeUserService"/>
+</beans>

@@ -1,0 +1,32 @@
+<!--弹出模态框-->
+<div class="modal ng-scope top am-fade" tabindex="-1" role="dialog" aria-hidden="true" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">{{title}}</h3>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="myForm">
+                    <div class="form-group">
+                        <label for="content" class="col-sm-2 control-label">媒介名称</label>
+                        <div class="col-sm-10">
+                            <input type="text"
+                                   class="form-control"
+                                   name="content"
+                                   id="content"
+                                   maxlength="20"
+                                   ng-model="content"
+                                   ng-blur="test()"
+                                   required>
+                        </div>
+                        <p class="col-sm-12 col-sm-offset-2" style="color: #ff0000" ng-if="isShow">媒介名称已存在</p>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" ng-click="cancel()">取消</button>
+                <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="myForm.content.$invalid || isShow">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

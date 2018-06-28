@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.summerwaves.dao.UserDao">
+    <insert id="insertUser" parameterType="cn.summerwaves.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user(username, password,tel,email,avatar) values(#{username},#{password},#{tel},#{email},#{avatar})
+    </insert>
+
+    <select id="selectUserByName" parameterType="java.lang.String" resultMap="userMap">
+        SELECT * FROM user WHERE username = #{username}
+     </select>
+
+    <select id="selectUserById" parameterType="int" resultMap="userMap">
+        SELECT * FROM user WHERE ID = #{id}
+    </select>
+
+    <select id="selectIdAvatarUsernameFromAllUser" resultMap="userMap">
+        SELECT ID,avatar,username FROM user
+    </select>
+
+    <select id="selectAllUser" resultMap="userMap">
+        SELECT ID,avatar,username,password,tel,email FROM user
+    </select>
+
+    <update id="updateUser" parameterType="cn.summerwaves.model.User">
+        UPDATE user
+        <set>
+            <if test="avatar != null">avatar=#{avatar},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="tel != null">tel=#{tel}</if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+
+    <resultMap id="userMap" type="cn.summerwaves.model.User">
+        <result property="id" column="ID"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="tel" column="tel"/>
+        <result property="email" column="email"/>
+        <result property="avatar" column="avatar"/>
+    </resultMap>
+
+
+</mapper>

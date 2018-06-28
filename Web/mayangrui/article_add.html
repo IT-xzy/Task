@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<div class="panel panel-default ng-scope">
+    <div class="panel-heading add-heading">
+        <!-- if.param.id 显示“编辑页面”，else 显示“新增页面”  -->
+        <strong class="ng-scope">{{pageName}}</strong>
+
+    </div>
+    <div class="panel-body add-body">
+        <form class="form-horizontal" name="myForm" novalidate>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">标题名称</label>
+                <div class="col-md-8">
+                    <input name="title" class="form-control" type="text" ng-model="title" required>
+                    <div class="warning" ng-messages="myForm.title.$error">
+                        <p ng-message="required">*必填项</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label word-spacing-25">类 型</label>
+                <div class="col-md-2">
+                    <select name="type" class="form-control" ng-model="type" ng-options="x.id as x.name for x in add_type"
+                            required>
+                    </select>
+                    <div class="warning" ng-messages="myForm.type.$error">
+                        <p ng-message="required">*必填项</p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <!-- If.params.type==3 显示该下拉菜单-->
+                    <select name="industry" class="form-control" ng-if="type === 3" ng-model="$parent.industry"
+                            ng-options="x.id as x.name for x in add_industry" required>
+                    </select>
+                    <div class="warning" ng-messages="myForm.industry.$error">
+                        <p class="red" ng-message="required">*必填项</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label word-spacing-25">说 明</label>
+                <div class="col-md-8">
+                    <div name="text" type="text/html" style="margin:auto;height:300px;width:100%;" ng-model="text"
+                         meta-umeditor meta-umeditor-config="config">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">跳转链接</label>
+                <div class="col-md-8">
+                    <input name="link" class="form-control" type="text" ng-model="goLink" required>
+                    <div class="warning" ng-messages="myForm.link.$error">
+                        <p class="red" ng-message="required">*必填项</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 选好图片后点击上传，出现进度条，出现预览图片；上传成功后才能点击上线按钮 -->
+            <div class="row form-group">
+                <label class="col-md-2 control-label word-spacing-25">配 图</label>
+                <div class="col-md-10">
+                    <div class="col-md-12 ">
+                        <label class="btn btn-primary" for="file2">选择文件</label>
+                        <input id="file2" style="display: none" type="file" ngf-select ngf-pattern="'image/*'"
+                               ngf-accept="'image/*'" ngf-max-size="2MB" ng-model="myFiles"
+                               name="file">
+                    </div>
+
+                    <div class="col-md-12">
+                        <img alt="配图预览" class="img-responsive" ng-model="imgView" ng-if="img_view" ng-src="{{img_view}}"
+                             ngf-size="{quality: 1}">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">图片名</th>
+                                    <th class="text-center">文件大小</th>
+                                    <th class="text-center">进度</th>
+                                    <th class="text-center">状态</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- 如果没有图片，不显示图片信息 -->
+                                <tr ng-if="myFiles">
+                                    <td class="text-center">
+                                        <b>{{myFiles.name}}</b>
+                                    </td>
+                                    <td class="text-center">{{myFiles.size | add_filter}}</td>
+                                    <td class="text-center" ng-if="myFiles">
+                                        <div class="progress text-center" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': myFiles.progress + '%' }"
+                                                 style="width: 0%;"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="glyphicon glyphicon-ok" ng-if="myFiles.progress"></span>
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="glyphicon glyphicon-upload btn btn-success upload" ng-click="imgUpload(myFiles)">上传</button>
+                                        <button type="button" class="glyphicon glyphicon-trash btn btn-danger upload" ng-click="imgDelete(myFiles)">删除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 上线 -->
+            <div class="form-group">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <button type="button" class="btn btn-success" ng-disabled="img_view === undefined || myForm.$invalid"
+                            ng-click="onLine()">立即上线
+                    </button>
+                    <button type="button" class="btn btn-success" ng-disabled="img_view === undefined || myForm.$invalid"
+                            ng-click="save()">
+                        存为草稿
+                    </button>
+                    <!-- <span class="text-red" ng-show="!vm.vaidShow">请补全信息</span> -->
+                    <button type="button" class="btn btn-default pull-right" ui-sref="first.article">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

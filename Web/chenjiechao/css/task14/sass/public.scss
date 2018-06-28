@@ -1,0 +1,313 @@
+$green: #29b078;
+$black: #333;
+$gray: #999;
+$background: #fafafa;
+$white: #fff;
+$red: #f01400;
+$black: #333;
+$padding: 1.5rem;
+* {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+button {
+  outline: none;
+}
+html {
+  font-size: 62.5%;
+  width: 100%;
+}
+body {
+  width: 100%;
+  font-size: 1.6rem;
+  background-color: $background;
+}
+header {
+  width: 100%;
+}
+.container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+// 公共字体样式部分
+.bold {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.8rem;
+  padding: 2rem 0;
+  color: $black;
+}
+.gray {
+  text-align: center;
+  color: $gray;
+  font-size: 1.5rem;
+}
+.minigray {
+  font-size: 1.2rem;
+  color: $gray;
+}
+.minired {
+  font-size: 1.2rem;
+  color: $red;
+}
+.miniblack {
+  font-size: 1.2rem;
+  color: $black;
+}
+.minibold {
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+  color: $black;
+}
+.green {
+  text-align: center;
+  font-size: 1.8rem;
+  color: $green;
+}
+.green-16 {
+  color: $green;
+}
+.white {
+  color: $white;
+}
+.md-3 {
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+@media (min-width: 768px) {
+  .md-3 {
+    width: 50%;
+  }
+}
+@media (min-width: 992px) {
+  .md-3 {
+    width: 25%;
+  }
+}
+// 我来组成头部之最上部分
+.top {
+  height: 4rem;
+  line-height: 4rem;
+}
+.top span {
+  display: inline-block;
+  font-size: 1.3rem;
+}
+.top img {
+  float: right;
+  width: 10.8rem;
+  height: 2.4rem;
+  margin: 0.8rem 0;
+}
+// 我来组成头部之导航条部分
+
+.nav {
+  position: relative;
+  background-color: $green;
+}
+.nav-show {
+  position: relative;
+  height: 5rem;
+}
+.nav-md {
+  display: none;
+  float: right;
+  height: 5rem;
+  .md-ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    .md-li {
+      position: relative;
+      display: inline-block;
+      width: 5rem;
+      height: 5rem;
+      line-height: 5rem;
+      text-align: center;
+      font-size: 1.6rem;
+      color: $white;
+      a {
+        text-decoration: none;
+        color: $white;
+      }
+      .whiteblock {
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 0.4rem;
+        bottom: 0;
+        left: 0;
+        background-color: $white;
+      }
+    }
+    .md-li:hover .whiteblock {
+      display: inline-block;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-md {
+    display: flex;
+  }
+}
+.nav-xs {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 1.01rem;
+  right: 1rem;
+}
+input[type="checkbox"]:checked + .xs-ul {
+  display: flex;
+}
+input[type="checkbox"]{
+  opacity: 0;
+}
+.nav-xs-button {
+  display: inline-block;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0.6rem 0;
+  border-top: 0.4rem solid $white;
+  border-bottom: 0.4rem solid $white;
+  box-sizing: border-box;
+  background-clip: content-box;
+  background-color: $white;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .nav-xs {
+    display: none;
+  }
+}
+.nav-input {
+  position: absolute;
+}
+.xs-ul {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 16rem;
+  padding: 0;
+  margin: 0;
+
+  background-color: $green;
+  .xs-li {
+    width: 100%;
+    height: 4rem;
+    font-size: 2rem;
+    text-align: center;
+    line-height: 4rem;
+    a {
+      display: inline-block;
+      width: 100%;
+      color: $white;
+      text-decoration: none;
+    }
+  }
+  .xs-li:hover {
+    background-color: #b6b6b6;
+  }
+}
+
+.nav-xs:hover + .xs-ul {
+  display: flex;
+}
+.xs-ul:hover {
+  display: flex;
+}
+// 我来组成腿部
+footer {
+  background-color: #29b078;
+}
+.foot {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  .foot-top {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+    div {
+      p {
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}
+.foot-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0.5rem 0;
+  color: $white;
+}
+@media (min-width: 768px) {
+  .foot-left {
+    width: 40%;
+  }
+}
+@media (min-width: 992px) {
+  .foot-left {
+    width: 34%;
+  }
+}
+.foot-middle {
+  @extend .foot-left;
+}
+@media (min-width: 768px) {
+  .foot-middle {
+    width: 55%;
+  }
+}
+@media (min-width: 992px) {
+  .foot-middle {
+    width: 52%;
+  }
+}
+.foot-right {
+  @extend .foot-left;
+  align-items: flex-start;
+  margin: 1rem 0;
+}
+@media (min-width: 992px) {
+  .foot-right {
+    width: 12%;
+  }
+}
+.space {
+  letter-spacing: -3px;
+}
+.space a {
+  letter-spacing: 0;
+}

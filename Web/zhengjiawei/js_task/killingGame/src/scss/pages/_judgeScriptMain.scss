@@ -1,0 +1,151 @@
+$blue :#24A7C6;
+body {
+    background: #f0f0f0;
+}
+
+main {
+    margin-top: 40px;
+    margin-bottom: 60px;
+    padding: 10px;
+    .dayNum {
+        width: 100%;
+        height: 40px;
+        color: #29BDE0;
+        font-size: 20px;
+        font-weight: 300;
+        border: 1px solid #C9C9C9;
+        background: $white;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px #fff;
+    }
+    .sunBox {
+        p {
+            border-left: 1px solid #C9C9C9;
+            margin: 0;
+            padding: 0 0px 20px 30px;
+        }
+    }
+    .moonBox {
+        p {
+            border-left: 1px solid #C9C9C9;
+            margin: 0;
+            padding: 20px 0 0 30px;
+        }
+    }
+    .box {
+        padding: 35px 15px 35px 30px;
+        position: relative;
+        margin-top: 10px;
+        border-left: 1px solid #fff;
+        background: $white;
+        border-radius: 5px;
+        &::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            margin-left: -10px;
+            top: 0;
+            margin-top: -20px;
+            display: inline-block;
+            border: 10px solid transparent;
+            border-bottom: 10px solid $white;
+        }
+        /* 三角  上 */
+        .guide {
+            padding: 0 0 20px 30px;
+            border-left: 1px solid #C9C9C9;
+            span {
+                position: relative;
+                display: inline-block;
+                text-align: center;
+                color: $white;
+                font-weight: 300;
+                width: 100%;
+                height: 30px;
+                line-height: 30px;
+                background: $blue;
+                border-radius: 7px;
+                cursor: pointer;
+                i {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -10px;
+                    left: 0;
+                    margin-left: -20px;
+                    display: inline-block;
+                    border: 10px solid transparent;
+                    border-right: 10px solid $blue;
+                }
+                /* 三角  左*/
+            }
+            /* 包含三角和条框 */
+        }
+        /* 大盒子 */
+    }
+    /* 导引框 */
+    #vote {
+        padding: 0 0 0 30px;
+    }
+}
+
+/* main */
+
+.sun {
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        left: 0;
+        margin-left: -16px;
+        display: inline-block;
+        background: url(../../img/moon.png) no-repeat;
+        background-color: #fff;
+        background-size: 70%;
+        background-position: 50%;
+        border: 1px solid #C9C9C9;
+        border-radius: 50%;
+    }
+}
+
+.moon {
+    position: relative;
+    &::before {
+        content: "";
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        left: 0;
+        margin-left: -16px;
+        display: inline-block;
+        background: url(../../img/sun.png) no-repeat;
+        background-color: #fff;
+        background-size: 70%;
+        background-position: 50%;
+        border: 1px solid #C9C9C9;
+        border-radius: 50%;
+    }
+}
+
+footer {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(41, 189, 224, 0.5);
+    button {
+        width: 40%;
+        height: 80%;
+        font-size: .18rem;
+        font-weight: 300;
+        border-radius: 5px;
+        color: $white;
+        background: #fbb435;
+    }
+}

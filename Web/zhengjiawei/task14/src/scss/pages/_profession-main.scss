@@ -1,0 +1,237 @@
+@import '../helpers/mixin';
+@import '../helpers/variable';
+.title {
+    padding: 30px 0; // 标题
+    border-bottom: 1px solid #D0D6D9;
+    a:nth-child(1) {
+        color: $black;
+    }
+    a:nth-child(2) {
+        color: $green;
+    }
+} //标题
+.direction {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #EDF1F2;
+    @media (max-width: 767px) {
+        display: block;
+    } //取消flex，让ul成行排列
+    .direction-nav {
+        span {
+            display: none;
+            margin: 15px 0;
+            border: 10px solid transparent;
+            width: 0;
+            height: 0;
+            border-left: 20px solid $green;
+            @media (max-width: 767px) {
+                display: block; //三角按钮显现
+            }
+        } //三角按钮
+    }
+    input:checked~span {
+        display: block;
+    }
+    input:checked~ul li {
+        display: block;
+    } //让隐藏的元素显现
+    >span {
+        margin-right: 30px;
+        @media (max-width: 767px) {
+            display: none;
+            width: 100%;
+        }
+    } //方向
+    ul {
+        display: flex;
+        @media (max-width: 767px) {
+            display: block;
+        }
+        li {
+            margin-right: 30px;
+            a {
+                color: $black;
+                &:hover {
+                    background: $green;
+                    color: $white;
+                    font-weight: 300;
+                }
+            }
+            @media (max-width: 767px) {
+                display: none;
+                width: 100%;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #EDF1F2;
+            }
+        }
+    } //方向：清单
+}
+
+.subhead {
+    color: $black;
+    padding: 30px 0;
+    border-bottom: 1px solid #D0D6D9;
+}
+
+table,
+th,
+td {
+    border: 1px solid #EDF1F2;
+}
+
+.direction-box {
+    margin: 48px 0;
+    @media (max-width: 575px) {
+        flex: 0 0 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        width: 100%;
+        position: relative;
+        min-height: 1px;
+        max-width: 100%;
+    }
+}
+
+.direction-table {
+    position: relative;
+    i {
+        display: inline-block;
+        background: url(../img/star.png)no-repeat;
+        width: 16px;
+        height: 15px;
+        margin-right: 10px;
+    } //为所有的i标签设置五角星
+    .direction-table-one {
+        border: none;
+        td {
+            padding: 20px 10px;
+            border: none;
+        }
+        td:nth-child(2) {
+            padding-left: 0;
+            h4 {
+                margin-bottom: 15px;
+                color: $black;
+            }
+            span {
+                display: block;
+                word-break: break-all;
+                color: $black;
+            }
+        }
+    } //表格第一行
+    .direction-table-two {
+        td {
+            padding: 10px 0;
+            width: 50%;
+            span {
+                margin-left: 5px;
+                margin-right: 12px;
+                font-size: 14px;
+                color: $gray;
+            }
+        }
+    } //第二行
+    .direction-table-three {
+        td {
+            padding: 10px 5px;
+            span:nth-child(1) {
+                font-size: 14px;
+                color: $gray;
+            }
+            span:nth-child(2) {
+                font-size: 12px;
+                color: #F01400;
+            }
+            span:nth-child(3) {
+                font-size: 12px;
+                color: $black;
+            }
+        }
+    } //第三行
+    .salary {
+        td {
+            padding: 0;
+        }
+        table {
+            border: none;
+            width: 100%;
+            tr:nth-child(1) {
+                td:nth-child(1) {
+                    color: $gray;
+                    text-align: center;
+                }
+                td:nth-child(2) {
+                    width: 60%;
+                    padding: 10px 10px;
+                    span:nth-child(2) {
+                        float: right;
+                    }
+                }
+            } //第一行
+            tr:nth-child(2) {
+                td {
+                    padding: 10px 10px;
+                    span:nth-child(2) {
+                        float: right;
+                    }
+                }
+            } //第三行
+            tr:nth-child(3) {
+                td {
+                    padding: 10px 10px;
+                    span:nth-child(2) {
+                        float: right;
+                    }
+                }
+            } //第四行
+        }
+    } //第四行
+    .direction-table-four {
+        td {
+            font-weight: 500;
+            padding: 10px;
+            span {
+                color: #F01400;
+            }
+        }
+    } //第五行
+    .direction-table-five {
+        td {
+            padding: 10px;
+            span {
+                color: $gray;
+            }
+        }
+    }
+}
+
+.direction-table:hover~.hide-content {
+    display: block;
+}
+
+.hide-content:hover {
+    display: block;
+    background: rgba(0, 0, 0, .7);
+    transition: all 2s;
+}
+
+.hide-content {
+    display: none;
+    position: absolute;
+    background: #fff;
+    margin-right: 15px;
+    padding: 80px 45px;
+    top: 0;
+    bottom: 0;
+    color: $white;
+    h5 {
+        font-size: 16px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    p {
+        letter-spacing: 2px;
+    }
+}

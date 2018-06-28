@@ -1,0 +1,94 @@
+$bgcolor:rgb(95,192,205);
+$white:#fff;
+%ab{
+	position:absolute;
+}
+%re{
+	position:relative;
+}
+%cen{
+	text-align:center;
+}
+html{
+	font-size:62.5%;
+	background:rgb(239,240,244);
+}
+body{
+	margin:0;
+	font-size:1.5rem;
+	min-width:300px;
+}
+header{
+	color:$white;
+	width:100%;
+	height:4rem;
+	line-height:4rem;
+	@extend %cen;
+	@extend %re;
+	background-color:$bgcolor;
+}
+header a{
+	&:link,&:visited {text-decoration:none;color:$white;}
+	&:hover {color:blue;}
+} 
+.register{
+	@extend %ab;
+	top:0;
+	left:1rem;
+}
+.login{
+	display:inline;
+	font-size:1.6rem;
+}
+.close{
+	@extend %ab;
+	top:0;
+	right:1rem;
+}
+.phone{
+	margin:1rem 0;
+	background:$white;
+	@extend %re;
+}
+span{
+	width:3rem;
+	@extend %ab;
+	left:2rem;
+	top:1rem;
+	border-right:1px solid #EFF0F4;
+}
+.pass{
+	margin-top:1rem 0;
+	background:$white;
+	@extend %re;
+}
+img{
+	width:1rem;
+}
+.phone>input,.pass>input{
+	width:auto;
+	height:4rem;
+	border:none;
+	padding-left:6rem;
+}
+.submit button{
+	color:$white;
+	width:100%;
+	height:5rem;
+	margin:1rem 0;
+	font-size:1.6rem;
+	@extend %cen;
+	border:none;
+	background-color:$bgcolor;
+}
+input{outline:none;}
+.link a{
+	&:link, &:visited{color:$bgcolor;} 
+	&:hover {color:blue;}
+}
+.link{
+	font-size:1rem;
+	@extend %ab;
+	margin-top:0.5rem;
+	right:1rem;
+}
