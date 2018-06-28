@@ -15,7 +15,7 @@ public class AliyunOSSUtil {
      String endpoint = "oss-cn-hangzhou.aliyuncs.com";
     //阿里云主账号的accessKey拥有所有API的AccessKey的访问权限。
      String accessKeyId = "LTAIs5HQAO7GlXZU";
-     String accessKeyScret = "pFFL3YTu4Xh8oFtRMDetGuFUs8HfeE";
+     String accessKeyScret = "pFFL3YTu4Xh8outRMDetGuFUs8Hytc";
      String bucketName = "imageuploadbychenxin";
 
     //创建OSSClient实例
