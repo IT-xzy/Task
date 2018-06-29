@@ -1,0 +1,117 @@
+@mixin flex($justify,$align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;}
+@mixin img($width,$height,$url) {
+  width: $width;
+  height: $height;
+  background: $url no-repeat center;}
+@mixin position($position,$side1,$side1value,$side2,$side2value) {
+  position: $position;
+  #{$side1}: $side1value;
+  #{$side2}: $side2value;}
+@mixin font($fz,$cl){
+  font-size: $fz;
+  color: $cl;}
+@mixin box($width,$height,$bg){
+  width: $width;
+  height: $height;
+  background-color: $bg;}
+%title{
+  font-size: 18px;
+  color: #333333;
+  margin-bottom: 70px;
+  text-align: center;
+}
+body {
+  background-color: #69d1e9;
+}
+.header{
+  position: relative;
+  margin-bottom: 30px;
+  padding: 0 15px;
+  height: 90px;
+  text-align: center;
+  line-height: 90px;
+  @include font(34px,white);
+  border-bottom: 1px solid rgba(255,255,255,.35);}
+  .close{
+    position: absolute;
+    right: 15px;
+    top: 30px;
+    width: 30px;}
+.openeyes{
+  @include position(absolute,top,100px,null,null);
+  @include box(calc(100% - 50px),36px,#b9e9f5);
+  padding-left: 50px;
+  font-size: 16px;
+  line-height: 36px;}
+  .grey_top_triangle{
+    margin-left: 3px;
+    width: 0;
+    height: 0;
+    border: 5px solid  rgba(0,0,0,.0);
+    border-top: 10px solid #b9e9f5;
+  };
+  .murderMark{
+    position: absolute;
+    top: 36px;
+    @include font(12px,white);
+  }
+
+
+
+
+
+.main{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 170px;
+}
+  .player_box{
+    position: relative;
+    margin: 50px calc( 16.6666% - 42px );
+    margin-bottom: 0;
+    width: 80px;
+    height: 80px;
+    font-size: 18px;
+    background-color: #f5c97b;
+    border: 2px solid white;
+    text-align: center;
+    line-height: 65px;
+  }
+  .deadGreen{
+    background-color: #83b09a;
+  }
+    .player_num{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 20px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 20px;
+      color: #fff;
+      background-color: #83b09a;
+    }
+    .knife{
+      @include img(30px,30px,url(../../images/3-1.png));
+      @include position(absolute,bottom,-40px,left,25px);}
+
+
+.footer{
+  @include flex(center,center);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background: #69d1e9;}
+  .yellow_button{
+    @include flex(center,center);
+    width: 80%;
+    height: 50px;
+    @include font(26px,white);
+    background-color: #fbb435;
+  }
+

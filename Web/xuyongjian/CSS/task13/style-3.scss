@@ -1,0 +1,118 @@
+@mixin flex($justify,$align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;}
+@mixin img($width,$height,$url) {
+  width: $width;
+  height: $height;
+  background: $url no-repeat center;}
+@mixin position($position,$side1,$side1value,$side2,$side2value) {
+  position: $position;
+  #{$side1}: $side1value;
+  #{$side2}: $side2value;}
+@mixin font($fz,$cl){
+  font-size: $fz;
+  color: $cl;}
+
+
+
+
+body {
+  padding-top: 588px;}
+.header{
+  @include flex(space-between,flex-start);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid rgba(255,255,255,.35);
+  background-color: #29bde0;
+  z-index: 2;}
+  .title {
+    margin : 44px 0 19px 0;
+    @include font(34px,white);}
+  .img1 {
+    @include img(51px,42px,url(images/9.png));
+    margin: 31px 0 0 20px;}
+  .img2 {
+    @include img(40px,40px,url(images/10.png));
+    margin: 32px 18px 0 0;}
+.fixedandcolor{
+  position: fixed;
+  top: 98px;
+  width: 100%;
+  background-color: #29bde0;
+  z-index: 2;}
+.img3 {
+  @include img(351px,205px,url(images/11.png));
+  margin-top: 24px;
+  margin-left: calc( 50% - 175px );
+  text-align: center;
+  line-height: 325px;
+  @include font(48px,white);}
+.congratulation{
+  width: 80%;
+  margin-top: 24px;
+  padding-left: 10%;
+  text-align: center;
+  @include font(34px,#ffc865);}
+.gametime {
+  margin: 65px 0 26px 10%;
+  width: 80%;
+  line-height: 34px;
+  @include font(26px,white);}
+  .gametime>div>span {
+    padding-right: 50px ;}
+.gameprocess{
+  position: relative;
+  padding: 0 10%;
+  background-color: white;
+  height: 165px;
+  border-top: 2px solid #dddddd;
+  @include font(26px,#a6a6a6);}
+  .firstday{
+    padding: 14px 0;
+    @include font(30px,#515151);}
+  .time{
+    @include position(absolute,top,23px,right,10%);}
+  .gameprocess>span {
+    display: block;
+    padding-top: 14px;}
+.footer {
+  @include position(fixed,bottom,0,none,none);
+  @include flex(center,center);
+  width: 100%;
+  height: 155px;
+  background-color: rgba(41,189,224,.48);}
+  %box{
+    margin: 0 5%;
+    width: 40%;
+    height: 86px;
+    line-height: 86px;
+    text-align: center;
+    @include font(50px,white);
+    border-radius: 10px;}
+  .footer>a {
+    @extend %box;
+    color: #fff;
+    background-color: #f66f6f;}
+  .footer>span {
+    @extend %box;
+    background-color: #fbb435;}
+  .white{
+    padding-bottom: 200px;
+    background-color: white;}
+
+
+@media screen and (max-width:650px){
+    %box {
+      font-size: 28px;}
+     .gametime {
+      font-size: 22px;}
+      .gametime>div>span {
+    	padding-right: 20px ;}
+    .gameprocess {
+      font-size: 20px;}
+    .congratulation {
+    	font-size: 30px;
+    	text-align: left;} 
+    }

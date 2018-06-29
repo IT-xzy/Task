@@ -1,0 +1,190 @@
+
+*{ margin: 0;
+	padding: 0;}
+	body{
+		padding-top: 88px;
+        padding-bottom: 150px;}
+    @mixin flex($justify,$align) {
+        display: flex;
+        justify-content: $justify;
+        align-items: $align;}
+    @mixin img($width,$height,$url) {
+        width: $width;
+        height: $height;
+        background: $url no-repeat;}
+    @mixin position($position,$side,$sidevalue,$marginside,$marginsidevalue) {
+        position: $position;
+        #{$side}: $sidevalue;
+        #{$marginside}: $marginsidevalue}
+
+    .box1 {
+        @include flex(center,center);
+        @include position(fixed,top,0,none,none);
+    	width: 100%;
+    	height: 88px;
+        background-color: red;
+    	background-color: #5fc0cd;
+    	z-index: 10;}
+        .bigbutton {
+            @include flex(center,center);
+            width: 286px;
+            height: 70px;
+            border-radius: 15px;
+            background-color: #55a8b3;}
+        %button {
+            @include flex(center,center);
+            width: 143px;
+            height: 70px;
+            text-decoration: none;
+            font-family: heiti TC;
+            font-size: 32px;
+            border-radius: 15px;}
+            .button {
+                @extend %button;
+                color: white;}
+            .button1 {
+                @extend %button;
+                color: #5fc0cd;
+                background-color: white;}
+        .GPSicon {
+            @include position(absolute,right,30px,none,none);
+            @include img(42px,44px,url(images/6.png) no-repeat);}/*header*/
+    .box2 {
+        @include flex(flex-start,center);
+    	width: 100%;
+    	height: 80px;
+        border-bottom: 1px solid #e1e5e7;} 
+        %xiala {
+            @include flex(center,center);
+            position: relative;
+            padding-left: calc( 16.6666% - 42px);
+            width: 33.33333%;
+            height: 100%;
+            color: #999999;
+            font-size: 28px;
+            background: url(images/5.png) no-repeat center right;
+            border: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;}
+        .xiala {
+            @extend %xiala;}
+            /*列表头*/
+    .box3 {
+        @include flex(space-between,center);
+        width: 100%;
+        height: 180px;
+        border-bottom: 1px solid #e1e5e7;
+        color: #999999;
+        font-size: 28px;}
+        .leftside {
+            @include flex(flex-start,center);
+            flex-wrap: wrap;
+            width: 380px;
+            max-width: 63%;}
+            .leftside span {
+                color: black;
+                padding: 15px 0 15px 68px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;}
+            .leftside ul {
+                font-size: 26px;}
+            .img8 {
+                margin: 0 15px 0 30px; 
+                @include img(24px,24px,url(images/5-1.png) -186px -190px);}
+            .img9 {
+                margin: 0 16px 0 32px; 
+                @include img(19px,23px,url(images/5-1.png) -230px -190px);}
+        .rightside {
+            @include flex(flex-start,center);}
+            .rightside span {
+                color: red;
+                white-space: nowrap;}
+            .img10 {
+                margin: 0 32px 0 24px;
+                @include img(19px,33px,url(images/2.png) no-repeat);}
+
+
+
+    .box4 {
+        @include position(fixed,bottom,0,padding,0 15%);
+        @include flex(space-around,center);
+    	width: 70%;
+    	height: 100px;
+    	border-top: 1px solid #e2eaec; 
+    	background-color: #f8fafb;
+        font-family: heiti TC;
+        font-size: 20px;
+    	z-index: 10;} /*footer*/
+        .img5 {
+            @include img(94px,94px,url(images/7.png) center);}/*填写按钮*/
+        .img6 {
+            @include img(46px,40px,url(images/9.png) bottom);
+            color: #5fc0cd;}/*小房子*/
+        .img7 {
+            @include img(42px,41px,url(images/8.png) bottom);
+            color: grey;}/*小人*/
+        .homebutton {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0 14px 0;
+            height: 74px;
+            color: #999999;}
+            .homebutton span {
+                color: #5fc0cd;}
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:600px){
+        .bigbutton{
+                width: 200px;
+                height: 50px;
+                margin-left: 10px;}
+            %button {
+            width: 100px;
+            height: 50px;}
+        .box3 {
+            font-size: 24px;}  
+            .box3 ul {
+                font-size: 22px;}
+        .box4 {
+            font-size: 16px;}
+        .GPSicon {
+            right: 0;
+            top: 32px;
+            background-size: 70% 70%;}
+        .xiala {
+            font-size: 18px;}
+        .img5 { 
+            background-size: 70% 70%;}
+        .img6 { 
+            background-size: 70% 70%;}
+        .img7 { 
+            background-size: 70% 70%;}}
+
+@media screen and (max-width:430px){
+        .leftside {
+            max-width: 65%;}
+        .img10{
+            margin: 10px 10px 0 9px;
+            background-size: 70% 70%;}
+        .box3 {
+            font-size: 16px;}  
+            .box3 ul {
+                font-size: 18px;}}
+
+
+
+
+
