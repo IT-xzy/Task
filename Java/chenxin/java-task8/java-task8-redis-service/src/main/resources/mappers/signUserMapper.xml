@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptteng.dao.SignUserDao">
+    <select id="get" resultType="SignedUser">
+        select users.username, users.name, t_course.course,users.image, users.createdAt,users.phone, users.email from users,t_course where users.courseId=t_course.courseId;
+    </select>
+    <select id="getById" resultType="SignedUser">
+        select users.username,users.name, t_course.course,users.image, users.createdAt,users.phone, users.email from users,t_course where users.courseId=t_course.courseId and users.id=#{id};
+    </select>
+</mapper>

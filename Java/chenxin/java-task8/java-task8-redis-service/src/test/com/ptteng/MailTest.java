@@ -1,4 +1,4 @@
-package com.ptteng.util.thirdAPI;
+package com.ptteng;
 
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
@@ -8,23 +8,14 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import com.ptteng.util.RedisUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.junit.Test;
 
-@Component
-public class MailCaptchaUtil {
 
-    @Autowired
-    RedisUtil redisUtil;
-    /**
-     * 发送邮件验证码
-     * @param email
-     *
-     */
-    public void sample(String email) {
+public class MailTest {
+    @Test
+    public void sample() {
         // 如果是除杭州region外的其它region（如新加坡、澳洲Region），需要将下面的"cn-hangzhou"替换为"ap-southeast-1"、或"ap-southeast-2"。
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIs5HQAO7rlXZU", "pFFL3YTu4Xh8oFtRMDetGuFytrcewx");
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIs5HQAO7GlXZU", "pFFL3YTu4Xh8oFtRMDetGuFUs8HfeE");
         // 如果是除杭州region外的其它region（如新加坡region）， 需要做如下处理
         //try {
         //DefaultProfile.addEndpoint("dm.ap-southeast-1.aliyuncs.com", "ap-southeast-1", "Dm",  "dm.ap-southeast-1.aliyuncs.com");
@@ -40,13 +31,9 @@ public class MailCaptchaUtil {
             request.setAddressType(1);
             request.setTagName("test0602");
             request.setReplyToAddress(true);
-            //用户邮箱
-            request.setToAddress(email);
+            request.setToAddress("1010353090@qq.com");
             request.setSubject("测试邮件调用SDK");
-            //生成验证码
-            String captchaCode = String.valueOf((int)((Math.random()*9+1)*1000));
-            redisUtil.set(email, captchaCode);
-            request.setHtmlBody("邮件正文:"+captchaCode);
+            request.setHtmlBody("邮件正文:就是试试");
             SingleSendMailResponse httpResponse = client.getAcsResponse(request);
         } catch (ServerException e) {
             e.printStackTrace();

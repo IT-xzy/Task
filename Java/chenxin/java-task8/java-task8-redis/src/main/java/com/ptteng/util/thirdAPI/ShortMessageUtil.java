@@ -19,8 +19,8 @@ public class ShortMessageUtil {
     static final String product = "Dysmsapi";//短信API产品名称（短信产品名固定，无需修改）
     static final String domain = "dysmsapi.aliyuncs.com";//短信API产品域名（接口地址固定，无需修改）
     //替换成你的AK
-    static final String accessKeyId = "LTAIs5HQAy7jlXZU";//你的accessKeyId,参考本文档步骤2
-    static final String accessKeySecret = "pFFL3YTu4Xh8oFtRMDetGuioubvgfd";
+    static final String accessKeyId = "LTAIs5HQAO7jlXZU";//你的accessKeyId,参考本文档步骤2
+    static final String accessKeySecret = "pFFL3YTu4Xh8oFtRMDetGuFUudgfwzs";
 
     public void t(String phone)throws Exception{
 //        JsonObject json = new JsonObject();

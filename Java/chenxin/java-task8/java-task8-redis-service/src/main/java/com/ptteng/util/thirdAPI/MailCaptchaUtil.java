@@ -24,7 +24,7 @@ public class MailCaptchaUtil {
      */
     public void sample(String email) {
         // 如果是除杭州region外的其它region（如新加坡、澳洲Region），需要将下面的"cn-hangzhou"替换为"ap-southeast-1"、或"ap-southeast-2"。
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIs5HQAO7rlXZU", "pFFL3YTu4Xh8oFtRMDetGuFytrcewx");
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAIs5HQAO7GlXZU", "pFFL3YTu4Xh8oFtRMDetGuFUs8HfeE");
         // 如果是除杭州region外的其它region（如新加坡region）， 需要做如下处理
         //try {
         //DefaultProfile.addEndpoint("dm.ap-southeast-1.aliyuncs.com", "ap-southeast-1", "Dm",  "dm.ap-southeast-1.aliyuncs.com");

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<context:annotation-config/>-->
+    <context:component-scan base-package="com.ptteng"/>
+    <context:component-scan base-package="com.ptteng.service"/>
+    <context:property-placeholder location="classpath:/jdbc.properties" ignore-unresolvable="true"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--数据源-->
+        <!--<property name="driverClassName" value=""/>-->
+        <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="10"/>
+        <property name="maxActive" value="30"/>
+        <property name="minIdle" value="15"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.ptteng.model"/>
+        <property name="mapperLocations" value="classpath:mappers/*Mapper.xml"/>
+    </bean>
+    <!--有了这个，就不用额外的mybatis的全局配置文件了-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--指定扫描的包名
+        如果扫描多个包，每个包中间使用半角逗号分隔-->
+        <property name="basePackage" value="com.ptteng.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--引入jedis的properties配置文件-->
+    <!--如果有多个数据源需要通过context:properties-placeholder管理,且不
+    愿放在同一个配置文件中,一定要加上ignore-unresolvable="true"-->
+    <context:property-placeholder location="classpath:properties/redisPool.properties" ignore-unresolvable="true"/>
+    <!--Jedis连接池 的相关配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--新版本的jedis.jar包将maxActive 替换为maxTotal-->
+        <property name="maxTotal" value="${redis.pool.maxActive}" />
+        <property name="minIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxActive}"/>
+        <!--<property name="testOnBorrow" value="true"/>-->
+        <!--<property name="testOnReturn" value="true"/>-->
+    </bean>
+    <!--redis连接工厂-->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig"/>
+        <!--ip-->
+        <property name="hostName" value="${redis.host}"/>
+        <!--端口号-->
+        <property name="port" value="${redis.port}"/>
+         <!--<property name="password" value="${redis.password}" />-->
+        <!--客户端超时，时间单位毫秒-->
+        <property name="timeout" value="${redis.timeout}"/>
+    </bean>
+    <!--redis操作模板，这里尽量采用面向对象的模板-->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务-->
+        <property name="enableTransactionSupport" value="true"/>
+    </bean>
+    <!--redis工具类（也可以通过注解的方式注入）-->
+    <bean id="redisUtil" class="com.ptteng.util.RedisUtil">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+    <bean id="occupationRMIServerA" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="occupationServiceImpl"/>
+        <property name="serviceName" value="occupationRMIServer"/>
+        <property name="serviceInterface" value="com.ptteng.service.OccupationService"/>
+        <property name="registryPort" value="8086"/>
+        <property name="servicePort" value="8087"/>
+    </bean>
+
+    <bean id="signUserRMIServerA" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="signUserServiceImpl"/>
+        <property name="serviceName" value="signUserRMIServer"/>
+        <property name="serviceInterface" value="com.ptteng.service.SignUserService"/>
+        <property name="registryPort" value="8086"/>
+        <property name="servicePort" value="8087"/>
+    </bean>
+
+    <bean id="userRMIServerA" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="userServiceImpl"/>
+        <property name="serviceName" value="userRMIServer"/>
+        <property name="serviceInterface" value="com.ptteng.service.UserService"/>
+        <property name="registryPort" value="8086"/>
+        <property name="servicePort" value="8087"/>
+    </bean>
+</beans>
