@@ -152,7 +152,7 @@ public class UserController {
         user.setPwd(request.getParameter("pwd"));
 
 
-        //判断手机号是否为数字 转换为long添加user
+        //判断手机号是否为数字 转换为long添加 user.phone
         if (request.getParameter("phone") != null && !request.getParameter("phone").equals("") ){
 
             Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
@@ -171,13 +171,15 @@ public class UserController {
 
         }
 
+        //设置email
         if ( request.getParameter("email") != null){
             user.setEmail(request.getParameter("email"));
             user.setPhone(0);
+        }else {
+            user.setEmail("");
         }
 
-
-        logger.info("\nuser："+user.toString());
+        logger.info("\nuser：" + user.toString());
 
         if (user.getName().equals("") && user.getPwd().equals("")){
             logger.info("输入信息不全");
@@ -191,6 +193,12 @@ public class UserController {
 
         //手机为0 使用邮箱注册
         if(user.getPhone()==0){
+            if (user.getEmail().equals("")){
+                message="注册必须使用邮箱或者手机二选一，请填入手机或者邮箱！";
+                model.addAttribute("status",2);
+                model.addAttribute("message",message);
+                return "reg";
+            }
             String mailCodeBack = request.getParameter("code_emil");
             String mailCode = String.valueOf(session.getAttribute("mailCode"));
 
@@ -224,7 +232,12 @@ public class UserController {
 
         //邮箱为空 使用手机注册
         if( user.getEmail().equals("")){
-
+            if (user.getPhone()==0){
+                message="注册必须使用邮箱或者手机二选一！";
+                model.addAttribute("status",2);
+                model.addAttribute("message",message);
+                return "reg";
+            }
             String smsCodeBack = request.getParameter("code_sms");
             String smsCode = String.valueOf(session.getAttribute("smsCode"));
 

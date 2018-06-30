@@ -100,7 +100,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
                         if(date.getTime()<jwt.getExpiresAt().getTime() && jwt.getIssuer().toString().equals("张强") && userService.findByName(jwt.getClaim("name").asString())!=null){
                             logger.info("\ntoken有效");
-                            String newToken = jwtUtil.createToken(jwt.getClaim("name").asString(),7*24*60);
+                            String newToken = jwtUtil.createToken(jwt.getClaim("name").asString(),1*24*60);
                             Cookie cookie1 = new Cookie("token",newToken);
                             response.addCookie(cookie1);
                             HttpSession session = request.getSession();

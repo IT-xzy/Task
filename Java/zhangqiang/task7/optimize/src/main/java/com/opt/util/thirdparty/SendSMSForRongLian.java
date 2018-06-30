@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class SendSMSForRongLian {
 
-    private static final String ACCOUNT_SID = " ";
-    private static final String AUTH_TOKEN = " ";
-    private static final String APPID = " ";
+    private static final String ACCOUNT_SID = "";
+    private static final String AUTH_TOKEN = "";
+    private static final String APPID = "";
 
 
     public static HashMap sendTemplateSMS(String to, String templateId, String[] datas){
@@ -50,7 +50,7 @@ public class SendSMSForRongLian {
     public void test(){
         //"验证码"，"分钟数"
         String[] datas = new String[]{"7788","3"};
-        sendTemplateSMS(" ","1",datas);
+        sendTemplateSMS("18638292925","1",datas);
     }
 
 }
