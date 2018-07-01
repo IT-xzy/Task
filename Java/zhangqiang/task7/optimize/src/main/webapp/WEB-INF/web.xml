@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE web-app PUBLIC-->
+<!--"-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"-->
+<!--"http://java.sun.com/dtd/web-app_2_3.dtd" >-->
+<!--<web-app version="2.4" metadata-complete="true"-->
+         <!--xmlns="http://xmlns.jcp.org/xml/ns/javaee"-->
+         <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+         <!--xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee-->
+              <!--http://xmlns.jcp.org/xml/ns/javaee/web-app_2_4.xsd">-->
+<!--<web-app version="3.1" metadata-complete="true"-->
+         <!--xmlns="http://xmlns.jcp.org/xml/ns/javaee"-->
+         <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+         <!--xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee-->
+              <!--http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">-->
+<!--xmlns="http://xmlns.jcp.org/xml/ns/javaee"-->
+<!--xmlns="http://java.sun.com/xml/ns/javaee"-->
+<!--xmlns:xsi="http://java.sun.com/xml/ns/j2ee"-->
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+  <display-name>Archetype Created Web Application</display-name>
+
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationcontext.xml</param-value>
+  </context-param>
+
+  <!--监听器>过滤器>servlet  监听器配置在过滤器之前 过滤器配置在servlet之前 否则会出错-->
+
+  <!--监听在线人数 在此配置或者在监听器类上注解@WebListener -->
+  <listener>
+    <listener-class>com.opt.controller.OnlineListener</listener-class>
+  </listener>
+
+  <!--自定义过滤器-->
+  <filter>
+    <filter-name>StringDoFilter</filter-name>
+    <filter-class>com.opt.controller.StringFilter</filter-class>
+    <!--<init-param>-->
+    <!--<param-name>excludedPages</param-name>-->
+    <!--<param-value>home</param-value>-->
+    <!--</init-param>-->
+  </filter>
+  <filter-mapping>
+    <filter-name>StringDoFilter</filter-name>
+    <url-pattern>/a/*</url-pattern>
+  </filter-mapping>
+
+  <!--过滤器 字符 -->
+  <filter>
+    <filter-name>characterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>characterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--过滤器 HiddenHttpMethodFilter，转换POST为Delete或Put请求-->
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    <init-param>
+      <param-name>methodParam</param-name>
+      <!-- 如果是_method那么不设置也可以，因为默认就是_method  -->
+      <param-value>_method</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+  <!--<filter>-->
+  <!--<filter-name>StringFilter</filter-name>-->
+  <!--<filter-class>com.opt.controller.StringFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+  <!--<filter-name>StringFilter</filter-name>-->
+  <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+
+  <!-- 初始化 DispatcherServlet时，该框架在 web应用程序WEB-INF目录中寻找一个名为[servlet-名称]-servlet.xml的文件，在那里定义相关的Beans，重写在全局中定义的任何Beans -->
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/SpringMVC-servlet.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>listings</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>readonly</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <!--<load-on-startup>1</load-on-startup>-->
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!--　该servlet为tomcat,jetty等容器提供,将静态资源映射从/改为/static/目录，如原来访问　http://localhost/foo.css,现在http://localhost/static/foo.css　-->
+  <!-- 不拦截静态文件 -->
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.png</url-pattern>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+
+  <!--自定义标签页-->
+  <jsp-config>
+    <taglib>
+      <taglib-uri>/tags</taglib-uri>
+      <taglib-location>/WEB-INF/tld/datatag.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+
+  <!-- 设置Session的有效时间:以分钟为单位-->
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+
+
+
+</web-app>
