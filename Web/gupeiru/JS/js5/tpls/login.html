@@ -1,0 +1,30 @@
+<div class="background">
+    <div class="box">
+        <p class="title">后台登录</p>
+        <form name="myForm">
+            <div class="input-box">
+                <img src="./img/man.png" alt="man" class="man">
+                <input type="text" name="account" ng-model="params.name" ng-change="change()" ng-maxlength="12" ng-minlength="5" required
+                    id="account" placeholder="账号">
+            </div>
+            <div class="ng-hide" ng-show="myForm.account.$dirty && myForm.account.$invalid">
+                <p class="word-account" ng-show="myForm.account.$error.required">请输入账号</p>
+                <p class="word-account" ng-show="myForm.account.$error.maxlength">账号必须小于12位</p>
+                <p class="word-account" ng-show="myForm.account.$error.minlength">账号必须大于5位</p>
+            </div>
+            <div class="input-box">
+                <img src="./img/lock.png" alt="lock" class="lock">
+                <input type="password" name="password" ng-model="params.pwd" ng-change="change()" ng-maxlength="12" ng-minlength="5" required
+                    id="password" placeholder="密码">
+            </div>
+            <div class="ng-hide" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                <p class="red-word" ng-show="myForm.password.$error.required">请输入密码</p>
+                <p class="red-word" ng-show="myForm.password.$error.maxlength">密码必须小于12位</p>
+                <p class="red-word" ng-show="myForm.password.$error.minlength">密码必须大于5位</p>
+            </div>
+            <p class="tip">{{tip}}</p>
+            <button id="login" ng-click="go()" ng-disabled="myForm.account.$dirty && myForm.account.$invalid ||  
+        myForm.password.$dirty && myForm.password.$invalid||myForm.account.$pristine||myForm.password.$pristine">登录</button>
+        </form>
+    </div>
+</div>

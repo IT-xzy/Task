@@ -1,0 +1,71 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;}
+.dropdown_manu{
+    display: none;
+    position: relative;}
+aside {
+    background-color: #29b078;
+    position: absolute;
+    width: 100%;
+    height: 300px;
+    z-index: 1;}
+    .dropdown_aside{
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 50px;}
+    .dropdown_aside>a{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        font-size: 16px;
+        color: white;
+        margin: 19px 0;}
+
+label {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 3;
+    margin: 10px;}
+.section {
+    margin-top: 0px;
+    position: relative;
+    width: 100%;
+    height: 100%;}
+.dropdown_content{
+    margin-top: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transition: transform .3s ease-in-out;}
+.dropdown_img{
+    width: 39px;
+    height: 40px;
+    background: url(images/1-24.png);}
+input{
+    display: none;
+    margin-top: 0px;}
+input[type="checkbox"]:checked ~ .dropdown_content {
+    transform: translatey(220px);}
+
+
+
+
+@media screen and (max-width:768px){
+    .dropdown_manu{
+        display: block;}
+    .dropdown_content{
+        margin-top: 37px;}
+    input{
+        display: block;}
+    label{
+        display: block;
+    }
+}

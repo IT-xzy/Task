@@ -1,0 +1,118 @@
+@mixin flex($justify,$align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;}
+@mixin img($width,$height,$url) {
+  width: $width;
+  height: $height;
+  background: $url no-repeat center;}
+@mixin position($position,$side1,$side1value,$side2,$side2value) {
+  position: $position;
+  #{$side1}: $side1value;
+  #{$side2}: $side2value;}
+@mixin font($fz,$cl){
+  font-size: $fz;
+  color: $cl;}
+@mixin box($width,$height,$bg){
+  width: $width;
+  height: $height;
+  background-color: $bg;}
+%title{
+  padding: 21px 0;
+  font-size: 16px;
+  text-align: center;
+  color: #333333;
+  border-bottom: 1px solid #d0d6d9;}
+%border{
+  border-top: 1px solid #edf1f2;
+  border-right: 1px solid #edf1f2;}
+
+
+
+
+.main>.content{
+  @include flex(space-between,flex-start);
+  flex-wrap: wrap;
+  margin-left: calc( 50% - 600px);
+  margin-bottom: 100px;
+  width: 1200px;
+  background-color: #fafafa;
+  @include font(16px,black);}
+.homepageimg{
+  width: 100%;}
+  .homepage{
+    width: 100%;
+    font-size: 16px;
+    padding: 33px 0;}
+    .homepage>span{
+      color: #29b078;}
+  .leftside{
+    width: 25%;
+    color: #29b078;
+    background-color: white;
+    @include flex(flex-start,center);
+    flex-direction: column;
+    box-shadow: 0 0 2px grey;}
+  .leftside>.title{
+    width: 100%;
+    @extend %title;}
+  .leftside>.content{
+    width: 100px;
+    padding: 33px 0;}
+    .company_box{
+      margin-bottom: 37px;
+      position: relative;}
+      .orangeball{
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border: 1px solid #ff640d;
+        border-radius: 50%;}
+      .company_box:hover .hiddencontent_orangefont{
+        color: #ff640d;
+        .orangeball{
+          background-color: #f9a372;}}
+  .rightside{
+    width: 72.5%;
+    box-shadow: 0 0 2px grey;
+    @include font(14px,#999);
+    line-height: 26px;
+    background-color: white;}
+    .company_intro{
+      @include flex(center,center);
+      border-bottom: 1px solid #e6e6e6;}
+      .tudouicon{
+        @include img(134px,122px,url(images/1-1.png))}
+      .company_intro_text{
+        width: 60%;
+        padding: 25px;}
+      .company_details>div{
+        margin: 40px 80px;}
+
+@media screen and (max-width:1200px){
+  %onehundred{
+    width: calc( 100% - 20px);
+    margin-left: 0;
+    padding: 0 10px;}
+  .main>.content{
+    @extend %onehundred;} }
+
+@media screen and (max-width:768px){
+  .main>.content{
+    flex-direction: column;
+    align-items: center;}
+    .leftside{
+      width: 90%;
+      margin-bottom: 30px;}
+      .company_box{
+        margin-bottom: 30px;}
+    .rightside{
+      width: 90%;}
+      .company_intro{
+        flex-direction: column;}
+      .company_intro_text{
+        width: 90%;
+        padding: 5px;}
+      .company_details>div{
+        margin: 20px 20px;}
+}

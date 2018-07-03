@@ -1,0 +1,162 @@
+@mixin flex($justify,$align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;}
+@mixin img($width,$height,$url) {
+  width: $width;
+  height: $height;
+  background: $url no-repeat center;}
+@mixin position($position,$side1,$side1value,$side2,$side2value) {
+  position: $position;
+  #{$side1}: $side1value;
+  #{$side2}: $side2value;}
+@mixin font($fz,$cl){
+  font-size: $fz;
+  color: $cl;}
+@mixin box($width,$height,$bg){
+  width: $width;
+  height: $height;
+  background-color: $bg;}
+
+
+body {
+  background-color: #fafafa;}
+.header {
+  @include box(100%,null,white);}
+  .headercontent {
+    @include flex(space-between,center);
+    margin-left: calc( 50% - 600px );
+    padding: 12px 0;
+    width: 1200px;
+    @include font(14px,#29b078);}
+  .headercontent > div > img {
+    margin-left: 10px;}
+  .headercontent>span{
+    display: none;}
+.navigationbar {
+  background-color: #29b078;}
+  .navigationbar>.content{
+    position: relative;
+    @include flex(flex-end,center);
+    margin-left: calc( 50% - 600px );
+    width: 1200px;}
+  .navigationbar>.content>a{
+    @include font(16px,white);
+    position: relative;
+    padding: 41px 33px;}
+  .navigationbar>.content>.title{
+    @include position(absolute,left,20px,top,18px);
+    @include font(38px,white);
+    font-family: 造字工房朗倩（非商用）;
+    z-index: 2;}
+    .navigationbar>.content>.title>div{
+      font-size: 10px ;}
+  .hiddencontent_whitebar{
+    display: none;
+    @include position(absolute,top,94px,left,10px);
+    @include box(80px,4px,white);}
+  .navigationbar>.content>a:hover .hiddencontent_whitebar{
+    display: block;}
+
+
+
+.main{}
+
+
+
+.footer {
+  @include box(100%,null,#26a26f);
+  @include font(16px,white);}
+  .footer>.footercontent{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 1200px;
+    margin-left: calc( 50% - 600px);}
+    .footercontent>.footertext , .footertextsecond , .footertextlast{
+      padding-top: 38px;
+      padding-bottom: 33px;
+      height: 100px;
+      @include flex(space-between,flex-start);
+      flex-direction: column;}
+    .footertext{
+      margin-right: 155px;}
+    .footertextsecond{
+      margin-right: 34px;}
+    .footertextlast{
+      padding-top: 80px;
+      height: 58px;}
+    .footer>.footercontent span{
+      position: relative;}
+      .footer>.footercontent span:hover .hiddencontent_whitebar2{
+        display: block;}
+      .hiddencontent_whitebar2 {
+        display: none;
+        @include box(100%,1px,white);
+        position: absolute;}
+      .erweima{
+      @include img(96px,114px,url(images/1-16.png));
+      @include position(absolute,right,0,top,39px);}
+  .footer>.copyright{
+    padding: 8px 0;
+    text-align: center;
+    border: 1px solid #32c086;}
+
+
+
+
+
+
+ @media screen and (max-width:1200px){
+  %onehundred{
+    width: 100%;
+    margin-left: 0;}
+  .footer>.footercontent , .headercontent, .navigationbar>.content{
+     @extend %onehundred;}
+  .footertext>span{
+     margin-left: 10px;}
+    .headercontent{
+      padding: 8px 0;
+      justify-content: flex-end;
+     @include font(20px,#29b078);}
+   .erweima{
+     right: 10px;
+   }
+    .headercontent>div{
+      display: none;}
+    .headercontent>span{
+      display: block;
+      padding: 3px;}
+    .blackline{
+      border-right:  1px solid black;} }
+
+
+@media screen and (max-width:768px){
+  .navigationbar>.content>a{
+    display: none;}
+  .navigationbar>.content>.title{
+    top: 10px;
+    font-size: 20px;}
+  .navigationbar>.content>.title>div{
+    font-size: 10px ;}
+  .footer>.footercontent{
+    width: calc( 100% - 20px );
+    margin-left: 20px;
+    flex-direction: column;}
+  .footercontent>.footertext , .footertextsecond , .footertextlast{
+    padding: 10px 0 ;
+    height: 100px;
+    @include flex(space-between,flex-start);
+    flex-direction: column;}
+  .footertext>span{
+    margin-left: 0;}
+  .footercontent>.footertext , .footertextlast{
+    margin-right: 0;
+    height: 56px;}
+  .footertextlast{
+    margin-bottom: 150px;}
+  .erweima{
+    left: 0;
+    top: 280px;}
+}
+

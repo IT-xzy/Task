@@ -1,0 +1,79 @@
+<div class="list-head rounded">
+
+    <form class="form-inline flex-start">
+        <label>发布时间</label>
+        <input type="date" class="form-control" ng-model="starAt"/>
+        <span>——</span>
+        <input type="date" class="form-control" ng-model="endAt"/>
+    </form>
+
+    <form class="form-inline">
+        <label for="sel1">类型</label>
+        <!-- 循环显示类型下拉菜单 -->
+        <select class="form-control" id="sel1" ng-model="checkType" ng-options="x.name for x in select.type"></select>
+    </form>
+
+    <form class="form-inline">
+        <label for="sel2">状态</label>
+        <!-- 循环显示状态下拉菜单 -->
+        <select class="form-control" id="sel2" ng-model="checkStatus" ng-options="x.name for x in select.status"></select>
+    </form>
+
+    <div class="flex-end">
+        <button type="button" class="btn btn-danger m10" ng-click="restList()">清空</button>
+        <button type="button" class="btn btn-success m10" ng-click="search()">搜索</button>
+    </div>
+</div>
+
+
+
+
+<div class="list-main rounded">
+    <div class="title flex-between">
+        <h6>Article列表</h6>
+        <button type="button" class="btn btn-success btn-sm" ui-sref='admin.add'>+新增</button>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>类型</th>
+                <th>发布时间</th>
+                <th>修改时间</th>
+                <th>发布者</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in listData.articleList">
+                <td ng-bind="$index + 1"></td>
+                <td>{{item.title}}</td>
+                <td>{{item.type | type}}</td>
+                <td>{{item.createAt | time}}</td>
+                <td>{{item.updateAt | time}}</td>
+                <td>{{item.author}}</td>
+                <td>{{item.status | status}}</td>
+                <td class="flex-around">
+                    <button type="button" class="btn btn-sm" ng-class="{true: 'btn-success',false: 'btn-secondary'}[item.status=='1']" ng-click="changeStatus()">{{item.status | statusTxt}}</button>
+                    <button type="button" class="btn btn-sm btn-info" ng-click="compile()">编辑</button>
+                    <button type="button" class="btn btn-sm btn-danger" ng-click="delete()">删除</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ul class="paging">
+    <span class="m10">每页显示<input type="number" ng-model="listSize">条</span>
+    <button class="btn" ng-click="changePage('first')">首页</button>
+    <button class="btn" ng-click="changePage('-1')">上一页</button>
+    <a ng-repeat="item in range" ng-class="{true: 'check'}[curr == item]" ng-click="clickPage()">{{item}}</a>
+    <button class="btn" ng-click="changePage('+1')">下一页</button>
+    <button class="btn" ng-click="changePage('end')">尾页</button>
+    <span class="m10">一共{{all}}页</span>
+    <span class="m10">跳转到<input type="number" value="" ng-model="jumpPage">页</span>
+    <button class="btn" ng-click="jump()">确定</button>
+</ul>
