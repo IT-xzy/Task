@@ -1,0 +1,103 @@
+html{
+  background: #232a3a;
+}
+.backGround_header{
+}
+
+.cutOff{
+  display: flex;
+}
+  .backGround_header{
+    @include flex(space-between,flex-start);
+  }
+    .controlSite{
+      @include flex(space-between,center);
+      margin-right: 20px;
+      width: 200px;
+      height: 50px;
+      font-size: 16px;
+    }
+      .controlSite>.span{
+        color: lightgrey;
+      }
+    .glyphicon-off{
+      color: orange;
+    }
+  .backGround_header>.backGround_title{
+    @include box(250px,50px,#232a3a);
+    @include font(18px,white);
+    text-align: center;
+    line-height: 50px;
+    border-bottom: 1px solid rgb(74, 95, 108);
+  }
+.backGround_leftSideBar{
+  padding-top: 28px;
+  width: 250px;
+  color: white;
+  background-color: #232a3a;
+}
+
+
+  .backGround_IM,.backGround_AM,.backGround_UM{
+    @include flex(space-around,center);
+    flex-wrap: wrap;
+    padding: 10px 30px 10px 0px;
+  }
+.backGround_Im{
+  margin: 0;
+  background: none;
+  border-radius: 0;
+  border: none;
+}
+
+    .backGround_AMHidCont{
+      padding: 0;
+      @include flex(center,center);
+      flex-direction: column;
+    }
+      .backGround_AML{
+        width: 250px;
+        height: 40px;
+        padding: 10px 15px 10px 75px;
+      }
+.backGround_rightContent{
+  padding: 30px;
+  min-height: calc(100vh - 50px);
+  width: calc(100vw - 250px);
+  background-color: #f5f5f5;
+  box-shadow: 0 1px 2px black inset;
+  }
+.showInPc{
+  display: block;
+}
+
+
+
+@media screen and (max-width:768px){
+  .showInPc{
+    display: none;
+  }
+  .cutOff{
+    display: block;
+  }
+  .backGround_header{
+    display: block;
+  }
+  .backGround_header>.backGround_title{
+      width: 100%;
+      text-align: left;
+      padding-left: 30px;
+    }
+  .backGround_leftSideBar{
+    padding: 0;
+    width: 100%;
+  }
+  .backGround_rightContent{
+    width: 100%;
+    min-height: auto;
+  }
+}
+
+
+
+

@@ -1,0 +1,120 @@
+
+<div class="backGround_rightContent">
+    <div class="artList_compamyTitle">
+        <strong>{{addOrEdit}}article</strong>
+    </div>
+    <form action="" name="verify" novalidate>
+    <div class='artList_listContent form-horizontal'>
+        <div class="form-group">
+            <strong class="col-md-2 control-label" >标题名称</strong>
+            <div class="col-md-8">
+            <input class="form-control" type="text" ng-model="newTitle" required >
+            </div>
+        </div>
+        <div class="form-group">
+            <strong class="col-md-2 control-label word-spacing-25">类 型</strong>
+            <div class="col-md-2">
+                <select class="artList_search" ng-model="newType" ng-options="x.changed for x in selectType" required >
+                    <!--<option value="">请选择</option>-->
+                </select>
+            </div>
+            <div class="col-md-2" ng-show="newType.num===3">
+                <select class="artList_search" ng-model="newIndustry" ng-options="x.changed for x in inIndustry">
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <strong class="col-md-2 control-label word-spacing-25">说 明</strong>
+            <div class="col-md-8">
+                <div class="ueditor" ng-model="content"></div>
+                <!--<div class="editor">-->
+                    <!--<script id="editor"  type="text/plain" ng-model="newIntro" required ></script>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <strong class="col-md-2 control-label">跳转链接</strong>
+            <div class="col-md-8">
+                <input class="form-control" type="text" ng-model="newLink" required >
+            </div>
+        </div>
+        <div class="form-group">
+            <strong class="col-md-2 control-label word-spacing-25">配 图</strong>
+            <div class="col-md-10 padding-0">
+            <div class="col-md-12">
+                <label for="choice" class="btn btn-primary">选择文件</label>
+                <input style="display: none;"
+                       type="file" id="choice"
+                       accept="image/*"
+                       onchange="angular.element(this).scope().fileChanged(this)"
+                       required>
+            </div>
+
+
+
+
+            <div class="col-md-12"> <img class="img-responsive"  ng-src="{{src}}" alt="配图预览" id="img"></div>
+
+            <div class="col-md-8">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>图片名</th>
+                    <th>文件大小</th>
+                    <th>进度</th>
+                    <th>操作</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-if="fileName">
+                    <td>{{fileName}}</td>
+                    <td>{{fileSize | number:2;}}MB</td>
+                    <td>
+                        <div class="progress">
+                            <div style="width: {{progress + '%'}};" class="progress-bar"></div>
+                        </div>
+                    </td>
+                    <td>
+                        <span ng-show="uploadStatus">
+                            <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-xs" ng-click="uploadArt()">
+                            <span class="glyphicon glyphicon-upload"></span>
+                            上传
+                        </button>
+
+                        <button class="btn btn-danger btn-xs" ng-click="delete()">
+                            <span class="glyphicon glyphicon-trash" ></span>
+                            删除
+                        </button>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <!--<button class="btn btn-success" ng-click="publishArt()">立即上线</button>-->
+                <!--<button class="btn btn-success" ng-click="draftArt()">存为草稿</button>-->
+
+                <button
+                        class="btn btn-success black-character"
+                        ng-repeat="x in pubOrDraButton"
+                        ng-click="publishArt(x.btnStatus)"
+                        ng-disabled="verify.$invalid || src === undefined">{{x.label}}</button>
+
+                <button class="btn btn-default pull-right" ng-click="cancelAdd()">取消</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+

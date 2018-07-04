@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>设置人数</title>
+    <link href="scss/match.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <p class="header-middle">
+            参数设置
+        </p>
+        <a class="header-left" href="./task2.html">
+            <img class="left-img" src="img/back.png" />
+        </a>
+        <a class="header-right" href="./task2.html">
+            <img class="right-img" src="img/p2.png" />
+        </a>
+    </header>
+    <main>
+        <div class="match">
+            <div class="match-tt">
+                <p>
+                    玩</br>
+                    家</br>
+                    配</br>
+                    比
+                </p>
+
+            </div>
+            <div class="match-ctt">
+                <ul class="match-ctt-main" id="clickMatch"></ul>
+                <button class="absolute" onclick="matchNum()">点击设置
+                    <img src="img/pencil.png" alt="">
+                </button>
+            </div>
+        </div>
+        <div class="wordgroup">
+            <input type="text" placeholder="水民词组">
+            <input type="text" placeholder="幽灵词组">
+        </div>
+
+        <div class="rangeblock">
+            <div class="range-player">
+                <span>玩家人数</span>
+                <input type="text" class="player-num" id="player" max="18" min="6" value="12" onchange="on_change()">
+                <span>人</span>
+            </div>
+            <div class="range-btn">
+                <button class="btn-sub" id="btnSub" onclick="less()"></button>
+                <input type="range" class="slider-block" id="slider" min="6" max="18" step="1" value="12" onchange="moveChange()">
+                <button class="btn-add" id="btnAdd" onclick="plus()"></button>
+            </div>
+
+    </main>
+    <footer>
+        <button class="vote" onclick="godraw()">
+            去发牌
+        </button>
+    </footer>
+    <script src="js/state-machine.js"></script>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/match.js"></script>
+    
+</body>
+
+</html>

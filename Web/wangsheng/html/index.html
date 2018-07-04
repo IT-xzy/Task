@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Title</title>
+    <!--<link rel="stylesheet" href="../html/css/backstage.css">-->
+    <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/backstage.css">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular-route.js"></script>
+    <script src="//cdn.bootcss.com/angular-ui-router/1.0.0-rc.1/angular-ui-router.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular-messages.min.js"></script>
+</head>
+<body ng-controller="stage">
+<div class="login_bg">
+    <div class="main">
+        <div class="box">
+            <img class="radish" src="../img/radish.png"/>
+        </div>
+        <form name="loginForm">
+        <div class="block">
+            <div class="user">
+                <img src="../img/users.png"/>
+                <input type="text" name="user" placeholder="用户名" id="users" ng-model="uname" ng-minlength=5 ng-maxlength=10 required>
+            </div>
+            <div class="password">
+                <img src="../img/download.png"/>
+                <input type="password" name="pwd" placeholder="密码" id="word" ng-model="pwd" ng-minlength=6 ng-maxlength=10 required>
+            </div>
+            <div id = "message" ng-model="info">{{warn}}</div>
+            <div ng-messages="userForm.uname.$error" ng-if="userForm.uname.$touched"  ng-messages="loginForm.uname.$error" >
+                <!--<p ng-message="minlength">用户名最小长度5</p>-->
+                <!--<p ng-message="maxlength">用户名最大长度10</p>-->
+                <!--<p ng-message="required">用户名必填</p>-->
+            </div>
+            <div class="button">
+                <button id="buttonLogin" ng-click="submit()">登录</button>
+            </div>
+
+        </div>
+        </form>
+    </div>
+</div>
+<script>
+    // var myApp = angular.module('myApp',[]);
+    angular.module('myApp',['ui.router']).controller('stage',function ($scope,$http,$state) {
+    //     myApp.controller('stage',function ($scope,$http,$state) {
+        $scope.submit = function () {
+            $http({
+                method: 'post',
+                url: '/carrots-admin-ajax/a/login',
+                params: {
+                    name: $scope.uname,
+                    pwd: $scope.pwd
+                },
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function (data) {
+                console.log(data.data);
+                if (data.data.code == 0) {
+                    //$state.go("route.html");
+                    //跳转页面
+                    window.location.href = "route.html"
+                } else {
+                    $scope.warn = data.data.message;//报错信息
+                }
+
+            })
+
+        }
+    })
+</script>
+</body>
+</html>

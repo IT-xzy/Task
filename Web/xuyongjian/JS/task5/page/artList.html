@@ -1,0 +1,112 @@
+
+<div class="backGround_rightContent">
+    <div class="artList_filter container">
+           <div class="row">
+               <div class=" filter-flex col-md-4 col-sm-4">
+                   <div class="artList_search_title">发布时间</div>
+                       <input type="text"
+                              class="artList_search"
+                              uib-datepicker-popup="{{format}}"
+                              datepicker-options="{maxDate:selectedEndTime,showweeks:false}"
+                              ng-model="selectedStartTime"
+                              is-open="popup1.opened"
+                              ng-required="true"
+                              close-text="关闭"
+                              clear-text="清空"
+                              current-text="今天"
+                              alt-input-formats="altInputFormats"
+                              ng-click="open1()"/>
+                   <!--<input class="artList_search" type="date" ng-model="selectedStartTime">-->
+               </div>
+               <div class=" filter-flex col-md-4 col-sm-4">
+                   <div class="artList_search_title">——</div>
+                   <input type="text"
+                          class="artList_search"
+                          uib-datepicker-popup="{{format}}"
+                          datepicker-options="{minDate:selectedStartTime,showweeks:false}"
+                          ng-model="selectedEndTime"
+                          is-open="popup2.opened"
+                          ng-required="true"
+                          close-text="关闭"
+                          clear-text="清空"
+                          current-text="今天"
+                          alt-input-formats="altInputFormats"
+                          ng-click="open2()"/>
+                   <!--<input class="artList_search" type="date" ng-model="selectedEndTime" >-->
+               </div>
+               <div class=" filter-flex col-md-4 col-sm-4">
+                   <div class="artList_search_title">类型</div>
+                   <select class="artList_search" ng-model="selectedType" ng-options="x.changed for x in selectType" >
+                       <!--<option value="">全部</option>-->
+                   </select>
+               </div>
+           </div>
+           <div class="row">
+               <div class=" filter-flex col-md-4 col-sm-4">
+                   <div class="artList_search_title">状态</div>
+                   <select class="artList_search" ng-model="selectedStatus" ng-options="x.changed for x in selectStatus">
+                       <!--<option value="">全部</option>-->
+                   </select>
+               </div>
+           </div>
+            <div class="pull-right">
+           <button class="btn btn-success" ng-click="selectedSearch()" >搜索</button>
+           <button class="btn btn-danger" ng-click="selectedClear()">清空</button>
+                <div>{{selectedStartTime }}</div>
+                <div>{{selectedEndTime}}</div>
+            </div>
+    </div>
+    <div class="artList_compamyTitle">
+        <strong>公司列表</strong>
+        <button class="pull-right btn btn-success addArt" ng-click="addArt()">+新增</button>
+    </div>
+    <div class='artList_listContent'>
+        <div class="artList_list">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                <tr ng-repeat="x in lists">
+                    <td>{{$index + 1}}</td>
+                    <td>{{x.title}}</td>
+                    <td>{{x.type | changeType}}</td>
+                    <td>{{x.createAt | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{x.updateAt | date : 'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{x.author}}</td>
+                    <td>{{x.status | changeStatus}}</td>
+                    <td>
+                        <a type="button" class="btn btn-sm" ng-click="draOrPub(x.id,x.status)">{{x.status | draOrpub}}</a>
+                        <a type="button" class="btn btn-sm" ng-click="editArt(x.id)">编辑</a>
+                        <a type="button" class="btn btn-sm" ng-click="deleteArt(x.id)">删除</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--<ul>-->
+            <!--<li ng-repeat="x in lists">{{x.title + ',' +  x.author}}</li>-->
+        <!--</ul>-->
+    </div>
+    <div>
+        <ul uib-pagination
+            total-items="totalItems"
+            ng-model="currentPage"
+            max-size="maxSize"
+            first-text="第一页"
+            previous-text="上一页"
+            next-text="下一页"
+            last-text="最后页"
+            boundary-links="true"
+            boundary-link-numbers="true"
+            ng-click="artPagination()"></ul>
+</div>
+
+    <div>{{currentPage}}</div>
+</div>
+

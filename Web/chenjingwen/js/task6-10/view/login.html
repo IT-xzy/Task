@@ -1,0 +1,22 @@
+<div class="bgimg">
+    <div class="loginbox" ng-controller="loginCtrl">
+        <span>后台登录</span>
+        <form name="loginForm">
+        <div class="username">
+            <img src="../img/2.png">
+            <input name="username" ng-model="name" type="text" placeholder="请输入用户名"
+            ng-blur="usr(name)" required>
+        </div> 
+        <div class="error">{{usrtip}}</div> 
+        <div class="password">
+            <img src="../img/3.png">
+            <input name="password" ng-model="password" type="password" placeholder="请输入密码"
+            ng-blur="pwd(password)"   required>
+        </div>
+        <div class="error">{{pwdtip}}</div>
+        </form>  
+        <div class="errormessage" ng-bind-html="errormessage | to_trusted"></div>
+        <button class="btn btn-success btn-default" ng-click="login()" type="button" ng-disabled="usrjudge||pwdjudge" disabled="disabled">登录</button>
+    </div>
+</div>
+ 

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="UserInfoModule">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">数据双向绑定</div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal" role="form" data-ng-controller="UserInfoCtrl" name="myform">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                邮箱:
+                            </label>
+                            <div class="col-md-10">
+                                <p>invalid: {{myform.myAddress.$invalid}} (如果输入的值是非合法的则为 true)。</p>
+                                <input name="myAddress" type="email" class="form-control" placeholder="推荐使用125邮箱" data-ng-model="userInfo.email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">
+                                密码:
+                            </label>
+                            <div class="col-md-10">
+                                <input type="password" class="form-control" placeholder="只能是数字字母下划线" data-ng-model="userInfo.password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" ng-checked="{{userInfo.autoLogin}}" ng-model="userInfo.autoLogin">自动登录
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button class="btn btn-primary" ng-click="getFormData()">获取form表单的值</button>
+                                <button class="btn btn-success" ng-click="setFormData()">设置form表单的值</button>
+                                <button class="btn btn-danger" ng-click="restFormData()">重置表单</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="./js/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.js"></script>
+<script src="https://cdn.bootcss.com/angular-ui-router/1.0.18/angular-ui-router.js"></script>
+<script src="https://cdn.bootcss.com/oclazyload/1.1.0/ocLazyLoad.js"></script>
+<script>
+    var userInfoModule = angular.module('UserInfoModule', []);
+    userInfoModule.controller('UserInfoCtrl', function($scope) {
+
+        $scope.userInfo = {
+            email: "1qeqweqw@qq.com",
+            password: "13asdasd",
+            autoLogin: true
+        };
+        $scope.err = {
+            urll: "这是个错位信息"
+        }
+        $scope.getFormData = function() {
+            console.log($scope.userInfo);
+            $scope.userInfo = {
+                email: "1qeqweqw@qq.com",
+                password: "131asdas",
+                autoLogin: true
+            };
+        };
+        $scope.setFormData = function() {
+            $scope.userInfo = {
+                email: "我会飞你会不",
+                password: "hahaha",
+                autoLogin: false
+            };
+        };
+        $scope.restFormData = function() {
+            $scope.userInfo = {
+                email: "你真他么牛逼",
+                password: "hehe",
+                autoLogin: true
+            }
+        }
+
+    })
+</script>
+
+</html>

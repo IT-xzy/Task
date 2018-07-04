@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="com.opt.service"/>
+    <!--<context:annotation-config/>-->
+    <context:property-placeholder location="classpath*:c3p0.properties"/>
+
+    <!--<bean id="sendCloud" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
+        <!--&lt;!&ndash; 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 &ndash;&gt;-->
+        <!--<property name="locations">-->
+            <!--<array>-->
+                <!--<value>classpath:properties/sendCloud.properties</value>-->
+            <!--</array>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+        <!--初始化和最大最小连接数-->
+        <property name="initialPoolSize" value="${initialPoolSize}"/>
+        <property name="maxPoolSize" value="${max_size}"/>
+        <property name="minPoolSize" value="${min_size}"/>
+        <property name="acquireIncrement" value="${acquireIncrement}"/>
+        <property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+        <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}"/>
+        <property name="maxIdleTime" value="${maxIdleTime}"/>
+        <property name="acquireRetryDelay" value="${acquireRetryDelay}"/>
+        <property name="autoCommitOnClose" value="${autoCommitOnClose}"/>
+        <property name="maxStatements" value="${maxStatements}"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:mapper/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.opt.dao.mapper"/>
+    </bean>
+
+    <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="studentService" class="com.opt.service.impl.StudentServiceImpl"/>
+
+    <bean id="professionService" class="com.opt.service.impl.ProfessionServiceImpl"/>
+
+    <bean id="userService" class="com.opt.service.impl.UserServiceImpl"/>
+
+    <!--<bean id="optUserService" class="com.opt.service.impl.OptUserServiceImpl"/>-->
+
+    <!--MultipartFile转File-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+    <import resource="memcache-config.xml"/>
+    <import resource="jedis-config.xml"/>
+
+
+
+
+</beans>

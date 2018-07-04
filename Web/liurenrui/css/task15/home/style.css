@@ -1,0 +1,319 @@
+
+html{
+	font-size:62.5%;
+}
+header ::after,main ::after,footer ::after {
+	content: "";
+	display:table;
+	clear: both;
+}
+
+@media screen and (max-width: 767px){
+	.hidden-xs{
+		display:none;
+	}
+}
+.ht-left{
+	float:left;
+	color:#29b078;
+	font-size:1.4rem;
+	line-height:4rem;
+}
+.ht-right{
+	float:right;
+	text-align:right;
+}
+.ht-right img{
+	width:2rem;
+	margin:1rem 1rem;
+}
+.ht-entry{
+	line-height: 4rem;
+	font-size:1.4rem;
+}
+@media screen and (min-width: 768px){
+	.ht-entry{
+		display:none;
+	}
+}
+
+/*自适应导航*/
+
+.head-b{
+	background-color: #29b078;
+	height:5rem;
+}.nav{	
+	background-color: #29b078;
+}
+#nav-btn{
+	display:none;
+}
+#nav-btn:checked ~ .nav-drop-menu {
+    display: block;
+}
+.btn{
+	float:right;
+	background-color: #29b078;
+	border:1px solid #fff;
+	border-radius:5px;
+	margin:10px;
+}
+.btn span {
+    margin: 5px 0;
+    display: block;
+    width: 20px;
+    height: 0px;
+    border:1px solid #fff;
+}
+.nav-drop-menu{
+	text-align:center;
+	clear:both;
+	list-style:none;
+	display:none;
+	padding-left:0;
+	margin-left:-15px;
+	margin-right:-15px;
+}
+.nav-drop-menu li{
+	background-color: #29b078;
+	padding: 15px 15px; 
+	list-style: none;
+	font-size:1.4rem;
+	position:relative;
+	z-index:1;
+}
+@media screen and (min-width: 768px){
+	.nav-drop-menu {
+	    display: block;
+	    float:right;
+	}
+	.nav-drop-menu li{
+	    display:inline-block;
+	    padding:5px 15px;
+	}
+}
+
+.nav::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+@media screen and (min-width: 768px){
+	.btn{
+		display:none;
+	}
+}
+/*头部↑*/
+h3{
+	font-size:24px;
+}
+/*h3*/
+ul.pic,li{ 
+	margin: 0;
+	padding: 0; 
+	text-decoration: none;
+	list-style: none;
+}
+
+#lunbo{
+   position: relative;
+   width: 100%;
+   height: 30vw;
+   overflow: hidden;/*隐藏溢出的图片*/
+}
+.pic{
+   width:400vw;/*4张图的宽度*/
+   position: absolute;/*基于父容器进行定位*/
+   left:0;
+   animation-name: focusmap;
+   animation-duration: 12s;
+   animation-iteration-count: infinite;//动画调用可以简写
+
+}
+@keyframes focusmap {
+   0%,30%{
+	   left: 0;
+   }
+   35%,65%{
+	   left: -100vw;
+   }
+   70%,99%{
+	   left: -200vw;
+   }
+   100%{
+	   left: -300vw;
+   }
+  
+}
+.pic li{
+   float: left;
+   background: #5dd94e;
+}
+
+.pic li img {
+   width: 100vw;
+   height: 30vw;
+}
+/*轮播图↑*/
+.first-row{
+	margin-top:6rem;
+	margin-bottom:6rem;
+}
+.first-box{
+	height:24rem;
+}
+.imtl-box{
+	height:8rem;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.first-box p{
+	font-size:1.6rem;
+	color:#999;
+	padding:2rem;
+}
+@media screen and (max-width:767px) {
+    .first-box p{
+        text-align:center;
+    }
+}
+h3{
+	text-align:center;
+}
+.first-box4{
+	font-size:1.8rem;
+	line-height:3rem;
+	color:#999;
+	height:24rem;
+	display:flex;
+	align-items:center;
+	border-left:1px dashed #dedede;
+	padding-left:6rem;
+}
+@media screen and (max-width:767px) {
+    .box4-in{
+        margin:0 auto;
+    }
+}
+span.color-num{
+	color:#29b078;
+	display:inline-block;
+	}
+/*人脉↑*/
+
+.second-box{
+	margin:4rem 0;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.i-mleft{
+	width:7rem;
+	float:left;
+}
+.i-mright{
+	float:right;
+}
+/*如何学习↑*/
+.third-row{
+	margin-top:6rem;
+	margin-bottom:6rem;
+}
+.photo-box{
+	text-align:center;
+	margin-top:4em;
+	margin-bottom:4rem;
+	padding:2rem;
+	background-color:#fff;
+}
+.photo-box p{
+	text-align:left;
+}
+h4{
+	text-align:center;
+	font-weight:bold;
+	line-height:3.6rem;
+}
+
+
+/*优秀学员↑*/
+
+.logo-box{
+	width:20%;
+	margin:4rem 0;
+	padding:0;
+	border:2px solid #fff;
+}
+@media screen and (max-width:991px) {
+    .logo-box{
+		width:60%;
+		margin:4rem auto;
+    }
+}
+@media screen and (max-width:767px) {
+    .logo-box{
+		width:100%;
+		padding:0 15px;
+    }
+}
+.logo{
+	width:100%;
+
+}
+.logo-box:hover{
+	border:2px outset #e2e2e2;
+}
+/*合作企业↑*/
+.last-row h3{
+	margin:4rem 0;
+}
+a.link{
+	float:left;
+	width:10%;
+	color:#999;
+	font-size:1.4rem;
+	font-size:bold;
+	text-align:center;
+}
+
+@media screen and (max-width:991px) {
+    a.link{
+        width:20%;
+    }
+}
+@media screen and (max-width:767px) {
+    a.link{
+        width:25%;
+    }
+}
+@media screen and (max-width:570px) {
+    a.link{
+        width:33%;
+    }
+}
+/*友情链接↑*/
+/**底部↓**/
+footer{
+	width:100%;
+	color:#fff;
+	font-size:1.4rem;
+	padding:0.5rem 0;
+	background-color:#29b078;
+}
+.f-r img{
+	width:8rem;
+	height:8rem;
+}
+.f-li{
+	margin-top:6rem;
+}
+
+footer p{
+	font-size:1.4rem;
+}
+footer>p{
+	font-size:1rem;
+	text-align:center;
+
+}

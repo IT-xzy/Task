@@ -1,0 +1,81 @@
+@mixin flex($justify,$align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;}
+@mixin img($width,$height,$url) {
+  width: $width;
+  height: $height;
+  background: $url no-repeat center;}
+@mixin position($position,$side1,$side1value,$side2,$side2value) {
+  position: $position;
+  #{$side1}: $side1value;
+  #{$side2}: $side2value;}
+@mixin font($fz,$cl){
+  font-size: $fz;
+  color: $cl;}
+@mixin box($width,$height,$bg){
+  width: $width;
+  height: $height;
+  background-color: $bg;}
+%title{
+  font-size: 18px;
+  color: #333333;
+  margin-bottom: 70px;
+  text-align: center;}
+
+body {
+  background-color: #69d1e9;
+}
+.header{
+  @include flex(space-between,center);
+  padding: 0 15px;
+  height: 90px;
+  @include font(34px,white);
+  border-bottom: 1px solid rgba(255,255,255,.35);}
+  .close,.return{
+    margin-top: 20px;}
+  .close{
+    width: 30px;}
+
+.main{
+  @include flex(center,center);
+  flex-direction: column;
+  position: relative;}
+
+  .identity,.hidden_id{
+    position: absolute;
+    top: 0;
+    @include flex(center,center);
+    margin-top: 50px;
+    @include box(225px,320px,#ffedc5);
+    border: 3px solid white;}
+
+    .header_num{
+      position: absolute;
+      top: 33px;
+      @include flex(center,center);
+      @include box(34px,34px,white);
+      border-radius: 50%;
+      @include font(18px,#f56b81);
+      border: 2px solid #ffedc5;}
+
+    .text,.hidden_text{
+      position: absolute;
+      top: 380px;
+      @include flex(center,center);
+      width: 245px;
+      height: 50px;
+      @include font(26px,white);
+      background-color: #fbb435;}
+
+  .hidden_id{
+    z-index: -1;}
+
+    .hidden_id>img{
+      margin-bottom: 80px;}
+
+    .hidden_id>.player{
+      position: absolute;
+      bottom: 110px;
+      @include font(24px,#29bde0);}
+

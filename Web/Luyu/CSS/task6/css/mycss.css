@@ -1,0 +1,311 @@
+@charset "UTF-8";
+/*
+  Document   : CSS样式初始化
+  Created on : 2016. 8. 7,09:41:00
+  Author :
+  Description:
+  CSS样式表的初始化，全局样式设置。部分样式属性请根据具体页面重置其属性
+      导入方式：<link href="css/common.css" rel="stylesheet" type="text/css" /> */
+/* reset */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button {
+  margin: 0;
+  padding: 0; }
+
+/* 初始化标签在所有浏览器中的margin、padding值 */
+fieldset, img {
+  border: 0 none; }
+
+/* 重置fieldset（表单分组）、图片的边框为0*/
+dl, ul, ol, menu, li {
+  list-style: none; }
+
+/* 重置类表前导符号为onne,menu在HTML5中有效 */
+blockquote, q {
+  quotes: none; }
+
+/* 重置嵌套引用的引号类型 */
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none; }
+
+/* 重置嵌套引用*/
+input, select, textarea, button {
+  vertical-align: middle; }
+
+/* 重置表单控件垂直居中*/
+button {
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer; }
+
+/* 重置表单button按钮效果 */
+body {
+  background: #fff; }
+
+/* 重置body 页面背景为白色 */
+a {
+  color: #666;
+  text-decoration: none; }
+
+/* 重置链接a标签 */
+a:active, a:hover {
+  text-decoration: none; }
+
+/* 重置链接a标签的鼠标滑动效果 */
+address, caption, cite, code, dfn, em, var {
+  font-style: normal;
+  font-weight: normal; }
+
+/* 重置样式标签的样式 */
+caption {
+  display: none; }
+
+/* 重置表格标题为隐藏 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed; }
+
+/* 重置table属性 */
+img {
+  vertical-align: top; }
+
+/* 图片在当前行内的垂直位置 */
+label {
+  margin-bottom: 0;
+  font-weight: unset; }
+
+/* 页面设置 */
+/* 取消a标签点击后的虚线框 */
+a {
+  outline: none; }
+
+a:active {
+  star: expression(this.onFocus=this.blur()); }
+
+/* 设置页面文字等在拖动鼠标选中情况下的背景色与文字颜色 */
+/*
+::selection {color: #fff;background-color: #4C6E78;}
+::-moz-selection {color: #fff;background-color: #4C6E78;}
+*/
+/*清除浮动*/
+.clear {
+  clear: both; }
+
+/*清除浮动--推荐使用*/
+.clearfix:before, .clearfix:after {
+  content: '';
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+html {
+  font-size: 62.5%;
+  overflow-y: auto;
+  -ms-overflow-style: scrollbar; }
+
+body {
+  font-size: 1.4rem;
+  padding-top: 8.4rem;
+  padding-bottom: 6.5rem; }
+
+.btn:active:focus, .btn:focus {
+  outline: none;
+  transform: scale(1); }
+
+.btn {
+  border-radius: 1rem; }
+
+header {
+  z-index: 2;
+  background-color: #5ac0ce;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  header a {
+    background: url("../img/img.png") -50px 0;
+    display: block;
+    width: 42px;
+    height: 44px;
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    transform: translateY(-22px) scale(0.5); }
+  header button {
+    font-size: 1.6rem;
+    width: 8rem;
+    height: 3.5rem;
+    color: white;
+    background-color: #51a8b4; }
+  header button + button {
+    background-color: white;
+    color: #5ac0ce;
+    margin-left: -1rem; }
+
+.main-head {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 5rem;
+  height: 3.4rem;
+  border-bottom: #c6d5dd 1px solid;
+  display: flex; }
+  .main-head .main-head-select--style {
+    position: relative;
+    flex-basis: calc(100%/3);
+    box-sizing: content-box; }
+    .main-head .main-head-select--style::before {
+      content: "";
+      display: block;
+      width: 1px;
+      height: 2rem;
+      background-color: #afafaf;
+      position: absolute;
+      right: 0;
+      top: .7rem; }
+    .main-head .main-head-select--style::after {
+      content: "";
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 5px solid #afafaf;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      overflow: hidden; }
+    .main-head .main-head-select--style select {
+      color: #a2a2a2;
+      height: 100%;
+      border: none;
+      outline: none;
+      padding: 0 calc(50% - 2.4rem);
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      text-align: center; }
+      .main-head .main-head-select--style select option {
+        border: none; }
+      .main-head .main-head-select--style select::-ms-expand {
+        display: none; }
+    .main-head .main-head-select--style:nth-of-type(3):before {
+      content: "";
+      display: none; }
+
+main .main-head .main-head-select--style:nth-of-type(3) #head_select_right {
+  padding: 0 calc(50% - 3rem); }
+
+ul {
+  list-style: none;
+  padding: 0; }
+
+.content {
+  overflow-y: auto;
+  margin-bottom: 0; }
+  .content ul {
+    border-bottom: #c6d5dd 1px solid;
+    padding: 1rem;
+    position: relative; }
+    .content ul li:nth-of-type(odd) {
+      display: flex;
+      align-items: center;
+      color: #a4b0b8; }
+    .content ul li:nth-of-type(1):before {
+      content: "";
+      display: inline-block;
+      background: url("../img/img.png") -22px 0;
+      width: 24px;
+      height: 24px;
+      transform: scale(0.6); }
+    .content ul li:nth-of-type(2) {
+      margin: .5rem 0;
+      padding-left: 24px;
+      padding-right: 10%;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      position: relative; }
+      .content ul li:nth-of-type(2) span {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; }
+      .content ul li:nth-of-type(2) span:nth-of-type(2) {
+        display: block;
+        transform: scale(1.2);
+        color: red;
+        position: relative; }
+    .content ul li:nth-of-type(3):before {
+      content: "";
+      display: inline-block;
+      background: url("../img/shape.png");
+      width: 19px;
+      height: 23px;
+      transform: scale(0.6); }
+    .content ul li:nth-of-type(3) {
+      padding-left: 4px; }
+    .content ul .go {
+      display: block;
+      position: absolute;
+      right: 3%;
+      top: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: none;
+      border-left: 2px solid #51a8b4;
+      border-top: 2px solid #51a8b4;
+      transform: rotate(135deg) translateY(59%); }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6.5rem;
+  background-color: #f9fafe;
+  border-top: 1px solid seashell;
+  display: flex;
+  align-items: center;
+  justify-content: space-around; }
+  footer a {
+    width: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    footer a:nth-of-type(1) {
+      color: #5ac0ce; }
+    footer a:nth-of-type(3) {
+      color: #a4b0b8; }
+    footer a span {
+      margin-top: .6rem;
+      font-size: 1.2rem; }
+    footer a img {
+      width: 2.5rem;
+      height: 2.5rem; }
+    footer a:nth-of-type(2) {
+      margin: 0 -20%;
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      background-color: #5ac0ce; }
+      footer a:nth-of-type(2) img {
+        transform: translate(2px, -2px); }
+    footer a:hover {
+      text-decoration: none; }
+      footer a:hover img {
+        width: 3rem;
+        height: 3rem; }
+
+@media all and (max-width: 270px) {
+  header a {
+    display: none; } }
+
+/*# sourceMappingURL=mycss.css.map */

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        @import url("https://fonts.googleapis.com/css?family=Roboto:900");
+
+        .carousel {
+            height: 300px;
+            width: 400px;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            padding: 0;
+            list-style: none;
+
+        }
+
+        .carousel__controls,
+        .carousel__activator {
+            display: none;
+        }
+
+        .carousel__activator:nth-of-type(1):checked~.carousel__track {
+            -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+        }
+
+        .carousel__activator:nth-of-type(1):checked~.carousel__slide:nth-of-type(1) {
+            -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .carousel__activator:nth-of-type(1):checked~.carousel__controls:nth-of-type(1) {
+            display: block;
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(1):checked~.carousel__indicators .carousel__indicator:nth-of-type(1) {
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(2):checked~.carousel__track {
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+        }
+
+        .carousel__activator:nth-of-type(2):checked~.carousel__slide:nth-of-type(2) {
+            -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .carousel__activator:nth-of-type(2):checked~.carousel__controls:nth-of-type(2) {
+            display: block;
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(2):checked~.carousel__indicators .carousel__indicator:nth-of-type(2) {
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(3):checked~.carousel__track {
+            -webkit-transform: translateX(-200%);
+            transform: translateX(-200%);
+        }
+
+        .carousel__activator:nth-of-type(3):checked~.carousel__slide:nth-of-type(3) {
+            -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .carousel__activator:nth-of-type(3):checked~.carousel__controls:nth-of-type(3) {
+            display: block;
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(3):checked~.carousel__indicators .carousel__indicator:nth-of-type(3) {
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(4):checked~.carousel__track {
+            -webkit-transform: translateX(-300%);
+            transform: translateX(-300%);
+        }
+
+        .carousel__activator:nth-of-type(4):checked~.carousel__slide:nth-of-type(4) {
+            -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .carousel__activator:nth-of-type(4):checked~.carousel__controls:nth-of-type(4) {
+            display: block;
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(4):checked~.carousel__indicators .carousel__indicator:nth-of-type(4) {
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(5):checked~.carousel__track {
+            -webkit-transform: translateX(-400%);
+            transform: translateX(-400%);
+        }
+
+        .carousel__activator:nth-of-type(5):checked~.carousel__slide:nth-of-type(5) {
+            -webkit-transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, -webkit-transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s;
+            transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .carousel__activator:nth-of-type(5):checked~.carousel__controls:nth-of-type(5) {
+            display: block;
+            opacity: 1;
+        }
+
+        .carousel__activator:nth-of-type(5):checked~.carousel__indicators .carousel__indicator:nth-of-type(5) {
+            opacity: 1;
+        }
+
+        .carousel__control {
+            height: 30px;
+            width: 30px;
+            margin-top: -15px;
+            top: 50%;
+            position: absolute;
+            display: block;
+            cursor: pointer;
+            border-width: 5px 5px 0 0;
+            border-style: solid;
+            border-color: #fafafa;
+            opacity: 0.35;
+            outline: 0;
+            z-index: 3;
+        }
+        .carousel__control:hover {
+            opacity: 1;
+        }
+        .carousel__control--backward {
+            left: 10px;
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+        }
+        .carousel__control--forward {
+            right: 10px;
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .carousel__indicators {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .carousel__indicator {
+            height: 15px;
+            width: 15px;
+            border-radius: 100%;
+            display: inline-block;
+            z-index: 2;
+            cursor: pointer;
+            opacity: 0.35;
+            margin: 0 2.5px 0 2.5px;
+        }
+
+        .carousel__indicator:hover {
+            opacity: 0.75;
+        }
+
+        .carousel__track {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 0;
+            margin: 0;
+            -webkit-transition: -webkit-transform 0.5s ease 0s;
+            transition: -webkit-transform 0.5s ease 0s;
+            transition: transform 0.5s ease 0s;
+            transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+        }
+
+        .carousel__track .carousel__slide {
+            display: block;
+            top: 0;
+            left: 0;
+            right: 0;
+            opacity: 1;
+        }
+
+        .carousel__track .carousel__slide:nth-of-type(1) {
+            -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+        }
+
+        .carousel__track .carousel__slide:nth-of-type(2) {
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+        }
+
+        .carousel__track .carousel__slide:nth-of-type(3) {
+            -webkit-transform: translateX(200%);
+            transform: translateX(200%);
+        }
+
+        .carousel__track .carousel__slide:nth-of-type(4) {
+            -webkit-transform: translateX(300%);
+            transform: translateX(300%);
+        }
+
+        .carousel__track .carousel__slide:nth-of-type(5) {
+            -webkit-transform: translateX(400%);
+            transform: translateX(400%);
+        }
+
+        .carousel--scale .carousel__slide {
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        .carousel__slide {
+            height: 100%;
+            position: absolute;
+            overflow-y: auto;
+            opacity: 0;
+        }
+
+        /**
+  * Theming
+*/
+
+        * {
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background-color: #111;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            color: #fff;
+        }
+
+        .carousel-container {
+            display: inline-block;
+        }
+
+        .my-carousel {
+            border-radius: 5px;
+            margin: 30px;
+        }
+
+        .carousel__slide {
+            overflow: hidden;
+        }
+
+        .carousel--thumb .carousel__indicator {
+            height: 30px;
+            width: 30px;
+        }
+
+        h1 {
+            font-size: 50px;
+            line-height: 50px;
+            color: #fafafa;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            margin-top: -25px;
+        }
+
+        h2,
+        h3 {
+            color: #fafafa;
+        }
+
+        h3 {
+            font-size: 50px;
+        }
+
+        .carousel__indicator {
+            background-color: #fafafa;
+        }
+
+        .carousel__slide:nth-of-type(1),
+        .carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(1) {
+            background-size: cover;
+
+        }
+
+        .carousel__slide:nth-of-type(2),
+        .carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(2) {
+            background-color: #434DBC;
+   
+        }
+
+        .carousel__slide:nth-of-type(3),
+        .carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(3) {
+            background-color: #358C3F;
+        
+        }
+
+        .carousel__slide:nth-of-type(4),
+        .carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(4) {
+            background-color: #A85B41;
+        
+        }
+
+        .carousel__slide:nth-of-type(5),
+        .carousel--thumb .carousel__indicators .carousel__indicator:nth-of-type(5) {
+            background-color: #4455A6;
+           
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Pure CSS carousels</h3>
+    <div class="carousel-container">
+        <h2>fade in/out</h2>
+        <ul class="carousel my-carousel">
+            <input class="carousel__activator" type="radio" id="A" name="activator" checked="checked" />
+            <input class="carousel__activator" type="radio" id="B" name="activator" />
+            <input class="carousel__activator" type="radio" id="C" name="activator" />
+            <input class="carousel__activator" type="radio" id="D" name="activator" />
+            <input class="carousel__activator" type="radio" id="E" name="activator" />
+            
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="E"></label>
+                <label class="carousel__control carousel__control--forward" for="B"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="A"></label>
+                <label class="carousel__control carousel__control--forward" for="C"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="B"></label>
+                <label class="carousel__control carousel__control--forward" for="D"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="C"></label>
+                <label class="carousel__control carousel__control--forward" for="E"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="D"></label>
+                <label class="carousel__control carousel__control--forward" for="A"></label>
+            </div>
+
+
+
+            <li class="carousel__slide">
+                <h1>A</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>B</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>C</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>D</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>E</h1>
+            </li>
+
+
+
+            <div class="carousel__indicators">
+                <label class="carousel__indicator" for="A"></label>
+                <label class="carousel__indicator" for="B"></label>
+                <label class="carousel__indicator" for="C"></label>
+                <label class="carousel__indicator" for="D"></label>
+                <label class="carousel__indicator" for="E"></label>
+            </div>
+        </ul>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="carousel-container">
+        <h2>slider</h2>
+        <div class="carousel my-carousel carousel--translate">
+            <input class="carousel__activator" type="radio" name="carousel" id="F" checked="checked" />
+            <input class="carousel__activator" type="radio" name="carousel" id="G" />
+            <input class="carousel__activator" type="radio" name="carousel" id="H" />
+            <input class="carousel__activator" type="radio" name="carousel" id="I" />
+            <input class="carousel__activator" type="radio" name="carousel" id="J" />
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="J"></label>
+                <label class="carousel__control carousel__control--forward" for="G"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="F"></label>
+                <label class="carousel__control carousel__control--forward" for="H"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="G"></label>
+                <label class="carousel__control carousel__control--forward" for="I"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="H"></label>
+                <label class="carousel__control carousel__control--forward" for="J"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="I"></label>
+                <label class="carousel__control carousel__control--forward" for="F"></label>
+            </div>
+            <div class="carousel__track">
+                <li class="carousel__slide">
+                    <h1>F</h1>
+                </li>
+                <li class="carousel__slide">
+                    <h1>G</h1>
+                </li>
+                <li class="carousel__slide">
+                    <h1>H</h1>
+                </li>
+                <li class="carousel__slide">
+                    <h1>I</h1>
+                </li>
+                <li class="carousel__slide">
+                    <h1>J</h1>
+                </li>
+            </div>
+            <div class="carousel__indicators">
+                <label class="carousel__indicator" for="F"></label>
+                <label class="carousel__indicator" for="G"></label>
+                <label class="carousel__indicator" for="H"></label>
+                <label class="carousel__indicator" for="I"></label>
+                <label class="carousel__indicator" for="J"></label>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-container">
+        <h2>thumbnail indicators</h2>
+        <ul class="carousel my-carousel carousel--thumb">
+            <input class="carousel__activator" type="radio" id="K" name="thumb" checked="checked" />
+            <input class="carousel__activator" type="radio" id="L" name="thumb" />
+            <input class="carousel__activator" type="radio" id="M" name="thumb" />
+            <input class="carousel__activator" type="radio" id="N" name="thumb" />
+            <input class="carousel__activator" type="radio" id="O" name="thumb" />
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="O"></label>
+                <label class="carousel__control carousel__control--forward" for="L"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="K"></label>
+                <label class="carousel__control carousel__control--forward" for="M"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="L"></label>
+                <label class="carousel__control carousel__control--forward" for="N"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="M"></label>
+                <label class="carousel__control carousel__control--forward" for="O"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="N"></label>
+                <label class="carousel__control carousel__control--forward" for="K"></label>
+            </div>
+            <li class="carousel__slide">
+                <h1>K</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>L</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>M</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>N</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>O</h1>
+            </li>
+            <div class="carousel__indicators">
+                <label class="carousel__indicator" for="K"></label>
+                <label class="carousel__indicator" for="L"></label>
+                <label class="carousel__indicator" for="M"></label>
+                <label class="carousel__indicator" for="N"></label>
+                <label class="carousel__indicator" for="O"></label>
+            </div>
+        </ul>
+    </div>
+    <div class="carousel-container">
+        <h2>scale</h2>
+        <ul class="carousel my-carousel carousel--scale">
+            <input class="carousel__activator" type="radio" id="P" name="scale" checked="checked" />
+            <input class="carousel__activator" type="radio" id="Q" name="scale" />
+            <input class="carousel__activator" type="radio" id="R" name="scale" />
+            <input class="carousel__activator" type="radio" id="S" name="scale" />
+            <input class="carousel__activator" type="radio" id="T" name="scale" />
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="T"></label>
+                <label class="carousel__control carousel__control--forward" for="Q"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="P"></label>
+                <label class="carousel__control carousel__control--forward" for="R"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="Q"></label>
+                <label class="carousel__control carousel__control--forward" for="S"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="R"></label>
+                <label class="carousel__control carousel__control--forward" for="T"></label>
+            </div>
+            <div class="carousel__controls">
+                <label class="carousel__control carousel__control--backward" for="S"></label>
+                <label class="carousel__control carousel__control--forward" for="P"></label>
+            </div>
+            <li class="carousel__slide">
+                <h1>P</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>Q</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>R</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>S</h1>
+            </li>
+            <li class="carousel__slide">
+                <h1>T</h1>
+            </li>
+            <div class="carousel__indicators">
+                <label class="carousel__indicator" for="P"></label>
+                <label class="carousel__indicator" for="Q"></label>
+                <label class="carousel__indicator" for="R"></label>
+                <label class="carousel__indicator" for="S"></label>
+                <label class="carousel__indicator" for="T"></label>
+            </div>
+        </ul>
+    </div>
+
+</body>
+
+</html>

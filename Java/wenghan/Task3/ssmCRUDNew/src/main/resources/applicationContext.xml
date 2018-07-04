@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--&lt;!&ndash;开启ioc注解配置&ndash;&gt;-->
+   <!--<context:annotation-config />-->
+    <!--&lt;!&ndash;开启ioc注解扫描指定包 扫描业务层的接口实现类，通过spring注解方式在ioc容器中配置接口实现类&ndash;&gt;-->
+	<!--<context:component-scan base-package="com.service" />-->
+
+	<!--<aop:aspectj-autoproxy/>-->
+	<!--<context:component-scan base-package="com.Logger"></context:component-scan>-->
+
+	<!--<context:property-placeholder location="db.properties"/>-->
+	<!--ssm不能使用<context:property-placeholder标签>-->
+	<!--<bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">-->
+		<!--<property name="location" value="classpath:db.properties"/>-->
+		<!--<property name="ignoreUnresolvablePlaceholders" value="true"/>-->
+	<!--</bean>-->
+
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--在ioc容器中配置数据源-->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  <property name="driverClassName" value="${jdbc.driver}"/>
+	  <property name="url" value="${jdbc.url}"/>
+	  <property name="username" value="${jdbc.username}"/>
+	  <property name="password" value="${jdbc.password}"/>
+	</bean>
+
+	<!--在ioc容器中配置会话-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:com/mapper/*.xml"/>
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties" value="mysql"/>
+				</bean>
+			</array>
+		</property>
+	</bean>
+
+	<!--在ioc容器中配置数据访问层的实现类-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.mapper"/>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+</beans>
