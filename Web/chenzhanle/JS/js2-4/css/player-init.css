@@ -1,0 +1,171 @@
+.page {
+  background-color: #efefef;
+}
+
+.page>header {
+  background-color: #29bde0;
+}
+
+.left>a {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  vertical-align: top;
+  margin-left: 25px;
+}
+
+/* 空心箭头 */
+
+.left>a::before,
+.left>a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.left>a::before {
+  border-right: 10px solid #fff;
+}
+
+.left>a::after {
+  left: 2px;
+  border-right: 10px solid #29bde0;
+}
+
+.middle {
+  color: #fff;
+}
+
+/* 主体 */
+
+main {
+  margin: 70px 10px 10px;
+}
+
+h4 {
+  padding: 10px 0;
+  margin: 0;
+  color: #666;
+  background-color: #fff;
+  text-align: center;
+  box-shadow: 2px 5px 2px #aaa;
+}
+
+section {
+  min-height: 100px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
+}
+
+.player-list span {
+  float: left;
+  width: 50%;
+  color: #666;
+}
+
+.player-list span:first-child::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 10px;
+  background-color: #fab344;
+  vertical-align: middle;
+}
+
+.player-list span:last-child::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 10px;
+  background-color: #29bde0;
+  vertical-align: middle;
+}
+
+#number {
+  width: 40px;
+  margin: 0 10px;
+  color: #fab344;
+  text-align: center;
+}
+
+.player-total span {
+  color: #fab344;
+  font-size: .8em;
+  white-space: nowrap;
+}
+
+.slider {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.minus,
+.plus {
+  display: block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px;
+  border: 1px solid #aaa;
+  background-color: #fff;
+}
+
+.minus::before,
+.plus::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 11px;
+  left: 2px; 
+  width: 20px;
+  height: 2px;
+  background-color: #fab344;
+}
+.plus::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 11px;  
+  width: 2px;
+  height: 20px;
+  background-color: #fab344;
+}
+#range {
+  flex: 1;
+  height: 3px;
+  background: linear-gradient(#fab344,#fab344) no-repeat;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+}
+#range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  width: 30px;
+  height: 20px;
+  background: url(../img/move.png) no-repeat;
+  background-size: 100% auto;
+}
+
+/* 底部 */
+footer {position: static;}
+footer>a {
+  display: block;
+  padding: 10px 0;
+  margin: 10px 10px 20px;
+  color: white;
+  background: #fab344;
+  font-size: 1.5em;
+  text-align: center;
+}
