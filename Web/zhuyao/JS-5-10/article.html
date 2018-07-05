@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<div class="content" ng-controller="list">
+    <div class="form">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-xm-4 calendar">
+                    <span class="word-hb ml-33">发布时间</span>
+                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                           ng-change="changeDate1()" ng-model="dt1" is-open="popup1.opened"
+                           ng-click="open1()" close-text="关闭" clear-text="清空"
+                           current-text="今天" datepicker-options="dateOptions1" readonly="true"
+                           ng-required="true" alt-input-formats="altInputFormats"/>
+                </div>
+                <div class="col-lg-4 col-md-4 col-xm-4 calendar">
+                    <span class="line">一</span>
+                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
+                           ng-change="changeDate2()" ng-model="dt2" is-open="popup2.opened"
+                           ng-click="open2()" close-text="关闭" clear-text="清空"
+                           current-text="今天" datepicker-options="dateOptions2" readonly="true"
+                           ng-required="true" alt-input-formats="altInputFormats"/>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <span class="word-hb lt">类型</span>
+                        <select class="form-control" ng-model="list"
+                                ng-options="list.id as list.name for list in lists">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <span class="word-hb lt">状态</span>
+                        <select class="form-control" ng-model="statusList"
+                                ng-options="item.id as item.name for item in items">
+                        </select>
+                    </div>
+                </div>
+                <div class="button-group clear">
+                    <button type="button" class="btn btn-danger"  ng-click="clean()">清空</button>
+                    <button type="button" class="btn btn-success" ng-click="search()">搜索</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading clearfix">
+            <span>Article列表</span>
+            <button type="button" class="btn btn-success" ui-sref="backstage.articleDetails">+新增</button>
+        </div>
+        <div class="panel-body table-responsive">
+            <table class="table table-striped table-border">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>图片</th>
+                    <th>名称</th>
+                    <th>类型</th>
+                    <th>发布时间</th>
+                    <th>修改时间</th>
+                    <th>发布者</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="data in datas">
+                    <td>{{$index + 1}}</td>
+                    <td><img ng-src="{{data.img}}" alt=""></td>
+                    <td>{{data.title}}</td>
+                    <td>{{data.type | typeFilter}}</td>
+                    <td>{{data.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{data.updateAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{data.author}}</td>
+                    <td>{{data.status | statusFilter}}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning" ng-click="offline(data.id, data.status)">{{data.status | statusTextFilter}}</button>
+                        <button type="button" class="btn btn-primary" ui-sref="backstage.articleDetails({id:data.id})">编辑</button>
+                        <button type="button" class="btn btn-success" ng-click="delete(data.id)">删除</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Table -->
+    </div>
+    <div class="pagination-group">
+        <div class="page-size">每页显示<input type="text" class="size" ng-model="size" ng-change="changeSize()">条</div>
+        <div class="pagination clear">
+            <uib-pagination total-items="totalItems" ng-model="currentPage" items-per-page="perPage"
+                            max-size="5" first-text="首页" previous-text="上一页" next-text="下一页"
+                            last-text="末页" boundary-links="true" force-ellipses="true" ng-change="pageChange()">
+            </uib-pagination>
+        </div>
+        <div class="go-page">去第<input type="text" ng-model="page" ng-change="changePage()">页</div>
+        <button class="determine" ng-click="determine()">确定</button>
+    </div>
+</div>
+
+
+

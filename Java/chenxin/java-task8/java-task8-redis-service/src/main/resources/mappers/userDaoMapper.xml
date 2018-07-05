@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptteng.dao.UserDao">
+    <!--新增用户注册-->
+    <insert id="saveUser" parameterType="User">
+        INSERT INTO users(id,username,password,name,courseId,image,email,address,phone,createdAt,updatedAt) VALUES (#{id},#{username},#{password},#{name},#{courseId},#{image},#{email},#{address},#{phone},#{createdAt},#{updatedAt})
+    </insert>
+    <!--通过用户名查询-->
+    <select id="getUserByName" parameterType="java.lang.String" resultType="User">
+       SELECT * from users WHERE username like '%${value}%'
+    </select>
+    <!--通过id查找-->
+    <select id="getUserById" parameterType="java.lang.Long" resultType="User">
+        SELECT * FROM users WHERE  id = #{id}
+    </select>
+    <!--删除-->
+    <delete id="deleteUserById" parameterType="java.lang.Long" >
+        DELETE from users WHERE id=#{id}
+    </delete>
+    <!--更新-->
+    <update id="updateUser" parameterType="User">
+        UPDATE users
+        <trim prefix="set" suffixOverrides=",">
+            <if test="username != null">username=#{username},</if>
+            <if test="password != null">password=#{password},</if>
+            <if test="name != null">name=#{name},</if>
+            <if test="courseId !=null">courseId=#{courseId},</if>
+            <if test="image != null">image=#{image},</if>
+            <if test="email != null">email=#{email},</if>
+            <if test="address != null">address=#{address},</if>
+            <if test="phone != null">phone=#{phone},</if>
+            <if test="createdAt != null">createdAt=#{createdAt},</if>
+            <if test="updatedAt != null">updatedAt=#{updatedAt},</if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+</mapper>

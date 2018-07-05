@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>optimize</groupId>
+  <artifactId>optimize</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>optimize Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <spring.version>5.0.4.RELEASE</spring.version>
+    <junit.version>4.12</junit.version>
+    <mysql.version>5.1.40</mysql.version>
+    <slf4j.version>1.7.16</slf4j.version>
+    <log4j.version>1.2.17</log4j.version>
+    <!--<log4j.version>2.5</log4j.version>-->
+    <c3p0.version>0.9.5.2</c3p0.version>
+    <mybatis.version>3.4.5</mybatis.version>
+    <mybatispring.version>1.3.2</mybatispring.version>
+
+    <jsontaglib.version>0.4.1</jsontaglib.version>
+    <tiles.version>3.0.5</tiles.version>
+  </properties>
+
+  <!-- maven 库-->
+  <repositories>
+    <repository>
+      <id>aliyun</id>
+      <name>aliyun</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+    </repository>
+    <repository>
+      <id>jahia</id>
+      <name>jahia repository</name>
+      <url>http://maven.jahia.org/maven2/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <!--阿里云oss-->
+    <!--<repository>-->
+      <!--<id>sonatype-nexus-staging</id>-->
+      <!--<name>Sonatype Nexus Staging</name>-->
+      <!--<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
+      <!--<releases>-->
+        <!--<enabled>true</enabled>-->
+      <!--</releases>-->
+      <!--<snapshots>-->
+        <!--<enabled>true</enabled>-->
+      <!--</snapshots>-->
+    <!--</repository>-->
+  </repositories>
+
+  <dependencies>
+
+    <!--第三方API start-->
+
+
+
+    <!--第三方API上传jar包依赖（阿里 腾讯 等等）-->
+
+    <!--  依赖冲突问题，先引入的先依赖，这里腾讯和荣联引入包冲突 先引入使用依赖  -->
+    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.4.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpmime</artifactId>
+      <version>4.4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all -->
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>1.3</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!--commons 图片上传核心包-->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.3.1</version>
+    </dependency>
+
+    <!--第三方API上传jar包依赖 end-->
+
+
+
+    <!--算法加密包 1.10和1.9不一样 jar包冲突在此-->
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.10</version>
+    </dependency>
+
+    <!--腾讯云桶-->
+    <dependency>
+      <groupId>com.qcloud</groupId>
+      <artifactId>cos_api</artifactId>
+      <version>5.4.4</version>
+      <exclusions>
+        <!--<exclusion>-->
+        <!--<groupId>org.apache.httpcomponents</groupId>-->
+        <!--<artifactId>httpclient</artifactId>-->
+        <!--</exclusion>-->
+        <exclusion>
+          <groupId>com.cloopen</groupId>
+          <artifactId>cloopen-rest-sdk</artifactId>
+          <!--<groupId>commons-codec</groupId>-->
+          <!--<artifactId>commons-codec</artifactId>-->
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!--阿里云  SingleSendMail 等-->
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-core</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-dm</artifactId>
+      <version>3.1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-ecs</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+
+
+    <!--阿里云oss 资源库-->
+
+    <dependency>
+      <groupId>com.aliyun.oss</groupId>
+      <artifactId>aliyun-sdk-oss</artifactId>
+      <version>2.8.2</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/jdom/jdom -->
+    <dependency>
+      <groupId>jdom</groupId>
+      <artifactId>jdom</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+
+    <!--SendCloud 邮件、短信发送 start-->
+
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20140107</version>
+    </dependency>
+
+    <!--SendCloud end-->
+
+    <!--荣联 短信发送-->
+    <dependency>
+      <groupId>com.cloopen</groupId>
+      <artifactId>cloopen-rest-sdk</artifactId>
+      <version>2.6.3</version>
+    </dependency>
+
+    <!--第三方API end-->
+
+
+
+    <!--缓存 包-->
+    <!--redis  jedis包-->
+    <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
+    <!--memcache -->
+    <!-- https://mvnrepository.com/artifact/com.whalin/Memcached-Java-Client -->
+    <dependency>
+      <groupId>com.whalin</groupId>
+      <artifactId>Memcached-Java-Client</artifactId>
+      <version>3.0.2</version>
+    </dependency>
+
+    <!-- 缓存 对象池 -->
+    <!--<dependency>-->
+      <!--<groupId>commons-pool</groupId>-->
+      <!--<artifactId>commons-pool</artifactId>-->
+      <!--<version>1.6</version>-->
+    <!--</dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+
+    <!--缓存 包 End-->
+
+    <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.tomcat</groupId>-->
+      <!--<artifactId>tomcat-catalina</artifactId>-->
+      <!--<version>9.0.8</version>-->
+    <!--</dependency>-->
+
+
+    <!--Tiles框架-->
+    <dependency>
+      <groupId>org.apache.tiles</groupId>
+      <artifactId>tiles-core</artifactId>
+      <version>${tiles.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tiles</groupId>
+      <artifactId>tiles-api</artifactId>
+      <version>${tiles.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tiles</groupId>
+      <artifactId>tiles-servlet</artifactId>
+      <version>${tiles.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tiles</groupId>
+      <artifactId>tiles-extras</artifactId>
+      <version>${tiles.version}</version>
+    </dependency>
+
+    <!--token jwt-->
+
+    <dependency>
+      <groupId>com.auth0</groupId>
+      <artifactId>java-jwt</artifactId>
+      <version>3.3.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.9.0</version>
+    </dependency>
+
+    <!--<dependency>-->
+    <!--<groupId>com.nimbusds</groupId>-->
+    <!--<artifactId>nimbus-jose-jwt</artifactId>-->
+    <!--<version>5.10</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.common &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.oltu.oauth2</groupId>-->
+      <!--<artifactId>org.apache.oltu.oauth2.common</artifactId>-->
+      <!--<version>1.0.2</version>-->
+    <!--</dependency>-->
+
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.client &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.oltu.oauth2</groupId>-->
+      <!--<artifactId>org.apache.oltu.oauth2.client</artifactId>-->
+      <!--<version>1.0.2</version>-->
+    <!--</dependency>-->
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.oltu.oauth2/org.apache.oltu.oauth2.authzserver &ndash;&gt;-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.oltu.oauth2</groupId>-->
+      <!--<artifactId>org.apache.oltu.oauth2.authzserver</artifactId>-->
+      <!--<version>1.0.2</version>-->
+    <!--</dependency>-->
+
+    <!--token jwt End-->
+
+    <!--json转换-->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.2</version>
+    </dependency>
+
+    <!-- 测试与日志 -->
+
+    <!--junit包-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <!--测试的时候用，不测试注掉-->
+      <!--<scope>test</scope>-->
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.1.0</version>
+    </dependency>
+
+    <!--log4j日志包-->
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!--log4j2的依赖包-->
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-api</artifactId>-->
+      <!--<version>${log4j.version}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.apache.logging.log4j</groupId>-->
+      <!--<artifactId>log4j-core</artifactId>-->
+      <!--<version>${log4j.version}</version>-->
+    <!--</dependency>-->
+
+    <!--格式化-->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>${slf4j.version}</version>
+    </dependency>
+
+    <!-- 测试与日志 end-->
+
+    <!--持久层-->
+
+    <!--mysql数据库包-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+
+    <!-- c3p0连接池 -->
+    <dependency>
+      <groupId>com.mchange</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>${c3p0.version}</version>
+    </dependency>
+
+    <!--mybatis包-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+
+    <!--spring-mybatis 包-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${mybatispring.version}</version>
+    </dependency>
+
+    <!--持久层 end-->
+
+
+    <!--读取自定义xml-->
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+
+    <!--Spring  framework -->
+
+    <!--Spring的核心工具包-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--在基础IOC功能上提供扩展服务，此外还提供许多企业级服务的支持，有邮件服务、任务调度、JNDI定位，EJB集成、远程访问、缓存以及多种视图层框架的支持。-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--Spring IOC的基础实现，包含访问配置文件、创建和管理bean等。-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--整合第三方的orm实现，如hibernate，ibatis，jdo以及spring 的jpa实现-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--Spring对于object/xml映射的支持，可以让JAVA与XML之间来回切换-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-oxm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--Spring表达式语言-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-expression</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--对JDBC 的简单封装-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--为JDBC、Hibernate、JDO、JPA等提供的一致的声明式和编程式事务管理。-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--spring test测试包-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--SpringAop 和 SpringAop支持 -->
+    <!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.8.13</version>
+    </dependency>
+
+    <!--Spring的面向切面编程，提供AOP（面向切面编程）的实现-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--Spring提供的对AspectJ框架的整合-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--SpringAop end-->
+
+    <!--Spring-web（mvc） jar-->
+    <!--包含Web应用开发时，用到Spring框架时所需的核心类，包括自动载入WebApplicationContext特性的类、Struts与JSF集成类、文件上传的支持类、Filter类和大量工具辅助类。-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--包含SpringMVC框架相关的所有类。包含国际化、标签、Theme、视图展现的FreeMarker、JasperReports、 Tiles、Velocity、XSLT相关类。如果使用了独立的MVC框架，则无需这个JAR文件里的任何类。-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--提供 Socket通信， web端的推送功能-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-websocket</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+
+    <!--Spring Instrument Tomcat：Spring对tomcat连接池的集成-->
+    <!--<dependency>-->
+    <!--<groupId>org.springframework</groupId>-->
+    <!--<artifactId>spring-instrument-tomcat</artifactId>-->
+    <!--<version>${spring.version}</version>-->
+    <!--</dependency>-->
+
+    <!-- springframework end -->
+
+
+    <!-- Jsp  JSON -->
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>1.2.32</version>
+    </dependency>
+
+    <!-- jsp核心标签库 -->
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!-- JSON Taglib -->
+    <!-- https://mvnrepository.com/artifact/atg.taglib.json/json-taglib -->
+    <dependency>
+      <groupId>atg.taglib.json</groupId>
+      <artifactId>json-taglib</artifactId>
+      <version>${jsontaglib.version}</version>
+    </dependency>
+
+    <!-- jsp的taglib标签库相关  json-lib-->
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <version>2.4</version>
+      <classifier>jdk15</classifier>
+    </dependency>
+
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+
+    <!--  java servlet -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet.jsp</groupId>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>javax.media</groupId>-->
+      <!--<artifactId>jai_imageio</artifactId>-->
+      <!--<version>1.1</version>-->
+    <!--</dependency>-->
+
+    <!--導致错误的元凶！！29-May-2018 16:42:21.513 严重 [RMI TCP Connection(7)-127.0.0.1] org.apache.catalina.core.StandardContext.startInternal Error during ServletContainerInitializer processing
+ javax.servlet.ServletException: java.lang.NoSuchMethodException: org.glassfish.tyrus.server.TyrusServerConfiguration.<init>()-->
+    <!--<dependency>-->
+    <!--<groupId>org.glassfish.main.extras</groupId>-->
+    <!--<artifactId>glassfish-embedded-all</artifactId>-->
+    <!--<version>4.0-b90</version>-->
+    <!--</dependency>-->
+
+    <!-- Jsp  JSON END -->
+
+  </dependencies>
+
+  <build>
+    <finalName>optimize</finalName>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <!--跳过测试-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.18.1</version>
+          <configuration>
+            <skipTests>true</skipTests>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

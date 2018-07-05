@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hzw.mapper.StudentMapper">
+
+    <select id="findIdStudnet" parameterType="Integer" resultType="Student">
+        SELECT * FROM student WHERE sId = #{sId}
+    </select>
+
+    <select id="getID" parameterType="java.lang.Long" resultType="Student">
+        SELECT * FROM student WHERE sId= #{sId}
+    </select>
+
+    <select id="findListStudent" resultType="Student">
+        SELECT * FROM student
+    </select>
+
+    <select id="findNameStudent" parameterType="String" resultType="Student">
+        SELECT * FROM student WHERE sName = #{sName}
+    </select>
+
+    <insert id="insertStudent" parameterType="Student">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="sId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO student
+        VALUES (null,#{sName},#{QQ},#{sType},#{sTime},#{sSchool},#{sNumber},
+        #{sDaily},#{sWish},#{sCoach},#{sWhence},#{create_at},#{update_at})
+    </insert>
+
+    <delete id="deleteStudent" parameterType="Integer" >
+        DELETE FROM student WHERE sId = #{sId}
+    </delete>
+
+    <update id="updateStudent" parameterType="Student">
+        UPDATE student SET sName = #{sName},sType = #{sType},sTime = #{sTime},sSchool = #{sSchool},
+        sNumber = #{sNumber},sDaily = #{sDaily},sWish = #{sWish},sCoach = #{sCoach},sWhence = #{sWhence},
+        update_at= #{update_at} WHERE sId = #{sId}
+    </update>
+</mapper>

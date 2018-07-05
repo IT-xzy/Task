@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task.dao.StudentDao">
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) FROM student
+    </select>
+    <!--添加信息-->
+    <insert id="addStudent" parameterType="Student" useGeneratedKeys="true" keyProperty="id" >
+        insert into  student (createdAt,name,profession,studentID,isWorked,username) values (#{createdAt},#{name},#{profession},#{studentID},#{isWorked},#{username})
+    </insert>
+    <!--删除信息,理论上不删除信息，只需要修改状态就行-->
+    <delete id="deleteStudent" parameterType="int" >
+        delete from student where id= #{id}
+    </delete>
+    <!--修改信息-->
+    <update id="updateStudent" parameterType="Student" >
+        update student
+        <set>
+            <if test="name!=null">name=#{name},</if>
+            <if test="profession!=null">profession=#{profession},</if>
+            <if test="endTime!=0">endTime=#{endTime},</if>
+            <if test="studentID!=0">studentID=#{studentID},</if>
+            <if test="isWorked!=null">isWorked=#{isWorked},</if>
+            <if test="company!=null">company=#{company},</if>
+            <if test="position!=null">position=#{position},</if>
+            <if test="duty!=null">duty=#{duty},</if>
+            <if test="telephone!=null">telephone=#{telephone},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="image!=null">image=#{image},</if>
+            <if test="updatedAt!=0">updatedAt=#{updatedAt}</if>
+        </set>
+        where username=#{username}
+    </update>
+    <!--根据id获取信息-->
+    <select id="getStudent" parameterType="int" resultType="Student">
+        select * from student where id=#{id}
+    </select>
+    <!-- 查询在学数 -->
+    <select id="selectIsStudy" resultType="int" >
+        select count(*) FROM student where isWorked = '在学'
+    </select>
+    <!-- 查询各职业在学数 -->
+    <select id="selectIsStuByPro" resultType="int" parameterType="String">
+        select count(*) FROM student where isWorked = '在学' and profession=#{profession}
+    </select>
+    <!--根据学号查找-->
+    <select id="getByStuID" parameterType="int" resultType="Student">
+        SELECT * FROM student WHERE studentID=#{studentID}
+    </select>
+    <!--根据姓名模糊查找-->
+    <select id="getByUsername" parameterType="String" resultType="Student">
+        select * from   student WHERE  username=#{username}
+    </select>
+</mapper>

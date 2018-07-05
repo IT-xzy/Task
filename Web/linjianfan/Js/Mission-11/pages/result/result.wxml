@@ -1,0 +1,119 @@
+<!--pages/result/result.wxml-->
+<text class='title'>最适合你的职业推荐</text>
+
+<view class="swiper-tab"> 
+ <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">{{theItem[theResultValue1].name}}</view> 
+ <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">{{theItem[theResultValue2].name}}</view> 
+ <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">{{theItem[theResultValue3].name}}</view> 
+</view> 
+  
+<swiper current="{{currentTab}}" class="swiper" duration="300" style="height:{{winHeight - 30}}px" bindchange="bindChange"> 
+ <swiper-item> 
+  <view>
+    <view class='box'>
+      <view class='titlebox'>职业门槛</view>
+      <view class='contentbox'>{{theItem[theResultValue1].threshold}}星</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>难易程度</view>
+      <view class='contentbox'>{{theItem[theResultValue1].difficult}}星</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>成长周期</view>
+      <view class='contentbox'>{{theItem[theResultValue1].cycle}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>求贤企业</view>
+      <view class='contentbox'>{{theItem[theResultValue1].company}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>入学基础</view>
+      <view class='contentbox'>{{theItem[theResultValue1].basis}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>薪资待遇</view>  
+      <view class='contentbox'>
+         <view class='content-inbox' wx:for='{{theMoney1}}'>{{item.time}} 约{{item.salary}}K</view> 
+        <!-- <view class='content-inbox' wx:for='{{theItem[theResultValue1]}}'>{{}}</view> -->
+      </view> 
+    </view>  
+  </view> 
+ </swiper-item> 
+
+ <swiper-item> 
+  <view>
+    <view class='box'>
+      <view class='titlebox'>职业门槛</view>
+      <view class='contentbox'>{{theItem[theResultValue2].threshold}}星</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>难易程度</view>
+      <view class='contentbox'>{{theItem[theResultValue2].difficult}}星</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>成长周期</view>
+      <view class='contentbox'>{{theItem[theResultValue2].cycle}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>求贤企业</view>
+      <view class='contentbox'>{{theItem[theResultValue2].company}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>入学基础</view>
+      <view class='contentbox'>{{theItem[theResultValue2].basis}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>薪资待遇</view>
+      <view class='contentbox'>
+        <view class='content-inbox' wx:for='{{theMoney2}}'>{{item.time}} 约{{item.salary}}K</view>
+      </view> 
+    </view>  
+  </view> 
+ </swiper-item> 
+
+ <swiper-item> 
+  <view>
+    <view class='box'>
+      <view class='titlebox'>职业门槛</view>
+      <view class='contentbox'>{{theItem[theResultValue3].threshold}}星</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>难易程度</view>
+      <view class='contentbox'>{{theItem[theResultValue3].difficult}}星</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>成长周期</view>
+      <view class='contentbox'>{{theItem[theResultValue3].cycle}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>求贤企业</view>
+      <view class='contentbox'>{{theItem[theResultValue3].company}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>入学基础</view>
+      <view class='contentbox'>{{theItem[theResultValue3].basis}}</view>
+    </view>
+
+    <view class='box'>
+      <view class='titlebox'>薪资待遇</view>
+      <view class='contentbox'>
+        <view class='content-inbox' wx:for='{{theMoney3}}'>{{item.time}} 约{{item.salary}}K</view>
+      </view> 
+    </view>  
+  </view> 
+ </swiper-item> 
+</swiper>

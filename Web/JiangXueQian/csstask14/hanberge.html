@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <style>
+        html,body{
+            font-size: 62.5%;
+        }
+        body,p,div,span,ul,a{
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: none;
+        }
+        .commonnav{
+            background-color: #26a26f;
+            height: 50px;
+        }
+        .dropdown{
+            text-align: right;
+            height: 50px;
+            /*width: 80%;*/
+            /*margin: 0 auto;*/
+        }
+       .dropdown label {
+            display: inline-block;
+            position: relative;
+            font-size: 0;
+            width: 33px;
+            height: 47px;
+            /*top: 8px;*/
+            border: none;
+            cursor: pointer;
+            /*background-color: #00bcd4;*/
+        }
+       .dropdown label:focus {
+            outline: none;
+        }
+       .dropdown label span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            top: 22px;
+            left: 6px;
+            right: 6px;
+            background-color: #fff;
+        }
+        label span:before,
+        label span:after {/*before和after与span重合，需要进行上移和下移*/
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+        }
+      label span:before {
+            top: -8px;/*相对于中间的span上移10px*/
+        }
+        label span:after {
+            bottom: -8px;/*相对于中间的span下移10px*/
+        }
+        input {
+            display: inline-block;
+            display: none;
+        }
+        /*input:checked ~ ul{*/
+              /*display: block;*/
+                /*background-color: red;*/
+            /*}*/
+        .dropdown:hover > ul{
+              display: block;
+                background-color: red;
+            }
+        .dropdown ul {
+            /*position: absolute;*/
+            display: none;
+            list-style: none;
+            list-style-type: none !important;
+            text-align: left;
+            /*width: 100%;*/
+            background-color: #fff;
+            /*z-index: 1;*/
+            margin: 0 !important;
+            padding: 0;
+            display: none;
+            box-sizing: border-box
+        }
+
+        ul li {
+            list-style-type: none;
+        }
+
+        .dropdown ul li:hover > a{
+            background-color: #5fc0cd;
+            color: #FFF; }
+
+        .dropdown ul li{
+            width: 100%;
+            box-sizing: border-box;
+            list-style: none;
+            background-color: #fff;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid #e1e5e7;
+            border-top: none;
+        }
+        ul li a{
+            width: 100%;
+            padding: 10px;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+            font-size: 15px;
+            /*color: #00bcd4;*/
+            color: #5fc0cd;
+        }
+        /*ul>li:nth-child(1){*/
+            /*border-top: 1px solid #e1e5e7;*/
+        /*}*/
+        @media (max-width: 768px) {
+            .dropdown{
+                display: block;
+            }
+        }
+        @media (max-width: 2000px)and (min-width: 769px) {
+            .dropdown{
+                display: none;
+            }
+        } @media (max-width: 768px) {
+            .headernav{
+                display: none;
+            }
+        }
+        @media (max-width: 2000px)and (min-width: 769px) {
+            .headernav{
+                display: block;
+            }
+        }
+        .headernav {
+            text-align: right;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+      .headernav  a{
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+            width: 80px;
+            text-align: center;
+            height: 50px;
+            line-height: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+
+        }
+       .headernav a:hover{
+            border-bottom: 3px solid #fff;
+        }
+
+
+        .header-wrap{
+            width: 80%;
+            margin: 0 auto;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #fff;
+        }
+        .header-wrap-text{
+            font-size: 15px;
+            color: #26a26f;
+        }
+        @media (max-width: 350px) {
+            .header-wrap-image{
+                display: none;
+            }
+        }
+    </style>
+
+</head>
+<body>
+<!--<button >-->
+<header>
+    <div class="header-wrap">
+        <div class="header-wrap-text">
+            <span>咨询电话 : 010-59478634</span>
+        </div>
+        <div class="header-wrap-image">
+            <a href="###">
+                <img src="image/qq.png" alt="" class="header-image">
+            </a>
+            <a href="###">
+                <img src="image/wechat.png" alt="" class="header-image">
+            </a>
+            <a href="###">
+                <img src="image/weio.png" alt="" class="header-image">
+            </a>
+        </div>
+    </div>
+</header>
+<div class="commonnav">
+<div class="dropdown">
+    <input type="checkbox" id="h1">
+    <label for="h1" class="hamburger"> <span></span></label>
+    <ul>
+        <li><a href="">首页</a></li>
+        <li><a href="">推荐</a></li>
+        <li><a href="">职业</a></li>
+        <li><a href="">关于</a></li>
+    </ul>
+</div>
+<div class="headernav">
+    <a href="">首页</a>
+    <a href="">推荐</a>
+    <a href="">职业</a>
+    <a href="">关于</a>
+</div>
+</div>
+<!--</button>-->
+</body>
+</html>

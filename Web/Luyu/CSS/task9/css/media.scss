@@ -1,0 +1,294 @@
+@charset "utf-8";
+@media all and ( max-width: 768px) {//xs屏幕时布局
+  header{
+    display: none;
+  }
+  .index-nav{
+    display: block;
+      >div:nth-of-type(1){
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        label{
+          width: .3rem;
+          height: .3rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content:space-between;
+          padding: .05rem 0;
+          span{
+            width: 80%;
+            height: .03rem;
+            background-color:#848484;
+          }
+          &:hover{
+              background-color: white;
+              border-radius: 5px;
+
+          }
+        }
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: .8rem;
+        padding-right: 15px;
+        background-color: #1db176;
+    }
+
+
+    input{
+      display: none;
+    }
+    input:checked ~ .index-nav-group{
+      display: block;
+      margin-top: 0;
+      transition: 500ms;
+      a{
+        line-height: .3rem;
+      }
+    }
+    .index-nav-group{
+      padding-bottom: .06rem;
+      z-index: -2;
+      transition: 500ms ;
+      margin-top: -1.26rem;
+      background-color: #1db176;
+      a{
+        position: relative;
+
+        display: block;
+        width: 100%;
+        height: .3rem;
+        text-align: center;
+        box-sizing: border-box;
+        color: white;
+        &:hover{
+          border-bottom: 2px solid white;
+        }
+      }
+    }
+  }
+  .wrap{
+    z-index: 99;
+    background-color: white;
+    .row{
+      div:nth-of-type(1){
+        display: none;
+      }
+      div:nth-of-type(2){
+        display: flex;
+        justify-content: flex-end;
+      }
+
+    }
+  }
+  main .how .row >div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  main .partner .row{
+    box-shadow:none;
+    .bowl-img{
+      border-bottom: 1px seashell solid;
+
+    }
+  }
+  main .advantage{
+    .row >div{
+      display: block;
+      text-align: center;
+      margin-bottom: .3rem;
+      width: 100%;
+      p{
+        text-align: center;
+      }
+    }
+    .row>div:nth-last-child(1){
+      display: flex;
+      flex-direction: column;
+      border-left: none;
+    }
+
+  }
+  .how{
+    .row{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      div{
+        margin-bottom: .2rem;
+        img{//--------------设置最小屏幕时显示出来，block无效，显示不出来
+          position: absolute;
+          left: 50%;
+          top: .4rem;
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+  main .how .row >div:nth-of-type(4) img{
+    display: block;
+  }
+
+  main .link{
+    .row{
+      display: flex;
+      justify-content: space-around;
+      ul{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+  }
+  //-----------job布局↓
+  main{
+    .row{
+      >div{
+        @include flex-justify-center;
+        .main-blk{
+          max-width: 4.5rem;
+        }
+      }
+    }
+  }
+
+  footer {
+
+    div div >div{
+      margin-bottom: .2rem;
+    }
+    .footer-right {
+      div{
+        margin-bottom: 0;
+      }
+      align-items: flex-start;
+    }
+  }
+  //---------------------↓partner布局
+  .partner-main{
+
+  }
+
+
+}
+@media all and ( min-width: 769px) and(max-width: 991px) {//sm布局时
+    .how{
+    .row{
+    div:nth-of-type(even) img{
+          display:none;
+    }
+    }
+    }
+  main .partner .row{
+    box-shadow:none;
+    .bowl-img{
+      border-bottom: 1px seashell solid;
+    }
+  }
+
+  main .link{
+    .row{
+      display: flex;
+      justify-content: space-around;
+      ul{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    }
+  }
+
+}
+
+
+  @media all and (min-width: 992px) and (max-width:1200px) { //md布局时
+    .how{
+      .row{
+        div:nth-of-type(4) img{
+          display: none;
+        }
+      }
+    }
+    main .partner .row{
+      display: flex;
+      .bowl-img{
+        flex-grow: 1;
+      }
+    }
+  }
+
+@media all and (min-width: 1200px) {//lg布局
+
+  main .partner .row{
+    display: flex;
+    .bowl-img{
+      flex-grow: 1;
+    }
+  }
+}
+
+@media all and(max-width: 330px){
+  main{
+    .main-blk{
+      .blk-line1{
+        align-items: center;
+        flex-direction: column;
+        img{
+          margin: 0;
+        }
+        >div{
+          span{
+            text-align: center;
+          }
+        }
+      }
+      .blk-line2{
+        >span{
+          @include flex-column;
+          span:nth-of-type(2){
+            display: flex;
+          }
+          }
+        }
+      .blk-line3{
+        >span{
+          @include flex-column
+        }
+      }
+      .blk-line4{
+        >div:nth-of-type(1){
+          writing-mode: vertical-lr;
+          -ms-writing-mode: tb-lr;
+          padding: .16rem .22rem;
+          flex-basis:0;
+        }
+      }
+      }
+    }
+  .partner-main{
+    div{
+      .main-right{
+        .main-right-title img{
+          width:1rem;
+          height: .5rem;
+        }
+      }
+    }
+  }
+  footer{
+    .footer-mid {
+      height: 1.5rem;
+    }
+    .footer-mid p span{
+      margin:.1rem 0;
+      flex-basis: 100%;
+    }
+  }
+  }
+
+
+

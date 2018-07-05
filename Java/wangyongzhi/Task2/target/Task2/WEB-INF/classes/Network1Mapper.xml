@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.Network1Mapper">
+
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="lineId">
+        insert into network1 (
+              Name, QQ, Type, Enrolment_time, Graduate,
+              Report_link, Wish, Senior, How_know, Create_at, Update_at)
+              values(
+              #{name}, #{QQ}, #{type},
+                 #{enrolmentTime}, #{graduate},
+                 #{reportLink},#{wish},#{senior},#{howKnow},#{createAt},#{updateAt})
+    </insert>
+
+    <update id="update">
+        update network1
+        set Line_id = #{lineId},
+        Name = #{name},
+        QQ = #{QQ},
+        Type = #{type},
+        Enrolment_time = #{enrolmentTime},
+        Graduate = #{graduate},
+        Report_link = #{reportLink},
+        Wish = #{wish},
+        Senior = #{senior},
+        How_know = #{howKnow},
+        Create_at = #{createAt},
+        Update_at = #{updateAt}
+        where 1 = 1
+        <choose>
+            <when test="lineId != null">
+                and Line_id = #{lineId}
+            </when>
+            <when test="name != null and name != ''">
+                and Name = #{name}
+            </when>
+            <otherwise>
+                and 1 = 2
+            </otherwise>
+        </choose>
+
+    </update>
+
+    <select id="selectAll" resultType="model.Network1">
+        select Line_id lineId,
+        Name name, QQ,
+        Type type, Enrolment_time enrolmentTime,
+        Graduate graduate, Report_link reportLink,
+        Wish wish, Senior senior,
+        How_know howKnow, Create_at createAt,
+        Update_at updateAt
+        from network1
+    </select>
+
+    <resultMap id="network1Map" type="model.Network1">
+        <id property="lineId" column="Line_id"/>
+        <result property="name" column="Name"/>
+        <result property="QQ" column="QQ"/>
+        <result property="type" column="Type"/>
+        <result property="enrolmentTime" column="Enrolment_time"/>
+        <result property="graduate" column="Graduate"/>
+        <result property="reportLink" column="Report_link"/>
+        <result property="wish" column="Wish"/>
+        <result property="senior" column="Senior"/>
+        <result property="howKnow" column="How_know"/>
+        <result property="createAt" column="Create_at"/>
+        <result property="updateAt" column="Update_at"/>
+    </resultMap>
+
+    <select id="selectByIdName" resultMap="network1Map">
+        select * from network1
+        <where>
+            <if test="lineId != null">
+                and Line_id = #{lineId}
+            </if>
+            <if test="name != null and name != ''">
+                and Name = #{name}
+            </if>
+        </where>
+
+    </select>
+
+    <delete id="deleteById">
+        delete from network1 where Line_id = #{lineId}
+    </delete>
+
+
+</mapper>

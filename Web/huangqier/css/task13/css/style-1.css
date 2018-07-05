@@ -1,0 +1,175 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  box-sizing: border-box; }
+
+html,
+body {
+  font-size: 62.5%; }
+
+a,
+a:hover {
+  text-decoration: none; }
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #f0f0f0; }
+
+input[type="checkbox"] {
+  display: none; }
+
+.sidebar-menu {
+  width: 80vw;
+  height: 100vh;
+  border-right: 5px solid #1fbade;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: -80vw;
+  transition: left 500ms; }
+  .sidebar-menu ul {
+    list-style: none; }
+    .sidebar-menu ul li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: auto;
+      height: 45px;
+      border-bottom: 1px solid #eaeaea;
+      font-size: 1.5rem;
+      color: #3ebfdf; }
+      .sidebar-menu ul li > img {
+        margin-right: 27px; }
+      .sidebar-menu ul li span {
+        display: flex;
+        align-items: center; }
+        .sidebar-menu ul li span img {
+          margin: 0 16px; }
+  #sidebar:checked ~ .sidebar-menu {
+    left: 0; }
+
+/*头部开始*/
+header {
+  transition: transform 500ms;
+  width: 100%;
+  height: 40px;
+  background: #29bde0;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  position: fixed;
+  top: 0;
+  z-index: 1; }
+  header label {
+    cursor: pointer; }
+    header label img {
+      width: 18px;
+      height: 16px; }
+    header label img:last-child {
+      display: none; }
+  #sidebar:checked ~ header {
+    transform: translateX(80vw); }
+    #sidebar:checked ~ header label img:first-child {
+      display: none; }
+    #sidebar:checked ~ header label img:last-child {
+      display: block; }
+
+/*头部结束*/
+/*主体开始*/
+.last-game {
+  transition: transform 500ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88vw;
+  height: 65px;
+  border: 1px solid #c9c9c9;
+  background: #fff;
+  margin: 56px auto 16px auto;
+  font-size: 1.96rem;
+  color: #9a9a9a;
+  position: relative; }
+  .last-game:hover {
+    font-size: 1.96rem;
+    color: #9a9a9a; }
+  .last-game img {
+    width: 12px;
+    height: 22px;
+    position: absolute;
+    margin-top: 1px;
+    right: 2.5vw; }
+  #sidebar:checked ~ .last-game {
+    transform: translateX(80vw); }
+
+.nav-game {
+  transition: transform 500ms;
+  width: 88vw;
+  height: auto;
+  margin: 0 auto;
+  margin-bottom: 35px;
+  border: 1px solid #c9c9c9;
+  background: #fff; }
+  .nav-game h1 {
+    width: auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.123rem;
+    color: #fbb435;
+    border-bottom: 1px solid #fdd793; }
+  .nav-game .row {
+    width: auto;
+    height: 108px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .nav-game .row .nav-item {
+      width: 72vw;
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.805rem;
+      color: #fff;
+      background: #69d1e9; }
+  .nav-game p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.38rem;
+    color: #787878; }
+  .nav-game .row-middle {
+    position: relative; }
+    .nav-game .row-middle .next {
+      position: absolute;
+      right: 1.5vw; }
+      .nav-game .row-middle .next img {
+        width: 15px;
+        height: 30px; }
+  .nav-game .nav-circle {
+    width: inherit;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; }
+    .nav-game .nav-circle a {
+      display: block;
+      margin: 0 2.5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background: #f0f0f0; }
+      .nav-game .nav-circle a:hover {
+        background: #69d1e9; }
+    .nav-game .nav-circle .active {
+      background: #69d1e9; }
+  #sidebar:checked ~ .nav-game {
+    transform: translateX(80vw); }
+
+/*主体结束*/
+
+/*# sourceMappingURL=style-1.css.map */

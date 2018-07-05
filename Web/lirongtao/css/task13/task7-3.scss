@@ -1,0 +1,100 @@
+@charset "utf-8";
+@import "ku.scss";
+$white: #fff;
+@mixin header-box ($width,$height,$margin-left,$margin-right) {
+  width: $width;
+  height: $height;
+  margin-left: $margin-left;
+  margin-right: $margin-right;
+}
+@mixin footer-btn ($width,$height,$white,$border-radius) {
+  width: $width;
+  padding:$height;
+  color: $white;
+  border-radius: $border-radius;
+}
+html {
+  font-size: 62.5%;
+}
+p {
+  margin: 0;
+}
+body {
+  margin: 0;
+}
+.header {
+  height: 4rem;
+  background-color: $blue-29;
+  border-bottom: 0.1rem solid #74d4eb;
+}
+.header-left {
+  @include header-box(2.1rem,1.8rem,0.5rem,0);
+  background: url("img7/Shape120.png") no-repeat;
+}
+.header-right {
+  @include header-box(2.1rem,1.8rem,0,0.5rem);
+  background: url("img7/Shape120.png") no-repeat left -3.1rem;
+}
+.title {
+  font-size: 1.6rem;
+  color: $white;
+}
+/*
+    内容
+*/
+.main {
+  flex-direction: column;
+  margin-top: 4rem;
+  padding: 1rem 13%;
+  border: 0.1rem solid #31a8c4;
+  background-color: $blue-29;
+}
+.explan {
+  margin-top: 1rem;
+  font-size: 1.7rem;
+  color: #ffc865;
+}
+.result {
+  width: 100%;
+  margin: 2rem 0;
+  color: $white;
+  font-size: 1.5rem;
+}
+/*
+    第一天、第二天...内容
+*/
+.main-tow {
+  margin-bottom: 5rem;
+  background-color: $white;
+}
+.first-day {
+  padding: 0 13%;
+  border-top: 0.1rem solid #ddd;
+}
+.day-first-p {
+  font-size: 1.4rem;
+  color: #515151;
+}
+.day-finally-p {
+  margin: 0.5rem 0;
+  color: #a6a6a6;
+}
+/*
+   页脚
+*/
+.footer {
+  height: 5rem;
+  text-align: center;
+  background-color: rgba(153, 223, 240, 0.5);
+}
+.ft-first-a {
+  margin-right: 15%;
+  background-color: #f66f6f;
+}
+.ft-first-a,
+.ft-finally-a {
+  @include footer-btn(8rem,1rem,$white,.5rem);
+}
+.ft-finally-a {
+  background-color: #fbb435;
+}

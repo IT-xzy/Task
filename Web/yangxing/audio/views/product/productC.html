@@ -1,0 +1,118 @@
+<div class="row pd-top-2">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" id="blur">
+                <div class="form-group ">
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">客户名称：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" ng-model="vm.params.name" placeholder="请输入客户名称"
+                                   maxlength="10">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">状态：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.status">
+                                <option value="">全部</option>
+                                <option value="1">上架</option>
+                                <option value="0">下架</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.clear()">重置</button>
+            </div>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.search()">搜索</button>
+            </div>
+        </div>
+    </div>
+    <!--产品列表-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>分单客户</strong>
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-primary btn-xs" ui-sref="field.productDetailC">
+                            +新增
+                        </button>
+                    </div>
+                    <button class="btn btn-success btn-xs pull-right margin-r-m"
+                            ng-click="vm.sortR()">
+                        推荐客户排序
+                    </button>
+                    <button class="btn btn-success btn-xs pull-right margin-r-m"
+                            ng-if="vm.sortableOptions.disabled == true"
+                            ng-click="vm.sort()">
+                        排序
+                    </button>
+                    <button class="btn btn-primary btn-xs pull-right margin-r-m"
+                            ng-if="vm.sortableOptions.disabled == false"
+                            ng-click="vm.sortSave()">保存排序
+                    </button>
+                    <button class="btn btn-danger btn-xs pull-right margin-r-m"
+                            ng-if="vm.sortableOptions.disabled == false"
+                            ng-click="vm.sortCancel()">取消排序
+                    </button>
+                </div>
+                <div class="list-replace" ng-if="vm.productList.length==0">
+                    <div class="list-replace-text">暂无任何数据</div>
+                </div>
+                <div class="panel-body ">
+                    <ul class="contentrank"
+                        ng-if="vm.productList.length>0"
+                        ui-sortable="vm.sortableOptions" ng-model="vm.productList">
+
+                        <li class="head-div">
+                            <span class="rank1-10">ID</span>
+                            <span class="rank1-10">客户名称</span>
+                            <span class="rank1-10">客户介绍</span>
+                            <span class="rank1-10">客户图标</span>
+                            <span class="rank1-10">客户额度</span>
+                            <span class="rank1-10">状态</span>
+                            <span class="rank1-10">配置状态</span>
+                            <span class="rank1-10">添加时间</span>
+                            <span class="rank1-10">操作</span>
+                        </li>
+                        <li ng-repeat="li in vm.productList track by $index">
+                            <span class="rank1-10">{{li.id}}</span>
+                            <span class="rank1-10">{{li.name}}</span>
+                            <span class="rank1-10">{{li.introduce}}</span>
+                            <span class="rank1-10">
+                                <img src="{{li.icon}}" style="max-width: 100px">
+                            </span>
+                            <span class="rank1-10">{{li.amountStart}}万-{{li.amountEnd}}万</span>
+                            <span class="rank1-10">{{li.status|statusFilter}}</span>
+                            <span class="rank1-10">{{li.isConfig|proConfig}}</span>
+                            <span class="rank1-10">{{li.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+
+                            <span class="rank-16" style="margin-left: -30px">
+                                <button
+                                        ng-class="{1:'btn-warning',0:'btn-success'}[li.status]"
+                                        class="btn btn-xs"
+                                        ng-disabled="li.isConfig==0&&li.status==0"
+                                        ng-bind="(li.status==1?0:1)|statusFilter"
+                                        ng-click="vm.updateProStatus(li)">
+                                </button>
+                                <button class="btn btn-primary btn-xs"
+                                        ui-sref="field.productDetailC({id:li.id})">编辑
+                                </button>
+                                <br>
+                                    <button
+                                            ng-class="{1:'btn-warning',0:'btn-success'}[li.status]"
+                                            class="btn btn-xs mg-top-10"
+                                            ng-bind="li.isConfig|proConfigB"
+                                            ng-click="vm.updateProConf(li)">
+                                </button>
+                        </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,173 @@
+@import "mixin";
+header {
+    .row{
+        @include flex-end;
+        height: 0.78rem;
+        span{
+            line-height: 0.78rem;
+            font-size: .28rem;
+            color: #29B078;
+        }
+        div{
+            height: 100%;
+        @include flex-align;
+        justify-content: flex-end;
+        i{
+            width: .6rem;
+            height: .6rem;
+            margin: auto .2rem;
+            &:nth-child(1){
+                background: url(../../8/image/img.png) no-repeat 2px 30%
+            }
+            &:nth-child(2){
+                background: url(../../8/image/img.png) no-repeat 2px 63%
+            }
+            &:nth-child(3){
+                background: url(../../8/image/img.png) no-repeat 2px -3%
+            }
+        }
+            
+        }
+    }
+   
+}
+.nav-green{
+    background: #29B078;
+    .container{
+        @include flex-between;
+        &>a{
+            img{
+                vertical-align: bottom;
+              @media screen and (min-width:769px) {
+                margin: .25rem 0;
+                height: 1.5rem;
+            }  
+            @media screen and (max-width:768px) {
+                max-width: 4rem;
+                margin: .4rem 0;
+            }  
+            }
+        }
+        label{
+            display: none;
+            @media screen and(max-width:768px){
+                display: block;
+                width: 1rem;
+            height: 1rem;
+            margin: auto 0;
+            border-radius: .15rem;
+            background: url(http://jns.img.bucket.ks3-cn-beijing.ksyun.com/skill/skill_html/images/menu.png) no-repeat 15px 15px;
+            background-color: rgb(29, 131, 88);
+            }
+            
+        }
+        ul{
+            font-size: .32rem;
+            text-align: center;
+            @media screen and(min-width:769px){
+                @include flex-between;
+                height: 2rem;
+                li{
+                    width: 20%;
+                   
+                  
+                    a{
+                        display: block;
+                        width: 100%;
+                        line-height: 1.95rem;
+                        color: #fff;
+                        border-bottom: transparent solid 5px;
+                    box-sizing: content-box;
+                        &:hover {
+                            border-bottom: #fff solid 5px;
+                        }
+                    }
+
+                }
+            }
+            @media screen and (max-width:768px){
+                position: absolute;
+                top: 2.27rem;
+                left: 0;
+                right: 0;
+                background: #29B078;
+                li{
+                    a{
+                        
+                        display: block;
+                        line-height: 0.8rem;
+                        color: #fff;
+                        &:hover{
+                            background: rgb(55, 241, 164);
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+}
+input{
+    display: none;
+}
+#navstyle:checked ~.main{
+
+transform: translateY(0.8rem*4);
+}
+.main{
+   @media screen and (max-width:768px){
+          position: absolute;
+    top: 2.2rem;
+  left: 0;
+    right: 0;
+    }  
+    transform: translate(0,0);
+    transition: all 0.5s;
+}
+.green{
+    bottom: 0;
+    background: #29B078;
+    padding-top: .74rem;
+    color: #fff;
+    font-size: .32rem;
+    .jnshu{
+        @include flex-align;
+        padding-top: 1.36rem;
+        padding-bottom: .68rem;
+        :nth-child(1),:nth-child(2){
+            margin-right: .3rem;
+            padding-right: .3rem;
+            border-right: 2px solid #fff;
+
+        }
+        li{
+            line-height: .5rem;
+            border-bottom: 2px solid transparent;
+            &:hover{
+                border-bottom: #fff 2px solid;
+            }
+        } 
+    }
+    .link-he{
+        @include flex-align;
+        padding: .27rem 0;
+        p{
+            margin-right: .6rem;
+            padding-bottom: .1rem;
+            border-bottom: 2px solid transparent;
+            &:hover{
+                border-bottom: #fff 2px solid;
+            }
+        }
+    }
+    img{
+        margin-top: .1rem;
+        width: 1.9rem;
+    }
+    .logo-link{
+        @include flex-alignCenter;
+        font-size: .2rem;
+        text-align: center;
+    }
+}
+

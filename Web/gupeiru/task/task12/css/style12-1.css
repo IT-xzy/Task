@@ -1,0 +1,253 @@
+@charset "UTF-8";
+header, nav, main li, footer {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  outline: none;
+  background: transparent;
+  border: none;
+}
+
+/* 顶部按钮 */
+header {
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  height: 0.5rem;
+  width: 100%;
+  background-color: #5fc0cd;
+  z-index: 2;
+}
+header button {
+  width: 25%;
+  height: 80%;
+  font-size: .17rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+header .left-button {
+  margin-right: -.05rem;
+  background-color: #55a8b3;
+  color: #fff;
+}
+header .right-button {
+  background-color: #fff;
+}
+header .right-button a {
+  color: #5fc0cd;
+}
+header .icon-map {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.21rem;
+  height: 0.24rem;
+  vertical-align: text-bottom;
+  background: url(../images/icon6.png) -0.95rem 0/1.99rem;
+  right: .1rem;
+}
+
+/* 下拉列表 */
+nav {
+  position: fixed;
+  margin-top: .5rem;
+  width: 100%;
+  height: .5rem;
+  border-bottom: 1px solid #ccc;
+  z-index: 1;
+}
+nav div:nth-child(-n+2) {
+  border-right: 1px solid #ccc;
+}
+nav div {
+  position: relative;
+  width: 33.3%;
+  height: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 0;
+  /* 点击，下拉列表出现 */
+}
+nav div input {
+  display: none;
+}
+nav div label {
+  display: inline-block;
+  width: 100%;
+  line-height: .5rem;
+  cursor: pointer;
+}
+nav div label::after {
+  content: "";
+  position: absolute;
+  top: .2rem;
+  right: .1rem;
+  width: 0;
+  height: 0;
+  border-width: .05rem;
+  border-style: solid;
+  border-color: #ccc transparent transparent transparent;
+}
+nav div ul {
+  display: none;
+  line-height: .28rem;
+  border: .01rem solid #ccc;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+nav div ul li a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+nav div ul li:hover {
+  background-color: #5fc0cd;
+}
+nav div ul li:hover a {
+  color: #fff;
+}
+nav div .nav-one:checked ~ ul,
+nav div .nav-two:checked ~ ul,
+nav div .nav-three:checked ~ ul {
+  display: block;
+}
+nav div .nav-one:checked ~ label,
+nav div .nav-two:checked ~ label,
+nav div .nav-three:checked ~ label {
+  color: #5fc0cd;
+}
+
+/* 护工信息 */
+main {
+  position: absolute;
+  top: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+main li {
+  justify-content: space-between;
+  position: relative;
+  line-height: .3rem;
+  text-indent: .3rem;
+}
+main li:nth-child(3n) {
+  border-bottom: .01rem solid #ccc;
+}
+main li h4 {
+  color: #ccc;
+}
+main li p {
+  overflow: hidden;
+  /*超出宽度部分的隐藏*/
+  white-space: nowrap;
+  /*文字不换行*/
+  text-overflow: ellipsis;
+  /*超出则...代替*/
+}
+main li span {
+  flex-shrink: 0;
+  color: #e63b0e;
+  margin-right: .25rem;
+}
+main li .icon-date {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.15rem;
+  height: 0.13rem;
+  vertical-align: text-bottom;
+  background: url(../images/icon6.png) -1.69rem 0/1.99rem;
+  left: .15rem;
+}
+main li .icon-right {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.11rem;
+  height: 0.16rem;
+  vertical-align: text-bottom;
+  background: url(../images/icon6.png) -1.51rem 0/1.99rem;
+  right: .05rem;
+}
+main li .icon-address {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.1rem;
+  height: 0.12rem;
+  vertical-align: text-bottom;
+  background: url(../images/icon6.png) -1.89rem 0/1.99rem;
+  left: .15rem;
+}
+
+/* 底部按钮 */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: .5rem;
+  background-color: #f8fafb;
+}
+footer .home-button, footer .mine-button {
+  position: relative;
+  width: 38%;
+  margin: 7%;
+  height: 100%;
+  cursor: pointer;
+}
+footer .icon-home {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.24rem;
+  height: 0.26rem;
+  vertical-align: text-bottom;
+  background: url(../images/icon6.png) -0.63rem 0/1.99rem;
+  margin-top: -.05rem;
+}
+footer .icon-home ~ span {
+  display: inline-block;
+  margin-top: .1rem;
+  font-size: .12rem;
+  color: #5fc0cd;
+}
+footer .mine-button {
+  cursor: pointer;
+}
+footer .mine-button .icon-mine {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.21rem;
+  height: 0.22rem;
+  vertical-align: text-bottom;
+  background: url(../images/icon6.png) -1.23rem 0/1.99rem;
+  margin-top: -.05rem;
+}
+footer .mine-button .icon-mine ~ span {
+  display: inline-block;
+  margin-top: .1rem;
+  font-size: .12rem;
+  color: #999;
+}
+footer .write-button {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: .54rem;
+  height: .5rem;
+}
+footer .write-button .icon-write {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.54rem;
+  height: 0.5rem;
+  vertical-align: text-bottom;
+  background: url(../images/icon6.png) 0 0/1.99rem;
+  left: 50%;
+  cursor: pointer;
+}

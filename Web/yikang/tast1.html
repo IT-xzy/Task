@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原生JS实现分页效果</title>
+    <style>
+        body{
+            margin:100px 200px;
+        }
+        #page{
+            margin:20px 0;
+        }
+        #page>#pre,#page>#next{
+            display:inline-block;
+            height: 34px;
+            line-height:34px;
+            padding: 0 18px;
+            border: 1px solid #e1e2e3;
+            text-decoration:none;
+        }
+        .list{
+            display:inline-block;
+        }
+        .list a{
+            text-decoration:none;
+            padding:0 5px;
+        }
+        .list a.current{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<section id="box"></section>
+<div id="page">
+    <a href="javascript:;" id="pre">上一页</a>
+    <div class="list"></div>
+    <a href="javascript:;" id="next">下一页</a>
+</div>
+</body>
+</html>
+<script>
+    'use strict'
+    // 获取元素
+    let domBox = document.getElementById("box");
+    let domPage = document.getElementById("page");
+    let domPre = document.getElementById("pre");
+    let domNext = document.getElementById("next");
+    let domList = document.querySelector(".list");
+
+    // 模拟数据
+    let arrJson = [
+        'Content_1',
+        'Content_2',
+        'Content_3',
+        'Content_4',
+        'Content_5',
+        'Content_6',
+        'Content_7',
+        'Content_8',
+        'Content_9',
+        'Content_10'
+    ];
+    let jsonLen = arrJson.length;
+
+    // 设置规则
+    let each = 3;
+    let page = Math.ceil(jsonLen / each);
+
+    // 设置内容
+    for(let i=0;i<each;i++){
+        let domP = '<p>'+ arrJson[i] +'</p>';
+        domBox.innerHTML += domP;
+    }
+
+
+    // 设置列表页数
+    for(let i=0;i<page;i++){
+        let domA = document.createElement('a');
+        domA.href = 'javascript:;';
+        domA.innerHTML = i + 1;
+        domList.insertBefore(domA,null);
+    }
+
+    // 切换页
+    domList.addEventListener('click',function(e){
+        let target = e.target;
+        let targetName = target.nodeName.toLocaleLowerCase();
+        if(targetName==='a'){
+            domBox.innerHTML = '';
+            if(target.innerHTML!=='1'){
+                if(target.innerHTML==='2'){
+                    for(let i=0;i<each;i++){
+                        let arrJsonCurrent = arrJson[i-1+(target.innerHTML*(each-1))];
+                        if(arrJsonCurrent==null){break;}
+                        let domP = '<p>'+ arrJsonCurrent +'</p>';
+                        domBox.innerHTML += domP;
+                    }
+                }else if(target.innerHTML==='3'){
+                    for(let i=0;i<each;i++){
+                        let arrJsonCurrent = arrJson[i+(target.innerHTML*(each-1))];
+                        if(arrJsonCurrent==null){break;}
+                        let domP = '<p>'+ arrJsonCurrent +'</p>';
+                        domBox.innerHTML += domP;
+                    }
+                }else{
+                    for(let i=0;i<each;i++){
+                        let arrJsonCurrent = arrJson[i + (target.innerHTML-each) +(target.innerHTML*(each-1))];
+                        if(arrJsonCurrent==null){break;}
+                        let domP = '<p>'+ arrJsonCurrent +'</p>';
+                        domBox.innerHTML += domP;
+                    }
+                }
+            }else{
+                for(let i=0;i<each;i++){
+                    let arrJsonCurrent = arrJson[i];
+                    if(arrJsonCurrent==null){break;}
+                    let domP = '<p>'+ arrJsonCurrent +'</p>';
+                    domBox.innerHTML += domP;
+                }
+            }
+        }
+    })
+</script>

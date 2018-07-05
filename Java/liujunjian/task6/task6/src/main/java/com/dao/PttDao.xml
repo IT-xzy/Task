@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.PttDao">
+    <select id="findProfessionByName" resultType="com.pojo.Profession" parameterType="String">
+        select * from ptt where profession=#{profession}
+    </select>
+
+    <select id="findProfessionNumber" resultType="com.pojo.Profession">
+        select stu_number,gra_number from ptt
+    </select>
+
+</mapper>

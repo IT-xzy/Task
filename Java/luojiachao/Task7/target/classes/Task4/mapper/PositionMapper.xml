@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Task4.mapper.PositionMapper">
+    <select id="findById" parameterType="int" resultType="Task4.pojo.Position">
+        select * from position where id=#{id}
+    </select>
+    <select id="findByClass" parameterType="String" resultType="Task4.pojo.Position">
+    SELECT * FROM position WHERE classes =#{classes}
+    </select>
+    <select id="list" resultType="Task4.pojo.Position">
+        SELECT * FROM position
+    </select>
+    <select id="findAll"  resultType="java.lang.Integer">
+        SELECT count(*) FROM position
+    </select>
+</mapper>

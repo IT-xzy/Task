@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatisPool.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>  <!--根节点 -->
+
+
+  <environments default="development">
+    <!--数据库环境 -->
+    <environment id="development">
+      <!--数据连接详情 -->
+      <transactionManager type="JDBC" />
+      <!--datasource的type值为数据库资源，本次中用的是外置连接池c3p0，默认的连接池为pooled，不用的话为unpooled和jndi-->
+      <dataSource type="mybatisPool.C3P0DataSourceFactory" >
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/jnshu_db?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="user" value="root"/>
+        <property name="password" value="123456"/>
+      </dataSource>
+    </environment>
+  </environments>
+
+  <mappers>
+    <!--配置文件的位置-->
+    <mapper resource="StudentMapper.xml" />
+
+  </mappers>
+</configuration>

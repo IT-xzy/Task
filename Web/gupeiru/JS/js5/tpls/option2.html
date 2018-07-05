@@ -1,0 +1,55 @@
+<div class="article2-body">
+    <div class="article2-title">新增Article</div>
+    <div class="container" >
+
+        <div class="row">
+            <div  class="col-sm-12 col-md-2">标题名</div>
+            <div class="col-sm12 col-md-8"><input type="text" class="unify" ng-model="title" value="title"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-2" >类型</div>
+            <div class="col-sm-12 col-md-3">
+                <select  class="unify back-color select-btn" ng-model="typeAt">
+                    <option value="">请选择</option>
+                    <option ng-repeat="(x,y) in types" value="{{x}}" ng-selected="typeAt==x">{{y}}</option>
+                </select>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <select  class="unify back-color select-btn" ng-model="industrieAt"  ng-show="typeAt==3">
+                    <option value="">请选择</option>
+                    <option ng-repeat="(x,y) in industries" value="{{x}}" ng-selected="industrieAt==x">{{y}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div  class="col-sm-12 col-md-2">说明</div>
+            <div class="col-sm12 col-md-8"><div id="editor">
+            </div></div>
+
+        </div>
+        <div class="row">
+            <div  class="col-sm-12 col-md-2">跳转连接</div>
+            <div class="col-sm-12 col-md-8"><input type="text"  class="unify" ng-model="url"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-2">配图</div>
+            <div class="col-sm-12 col-md-8">
+                <div >文件选择</div>
+                <div>
+                    <up-Loader ng-model="logoUrl"></up-Loader>
+                </div>
+                <div  class="upDown-list">
+                    <div class="upDown-btn">
+                        <input type="submit"  ng-click="upLoading()" class="load-btn" value="立即上线" >
+                        <input type="submit"  ng-click="downLoading()" class="load-btn" value="存为草稿" >
+                    </div>
+                    <div class="cancle-btn" ng-click="cancleLoading()">取消</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="../my-js/editor.js"></script>
+

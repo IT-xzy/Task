@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <title>首页</title>
+
+
+    <link rel="stylesheet" href="css/setting.css">
+    <script src="//at.alicdn.com/t/font_673342_rw5zvsozbxs10pb9.js"></script>
+
+</head>
+<body>
+    <!--页面头部-->
+        <header>
+            <a href="index.html"><img class="small" src="img/samll.png" /></a>
+            <span>参数设置</span>
+
+            <img src="img/question.png" /></header>
+    <main>
+    <div class="playersSetting">
+        玩家配比
+    </div>
+        <!--页面主体-->
+
+    <div class="numberBox">
+        杀手<span id="killer">2</span>人
+        水民<span id="water">6</span>人
+    </div>
+    <div class="wordBox">
+       <div class="word"> 水民词汇 <input id="killWord" type="text" placeholder="限输入10个字内" maxlength="10" > </div>
+       <div class="word">杀手词汇 <input id="waterWord" type="text" placeholder="限输入10个字内" maxlength="10"></div>
+    </div>
+
+ <div class="inputBox">
+     请输入玩家数量<input id="inputNumber" type="tel" onchange="judgeNumber()" value="8"> 玩家数量为4-18
+
+ </div>
+    <div class="controlBox">
+       <div class="control" onclick="reduce()">-</div>
+    <input type="range" id="range" value="8" max="18" min="4" step="1" onchange="move()"/>
+
+    <div class="control" onclick="add()">+</div>
+    </div>
+    </main>
+    <button class="deal" onclick="openPlayersLook()"> 去发牌</button>
+
+<script src="js/setting.js"></script>
+</body>
+</html>

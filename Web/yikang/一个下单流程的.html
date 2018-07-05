@@ -1,0 +1,81 @@
+var app = angular.module('myApp', ['ui.router', 'ui.bootstrap']);
+
+app.filter('reverse', function () { //可以注入依赖co
+return function (text) {
+if (text === 1) {
+return "草稿"
+
+} else if (text === 2) {
+return "上线  "
+}
+}
+});
+app.filter('else', function () { //可以注入依赖co
+return function (character) {
+if (character === 0) {
+return '首页banner'
+} else if (character === 1) {
+return "找职位banner"
+
+} else if (character === 2) {
+return "找精英banner"
+} else if (character === 3) {
+return "行业大图"
+}
+}
+});
+
+app.controller('myOne', function ($scope, $http, $state, $stateParams) {
+$scope.maxSize = 10;
+$scope.totalItems = 190;
+if ($stateParams !== undefined) {
+$scope.datum = $stateParams;
+console.log($scope.datum)
+}
+
+$scope.currentPage = 1;
+
+$scope.itemsPerPage = 10;
+$scope.size = $scope.currentPage;
+$scope.tot = $scope.itemsPerPage;
+
+
+$http({
+method: 'get',
+url: 'http://localhost//carrots-admin-ajax/a/article/search',
+headers: {
+"Content-Type": "application/x-www-form-urlencoded;"
+}
+}).then(function fn(omg) {
+console.log(omg);
+$scope.datum = omg.data.data.articleList;
+});
+$scope.one = function () {
+console.log($scope.currentPage);
+$state.go('two', {
+page: $scope.currentPage
+}, {reload: true});
+
+};
+$scope.myVar = true;
+$scope.toggle = function () {
+$scope.myVar = !$scope.myVar;
+console.log($scope.myVar)
+}
+});
+
+app.config(['$stateProvider', function ($stateProvider) {
+$stateProvider
+.state('one', {
+url: '/one',
+template: '<h1>Welcome</h1>'
+})
+.state('two', {
+url: '/two/:page',
+templateUrl: 'JS6-2.html'
+})
+.state('three', {
+url: '/three',
+templateUrl: 'JS6-3.html'
+})
+}]);

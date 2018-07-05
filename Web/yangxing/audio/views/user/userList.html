@@ -1,0 +1,233 @@
+<div class="row pd-top-2">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" id="blur">
+                <div class="form-group">
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0">注册时间：</label>
+                        <label class="col-md-8"><input type="text" class="form-control"
+                                                       ng-model="vm.params.registerStart"
+                                                       data-date-format="yyyy-MM-dd"
+                                                       data-date-type="number"
+                                                       data-max-date="today"
+                                                       autoclose="true"
+                                                       bs-datepicker>
+                            <span class="glyphicon glyphicon-calendar user-icon"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 text-center">—</label>
+                        <label class="col-md-8"><input type="text" class="form-control"
+                                                       ng-model="vm.params.registerEnd"
+                                                       data-date-format="yyyy-MM-dd"
+                                                       data-date-type="number"
+                                                       data-max-date="today"
+                                                       data-min-date="{{vm.params.registerStart}}"
+                                                       autoclose="true"
+                                                       bs-datepicker>
+                            <span class="glyphicon glyphicon-calendar user-icon"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4"> 手机号码：</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" ng-model="vm.params.mobile" numberic-input
+                                   maxlength="11">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">房产情况：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.estate">
+                                <option value="">全部</option>
+                                <option value="1">有房贷</option>
+                                <option value="2">有房无贷</option>
+                                <option value="3">无房</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0 pd-right-0">车产情况：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.car">
+                                <option value="">全部</option>
+                                <option value="1">有车贷</option>
+                                <option value="2">有车无贷</option>
+                                <option value="3">无车</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0"> 年保费合计：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.feeInsurance">
+                                <option value="">全部</option>
+                                <option value="1"><2400</option>
+                                <option value="2">>2400</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">寿险保单：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.lifeInsurance">
+                                <option value="">全部</option>
+                                <option value="1">有保单</option>
+                                <option value="2">无保单</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0 pd-right-0">居住时间：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.livingTime">
+                                <option value="">全部</option>
+                                <option value="1"><6个月</option>
+                                <option value="2">>6个月</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0"> 职业：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.profession">
+                                <option value="">全部</option>
+                                <option value="1">白领</option>
+                                <option value="2">公务员</option>
+                                <option value="2">私企业主</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">信用卡：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.card">
+                                <option value="">全部</option>
+                                <option value="1">有信用卡</option>
+                                <option value="2">无信用卡</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0 pd-right-0">媒介来源：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.source" ng-change="vm.getLinkList(vm.params.source)">
+                                <option value="">全部</option>
+                                <option value="{{s.id}}" ng-repeat="s in vm.mediumListSearch" ng-selected="vm.params.source==s.id">{{s.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0"> 媒介链接：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.sourceLink">
+                                <option value="">全部</option>
+                                <option value="{{l.id}}" ng-repeat="l in vm.mediumLink" ng-selected="vm.params.sourceLink==l.id">{{l.link}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="control-label col-md-4 pd-left-0">用户性质：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.isDone">
+                                <option value="">全部</option>
+                                <option value="0">新用户</option>
+                                <option value="1">老用户</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="control-label col-md-4 pd-left-0 pd-right-0">分单客户：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.productId">
+                                <option value="">全部</option>
+                                <option value="{{p.id}}" ng-repeat="p in vm.productList" ng-selected="vm.params.productId==p.id">{{p.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.clear()">重置</button>
+            </div>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.search()">搜索</button>
+            </div>
+        </div>
+    </div>
+    <!--用户列表-->
+    <div class="row" ng-if="!vm.status">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>用户量</strong>
+                    <span>共：{{vm.total}}人</span>
+                    <button type=button class="btn btn-success btn-xs pull-right margin-r-m"
+                            ng-click="vm.output()">
+                        导出
+                    </button>
+                </div>
+                <div class="list-replace" ng-if="vm.usrList.length == 0">
+                    <div class="list-replace-text">暂无任何数据</div>
+                </div>
+                <div class="panel-body panel-body-noMax" ng-if="vm.usrList.length > 0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>姓名</th>
+                                <th>电话号码</th>
+                                <th>房产</th>
+                                <th class="white-space-normal">汽车</th>
+                                <th>信用卡</th>
+                                <th>寿单</th>
+                                <th>年保费</th>
+                                <th>居住时间</th>
+                                <th>职业</th>
+                                <th>注册时间</th>
+                                <th>媒介来源</th>
+                                <th>媒介链接</th>
+                                <th>客户归属</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="li in vm.usrList track by $index" class="text-center break-all">
+                                <td>{{li.id}}</td>
+                                <td>{{li.nick}}</td>
+                                <td>{{li.mobile}}</td>
+                                <td>{{li.estate|estateFilter}}</td>
+                                <td>{{li.car|carFilter}}</td>
+                                <td>{{li.card|cardFilter}}</td>
+                                <td>{{li.lifeInsurance|lifeInsuranceFilter}}</td>
+                                <td>{{li.feeInsurance|feeInsuranceFilter}}</td>
+                                <td>{{li.livingTime|livingTimeFilter}}</td>
+                                <td>{{li.profession|professionFilter}}</td>
+                                <td>{{li.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td>{{li.mediumName}}</td>
+                                <td>{{li.sourceLink}}</td>
+                                <td>
+                                    <div style="margin: auto;width: 20rem;white-space: normal;text-align: left">
+                                        {{li.belongStr}}
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <page ng-if="vm.totalPage" total-page="{{vm.totalPage}}"></page>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

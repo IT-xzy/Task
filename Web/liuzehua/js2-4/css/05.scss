@@ -1,0 +1,113 @@
+@import "_reset";
+
+
+body {
+    background: #f0f0f0;
+}
+
+header {
+    @include flex-between-center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: $bg-blue;
+    border-bottom: 1px solid #eee;
+    .head-left {
+        border: 1px solid #fff;
+        margin-left: .1rem;
+    }
+    .big-arrow {
+        margin-left: .1rem;
+    }
+}
+
+main {
+    margin-top: .7rem;
+    .list {
+        margin: .1rem auto;
+        width: 95%;
+        .list-day {
+            @include flex-between-center;
+            margin: .05rem 0;
+            padding: 0 .15rem;
+            height: .3rem;
+            background-color: #fff;
+            color: $bg-blue;
+            border: 1px solid #ccc;
+            .arrow-x {
+                width: .11rem;
+            }
+            .day {
+                font-size: 16px;
+                font-weight: 600;
+            }
+            .arrow{
+                margin-top: -5px;
+                transform: rotate(135deg);
+            }
+        }
+    }
+}
+
+
+.list-main{
+    background-color: #fff;
+    border: 1px solid #ccc;
+    .content {
+        margin: .2rem;
+        margin-left: .4rem;
+        border-left: 2px solid #ccc;
+        padding-left: .2rem;
+        .list-menu{
+            @include flex-start-center;
+            position: relative;
+            margin: .15rem 0;
+            
+        }
+    }
+}
+
+
+
+
+.list-wrap{
+    flex: 1;
+    line-height: .24rem;
+    background: $bg-blue;
+    color: #fff;
+    text-align: center;
+}
+
+// 提示文本
+.tips{
+    padding-left: .1rem;
+    font-size: .12rem;
+}
+
+// 白天黑夜图标
+.sun,.moon{
+    position: absolute;
+    width: .24rem;
+    height: .24rem;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    left: -.34rem;
+    background: #fff;
+}
+.sun{
+    background: url("../img/langren.jpg") no-repeat;
+    background-size: 100%;
+}
+.moon{
+    background: url("../img/cunmin.jpg") no-repeat;
+    background-size: 100%;
+}
+// 三角图标
+.trangle{
+    width: 0; 
+    height: 0; 
+    border-top: .05rem solid transparent; 
+    border-right: .1rem solid $bg-blue; 
+    border-bottom: .05rem solid transparent; 
+}

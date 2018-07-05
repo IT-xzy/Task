@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/normalize/8.0.0/normalize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/allot.css">
+
+    <title>玩家分配</title>
+    <script src="js/flex.js">
+    </script>
+    <style>
+        /*横条样式*/
+        input[type=range] {
+            -webkit-appearance: none;
+            /*清除系统默认样式*/
+            width: 100%;
+            margin: 0 20px;
+            background: -webkit-linear-gradient(90deg, #61bd12, #61bd12) no-repeat,#d8d8d8;
+            /*设置左边颜色为#61bd12，右边颜色为#ddd*/
+            background-size: calc(4/15*100% ) 100%; 
+            height: 40px;
+            /*横条的高度*/
+        }
+
+        /*拖动块的样式*/
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            /*清除系统默认样式*/
+            height: 80px;
+            /*拖动块高度*/
+            width: 80px;
+            /*拖动块宽度*/
+            background: #000;
+            /*拖动块背景*/
+            border-radius: 50%;
+            /*外观设置为圆形*/
+            border: solid 1px #ddd;
+            /*设置边框*/
+        }
+        .range {
+            display: flex;
+            align-items: center;
+            margin: 30% auto 0;
+            width: 80%;
+            height: 80px;
+        }
+        .range span{
+            width: 100px;
+            padding: 5px;
+            border: 1px solid ;
+            text-align: center;
+            line-height: 78px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <i class="return-btn back"></i>
+    </header>
+    <main>
+        <h4>玩家配比</h4>
+        <div class="id-container">
+            <div class="kill-id">
+                <img src="img/wolf.jpg" alt="杀手">杀手
+                <span id="killsNum" class="players-num">2</span>人
+            </div>
+            <div class="pop-id">
+                <img src="img/man.jpg" alt="水民">平民
+                <span id="popsNum" class="players-num">6</span>人
+            </div>
+        </div>
+        <div class="range">
+            <span id="sub">-</span>
+            <input type="range" name="" id="ranges" value="8" min="4" max="18" step="1">
+            <span id="add">+</span>
+        </div>
+        <div class="input-player">
+            <label for="player">
+                请输入玩家数量
+            </label>
+            <input type="text" id='player' maxlength="2" value="8" />
+            <small>玩家数量4-18</small>
+        </div>
+
+    </main>
+    <footer>
+        <button type="button" id="go">去发牌</button>
+    </footer>
+
+    <script src="js/jq.js"></script>
+    <script src="js/allot.js"></script>
+</body>
+
+</html>

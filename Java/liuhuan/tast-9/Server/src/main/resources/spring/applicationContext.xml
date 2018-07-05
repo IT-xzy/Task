@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="applicationContext-Dao.xml"/>
+    <import resource="applicationContext-transation.xml"/>
+    <import resource="applicationContext-Memcached.xml"/>
+    <import resource="applicationContext-Service.xml"/>
+    <import resource="applicationContext-SDK.xml"/>
+    <!-- 使用 tuscany 就不需要原来的RMI配置了 -->
+    <!--<import resource="applicationContext-RMI-Server.xml" />-->
+    <import resource="classpath:/tuscany/tuscany-sca.xml" />
+</beans>

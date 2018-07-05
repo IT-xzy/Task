@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace是命名空间,可以分类管理sql -->
+<mapper namespace="test">
+    <!-- select标识一个MappedStatement -->
+    <!-- id:标识映射文件的sql，将sql语句封装到mapperStatement中
+         所以称为statement的id -->
+    <!-- parameterType:指定输入参数的Java类型.由于采用的是根据id查询.指定int -->
+    <!-- resultType:指定单条记录的类型.(例如:select * from user指定的resultType依然为User类)
+    指定sql输出结果的所映射的java对象类型-->
+    <!-- 标签主体里写sql语句.注意#{}里接受输入的参数类型.如果输入的参数类型为基本的数据类型.
+    那么#内的内容可以任意.#{}会对输入类型进行解释.例如如果指定ParameterType为java.lang.String,
+    那么#{}会默认为输入的值加上'' -->
+    <select id="findUserById" parameterType="int" resultType="cn.jnshu.zcm.po.User">
+        SELECT * FROM USER WHERE id=#{id}
+    </select>
+
+
+    <!--&lt;!&ndash;添加用户&ndash;&gt;-->
+
+    <!--<insert id="insertUser" parameterType="cn.jnshu.zcm.po.User" >-->
+
+        <!--<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">-->
+                <!--SELECT  LAST_INSERT_ID()-->
+        <!--</selectKey>-->
+        <!--INSERT INTO USER (id,username) VALUE (#{id},#{username})-->
+    <!--</insert>-->
+
+    <!-- 批量插入user表中 -->
+    <insert id="insertUser" parameterType="cn.jnshu.zcm.po.User">
+        INSERT INTO USER (id,username)
+        VALUE
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.username})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -1,0 +1,54 @@
+@mixin header_and_footer {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: .48rem;
+}
+
+header {
+    @include header_and_footer();
+    top: 0;
+    align-items: center;
+    background: #5fc0cd;
+    a {
+        position: absolute;
+        left: .18rem;
+        display: inline-block;
+        width: .12rem;
+        height: .12rem;
+        border-bottom: 2px solid #f8f8f8;
+        border-left: 2px solid #f8f8f8;
+        transform: rotate(45deg);
+    }
+    p {
+        margin: 0 auto;
+        color: white;
+        font-size: .18rem;
+    }
+}
+
+footer {
+    @include header_and_footer();
+    bottom: 0;
+    justify-content: space-around;
+    margin-bottom: .1rem;
+    background: white;
+    a {
+        width: 46%;
+        height: .48rem;
+        line-height: .48rem;
+        border: 1px solid #5fc0cd;
+        border-radius: .08rem;
+        text-align: center;
+        text-decoration: none;
+        &.footer1 {
+            background: white;
+            color: #5fc0cd;
+        }
+        &.footer2 {
+            background: #5fc0cd;
+            color: white;
+        }
+    }
+}

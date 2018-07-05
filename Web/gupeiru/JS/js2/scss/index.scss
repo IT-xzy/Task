@@ -1,0 +1,153 @@
+@import "../../common/all";
+@import "mystyle";
+// 顶部按钮
+/* 顶部按钮 */
+
+header {
+    @extend %head;
+    border-bottom: none;
+}
+
+body {
+    background: $grey-f0;
+}
+
+#position {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: $blue;
+    z-index: 1;
+    img {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 20vh;
+    }
+    p {
+        margin-top: 65vh;
+        font-weight: bold;
+        color: #fff;
+        font-size: .2rem;
+    }
+}
+
+// 按钮点击使导航栏侧滑显示
+/* 按钮点击使导航栏侧滑显示 */
+
+.menu {
+    display: none;
+    &:checked+.container nav {
+        width: 45%;
+    }
+    &:checked+.container main {
+        box-shadow: 0 0 .03rem .02rem #ccc;
+    }
+}
+
+.container {
+    display: flex;
+    margin-top: .5rem; // 导航栏
+    /* 导航栏 */
+    nav {
+        flex-shrink: 0;
+        width: 0;
+        overflow: hidden;
+        background: #fff;
+        transition: width .8s;
+        ul {
+            li {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: $blue;
+                line-height: .4rem;
+                padding: 0 20px;
+                border-bottom: .01rem solid #ccc; // 小箭头
+                /* 小箭头 */
+                span {
+                    display: inline-block;
+                    width: .1rem;
+                    height: .1rem;
+                    border: 1px solid $blue;
+                    border-width: .02rem .02rem 0 0;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+}
+
+// 主体按钮
+/* 主体按钮 */
+
+.box {
+    position: relative;
+    flex-shrink: 0;
+    width: 100%;
+    padding: .2rem 5% 0;
+    text-align: center;
+    background: $grey-f0;
+}
+
+.continue {
+    position: relative;
+    color: $grey-9a;
+    line-height: .5rem;
+    font-size: .17rem;
+    background: #fff;
+    border: 1px solid $grey-c9;
+    a {
+        position: absolute;
+        right: .2rem;
+        top: .17rem;
+        @include arrow(.16rem, .16rem, .03rem, #ccc, 45deg);
+        cursor: pointer;
+    }
+}
+
+.main-content {
+    margin-top: .1rem;
+    padding-bottom: .1rem;
+    background: #fff;
+    border: .01rem solid $grey-c9; // 右侧黄色三角
+    .next {
+        content: "";
+        position: absolute;
+        right: 5%;
+        top: 50%;
+    }
+    .title {
+        display: block;
+        width: 100%;
+        line-height: .45rem;
+        font-size: .17rem;
+        color: $orange;
+        border-bottom: .01rem solid $orange;
+    }
+    a {
+        display: block;
+        width: 80%;
+        line-height: .5rem;
+        font-size: .17rem;
+        margin: .15rem auto;
+        color: #fff;
+        background: $blue;
+    }
+    .grey-word {
+        line-height: .15rem;
+        color: #838383;
+    } // 底部小圆点
+    .circle-box {
+        height: .2rem;
+        & i:first-child {
+            background: $blue;
+        }
+        i {
+            @include circle(.1rem, .1rem, $grey-f0);
+        }
+    }
+}

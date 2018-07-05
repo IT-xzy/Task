@@ -1,0 +1,158 @@
+@import "_reset";
+
+
+
+
+
+.head-left {
+    position: absolute;
+    top: .2rem;
+    left: .1rem;
+}
+
+.close {
+    display: none;
+}
+
+// 按钮部分
+input {
+    display: none;
+}
+
+// 按钮效果
+#nav-open:checked~nav {
+    width: 60vw;
+    transition: width .5s ease;
+}
+
+#nav-close:checked~nav {
+    width: 0;
+    transition: width .5s ease;
+}
+
+#nav-open:checked~.open,
+#nav-close:checked~.close {
+    display: none;
+}
+
+#nav-open:checked~.close,
+#nav-close:checked~.open {
+    display: block
+}
+
+// 容器
+.container {
+    display: flex;
+    width: 100vw;
+    overflow: hidden;
+}
+
+body{
+    background: $bg-blue;
+}
+
+nav {
+    width: 0;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #fff;
+    color: $bg-blue;
+    .nav-list {
+        @include flex-between-center;
+        height: .4rem;
+        border-bottom: 1px solid $bg-gary;
+        padding: 0 .2rem;
+    }
+}
+
+
+
+main {
+    width: 100vw;
+    flex-shrink: 0;
+    .title {
+        position: relative;
+        width: 95%;
+        height: .5rem;
+        line-height: .5rem;
+        text-align: center;
+        margin: .1rem auto;
+        border-radius: 5px;
+        font-size: .18rem;
+        background: #2ca8c6;
+        color: #fff;
+        >.white {
+            position: absolute;
+            top: .2rem;
+            right: .2rem;
+            border-color: #fff;
+        }
+    }
+}
+
+section {
+    width: 95%;
+    margin: .1rem auto;
+    margin-bottom: 0;
+    background: $bg-sblue;
+    border-radius: 5px;
+    .top {
+        color: #fbb435;
+        line-height: .4rem;
+        text-align: center;
+        border-bottom: 1px solid #fbb435;
+        font-size: .18rem;
+    }
+    
+}
+
+.artice{
+    display: flex;
+    justify-content: flex-start;
+    .left,.right{
+        @include flex-start-center;
+        justify-content: center;
+        width: 15%;
+        .arrow{
+            width: .18rem;
+            height: .18rem;
+            border-width: 4px 4px 0 0;
+            margin-bottom: .2rem;
+        }
+    }
+    .center{
+        width: 70%;
+    }
+}
+
+    .btn-blue{
+        display: block;
+        width: 100%;
+        margin: .2rem auto;
+        background: $bg-blue;
+        text-align: center;
+        line-height: .6rem;
+        border-radius: 5px;
+        color: #fff;
+        font-size: .18rem;
+    }
+    p{
+        text-align: center;
+        color: #666;
+    }
+
+
+.bottom{
+    text-align: center;
+    .round{
+        display: inline-block;
+        width: .12rem;
+        height: .12rem;
+        border-radius: 50%;
+        background: #eff0f1;
+        margin: .03rem;
+    }
+    .round:hover{
+        background:$bg-blue;
+    }
+}

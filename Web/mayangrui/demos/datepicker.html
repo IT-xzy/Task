@@ -1,0 +1,57 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <script src="../js/angular/angular.js"></script>
+    <script src="../js/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="../js/angular-animate/angular-animate.js"></script>
+    <script src="../js/angular-sanitize/angular-sanitize.js"></script>
+    <link rel="stylesheet" href="../js/angular-ui-bootstrap/dist/ui-bootstrap-csp.css">
+    <!--<script src="../js/demo3.js"></script>-->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>
+<div ng-controller="myCtrl">
+    <h4>简单分页</h4>
+    <ul uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" ></ul>
+    <!--total-items:总共有多少条数据-->
+    <h4>是否显示第一页和最后一页的按钮</h4>
+    <ul uib-pagination total-items="totalItems" ng-model="currentPage" class="pagination-lg"
+        previous-text="我是前一页" next-text="&rsaquo;" first-text="我是首页;" last-text="&raquo;"></ul>
+    <!--boundary-links：是否显示第一页和最后一页的按钮-->
+    <h4>是否显示前进和后退</h4>
+    <ul uib-pagination direction-links="false" boundary-links="true" first-text="我是首页" total-items="totalItems" ng-model="currentPage"></ul>
+    <!--direction-links：是否显示上一页和下一页的按钮-->
+    <h4>boundary-links:默认是false的</h4>
+    <ul uib-pagination direction-links="false" total-items="totalItems" ng-model="currentPage" num-pages="smallnumPages"></ul>
+    <!--boundary-links:默认是false的-->
+    <pre>The selected page no: {{currentPage}}</pre>
+    <button type="button" class="btn btn-info" ng-click="setPage(3)">Set current page to: 3</button>
+
+      <h4>分页设置限制</h4>
+    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+        class="pagination-md" boundary-links="true" num-pages="numPages"></ul>
+
+    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+        class="pagination-sm" boundary-links="true" force-ellipses="true"></ul>
+
+    <ul uib-pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize"
+        class="pagination-sm" boundary-links="true" rotate="false"></ul>
+</div>
+</body>
+</html>
+
+
