@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.ptt">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean">
+        <property name="port" value="1111"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="homePage"/>
+        <property name="service" ref="homePageServiceImpl"/>
+        <property name="serviceInterface" value="com.ptt.service.IHomePageService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="recommend"/>
+        <property name="service" ref="IRecommendServiceImpl"/>
+        <property name="serviceInterface" value="com.ptt.service.IRecommendService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="student"/>
+        <property name="service" ref="IStudentServiceImpl"/>
+        <property name="serviceInterface" value="com.ptt.service.IStudentService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="profession"/>
+        <property name="service" ref="ITProfessionServiceImpl"/>
+        <property name="serviceInterface" value="com.ptt.service.ITProfessionService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+</beans>
