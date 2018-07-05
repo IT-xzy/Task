@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.UserMapper">
+    <!--定义resultMap-->
+    <!--学生的Map-->
+    <resultMap id="StudentMap" type="com.pojo.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="Oid" property="oid"/>
+        <result column="Company" property="company"/>
+        <result column="position" property="position"/>
+        <result column="Personal_Profile" property="personalProfile"/>
+        <result column="Head_Portrait" property="headPortrait"/>
+        <result column="Learning_state" property="learningState"/>
+        <result column="Job_satisfaction" property="jobSatisfaction"/>
+        <result column="create_at" property="create_at"/>
+        <result column="update_at" property="update_at"/>
+    </resultMap>
+    <!--职业的Map-->
+    <resultMap id="OccupationReuniteMap" type="com.pojo.OccupationReunite">
+        <id column="id" property="id"/>
+        <result column="Occupation" property="occupationName"/>
+        <result column="Career_introduction" property="careerIntroduction"/>
+        <result column="Occupation_direction" property="occupationDirection"/>
+        <result column="threshold" property="threshold"/>
+        <result column="Difficulty_Degree" property="difficultyDegree"/>
+        <result column="Growth_Cycle" property="growthCycle"/>
+        <result column="Requirement" property="requirement"/>
+        <result column="Early_Salary" property="earlySalary"/>
+        <result column="MediumTerm_Salary" property="mediumTermSalary"/>
+        <result column="Late_Salary" property="lateSalary"/>
+        <result column="Related_Skills" property="relatedSkills"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+    </resultMap>
+    <!--统计在学人数-->
+    <select id="statisticsInLearning" resultType="int" parameterType="String">
+        SELECT count(1) from studenttable where Learning_state=#{entry}
+    </select>
+    <!--统计工作满意人数-->
+    <select id="statisticaljobSatisfaction" resultType="int" parameterType="String">
+        SELECT count(1) from studenttable where Job_satisfaction=#{entry}
+    </select>
+    <!--查询4个优秀学员-->
+    <select id="queryStudent" resultMap="StudentMap" parameterType="String">
+        select name,position,Personal_Profile,Head_Portrait
+         from studenttable where Job_satisfaction=#{entry} limit 4
+    </select>
+    <!--查询职业-->
+    <select id="queryOccupationReunite" resultMap="OccupationReuniteMap" parameterType="String">
+        select * from occupationtable where Occupation_direction=#{entry}
+    </select>
+    <!--查询职业在学人数-->
+    <select id="queryStudentNumber" resultType="int" parameterType="int">
+        SELECT count(1) from studenttable where Oid=#{oid}
+    </select>
+</mapper>
