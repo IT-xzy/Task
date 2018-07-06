@@ -1,0 +1,111 @@
+@mixin bgposition($width, $height, $xAndY) {
+    zoom: 0.5;
+    width: $width;
+    height: $height;
+    background: url(../images/task3.png);
+    background-position: $xAndY;
+}
+
+@mixin fscolor($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+body {
+    background: #29bde0;
+    header {
+        border-bottom: 1px solid #f0f0f0;
+        .hall {
+            margin-left: 5%;
+            @include bgposition(.255rem, .21rem, -353px -86px);
+        }
+        p {
+            @include fscolor(.17rem, white);
+        }
+        .i {
+            width: .21rem;
+            height: .21rem;
+            margin-right: 5%;
+            @include bgposition(.21rem, .21rem, -353px -130px);
+        }
+    }
+    main {
+        margin-top: .45rem;
+        margin-bottom: .65rem;
+        .trophy {
+            padding-top: .15rem;
+            text-align: center;
+            .wreath {
+                display: inline-block;
+                text-align: center;
+                @include bgposition(1.755rem, 1.025rem, 0 0);
+                .first {
+                    display: inline-block;
+                    @include bgposition(.425rem, .42rem, -353px 0);
+                    zoom: 1;
+                    margin-top: 0.1rem;
+                }
+                p {
+                    margin-top: .09rem;
+                    font-weight: bolder;
+                    @include fscolor(.48rem, white);
+                }
+            }
+        }
+        .text-all {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .first-text {
+                display: inline-block;
+                width: 80%;
+                margin-top: .1rem;
+                font-weight: bold;
+                text-align: justify;
+                @include fscolor(.155rem, #ffc865);
+            }
+            .second-text {
+                width: 80%;
+                margin-top: .15rem;
+                @include fscolor(.13rem, white);
+            }
+            .third-text {
+                width: 80%;
+                line-height: .2rem;
+                @include fscolor(.13rem, white);
+                margin-bottom: .12rem;
+                p {
+                    display: inline-block;
+                    width: 30%;
+                }
+            }
+            .log {
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                background: white;
+                border-bottom: 1px solid #a6a6a6;
+                .day {
+                    width: 80%;
+                    margin-top: .075rem;
+                    margin-bottom: .175rem;
+                    div:nth-child(1) {
+                        text-align-last: justify;
+                    }
+                    div:nth-child(1) p:nth-child(1) {
+                        display: inline-block;
+                        font-size: 0.15rem;
+                    }
+                    div:nth-child(1) p:nth-child(2) {
+                        display: inline-block;
+                        @include fscolor(.1rem, #c7c7c7);
+                    }
+                    div:nth-child(2) {
+                        @include fscolor(.13rem, #a6a6a6);
+                    }
+                }
+            }
+        }
+    }
+}
