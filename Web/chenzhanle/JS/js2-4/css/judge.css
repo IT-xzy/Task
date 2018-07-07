@@ -1,0 +1,156 @@
+a {
+  text-decoration: none;
+}
+header {
+  background-color: #29bde0;
+}
+header .middle {
+  font-size: 1.2em;
+  text-align: center;
+  letter-spacing: 6px;
+  color: #ffffff;
+}
+.left>a,
+.right>a {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  vertical-align: top;
+  margin-left: 25px;
+}
+
+/* 空心箭头 */
+
+.left>a::before,
+.left>a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.left>a::before {
+  border-right: 10px solid #fff;
+}
+
+.left>a::after {
+  left: 2px;
+  border-right: 10px solid #29bde0;
+}
+
+/* 叉号 */
+
+.right>a::before,
+.right>a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.right>a::before {
+  transform: rotate(135deg);
+}
+
+.right>a::after {
+  transform: rotate(45deg);
+}
+
+main {
+  position: relative;
+  top: 65px;
+  left: 0;
+  padding-bottom: 10px;
+  margin-bottom: 90px;
+  background-color: #69d1e9;
+}
+.clearfix::before,
+.clearfix::after {
+  content: '';
+  display: table;
+}
+.clearfix::after {
+  clear: both;
+}
+.play {
+  min-height: 400px;
+  margin: 20px 10px 0 10px;
+  padding-top: 20px;
+  border-radius: 10px;
+  background-color: #23a9c8;
+}
+.player {
+  float: left;
+  width: 25%;
+  height: 0;
+  margin: 0 4%;
+  padding-bottom: 35%;
+}
+.player-id {
+  height: 0;
+  padding-bottom: calc(100% - 10px);
+  border: 5px solid #ffffff;
+  text-align: center;
+}
+.player-id .player-name {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 70%;
+  color: #575757;
+  background-color: #f5c97b;
+}
+.player-id .player-num {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 30%;
+  color: #f2f2f2;
+  background-color: #83b09a;
+}
+.player-id span {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: 100%;
+}
+.play-drop {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  opacity: 0;
+}
+.play-drop span {
+  display: inline-block;
+  width: 20%;
+  padding: 10% 0;
+  background-color: #ffffff;
+  background: url(../img/choice.png) no-repeat;
+  background-position: 0;
+  background-size: 500%;
+}
+
+footer {
+  text-align: center;
+  background-color: #69d1e9;
+}
+footer a {
+  display: inline-block;
+  width: 70%;
+  padding: 10px;
+  margin: 15px 10px 30px;
+  font-size: 1.3em;
+  letter-spacing: 10px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #fbb435;
+}
