@@ -1,101 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
-    <display-name>SpringMVCTest</display-name>
+  <!--编码过滤器，解决乱码 -->
+  <!-- 过滤器 3-->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <async-supported>true</async-supported>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 
-    <!-- 0.添加 login.jsp 为首页 -->
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
 
-    <!-- 1.Spring和mybatis的配置文件 -->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring-mybatis.xml</param-value>
-    </context-param>
+  <!--启动Spring容器-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/config/spring/applicationContext.xml</param-value>
+  </context-param>
 
-     <!--2.配置 Spring MVC DispatcherServlet 前端控制器 -->
-    <servlet>
-        <servlet-name>springmvc</servlet-name>
-        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <init-param>
-            <!-- contextConfigLocation 是参数名称，该参数的值包含 Spring MVC 的配置文件路径 -->
-            <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:springmvc-servlet.xml</param-value>
-        </init-param>
-        <!-- 在 Web 应用启动时立即加载 Servlet -->
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-     <!--3.Servlet 映射声明 -->
-    <servlet-mapping>
-        <servlet-name>springmvc</servlet-name>
-        <!-- 监听当前域的所有请求 -->
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+  <listener>
+    <description>Spring容器加载监听器</description>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
 
-    <!-- 4.1 编码过滤器 -->
-    <filter>
-        <filter-name>encodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <async-supported>true</async-supported>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <!-- 4.2 HiddenHttpMethodFilter过滤器可以将POST请求转化为put请求和delete请求! -->
-    <!--<filter>-->
-        <!--<filter-name>hiddenHttpMethodFilter</filter-name>-->
-        <!--<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>-->
-    <!--</filter>-->
-    <!--<filter-mapping>-->
-        <!--<filter-name>hiddenHttpMethodFilter</filter-name>-->
-        <!--<url-pattern>/*</url-pattern>-->
-    <!--</filter-mapping>-->
+  <!--log4j2 start-->
+  <context-param>
+    <param-name>log4jContextName</param-name>
+    <param-value>star</param-value>
+  </context-param>
+  <context-param>
+    <param-name>log4jConfiguration</param-name>
+    <param-value>classpath:log4j2.xml</param-value>
+  </context-param>
+  <!--log4j2 end-->
 
-    <!-- 5.Spring监听器 -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 
-    <!--Tiles控制器-->
-    <servlet>
-        <servlet-name>Tiles Dispatch Servlet</servlet-name>
-        <servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Tiles Dispatch Servlet</servlet-name>
-        <url-pattern>*.tiles</url-pattern>
-    </servlet-mapping>
-    <!--Tiles监听器-->
-    <listener>
-        <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
-    </listener>
 
-    <!-- 6.拦截器 -->
-    <listener>
-        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-    </listener>
+  <!--——————————————————欢迎页面————————————————————-->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
 
-    <!--JSP页面时间转换标签-->
-    <jsp-config >
-        <taglib >
-            <taglib-uri> /tags</taglib-uri >
-            <taglib-location> /WEB-INF/datetag.tld</taglib-location >
-        </taglib >
-    </jsp-config >
 
+  <!--————————-——————————servlet配置——————————————————-->
+  <!--Spring MVC 前置Servlet，中心控制器 -->
+  <servlet>
+    <servlet-name>springmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <!--Spring MVC配置文件路径 -->
+      <param-value>/WEB-INF/config/spring/spring-mvc.xml</param-value>
+    </init-param>
+    <!-- 启动动优先级，越小越早加载 -->
+    <load-on-startup>1</load-on-startup>
+    <!--Servlet3.0以上文件上传配置 -->
+    <multipart-config>
+      <!--上传文件的最大限制5MB -->
+      <max-file-size>5242880</max-file-size>
+      <!--请求的最大限制20MB -->
+      <max-request-size>20971520</max-request-size>
+      <!--当文件的大小超过临界值时将写入磁盘 -->
+      <file-size-threshold>0</file-size-threshold>
+    </multipart-config>
+  </servlet>
+  <!-- Servlet访问的路径映射，所有的访问都必须经过调度用的前置控制品 -->
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+  <!--支持restful风格-->
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- jsp自定义tags, 前端jsp时间格式转换 -->
+  <jsp-config>
+    <taglib>
+      <taglib-uri>/tags</taglib-uri>
+      <taglib-location>/WEB-INF/tld/datetag1.tld</taglib-location>
+    </taglib>
+  </jsp-config>
 </web-app>
-
-
-
-
-
