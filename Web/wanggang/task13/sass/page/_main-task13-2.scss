@@ -1,0 +1,145 @@
+@mixin bgposition($xAndY) {
+    height: 4vw;
+    width: 4vw;
+    background: url(../images/task21.png) no-repeat;
+    background-size: auto 100%;
+    background-position: $xAndY;
+}
+
+@mixin fscolor($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+header {
+    p {
+        display: inline-block;
+        font-size: .17rem;
+        color: white;
+    }
+    .close {
+        margin-right: .22rem;
+        width: .0189rem;
+        height: .255rem;
+        background: white;
+        transform: rotate(45deg);
+        &::after {
+            content: '';
+            display: block;
+            width: .0189rem;
+            height: .255rem;
+            background: white;
+            transform: rotate(-90deg);
+        }
+    }
+}
+
+main {
+    margin-top: .45rem;
+    margin-bottom: .85rem;
+    overflow: auto;
+    background: #29bde0;
+    .vote {
+        .choose {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: .41rem;
+            background: #b9e9f5;
+            p {
+                display: inline-block;
+                margin-left: 8%;
+                line-height: 0.41rem;
+                @include fscolor(.13rem, #464646);
+            }
+            .circle {
+                display: inline-block;
+                width: 0.255rem;
+                height: 0.255rem;
+                border-radius: 50%;
+                background: #fbb435;
+                margin-right: 4%;
+                text-align: center;
+                &::after {
+                    content: "";
+                    display: inline-block;
+                    border-left: 13px solid white;
+                    border-top: 8.5px solid transparent;
+                    border-bottom: 8.5px solid transparent;
+                    margin-left: 4px;
+                    vertical-align: middle;
+                }
+            }
+        }
+        .air {
+            display: block;
+            width: 0;
+            height: 0;
+            margin-left: 9%;
+            border-top: 6px solid #b9e9f5;
+            border-left: 3.5px solid transparent;
+            border-right: 3.5px solid transparent;
+        }
+        .information {
+            margin-left: 9%;
+            @include fscolor(.12rem, white);
+        }
+    }
+    .players {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        .player {
+            margin-bottom: .3rem;
+            .photo {
+                display: inline-block;
+                border: 1vw solid white;
+                .name {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 24vw;
+                    height: 20vw;
+                    font-size: .15rem;
+                    background: #f5c97b;
+                }
+                .number {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 24vw;
+                    height: 4vw;
+                    @include fscolor(.11rem, white);
+                    background: #83b09a;
+                }
+            }
+            .select {
+                display: flex;
+                justify-content: space-between;
+                visibility: hidden;
+                margin-top: .1rem;
+                width: 100%;
+                .icon1 {
+                    display: inline-block;
+                    @include bgposition(0 0);
+                }
+                .icon2 {
+                    display: inline-block;
+                    @include bgposition(33% 0);
+                }
+                .icon3 {
+                    display: inline-block;
+                    @include bgposition(66% 0);
+                }
+                .icon4 {
+                    display: inline-block;
+                    @include bgposition(100% 0);
+                }
+            }
+            &:hover .select {
+                visibility: visible;
+            }
+        }
+    }
+}
