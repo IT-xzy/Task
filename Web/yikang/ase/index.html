@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/boot_care.css">
+    <script src="js/jquery.min.js"></script>
+    <title>开机助手</title>
+</head>
+<body>
+<div id="wrap" class="active wrap">
+    <div class="top1"></div>
+    <!--<div class="top2"></div>-->
+    <img src="https://priv-update.lenovo.com.cn/startupmanager/changui-news/templet/20180130/bootcare_lv/assets/LPCM_appicon_titlebar_xiangaolanse.png" class="toptime">
+    <span class="toptex" style="font-family:'微软雅黑','Microsoft YaHei'">联想开机小助手</span>
+    <span class="setting"></span>
+    <span class="erray-one" onclick="colese()"></span>
+    <span class="quan" style="font-family:' ','Microsoft YaHei'"></span>
+    <div class="ppop">
+        <div id="header" class="header">
+            <div class="cou_box"> <span class="cou-list1" style="font-family:'微软雅黑','Microsoft YaHei'">0</span>
+                <span class="cou-list2" style="font-family:'微软雅黑','Microsoft YaHei'">分</span>
+                <span class="cou-list3" style="font-family:'微软雅黑','Microsoft YaHei'">0</span>
+                <span class="cou-list4" style="font-family:'微软雅黑','Microsoft YaHei'">秒</span></div>
+            <p class="speed-up" style="font-family:'微软雅黑','Microsoft YaHei'"></p>
+            <button class="btn-icon-one" style="font-family:'微软雅黑','Microsoft YaHei'"></button>
+
+        </div>
+        <div class="bottom"><img src="https://priv-update.lenovo.com.cn/startupmanager/changui-news/templet/20180130/bootcare_lv/assets/bottom.png" alt=""></div>
+
+        <div id="main" class="main">
+            <ul class="headline">
+            </ul>
+            <ul class="contents">
+                <img class="newLoading" src="https://priv-update.lenovo.com.cn/startupmanager/changui-news/templet/20180130/bootcare_lv/assets/loading.png" alt="">
+            </ul>
+        </div>
+    </div>
+    <img class="aseImg" src="" alt="">
+
+</div>
+
+
+<script src="js/boot_care.js"></script>
+<script src="js/jquery.nicescroll.min.js"></script>
+<script>
+    //    CSS加载不成功时不显示
+    window.onload = function () {
+        var btna = document.getElementsByTagName('body')[0];
+        var style;
+        if (window.getComputedStyle) {
+            style = window.getComputedStyle(btna, null);
+        } else {
+            style = btna.currentStyle;
+        }
+        if (style.overflow != 'hidden') {
+            console.log("css加载失败-")
+            colese()
+        }
+    }
+    //关闭页面
+    var erray = document.getElementById('erray-one');
+    var wrap = document.getElementById('wrap');
+    function colese() {
+        var offpage = '{ "category": "Click", "action": "F0028", "data": [] }';
+        wrap.style.display = 'none';
+        wrap.classList.remove('active');
+        CallNativeMethod('report_big_data', offpage);
+        CallNativeMethod('close_window', '');
+    }
+    //滚动条
+    $('.contents').niceScroll({
+        cursorcolor: "#ccc",//#CC0071 光标颜色
+        cursoropacitymax: 1, //改变不透明度非常光标处于活动状态（scrollabar“可见”状态），范围从1到0
+        touchbehavior: false, //使光标拖动滚动像在台式电脑触摸设备
+        cursorwidth: "5px", //像素光标的宽度
+        cursorborder: "0", // 游标边框css定义
+        cursorborderradius: "5px",//以像素为光标边界半径
+        autohidemode: true //是否隐藏滚动条
+    });
+
+</script>
+
+</body>
+</html>

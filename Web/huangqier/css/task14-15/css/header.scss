@@ -1,0 +1,98 @@
+@charset "UTF-8";
+@import "global";
+
+//头部（包含导航栏）
+header {
+  .header-top {
+    @include b-t(#bfe3d4);
+    background: #fff;
+    .container {
+      @include text(1.4rem, #29b078);
+      @include middle;
+      @include jc-sb;
+      height: 40px;
+      .header-top-nav {
+        @include middle;
+        a {
+          margin-left: 15px;
+          @include xs {
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+  .header-bottom {
+    background-color: #29b078;
+    .container {
+      position: relative;
+      min-height: 60px;
+      @include middle;
+      @include jc-sb;
+      ul {
+        list-style: none;
+        @include middle;
+        li {
+          a {
+            @include text(1.6rem, #fff);
+            @include middle-center;
+            @include box(102px, 100px);
+            border-bottom: 4px solid #29b078;
+            &:hover {
+              border-bottom: 4px solid #fff;
+            }
+            @include xs {
+              @include box(100vw, 44px);
+            }
+          }
+        }
+        .active{
+          a{
+            border-bottom: 4px solid #fff;
+          }
+        }
+        @include xs {
+          flex-direction: column;
+          align-self: center;
+          display: none;
+        }
+      }
+      #sidebar-icon:checked ~ ul {
+        display: flex;
+      }
+      @include xs {
+        align-items: flex-start;
+        flex-direction: column;
+
+      }
+      & > a {
+        height: 60px;
+        @include middle;
+      }
+      #sidebar-icon {
+        display: none;
+      }
+      label {
+        position: absolute;
+        top: 11px;
+        right: 15px;
+        border-radius: 4px;
+        @include box(40px, 38px);
+        @include middle-center;
+        flex-direction: column;
+        span {
+          @include box(20px, 4px);
+          margin: 2px;
+          background: #888;
+        }
+        display: none;
+        @include xs {
+          display: flex;
+        }
+      }
+      #sidebar-icon:checked ~ label {
+        background: #fff;
+      }
+    }
+  }
+}

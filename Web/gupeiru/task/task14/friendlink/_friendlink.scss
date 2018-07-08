@@ -1,0 +1,65 @@
+aside {
+    // 友情链接
+    .friendlink {
+        background: $white;
+        margin-top: .5rem;
+        padding-bottom: .15rem;
+        .friendlink-title {
+            // 标题
+            text-align: center;
+            font-weight: bold;
+            line-height: .5rem;
+        }
+        .list {
+            // 链接列表
+            display: flex;
+            justify-content: space-between;
+            @media (max-width: 550px) {
+                display: block;
+                width: 50%;
+            }
+            li {
+                position: relative;
+                line-height: .3rem;
+                @media (max-width: 550px) {
+                    margin-left: 30%;
+                    line-height: .25rem;
+                }
+                a {
+                    // 链接字体灰色和hover底部出现横线
+                    color: $grey-999;
+                    &:hover::after {
+                        content: "";
+                        position: absolute;
+                        top: .25rem;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        height: .015rem;
+                        width: .73rem;
+                        background: $green-29;
+                        @media (max-width: 550px) {
+                            // 550px下横线变细
+                            left: 0;
+                            width: .68rem;
+                            height: .01rem;
+                            transform: translateX(-.05rem);
+                        }
+                    }
+                }
+                @media (max-width: 550px) {
+                    // 550px下列表两列显示
+                    flex-basis: 50%;
+                    text-align: justify;
+                }
+                &::before {
+                    // 链接前添加灰色圆点
+                    @include circle(.04rem, .04rem, $grey-999);
+                    margin: {
+                        bottom: .03rem;
+                        right: .05rem;
+                    }
+                }
+            }
+        }
+    }
+}

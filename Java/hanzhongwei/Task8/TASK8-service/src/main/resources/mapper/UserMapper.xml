@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hzw.mapper.UserMapper">
+
+    <insert id="addUser" parameterType="User">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="userId">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tb_user
+        VALUES (null,#{userName},#{password},#{salt},#{create_at},#{update_at},#{userIphone},#{userPhoto},#{userEmail})
+    </insert>
+
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        DELETE FROM tb_user WHERE userId = #{userId}
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE tb_user SET userName = #{userName},password = #{password},salt = #{salt},create_at = #{create_at},
+        update_at = #{update_at},userIphone = #{userIphone},userPhoto = #{userPhoto},userEmail = #{userEmail},userCode = #{userCode},
+        emailState = #{emailState} WHERE userId = #{userId}
+    </update>
+
+    <update id="updateUser1" parameterType="User">
+        UPDATE tb_user SET userPhoto = #{userPhoto} WHERE userId = #{userId}
+    </update>
+
+    <select id="findIdUser" parameterType="java.lang.Long" resultType="User">
+        SELECT * FROM tb_user WHERE userId = #{userId}
+    </select>
+
+    <select id="findNameUser" parameterType="String" resultType="User">
+        SELECT * FROM tb_user WHERE userName = #{userName}
+    </select>
+
+    <select id="findIphone" parameterType="String" resultType="User">
+        SELECT * FROM  tb_user WHERE userIphone = #{userIphone}
+    </select>
+
+    <select id="findCodeUser" parameterType="String" resultType="User">
+        SELECT * FROM  tb_user WHERE  userCode = #{userCode}
+    </select>
+
+    <select id="findMailUser" parameterType="String" resultType="User">
+        SELECT * FROM  tb_user WHERE  userEmail = #{userEmail}
+    </select>
+
+    <select id="findListUser" resultType="User">
+        SELECT * FROM tb_user
+    </select>
+</mapper>

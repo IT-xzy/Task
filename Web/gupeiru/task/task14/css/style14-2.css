@@ -1,0 +1,442 @@
+body {
+  background: #fafafa;
+}
+@media (max-width: 575px) {
+  body {
+    font-size: .12rem;
+  }
+}
+
+@media (min-width: 577px) {
+  .row {
+    padding: 0 5%;
+  }
+}
+@media (min-width: 992px) {
+  .row {
+    padding: 0 10%;
+  }
+}
+
+header .row-header {
+  align-items: center;
+  font-size: .12rem;
+  color: #29b078;
+}
+header .row-header .share {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+header .row-header .share .icon-microblog {
+  display: inline-block;
+  height: 0.25rem;
+  width: 0.26rem;
+  background: url(../images/sprite.png) -0.55rem 0 no-repeat;
+  transform: scale(0.7);
+}
+header .row-header .share .icon-qq {
+  display: inline-block;
+  height: 0.25rem;
+  width: 0.27rem;
+  background: url(../images/sprite.png) -1.28rem 0 no-repeat;
+  transform: scale(0.7);
+}
+header .row-header .share .icon-wechat {
+  display: inline-block;
+  height: 0.26rem;
+  width: 0.26rem;
+  background: url(../images/sprite.png) -0.92rem 0 no-repeat;
+  transform: scale(0.7);
+}
+
+nav .nav {
+  align-items: center;
+  background: #29b078;
+}
+nav .nav .nav-bar {
+  line-height: .7rem;
+}
+nav .nav .toogle {
+  position: absolute;
+  right: .15rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  background-color: #47d197;
+  padding: .06rem;
+  border-radius: .04rem;
+}
+nav .nav .toogle :nth-child(n+2) {
+  margin-top: .06rem;
+}
+nav .nav .toogle .icon-bar {
+  display: block;
+  width: .18rem;
+  height: .02rem;
+  border-radius: .02rem;
+  background: #33976d;
+}
+nav .nav input {
+  display: none;
+}
+nav .nav input:checked + .col-sm-6 label {
+  background: #218d60;
+}
+nav .nav input:checked + .col-sm-6 label .icon-bar {
+  background: #185c40;
+}
+nav .nav input:checked ~ .col-sm {
+  height: 1.2rem;
+}
+nav .nav .logo {
+  width: 1.45rem;
+  height: .3rem;
+}
+nav .nav .nav-list {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0;
+  transition: height 1s;
+}
+nav .nav .nav-list li a {
+  color: #fff;
+}
+@media (min-width: 577px) {
+  nav .nav .nav-list li {
+    width: .6rem;
+    border-bottom: .02rem solid transparent;
+    text-align: center;
+  }
+  nav .nav .nav-list li:hover {
+    border-bottom: 0.02rem solid #fff;
+  }
+}
+@media (min-width: 577px) {
+  nav .nav {
+    line-height: .7rem;
+  }
+}
+@media (max-width: 577px) {
+  nav .nav .nav-bar {
+    line-height: .5rem;
+  }
+  nav .nav .toogle {
+    display: block;
+  }
+  nav .nav .nav-list {
+    flex-direction: column;
+    height: 0;
+    text-align: center;
+    overflow: hidden;
+  }
+  nav .nav .nav-list li {
+    margin: 0;
+  }
+  nav .nav .nav-list li:hover a {
+    color: #333;
+    background: rgba(255, 255, 255, 0.5);
+  }
+  nav .nav .nav-list li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: .29rem;
+  }
+}
+
+main .index, main .title {
+  line-height: .7rem;
+}
+
+main .index {
+  width: 100%;
+  margin: 0 .15rem;
+  border-bottom: 1px solid #ccc;
+}
+main .index a {
+  font-size: .15rem;
+}
+main .index .word-green {
+  color: #29b078;
+}
+main .triangle {
+  display: none;
+  width: 0;
+  height: 0;
+  margin-left: .15rem;
+  margin-top: .1rem;
+  margin-bottom: .1rem;
+  border-left: 0.12rem solid #29b078;
+  border-bottom: .1rem solid transparent;
+  border-top: .1rem solid transparent;
+  transition: all .5s;
+}
+@media (max-width: 600px) {
+  main .triangle {
+    display: block;
+  }
+}
+main .list-button {
+  display: none;
+}
+main .list-button:checked + .triangle {
+  transform: rotate(90deg);
+}
+main .list-button:checked ~ .job {
+  height: 1.8rem;
+}
+main .job {
+  display: flex;
+  width: 100%;
+  margin: 0 .15rem;
+  border-bottom: 1px solid #edf1f2;
+  transition: height 1s;
+}
+main .job .grey {
+  color: #999;
+}
+main .job li {
+  padding-right: .12rem;
+  line-height: .6rem;
+  text-align: center;
+}
+main .job li a {
+  padding: .07rem;
+}
+main .job li a:hover {
+  color: #fff;
+  background: #29b078;
+}
+@media (max-width: 600px) {
+  main .job {
+    height: 0;
+    overflow: hidden;
+    flex-direction: column;
+  }
+  main .job li {
+    flex-basis: 100%;
+    height: .3rem;
+    line-height: .3rem;
+    padding-right: 0;
+  }
+  main .job li a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+}
+main .title {
+  width: 100%;
+  margin: 0 .15rem .3rem;
+  font-weight: bold;
+  font-size: .15rem;
+  border-bottom: 1px solid #ccc;
+}
+main .job-introduce {
+  margin: .2rem 0;
+}
+main .job-introduce:hover .iso {
+  top: 0;
+  bottom: 0;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  visibility: visible;
+}
+main .job-introduce .iso {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  left: .15rem;
+  right: .15rem;
+  padding: 0 .35rem;
+  line-height: .3rem;
+  color: transparent;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0);
+  transition: all 1s;
+  z-index: 1;
+}
+main .job-introduce .iso h3 {
+  line-height: .4rem;
+  text-align: center;
+}
+main .job-introduce table {
+  background-color: #fff;
+  border-collapse: collapse;
+  box-shadow: 0 0 .08rem #ccc;
+}
+main .job-introduce table td {
+  padding: .15rem .1rem;
+  border: .01rem solid #edf1f2;
+}
+main .job-introduce table td .star {
+  display: inline-block;
+  height: 0.15rem;
+  width: 0.16rem;
+  background: url(../images/sprite.png) -0.26rem 0 no-repeat;
+  transform: scale(0.7);
+  margin-left: .1rem;
+  margin-bottom: -.01rem;
+  transform: scale(1.01);
+}
+main .job-introduce table td p {
+  word-break: break-all;
+}
+main .job-introduce table td .word-red {
+  color: #f01400;
+}
+main .job-introduce table td .big-word {
+  font-weight: bold;
+  font-size: .16rem;
+}
+main .job-introduce table td .right {
+  float: right;
+}
+main .job-introduce table .word-grey {
+  color: #999;
+}
+main .job-introduce table .word-grey .spacing {
+  word-spacing: .1rem;
+}
+main .job-introduce table .tr-height {
+  height: 0;
+}
+main .job-introduce table .tr-height th {
+  padding: 0;
+}
+main .job-introduce table .tr-height .th-one {
+  width: 40%;
+}
+main .job-introduce table .tr-height .th-two {
+  width: 10%;
+}
+main .job-introduce table .word-center {
+  color: #999;
+  text-align: center;
+}
+main .job-introduce table .td-one .job-img {
+  float: left;
+  margin-right: .1rem;
+  transform: scale(0.9);
+}
+@media (max-width: 992px) {
+  main .job-introduce table .td-one .job-img {
+    width: 1rem;
+  }
+}
+@media (max-width: 400px) {
+  main .job-introduce table .td-one .job-img {
+    width: .7rem;
+  }
+}
+main .job-introduce table .td-one .name-box {
+  margin-top: .1rem;
+}
+main .job-introduce table .td-one .name-box .job-name {
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  main .job-introduce table td {
+    padding: .05rem .05rem;
+  }
+}
+@media (max-width: 768px) {
+  main .index, main .title {
+    line-height: .4rem;
+  }
+  main .title {
+    margin-bottom: .2rem;
+  }
+  main .job-introduce {
+    margin: .1rem 0;
+  }
+}
+
+footer {
+  background: #26a26f;
+  color: #fff;
+}
+footer a {
+  display: inline-block;
+  margin-top: .15rem;
+  margin-right: .05rem;
+  font-size: .13rem;
+  word-spacing: .06rem;
+  line-height: .2rem;
+  color: #fff;
+  border-bottom: 1px solid transparent;
+}
+footer a:hover {
+  border-bottom: 1px solid #fff;
+}
+@media (max-width: 768px) {
+  footer a {
+    margin-top: .05rem;
+  }
+}
+footer aside {
+  padding-top: .18rem;
+  padding-bottom: .1rem;
+}
+@media (max-width: 500px) {
+  footer aside .link-title {
+    font-size: .13rem;
+  }
+}
+footer aside .contact a {
+  margin-top: .5rem;
+}
+@media (max-width: 768px) {
+  footer aside .contact a {
+    margin: .1rem 0;
+  }
+}
+footer aside .contact .line::after {
+  content: "";
+  display: inline-block;
+  height: .13rem;
+  width: .01rem;
+  margin-left: .1rem;
+  vertical-align: text-bottom;
+  background: #fff;
+}
+footer aside .code {
+  text-align: right;
+}
+footer aside .code span {
+  display: block;
+  margin-right: .1rem;
+  font-size: .12rem;
+}
+footer aside .code .qr-code {
+  display: inline-block;
+  height: 0.92rem;
+  width: 0.92rem;
+  background: url(../images/sprite.png) -3.95rem 0 no-repeat;
+  transform: scale(0.7);
+  transform: scale(0.9);
+}
+@media (max-width: 768px) {
+  footer aside .code {
+    text-align: left;
+  }
+  footer aside .code span {
+    padding-left: .1rem;
+  }
+}
+footer .copyright {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid #32c086;
+}
+@media (max-width: 500px) {
+  footer .copyright span {
+    display: block;
+  }
+}

@@ -1,0 +1,107 @@
+@import "omnipotent";
+.img-responsive {
+    .block;
+    width: 100%;
+}
+
+.kind {
+    line-height: 4rem;
+    color: @green;
+}
+
+.data {
+    .font(0);
+    &>div:first-child {
+        .inline-block;
+        width: 25%;
+        margin-bottom: 2rem;
+        @media all and (max-width: 767px) {
+            .block;
+            .width;
+        }
+        ul {
+            .font(1.125rem);
+            color: @green;
+            padding-bottom: 1rem;
+            margin-right: 1rem;
+            .box-shadow;
+            border-radius: .3rem;
+            @media all and (max-width: 767px) {
+                margin: 0 ;
+            }
+            li:first-child {
+                .width;
+                line-height: 3rem;
+                margin: 0;
+                padding: 0;
+                border-bottom: solid .08rem #e6e6e6;
+                .center;
+            }
+            li:nth-child(2) {
+                span {
+                    color: @orange;
+                    &::before {
+                        background: #ff650e;
+                    }
+                }
+            }
+            li {
+                .block;
+                width: 7rem;
+                padding-left: 2rem;
+                margin: 2rem auto;
+                span {
+                    &::before {
+                        content: "";
+                        .inline-block;
+                        width: .6rem;
+                        height: .6rem;
+                        margin-right: .4rem;
+                        border-radius: 50%;
+                        border: solid .07rem @orange;
+                    }
+                    &:hover {
+                        color: @orange;
+                        &::before {
+                            background: #ff650e;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &>div:last-child {
+        .inline-block;
+        width: 75%;
+        margin-bottom: 5rem;
+        .font(.875rem);
+        
+        vertical-align: top;
+        
+        @media all and (max-width: 767px) {
+            .block;
+            .width;
+        }
+        .box {
+            .box-shadow;
+            border-radius: .3rem;
+            
+        }
+        p:first-child {
+            
+            border-bottom: solid .07rem @gray;
+            img {
+                .left;
+                @media all and (min-width: 1200px) {
+                    width: 7rem;
+                }
+            }
+        }
+        p {
+            padding: 1rem 1.5rem;
+            color: @gray;
+            line-height: 2rem;
+        }
+        
+    }
+}

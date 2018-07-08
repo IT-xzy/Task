@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录页</title>
+</head>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_683135_0is3ng5aihog8pvi.css">
+<link rel="stylesheet" href="css/login.css">
+<style>
+    .progress{
+        position: absolute;
+        width: 0;
+        height: 5px;
+        background: red;
+        transition: 2s all;
+    }
+</style>
+<body>
+    <canvas id="canvas"></canvas>
+    <main>
+        <div class="form-container">
+            <h4>后台登陆</h4>
+            <form action="" id="form">
+                <div class="user-box">
+                    <label for="user">
+                        <i class="iconfont icon-user1"></i>
+                    </label>
+                    <input type="text" id="user" placeholder="请输入用户名" name="name">
+                </div>
+                <div class="pwd-box">
+                    <label for="password">
+                        <i class="iconfont icon-lock"></i>
+                    </label>
+                    <input type="password" id="password" placeholder="请输入密码" maxlength="20" name="pwd"> 
+                </div>
+                <p class="error-show"></p>
+                <button class="login" type="button" id="login">登录</button>
+            </form>
+        </div>
+        <p class="progress"></p>
+    </main>
+
+
+
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <script >
+       // 获取所有的dom节点
+ var login = document.getElementById('login'),
+ user  = document.getElementById('user'),
+ password = document.getElementById('password'),
+ showMsg=document.querySelector('.error-show');
+//给按钮天剑点击事件
+login.onclick = function () {
+ var data;
+ //使用FormData对象实现请求
+ var form=document.getElementById('form');
+ var formdata = new FormData(form); //表单序列化
+
+//或者使用append方法插入
+//  formdata.append('name',user.value);  
+//  formdata.append('pwd',password.value);
+ //创建xhr对象
+ var xhr = new XMLHttpRequest();
+
+ //触发onreadystatechange事件
+ xhr.onload= function () {
+     //判断已经完成接受数据
+   
+         if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+             //解析字符串
+             data=JSON.parse( xhr.responseText);
+             if(data.code ===0){//成功
+                // location.href="result.html";
+             }else if(data.code ===-5004) {//密码错误
+                 showMsg.innerHTML=data.message;
+             }else{                       //账户错误
+                 showMsg.innerHTML=data.message;                            
+             }
+         } else {
+           alert('请求出错');
+         }
+     
+ };
+ //添加一个异步请求以待发送
+ xhr.onprogress=function(e){
+     var p=document.querySelector('.progress');
+     if(e.lengthComputable){
+        p.style.width=e.loaded+'px';
+     }
+ }
+ xhr.onloadend=function(){
+    var p=document.querySelector('.progress');     
+ }
+ xhr.open('post', '/carrots-admin-ajax/a/login', true);
+ xhr.withCredentials=true;
+ //使用setRequestHeader设置Content-Type，不需要设置Content-Type，否则报错
+ //发送请求
+ xhr.send(formdata);
+};
+    </script>
+</body>
+
+</html>

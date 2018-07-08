@@ -1,0 +1,192 @@
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta content="">
+    <style>
+        body {
+            margin:0;
+            background: #0f0f0f;
+        }
+    .container {
+        width: 100%;
+        height: 200px;
+        animation:myfirst 16s;
+        animation-direction:normal;
+        animation-iteration-count: infinite;
+    }
+        img {
+            width: 100%;
+            height: 200px;
+        }
+        @keyframes myfirst
+        {
+            0%   {background-image: url("../images/task8-lunbo1.png");
+                background-size:  100% 100%;
+            }
+            25%  {
+                background-image: url("../images/task8-lunbo2.png");
+                background-size:  100% 100%;
+            }
+            50%  {background-image: url("../images/task8-lunbo3.png");
+                background-size:  100% 100%;
+            }
+            100% {background-image: url("../images/task8-lunbo1.png");
+                background-size: 100% 100%;}
+        }
+
+        #sidemenu{
+            display: none;
+        }
+
+        #sidemenu:checked + aside {
+            /*为被选中的sidemenu后的aside设置属性（紧邻）*/
+            left: 0;
+            /*点击按钮即选中checked后,侧边栏位置变为贴着左边,配合ease-out使用,有渐变滑出的效果*/
+        }
+
+        aside {
+            /*侧边栏,初始位置为-200px，即隐藏效果*/
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            left: -100%;
+            width: 100%;
+            height: 200px;
+            /* background: black; */
+            transition: 0.2s ease-out;
+            /*动画效果的执行方式是ease-out，即侧边栏滑动效果为渐变式，而不是生硬的突然变化*/
+        }
+
+
+        /*控制侧边栏进出的按钮（外部包裹）*/
+        #wrap {
+            position: fixed;
+            top:180px;
+            left: 46%;
+            z-index: 99;
+            transition: 0.2s ease-out;
+        }
+
+        /*控制侧边栏进出的按钮（内部文字样式）*/
+        label {
+            /*控制侧边栏进出的按钮*/
+            position: fixed;
+            top:180px;
+            background: white;
+            border-radius: 70px;
+            color: orange;
+            cursor: pointer;
+            display: block;
+            font-family: Courier New;
+            font-size: 2em;
+            width: 10px;
+            height: 10px;
+            line-height: 1.5em;
+            text-align: center;
+            display: inline-block;
+        }
+
+
+
+
+
+
+
+
+        #sidemenu1{
+            display: none;
+        }
+
+        #sidemenu1:checked + aside {
+            /*为被选中的sidemenu后的aside设置属性（紧邻）*/
+            left: 0;
+            /*点击按钮即选中checked后,侧边栏位置变为贴着左边,配合ease-out使用,有渐变滑出的效果*/
+        }
+
+        aside {
+            /*侧边栏,初始位置为-200px，即隐藏效果*/
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            left: -100%;
+            width: 100%;
+            height: 200px;
+            /* background: black; */
+            transition: 0.2s ease-out;
+            /*动画效果的执行方式是ease-out，即侧边栏滑动效果为渐变式，而不是生硬的突然变化*/
+        }
+
+
+        /*控制侧边栏进出的按钮（外部包裹）*/
+        #wrap3 {
+            position: fixed;
+            top:180px;
+            left: 50%;
+            z-index: 99;
+            transition: 0.2s ease-out;
+        }
+
+
+        #sidemenu3{
+            display: none;
+        }
+
+        #sidemenu3:checked + aside {
+            /*为被选中的sidemenu后的aside设置属性（紧邻）*/
+            left: 0;
+            /*点击按钮即选中checked后,侧边栏位置变为贴着左边,配合ease-out使用,有渐变滑出的效果*/
+        }
+
+
+
+        /*控制侧边栏进出的按钮（外部包裹）*/
+        #wrap1 {
+            position: fixed;
+            top:180px;
+            left: 54%;
+            z-index: 99;
+            transition: 0.2s ease-out;
+        }
+
+
+    </style>
+</head>
+<body>
+<header>
+
+   <div class="container">
+       <form>
+       <input type='checkbox' id='sidemenu'>
+       <aside>
+           <img src="../images/task8-lunbo1.png">
+       </aside>
+       <div id='wrap'>
+           <label id='sideMenuControl' for='sidemenu'></label>
+           <!--for 属性规定 label 与哪个表单元素绑定，即将这个控制侧边栏进出的按钮与checkbox绑定-->
+       </div>
+
+       <input type='checkbox' id='sidemenu1'>
+       <aside>
+           <img src="../images/task8-lunbo2.png">
+       </aside>
+       <div id='wrap1'>
+           <label id='sideMenuControl1' for='sidemenu1'></label>
+           <!--for 属性规定 label 与哪个表单元素绑定，即将这个控制侧边栏进出的按钮与checkbox绑定-->
+       </div>
+
+       <input type='checkbox' id='sidemenu3'>
+       <aside>
+           <img src="../images/task8-lunbo3.png">
+       </aside>
+       <div id='wrap3'>
+           <label id='sideMenuControl3' for='sidemenu3'></label>
+           <!--for 属性规定 label 与哪个表单元素绑定，即将这个控制侧边栏进出的按钮与checkbox绑定-->
+       </div>
+       </form>
+   </div>
+</header>
+</body>
+</html>

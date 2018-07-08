@@ -1,0 +1,36 @@
+<img src="../images/1.png"  class="login_starBack">
+<div class="login_loginBox">
+    <div class="login_loginTitle">后台登陆</div>
+    <form  name="loginForm">
+    <div class="login_userInputBox">
+        <div class="login_userIcon"></div>
+        <input type="text"
+               name="userName"
+               class="login_userInput"
+               id="userInput"
+               placeholder="用户名"
+               ng-model="userName"
+               ng-minlength=3
+               ng-maxlength=10
+               required />
+    </div>
+    <div class="login_userInputBox">
+        <div class="login_pwIcon"></div>
+        <input type="password"
+               name="pwd"
+               class="login_userInput"
+               id="pwInput"
+               placeholder="密码"
+               ng-model="pwd"
+               ng-minlength=3
+               ng-maxlength=10
+               required />
+    </div>
+    <input type="submit" class="login_loginBtn" id="loginBtn" ng-click="loginBtn()" value="登陆">
+        <div class="login_redWord" ng-messages="loginForm.userName.$error">
+            <div ng-message="required">用户名不能为空</div>
+            <div ng-message="minlength">用户名长度至少为3</div>
+            <div ng-message="maxlength">用户名长度不能超过10</div>
+        </div>
+    </form>
+</div>

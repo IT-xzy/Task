@@ -1,0 +1,264 @@
+@charset "UTF-8";
+html {
+  font-size: 312.5%; }
+
+body {
+  margin: 0;
+  font-size: 16px; }
+
+ul, li, p {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+a {
+  text-decoration: none;
+  color: #333; }
+
+button {
+  border: none;
+  outline: none; }
+
+.popup-style {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(3, 3, 3, 0.5); }
+  .popup-style .headlink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 4rem;
+    height: 2rem;
+    background: #fff; }
+    .popup-style .headlink p {
+      line-height: 1.3rem; }
+    .popup-style .headlink button {
+      width: 100%;
+      height: 0.7rem;
+      background: #fff; }
+
+.witch-popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(3, 3, 3, 0.5);
+  display: none; }
+  .witch-popup .witchlink {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 4rem;
+    height: 2rem;
+    background: #fff; }
+    .witch-popup .witchlink p {
+      line-height: 1.3rem;
+      text-align: center; }
+    .witch-popup .witchlink > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
+      .witch-popup .witchlink > div button {
+        height: 0.7rem;
+        background: #fff;
+        padding: 0; }
+        .witch-popup .witchlink > div button:nth-child(1) {
+          flex: 1 0 30%;
+          color: #fff;
+          background: red; }
+        .witch-popup .witchlink > div button:nth-child(2) {
+          flex: 1 0 40%; }
+        .witch-popup .witchlink > div button:nth-child(3) {
+          flex: 1 0 30%;
+          color: #fff;
+          background: #333; }
+
+.close-popup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(3, 3, 3, 0.5);
+  display: none; }
+  .close-popup .closelink {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 4rem;
+    height: 2rem;
+    background: #fff; }
+    .close-popup .closelink p {
+      line-height: 1.3rem;
+      text-align: center; }
+    .close-popup .closelink > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; }
+      .close-popup .closelink > div button {
+        height: 0.7rem;
+        background: #fff;
+        padding: 0;
+        border-top: 1px solid #333; }
+        .close-popup .closelink > div button:nth-child(1) {
+          flex: 1 0 50%;
+          border-right: 1px solid #333; }
+        .close-popup .closelink > div button:nth-child(2) {
+          flex: 1 0 50%; }
+
+body {
+  background: #f0f0f0; }
+
+header {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 0.75rem;
+  padding: 0 .23rem;
+  background: #29bde0;
+  font-size: .34rem;
+  color: #fff; }
+  header .back {
+    width: .25rem;
+    height: .25rem;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+    transform: rotate(-45deg); }
+  header .close {
+    width: .4rem;
+    height: .4rem;
+    text-align: center;
+    position: relative; }
+    header .close::before, header .close::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      right: 0.18rem;
+      width: .04rem;
+      height: .42rem;
+      background: #fff; }
+    header .close::before {
+      transform: rotate(-45deg); }
+    header .close::after {
+      transform: rotate(45deg); }
+
+main {
+  margin: 0.75rem 0.2rem 1.2rem 0.2rem;
+  overflow: auto; }
+  main .days {
+    margin-top: .2rem; }
+    main .days .day {
+      height: .84rem;
+      font-size: .3rem;
+      font-weight: bold;
+      line-height: .84rem;
+      text-align: center;
+      color: #29bde0;
+      border: 1px solid #C9C9C9;
+      background: #fff; }
+    main .days .flow-style {
+      display: block;
+      position: relative;
+      margin-top: .2rem;
+      padding: 0.42rem 0.21rem 0.42rem 0.68rem;
+      background: #fff;
+      border: 1px solid #C9C9C9; }
+      main .days .flow-style::before {
+        display: inline-block;
+        content: "";
+        position: absolute;
+        top: -0.3rem;
+        left: 50%;
+        margin-left: -0.25rem;
+        border-bottom: .3rem solid #fff;
+        border-left: .25rem solid transparent;
+        border-right: .25rem solid transparent; }
+      main .days .flow-style .flow {
+        border-left: 1px solid #C9C9C9;
+        padding-left: 0.49rem; }
+        main .days .flow-style .flow li {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          margin: .21rem 0; }
+          main .days .flow-style .flow li p {
+            flex: 1 0 90%;
+            font-size: .3rem;
+            color: #fff;
+            text-align: center;
+            line-height: .76rem;
+            background: #24A7C6; }
+          main .days .flow-style .flow li i {
+            border-right: .2rem solid #24A7c6;
+            border-top: .15rem solid transparent;
+            border-bottom: .15rem solid transparent; }
+        main .days .flow-style .flow .gurad {
+          margin-top: 0; }
+          main .days .flow-style .flow .gurad::before {
+            display: inline-block;
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -0.82rem;
+            width: .6rem;
+            height: .6rem;
+            background: url(../../image/黑夜.png) no-repeat 8px #fff;
+            background-size: 50%;
+            border: 1px solid #C9C9C9;
+            border-radius: 50%; }
+        main .days .flow-style .flow .vote {
+          margin-bottom: 0; }
+        main .days .flow-style .flow .the-dead::before {
+          display: inline-block;
+          content: "";
+          position: absolute;
+          left: -0.82rem;
+          width: .6rem;
+          height: .6rem;
+          background: url(../../image/白天.png) no-repeat 8px #fff;
+          background-size: 50%;
+          border: 1px solid #C9C9C9;
+          border-radius: 50%; }
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1.2rem;
+  background: rgba(41, 189, 224, 0.5); }
+  footer button {
+    height: .7rem;
+    width: 40%;
+    font-size: .3rem;
+    color: #fff;
+    border-radius: 7px;
+    background: #fdbc48; }
+
+/*# sourceMappingURL=1.8.css.map */

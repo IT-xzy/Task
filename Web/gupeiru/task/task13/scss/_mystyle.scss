@@ -1,0 +1,26 @@
+// 小图标
+@mixin icon($height,$width,$url){
+    display: inline-block;
+    height: $height;
+    width: $width;
+    background: url($url) 0/contain no-repeat;
+}
+// 顶部公共样式
+%head {
+    @include flex(space-between);
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: .6rem;
+    color: #fff;
+	border-bottom: 1px solid #fff;
+	background-color: #74d4eb;
+	z-index: 1;
+}
+body{
+    background: $blue;
+    @media (max-width:500px) {
+        font-size: .14rem;
+    }
+}

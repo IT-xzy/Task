@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 登陆信息 -->
+<ul class="nav nav-tabs info">
+    <li role="presentation" class="pull-right" ng-click="logOut()">
+        <a ui-sref="login">
+            <!-- <a href="#"> -->
+            <span class="glyphicon glyphicon-off"></span>
+        </a>
+    </li>
+    <li role="presentation" class="pull-right">
+        <a>admin</a>
+    </li>
+    <li role="presentation" class="pull-right">
+        <a>管理员</a>
+    </li>
+</ul>
+<!-- jQuery插件手风琴 -->
+<dl class="list_dl left" data-ng-controller="backstage" data-ng-init="loadAccordion()">
+
+    <!-- 跳转backstage页面 -->
+    <h3 class="title" ui-sref="backstage">萝卜多后台管理系统</h3>
+    <div class="toggle">
+        <div class="list_dt" index="1">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>信息管理</span>
+            <i class="list_dt_icon"></i>
+        </div>
+        <ul class="body" index="1">
+            <li class="list_li" index="1">公司列表</li>
+            <li class="list_li" index="2">职位列表</li>
+        </ul>
+    </div>
+    <div class="toggle">
+        <div class="list_dt" index="2">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>Article管理</span>
+            <i class="list_dt_icon"></i>
+        </div>
+        <ul class="body" index="2">
+            <li class="list_li" index="1" ui-sref=".list">Article列表</li>
+            <li class="list_li" index="2">文章管理1</li>
+            <li class="list_li" index="3">文章管理2</li>
+        </ul>
+    </div>
+    <div class="toggle">
+        <div class="list_dt" index="3">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>用户管理</span>
+            <i class="list_dt_icon"></i>
+        </div>
+        <ul class="body" index="3">
+            <li class="list_li" index="1" ui-sref=".add">用户列表</li>
+
+        </ul>
+    </div>
+    <div class="toggle">
+        <div class="list_dt" index="4">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span>内容管理</span>
+            <i class="list_dt_icon"></i>
+        </div>
+        <ul class="body" index="4">
+            <li class="list_li" index="1" ui-sref=".admin">视频管理</li>
+        </ul>
+    </div>
+</dl>
+
+
+
+<div ui-view="" class="right">
+    <h1>
+        welcome!
+    </h1>
+</div>
+
+</html>
+
+

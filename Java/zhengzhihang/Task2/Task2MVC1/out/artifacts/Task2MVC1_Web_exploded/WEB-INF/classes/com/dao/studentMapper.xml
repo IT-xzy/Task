@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置命名空间，namespace的名字需要对应相应的接口名-->
+<mapper namespace="com.dao.StudentMapper">
+    <select id="selectStudentById" parameterType="int" resultType="com.pojo.Student">
+        SELECT * FROM  student where  id =#{id}
+    </select>
+
+    <select id="selectStudentByName" parameterType="String" resultType="com.pojo.Student">
+        SELECT * FROM  student where  name like CONCAT('%', #{name}, '%')
+    </select>
+
+    <insert id="insertStudent" parameterType="com.pojo.Student" keyProperty="id" useGeneratedKeys="true" >
+        INSERT INTO student (age,sex,school,name) values  (#{age} ,#{sex}, #{school} , #{name})
+    </insert>
+
+    <delete id="deleteStudentById" parameterType="int">
+        delete from student where id=#{id}
+    </delete>
+
+    <update id="updateStudentById" parameterType="com.pojo.Student" >
+        UPDATE student set age=#{age},sex=#{sex} ,school=#{school},name=#{name} where id=#{id}
+    </update>
+
+    <select id="selectStudent" resultType="com.pojo.Student">
+        select * from student
+    </select>
+</mapper>

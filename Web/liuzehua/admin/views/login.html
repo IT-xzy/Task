@@ -1,0 +1,28 @@
+<!-- 登录页html部分 -->
+
+<div class="login flex-center">
+    <div class="loginbar">
+
+        <h1>后台登录系统</h1>
+
+        <form class="form" name="form">
+            <div class="name flex-start">
+                <span><img src="./img/01.png" /> </span>
+                <input type="text" name="user" placeholder="用户名" novalidate required ng-model="name" ng-minlength="3"/>
+            </div>
+            <div ng-show="form.user.$dirty && form.user.$invalid">
+                <div class="tips" ng-show='form.user.$error.minlength'>用户名最少需要3位</div>
+            </div>
+            <div class="password flex-start">
+                <span><img src="./img/02.png"> </span>
+                <input type="password" name="pwd" placeholder="密码" novalidate required ng-model="pwd" ng-minlength="6"/>
+            </div>
+            <div ng-show="form.pwd.$dirty && form.pwd.$invalid">
+                <div class="tips" ng-show='form.pwd.$error.minlength'>密码最少需要6位</div>
+            </div>
+            <div class="tips">{{tips}}</div>
+            
+            <button type="submit" ng-click="error()">登录</button>
+        </form>
+    </div>
+</div>

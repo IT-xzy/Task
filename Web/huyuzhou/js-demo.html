@@ -1,0 +1,72 @@
+<html ng-app="ui.bootstrap.demo">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/angular/angular.min.js"></script>
+  <script src="js/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+  <script src="js/angular-locale_zh-cn.js"></script>
+  <script>
+    angular.module('ui.bootstrap.demo', ['ui.bootstrap']).controller('Datepicker', function($scope) {
+      //基础设置
+      $scope.format = "yyyy/MM/dd";
+      $scope.altInputFormats = ['yyyy/M!/d!'];
+      //第一个日历
+      $scope.dat1 = new Date();
+      $scope.popup1 = {
+        opened: false
+      };
+      $scope.open1 = function() {
+        $scope.popup1.opened = true;
+      };
+
+    //第二个日历
+      $scope.dat2 = new Date();
+      $scope.popup2 = {
+        opened: false
+      };
+      $scope.open2 = function() {
+        $scope.popup2.opened = true;
+      };
+    });
+  </script>
+</head>
+
+<body ng-controller="Datepicker">
+  <div>
+    <p class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control"
+        uib-datepicker-popup="{{format}}"
+        ng-model="dat1"
+        is-open="popup1.opened"
+        close-text="关闭" clear-text="清空"
+        current-text="今天"
+        alt-input-formats="altInputFormats" />
+  <!--逐条分析
+   uib-datepicker-popup	yyyy-MM-dd 显示日期格式
+   ng-model="dat1"  绑定今天时间
+   is-open="popup1.opened" 控制时间控件开启和关闭
+   close-text/clear-text/current-text  按钮组的文本
+   alt-input-formats    手动输入日期时可接受的格式
+   -->
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open1()">
+          <i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
+    </p>
+  </div>
+  <!--第二个日历-->
+  <div>
+    <p class="form-group">
+      <div class="input-group">
+        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dat2" is-open="popup2.opened" close-text="关闭" clear-text="清空" current-text="今天" alt-input-formats="altInputFormats" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
+    </p>
+  </div>
+</body>
+</html>

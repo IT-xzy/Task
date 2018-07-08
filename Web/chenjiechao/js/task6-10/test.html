@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body ng-app="myApp">
+    <div ng-controller="controller1"></div>
+    <div ng-controller="controller2"></div>
+    
+    <script src="https://cdn.bootcss.com/angular.js/1.6.1/angular.js"></script>
+    <script>
+        var myApp = angular.module('myApp', []);
+        var testa = '111' //直接var全局变量
+        myApp
+            .constant('testb', '222') //constant设置全局变量
+            .value('testc', '333') //value设置全局变量
+            .config(function (testa) {
+                console.log('testa', testa);
+            })
+            .config(function (testb) {
+                console.log('testb', testb);
+            })
+            .config(function (testc) {
+                console.log('testc', testc);
+            })
+
+
+
+        .provider('myService', function () {//声明
+            var data = {//定义一个全局变量
+                name: 'bob',
+                age: 18
+            }; 
+            var f = function (name, age) { //定义一个更改变量的函数
+                if (name != 0) //为0则不改变
+                {
+                    data.name = name;
+                    data.age = age;
+                }
+                return data;
+            };
+            this.$get = function () { //
+                return f; //返回函数运行值
+            };
+        })
+
+
+
+        myApp.controller('controller1', function ($scope, testc, myService) {
+                var data = myService('Helen', 28); //改变全局变量
+                console.log('data', data);
+
+                var testc = '000;'//改变value定义的全局变量
+                $scope.c = testc;
+                console.log('$scope.c', $scope.c);
+            })
+            .controller('controller2', function ($scope, testc, myService) {
+                console.log('testc', testc);
+
+
+                var data = myService(0, 0); //参数为0则为不更改，直接获取
+                console.log('data', data);
+            })
+        
+            
+        
+    </script>
+</body>
+
+</html>

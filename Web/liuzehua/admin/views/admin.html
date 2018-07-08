@@ -1,0 +1,35 @@
+<header>
+    <div class="head-left">
+        <a class="title" ui-sref="admin">后台管理系统</a>
+    </div>
+    <div class="head-right flex-end">
+        <div class="btn-group">
+            <button type="button" class="btn text-muted btn-light">管理员</button>
+            <button type="button" class="btn text-muted btn-light">admin</button>
+            <button type="button" class="btn text-warning btn-danger" ng-click="out()">注销</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <nav>
+        <ul>
+            <a class="menu" ng-click="toggle(1)">信息管理</a>
+            <li ng-show="menu1">公司列表</li>
+            <li ng-show="menu1">职位列表</li>
+        </ul>
+
+        <ul>
+            <a class="menu" ng-click="toggle(2)">Article管理</a>
+            <li ng-show="menu2" ui-sref="admin.list">Article列表</li>
+            <li ng-show="menu2" ui-sref="admin.add">新增列表</li>
+        </ul>
+
+        <ul>
+            <a class="menu" ng-click="toggle(3)">用户管理</a>
+            <li ng-show="menu3">用户列表</li>
+        </ul>
+    </nav>
+    <section ui-view></section>
+
+</main>

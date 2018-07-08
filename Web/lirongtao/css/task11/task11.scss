@@ -1,0 +1,97 @@
+$backcolor: #5AC0CE;
+$color: #fff;
+$in-bl: inline-block;
+$relative: relative;
+$pad: 1rem;
+@mixin hea-btn {
+  display: $in-bl;
+  text-decoration: none;
+  color: #fff;
+}
+@mixin flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #eff0f4;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: $backcolor;
+  height: 3.4rem;
+}
+
+.g,
+.d,
+.z {
+  @include hea-btn;
+}
+
+.g {
+  float: left;
+  padding: $pad;
+}
+
+.z {
+  float: right;
+  padding: $pad;
+}
+.d {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 1.2rem;
+  padding: .9rem;
+}
+
+.main,
+.main-t {
+  @include flex;
+  height: 3rem;
+  background-color: #fff;
+}
+.main {
+  margin-top: 4rem;
+}
+.main-t {
+  margin-top: 1rem;
+}
+.ma-img {
+  margin: 0 1rem;
+}
+.ma-input {
+  margin-left: 1rem;
+  width: 100%;
+  height: 1.3rem;
+  border: 0;
+  outline: none;
+}
+
+.footer-a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  margin-top: 2rem;
+  color: #fff;
+  font-size: 1.2rem;
+  text-decoration: none;
+  background-color: $backcolor;
+}
+
+.ft-finally {
+  float: right;
+  padding: 1rem;
+  color: #5AC0CE;
+  text-decoration: none;
+}

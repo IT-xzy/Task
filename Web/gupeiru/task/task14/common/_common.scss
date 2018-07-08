@@ -1,0 +1,54 @@
+@charset "UTF-8";
+$green-26:#26a26f;
+$green-29: #29b078;
+$green-47: #47d197;
+$white: #fff;
+$grey-999: #999;
+$bg-body: #fafafa;
+@mixin center($x, $y, $h, $V) {
+    left: $x;
+    top: $y;
+    transform: translate($h, $V);
+}
+
+@mixin flex($justify) {
+    display: flex;
+    align-items: center;
+    justify-content: $justify;
+}
+
+//雪碧图
+@mixin sprite($height, $width, $x) {
+    display: inline-block;
+    height: $height;
+    width: $width;
+    background: url(../images/sprite.png) $x 0 no-repeat;
+    transform: scale(.7);
+}
+// 圆
+@mixin circle($height, $width, $color) {
+    content: "";
+    display: inline-block;
+    height: $height;
+    width: $width;
+    background: $color;
+    border-radius: 50%;
+}
+// 主体背景和字体通用设置
+body {
+    background: $bg-body;
+    @media (max-width: 575px) {
+        font-size: .12rem;
+    }
+}
+// 页面左右间距设置
+.row {
+    @media (min-width: 577px) {
+        padding: 0 5%;
+    }
+    @media (min-width: 992px) {
+        padding: 0 10%;
+    }
+}
+
+//575px 字体缩小，

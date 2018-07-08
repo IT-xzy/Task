@@ -1,0 +1,99 @@
+@import "../../common/all";//引用共用样式
+@import "mystyle";
+// 顶部按钮
+header {
+    @extend %head;
+    .arrow {
+        @include arrow(.16rem, .16rem, .03rem, #fff, 225deg);
+        margin-left: .2rem;
+        margin-top: .17rem;
+        cursor: pointer;
+    }
+}
+
+body {
+    background: $grey-f0;
+}
+
+main {
+    margin-top: .55rem;
+    padding: 0 2%;
+}
+
+input {
+    font-size: .12rem;
+}
+
+.title {
+    margin-bottom: .05rem;
+    line-height: .35rem;
+    text-align: center;
+    box-shadow: 0 .02rem .01rem #ccc;
+    background: #fff;
+    border-radius: .03rem;
+}
+
+.people {
+    display: flex;
+    height: 2rem;
+    padding-left: .15rem;
+    padding-top: .1rem;
+    background: #fff;
+    .box {
+        display: flex;
+        align-items: center;
+        height: .3rem;
+        flex-basis: 50%;
+        p {
+            margin-left: .1rem;
+            font-size: .12rem;
+        }
+    }
+    .killer {
+        @include icon(.3rem, .3rem, "../image/litlang.jpg")
+    }
+    .villager {
+        @include icon(.3rem, .3rem, "../image/litping.jpg")
+    }
+}
+
+.word {
+    margin: .05rem 0;
+    padding: .2rem .3rem .5rem;
+    background: #fff;
+    .word-box {
+        border-bottom: .015rem solid #ccc;
+    }
+    .grey {
+        line-height: .35rem;
+        font-weight: bold;
+        color: #ccc;
+    }
+    .bold {
+        @extend %bold;
+    }
+    .number {
+        height: .3rem;
+        width: .4rem;
+        font-size: .18rem;
+        text-align: center;
+        color: $orange;
+        @extend %bold;
+        background: $grey-f0;
+    }
+    .orange {
+        font-size: .12rem;
+        color: $orange;
+    }
+}
+
+#position {
+    @extend %position;
+    z-index: 1;
+}
+
+#go {
+    width: 100%;
+    margin-top: .1rem;
+    @extend %button;
+}
