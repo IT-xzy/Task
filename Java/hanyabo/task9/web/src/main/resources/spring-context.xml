@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.task.service" />
+
+
+    <!--引入数据库属性文件-->
+    <context:property-placeholder location="classpath*:config.properties"/>
+
+
+    <!--配置 druid连接池 数据源-->
+    <!--<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">-->
+        <!--&lt;!&ndash; 基本属性 url、user、password &ndash;&gt;-->
+        <!--<property name="driver" value="${jdbc.driver}" />-->
+        <!--<property name="url" value="${jdbc.url}" />-->
+        <!--<property name="username" value="${jdbc.username}" />-->
+        <!--<property name="password" value="${jdbc.password}" />-->
+    <!--</bean>-->
+
+    <!-- 阿里 druid 数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+
+        <!-- 数据库基本信息配置 -->
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="filters" value="${jdbc.filters}"/>
+
+        <!--最大并发连接数-->
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+
+        <!--初始化连接数量-->
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+
+        <!--配置获取连接等待超时的时间-->
+        <property name="maxWait" value="${jdbc.maxWait}"/>
+
+        <!--最小空闲连接数-->
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+
+        <!--配置间隔多久检测一次，检测需要关闭的空闲连接，单位是ms-->
+        <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}"/>
+
+        <!--配置一个连接在池中最小的生存时间，单位是ms-->
+        <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}"/>
+
+        <property name="validationQuery" value="${jdbc.validationQuery}"/>
+
+        <property name="testWhileIdle" value="${jdbc.testWhileIdle}"/>
+        <property name="testOnBorrow" value="${jdbc.testOnBorrow}"/>
+        <property name="testOnReturn" value="${jdbc.testOnReturn}"/>
+        <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}"/>
+
+        <!--打开removeAbandoned功能-->
+        <property name="removeAbandoned" value="${jdbc.removeAbandoned}"/>
+        <!--1800s，30分钟-->
+        <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}"/>
+        <!--关闭abandoned连接时输出错误日志-->
+        <property name="logAbandoned" value="${jdbc.logAbandoned}"/>
+    </bean>
+
+
+    <!--会话工厂-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.task.entity" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:/mapper/*.xml"/>
+    </bean>
+
+    <!--自动扫描关系映射-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.task.dao"/>
+    </bean>
+
+
+
+    <bean id="oss" class="com.aliyun.oss.OSSClient">
+       <constructor-arg index="0" type="java.lang.String" value="www.zhimowen.top"/>
+       <constructor-arg index="1" type="java.lang.String" value="LTAIqOUGXnL4zD5n"/>
+       <constructor-arg index="2" type="java.lang.String" value="iOUz31sDcGhq6IqMDEckBn17dT5yg7"/>
+    </bean>
+
+    <bean id="smsClient" class="com.task.util.SmsUtil">
+        <property name="serverIP" value="app.cloopen.com"/>
+        <property name="serverPort" value="8883"/>
+        <property name="appId" value="8aaf070863f8fb040163f9b605d30057"/>
+        <property name="accountSid" value="8aaf070863f8fb040163f9b605610050"/>
+        <property name="accountToken" value="c96758a27cc7452dbb87cde1be154ace"/>
+    </bean>
+
+
+    <!--<bean id="hello1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">-->
+        <!--<property name="serviceUrl" value="rmi://117.48.215.129:1199/hello"></property>-->
+        <!--<property name="serviceInterface" value="com.task.service.HelloService"></property>-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="user1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">-->
+        <!--<property name="serviceUrl" value="rmi://117.48.215.129:1199/user"></property>-->
+        <!--<property name="serviceInterface" value="com.task.service.UserService"></property>-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="student1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">-->
+        <!--<property name="serviceUrl" value="rmi://117.48.215.129:1199/student"></property>-->
+        <!--<property name="serviceInterface" value="com.task.service.StudentService"></property>-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+
+    <!--<bean id="hello2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">-->
+        <!--<property name="serviceUrl" value="rmi://111.230.70.237:1199/hello"></property>-->
+        <!--<property name="serviceInterface" value="com.task.service.HelloService"></property>-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="user2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">-->
+        <!--<property name="serviceUrl" value="rmi://111.230.70.237:1199/user"></property>-->
+        <!--<property name="serviceInterface" value="com.task.service.UserService"></property>-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="student2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">-->
+        <!--<property name="serviceUrl" value="rmi://111.230.70.237:1199/student"></property>-->
+        <!--<property name="serviceInterface" value="com.task.service.StudentService"></property>-->
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+        <!--<property name="refreshStubOnConnectFailure" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="memcachedClientBuilder"-->
+            <!--class="net.rubyeye.xmemcached.XMemcachedClientBuilder"-->
+            <!--p:connectionPoolSize="${xmemcached.connectionPoolSize}"-->
+            <!--p:failureMode="${xmemcached.failureMode}">-->
+        <!--&lt;!&ndash; XMemcachedClientBuilder have two arguments.First is server list,and-->
+            <!--second is weights array. &ndash;&gt;-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<bean class="java.net.InetSocketAddress">-->
+                    <!--<constructor-arg>-->
+                        <!--<value>${xmemcached.server1.host}</value>-->
+                    <!--</constructor-arg>-->
+                    <!--<constructor-arg>-->
+                        <!--<value>${xmemcached.server1.port}</value>-->
+                    <!--</constructor-arg>-->
+                <!--</bean>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<value>${xmemcached.server1.weight}</value>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--<property name="commandFactory">-->
+            <!--<bean class="net.rubyeye.xmemcached.command.TextCommandFactory" />-->
+        <!--</property>-->
+        <!--<property name="sessionLocator">-->
+            <!--<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />-->
+        <!--</property>-->
+        <!--<property name="transcoder">-->
+            <!--<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; Use factory bean to build memcached client &ndash;&gt;-->
+    <!--<bean  id="memcachedClient"-->
+            <!--factory-bean="memcachedClientBuilder"-->
+            <!--factory-method="build"-->
+            <!--destroy-method="shutdown" >-->
+    <!--</bean>-->
+
+
+
+     <!--redis连接池配置-->
+    <!--<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >-->
+        <!--&lt;!&ndash;最大空闲数&ndash;&gt;-->
+        <!--<property name="maxIdle" value="${redis.maxIdle}" />-->
+        <!--&lt;!&ndash;连接池的最大数据库连接数  &ndash;&gt;-->
+        <!--<property name="maxTotal" value="${redis.maxTotal}" />-->
+        <!--&lt;!&ndash;最大建立连接等待时间&ndash;&gt;-->
+        <!--<property name="maxWaitMillis" value="${redis.maxWaitMillis}" />-->
+        <!--&lt;!&ndash;逐出连接的最小空闲时间 默认1800000毫秒(30分钟)&ndash;&gt;-->
+        <!--<property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}" />-->
+        <!--&lt;!&ndash;每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3&ndash;&gt;-->
+        <!--<property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}" />-->
+        <!--&lt;!&ndash;逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1&ndash;&gt;-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}" />-->
+        <!--&lt;!&ndash;是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个&ndash;&gt;-->
+        <!--<property name="testOnBorrow" value="${redis.testOnBorrow}" />-->
+        <!--&lt;!&ndash;在空闲时检查有效性, 默认false  &ndash;&gt;-->
+        <!--<property name="testWhileIdle" value="${redis.testWhileIdle}" />-->
+    <!--</bean >-->
+
+
+
+    <!--&lt;!&ndash;redis连接工厂 &ndash;&gt;-->
+    <!--<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">-->
+        <!--<property name="poolConfig" ref="jedisPoolConfig"></property>-->
+        <!--&lt;!&ndash;IP地址 &ndash;&gt;-->
+        <!--<property name="hostName" value="${redis.hostName}"></property>-->
+        <!--&lt;!&ndash;端口号  &ndash;&gt;-->
+        <!--<property name="port" value="${redis.port}"></property>-->
+        <!--&lt;!&ndash;如果Redis设置有密码  &ndash;&gt;-->
+        <!--<property name="password" value="${redis.password}" />-->
+        <!--&lt;!&ndash;客户端超时时间单位是毫秒  &ndash;&gt;-->
+        <!--<property name="timeout" value="${redis.timeout}"></property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash;redis操作模版,使用该对象可以操作redis  &ndash;&gt;-->
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate" >-->
+        <!--<property name="connectionFactory" ref="jedisConnectionFactory" />-->
+        <!--&lt;!&ndash;如果不配置Serializer，那么存储的时候缺省使用String，如果用User类型存储，那么会提示错误User can't cast to String！！  &ndash;&gt;-->
+        <!--<property name="keySerializer" >-->
+            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />-->
+        <!--</property>-->
+
+        <!--<property name="valueSerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>-->
+        <!--</property>-->
+
+        <!--<property name="hashKeySerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>-->
+        <!--</property>-->
+        <!--<property name="hashValueSerializer">-->
+            <!--<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>-->
+        <!--</property>-->
+        <!--&lt;!&ndash;开启事务  &ndash;&gt;-->
+        <!--<property name="enableTransactionSupport" value="true"></property>-->
+    <!--</bean >-->
+
+    <!--&lt;!&ndash;自定义redis工具类,在需要缓存的地方注入此类  &ndash;&gt;-->
+    <!--<bean id="redisUtil" class="com.task.util.RedisUtil">-->
+        <!--<property name="redisTemplate" ref="redisTemplate" />-->
+    <!--</bean>-->
+
+</beans>
