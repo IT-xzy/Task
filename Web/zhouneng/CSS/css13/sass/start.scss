@@ -1,0 +1,192 @@
+// 变量
+$eliminate:0;
+$white:#FFFFFF;
+$blue:#69D1E9;
+$gray:#E7E7E7;
+$header:.05rem solid $white;; 
+$main:.01rem  solid #C9C9C9;
+$font:.05rem solid ;
+$orange: #FBB435;
+$border:.01rem solid $orange;
+
+// 混合器
+@mixin box($w:0,$h:0){
+    width: $w;
+    height: $h;
+}
+@mixin txet{
+    text-align: center;
+}
+@mixin flex($x:center,$y:center){
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin circle{
+    @include box(.17rem,.17rem );
+    border-radius: 100%;
+}
+
+
+html{
+    font-size:312.5%
+}
+body{
+    margin: $eliminate;
+    font-size: initial;
+}
+p{
+    margin:$eliminate;
+}
+ul{
+    margin: $eliminate;
+    padding: $eliminate;
+    list-style: none;
+}
+
+    /*左侧滑动导航栏*/
+div.nav{
+    position: relative;
+    overflow: hidden;
+
+    input{
+        display: none;
+    }
+
+    /*左侧导航栏内容*/
+    ul.menu-box{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 65vw;
+        background: $white;
+
+        a.menu-font{
+            @include flex(space-between,center);
+            @include box(100%,.8rem);
+            padding: .1rem  0 .1rem .2rem;
+            border-bottom:$main;
+            font-size: .15rem;
+            text-decoration: none;
+            color:$blue;
+
+            &.menu-font::after{
+                content: "";
+                @include box(.24rem,.24rem );
+                margin-right: .5rem;
+                border-top: $font $blue;
+                border-right: $font $blue;
+                transform: rotate(45deg);
+            }
+        }
+    }
+    #menu:checked ~ .main-content {
+        margin-left: 65vw; 
+    }
+    /*右侧文本内容*/
+    div.main-content{
+        position: relative;
+        width: 100vw;
+        background: $white;
+        transition: all 1s;
+        
+        /*header 眉页*/
+        header{
+            height: .9rem;
+            background: #29BDE0;
+
+            label.left{
+                display: inline-block;
+                @include box(.34rem,.07rem );
+                padding: .08rem 0;
+                margin: .3rem 0 0 .22rem;
+                border-top:$header ;
+                border-bottom:$header ;
+                background: $white content-box;
+    }
+    }
+
+        /*main主体*/
+        main{   
+            p.font{
+                margin: .27rem .36rem;
+                border: $main ;
+                background: $white ;
+                line-height: 1.16rem;
+                @include txet;
+                font-size: .35rem;
+                color: #9A9A9A;
+        
+                &.font::after{
+                    content: "";
+                    float: right;
+                    @include box(.24rem,.24rem );
+                    margin: .42rem .2rem 0 -.5rem;
+                    border-top: $font $gray;
+                    border-right:$font $gray;
+                    transform: rotate(45deg);
+                }
+            }
+            ul.box{
+                position: relative;
+                height: 8rem;
+                margin: 0 .35rem;
+                border: $main;
+                background: $white;
+                @include txet;
+        
+                    li.top-box{
+                    border-bottom: $border;
+                    line-height: .9rem;
+                    @include txet;
+                    font-size: .38rem;
+                    /* 字符间距 */
+                    letter-spacing: .03rem;
+                    color: $orange;
+                }
+            
+                a.box{
+                   display: inline-block;
+                   width: 80%;
+                   margin-top: .27rem;
+                   background: $blue;
+                   line-height: 1.32rem;
+                   letter-spacing: .04rem;
+                   text-decoration:none;
+                   color: $white;
+        
+                   &.sjx::after{
+                       content:"";
+                       position: absolute;
+                       top: 50%;
+                       right: .1rem;
+                       margin: -.3rem -.2rem -3rem 0;
+                       border:solid 0.3rem; 
+                       border-color:transparent transparent transparent $orange;
+                    }
+                }
+        
+                li.font{
+                    display: inline-block;
+                    margin-top: .27rem;
+                    font-size: .25rem;
+                    color:#787878;
+                }
+                li.bottom-box{
+                    @include flex(space-between,flex-grow);
+                    width: .98rem;
+                    margin:.14rem auto;
+        
+                    span.blue{
+                        @include circle;
+                        background: $blue;
+                    }
+                    span.white{
+                        @include circle;
+                        background:#F0F0F0;
+                    }
+                }
+            }
+        }
+    }
+}

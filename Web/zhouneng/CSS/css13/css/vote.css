@@ -1,0 +1,210 @@
+@charset "UTF-8";
+html {
+  font-size: 312.5%;
+}
+
+body {
+  padding: .9rem 0 1.6rem 0;
+  margin: 0;
+  background: #29BDE0;
+  font-size: initial;
+}
+
+p {
+  margin: 0;
+}
+
+/*header 眉页*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  background: #29BDE0;
+  z-index: 1;
+  top: 0;
+  height: .88rem;
+  font-size: .34rem;
+  letter-spacing: .15rem;
+  color: #FFFFFF;
+}
+header div.left-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.4rem;
+  height: 0.43rem;
+  padding: .03rem;
+  margin-left: .23rem;
+  border: 0.01rem solid #FFFFFF;
+}
+header div.left-box a.content {
+  width: 0.34rem;
+  height: 0.05rem;
+  padding: .11rem 0;
+  border-top: 0.03rem solid #FFFFFF;
+  border-bottom: 0.03rem solid #FFFFFF;
+  background: #FFFFFF content-box;
+}
+header div.right-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: .5rem;
+}
+header div.right-box a.content {
+  display: inline-block;
+  width: 0.02rem;
+  height: 0.5rem;
+  border: 0.01rem solid #FFFFFF;
+  background: #FFFFFF;
+  transform: rotate(45deg);
+}
+header div.right-box a.content.content::after {
+  position: absolute;
+  top: -.02rem;
+  left: -.01rem;
+  content: "";
+  width: 0.02rem;
+  height: 0.5rem;
+  border: 0.01rem solid #FFFFFF;
+  background: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+div.top-box {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: .82rem;
+  background: #b9e9f5;
+  /*三角形*/
+}
+div.top-box.top-box::before {
+  float: left;
+  content: "";
+  margin: .97rem 0 0 .71rem;
+  border-top: .14rem solid #b9e9f5;
+  border-left: 0.07rem solid transparent;
+  border-right: 0.07rem solid transparent;
+}
+div.top-box p.left-font {
+  position: absolute;
+  left: .46rem;
+  font-size: .26rem;
+  color: #464646;
+}
+div.top-box button.right-circle {
+  width: 0.52rem;
+  height: 0.52rem;
+  margin-right: .17rem;
+  border: none;
+  outline: none;
+  border-radius: 100%;
+  background: #FBB435;
+  /*三角形*/
+}
+div.top-box button.right-circle.right-circle::after {
+  display: inline-block;
+  content: "";
+  margin: .05rem 0 0 .05rem;
+  border-top: 0.15rem solid transparent;
+  border-left: 0.3rem solid #FFFFFF;
+  border-bottom: 0.15rem solid transparent;
+}
+
+p.font {
+  margin: .24rem 0 .43rem .72rem;
+  font-size: .24rem;
+  color: #FFFFFF;
+}
+
+div.center-box {
+  display: flex;
+  flex-flow: nowrap;
+  justify-content: center;
+  /*下拉框*/
+}
+div.center-box div.dropdown {
+  width: 23.5vw;
+  height: 23.5vw;
+  margin: 0 4vw 8.3vw 4vw;
+  border: 0.05rem solid #FFFFFF;
+  background: #F5C97B;
+  /*下拉内容*/
+}
+div.center-box div.dropdown span.role {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75%;
+  font-size: .1rem;
+  color: #565656;
+}
+div.center-box div.dropdown span.number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25%;
+  background: rgba(26, 153, 183, 0.5);
+  font-size: .23rem;
+  color: #FFFFFF;
+}
+div.center-box div.dropdown ul.dropdown-content {
+  margin: 0;
+  margin-top: 2vw;
+  padding: 0;
+  list-style: none;
+  display: none;
+}
+div.center-box div.dropdown ul.dropdown-content li.killer {
+  width: 4.5vw;
+  height: 4.5vw;
+  background: url(../picture/task2-css12.png) no-repeat 0 0/100%;
+}
+div.center-box div.dropdown ul.dropdown-content li.judge {
+  width: 4.5vw;
+  height: 4.5vw;
+  background: url(../picture/task2-css12.png) no-repeat 0 30%/100%;
+}
+div.center-box div.dropdown ul.dropdown-content li.sniper {
+  width: 4.5vw;
+  height: 4.5vw;
+  background: url(../picture/task2-css12.png) no-repeat 0 67%/100%;
+}
+div.center-box div.dropdown ul.dropdown-content li.doctor {
+  width: 4.5vw;
+  height: 4.5vw;
+  background: url(../picture/task2-css12.png) no-repeat 0 100%/100%;
+}
+div.center-box div.dropdown.dropdown:hover .dropdown-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-flow;
+}
+
+/*footer 尾页*/
+footer {
+  position: fixed;
+  width: 100%;
+  background: #29BDE0;
+  z-index: 1;
+  bottom: 0;
+  height: 1.8rem;
+  line-height: 1.9rem;
+  text-align: center;
+}
+footer .button-box {
+  width: 75%;
+  height: 0.87rem;
+  background: #FBB435;
+  font-size: .4rem;
+  /* 字符间距 */
+  letter-spacing: .15rem;
+  color: #FFFFFF;
+  box-shadow: 0 0 0 1.5px #F5C97B;
+}
+
+/*# sourceMappingURL=vote.css.map */
