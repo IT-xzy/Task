@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--开启注解-->
+    <context:annotation-config />
+    <!--开启扫描-->
+    <context:component-scan base-package="mapper"/>
+
+    <context:property-placeholder location="classpath:databases.properties"/>
+    <!-- 数据库连接池 -->
+    <bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource" >
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- 配置sqlSessionFactory -->
+    <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--  配置mybatis核心配置文件 -->
+        <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean name="mapperFactoryBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="mapper.PersonMapper"/>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+</beans>
