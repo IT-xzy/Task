@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task1.mybatis.dao.Dao">
+    <select id="lookupId" parameterType="int" resultType="com.task1.mybatis.model.User">
+        select * from student_info where id = #{Id}
+    </select>
+
+    <select id="lookupName" resultType="com.task1.mybatis.model.User">
+        select * from student_info where name = #{userName}
+    </select>
+
+    <select id="lookupNum" resultType="com.task1.mybatis.model.User">
+        select * from student_info where student_num = #{student_num}
+    </select>
+
+    <insert id="insert" parameterType="com.task1.mybatis.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into student_info ( name, qq, study_type, enrollment, graduate_school, student_num, daily_link, wish, check_bro) values(#{name},#{qq},#{study_type},#{enrollment},#{graduate_school},#{student_num},#{daily_link},#{wish},#{check_bro})
+    </insert>
+
+    <update id="update" parameterType="com.task1.mybatis.model.User">
+        update student_info set qq=#{qq} where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from student_info where id =#{id}
+    </delete>
+
+    <select id="countAll" resultType="int">
+        select count(*) from student_info;
+    </select>
+
+    <select id="selectAll" resultType="com.task1.mybatis.model.User">
+        select * from student_info order by id asc
+    </select>
+</mapper>
