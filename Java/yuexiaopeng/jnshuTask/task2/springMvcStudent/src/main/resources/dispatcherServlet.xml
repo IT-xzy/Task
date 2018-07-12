@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <!--扫描controller包-->
+    <context:component-scan base-package="com.yxpStu.controller">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <mvc:annotation-driven/>
+
+    <mvc:default-servlet-handler/>
+
+
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="studentViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+        <!--使用viewNames后，只能识别jsp视图，不能识别redirect，需要将rest方法转成post或get-->
+        <!--<property name="viewNames" value="stu*"/>-->
+
+    </bean>
+
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
+            <!--id="loginViewResolver">-->
+    <!--<property name="prefix" value="/WEB-INF/login/"/>-->
+    <!--<property name="suffix" value=".jsp"/>-->
+    <!--<property name="viewNames" value="login*"/>-->
+    <!--</bean>-->
+
+    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          id="commonsMultipartResolver"/>
+</beans>

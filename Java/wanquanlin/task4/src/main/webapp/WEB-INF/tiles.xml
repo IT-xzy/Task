@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+<!--定义基础模块-->
+<definition name="base.definition" template="/WEB-INF/jsp/main.jsp">
+<!--  定义模板-->
+    <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+    <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+    <put-attribute name="body" value="" />
+</definition>
+<!--继承了基础模板布局，注意罗继明welcome哦-->
+<definition name="welcome2" extends="base.definition" >
+
+<!--    //放入属性body值-->
+    <put-attribute name="body" value="/WEB-INF/jsp/welcome.jsp" >
+       <!-- <definition  template="/WEB-INF/jsp/main.jsp">
+            &lt;!&ndash;  定义模板&ndash;&gt;
+            <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+            <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+            <put-attribute name="body" value="welcome.jsp"/>
+        </definition>-->
+
+    </put-attribute>
+</definition>
+
+<definition name="jobs" extends="base.definition">
+    <!--    //放入属性body值-->
+    <put-attribute name="body" value="/WEB-INF/jsp/job.jsp" />
+</definition>
+</tiles-definitions>

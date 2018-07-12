@@ -1,0 +1,208 @@
+@charset "utf-8";
+@import "basis";
+@import "layout";
+main{
+  padding:1rem 0 0 0;
+  .advantage{
+    margin-bottom: 1rem;
+    display: flex;
+    .bowl-img{
+      height: .7rem;
+      @include flex-all-center
+    }
+    h4~p{
+      font-size: .14rem;
+      color: #adadad;
+      text-align: left;
+    }
+    div:nth-of-type(4){
+      border-left: 2px dashed #adadad ;
+      display: flex;
+      flex-direction:column;
+      height: 100%;
+      max-height: 1.8rem;
+      justify-content: center;
+      span:nth-of-type(odd){
+        color: #1db176;
+        margin-top: .2rem;
+        margin-bottom: .1rem;
+        &:before{
+          content:url("../img/user.png");
+          margin-right: .1rem;
+        }
+      }
+      span:nth-of-type(even){
+        font-size: .16rem;
+        color: #adadad;
+
+      }
+    }
+  }
+
+  .how{//如何学习
+    margin-top: .5rem;
+    .row >div{// 如何学习下的块
+      position: relative;
+      @include flex-vertical-center;
+      font-size: .14rem;
+      margin-top: .2rem;
+      span:nth-of-type(2){
+        flex-shrink: 1;
+        margin: 0 .1rem;
+        color: #959595;
+        font-weight: bold;
+      }
+       .number{
+         flex-shrink: 0;
+         @include flex-all-center;
+        width: .4rem;
+        height: .4rem;
+        border-radius: 50%;
+        border: 1px solid #c4c4c4;
+         color: #1db176;
+      }
+      &:nth-of-type(4) img{//---------------------------问题在这--------------------↓
+        display: none;
+      }//------------------------------设置第4个和第8个小三角隐藏------------↑
+    }
+    margin-bottom: 1rem;
+  }
+
+  .show{//学员展示
+    position: relative;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+    .row >div{
+      display: flex;
+      justify-content: center;
+    }
+    .show-blk{
+      @include flex-all-center;
+      flex-direction: column;
+      box-shadow: 0  2px 4px #e7e7e7;
+      &:hover{
+        z-index: 1;
+        cursor: pointer;
+        box-shadow:  0 0 6px 2px #e0e0e0;
+      }
+
+      margin-top: .1rem;
+      img{
+        width: 1rem;
+        margin-bottom: .1rem;
+      }
+      width: 2.3rem;
+      background-color: #ffffff;
+      padding: .2rem;
+      p{
+        width: 100%;
+        font-size: .16rem;
+        color:#959595 ;
+      }
+
+    }
+    .point{//小圆点
+      position: absolute;
+      transform: translateX(-50%);
+      left:calc(50% - .1rem);
+      margin: .1rem;
+      display: flex;
+      input{
+        display:none;
+        &:nth-of-type(1){
+        }
+      }
+      label{
+        display: block;
+        width: .13rem;
+        height: .13rem;
+        background-color:#f0f0f0;
+        border-radius: 50%;
+        margin: .05rem .03rem;
+        &:hover{
+
+          background-color: #d4ffea;
+        }
+      }
+      input:nth-of-type(1):checked ~ label:nth-of-type(1){
+        background-color: #1db176;
+      }
+      input:nth-of-type(2):checked ~ label:nth-of-type(2){
+        background-color: #1db176;
+      }
+      input:nth-of-type(3):checked ~ label:nth-of-type(3){
+        background-color: #1db176;
+
+      }
+      input:nth-of-type(4):checked ~ label:nth-of-type(4){
+        background-color: #1db176;
+      }
+
+    }
+
+  }
+
+  .partner{
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+    .row{
+      background-color: white;
+      .bowl-img{
+        @include flex-all-center;
+        height: 1rem;
+        background-color: white;
+        &:hover{
+          z-index: 1;
+          cursor: pointer;
+          box-shadow:  0 0 6px 2px #e0e0e0;
+        }
+      }
+      box-shadow: 2px  2px 3px #e7e7e7;
+
+    }
+  }
+}
+.link-wrap{
+  width: 100%;
+  background-color: white;
+  padding: .2rem 0;
+}
+.link{
+  .row{
+    ul{
+      margin-top: .1rem;
+      display: flex;
+      justify-content: space-between;
+      li{
+        list-style: none;
+        font-size:.12rem;
+        &:before{
+          content: "·";
+          font-size: .22rem;
+          color: #959595;
+          margin-right: .05rem;
+        }
+        a{
+          font-size: .16rem;
+          color:#959595 ;
+        }
+        padding: .03rem;
+        border-bottom: 2px solid white;
+        &:hover{
+          border-bottom: 2px solid #1ba36e;
+        }
+
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+@import "media";

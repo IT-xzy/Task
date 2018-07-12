@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="css/articleList.css">
+<!-- 列表页 -->
+<div data-ng-controller="list">
+    <!-- 搜索 -->
+    <div class="search">
+        <div class="wrap wrap-search">
+            <!-- 第一排 -->
+            <div class="row row-margin">
+                <!-- 修改时间，第一个时间 -->
+                <div class="col-md-4 vertical ">
+                    <div class="form-group">
+                        <label class="control-label col-md-4 nobreak">修改时间</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" ng-click="open1()" uib-datepicker-popup="{{format}}" ng-model="dt1" is-open="popup1.opened"
+                                datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <!-- ————，第二个时间 -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">——</label>
+                        <div class="col-md-8">
+                            <input type="text" ng-click="open2()" class="form-control" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions"
+                                ng-required="true" close-text="Close" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 类型 -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label col-md-4 nobreak">类&ensp;&ensp;&ensp;&ensp;型</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="type" ng-options="type.id as type.typename for type in types">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二排 -->
+            <div class="row row-margin">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label col-md-4 nobreak">状&ensp;&ensp;&ensp;&ensp;态</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="status" ng-options="status.id as status.statusname for status in statuses">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三排 -->
+            <div class="row">
+                <div class="col-md-4 pull-right text-right btn-spacing">
+                    <div class="ng-isolate-scope">
+                        <button type="button" class="btn btn-danger" ng-click="clear()">清空</button>
+                        <button type="button" class="btn btn-success" ng-click="search()">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 列表 -->
+    <div class="wrap">
+        <div class="list_title">
+            <label class="control-label">Article管理</label>
+            <div class="ng-isolate-scope">
+                <!-- <button class="btn btn-success btn-xs pull-right margin-r-m" ng-if="vm.sortableOptions.disabled == true" ng-click="vm.sort()">
+                    排序
+                </button>
+                <button class="btn btn-primary btn-xs pull-right margin-r-m" ng-if="vm.sortableOptions.disabled == false" ng-click="vm.sortSave()">保存排序
+                </button>
+                <button class="btn btn-danger btn-xs pull-right margin-r-m" ng-if="vm.sortableOptions.disabled == false" ng-click="vm.sortCancel()">取消排序
+                </button> -->
+                <button type="button" class="btn btn-success" ui-sref="backstage.add">+新增</button>
+            </div>
+        </div>
+        <div class="wrap-list">
+            <table class="table table-striped table-border">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>图片</th>
+                        <th>标题</th>
+                        <th>类型</th>
+                        <th>发布者</th>
+                        <th>发布时间</th>
+                        <th>修改时间</th>
+                        <th>状态</th>
+                        <th id="ctrl">操作</th>
+                    </tr>
+                </thead>
+                <tbody ui-sortable="sortableOptions" ng-model="articleList">
+                    <tr ng-repeat="item in articleList">
+                        <td>{{$index+1}}</td>
+                        <td>
+                            <img class="small-img" data-ng-src="{{item.img}}" />
+                        </td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.type|types}}</td>
+                        <td>{{item.author}}</td>
+                        <td>
+                            <p class="nobreak">{{item.createAt| date:'yy-MM-dd'}}</p>
+                            <p class="nobreak">{{item.createAt | date:'HH:mm:ss'}}</p>
+                        </td>
+                        <td>
+                            <p class="nobreak">{{item.updateAt| date:'yy-MM-dd'}}</p>
+                            <p class="nobreak">{{item.updateAt | date:'HH:mm:ss'}}</p>
+                        </td>
+                        <td class="nobreak">{{item.status|statuses}}</td>
+                        <td class="nobreak">
+                            <button type="button" class="btn btn-warning" ng-click="onoff()">{{btnStatus()}}</button>
+                            <button type="button" class="btn btn-success" ng-click="update()">编辑</button>
+                            <button type="button" class="btn btn-danger" ng-click="delete()">删除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 分页插件 -->
+            <div class="footer-page">
+                <div>每页显示
+                    <input type="text" ng-model="pagesize">条
+                </div>
+                <ul uib-pagination total-items="bigTotalItems" max-size="maxSize" items-per-page="perpage" boundary-link-numbers="true" boundary-links="true"
+                    ng-model="currentPage" class="pagination-sm  page-fontsize" previous-text="&lsaquo;" next-text="&rsaquo;"
+                    first-text="首页" last-text="末页" ng-change="page()">
+                </ul>
+                <div>去第
+                    <input type="text" ng-model="gotopage">页
+                </div>
+                <button type="button" class="btn btn-success" ng-click="confirm()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>

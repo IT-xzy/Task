@@ -1,0 +1,68 @@
+@mixin bg($color){
+  background: $color;
+}
+$width:20vw;
+$height:5vw;
+
+body{
+	@include bg(#29bde0);
+}
+header{
+	top:0;
+	@include bg(#29bde0);
+}
+.voice{
+	@include bg(#B9E9F5);
+}
+.voice img{
+	right:1rem;
+	top:0.5rem;
+}
+audio{
+	transform:rotateZ(180deg);
+	top:-0.1rem;
+	right:0.5rem;
+	opacity: 0; 
+	filter:Alpha(opacity=0);
+}
+.triangle {
+	border: {
+		width: 20px;
+		style:solid;
+		color:#B9E9F5 transparent transparent transparent;
+	}  
+}
+.box{
+	margin-left:9%;
+	margin-bottom:9%;
+}
+.show{
+	width:$width;
+	height:$height*4;
+	line-height:$height*3;
+	border:0.5vw solid #fff;
+	@include bg(#f5c97b);
+}
+.shou-b{
+	bottom:0;
+	width:$width;
+	height:$height;
+	line-height:$height;
+	left:0;
+	@include bg(#83b09a);
+}
+.hide img{
+	width:21vw;
+	height:$height;
+	bottom:-7vw;
+}
+.box:hover .hide{
+    display:block;
+}
+footer{
+	bottom:0;
+	@include bg(#29bde0);
+}
+.btn button{
+	@include bg(#fbb435);
+}

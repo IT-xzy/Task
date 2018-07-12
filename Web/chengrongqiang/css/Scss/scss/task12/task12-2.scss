@@ -1,0 +1,201 @@
+@import "../../drop-down.scss";
+@import "../../normal-css-style";
+html,
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@import "../../normal-css-style.scss";
+a {
+  text-decoration: none;
+  color: #000;
+}
+html {
+  font-size: 62.5%;
+}
+@mixin bg-color($bg-color: #5fc0cd) {
+  background-color: $bg-color;
+}
+@mixin border-radius($color: #5fc0cd) {
+  border: 1px solid $color;
+  border-radius: 0.5rem;
+}
+@mixin font($f-color: #000, $f-size: 1.6rem) {
+  font-size: $f-size;
+  color: $f-color;
+}
+@mixin tapered-line {
+  border-right-width: 1px;
+  border-right-style: solid;
+  border-image: linear-gradient(to bottom, #fff, #e1e5e7, #fff) 1 100%;
+}
+@mixin display-flex($item: space-between) {
+  display: flex;
+  justify-content: $item;
+  align-items: center;
+}
+@mixin text-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+header {
+  box-sizing: border-box;
+  @include bg-color;
+  padding: 0.7rem 0.7rem 0.7rem 2.8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  word-spacing: -1rem;
+  button {
+    @include border-radius;
+    width: 7.2rem;
+    height: 3.4rem;
+    font-size: 1.7rem;
+  }
+  a {
+    float: right;
+    margin-top: 0.7rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    background: url(../../.././favicon.ico/task12/task6-sprite.png);
+  }
+  .employer {
+    @include font(#fff);
+    @include bg-color(#55a8b3);
+  }
+  .worker {
+    @include font(#5fc0cd);
+    @include bg-color(#fff);
+  }
+}
+
+nav {
+  color:#999;
+  position: fixed;
+  top: 4.8rem;
+  left: 0;
+  border-bottom: 1px solid #e1e5e7;
+  padding: 0;
+  width: 100%;
+  text-align: center;
+  word-spacing: -5px;
+
+  .dropdown-self {
+    width: 33.33333%;
+    &:nth-child(2) {
+      border: 1px solid #f5f6f7 {
+        top: none;
+        bottom: none;
+      }
+    }
+    &:nth-child(3) {
+      border: 1px solid #f5f6f7 {
+        top: none;
+        bottom: none;
+      }
+    }    
+    ul {
+      background: #fff;
+      border: 1px solid #f5f6f7;
+    }
+    li {
+      padding: 10px;
+    }
+  }
+  .arrow{
+    @include arrow(bottom,5px,#999);
+    float: right;
+    margin: 6px 5px 0 -15px;
+  }
+}
+main {
+  margin-bottom: 5rem;
+  .list-items {
+    margin-top: 8.4rem;
+    font-size: 1.4rem;
+    .list-item {
+      border-bottom: 1px solid #e1e5e7;
+      padding: 1.5rem 1rem;
+      @include font(#999);
+      .sevice-date i {
+        display: inline-block;
+        margin-right: 0.4rem;
+        width: 1.4rem;
+        height: 1.2rem;
+        background: url(../../.././favicon.ico/task12/task6-sprite.png)
+          no-repeat 0 -1.7rem;
+      }
+      .date {
+        @include display-flex;
+        padding-left: 1.8rem;
+        color: #333;
+        p {
+          margin: 0;
+          @include text-overflow;
+        }
+        span {
+          font-size: 1.5rem;
+          white-space: nowrap;
+          @include font(#e63b0e);
+          i {
+            display: inline-block;
+            margin-left: 0.9rem;
+            padding-top: 0.2rem;
+            width: 1rem;
+            height: 1.7rem;
+            vertical-align: top;
+            background: url(../../.././favicon.ico/task12/task6-sprite.png)
+              no-repeat 0 -4.1rem;
+          }
+        }
+      }
+      .adress {
+        i {
+          display: inline-block;
+          margin-right: 0.4rem;
+          width: 1.4rem;
+          height: 1.2rem;
+          background: url(../../.././favicon.ico/task12/task6-sprite.png)
+            no-repeat 0 -3rem;
+        }
+      }
+    }
+  }
+}
+footer {
+  @include display-flex;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-top: 1px solid #e2eaec;
+  padding: 0 23%;
+  width: 100%;
+  height: 5rem;
+  text-align: center;
+  background: #f8fafb;
+  .home-page div {
+    width: 2.3rem;
+    height: 2rem;
+    background: url(../../.././favicon.ico/task12/task6-sprite.png) no-repeat
+      0.2rem -5.8rem;
+  }
+  .edit {
+    width: 4.5rem;
+    height: 4.4rem;
+    background: url(../../.././favicon.ico/task12/task6-sprite.png) no-repeat 0 -7.7rem;
+  }
+  .my-page div {
+    width: 2.1rem;
+    height: 2.1rem;
+    background: url(../../.././favicon.ico/task12/task6-sprite.png) no-repeat
+      0.1rem -12rem;
+  }
+}

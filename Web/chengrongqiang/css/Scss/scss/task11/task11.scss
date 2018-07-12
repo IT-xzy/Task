@@ -1,0 +1,82 @@
+@mixin clear {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+@mixin bg-f {
+  color: #fff;
+  background: #5fc0cd;
+}
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+html,
+body {
+  min-width: 320px;
+  background-color: #eff0f4;
+}
+header {
+  .container {
+    @include bg-f;
+    margin-bottom: 8px;
+    padding: 15px;
+  }
+  p {
+    line-height: 18px;
+    margin-bottom: 0;
+  }
+  .head-login {
+    font-size: 18px;
+  }
+}
+main {
+  @mixin f-float($l: left) {
+    float: $l;
+    font-size: 0;
+    padding: 15px 22px;
+  }
+  .num {
+    @include clear;
+    margin-bottom: 8px;
+    background: #fff;
+    div {
+      @include f-float(left);
+    }
+    input {
+      margin: 15px {
+        left: 0;
+      }
+      border: none;
+      border-left: 1px solid #eaedee;
+      padding-left: 15px;
+      &::-webkit-input-placeholder {
+        color: #e1e5e7;
+      }
+    }
+  }
+  .password {
+    @extend .num;
+  }
+  .button {
+    margin-top: 35px;
+    button {
+      @include bg-f;
+      border: none;
+      padding: 17px;
+      font-size: 18px;
+      width: 100%;
+    }
+  }
+}
+footer {
+  margin-top: 8px;
+  a {
+    float: right;
+    color: #5fc0cd;
+  }
+}

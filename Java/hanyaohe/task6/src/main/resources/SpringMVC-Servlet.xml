@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <mvc:annotation-driven/>
+
+    <!-- 启用默认的servlet去处理静态资源 -->
+    <!--没有启用这个的话，就没法读取样式和图片-->
+    <mvc:default-servlet-handler/>
+
+    <!-- 扫描路径-->
+    <!-- 只扫描web层带注解@Controller的类-->
+    <context:component-scan base-package="com.alibaba.controller"/>
+    <!-- 这里只扫描Controller，不可重复加载Service -->
+    <!--<context:include-filter type="annotation" expression="org.springframework.sterotype.Controller"/>-->
+    <!--</context:component-scan>-->
+
+    <!--处理jsp的ViewResolver-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
+
+
+
+

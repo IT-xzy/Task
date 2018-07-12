@@ -1,0 +1,206 @@
+.clearfix::before,
+.clearfix::after {
+  content: '';
+  display: table;
+}
+
+.clearfix::after {
+  clear: both;
+}
+
+.page {
+  min-height: 500px;
+  background-color: #eee;
+}
+
+header {
+  background-color: #29bde0;
+}
+
+header .middle {
+  font-size: 1.2em;
+  text-align: center;
+  letter-spacing: 6px;
+  color: #ffffff;
+}
+
+.left>a,
+.right>a {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  vertical-align: top;
+  margin-left: 25px;
+}
+
+/* 空心箭头 */
+
+.left>a::before,
+.left>a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.left>a::before {
+  border-right: 10px solid #fff;
+}
+
+.left>a::after {
+  left: 2px;
+  border-right: 10px solid #29bde0;
+}
+
+/* 叉号 */
+
+.right>a::before,
+.right>a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.right>a::before {
+  transform: rotate(135deg);
+}
+
+.right>a::after {
+  transform: rotate(45deg);
+}
+
+/* main */
+
+main {
+  margin: 65px 0 80px;
+  padding: 15px 10px;
+}
+
+.content-hd {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  color: #29bde0;
+  background-color: #fff;
+  text-align: center;
+}
+
+.content-list {
+  position: relative;
+  padding: 1rem 0;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.content-list::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: -1rem;
+  left: calc(50% - 1rem);
+  height: 0;
+  border-left: 1rem solid transparent;
+  border-right: 1rem solid transparent;
+  border-bottom: 1rem solid #fff;
+}
+
+.content-list>ul {
+  margin-left: 2rem;
+  margin-right: 1rem;
+  border-left: 2px solid #ccc;
+}
+
+.play-order {
+  position: relative;
+  padding: 10px 0;
+  color: #fff;
+  background-color: #29bde0;
+  text-align: center;
+}
+
+.play-order::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -1rem;
+  top: calc(50% - 1rem);
+  border-top: 1rem solid transparent;
+  border-bottom: 1rem solid transparent;
+  border-right: 2rem solid #29bde0;
+}
+.killContent,.voteContent {
+  font-size: .8em;
+}
+.icon {
+  display: inline-block;
+  position: absolute;
+  left: calc(-42px - 1rem);
+  top: 0;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+}
+.icon-moon {
+  background: #fff url(../img/moon.png) no-repeat center center;
+  background-size: 50%;
+}
+.icon-sun {
+  background: #fff url(../img/sun.png) no-repeat center center;
+  background-size: 70%;
+}
+/* 点击之后效果 */
+
+.play-order-click {
+  position: relative;
+  padding: 10px 0;
+  color: #fff;
+  background-color: #83b09b;
+  text-align: center;
+}
+
+.play-order-click::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -1rem;
+  top: calc(50% - 1rem);
+  border-top: 1rem solid transparent;
+  border-bottom: 1rem solid transparent;
+  border-right: 2rem solid #83b09b;
+}
+
+/* footer */
+
+footer {
+  padding: 10px 0;
+  text-align: center;
+  background-color: rgba(41, 189, 224, 0.5);
+}
+
+footer div {
+  float: left;
+  width: 50%;
+}
+
+footer a {
+  display: inline-block;
+  width: 70%;
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
+  letter-spacing: 5px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #fbb435;
+}
