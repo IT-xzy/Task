@@ -1,0 +1,125 @@
+@charset"UTF-8";
+
+@import"_layout";
+
+ul{
+    padding: 0;
+}
+// collaborate主体
+
+main.collaborate{
+    .picture{
+        width: 100%;
+        margin-bottom: .3rem;
+    }
+    .black-font{
+        font-size: .16rem;
+        color: $black;
+    }
+    .green-font{
+        font-size: .16rem;
+        color: $green;
+    }
+
+    // 文本整体
+    .box{
+        @include flex(space-between,flex-grow);
+
+        @media (max-width:575px) {
+            margin: 0 .3rem;
+        }
+
+        // 左边导航
+        .left-nav{
+            @include flex(center,flex-grow);
+            margin-top: .35rem ;
+            border:$main-border;
+            background:$white;
+
+            &::before{
+                content: "";
+                display: inline-block;
+                position: absolute;
+                @include box(100%,.01rem);
+                margin-top: 1rem;
+                border:$main-border;
+
+            }
+
+            li.headline{
+                display: inline-block;
+                margin: .21rem 0 .24rem 0 ;
+                list-style:none;
+
+                h1.font{
+                    width: 100%;
+                    margin: 0;
+                    font-size: .30rem;
+                    color: $black;
+                }
+            }
+            li.dian{
+                color:$orange;
+                line-height: .8rem;
+                // li空心点
+                list-style: inside circle;
+
+                &:hover {
+                    color:$orange;
+                    // 实心点
+                    list-style: inside disc;
+
+                    a.font{
+                        color:$orange;
+                    }
+                }
+
+                a.font{
+                    margin-left: -.2rem;
+                    font-size: .22rem;
+                    color: $green;
+                    line-height: .8rem;
+                }
+            }
+        }
+    }
+    
+    // 右边文章
+    .text-box{
+        margin-top: .35rem ;
+        padding:0;
+        border:$main-border;
+        background: $white;
+
+
+        .top-box{
+            padding :.25rem .64rem .31rem .64rem;
+            border-bottom: $main-border;
+
+            .tudouwang{
+                float: left;
+                @include box(2.6rem,1.5rem);
+                margin: .13rem .25rem .16rem .84rem;
+            }
+            p.text-top{
+                line-height: .4rem;
+                font-size: .14rem;
+                // 字符间距
+                letter-spacing:.01rem;
+                color:$text;
+            }
+        }
+        article{
+            padding: 0 .64rem;
+            line-height: .4rem;
+            font-size: .14rem;
+            // 首行缩进
+            text-indent:.54rem;
+            color: $text;
+        
+            .text-font{
+                margin:.4rem 0;
+            }
+    }
+    }
+}
