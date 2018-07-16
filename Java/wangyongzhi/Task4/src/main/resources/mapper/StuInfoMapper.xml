@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.StuInfoMapper">
+
+
+    <resultMap id="StuInfoMap" type="model.StuInfo">
+        <id property="id" column="Id"/>
+        <result property="name" column="Name"/>
+        <result property="stuNumber" column="Stu_number"/>
+        <result property="major" column="Major"/>
+        <result property="startTime" column="Start_time"/>
+        <result property="endTime" column="End_time"/>
+        <result property="status" column="Status"/>
+        <result property="company" column="Company"/>
+        <result property="position" column="Position"/>
+        <result property="duty" column="Duty"/>
+        <result property="createAt" column="Create_at"/>
+        <result property="updateAt" column="Update_at"/>
+    </resultMap>
+
+    <!--此处如果没有使用结果集匹配，而是直接使用resultType,会出现查询结果某些栏目数据遗失-->
+    <select id="getById" resultMap="StuInfoMap">
+        select * from stu_info where Id = #{id}
+    </select>
+
+    <!--此处useGeneratedKeys="true"只是能够让数据库中自增的主键映射回结果集的id，如果是false，此处id属性会是null。
+        另外，此处如果插入，为了防止主键重复造成插入失败，建议不要把自增主键放到语句中。-->
+    <insert id="insert" parameterType="model.StuInfo" useGeneratedKeys="true" keyProperty="id" keyColumn="Id">
+        insert into stu_info (
+              Name, Stu_number, Major, Start_time, End_time,
+              Status, Company, Position, Duty, Create_at, Update_at)
+              values(
+              #{name}, #{stuNumber}, #{major},
+                 #{startTime}, #{endTime},
+                 #{status},#{company},#{position},#{duty},#{createAt},#{updateAt})
+    </insert>
+
+    <update id="update">
+        update stu_info
+        set Id = #{id},
+        Name = #{name},
+        Stu_number = #{stuNumber},
+        Major = #{major},
+        Start_time = #{startTime},
+        End_time = #{endTime},
+        Status = #{status},
+        Company = #{company},
+        Position = #{position},
+        Duty = #{duty},
+        Create_at = #{createAt},
+        Update_at = #{updateAt}
+        where 1 = 1
+        <choose>
+            <when test="id != null">
+                and Id = #{id}
+            </when>
+            <when test="name != null and name != ''">
+                and Name = #{name}
+            </when>
+            <otherwise>
+                and 1 = 2
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="getByNumName" resultType="model.StuInfo">
+        select Id id,
+        Name name, Stu_number stuNumber,
+        Major major, Start_time startTime,
+        End_time endTime, Status status,
+        Company company, Position position,
+        Duty duty, Create_at createAt,
+        Update_at updateAt
+        from stu_info
+        <where>
+            <if test="stuNumber != null">
+                and Stu_number = #{stuNumber}
+            </if>
+            <if test="name != null and name != ''">
+                and Name = #{name}
+            </if>
+        </where>
+
+    </select>
+
+    <delete id="deleteById" parameterType="model.StuInfo">
+        delete from stu_info where Id = #{id}
+    </delete>
+
+    <!-- 查询总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) FROM stu_info
+    </select>
+
+    <!-- 查询在学数 -->
+    <select id="selectStudyWork" resultType="int">
+        select count(*) FROM stu_info where Status = #{status}
+    </select>
+
+    <!-- 根据专业查询在学数 -->
+    <select id="selectCountByMajor" resultType="int" parameterType="model.StuInfo">
+        select count(*) FROM stu_info where Status = '在学' and Major = #{major}
+    </select>
+
+    <!-- 查询总数 -->
+    <select id="selectWork" resultType="int">
+        select count(*) FROM stu_info where Status = '工作'
+    </select>
+
+
+</mapper>
