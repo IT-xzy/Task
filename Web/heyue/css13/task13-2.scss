@@ -1,0 +1,202 @@
+@import "style";
+//颜色变量
+$c-blue: #29BDE0;
+$c-lightblue: #b9e9f5;
+$c-white: #ffffff;
+$c-darkgray: #464646;
+$c-gray: #565656;
+$c-orange: #FBB435;
+$c-lightorange: #F5C97B;
+//字体变量
+$fz-40: .4rem;
+$fz-34: .34rem;
+$fz-26: .26rem;
+$fzvw-50: 5vw;
+$fzvw-35: 35vw;
+//混合器部分
+//flex混合器
+@mixin flex-c($h:center, $v:center) {
+    display: flex;
+    justify-content: $h;
+    align-items: $v;
+}
+
+/*全局设定*/
+
+body {
+    background-color: $c-blue;
+}
+
+/*header部分*/
+
+header {
+    position: fixed;
+    @include flex-c(space-between, center);
+    width: 100%;
+    height: .88rem;
+    background-color: $c-blue;
+    span {
+        &:nth-child(1) {
+            margin-left: .23rem;
+            width: .4rem;
+            height: .4rem;
+            background: url(img13/css_sprites.png) no-repeat -2.04rem -2.66rem;
+        }
+        &:nth-child(3) {
+            position: relative;
+            margin-right: .24rem;
+            width: .46rem;
+            height: .46rem;
+            &::before,
+            &::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 0;
+                margin-top: -.01rem;
+                width: 100%;
+                height: .03rem;
+                transform: rotate(45deg);
+                background-color: $c-white;
+            }
+            &::before {
+                transform: rotate(-45deg);
+            }
+        }
+    }
+    h3 {
+        margin: 0;
+        font-size: $fz-34;
+        font-weight: normal;
+        color: $c-white;
+    }
+}
+
+/*main部分*/
+
+/*提示部分*/
+
+main {
+    padding-top: .88rem;
+    padding-bottom: .9rem;
+    .hint {
+        position: fixed;
+        @include flex-c(space-between, center);
+        width: 100%;
+        height: .82rem;
+        background-color: $c-lightblue;
+        z-index: 2;
+        p {
+            margin-left: .46rem;
+            font-size: $fz-26;
+            color: $c-darkgray;
+            &::after {
+                content: "";
+                position: absolute;
+                left: .72rem;
+                top: .82rem;
+                border-top: .2rem solid $c-lightblue;
+                border-left: .1rem solid transparent;
+                border-right: .1rem solid transparent;
+            }
+        }
+        span {
+            margin-right: .17rem;
+            width: .52rem;
+            height: .52rem;
+            background: url(img13/css_sprites.png) -.2rem -2.66rem;
+        }
+    }
+    .click {
+        position: fixed;
+        margin-top: .82rem;
+        width: 100%;
+        height: .91rem;
+        background-color: $c-blue;
+        z-index: 1;
+        p {
+            margin-left: .72rem;
+            margin-top: .24rem;
+            font-size: $fz-26;
+            color: $c-white;
+        }
+    }
+    .list {
+        margin-top: 1.7rem;
+        font-size: 0;
+        .action {
+            display: inline-block;
+            width: 33.3%;
+            .dropdown {
+                margin: 0 4vw 8.3vw 4vw;
+                border: .1vw solid $c-white;
+                width: 23.5vw;
+                height: 23.5vw;
+                text-align: center;
+                background: $c-lightorange;
+                &:hover ul {
+                    @include flex-c(space-between, center);
+                }
+                div {
+                    &:nth-child(1) {
+                        line-height: 17vw;
+                        font-size: 5vw;
+                        color: #565656;
+                    }
+                    &:nth-child(2) {
+                        line-height: 6.5vw;
+                        font-size: 3.5vw;
+                        color: #FFFFFF;
+                        background: rgba(26, 153, 183, .5);
+                    }
+                }
+                ul {
+                    position: absolute;
+                    display: none;
+                    margin-top: 2vw;
+                    overflow: hidden;
+                    li {
+                        margin-right: 1.8vw;
+                        width: 4.5vw;
+                        height: 4.5vw;
+                        &:nth-child(1) {
+                            background: url(img13/img.png) 0 0/100%;
+                        }
+                        &:nth-child(2) {
+                            background: url(img13/img.png) 0 33%/100%;
+                        }
+                        &:nth-child(3) {
+                            background: url(img13/img.png) 0 69%/100%;
+                        }
+                        &:nth-child(4) {
+                            background: url(img13/img.png) 0 100%/100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*footer部分*/
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    line-height: .9rem;
+    text-align: center;
+    background: $c-blue;
+    button {
+        width: 75%;
+        height: .87rem;
+        font-size: $fz-40;
+        letter-spacing: .15rem;
+        color: $c-white;
+        background: $c-orange;
+    }
+    audio{
+        width: 0;
+        height: 0;
+    }
+}
