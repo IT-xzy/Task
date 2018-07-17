@@ -1,0 +1,83 @@
+@charset "UTF-8";
+$blue: #74d4eb;
+$orange: #ffc865;
+$grey-f0: #f0f0f0;
+$grey-c9: #c9c9c9;
+$grey-9a: #9a9a9a;
+$grey-78: #787878;
+$blue-24:#24A7C6;
+// 定位居中
+@mixin center($x, $y, $h, $V) {
+    left: $x;
+    top: $y;
+    transform: translate($h, $V);
+}
+
+%bold {
+    font-weight: bold;
+}
+
+@mixin ask($color) {//全屏拉伸
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: $color;
+}
+
+// flex布局
+@mixin flex($justify) {
+    display: flex;
+    align-items: center;
+    justify-content: $justify;
+}
+
+//三角
+@mixin triangle( $top, $left, $color) {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-top: $top solid $color;
+    border-right: $left solid transparent;
+    border-left: $left solid transparent;
+}
+
+// 圆形
+@mixin circle($height, $width, $color) {
+    content: "";
+    display: inline-block;
+    height: $height;
+    width: $width;
+    background: $color;
+    border-radius: 50%;
+}
+
+// 箭头
+@mixin arrow($width, $height, $border, $color, $rotate) {
+    display: inline-block;
+    width: $width;
+    height: $height;
+    border-top: $border solid $color;
+    border-right: $border solid $color;
+    transform: rotate($rotate);
+}
+
+// 清除input=number样式
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+// 清除input和button样式
+input,
+button {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+}
