@@ -19,10 +19,10 @@ public class ToQiNiuYun {
 
 	private static Logger logger = LoggerFactory.getLogger(ToQiNiuYun.class);
 
-	private static String endpoint = "oss-cn-hangzhou.aliyuncs.com";
-	private static String accessKeyId = "LTAIh30qGheYr79E";
-	private static String accessKeySecret = "d6ia3YFzpgXJMCdvuTGntXxuIIZiCS";
-	private static String bucketName = "white-star-777";
+	private static String endpoint = "o";
+	private static String accessKeyId = "";
+	private static String accessKeySecret = "";
+	private static String bucketName = "";
 
 
 	public static void main(String[] args)throws Exception{
