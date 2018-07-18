@@ -22,9 +22,9 @@ import static com.mvc.springUtil.QiNiuYunOssAPI.getAuth;
 public class ccc {
 
 	private static Logger logger = LoggerFactory.getLogger(PhotoAPIQiNiu.class);
-	private static String accessKey = "cHfKnAVn35k-FqlpR-NQLRAFbvfi0Z3Tb0Lanr7A";
-	private static String secretKey = "KviaxCNf-DHzpaBJ9aRlG2pMiWX6VBuBxybVtm7I";
-	private static String bucket = "white-star-777";
+	private static String accessKey = "c";
+	private static String secretKey = "K";
+	private static String bucket = "w";
 
 	public static String setPhoto(InputStream A,String B)throws Exception{
 
