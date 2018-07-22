@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--日志级别以及优先级排序:  FATAL > ERROR > WARN > INFO > DEBUG > TRACE  -->
+<!--       All:最低等级的，用于打开所有日志记录.
+　　　　　　Trace:是追踪，就是程序推进以下，你就可以写个trace输出，所以trace应该会特别多，我们可以设置最低日志级别不让他输出.
+　　　　　　Debug:指出细粒度信息事件对调试应用程序是非常有帮助的.
+　　　　　　Info:消息在粗粒度级别上突出强调应用程序的运行过程.
+　　　　　　Warn:输出警告及warn以下级别的日志.
+　　　　　　Error:输出错误信息日志.
+　　　　　　Fatal:输出每个严重的错误事件将会导致应用程序的退出的日志.
+　　　　　　OFF:最高等级的，用于关闭所有日志记录.-->
+
+<!--程序会打印高于或等于所设置级别的日志，设置的日志等级越高，打印出来的日志就越少-->
+
+        <!--根节点Configuration有两个属性:status和monitorinterval,
+        有两个子节点:Appenders和Loggers(表明可以定义多个Appender和Logger).-->
+
+<!--status用来指定log4j本身的打印日志的级别.这个用于设置log4j2自身内部的信息输出，
+    可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+
+<!--　　　monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位是s,最小是5s.-->
+<Configuration status="WARN" monitorInterval="1800">
+    <properties>
+        <property name="LOG_HOME">/var/log/tomcat</property>
+        <property name="ERROR_LOG_FILE_NAME">error</property>
+        <property name="INFO_LOG_FILE_NAME">info</property>
+    </properties>
+
+    <!--Appenders节点，常见的有三种子节点:Console、RollingFile、File.-->
+    <Appenders>
+
+        <!--Console节点用来定义输出到控制台的Appender.-->
+            <!--  name:指定Appender(输出源)的名字.
+　　　　　　　　target:SYSTEM_OUT 或 SYSTEM_ERR,一般只设置默认:SYSTEM_OUT.
+　　　　　　　　PatternLayout:输出格式，不设置默认为:%m%n.-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n" />
+        </Console>
+
+        <!--每天生成一个日志文件，但是如果一天内的日志文件体积超过100M，就重新生成一个文件。-->
+        <!--name：指定appender的名字。
+           fileName：指定当前日志文件的位置和文件名称。
+           filePattern：指定当发生Rolling时，文件的转移和重命名规则。-->
+        <RollingRandomAccessFile name="ErrorLog"
+                                 fileName="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/${ERROR_LOG_FILE_NAME}.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout pattern="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/><!--和filePattern结合使用上面最小时间粒度dd,若指定size=1，则一天生成一个文件-->
+                <SizeBasedTriggeringPolicy size="100 MB"/><!--指定当文件体积大于size指定的值是，触发Rolling。-->
+            </Policies>
+            <DefaultRolloverStrategy max="20"/><!--指定最多保存的文件个数。-->
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="InfoLog"
+                                 fileName="${LOG_HOME}/${INFO_LOG_FILE_NAME}.log"
+                                 filePattern="${LOG_HOME}/${INFO_LOG_FILE_NAME}.log.%d{yyyy-MM-dd}.gz">
+            <PatternLayout pattern="%d{ISO8601} 耗时：%r [日志来自：%-40.40c{3} 日志类型: %-5p 日志内容：%m]%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+
+
+    </Appenders>
+
+
+    <!--Loggers节点，常见的有两种:Root和Logger.-->
+    <Loggers>
+
+        <!--Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。-->
+        <!--name:用来指定该Logger所适用的类或者类所在的包全路径,继承自Root节点.-->
+        <logger name="org.springframework.core" level="info"/>
+        <logger name="org.springframework.beans" level="info"/>
+        <logger name="org.springframework.context" level="info"/>
+        <logger name="org.springframework.web" level="info" includeLocation="true" additivity="false">
+            <!--AppenderRef：Logger的子节点，用来指定该日志输出到哪个Appender,
+            如果没有指定，就会默认继承自Root.
+            如果指定了，那么会在指定的这个Appender和Root的Appender中都会输出，
+            此时我们可以设置Logger的additivity="false"只在自定义的Appender中进行输出。-->
+            <appender-ref ref="InfoLog"/>
+        </logger>
+
+        <!--<logger name="com.jnshu.ssm.controller" level="debug" includeLocation="true" additivity="false">
+            <appender-ref ref="DebugLog"/> &lt;!&ndash; 写入错误日志文件&ndash;&gt;
+            <appender-ref ref="Console"/>  &lt;!&ndash; 控制台输出&ndash;&gt;
+        </logger>-->
+
+        <!--Root节点用来指定项目的根日志，如果没有单独指定Logger，那么就会默认使用该Root日志输出-->
+        <!--level日志级别-->
+        <root level="debug" includeLocation="true">
+            <!--AppenderRef：Root的子节点，用来指定该日志输出到哪个Appender-->
+            <appender-ref ref="Console"/>
+            <appender-ref ref="InfoLog"/>
+            <appender-ref ref="ErrorLog"/>
+        </root>
+    </Loggers>
+</Configuration>
