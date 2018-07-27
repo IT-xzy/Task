@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.opt.dao.mapper.UserMapper">
+
+    <resultMap id="userMapper" type="com.opt.model.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pwd"  property="pwd" jdbcType="VARCHAR"/>
+        <result column="qq"  property="qq" jdbcType="BIGINT"/>
+        <result column="email"  property="email" jdbcType="VARCHAR"/>
+        <result column="tell" property="tell" jdbcType="BIGINT"/>
+        <result column="phone" property="phone" jdbcType="BIGINT"/>
+        <result column="stu_ico" property="stuIco" jdbcType="VARCHAR"/>
+        <result column="address"  property="address" jdbcType="VARCHAR"/>
+        <result column="create_at"  property="createAt" jdbcType="BIGINT"/>
+        <result column="update_at"  property="updateAt" jdbcType="BIGINT"/>
+        <result column="salt"  property="salt" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="userColumn">
+         id,name,pwd,qq,email,address,tell,phone,stu_ico,create_at,update_at,salt
+    </sql>
+    
+    <select id="findById" resultType="int"  resultMap="userMapper">
+      SELECT <include refid="userColumn"/> FROM rest_user where id = #{id}
+    </select>
+    <select id="findByName" resultType="String"  resultMap="userMapper">
+        SELECT <include refid="userColumn"/> FROM rest_user where name = #{name}
+    </select>
+    <select id="findByPhone" resultType="long"  resultMap="userMapper">
+        SELECT <include refid="userColumn"/> FROM rest_user where phone = #{phone}
+    </select>
+    <select id="findByEmail" resultType="String"  resultMap="userMapper">
+        SELECT <include refid="userColumn"/> FROM rest_user where email = #{email}
+    </select>
+    <select id="findAllCount"  resultType="int">
+      SELECT COUNT(*) FROM  rest_user
+    </select>
+
+    <select id="findByUser" parameterType="com.opt.model.User"  resultMap="userMapper">
+        SELECT * FROM rest_user
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id!=null and id!=0">
+                AND id = #{id}
+            </if>
+            <if test="name!=null">
+                AND name LIKE '%${name}%'
+            </if>
+            <if test="pwd!=null">
+                AND pwd like '%${pwd}%'
+            </if>
+            <if test="qq!=null and qq!=0">
+                AND qq = #{qq}
+            </if>
+            <if test="email!=null">
+                AND email like '%${email}%'
+            </if>
+            <if test="tell!=null and tell!=0">
+                AND tell = #{tell}
+            </if>
+            <if test="phone!=null and phone!=0">
+                AND phone = #{phone}
+            </if>
+            <if test="address!=null">
+                AND address = #{address}
+            </if>
+            <if test="createAt!=null and createAt!=0">
+                AND create_at = #{createAt}
+            </if>
+            <if test="updateAt!=null and updateAt!=0">
+                AND update_at = #{updateAt}
+            </if>
+        </trim>
+    </select>
+    
+    <select id="findPage"  parameterType="Map" resultMap="userMapper">
+        SELECT
+        <include refid="userColumn"/>
+        FROM rest_user
+        <if test="nowpage!=null and pagesize!=null">
+            limit #{nowpage} ,#{pagesize}
+        </if>
+    </select>
+
+    <!--插入单条数据-->
+    <insert id="insertOne" parameterType="com.opt.model.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+        INSERT INTO rest_user
+        (name,pwd,qq,email,tell,phone,stu_ico,address,create_at,update_at,salt)
+        values
+        (#{name,jdbcType=VARCHAR},
+        #{pwd,jdbcType=VARCHAR},
+        #{qq,jdbcType=INTEGER},
+        #{email,jdbcType=VARCHAR},
+        #{tell,jdbcType=BIGINT},
+        #{phone,jdbcType=BIGINT},
+        #{stuIco,jdbcType=VARCHAR},
+        #{address,jdbcType=VARCHAR},
+        #{createAt,jdbcType=BIGINT},
+        #{updateAt,jdbcType=BIGINT},
+        #{salt,jdbcType=VARCHAR})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+
+    <!--修改数据-->
+    <update id="updateOne" parameterType="com.opt.model.User" >
+        UPDATE rest_user
+        SET
+        name=#{name},pwd=#{pwd},qq=#{qq},email=#{email},tell=#{tell},phone=#{phone},stu_ico=#{stuIco},address=#{address},update_at=#{updateAt},salt=#{salt} WHERE id=#{id}
+    </update>
+
+
+    <!--删除单条数据-->
+    <delete id="deleteOne" parameterType="int"  >
+        DELETE FROM rest_user WHERE id = #{id}
+    </delete>
+
+</mapper>

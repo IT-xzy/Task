@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>
+  <!--  
+	  通过contextConfigLocation配置spring，contextConfigLocation参数定义了要装入的 Spring 配置文件。
+	  如果想装入多个配置文件，可以在 <param-value>标记中用逗号作分隔符。
+	  在web.xml里需配置ContextLoaderListener
+  -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring.xml;classpath:spring-mybatis.xml</param-value>
+  </context-param>
+  <!-- 过滤通过用于处理项目中的乱码问题，该过滤器位于org.springframework.web.filter包中，指向类CharacterEncodingFilter -->
+  <filter>
+    <description>字符集过滤器</description>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <description>字符集编码</description>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!-- 
+		  自动装配ApplicationContext的配置信息。
+		  因为它实现了ServletContextListener这个接口，在web.xml配置这个监听器，启动容器时，就会默认执行它实现的方法。
+   -->
+  <listener>
+    <description>spring监听器</description>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <!-- 
+ 		 servlet标准不允许在web容器内自行做线程管理
+ 		   主要负责处理由　JavaBeans Introspector的使用而引起的缓冲泄露。清除Introspector的唯一方式是刷新整个缓冲
+   -->
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+  <!-- 
+ 	DispatcherServlet是前端控制器设计模式的实现，提供Spring Web MVC的集中访问点，而且负责职责的分派，
+            而且与Spring IoC容器无缝集成，从而可以获得Spring的所有好处。
+ 
+	DispatcherServlet主要用作职责调度工作，本身主要用于控制流程，主要职责如下：
+	1、文件上传解析，如果请求类型是multipart将通过MultipartResolver进行文件上传解析；
+	2、通过HandlerMapping，将请求映射到处理器（返回一个HandlerExecutionChain，它包括一个处理器、多个HandlerInterceptor拦截器）；
+	3、通过HandlerAdapter支持多种类型的处理器(HandlerExecutionChain中的处理器)；
+	4、通过ViewResolver解析逻辑视图名到具体视图实现；
+	5、本地化解析；
+	6、渲染具体的视图等；
+	7、如果执行过程中遇到异常将交给HandlerExceptionResolver来解析。
+   -->
+  <servlet>
+    <description>spring mvc servlet</description>
+    <servlet-name>springMvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <description>spring mvc 配置文件</description>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springMvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!-- 
+		  Session是由浏览器和服务器之间维护的。
+		  Session超时理解为：浏览器和服务器之间创建了一个Session，由于客户端长时间（休眠时间）没有与服务器交互，
+		      服务器将此Session销毁，客户端再一次与服务器交互时之前的Session就不存在了。
+   -->
+  <session-config>
+    <session-timeout>15</session-timeout>
+  </session-config>
+
+  <welcome-file-list>
+    <welcome-file>/WEB-INF/View/login.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
