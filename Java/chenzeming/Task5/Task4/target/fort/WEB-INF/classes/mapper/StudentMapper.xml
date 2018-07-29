@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.czm.dao.StudentDao" >
+
+    <!--resultMap属性：type为java的实体类，id为此resultMap的标识-->
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.jnshu.czm.model.Student">
+        SELECT * FROM student WHERE id=#{id}
+    </select>
+
+
+    <!-- 查询所有结业人员，并按成绩从高到低的排序 -->
+    <select id="findAll" resultType="com.jnshu.czm.model.Student">
+        select * from student where status='结业'order by grade desc
+
+    </select>
+
+    <!-- 查询用户记录在学总数 -->
+    <select id="selectAt" resultType="int">
+        select count(*) from student where status='在学'
+    </select>
+
+
+    <!-- 查询用户记录就业总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) from student where status='结业'
+    </select>
+
+</mapper>
