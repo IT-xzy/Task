@@ -1,0 +1,78 @@
+@charset"UTF-8";
+
+@import"_layout";
+
+body{
+    background: $bg;
+}
+
+
+/*main主体*/ 
+main{
+    padding: .9rem .88rem 0 .88rem;
+
+    .box{
+        @include flex(center,center);
+        position: relative;
+        height: 6.64rem;
+        border: $header;
+        background:#FFEDC5;
+
+        .circle{
+            position: absolute;
+            left: 50%;
+            top: -.36rem;
+            @include flex(center,center);
+            @include box(.68rem,.68rem);
+            margin-left: -.34rem;
+            border-radius: 100%;
+            background: $white;
+        }
+        .figure{
+            font-size: .4rem;
+            color: #F56B81;
+        }
+    }
+
+    .picture{
+        @include box(3rem,3rem);
+        border-radius: 100%;
+        background: url(../img/draw.png) no-repeat center/cover;
+    }
+    .circle-box{
+        display: none;
+        position: absolute;
+        top: .6rem;
+        
+        .look{
+            display: inline-block;
+            @include box(2.5rem,2.5rem);
+            border-radius: 100%;
+            background: url(../img/look.png) no-repeat center/cover;
+        }
+        .describe{
+            margin-top: .3rem;
+            display: block;
+            text-align: center;
+            font-size: .4rem;
+            color:$bg;
+        }
+    }
+}
+
+footer{
+    @include flex(center,center);
+    margin-top:1rem;
+    
+    button{
+        @include box (100%,.85rem);
+        margin: 0 .75rem;
+        background: $orange;
+        font-size: .48rem;
+        /*字符间距*/
+        letter-spacing:.1rem;
+        color: $white;
+        /*鼠标指标为一只手*/
+        cursor:pointer;
+    }
+}
