@@ -1,0 +1,45 @@
+$px15: 15px;
+$screen: ( xs: 576px, sm: 768px, md: 992px, lg: 1200px);
+@each $screen-item,
+$screen-size in $screen {
+    @for $i from 1 through 12 {
+        .col-#{$screen-item}-#{$i} {
+            padding-right: $px15;
+            padding-left: $px15;
+        }
+    }
+}
+
+/*通过遍历maps生成每列的列宽*/
+$screen: (
+    xs: 576px,
+    sm: 768px,
+    md: 992px,
+    lg: 1200px
+);
+
+@each $screen-item,
+$screen-size in $screen {
+    @media screen and (min-width: $screen-size) {
+        @for $i from 1 through 12 {
+            .col-#{$screen-item}-#{$i} {
+                width: 100%;
+                padding-right: $px15;
+                padding-left: $px15;
+                flex: 0 0 #{$i*100%/12};
+                max-width: #{$i*100%/12};
+                min-height: 1px;
+            }
+        }
+    }
+}
+
+@for $col from 1 through 12 {
+    .col-#{$col} {
+        width: 100%;
+        padding-right: $px15;
+        padding-left: $px15;
+        flex: 0 0 #{$col*100%/12};
+        min-height: 1px;
+    }
+}

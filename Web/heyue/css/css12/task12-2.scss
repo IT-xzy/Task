@@ -1,0 +1,245 @@
+//变量颜色部分
+$c-white: #ffffff;
+$c-blue: #5fc0cd;
+$c-darkbule: #55a8b3;
+$c-lightgray1: #e2eaec;
+$c-lightgray2: #AFBAC0;
+$c-gray: #999999;
+$c-darkgray1: #5D5D5D;
+$c-darkgray2: #333333;
+$c-red: #E63B0E;
+$c-lime: #F8FAFB;
+//变量字体大小部分
+$fs-html: 312.5%;
+$fs-34: .34rem;
+$fs-30: .3rem;
+$fs-28: .28rem;
+$fs-24: .24rem;
+$fs-20: .2rem;
+//混合器部分
+//flex混合器
+@mixin flex-c($h:center, $v:center) {
+    display: flex;
+    justify-content: $h;
+    align-items: $v;
+}
+
+/*全局设定*/
+
+html {
+    font-size: $fs-html;
+    background-color: $c-white;
+}
+
+* {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+/*header部分*/
+
+header {
+    @include flex-c;
+    position: fixed;
+    height: .88rem;
+    width: 100%;
+    background-color: $c-blue;
+    z-index: 2;
+    button {
+        position: absolute;
+        right: 50%;
+        top: .1rem;
+        width: 1.43rem;
+        height: .7rem;
+        color: $c-white;
+        font-size: $fs-34;
+        background-color: $c-darkbule;
+        border: 2px solid $c-darkbule;
+        border-radius: 5px;
+        outline: none;
+        &:nth-child(2) {
+            left: 50%;
+        }
+        &:hover {
+            color: $c-darkbule;
+            background-color: $c-white;
+            border: 2px solid $c-white;
+        }
+    }
+    img {
+        position: absolute;
+        right: .3rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: .42rem;
+        height: .44rem;
+    }
+}
+
+/*main部分*/
+
+main {
+    position: relative;
+    padding-top: .88rem;
+    padding-bottom: .99rem;
+}
+
+/*nav部分*/
+
+nav {
+    @include flex-c;
+    width: 100%;
+    height: .8rem;
+    border-bottom: 1px solid $c-lightgray1;
+    background-color: $c-white;
+    div {
+        position: relative;
+        flex: 1;
+        &:hover ul {
+            display: block;
+            width: 100%;
+            z-index: 1;
+        }
+        &:nth-child(2)>button {
+            border-left: 1px solid $c-lightgray1;
+            border-right: 1px solid $c-lightgray1;
+        }
+        button {
+            display: block;
+            padding: 0;
+            border: none;
+            outline: none;
+            width: 100%;
+            white-space: nowrap;
+            text-align: center;
+            line-height: .8rem;
+            font-size: $fs-28;
+            color: $c-gray;
+            background-color: $c-white;
+            border-bottom: 1px solid $c-lightgray1;
+            &::after {
+                position: absolute;
+                right: 0;
+                content: "";
+                border: 0.1rem solid;
+                border-color: $c-lightgray2 transparent transparent transparent;
+                margin: 0.36rem 0.12rem 0 0;
+            }
+        }
+        ul {
+            position: absolute;
+            display: none;
+            font-size: $fs-28;
+            li {
+                display: block;
+                text-align: center;
+                line-height: .8rem;
+                font-size: $fs-28;
+                color: $c-gray;
+                background-color: $c-white;
+                border-bottom: 1px solid $c-lightgray1;
+                &:hover {
+                    background-color: $c-lightgray1;
+                }
+            }
+        }
+    }
+}
+
+.describe ul {
+    @include flex-c(flex-start, center);
+    flex-direction: column;
+    height: 1.8rem;
+    border-bottom: 1px solid $c-lightgray1;
+    li {
+        height: .6rem;
+        width: 100%;
+        &:nth-child(1),
+        &:nth-child(3) {
+            @include flex-c(flex-start, center);
+            img {
+                margin-left: 0.3rem;
+                margin-right: .15rem;
+                width: .24rem;
+                height: .24rem;
+            }
+            span {
+                font-size: $fs-24;
+                color: $c-darkgray1;
+            }
+        }
+        &:nth-child(2) {
+            @include flex-c(space-between, center);
+            >span {
+                &:nth-child(1) {
+                    margin-left: .68rem;
+                    font-size: $fs-28;
+                    color: $c-darkgray2;
+                    white-space: nowrap;
+                }
+                &:nth-child(2) {
+                    font-size: $fs-30;
+                    color: $c-red;
+                    white-space: nowrap;
+                    &::after {
+                        display: inline-block;
+                        content: "";
+                        width: .19rem;
+                        height: .19rem;
+                        margin: 0 .32rem 0 .21rem;
+                        border-top: .03rem solid $c-blue;
+                        border-right: .03rem solid $c-blue;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/*fotter部分*/
+
+footer {
+    @include flex-c;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: .99rem;
+    font-size: $fs-20;
+    background-color: $c-lime;
+    div {
+        @include flex-c;
+        flex-direction: column;
+        flex: 1;
+        &:nth-child(1) {
+            img {
+                width: 0.46rem;
+                height: 0.4rem;
+            }
+            span {
+                color: $c-blue;
+                font-size: 0.2rem;
+            }
+        }
+        &:nth-child(2) {
+            img {
+                width: .94rem;
+                height: .94rem;
+            }
+        }
+        &:nth-child(3) {
+            img {
+                width: .42rem;
+                height: .41rem;
+            }
+            span {
+                color: $c-gray;
+                font-size: 0.2rem;
+            }
+        }
+    }
+}

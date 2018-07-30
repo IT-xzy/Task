@@ -1,0 +1,83 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;     
+}
+
+
+@media (min-width:576px) {
+    .container {
+        max-width: 540px
+    }
+}
+
+@media (min-width:768px) {
+    .container {
+        max-width: 720px
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 960px
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1140px
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+$screen: ( xs: 576px, sm: 768px, md: 992px, lg: 1200px);
+@each $screen-item,
+$screen-size in $screen {
+    @for $i from 1 through 12 {
+        .col-#{$screen-item}-#{$i} {
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding: 0 15px;
+        }
+    }
+}
+
+@each $screen-item,
+$screen-size in $screen {
+    @media screen and (min-width: $screen-size) {
+        @for $i from 1 through 12 {
+            .col-#{$screen-item}-#{$i} {
+                flex: 0 0 100%/12*$i;
+                max-width: 100%/12*$i;
+                
+            }
+        }
+    }
+}
+
+
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        position: relative;
+        width: 100%;
+        padding: 0 15px;
+        flex: 0 0 100%/12*$i;
+        max-width: 100%/12*$i;
+        min-height: 1px;
+    }
+}
