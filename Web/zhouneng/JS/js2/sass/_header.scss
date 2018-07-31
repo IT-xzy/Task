@@ -1,0 +1,52 @@
+@charset"UTF-8";
+
+@import"_layout";
+
+
+header{
+    @include flex(space-between,center);
+    height: 1rem;
+    border-bottom: .01rem solid rgba(255,255,255,.5);
+    background: $bg;
+
+    .return{
+        display: inline-block;
+        @include box(.24rem, .24rem);
+        margin-left: .4rem;
+        border-top: $font $white;
+        border-right: $font $white;
+        transform: rotate(225deg);
+        /*鼠标指标为一只手*/
+        cursor:pointer;
+        /*返回箭头*/
+    }
+    span.font{
+        font-size: .45rem;
+        color: $white;
+        /*字符间距*/
+        letter-spacing:.15rem;
+    }
+    .close{
+        @include flex(space-between,center);
+        width: .5rem;
+        margin-right: .1rem;
+        /*鼠标指标为一只手*/
+        cursor:pointer;
+
+        a.content{
+            display: inline-block;
+            @include close;
+            transform: rotate(45deg);
+
+            &.content::after{
+                position: absolute;
+                top:-.02rem;
+                left:-.01rem;
+                content: "";
+                @include close;
+                transform: rotate(90deg);
+                /*关闭按钮*/
+            }
+        }
+    }
+}

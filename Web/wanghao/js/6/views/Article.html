@@ -1,0 +1,75 @@
+<div class="article-body">
+    <form class="article-bor">
+        <div>
+            <label for="start" class="article-label">发布时间</label>
+            <input type="date" id="article-start" ng-model="start">
+            <label class="article-label">-</label>
+            <input type="date" id="article-end" ng-model="end">
+            <label class="article-label">类型</label>
+            <select ng-options="itme.num as itme.type for itme in typeItem" ng-model="request.type"></select>
+        </div>
+        <div>
+            <label class="article-label article-statuslabel">状态</label>
+            <select ng-options="itme.num as itme.status for itme in statusItem" ng-model="request.status"></select>
+        </div>
+        <div class="article-action">
+            <button ng-click="del()">清空</button>
+            <button ng-click='skip(1,size)'>搜索</button>
+        </div>
+    </form>
+    <from>
+        <div class="article-main">
+            <div class="article-mainhead">
+                <p>Article列表</p>
+                <button ui-sref='u.addArticle'>+新增</button>
+            </div>
+            <div class="article-mainbody">
+                <table class="artcle-table">
+                    <thead>
+                        <tr>
+                            <th ng-repeat="title in headtitle">{{title}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="itme in mainmassge">
+                            <td>{{$index|indexFilter}}</td>
+                            <td>{{itme.title}}</td>
+                            <td>{{itme.type|typeFilter}}</td>
+                            <td>{{itme.createAt|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td>{{itme.updateAt|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td>{{itme.author}}</td>
+                            <td>{{itme.status|statusFilter}}</td>
+                            <td>
+                                <p ng-click="changeStatus(itme.id,itme.status)">{{itme.status|statusTypeFilter}}</p>
+                                <a ui-sref='u.redactArticle({id:itme.id})'>编辑</a>
+                                <p ng-click="delId(itme.id)">删除</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="artcle-foot">
+            <ul>
+                <li>
+                    <label for="branches">每页显示</label>
+                    <input type="text" id="branches" ng-model="size">
+                    <label for="branches">条</label>
+                </li>
+                <li>
+                    <a ng-click="skip(1,size)" >首页</a>
+                </li>
+                <!-- <li ng-repeat="item in pagenum" >
+                    <a ng-click="skip(item.num,size)" class="ahref" ng-class="{'ahrefturn':isA(item.num)}" >{{item.title}}</a>
+                </li> -->
+                <my-tabs page="pagecount"></my-tabs>
+                <li>
+                    <label for="skip">去第</label>
+                    <input type="text" id="skip" ng-model="page">
+                    <label for="skip">页</label>
+                </li>
+                <li ng-click="skip(page,size)">确定</li>
+            </ul>
+        </div>
+    </from>
+</div>

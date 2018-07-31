@@ -16,22 +16,30 @@
 </header>
 <main>
     <div class="out-box">
-        <div class="num" id="num" ></div>
-        <div class="wait">
+        <div class="num" id="numbox" >1</div>
+        <div class="wait" id="waitbox">
             <img class="bg1" src="img/4-bg1.png" >
         </div>
-        <div class="sea">
+        <div class="see" id="seebox" style="display: none;">
             <div class="sea-t">
                 <img class="bg2" src="img/4-bg2.png">
-                <p class="p1" >角色：<span></span></p>
-                <p class="p2" >词组：<span></span></p>
+                <p class="p1" >角色：<span id="role" ></span></p>
+                <p class="p2" >词组：<span id="word" ></span></p>
             </div>
             <div class="sea-b">
                 <p>想办法猜到别人的词，同时还要注意 不要暴露自己哦！</p>
             </div>          
         </div>
     </div>
-    <button class="btn" id="btn" ></button>
+    <button class="btn" id="btn-see" onclick="see()">
+        查看<span id="btn-see-num">1</span>号身份
+    </button>
+    <button class="btn" id="btn-next" onclick="next()" style="display: none;">
+        隐藏并传递给<span id="btn-next-num">2</span>号
+    </button>
+    <button class="btn" id="judge-see" onclick="judge()" style="display: none;">
+        法官视角
+    </button>
 </main>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="js/page4.js"></script>

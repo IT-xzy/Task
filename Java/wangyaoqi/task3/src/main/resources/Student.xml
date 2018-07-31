@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wyq.springmvc.mapper.StudentMapper">
+    <resultMap type="Student" id="student">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="school" column="school"/>
+        <result property="pledge" column="pledge"/>
+        <result property="createTime" column="create_at"/>
+        <result property="updateTime" column="update_at"/>
+        <result property="siblingId" column="sibling_id"/>
+        <result property="siblingName" column="sibling_name"/>
+    </resultMap>
+    <insert id ="add" parameterType="Student">
+        insert into student(id,name,type,school,pledge,create_at,update_at,sibling_id,sibling_name) values (#{id},#{name},#{type},#{school},#{pledge},#{createTime},#{updateTime},#{siblingId},#{siblingName})
+    </insert>
+    <delete id="delete" parameterType="Student">
+        delete from student where id=#{id}
+    </delete>
+    <select id="getOne" parameterType="_int" resultMap="student">
+        select * from student where id=#{id}
+    </select>
+    <update id="update" parameterType="student">
+        update student set name=#{name},type=#{type},school=#{school},pledge=#{pledge},create_at=#{createTime},update_at=#{updateTime},sibling_id=#{siblingId},sibling_name=#{siblingName} where id=#{id}
+    </update>
+    <select id="list" resultMap="student">
+        select * from student
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+    <select id="total" resultType="int">
+        select count(0) from student
+    </select>
+</mapper>

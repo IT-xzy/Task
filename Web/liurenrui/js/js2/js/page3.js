@@ -39,6 +39,8 @@ var playersArr=new Array();//新建角色身份数组
 function role(){
     playersArr=[];
     var killer= Math.floor(inputNum.value/3);//杀手人数
+    sessionStorage.kiNum = killer;
+    sessionStorage.ciNum = inputNum.value - killer;
     for (var i=0;i<killer;i++ ){
         playersArr[i]="杀手";
     }
@@ -91,8 +93,8 @@ function setGame(){
 //   }
    
 }
-var ciworld=document.getElementById("ciworld");
-var kiworld=document.getElementById("kiworld");
+var ciworld=document.getElementById("ciword");
+var kiworld=document.getElementById("kiword");
 
 function play(){
     if (
@@ -100,7 +102,12 @@ function play(){
         ciworld.value != "" &&
         kiworld.value != "" 
     ){
-        location.assign("page4.html")
+        sessionStorage.Num=inputNum.value;
+        // sessionStorage.setItem("Num", inputNum.value);
+        sessionStorage.playArr=JSON.stringify(playersArr);
+        sessionStorage.ciword=ciword.value;
+        sessionStorage.kiword=kiword.value;
+        location.href="page4.html";
     }else if (playersArr.length==0 ){
         alert("请设置玩家数量")
     }else if (ciworld.value =="" ){
