@@ -1,0 +1,132 @@
+main {
+    margin-top: .45rem;
+}
+
+.day {
+    margin: .05rem;
+    padding-top: .02rem;
+}
+
+//day标题样式
+.title {
+    margin-top: .05rem;
+    height: .36rem;
+    font-size: .15rem;
+    font-weight: bold;
+    line-height: .36rem;
+    text-align: center;
+    color: #5dcce6;
+    background: white;
+}
+
+//游戏顺序样式
+.gameOrder {
+    margin-top: .05rem;
+    padding: .15rem;
+    padding-bottom: .05rem;
+    background: white;
+    position: relative; //三角箭头
+    &::before {
+        content: "";
+        position: absolute;
+        top: -.1rem;
+        left: 50%;
+        margin-left: -.1rem;
+        border-right: .1rem solid transparent;
+        border-left: .1rem solid transparent;
+        border-bottom: .1rem solid white;
+    }
+    .choose {
+        margin-bottom: .1rem;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;  
+       p {
+           display: none;
+           width: 74%;
+           margin-top: .1rem;
+       }
+    } //游戏顺序按钮
+    .textBox {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .02rem 0;
+        width: 74%;
+        font-size: .15rem;
+        color: white;
+        background: #24a7c6;
+        &::after {
+            content: "";
+            position: absolute;
+            left: -.13rem;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 13px solid #24a7c6;
+        }
+    }
+}
+
+//内部左侧竖线
+.order {
+    margin-left: .3rem;
+    border-left: 1.5px solid #c9c9c9;
+}
+
+//夜晚图标样式
+.night>i {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    left: -12.5px;
+    height: 23px;
+    width: 23px;
+    border: 1px solid #c9c9c9;
+    border-radius: 50%;
+    background: white;
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 17.5px;
+        width: 14.5px;
+        zoom: .8;
+        background: url(../images/moon.png) no-repeat center;
+        background-size: 100%;
+    }
+}
+
+//天亮图标
+.morning>i {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    left: -12.5px;
+    height: 23px;
+    width: 23px;
+    border: 1px solid #c9c9c9;
+    border-radius: 50%;
+    background: white;
+    &::after {
+        content: "";
+        display: inline-block;
+        height: 18px;
+        width: 18px;
+        background: url(../images/day.png) no-repeat center;
+        background-size: 100%;
+    }
+}
+
+footer {
+    justify-content: space-around !important;
+    background: rgba(41, 189, 224, .7) !important;
+    button {
+        width: 40% !important;
+        margin-top: .1rem;
+        margin-bottom: .1rem !important;
+        border-radius: .1rem;
+    }
+}
