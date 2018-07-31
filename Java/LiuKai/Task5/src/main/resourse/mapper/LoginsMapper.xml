@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.LoginsDao">
+    <resultMap id="LoginMapper" type="pojo.Logins">
+    <id property="id" column="id"/>
+    <result property="logntime" column="logntime"/>
+
+    </resultMap>
+
+    <select id="findById" resultMap="LoginMapper">
+    select * from logins where id=#{id}
+</select>
+
+    <insert id="addLogin" parameterType="pojo.Logins">
+        INSERT INTO logins(id,logntime)
+        values (#{id},#{logntime})
+    </insert>
+
+
+    <delete id="deleteAll">
+--      DELETE FROM student
+TRUNCATE logins
+</delete>
+</mapper>
