@@ -1,0 +1,110 @@
+<div ng-controller="jobCtrl">
+<div class="condition">
+    <form action="">
+      <div class="row">
+        <div class="col-sm-1 text-center">
+          在招公司
+        </div>
+        <div class="col-sm-3 text-center">
+          <input type="text" class="form-control">
+        </div>
+        <div class="col-sm-1 text-center">
+          职位名称
+        </div>
+        <div class="col-sm-3 text-center">
+          <input type="text" class="form-control">
+        </div>
+        <div class="col-sm-1 text-center">
+          工作经验
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedExperience" ng-options="item | experienceFilter for item in data[0].experience">
+            <option value="" selected>全部</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1 text-center">
+          发布时间
+        </div>
+        <div class="col-sm-3 text-center">
+          <input type="date" class="form-control">
+        </div>
+        <div class="col-sm-1 text-center">
+          ——
+        </div>
+        <div class="col-sm-3 text-center">
+          <input type="date" class="form-control">
+        </div>
+        <div class="col-sm-1 text-center">
+          学历要求
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedEdu" ng-options="item | eduFilter for item in data[1].edu">
+            <option value="" selected="selected">全部</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-1 text-center">
+          职业类别
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedCategory" ng-options="item | categoryFilter for item in data[2].category">
+            <option value="" selected>全部</option>
+          </select>
+        </div>
+        <div class="col-sm-1 text-center">
+          职业子类
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedSub" ng-options="item | subFilter for item in data[3].sub">
+            <option value="" selected>全部</option>
+          </select>
+        </div>
+        <div class="col-sm-1 text-center">
+          薪资
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedSalary" ng-options="item | salaryFilter for item in data[4].salary">
+            <option value="" selected>全部</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1 text-center">
+          状态
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedStatus" ng-options="item | statusFilter for item in data[5].status">
+            <option value="" selected>全部</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <div style="text-align: right">
+      <button type="button" class="btn btn-danger">清空</button>
+      <button type="button" class="btn btn-success">搜索</button>
+    </div>
+  </div>
+
+  <div class="table">
+    <div class="result-title">
+      <span>公司列表</span>
+      <button type="button" class="btn btn-primary">新增</button>
+    </div>
+    <div class="table-header">
+      <span>序号</span>
+      <span>在招公司</span>
+      <span>职位名称</span>
+      <span>职业类别</span>
+      <span>薪资</span>
+      <span>学历要求</span>
+      <span>工作经验</span>
+      <span>发布时间</span>
+      <span>状态</span>
+      <span>操作</span>
+    </div>
+  </div>
+</div>

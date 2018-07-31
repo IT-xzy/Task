@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Task2-home</title>
+  <meta name="viewport" content="width=720">
+  <link rel="stylesheet" type="text/css" media="screen" href="./CSS/task2-home.css" />
+
+</head>
+
+<body>
+  <div class="wrap">
+    <aside>
+      <ul class="menu">
+        <li>
+          <img src="./resource/gonggao.png" alt="" srcset="">公告</li>
+        <li>
+          <img src="./resource/setting.png" alt="" srcset="">设置</li>
+        <li>
+          <img src="./resource/help.png" alt="" srcset="">帮助</li>
+        <li>
+          <img src="./resource/guanyu.png" alt="" srcset="">关于</li>
+      </ul>
+    </aside>
+    <main>
+      <header>
+        <div class="switch" onclick="display()"></div>
+      </header>
+      <section class="main__body">
+        <div class="title">
+          上次游戏：杀人游戏简单版
+          <img src="./resource/back.png" alt="" srcset="">
+        </div>
+        <div class="game">
+          <div class="game__title">杀人游戏</div>
+          <div class="game__unit">
+            <div class="game__version" onclick="location.href='./task2-assign.html?v=simple'">简化版</div>
+            <div class="game__intro">有1133个用户正在玩此款游戏</div>
+          </div>
+          <div class="game__unit">
+            <div class="game__version">猜词版</div>
+            <div class="game__intro">有1133个用户正在玩此款游戏</div>
+          </div>
+          <div class="game__unit">
+            <div class="game__version">白痴版</div>
+            <div class="game__intro">有1133个用户正在玩此款游戏</div>
+          </div>
+
+          <div class="circles">
+            <div class="circle circle-active"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+          </div>
+          <div class="triangle"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+<script>
+  var status = 0;
+
+  function display() {
+    var aside = document.getElementsByTagName("aside")[0];
+    if (status % 2 == 0) {
+      aside.style.width = "40%";
+      status++;
+    } else {
+      aside.style.width = "0";
+      status++;
+    }
+  }
+</script>
+<script src="./js/resize.js"></script>
+</html>
