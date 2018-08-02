@@ -60,12 +60,7 @@ public class ConRest {
 //        return "jackson";
 //    }
 
-
-    @RequestMapping(value = "pageCount")
-    public String pageCount(Model model){return null;}
-
-
-    @RequestMapping(value="/students")
+    @RequestMapping(value="/students",method = RequestMethod.POST)
     @ResponseBody
     public String hello(HttpServletResponse response) throws Exception{
         User user=new User();
@@ -145,7 +140,7 @@ public class ConRest {
     }
 
     //分页
-    @RequestMapping(value = "lastPage")
+    @RequestMapping(value = "lastPage",method = RequestMethod.GET)
     public String lastPage(Integer pageCount,Model model){
         System.out.println("---上一页---");
         int increment=5;
@@ -172,7 +167,7 @@ public class ConRest {
         return "list";
     }
 
-    @RequestMapping(value = "nextPage")
+    @RequestMapping(value = "nextPage",method = RequestMethod.GET)
     public String nextPage(Integer pageCount,Model model){
         System.out.println("---下一页---");
         int increment=5;
@@ -204,10 +199,11 @@ public class ConRest {
         }catch (Exception e){
             e.printStackTrace(); }return "list"; }
 
-    @RequestMapping(value = "/listInfo")
+    @RequestMapping(value = "/listInfo",method = RequestMethod.GET)
     public String listInfo(Model model){
         System.out.println("---login---");
         int increment=5;
+        logger.debug("123");
         try {
             StudentInfoMapper studentInfoMapper = getConfig();
             List<StudentInfo> lists = studentInfoMapper.listTable();

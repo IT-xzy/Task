@@ -1,5 +1,5 @@
 package main.com.jnshu.pojo;
-import java.util.Date;
+
 import java.util.List;
 
 public class StudentInfo {
@@ -15,6 +15,7 @@ public class StudentInfo {
     private String brother;
     private String knowFrom;
     private List<StudentInfo> lists;
+
     public StudentInfo(Integer id, String studentName, Integer qq, String learnType, String joinTime, String school, Integer studentID, String link, String motto, String brother, String knowFrom) {
         this.id = id;
         this.studentName = studentName;
@@ -28,9 +29,11 @@ public class StudentInfo {
         this.brother = brother;
         this.knowFrom = knowFrom;
     }
+
     public StudentInfo() {
         super();
     }
+
     @Override
     public String toString() {
         return "StudentInfo{" +
@@ -47,6 +50,7 @@ public class StudentInfo {
                 ", knowFrom='" + knowFrom + '\'' +
                 '}';
     }
+
     public Integer getId() {
         return id;
     }
