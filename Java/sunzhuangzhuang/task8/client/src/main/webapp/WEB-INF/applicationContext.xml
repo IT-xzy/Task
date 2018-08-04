@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="spring"/>
+    <context:component-scan base-package="utils"/>
+    <context:property-placeholder location="classpath:Email.properties,classpath:Message.properties,classpath:redis.properties" ignore-unresolvable="true"/>
+
+    <bean id="userServiceOne" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="spring.service.IuserService"/>
+        <property name="serviceUrl" value="rmi://106.14.220.166:9999/userRMI"/>
+    </bean>
+    <bean id="studentServiceOne" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="spring.service.IstudentService"/>
+        <property name="serviceUrl" value="rmi://106.14.220.166:9999/studentRMI"/>
+    </bean>
+    <bean id="occupationServiceOne" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="spring.service.IoccupationService"/>
+        <property name="serviceUrl" value="rmi://106.14.220.166:9999/occupationRMI"/>
+    </bean>
+
+
+    <!--<bean id="userServiceTwo" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+    <!--<property name="serviceInterface" value="spring.service.IuserService"/>-->
+    <!--<property name="serviceUrl" value="rmi://127.0.0.1:8888/userRMI"/>-->
+<!--</bean>-->
+    <!--<bean id="studentServiceTwo" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceInterface" value="spring.service.IstudentService"/>-->
+        <!--<property name="serviceUrl" value="rmi://127.0.0.1:8888/studentRMI"/>-->
+    <!--</bean>-->
+    <!--<bean id="occupationServiceTwo" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceInterface" value="spring.service.IoccupationService"/>-->
+        <!--<property name="serviceUrl" value="rmi://127.0.0.1:8888/occupationRMI"/>-->
+    <!--</bean>-->
+
+    <!--jedis配置-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!--redis服务器中心-->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="hostName" value="${redis.host}"/>
+        <property name="password" value="${redis.password}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <bean id="smsBean" class="spring.model.SmsBean">
+        <property name="accessKeyId" value="${Message.accessKeyId}"/>
+        <property name="accessKeySecret" value="${Message.accessKeySecret}"/>
+        <property name="signName" value="${Message.signName}"/>
+        <property name="templateCode" value="${Message.templateCode}"/>
+    </bean>
+    <bean id="emailBean" class="spring.model.EmailBean">
+        <property name="region" value="${email.region}"/>
+        <property name="accessKeyId" value="${email.accessKeyId}"/>
+        <property name="accessKeySecret" value="${email.accessKeySecret}"/>
+        <property name="accountName" value="${email.accountName}"/>
+        <property name="tagName" value="${email.tagName}"/>
+        <property name="fromAlias" value="${email.fromAlias}"/>
+        <property name="subject" value="${email.subject}"/>
+        <property name="htmlBody" value="${email.htmlBody}"/>
+    </bean>
+</beans>
