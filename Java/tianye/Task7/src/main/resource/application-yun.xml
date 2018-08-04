@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 文件上传 -->
+    <!-- 配置multipart类型解析器 文件上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为5MB -->
+        <property name="maxUploadSize">
+            <value>5242880</value>
+        </property>
+    </bean>
+
+    <!-- 容联短信 SDK -->
+    <bean id="SDKTestSendTemplateSMS" class="com.API.message.SDKTestSendTemplateSMS">
+        <constructor-arg name="accountSid" value=""/>
+        <constructor-arg name="accountToken" value=""/>
+        <constructor-arg name="AppId" value="" />
+    </bean>
+
+    <!-- SendCloudMail SDK -->
+    <bean id="SendCommonPostMail" class="com.API.mail.SendCommonPostMail">
+        <constructor-arg name="apiUser" value="" />
+        <constructor-arg name="apiKey" value="" />
+        <constructor-arg name="apiUrl" value="http://api.sendcloud.net/apiv2/mail/send" />
+    </bean>
+    <bean id="aliyunSDK" class="com.API.aliyun.aliyunSDK">
+        <constructor-arg name="endpoint" value="http://oss-cn-shanghai.aliyuncs.com"/>
+        <constructor-arg name="accessKeyId" value=""/>
+        <constructor-arg name="accessKeySecret" value=""/>
+        <constructor-arg name="bucketName" value="wan-an"/>
+        <constructor-arg name="fileUrl" value=""/>
+    </bean>
+    <bean id="OssApiQiNiuYun" class="com.API.qiniuyun.OssApiQiNiuYun">
+        <constructor-arg name="endpoint" value="zone0"/>
+        <constructor-arg name="accessKeyId" value=""/>
+        <constructor-arg name="accessKeySecret" value=""/>
+        <constructor-arg name="bucketname" value="wan-an"/>
+        <constructor-arg name="fileUrl" value="http://pc7i8ttn1.bkt.clouddn.com"/>
+    </bean>
+    <bean id="sdkTools" class="com.Tool.SdkTools">
+    </bean>
+</beans>
