@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.StudentDao">
+    <select id="getAll" resultType="int">
+        SELECT COUNT(*) FROM game2
+    </select>
+    <select id="getOffer" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE offer
+    </select>
+    <select id="getJava" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE occupation='java' AND offer=0
+    </select>
+    <select id="getWeb" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE occupation='web' AND offer=0
+    </select>
+    <select id="getPm" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE occupation="pm" AND offer=0
+    </select>
+
+    <select id="getGood" resultType="spring.model.Student">
+        SELECT name,offer,resume,creatdate FROM game2 WHERE good=1
+    </select>
+    <insert id="addStudent">
+        INSERT INTO game2(name,creatdate,occupation,telephone,state,username,email) VALUE (#{name},#{creatdate},#{occupation},#{telephone},#{state},#{username},#{email})
+    </insert>
+    <select id="getStudentByName" resultType="spring.model.Student">
+        SELECT * FROM game2 where username=#{username}
+    </select>
+    <select id="selectByName" resultType="Boolean">
+           <![CDATA[SELECT COUNT(*) FROM game2 WHERE username=#{username}]]>
+    </select>
+    <update id="updateByName">
+        UPDATE game2 SET image=#{image} WHERE username=#{username}
+    </update>
+</mapper>
