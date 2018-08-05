@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder ignore-resource-not-found="true" location="classpath:other/Account_password.properties"
+                                  ignore-unresolvable="true"/>
+
+    <bean id="SendPhone" class="com.mvc.third_PartyUtil.SendPhone">
+        <property name="serverIP" value="${phone.serverIP}"/>
+        <property name="serverPort" value="${phone.serverPort}"/>
+        <property name="accounSid" value="${phone.accounSid}"/>
+        <property name="accountToken" value="${phone.accountToken}"/>
+        <property name="AppID" value="${phone.AppID}"/>
+        <property name="templateID" value="${phone.templateID}"/>
+        <property name="NeedTime" value="${phone.NeedTime}"/>
+    </bean>
+
+    <bean id="SendEmail" class="com.mvc.third_PartyUtil.SendEmail">
+        <constructor-arg name="url" value="${sendcoloud.url}"/>
+        <constructor-arg name="apiUser" value="${sendcoloud.apiUser}"/>
+        <constructor-arg name="apiKey" value="${sendcoloud.apiKey}"/>
+        <constructor-arg name="templateInvokeName" value="${sendcoloud.templateInvokeName}"/>
+        <constructor-arg name="from" value="${sendcoloud.from}"/>
+        <constructor-arg name="fromName" value="${sendcoloud.fromName}"/>
+    </bean>
+
+    <bean id="AliYunOssAPI" class="com.mvc.third_PartyUtil.ALiYunOssAPI">
+        <constructor-arg name="endpoint" value="${ali.endpoint}"/>
+        <constructor-arg name="accessKeyId" value="${ali.accessKeyId}"/>
+        <constructor-arg name="accessKeySecret" value="${ali.accessKeySecret}"/>
+        <constructor-arg name="bucketName" value="${ali.bucketName}"/>
+    </bean>
+
+    <bean id="QiNiuYunOssAPI" class="com.mvc.third_PartyUtil.QiNiuYunOssAPI">
+        <constructor-arg name="accessKey" value="${qiNiu.accessKey}"/>
+        <constructor-arg name="secretKey" value="${qiNiu.secretKey}"/>
+        <constructor-arg name="bucket" value="${qiNiu.bucket}"/>
+    </bean>
+
+</beans>
