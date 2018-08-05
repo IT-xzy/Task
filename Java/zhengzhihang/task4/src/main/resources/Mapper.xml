@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 配置命名空间，namespace的名字需要对应相应的接口名-->
+<mapper namespace="com.dao.Mapper">
+
+
+    <!-- 数据库映射-->
+    <resultMap id="CareerResultMap" type="com.pojo.OcT">
+        <id column="id" property="id"/>
+        <result column="Career_Type" property="career"/>
+        <result column="Career_Introduction" property="introduction"/>
+        <result column="pic" property="pic"/>
+        <result column="Threshold" property="threshold"/>
+        <result column="Complexity" property="complexity"/>
+        <result column="Growth_Cycle" property="growthCycle"/>
+        <result column="Requirement" property="requirement"/>
+        <result column="Skills_Related" property="skillRelated"/>
+        <result column="Early_Salary" property="eSalary"/>
+        <result column="MediumTerm_Salary" property="mSalary"/>
+        <result column="Late_Salary" property="lSalary"/>
+    </resultMap>
+
+    <resultMap id="TraineesResultsMap" type="com.pojo.Trainees">
+        <result column="Id" property="id"/>
+        <result column="Name" property="name"/>
+        <result column="pic" property="pic"/>
+        <result column="level" property="level"/>
+        <result column="Study_stat" property="status"/>
+        <result column="Careers" property="career"/>
+        <result column="Company" property="company"/>
+        <result column="Salary" property="salary"/>
+        <result column="description" property="description"/>
+        <result column="account" property="account"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+    </resultMap>
+
+
+
+
+    <!-- Study_stat : 1在学 2工作 3退学-->
+    <!-- Careers 1Java  2web 3QA 4PM 5UI 6OP -->
+    <!-- trainees level =2 优秀-->
+
+    <!--累计学习人数统计-->
+    <select id="accountTrainees" resultType="int">
+        select max(Id) from trainees
+    </select>
+    <!--找到工作人数统计-->
+    <select id="countWork" resultType="int">
+        select count(*) from trainees where Study_stat = 2 ;
+    </select>
+    <!--课程在学人数-->
+    <select id="lessonCount" parameterType="int" resultType="int">
+        select count(*) from trainees where Careers = #{Careers} ;
+    </select>
+    <!--优秀学员获取类-->
+    <select id="niceTrainees" resultMap="TraineesResultsMap">
+        select * from trainees where level=2;
+    </select>
+    <!--职业-->
+    <select id="queryAllCareers"  resultMap="CareerResultMap">
+        select * from careers
+    </select>
+
+    <!--职业和人数 -->
+    <select id="queryAllCareersAndLesson" resultMap="CareerResultMap">
+        select * from careers
+    </select>
+
+    <!-- 根据账号查询密码和ID-->
+    <select id="checkPwd" parameterType="String" resultMap="TraineesResultsMap">
+        select password ,id,salt from trainees where account like #{account};
+    </select>
+
+    <!-- 添加学员-->
+    <insert id="loginTrainees" parameterType="com.pojo.Trainees" >
+        insert into trainees (account,password,salt) values ( #{account},#{password},#{salt} );
+    </insert>
+
+
+</mapper>
