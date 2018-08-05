@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.alien.mybatis.samples.mapper.StudentMapper">
+
+    <resultMap id="student" type="student">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="qq_num" column="qq_num"/>
+        <result property="study_type" column="study_type"/>
+        <result property="study_time" column="study_time"/>
+        <result property="school" column="school"/>
+        <result property="study_id" column="study_id"/>
+        <result property="daily_link" column="daily_link"/>
+        <result property="promise" column="promise"/>
+        <result property="teach_bro" column="teach_bro"/>
+        <result property="know_us_from" column="know_us_from"/>
+        <result property="create_at" column="create_at"/>
+        <result property="update_at" column="update_at"/>
+    </resultMap>
+    <!--query-->
+    <select id="getStudentById" parameterType="int" resultMap="student">
+        SELECT * FROM student WHERE id = #{id}
+    </select>
+
+    <insert id="addStudent" parameterType="student">
+        INSERT INTO student
+        (id, username, qq_num, study_type, study_time, school, study_id, daily_link, promise, teach_bro,
+        know_us_from, create_at, update_at)
+        VALUES (#{id},#{username},#{qq_num},#{study_type},#{study_time},#{school},#{study_id},#{daily_link},
+        #{promise},#{teach_bro},#{know_us_from},#{create_at},#{update_at})
+        <selectKey keyProperty="id" resultType="int" >
+            SELECT max(id) FROM student
+        </selectKey>
+    </insert>
+
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM student
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateStudent" parameterType="student">
+        UPDATE student
+        SET username = #{username}, school = #{school}, promise = #{promise}, know_us_from = #{know_us_from}
+        WHERE id = #{id}
+    </update>
+
+
+
+</mapper>
