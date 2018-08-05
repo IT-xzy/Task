@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="task04tiles.dao.StuDao">
+
+        <select id="querySum" resultType="int">
+            SELECT
+              count(*)
+            FROM
+              restudents_
+        </select>
+
+        <select id="queryWorkSum" resultType="int">
+            SELECT
+              count(*)
+            FROM
+              restudents_
+            WHERE
+              status=1;
+        </select>
+
+        <select id="queryFrontList" resultType="Students">
+            SELECT
+              *
+            FROM
+              restudents_
+            ORDER BY
+              score
+            DESC
+              LIMIT 4
+        </select>
+
+
+    </mapper>
