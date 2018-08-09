@@ -1,0 +1,337 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+</head>
+<body>
+<img src="https://ptteng.github.io/PPT/img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h3>Cookie和Session简单了解</h3>
+			<p></p>
+            <h4></h4>
+            <p>分享人：郑志航</p>
+        </section>
+        <section>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+
+
+
+          <section> 
+            <h3>1.背景介绍</h3>
+            <h5>为什么要Cookie和Session？</h5>
+            <p style="text-align:left">因为http是一种不状态性的协议；</p>
+            <p style="text-align:left">Http协议是无状态的协议，一旦数据库交换完毕，客户端与服务器的链接会关闭，再次交换数据，需要建立新的链接。（服务器无法从连接上跟踪会话，对于上一个会话遗留的信息，无法判断是属于哪个请求的会话）</p>
+        </section>
+
+          <section> 
+            <h3>1.背景介绍</h3>
+            <h5>什么是有状态？</h5>
+            <p style="text-align:left">需要弥补HTTP协议无状态的不足；基本在Session出现前，都用Cookie来跟踪会话</p>
+            <p style="text-align:left">Cookie和Session存在的意义就是为了保存Http客户端/服务器的部分有用的状态。</p>
+        </section>
+
+         <section> 
+            <h3>1.背景介绍</h3>
+            <h5></h5>
+            <p style="text-align:left">Cookies：保存在客户端浏览器中，相当于确认客户身份的“通行证”；</p>
+            <p style="text-align:left">Session：保存在服务器上，相当于客户档案，客户明细表</p>
+        </section>
+
+          <section> 
+            <h3>1.背景介绍</h3>
+            <h5></h5>
+            <p style="text-align:left">记录会话的网站演示</p>
+        </section>            
+
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：</h5>
+            <p style="text-align:left">0:cookie的解释：Cookie是服务器发送给客户端的文本信息。 </p> 
+            <p style="text-align:left">1:cookie生存期和存放的位置。 </p> 
+            <p style="text-align:left">2:cookie的设置过程。 </p> 
+            <p style="text-align:left">3:cookie的设置和获得 </p> 
+            <p style="text-align:left">4:cookie的属性 </p> 
+        </section>
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：</h5>
+            <p style="text-align:left">Cookie生存期和存放的位置： </p> 
+            <p style="text-align:left">生存期： </p> 
+            <p style="text-align:left">-1:如果Cookie的生存期是整个会话期间，那么Cookie保存在内存中，浏览器关闭的时候就会自动清除这个Cookie。 </p> 
+            <p style="text-align:left">-2:如果Coolie的生存期设定了一个长的值，那么浏览器关闭Cookie也不会被清除，Cookie会保存在硬盘中。下次访问的时候，就会在请求头携带这个Cookie。 </p> 
+            <p style="text-align:left">-3:存放位置：windows: [系统盘]:\Documents and Settings[用户名]\Cookies。 </p> 
+
+        </section>        
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：</h5>
+            <p style="text-align:left">Cookie的设置过程 </p> 
+            <p style="text-align:left">Cookie的设置分成以下4步 </p> 
+            <p style="text-align:left">HTTP Request </p> 
+            <p style="text-align:left">HTTP Response + Set-Cookie </p> 
+            <p style="text-align:left">HTTP Request + Cookie </p> 
+            <p style="text-align:left">HTTP Response</p> 
+            <p style="text-align:left">虽然在二次请求的时候，用户可能禁止Cookie的使用，但是这种情况的出现很少。</p>            
+        </section>
+
+        <section>
+            <h3>.2知识剖析:Cookie部分：</h3>
+            <p style="text-align:left">Cookie的设置和获得 </p> 
+            <p style="text-align:left">Cookie 封装成javax.servlet.http.Cookie类。 </p> 
+            <p style="text-align:left">服务器通过操作Cookie类对象，对客户端Cookie进行操作。 </p> 
+            <p style="text-align:left">Request.getCookie() //获取客户端提交的所有Cookie，  以Cookie[]数组形式返回 </p> 
+            <p style="text-align:left">Response.addCookie(Cookie cookie) //向客户端设置Cookie. </p>
+            <p style="text-align:left">每一Cookie对象以 key-value的属性对形式，保存用户形态；</p> 
+            <p style="text-align:left">一个request和response可以同时包含和使用多个cookie（有上限）；需要的时候对该cookie进行遍历；
+Cookie类，位于包javax.servlet.http.*下面；</p> 
+        </section>
+
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：属性</h5>
+            <p style="text-align:left">Name : cookie的名字</p> 
+            <p style="text-align:left">Value:   coolie的值 </p> 
+            <p style="text-align:left">maxAge: cookie的生存期 </p> 
+            <p style="text-align:left">Secure： 安全协议 </p> 
+            <p style="text-align:left">Path：     路径 </p> 
+            <p style="text-align:left">Domain：  访问域</p> 
+            <p style="text-align:left">Comment ：cookie用处的说明</p>
+        </section>
+
+         <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：属性</h5>
+            <p style="text-align:left">4.1:name 和 value</p> 
+            <p style="text-align:left">Name 和 Value是在reponse Cookie之前就设置的。 </p> 
+            <p style="text-align:left">name和value是成对存在的。 </p> 
+            <p style="text-align:left">通过name和value的设置，在下次访问的时候，通过name和value就能判断Cookie是哪个客户端，进而响应相应的资源； </p> 
+
+        </section>       
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：属性</h5>
+            <p style="text-align:left">4.2:maxAge:</p> 
+            <p style="text-align:left">表示Cookie的有效期。 </p> 
+            <p style="text-align:left">=-1，表示关闭就失效，默认就是-1； </p> 
+            <p style="text-align:left">=0，表示删除cookie，cookie没有删除cookie的机制，只能设置即使失效，删除它； </p> 
+            <p style="text-align:left">>0, 表示设置长久的cookie,这个时候会进行倒数，倒数到0就会删除。 </p> 
+        </section>
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：属性</h5>
+            <p style="text-align:left">4.3:secure </p> 
+            <p style="text-align:left">HTTP. 无状态且不安全；不加密有可能被截获； </p> 
+            <p style="text-align:left">HTTPS和SSL是安全协议； </p> 
+            <p style="text-align:left">将Cookie的secure属性设置为true，就是指允许在HTTPS和SSL等安全协议中传输此类Cookie。 </p> 
+            <p style="text-align:left">Cookie.setSecure(true); </p> 
+            <p style="text-align:left">__这只是在传输协议上的加密；提高安全性，需要对内容进行加密，解密；</p> 
+        </section>
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：属性</h5>
+            <p style="text-align:left">4.4:path</p> 
+            <p style="text-align:left">Path属性需要使用符号“/”结尾 </p> 
+            <p style="text-align:left">只允许/xxxweb/下的程序使用cookie（决定允许访问Cookie的路径【ContexPath】） </p> 
+            <p style="text-align:left">设置成"/"允许所有路径。</p> 
+            <p style="text-align:left">页面只能获取属于它Path的cookie: /session/test/a.jsp不能获得/session/abc的Cookie。 </p> 
+        </section>
+
+        <section>
+            <h3>.2知识剖析:Cookie部分：属性</h3>
+            <p style="text-align:left">4.5.1:Domain：访问域</p> 
+            <p style="text-align:left">*隐私机制决定不可跨域名 </p> 
+            <p style="text-align:left">*一般情况下，同一个一级域名下的两个二级域名如 </p> 
+            <p style="text-align:left">123.com；Images.123.com </p> 
+            <p style="text-align:left">也不能交互使用Cookie，因为域名并不严格完全相同； </p> 
+            <p style="text-align:left">若想所有二级域名都可以使用该Cookie，需要设置Cookie的Domain参数；</p> 
+            <p style="text-align:left">Cookie cookie = new Cookie("time","2008080");</p> 
+            <p style="text-align:left">Cookie.setDomain(".123.com");//设置域名，这样123.com的所有子域名可以使用该cookie</p> 
+        </section>
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Cookie部分：属性</h5>
+            <p style="text-align:left">4.5.2:Domain</p> 
+			<p style="text-align:left">参数必须以“.”开始</p> 
+			<p style="text-align:left">name相同，但是domain不同的cookie，是不同的cookie</p> 
+			<p style="text-align:left">不同域名要共有cookie，只能生成两个cookie，</p> 
+			<p style="text-align:left">domain属性分别为两个域名，输出到客户端。</p> 
+        </section>
+
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Session部分：</h5>
+            <p style="text-align:left">-Session的解释</p> 
+			<p style="text-align:left">1:Session的生命周期</p> 
+			<p style="text-align:left">2:Session的有效期</p> 
+			<p style="text-align:left">3:Session的常用方法</p> 
+        </section>
+ 
+         <section>
+            <h3>.2知识剖析:Session部分：</h3>
+            <p style="text-align:left">0:Session的解释：</p> 
+			<p style="text-align:left">Session是服务器端使用的一种记录客户端状态的机制。</p> 
+			<p style="text-align:left">比Cookie简单一些，也相应的增加了服务器的存储压力；</p> 
+			<p style="text-align:left">Q：如何根据Value-key从Session中获取匹配的内容；</p> 
+			<p style="text-align:left">A：创建session ————在服务器端程序运行的过程中创建；(同时为该Session生成唯一的Session ID)</p> 
+        </section>     
+
+        <section>
+            <h3>.2知识剖析</h3>
+            <p style="text-align:left">2.1:Session的生命周期</p> 
+			<p style="text-align:left">1：Session在内存中；</p> 
+			<p style="text-align:left">优点：提高存取速度；弊端：大量访问会导致内存溢出</p> 
+			<p style="text-align:left">要求：Session里面的内容尽量精简。</p> 
+			<p style="text-align:left">2:Session第一次访问的时候创建；</p> 
+			<p style="text-align:left">未生成Session可用：Request.getSession(true）强制生成；</p> 
+        </section>
+
+       <section>
+             <h3>.2知识剖析</h3>
+            <p style="text-align:left">访问：JSP，Servlet等程序时候才会创建Session；访问静态资源，不会创建Session。</p> 
+            <p style="text-align:left">3:Session更新，更新到Session的最后访问时间，无论是否读写Session 都认为该用户的Session活跃了一次</p> 
+        </section>       
+
+        <section>
+            <h3>.2知识剖析:Session部分：</h3>
+            <p style="text-align:left">2.2:Session的有效期</p> 
+			<p style="text-align:left">为了防止资源浪费，需要设置一个有效期。</p> 
+        </section>
+
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>Session部分：</h5>
+            <p style="text-align:left">2.3常用方法：</p> 
+			<p style="text-align:left">Attribute： get或者set Session | romve Session | getArrtributeName;</p> 
+			<p style="text-align:left">MaxInacticveInterval():get 或者 set Session 失效时间；</p> 
+			<p style="text-align:left">getLastAccessedTime,得到最后的活跃时间。</p> 
+        </section>
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>2.3Cookie和Session的区别：</h5>
+            <p style="text-align:left">1cookie数据存放在客户的浏览器上，session存放在服务器上。</p> 
+			<p style="text-align:left">2cookie不太安全，能分析存放在本地的cookie，进行cookie欺骗；安全的话，应该使用session；</p> 
+			<p style="text-align:left">3session会在一定时间内保存在服务器，当访问过多，会比较占用服务器的性能，如果要减轻服务器性能的压力，可以使用cookie；</p> 
+        </section>
+        <section>
+            <h3>.2知识剖析</h3>
+            <h5>2.3Cookie和Session的区别：</h5>
+            <p style="text-align:left">4单个cookie在客户端的限制的3K，一个站点在客户点存放的cookie不能超过3K</p> 
+            <p style="text-align:left">session机制会生成session的id，该id作为识别标志存放在客户端的cookie容器中，客户端每次请求，会把该id放到http的请求的头部，发送给服务器。</p> 
+            <p style="text-align:left">对于jsp和php编写的网站，完全禁用cookie的时候，session会不能正常使用。</p> 
+        </section>
+
+
+
+        <section>
+            <h3>3.常见问题</h3>
+            <p style="text-align:left">Q1：cookie存在本地的话会不会存在被篡改的风险？ </p>
+            <p style="text-align:left"> Q2：如果cookie被禁用了，session还能用吗</p>
+            <p style="text-align:left">Q3：网站能读取其它网站的Cookie吗？</p> 
+            <p style="text-align:left">Q4:删除Cookie需要注意设么</p> 
+        </section>
+        
+		
+        <section>
+            <h3>4.解决方案</h3>
+            <h4>2):实现增强的方法有那些？</h4>
+            <p style="text-align:left">Q1不仅存在本地会，存在浏览器也会，cookie本身安全性就低</p>
+            <p style="text-align:left">Q2:url重写或者表单隐藏域都可以让客户端请求携带上sessionid</p>
+            <p style="text-align:left">Q3:W3C浏览器会阻止javaScript读写任何不属于自己网站的Cookie</p>
+            <p style="text-align:left">Q4:覆盖或者删除，都要求除了值意外的属性一样。</p>           
+        </section>
+
+       
+		
+       
+        <section>
+            <h3>5.编码实战</h3>
+        </section>
+
+		 <section>
+            <h3>6.扩展思考</h3>
+            <p style="text-align:left">Tocken</p>
+        </section>
+
+        <section>
+            <h3>7.参考文献</h3>
+			<p style="text-align:center">百度，CSDN博客</p>
+        </section>
+		
+        <section>
+            <h3>8.更多讨论</h3>
+            <p>今天的分享就到这里啦，欢迎大家提问和探讨!</p>
+        </section>
+    </div>
+</div>
+
+<script src="https://ptteng.github.io/PPT/lib/reveal/js/head.min.js"></script>
+<script src="https://ptteng.github.io/PPT/lib/reveal/reveal.js"></script>
+
+<script>
+
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true },
+            { src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+</script>
+</body>
+</html>

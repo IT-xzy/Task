@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mvc.dao.PersonDao">
+
+    <select id="queryWork" parameterType="Integer" resultType="Integer">
+        SELECT COUNT(isWork) FROM person
+        <if test="_parameter!=0 and _parameter!=null">
+            where isWork=#{isWork};
+        </if>
+    </select>
+
+    <select id="queryGood" parameterType="Integer" resultType="com.mvc.model.Person">
+        select * from person where isGood=#{isGood} LIMIT 4;
+    </select>
+
+    <select id="queryType" parameterType="String" resultType="int">
+        SELECT COUNT(type) FROM person
+            where type=#{type};
+    </select>
+
+    <select id="findStudentId" parameterType="Integer" resultType="com.mvc.model.Person">
+       select * from person where ID=#{ID};
+    </select>
+
+</mapper>

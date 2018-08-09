@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.UsersMapper">
+
+    <resultMap id="UsersMap" type="model.Users">
+        <id property="id" column="Id"/>
+        <result property="username" column="Username"/>
+        <result property="password" column="Password"/>
+        <result property="salt" column="Salt"/>
+        <result property="loginTime" column="Login_time"/>
+        <result property="createAt" column="Create_at"/>
+        <result property="updateAt" column="Update_at"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="model.Users" useGeneratedKeys="true" keyProperty="id" keyColumn="Id">
+        insert into users (
+              Username, Password, Salt, Create_at, Update_at)
+              values(
+              #{username}, #{password},#{salt},#{createAt},#{updateAt})
+    </insert>
+
+    <delete id="deleteByName" parameterType="String">
+        delete from users where Username = #{username}
+    </delete>
+
+    <update id="update">
+        update users
+        set Id = #{id},
+        Username = #{username},
+        Password = #{password},
+        Salt = #{salt},
+        Create_at = #{createAt},
+        Update_at = #{updateAt}
+        where 1 = 1
+        <choose>
+            <when test="id != null">
+                and Id = #{id}
+            </when>
+            <when test="name != null and name != ''">
+                and Username = #{username}
+            </when>
+            <otherwise>
+                and 1 = 2
+            </otherwise>
+        </choose>
+    </update>
+
+    <select id="getByName" resultMap="UsersMap" parameterType="String">
+        select * from users where Username = #{username}
+    </select>
+
+    <update id="updateloginTime">
+        update users
+        set Login_time = #{loginTime}
+        where 1 = 1
+        <choose>
+            <when test="id != null">
+                and Id = #{id}
+            </when>
+            <when test="name != null and name != ''">
+                and Username = #{username}
+            </when>
+            <otherwise>
+                and 1 = 2
+            </otherwise>
+        </choose>
+    </update>
+
+
+</mapper>

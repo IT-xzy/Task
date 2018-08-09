@@ -1,0 +1,187 @@
+main {
+    .home-occupation {
+        display: flex;
+        align-items: center;
+        height: .8rem;
+        border-bottom: .01rem solid #D0D6D9;
+        .home-page {
+            font-size: .16rem;
+            color: #333333;
+        }
+        .occupation {
+            font-size: .16rem;
+            color: #29B078
+        }
+    }
+    .direction-box {
+        @include flex-c(sapce-between, center);
+        .col-zdy-1 {
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+            -ms-flex: 0 0 14.28571%;
+            flex: 0 0 14.28571%;
+            max-width: 14.28571%;
+        }
+        @media(max-width:768px) {
+            .col-zdy-1 {
+                display: flex;
+                justify-content: center;
+                -ms-flex: 0 0 100%;
+                flex: 0 0 100%;
+                max-width: 100%
+            }
+        }
+        .direction {
+            line-height: .6rem;
+            font-size: .14rem;
+            border-bottom: .01rem solid #D0D6D9;
+            span {
+                margin: 0 .3rem 0 0;
+                font-size: .14rem;
+                color: #999999;
+            }
+            a {
+                margin-right: .3rem;
+                font-size: .14rem;
+                color: #333333;
+                &:hover {
+                    color: #ffffff;
+                    background-color: #29B078;
+                }
+            }
+        }
+    }
+    .web {
+        display: flex;
+        align-items: center;
+        height: .8rem;
+        border-bottom: .01rem solid #D0D6D9;
+        p {
+            margin: 0 .3rem 0 0;
+            font-size: .16rem;
+            color: #333333;
+        }
+    }
+    .list{
+        position: relative;
+        margin-top:.48rem;
+        margin-bottom: .48rem;
+        &:hover ~ .hidden-text {
+            visibility: visible;      
+        }
+        .gray-font{
+            color: #999999;
+        }
+        .red-font{
+            color: red;
+        }        
+    }
+    /*表格第一行*/
+    table tr td{
+        font-size: .14rem;
+        line-height: .4rem;
+        border: .01rem solid #EDF1F2;
+        img{
+            float: left;
+            padding: .2rem .08rem .16rem .11rem;
+        }
+        h4{
+            font-size: .16rem;
+            padding-top: .34rem;
+            padding-bottom: .16rem;
+            margin-bottom: 0;
+            color: #333333;
+        }
+        p{
+            font-size: .14rem;
+            margin-bottom: 0;
+        }
+        span{
+            font-size: .14rem;
+        }
+    }
+    
+    /*表格第二行*/
+    .threshold::after{
+        display: inline-block;
+        content:"";
+        width: .16rem;
+        height: .16rem;
+        margin-left:.13rem;
+        background: url(./../img14/star.png);
+        
+    
+    }
+    .level::after{
+        display: inline-block;
+        content:"";
+        width: .16rem;
+        height: .16rem;
+        margin-left:.13rem;
+        background: url(./../img14/star.png);
+    }
+    .level::before{
+        display: inline-block;
+        position: absolute;
+        content:"";
+        width: .16rem;
+        height: .16rem;
+        background: url(./../img14/star.png);
+        margin-top: .15rem;
+        margin-left: 1.43rem;
+    }
+    /*表格第四行*/
+    .nested{
+        padding:0;
+    }
+    .tabulation{
+        border: none;
+        width: 100%;
+    }
+    .tabulation td{
+        border: none;
+    }
+    .pay{
+        text-align: center;
+        border-right: 1px solid #EDF1F2;
+    }
+    .year{
+        border-top: 1px solid #EDF1F2;
+        border-bottom: 1px solid #EDF1F2;
+    }
+    .money{
+        display: flex;
+        justify-content: space-between;
+    }
+    .hidden-text {
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin-top: .48rem;
+        margin-bottom: .48rem;
+        padding: .3rem;
+        word-break: break-all;
+        background: rgba(0, 0, 0, .7);
+        color: white;
+        transition: transform 2s;
+        z-index: 1;
+        h5 {
+            font-size: .2rem !important;
+            margin-bottom: .2rem;
+        }
+        p {
+            text-align: justify;
+            font-size: .16rem;
+        }
+        &:hover {
+            visibility: visible;
+            transform: rotate(360deg);
+        }
+    }
+}

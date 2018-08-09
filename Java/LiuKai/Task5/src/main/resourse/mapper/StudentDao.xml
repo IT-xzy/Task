@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.StudentDao">
+    <resultMap id="StudentMapper" type="pojo.Student">
+        <id property="id" column="id"/>
+        <result property="stuName" column="stu_name"/>
+        <result property="course" column="course"/>
+        <result property="job" column="job"/>
+        <result property="good" column="good"/>
+        <result property="password" column="password"/>
+        <result property="selfIntro" column="self_intro"/>
+        <result property="createTime" column="create_at"/>
+        <result property="updateTime" column="update_at"/>
+    </resultMap>
+    <select id="signIn" resultMap="StudentMapper" parameterType="pojo.Student">
+         SELECT * FROM student WHERE stu_name=#{stuName} and password=#{password}
+    </select>
+
+    <!--<select id="findByName" resultType="boolean">-->
+        <!--<![CDATA[SELECT count(id) FROM student-->
+        <!--WHERE stu_name=#{stuName}]]>-->
+    <!--</select>-->
+
+
+    <select id="findByName" resultMap="StudentMapper">
+        SELECT * FROM student
+        WHERE stu_name=#{stuName}
+    </select>
+
+
+    <select id="countAll" resultType="long">
+        select count(*) from  student
+    </select>
+    <select id="countJob" resultType="long">
+           select count(job) from student
+    </select>
+
+    <select id="countCourse" resultType="int">
+        select count(*) from student where course=#{cour} and job is null
+    </select>
+
+    <insert id="insertStudent" parameterType="pojo.Student">
+        INSERT INTO student(stu_name,password,course,job,good,self_intro,create_at,update_at)
+        values (#{stuName},#{course},#{password},#{job},#{good},#{selfIntro},#{createTime},#{updateTime})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+    <insert id="regStudent" parameterType="pojo.Student">
+        INSERT INTO student(stu_name,password,create_at,update_at)
+        values (#{stuName},#{password},#{createTime},#{updateTime})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="updateStudent">
+        UPDATE student SET
+        course=#{course},
+        job=#{job},
+        good-#{good};
+        self_intro=#{selfIntro};
+        update_at=#{updateTime}
+        WHERE id=#{id}
+    </update>
+
+
+    <delete id="deleteAll">
+--      DELETE FROM student
+TRUNCATE student
+</delete>
+
+
+    <select id="findGood" resultMap="StudentMapper">
+        select * from student where good="yes"
+    </select>
+
+    <delete id="deleteById" parameterType="long">
+    DELETE FROM student WHERE id=#{id}
+</delete>
+
+
+    <select id="findById" resultMap="StudentMapper">
+        SELECT * FROM student
+        WHERE id=#{id}
+    </select>
+
+    
+    
+    <select id="findLikeName" resultMap="StudentMapper">
+         SELECT * FROM student
+         WHERE stu_name LIKE "%"#{value}"%"
+    </select>
+
+
+    <select id="findAll" resultMap="StudentMapper">
+        SELECT * FROM student
+    </select>
+</mapper>
