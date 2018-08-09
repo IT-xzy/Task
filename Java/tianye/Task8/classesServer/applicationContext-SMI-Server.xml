@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.service"/>
+    <context:component-scan base-package="com.service.Impl"/>
+    <!--<context:component-scan base-package="com.API"/>-->
+    <bean id="serviceAuth" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- 设置服务名称 -->
+        <property name="serviceName" value="serviceAuth"/>
+        <!-- 设置服务类 -->
+        <property name="Service" ref="userServiceImpl"/>
+        <!-- 设置服务接口 -->
+        <property name="serviceInterface" value="com.service.userService"/>
+        <!-- 注册端口号 用来暴露发现服务 -->
+        <property name="registryPort" value="9090" />
+        <!-- 设置服务端口号 用来传输数据 这个参数是可选参数, 当不设置的时候, 数据传输会使用随机端口号 -->
+        <property name="servicePort" value="9093" />
+    </bean>
+    <!-- OSS 阿里云 -->
+    <bean id="serverALiYunOSS" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="ServerALiYunOSS"/>
+        <property name="service" ref="aliyunServiceImpl"/>
+        <property name="serviceInterface" value="com.service.aliyunService"/>
+        <property name="registryPort" value="9090"/>
+        <property name="servicePort" value="9093"/>
+    </bean>
+
+    <!-- OSS 七牛云 -->
+    <bean id="serverQiNiuYunOSS" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="ServerQiNiuYunOSS"/>
+        <property name="service" ref="qiniuyunServiceImpl"/>
+        <property name="serviceInterface" value="com.service.qiniuyunService"/>
+        <property name="registryPort" value="9090"/>
+        <property name="servicePort" value="9093"/>
+    </bean>
+
+    <!-- Mail SendCloudMail -->
+    <bean id="serverMailSendCloud" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="ServerMailSendCloud"/>
+        <property name="service" ref="sendMailServiceImpl"/>
+        <property name="serviceInterface" value="com.service.sendMailService"/>
+        <property name="registryPort" value="9090"/>
+        <property name="servicePort" value="9093"/>
+    </bean>
+
+    <!-- SMS 容联短信 -->
+    <bean id="serverSMSRLian" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="ServerSMSRLian"/>
+        <property name="service" ref="messageServiceImpl"/>
+        <property name="serviceInterface" value="com.service.messageService"/>
+        <property name="registryPort" value="9090"/>
+        <property name="servicePort" value="9093"/>
+    </bean>
+    <!--&lt;!&ndash; 缓存 &ndash;&gt;-->
+    <!--<bean id="serverCached" class="org.springframework.remoting.rmi.RmiServiceExporter">-->
+        <!--<property name="serviceName" value="ServerCachedMem"/>-->
+        <!--<property name="service" ref="serviceCacheMemImpl"/>-->
+        <!--<property name="serviceInterface" value="com.service.ServiceCache"/>-->
+        <!--<property name="registryPort" value="9191" />-->
+        <!--<property name="servicePort" value="9292" />-->
+    <!--</bean>-->
+</beans>
