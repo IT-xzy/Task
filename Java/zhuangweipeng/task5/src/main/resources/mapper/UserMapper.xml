@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserMapper">
+    <!--将展示一条信息展示在学人员-->
+    <select id="getAll" resultType="Excellent_Stu">
+        select * from excellent_stu
+    </select>
+
+    <!--展示优秀学员信息-->
+    <select id="limit" resultType="Excellent_Stu">
+        select imges,consultant,introduction from excellent_stu limit 4
+    </select>
+
+    <!--取出用户信息-->
+    <select id="judgeUser" parameterType="String" resultType="User">
+        select * from user where name = #{name}
+    </select>
+
+    <!--注册用户-->
+    <insert id="addUser" parameterType="User">
+        insert into user(name,password,create_at,update_time,salt) values(#{name},#{password},now(),now(),#{salt});
+    </insert>
+    <!--查询数据库用户-->
+    <select id="findUserByName" parameterType="java.lang.String" resultType="com.entity.User">
+        SELECT * FROM user WHERE name=#{name,jdbcType=VARCHAR}
+    </select>
+
+</mapper>
