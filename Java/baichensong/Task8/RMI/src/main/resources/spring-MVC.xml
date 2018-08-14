@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--<mvc:annotation-driven>会自动注册RequestMappingHandlerMapping与RequestMappingHandlerAdapter两个Bean,这是Spring MVC为@Controller分发请求所必需的，并且提供了数据绑定支持-->
+    <context:component-scan base-package="com.controller">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+
+    <!-- 拦截器的配置 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>  <!--拦截谁不让谁 加载。。。-->
+            <bean class="com.controller.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+    <!--自动扫描包-->
+    <!--json
+         坑        自动加载json等 映射文件<mvc:annotation-driven/> 但不会生效。   导致了时间传入的转换被阻止   -->
+    <mvc:annotation-driven conversion-service="conversionServiceCustom"/>
+
+    <!-- 静态资源          源目录location 映射成 mapping目录 -->
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/images/**" location="/WEB-INF/images/" />
+    <mvc:resources mapping="/conf/**" location="/WEB-INF/conf/" />
+    <mvc:resources mapping="/imagesTwo/**" location="/WEB-INF/imagesTwo/"/>
+    <mvc:resources mapping="/confTwo/**" location="/WEB-INF/confTwo/"/>
+    <mvc:resources mapping="/login/**" location="/WEB-INF/login/"/>
+
+
+        <!--注解配置-->
+    <context:annotation-config/>
+<!--视图-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!-- 激活组件扫描功能,在包com.AOP及其子包下面自动扫描通过注解配置的组件 -->
+
+    <!-- 开启自动切面代理 -->    <!-- 激活自动代理功能 -->
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+
+    <context:component-scan base-package="com.AOP">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+    <!-- 配置tiles模板       加载tiles配置文件 -->
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>WEB-INF/jsp/Tiles.xml</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <!--自定义Spring参数绑定-->
+    <bean id="conversionServiceCustom"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!-- 转换器 -->
+        <property name="converters">
+            <!--日期类型转换-->
+            <bean class="com.DateTag.TagDate"/>
+        </property>
+        <!-- 转换器end-->
+    </bean>
+
+
+
+
+
+</beans>

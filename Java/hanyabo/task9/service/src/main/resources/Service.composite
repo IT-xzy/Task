@@ -1,0 +1,24 @@
+<?xml version= "1.0" encoding ="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+      xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+      targetNamespace="http://hello" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+      name= "helloworld-contribution" >
+
+
+     <component name="HelloWorldComponent">
+           <implementation.spring location="applicationContext.xml" />
+
+           <service name= "HelloService">
+               <tuscany:binding.rmi uri="rmi://localhost:8086/HelloService" />
+           </service>
+
+           <service name= "StudentService">
+               <tuscany:binding.rmi uri="rmi://localhost:8086/StudentService" />
+           </service>
+
+           <service name= "UserService">
+              <tuscany:binding.rmi uri="rmi://localhost:8086/UserService" />
+          </service>
+
+     </component >
+</composite>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.CompanyMapper">
+
+    <resultMap type="com.model.Company" id="CompanyMap">
+        <id property="companyId" column="companyId"/>
+        <result property="companyName" column="companyName"/>
+        <result property="companyIntro" column="companyIntro"/>
+        <result property="companyInfo" column="companyInfo"/>
+        <result property="creatTime" column="creat_at"/>
+        <result property="updateTime" column="update_at"/>
+        <!--<collection property="interests" column="interestname" ofType="Interests">-->
+        <!--<id property="id" column="interestid"/>-->
+        <!--<result property="name" column="interestname"/>-->
+        <!--</collection>-->
+    </resultMap>
+
+    <insert id="addCompany" parameterType="com.model.Company" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into company (companyName,companyIntro,companyInfo,creat_at,update_at) values (#{companyName},#{companyIntro},#{companyInfo},#{creatTime},#{updateTime})
+    </insert>
+
+    <select id="listCompany" resultMap="CompanyMap">
+        select companyName,companyIntro,companyInfo from company
+    </select>
+
+    <select id="selectCompany" parameterType="com.model.Company" resultType="com.model.Company">
+        select * from company where companyId=#{companyId}
+    </select>
+
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.opt.dao.mapper.StudentMapper">
+
+    <resultMap id="studentMapper" type="com.opt.model.Student">
+        <id column="id" property="id"/>
+        <result column="create_at"  property="create_at"/>
+        <result column="update_at"  property="update_at"/>
+        <result column="stuName" property="stuName"/>
+        <result column="stuPhoto"  property="stuPhoto"/>
+        <result column="sex"  property="sex"/>
+        <result column="age"  property="age"/>
+        <result column="school"  property="school"/>
+        <result column="pro_id" property="pro_id"/>
+        <result column="office" property="office"/>
+        <result column="recommend" property="recommend"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,stuName,stuPhoto,sex,age,school,pro_id,office,recommend,create_at,update_at
+    </sql>
+
+    <!--parameterType	将会传入这条语句的参数类的完全限定名或别名。这个属性是可选的，因为 MyBatis 可以通过 TypeHandler 推断出具体传入语句的参数，默认值为 unset。-->
+    <!--resultType	从这条语句中返回的期望类型的类的完全限定名或别名。注意如果是集合情形，那应该是集合可以包含的类型，而不能是集合本身。使用 resultType 或 resultMap，但不能同时使用。-->
+    <!--resultMap	外部 resultMap 的命名引用。结果集的映射是 MyBatis 最强大的特性，对其有一个很好的理解的话，许多复杂映射的情形都能迎刃而解。使用 resultMap 或 resultType，但不能同时使用。-->
+    <!--statementType	STATEMENT，PREPARED 或 CALLABLE 的一个。这会让 MyBatis 分别使用 Statement，PreparedStatement 或 CallableStatement，默认值：PREPARED。-->
+    <select id="findByID" parameterType="int" resultMap="studentMapper" >
+        SELECT * FROM jnshu_students where id = #{id}
+        <!--<where>-->
+        <!--<if test="id!=null">-->
+        <!--id = #{id}-->
+        <!--</if>-->
+        <!--</where>-->
+    </select>
+
+    <select id="findAllCount"  resultType="int">
+        SELECT COUNT(*) FROM jnshu_students
+    </select>
+
+    <!--根据列查询 所有列名-->
+    <select id="findByStudent" parameterType="com.opt.model.Student" resultMap="studentMapper">
+        SELECT * FROM jnshu_students
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="id!=null and id!=0">
+                AND id = #{id}
+            </if>
+            <if test="create_at!=null and create_at!=0">
+                AND create_at = #{create_at}
+            </if>
+            <if test="update_at!=null and update_at!=0">
+                AND update_at = #{update_at}
+            </if>
+            <if test="stuName!=null">
+                AND stuName like '%${stuName}%'
+            </if>
+            <if test="stuPhoto!=null ">
+                AND stuPhoto like '%${stuPhoto}%'
+            </if>
+            <if test="sex!=null and sex!=0">
+                AND sex = #{sex}
+            </if>
+            <if test="age!=null and age!=0 ">
+                AND age like '%${age}%'
+            </if>
+            <if test="school!=null">
+                AND schoole like '%${schoole}%'
+            </if>
+            <if test="office!=null">
+                AND office = #{office}
+            </if>
+            <if test="recommend!=null">
+                AND recommend like '%${recommend}%'
+            </if>
+            <if test="pro_id!=null and pro_id!=0">
+                AND pro_id = #{pro_id}
+            </if>
+
+        </trim>
+    </select>
+
+    <select id="findByPage"  parameterType="Map" resultMap="studentMapper">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM jnshu_students
+        <if test="start!=null and size!=null">
+            limit #{start} ,#{size}
+        </if>
+    </select>
+
+    <select id="findAll" parameterType="com.opt.model.Student" resultMap="studentMapper" >
+        SELECT * FROM jnshu_students
+    </select>
+    
+    
+    <!--插入单条数据-->
+    <insert id="insertOne" parameterType="com.opt.model.Student" useGeneratedKeys="true" keyColumn="id" keyProperty="id" >
+        INSERT INTO jnshu_students
+        (stuName,stuPhoto,sex,age,school,office,recommend,pro_id)
+        values
+        (#{stuName,jdbcType=VARCHAR},
+        #{stuPhoto,jdbcType=VARCHAR},
+        #{sex,jdbcType=INTEGER},
+        #{age,jdbcType=INTEGER},
+        #{school,jdbcType=VARCHAR},
+        #{office,jdbcType=VARCHAR},
+        #{recommend,jdbcType=VARCHAR},
+        #{pro_id,jdbcType=BIGINT})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select @@IDENTITY AS ID
+        </selectKey>
+    </insert>
+    <!--修改数据-->
+    <update id="updateOne" parameterType="com.opt.model.Student" >
+        UPDATE jnshu_students
+        SET
+        update_at=#{update_at},stuName=#{stuName},stuPhoto=#{stuPhoto},sex=#{sex},age=#{age},school=#{school},office=#{office},pro_id=#{pro_id},recommend=#{recommend} WHERE id=#{id}
+    </update>
+    <!--修改头像-->
+    <update id="updateHeadIcoById" parameterType="Map" >
+        UPDATE jnshu_students
+        SET
+        stuPhoto=#{stuPhoto} WHERE id=#{id}
+    </update>
+
+
+
+</mapper>

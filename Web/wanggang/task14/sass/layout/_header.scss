@@ -1,0 +1,30 @@
+header {
+    .first .row {
+        height: .4rem;
+        align-items: center;
+        font-size: .07rem;
+        color: $bgcolor;
+    }
+    .col-4 {
+        @media screen and (max-width: 576px) {
+            visibility: hidden;
+        }
+    }
+    .col-8 {
+        @include flex-center($justify: flex-end);
+        .weixin {
+            @include header-icon(微信);
+        }
+        .qq {
+            margin-right: .1rem;
+            margin-left: .1rem;
+            @include header-icon(qq);
+        }
+        .weibo {
+            @include header-icon(新浪微博);
+        }
+    }
+    >div:nth-child(2) {
+        background: $bgcolor;
+    }
+}

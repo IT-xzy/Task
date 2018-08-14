@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.jnshu.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_at" jdbcType="DATE" property="createAt" />
+    <result column="update_at" jdbcType="DATE" property="updateAt" />
+    <result column="name" jdbcType="CHAR" property="name" />
+    <result column="qq" jdbcType="CHAR" property="qq" />
+    <result column="study_type" jdbcType="CHAR" property="studyType" />
+    <result column="enrollment" jdbcType="CHAR" property="enrollment" />
+    <result column="graduate_school" jdbcType="CHAR" property="graduateSchool" />
+    <result column="student_num" jdbcType="CHAR" property="studentNum" />
+    <result column="daily_link" jdbcType="CHAR" property="dailyLink" />
+    <result column="wish" jdbcType="CHAR" property="wish" />
+    <result column="check_bro" jdbcType="CHAR" property="checkBro" />
+    <result column="know_way" jdbcType="CHAR" property="knowWay" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_at, update_at, name, qq, study_type, enrollment, graduate_school, student_num, 
+    daily_link, wish, check_bro, know_way
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from student_enroll
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from student_enroll
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.model.User">
+    insert into student_enroll (id, create_at, update_at, 
+      name, qq, study_type, enrollment, 
+      graduate_school, student_num, daily_link, 
+      wish, check_bro, know_way)
+    values (#{id,jdbcType=INTEGER}, #{createAt,jdbcType=DATE}, #{updateAt,jdbcType=DATE}, 
+      #{name,jdbcType=CHAR}, #{qq,jdbcType=CHAR}, #{studyType,jdbcType=CHAR}, #{enrollment,jdbcType=CHAR}, 
+      #{graduateSchool,jdbcType=CHAR}, #{studentNum,jdbcType=CHAR}, #{dailyLink,jdbcType=CHAR}, 
+      #{wish,jdbcType=CHAR}, #{checkBro,jdbcType=CHAR}, #{knowWay,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.model.User">
+    insert into student_enroll
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="studyType != null">
+        study_type,
+      </if>
+      <if test="enrollment != null">
+        enrollment,
+      </if>
+      <if test="graduateSchool != null">
+        graduate_school,
+      </if>
+      <if test="studentNum != null">
+        student_num,
+      </if>
+      <if test="dailyLink != null">
+        daily_link,
+      </if>
+      <if test="wish != null">
+        wish,
+      </if>
+      <if test="checkBro != null">
+        check_bro,
+      </if>
+      <if test="knowWay != null">
+        know_way,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=DATE},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=DATE},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=CHAR},
+      </if>
+      <if test="studyType != null">
+        #{studyType,jdbcType=CHAR},
+      </if>
+      <if test="enrollment != null">
+        #{enrollment,jdbcType=CHAR},
+      </if>
+      <if test="graduateSchool != null">
+        #{graduateSchool,jdbcType=CHAR},
+      </if>
+      <if test="studentNum != null">
+        #{studentNum,jdbcType=CHAR},
+      </if>
+      <if test="dailyLink != null">
+        #{dailyLink,jdbcType=CHAR},
+      </if>
+      <if test="wish != null">
+        #{wish,jdbcType=CHAR},
+      </if>
+      <if test="checkBro != null">
+        #{checkBro,jdbcType=CHAR},
+      </if>
+      <if test="knowWay != null">
+        #{knowWay,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.model.User">
+    update student_enroll
+    <set>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=DATE},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=DATE},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=CHAR},
+      </if>
+      <if test="studyType != null">
+        study_type = #{studyType,jdbcType=CHAR},
+      </if>
+      <if test="enrollment != null">
+        enrollment = #{enrollment,jdbcType=CHAR},
+      </if>
+      <if test="graduateSchool != null">
+        graduate_school = #{graduateSchool,jdbcType=CHAR},
+      </if>
+      <if test="studentNum != null">
+        student_num = #{studentNum,jdbcType=CHAR},
+      </if>
+      <if test="dailyLink != null">
+        daily_link = #{dailyLink,jdbcType=CHAR},
+      </if>
+      <if test="wish != null">
+        wish = #{wish,jdbcType=CHAR},
+      </if>
+      <if test="checkBro != null">
+        check_bro = #{checkBro,jdbcType=CHAR},
+      </if>
+      <if test="knowWay != null">
+        know_way = #{knowWay,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.model.User">
+    update student_enroll
+    set create_at = #{createAt,jdbcType=DATE},
+      update_at = #{updateAt,jdbcType=DATE},
+      name = #{name,jdbcType=CHAR},
+      qq = #{qq,jdbcType=CHAR},
+      study_type = #{studyType,jdbcType=CHAR},
+      enrollment = #{enrollment,jdbcType=CHAR},
+      graduate_school = #{graduateSchool,jdbcType=CHAR},
+      student_num = #{studentNum,jdbcType=CHAR},
+      daily_link = #{dailyLink,jdbcType=CHAR},
+      wish = #{wish,jdbcType=CHAR},
+      check_bro = #{checkBro,jdbcType=CHAR},
+      know_way = #{knowWay,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="getAll" resultMap="BaseResultMap" >
+    SELECT * FROM student_enroll
+  </select>
+
+  <select id="getPage" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT * FROM student_enroll limit #{pageNo},#{SHOW_ITEMS}
+  </select>
+  <select id="selectByIdAndName" resultMap="BaseResultMap" parameterType="com.jnshu.model.User" >
+    select * from student_enroll
+    where id = #{id} and name = #{name}
+  </select>
+  <select id="countAll" resultType="java.lang.Integer" >
+    SELECT count(*)  FROM student_enroll
+  </select>
+</mapper>

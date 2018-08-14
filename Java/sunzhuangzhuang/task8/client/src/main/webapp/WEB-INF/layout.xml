@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <definition name="layout" template="/WEB-INF/views/mainLayout.jsp"/>
+    <!-- 主布局 -->
+    <!-- 项目A -->
+    <definition name="home" extends="layout">
+        <put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/homebody.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
+    </definition>
+
+    <definition name="occupation" extends="home">
+        <put-attribute name="header" value="/WEB-INF/views/userheader.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/occupationbody.jsp"/>
+    </definition>
+
+    <definition name="student" extends="occupation">
+        <put-attribute name="body" value="/WEB-INF/views/studentbody.jsp"/>
+    </definition>
+
+
+
+
+
+</tiles-definitions>

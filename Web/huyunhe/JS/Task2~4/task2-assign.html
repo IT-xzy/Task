@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>发放身份</title>
+  <meta name="viewport" content="width=640,maximum-scale=1,user-scalable=no">
+  <link rel="stylesheet" type="text/css" media="screen" href="./CSS/task2-assign.css" />
+
+</head>
+
+<body>
+  <header class="header">
+    <img src="./resource/back-left.png" onclick="location='./task2-home.html'">
+    <span class="header__title">参数设置</span>
+    <img src="./resource/help-circle.png">
+  </header>
+  <main>
+    <div class="proportion">
+      <div class="proportion__title">
+        <span>玩家配比</span>
+      </div>
+      <div class="proportion__content">
+        <!--js动态生成-->
+        <div class="proportion__identities">
+          <div class="proportion__identity"><img src="./resource/killer.png" alt="" srcset=""> 杀&nbsp&nbsp手
+            <span id="killer">1</span>人</div>
+          <div class="proportion__identity-3"><img src="./resource/citizen.png" alt=""> 水&nbsp&nbsp民
+            <span id="citizen">1</span>人</div>
+        </div>
+        <div class="proportion__setting" onclick="setting()">
+          <span>点击设置</span>
+          <img src="./resource/pencil.png">
+        </div>
+      </div>
+    </div>
+
+    <div class="words">
+      <div class="words__shuimin">
+        水民词组
+      </div>
+      <div class="words__ghost">
+        幽灵词组
+      </div>
+    </div>
+
+    <div class="players">
+      <div class="players__number">
+        <span>玩家人数</span>
+        <input type="number" id="totle-player" min="3" max="18" onchange="changeRange(this)"></input>
+      </div>
+      <div class="players__slide">
+        <div class="sub">
+          <img src="./resource/sub.png">
+        </div>
+        <div class="slide">
+          <div class="slide__bar"></div>
+          <div class="slide__bar-active"></div>
+          <div class="slide__thumb"></div>
+        </div>
+        <div class="add">
+          <img src="./resource/add.png">
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <button class="assign" onclick="dispatcher()">去发牌</button>
+  </footer>
+</body>
+<script src="./js/slide.js"></script>
+<script src="./js/assginQuantity.js"></script>
+<script src="./js/resize.js"></script>
+</html>

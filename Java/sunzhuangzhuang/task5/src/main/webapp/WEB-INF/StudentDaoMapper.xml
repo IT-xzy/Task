@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.StudentDao">
+    <select id="getAll" resultType="int">
+        SELECT COUNT(*) FROM game2
+    </select>
+    <select id="getOffer" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE offer
+    </select>
+    <select id="getJava" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE a='java' AND offer=0
+    </select>
+    <select id="getWeb" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE a='web' AND offer=0
+    </select>
+    <select id="getPm" resultType="int">
+        SELECT COUNT(*) FROM game2 WHERE a="pm" AND offer=0
+    </select>
+
+
+    <select id="getGood" resultType="spring.model.Student">
+        SELECT name,offer,resume,creatdate FROM game2 WHERE good=1
+    </select>
+    <insert id="addStudent">
+        INSERT INTO game2(id,name,good,offer,resume,creatdate,up) VALUE (#{id},#{name},#{good},#{offer},#{resume},#{creatdate},#{up})
+    </insert>
+</mapper>

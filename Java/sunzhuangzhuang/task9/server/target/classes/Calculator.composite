@@ -1,0 +1,36 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="Calculator">
+
+    <component name="CalculatorServiceComponent">
+        <implementation.java class="spring.calculator.CalculatorImpl"/>
+        <service name="CalculatorImpl">
+            <interface.java interface="spring.calculator.Calculator"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:9999/CalculatorRMIService"/>
+        </service>
+        <reference name="plus" target="PlusComponent"/>
+        <reference name="reduce" target="ReduceComponent"/>
+        <reference name="ride" target="RideComponent"/>
+        <reference name="except" target="ExceptComponent"/>
+    </component>
+
+
+
+    <component name="PlusComponent">
+        <implementation.java class="spring.plus.PlusImpl"/>
+    </component>
+
+    <component name="ReduceComponent">
+        <implementation.java class="spring.reduce.ReduceImpl"/>
+    </component>
+
+    <component name="RideComponent">
+        <implementation.java class="spring.ride.RideImpl"/>
+    </component>
+    <component name="ExceptComponent">
+        <implementation.java class="spring.except.ExceptImpl"/>
+    </component>
+</composite>

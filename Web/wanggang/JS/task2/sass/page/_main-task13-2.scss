@@ -1,0 +1,126 @@
+@mixin bgposition($xAndY) {
+    height: 8vw;
+    width: 8vw;
+    background: url(../images/task21.png) no-repeat;
+    background-size: auto 100%;
+    background-position: $xAndY;
+}
+
+@mixin fscolor($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+body {
+    background: #29bde0;
+}
+
+header {
+    justify-content: center;
+    p {
+        display: inline-block;
+        font-size: .2rem;
+        letter-spacing: .01rem;
+        color: white;
+    }
+    .close {
+        position: absolute;
+        right: 0;
+        margin-right: .22rem;
+        width: .03rem;
+        height: .3rem;
+        margin-right: 7%;
+        background: white;
+        transform: rotate(45deg);
+        &::after {
+            content: '';
+            display: block;
+            width: .03rem;
+            height: .3rem;
+            background: white;
+            transform: rotate(-90deg);
+        }
+    }
+}
+
+main {
+    margin-top: .45rem;
+    margin-bottom: .85rem;
+    overflow: auto;
+    background: #29bde0;
+    .vote {
+        .choose {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: .41rem;
+            background: #b9e9f5;
+            p {
+                display: inline-block;
+                margin-left: 8%;
+                line-height: 0.41rem;
+                @include fscolor(.13rem, #464646);
+            }
+        }
+    }
+    .air {
+        display: block;
+        width: 0;
+        height: 0;
+        margin-left: 9%;
+        border-top: 6px solid #b9e9f5;
+        border-left: 3.5px solid transparent;
+        border-right: 3.5px solid transparent;
+    }
+    .information {
+        margin-left: 9%;
+        @include fscolor(.12rem, white);
+    }
+}
+
+.players {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: .15rem;
+    .player {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 33.3%;
+        margin-bottom: .3rem;
+        .photo {
+            display: inline-block;
+            border: 1vw solid white;
+            .name {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 24vw;
+                height: 20vw;
+                font-size: .15rem;
+                background: #f5c97b;
+            }
+            .number {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 24vw;
+                height: 4vw;
+                @include fscolor(.11rem, white);
+                background: #83b09a;
+            }
+        }
+        .select {
+            display: flex;
+            justify-content: center;
+            visibility: hidden;
+            margin-top: .1rem;
+            width: 100%;
+            .icon1 {
+                display: inline-block;
+                @include bgposition(0 0);
+            }
+        }
+    }
+}

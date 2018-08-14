@@ -1,0 +1,97 @@
+<div  ng-controller="corpCtrl">
+  <div class="condition">
+    <form action="" name="corpForm">
+      <div class="row">
+        <div class="col-sm-1 text-center">
+          公司名称
+        </div>
+        <div class="col-sm-3 text-center">
+          <input type="text" name="corpName" class="form-control" ng-pattern="[A-Za-z]">
+        </div>
+        <div class="col-sm-1 text-center">
+          公司行业
+        </div>
+        <div class="col-sm-3 text-center">
+          <select name="" id="" class="form-control" ng-model="selectedIndustry" ng-options="item | industryFilter for item in data.industry">
+            <option value="" selected="selected">全部</option>
+          </select>
+        </div>
+        <div class="col-sm-1 text-center">
+          产品名称
+        </div>
+        <div class="col-sm-3 text-center">
+          <input type="text" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1 text-center">
+          认证状态
+        </div>
+        <div class="col-sm-3 text-center">
+          <select name="" class="form-control" ng-model="selectedValid" ng-options="item | validFilter for item in data.status">
+            <option value="">全部</option>
+          </select>
+        </div>
+        <div class="col-sm-1 text-center">
+          冻结状态
+        </div>
+        <div class="col-sm-3 text-center">
+          <select name="" class="form-control" ng-model="selectedFreeze" ng-options="item | freezeFilter for item in data.status">
+              <option value="">全部</option>
+          </select>
+        </div>
+        <div class="col-sm-1 text-center">
+          融资规模
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedScale" ng-options="item | scaleFilter for item in data.scale">
+            <option value="" selected="selected">全部</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-1 text-center">
+          地区
+        </div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedProvince" ng-options="item.name for item in province.data" ng-change="onChangeProvince()">
+            <option value="" selected>请选择省份</option>
+          </select>
+        </div>
+        <div class="col-sm-1 text-center"></div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedCity" ng-options="item.name for item in cities" ng-change="onChangeCity()">
+            <option value="" selected>请选择城市</option>
+          </select>
+        </div>
+        <div class="col-sm-1 text-center"></div>
+        <div class="col-sm-3 text-center">
+          <select class="form-control" ng-model="selectedArea" ng-options="item for item in area">
+            <option value="" selected>请选择区域</option>
+          </select>
+        </div>
+      </div>
+    </form>
+    <div style="text-align: right">
+      <button type="button" class="btn btn-danger">清空</button>
+      <button type="button" class="btn btn-success">搜索</button>
+    </div>
+  </div>
+
+  <div class="table">
+    <div class="result-title">
+      <span>公司列表</span>
+      <button type="button" class="btn btn-primary">新增</button>
+    </div>
+    <div class="table-header">
+      <span>序号</span>
+      <span>公司名称</span>
+      <span>公司行业</span>
+      <span>地区</span>
+      <span>融资规模</span>
+      <span>认证状态</span>
+      <span>冻结状态</span>
+      <span>操作</span>
+    </div>
+  </div>
+</div>

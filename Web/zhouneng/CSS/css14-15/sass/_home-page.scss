@@ -1,0 +1,314 @@
+@charset "UTF-8";
+@import"layout";
+// 主体
+main {
+    div.top-content {
+        text-align: center;
+
+        // 高效
+        span.huojian {
+            @include homepage-top;
+            @include box(.45rem, .62rem);
+            background: url(../picture/task-css14.png) no-repeat -1.99rem 0;
+        }
+
+        // 规范
+        span.book {
+            @include homepage-top;
+            @include box(.6rem, .48rem);
+            background: url(../picture/task-css14.png) no-repeat -1.88rem -2.42rem;
+        }
+
+        // 人脉
+        span.person {
+            @include homepage-top;
+            @include box(.52rem, .55rem);
+            background: url(../picture/task-css14.png) no-repeat -1.92rem -1.2rem;
+        }
+        h6 {
+            margin: .3rem 0;
+            font-size: .18rem;
+            color: $black;
+        }
+
+        // 在学人数
+        p.synopsis {
+            font-size: .16rem;
+            color: $text;
+        }
+        @media(min-width: 576px) and (max-width:767px) {
+            .synopsis {
+                text-align: left;
+            }
+        }
+        @media(max-width:420px) {
+            .synopsis-left {
+                text-align: left;
+            }
+        }
+        @media(min-width:576px) {
+            p.left {
+                text-align: left;
+            }
+        }
+        @media(min-width:992px) {
+            p.center {
+                text-align: center;
+            }
+        }
+        span.long{
+            position: absolute;
+            height: 2.2rem;
+            margin: 2rem 0 0 -1.55rem;
+            border: $border #DEDEDE;
+        }
+        @media(max-width:576px){
+            .long{
+                display: none;
+            }
+        }
+        h6.digit{
+            margin: 1.9rem 0 .17rem 0;
+            font-size: .18rem;
+            color: $green;
+
+            &::before{
+                content: "";
+                display: inline-block;
+                @include box(.13rem,.15rem);
+                margin-right: .14rem;
+                background: url(../picture/task6-css14.png) no-repeat 0 -.01rem;
+            }
+        }
+        h6.bottom-digit{
+            margin: .32rem 0 .17rem 0;
+        }
+    }
+
+    strong{
+        display: block;
+        margin: 1.51rem 0 .72rem 0;
+        text-align: center;
+        font-size: .18rem;
+        color: $black;
+    }
+
+    // 如何学习
+    @media  (max-width:399px) {
+        .row-box{
+            margin-left: 5vw;
+        }
+    }
+    @media (min-width:400px) and (max-width:575px) {
+        .row-box{
+            margin-left: 15vw;
+        }
+    }
+    div.box{
+        @include flex(space-between,center);
+        padding-left: 0;
+        margin-bottom: .2rem;
+
+        div.circle{
+            @include box(.7rem, .7rem);
+            border-radius: 100%;
+            border:$homepage-border;
+            background: $white;
+
+            span.circle-content{
+                @include flex(center,center);
+                line-height: .7rem;
+                color:$green;
+            }
+        }
+        p.font{
+            flex: 1;
+            margin: 0 .35rem;
+            font-size: .14rem;
+            color:$text;
+        }
+        @media(min-width:992px){
+            .font-right{
+                flex: none;
+            }
+        }
+        span.arrows{
+            @include box(.2rem,.2rem);
+            background: url(../picture/task-css14.png) no-repeat 0 -1.94rem;
+        }
+        @media(max-width:575px){
+            .arrows{
+                display: none;
+            }
+        }
+        @media (min-width:768px){
+            .distance{
+                margin-top:1.24rem;
+            }
+        }
+    }
+
+    // 优秀学员展示
+    .student-box{
+        @include box(90%,6rem);
+        padding: .5rem .32rem .4rem .32rem;
+        margin: .2rem auto;
+        border: $homepage-border;
+        background: $white;
+        text-align: center;
+
+        .portrait{
+            @include box(1.08rem,1.08rem);
+        }
+        h4{
+            margin: .4rem 0 .6rem 0;
+            font-size: .18rem;
+            color: $black;
+        }
+        .show{
+            text-align: left;
+            font-size: .18rem;
+            color: $text;
+        }
+        @media(min-width:380px) and (max-width:576px){
+            .show{
+                line-height: .5rem;
+                margin: 0 .3rem;
+            }
+        }
+        @media(min-width:426px) and (max-width:575px){
+            .show{
+                line-height: .5rem;
+                margin: 0 1rem;
+            }
+        }
+    }
+    @media(max-width:425px){
+        .student-box{
+            width: 70%;
+            margin: .2rem auto;
+        }
+    }
+    div.indicate-box{
+        text-align: center;
+
+        .indicate-green{
+            @include homepage-indicate;
+            background: $green;
+        }
+        .indicate{
+            @include homepage-indicate;
+            border: $homepage-border;
+            background: $white;
+        }
+    }
+
+    // 合作企业
+    div.collaborate{
+        @include flex(space-between,center);
+        background: $white;
+
+        div.picture-box{
+            @include flex(center,center);
+            @include box(20%,1.9rem);
+            text-align: center;
+    
+            &:hover{
+                box-shadow: 3px 3px 3px 3px $text;
+                /*阴影效果*/
+            }
+            .alibaba{
+                @include box(1.78rem,1.78rem);
+            }
+            .jishanyun{
+                @include box(.7rem,.7rem);
+            }
+            .huanxin{
+                @include box(1.34rem,.69rem);
+            }
+            .ronglian{
+                @include box(1.75rem,.65rem);
+            }
+            .qiniu{
+                @include box(1.24rem,.65rem);
+            }
+        }
+        @media(max-width:575px){
+            div.picture-box{
+                @include box(100%,1.9rem);
+                text-align: center;
+            }
+        }
+    }
+    @media(max-width:575px){
+        .picture{
+            width: 80%;
+        }
+    }
+
+    // 友情链接
+   div.bottom{
+       margin-top: .93rem;
+       padding-bottom: .3rem;
+       background: $white;
+
+       strong.font{
+        margin-top: .21rem;
+        font-size: .18rem;
+        color: $black;
+        }
+
+        ul.bottom-box{
+            
+            margin:.28rem 0 0 0;
+            font-size: .01rem;
+            color: $text;
+
+            li.zoom{
+                list-style: inside;
+
+                a.bottom-font{
+                    display: inline-block;
+                    font-size: .14rem;
+                    border-bottom:.02rem solid $white;
+                    color: $text;
+
+                    &:hover{
+                        border-bottom: .02rem solid $green;
+                    }
+                }
+            }
+            @media(max-width:767px){
+                .zoom{
+                    width: 20%;
+                    text-align: center;
+                    line-height: .5rem;
+                }
+            }
+            @media(max-width:450px){
+                .zoom{
+                    width: 35%;
+                    text-align: left;
+                    line-height: .5rem;
+                }
+            }
+        }
+        @media(min-width:451px){
+            .bottom-box{
+                @include flex(space-evenly,flex-grow);
+                margin-left: -1rem;
+            }
+        }
+        @media(max-width:767px){
+            .bottom-box{
+                margin-top: 0 !important;
+            }
+        }
+        @media(max-width:450px){
+            .bottom-box{
+                @include flex(space-evenly,flex-grow);
+                margin-left: .6rem !important;
+            }
+        }
+    }
+}
