@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+
+    <!--<import resource="classpath*:spring-servlet.xml"/>-->
+    <!--扫描包-->
+    <context:component-scan base-package="com.jns.service"/>
+    <context:component-scan base-package="util"/>
+    <context:component-scan base-package="interceptor"/>
+
+    <!--加载redis的配置文件-->
+    <context:property-placeholder location="classpath:properties/redis.properties" ignore-unresolvable="true"/>
+    <!--redis-->
+    <!-- redis config start -->
+    <!-- 配置JedisPoolConfig实例 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!-- 配置JedisConnectionFactory -->
+    <bean id="jedisConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <!-- <property name="password" value="${redis.pass}" /> -->
+        <!--<property name="database" value="${redis.dbIndex}"/>-->
+        <property name="poolConfig" ref="poolConfig"/>
+    </bean>
+    <!-- 配置RedisTemplate -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <!-- 序列化方式 建议key/hashKey采用StringRedisSerializer -->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <!--<property name="valueSerializer">-->
+        <!--<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>-->
+        <!--</property>-->
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--<property name="stringSerializer">-->
+        <!--<bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>-->
+        <!--</property>-->
+        <!-- 开启REIDS事务支持 -->
+        <property name="enableTransactionSupport" value="false"/>
+    </bean>
+    <!-- 对string操作的封装 -->
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <constructor-arg ref="jedisConnectionFactory"/>
+        <!-- 开启REIDS事务支持 -->
+        <property name="enableTransactionSupport" value="false"/>
+    </bean>
+
+    <!--阿里短信服务-->
+    <context:property-placeholder location="classpath:properties/aliSms.properties" ignore-unresolvable="true"/>
+    <bean id="aliSmsBean" class="util.aliSmsUtil.AliSmsBean">
+        <property name="accessKeyId" value="${mesg.acceKeyId}"/>
+        <property name="accessKeySecret" value="${mesg.accessKeySecret}"/>
+        <property name="signName" value="${mesg.SignName}"/>
+        <property name="templateCode" value="${mesg.TemplateCode}"/>
+        <property name="connectTimeout" value="${mesg.ConnectTimeout}"/>
+        <property name="readTimeout" value="${mesg.ReadTimeout}"/>
+    </bean>
+
+
+    <!--阿里图片存储-->
+    <context:property-placeholder location="classpath:properties/oss.properties" ignore-unresolvable="true"/>
+    <bean id="ossbean" class="util.ossUtil.OssBean">
+        <property name="accessKeyId" value="${oss.accessKeyId}"/>
+        <property name="accessKeySecret" value="${oss.accessKeySecret}"/>
+        <property name="bucketName" value="${oss.bucketName}"/>
+        <property name="contentype" value="${oss.contentype}"/>
+        <property name="endpoint" value="${oss.endpoint}"/>
+    </bean>
+
+    <!--阿里邮箱推送-->
+    <context:property-placeholder location="classpath:properties/aliEmail.properties" ignore-unresolvable="true"/>
+    <bean name="aliEmailBean" class="util.aliEmailUtil.AliEmailBean">
+        <property name="accessKeyId" value="${email.acceKeyId}"/>
+        <property name="accessKeySecret" value="${email.accessKeySecret}"/>
+        <property name="accountName" value="${email.accountName}"/>
+        <property name="fromAlias" value="${email.fromAlias}"/>
+        <property name="subject" value="${email.subject}"/>
+        <property name="tagName" value="${email.tagName}"/>
+    </bean>
+
+    <!--rmi配置文件加载-->
+    <bean id="studentRMIClientOne" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jns.service.StudentService"/>
+        <property name="serviceUrl" value="rmi://47.96.95.132:9999/studentRMI"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+    <bean id="courseRMIClientOne" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jns.service.CourseService"/>
+        <property name="serviceUrl" value="rmi://47.96.95.132:9999/courseRMI"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean id="studentRMIClientTwo" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jns.service.StudentService"/>
+        <property name="serviceUrl" value="rmi://192.168.88.160:8888/studentRMI1"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+    <bean id="courseRMIClientTwo" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jns.service.CourseService"/>
+        <property name="serviceUrl" value="rmi://192.168.88.160:8888/courseRMI1"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+</beans>
