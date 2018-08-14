@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fgh.task2.dao.LoginDao">
+    <!--<sql id="test">-->
+        <!--<trim suffixOverrides=",">-->
+            <!--<if test="password!=null and password!=''">  password=#{password},</if>-->
+            <!--<if test="MD5Pass!=null and MD5Pass!=''">    MD5Pass=#{MD5Pass},</if>-->
+            <!--<if test="photo!=null and photo!=''">        photo=#{photo},</if>-->
+            <!--<if test="mail!='' and mail!=null">          mail=#{mail} ,</if>-->
+            <!--<if test="mailstatus!='' and mailstatus!=null">    mailstatus=#{mailstatus} ,</if>-->
+            <!--<if test="mailcode!='' and mailcode!=null">   mailcode=#{mailcode} </if>-->
+        <!--</trim>-->
+    <!--</sql>-->
+
+    <select id="quaryByName" resultType="login" parameterType="String">
+        select * from t_task4_login where phcount = #{phcount}
+    </select>
+
+    <select id="quaryLogin" resultType="login">
+        select * from  t_task4_login
+    </select>
+
+    <select id="quaryById"  parameterType="int" resultType="login">
+        select * from t_task4_login where id = #{id}
+    </select>
+
+    <select id="quaryByCode"  parameterType="String" resultType="login">
+        select * from t_task4_login where  mailcode= #{mailcode}
+    </select>
+
+    <insert id="insertLogin" parameterType="login" >
+        insert into t_task4_login (phcount,password,MD5Pass,mailstatus,mailcode,photo)
+        values (#{phcount},#{password},#{MD5Pass},#{mailstatus},#{mailcode},#{photo})
+    </insert>
+
+    <delete id="delLogin" parameterType="String">
+        delete from t_task4_login where phcount = #{phcount}
+    </delete>
+
+    <update id="updateLogin" parameterType="login" >
+        update t_task4_login set mailstatus = #{mailstatus},mail=#{mail},
+        mailcode=#{mailcode}
+        where id = #{id}
+    </update>
+
+    <update id="updatePhoto" parameterType="login" >
+        update t_task4_login set photo = #{photo} where id = #{id}
+    </update>
+    <!--<update id="updateLogin" parameterType="com.fgh.task2.model.LoginUser" >-->
+        <!--update t_task4_login-->
+        <!--<set>-->
+            <!--<include refid="test"/>-->
+        <!--</set>-->
+        <!--where phcount=#{phcount}-->
+    <!--</update>-->
+</mapper>
