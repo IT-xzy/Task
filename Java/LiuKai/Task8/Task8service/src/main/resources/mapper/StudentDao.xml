@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jns.dao.StudentDao">
+    <resultMap id="studentMapper" type="com.jns.pojo.Student">
+        <id property="stuID" column="stu_id"/>
+        <result property="stuName" column="stu_name"/>
+        <result property="passWord" column="password"/>
+        <result property="phoneNum" column="phone_num"/>
+        <result property="stuImage" column="stu_image"/>
+        <result property="emailAddress" column="email_address"/>
+        <result property="course" column="course"/>
+        <result property="job" column="job"/>
+        <result property="good" column="good"/>
+        <result property="selfIntro" column="self_intro"/>
+        <result property="createTime" column="create_at"/>
+        <result property="updateTime" column="update_at"/>
+        <result property="loginTime" column="login_at"/>
+        <result property="emailActived" column="email_actived"/>
+    </resultMap>
+    <!--    统计学生数  -->
+    <select id="countAll"  resultType="int">
+         select count(*)  from  student
+    </select>
+    <select id="countJob" resultType="int">
+           select count(job) from student
+    </select>
+    <select id="countCourse" resultType="int">
+        select count(*) from student where course = #{cour} and job is null
+    </select>
+    <!--    查找优秀学员  -->
+    <select id="findGood" resultMap="studentMapper">
+        select * from student where good=1
+    </select>
+
+
+    <!--    查询所有学生  -->
+    <select id="selectAll" resultMap="studentMapper">
+    select * from student
+    </select>
+
+    <!--    根据手机号查询    -->
+    <select id="selectPhoneNum" resultMap="studentMapper">
+        select * from  student where phone_num=#{phoneNum}
+    </select>
+
+    <!--    根据StuID查询    -->
+    <select id="selectStuID" resultMap="studentMapper">
+        select * from  student where stu_id = #{stuID}
+    </select>
+
+    <!--   根据姓名查询   -->
+    <select id="selectStuName" resultMap="studentMapper">
+        select * from  student where stu_name=#{stuName}
+    </select>
+
+
+
+
+    <!--    注册   返回自增id  -->
+    <!--    方法一使用last_inser_id()方法    -->
+    <!--<insert id="signUpStudent" parameterType="com.Student">-->
+    <!--INSERT INTO student(stu_name,phone_num,password,create_at,update_at)-->
+    <!--values (#{stuName},#{phoneNum},#{passWord},#{createTime},#{updateTime})-->
+    <!--<selectKey keyProperty="stuID" order="AFTER" resultType="java.lang.Integer">-->
+    <!--select last_insert_id()-->
+    <!--</selectKey>-->
+    <!--</insert>-->
+    <!--    方法二设置自增id为true    -->
+    <insert id="signUpStudent" parameterType="com.jns.pojo.Student" useGeneratedKeys="true" keyProperty="stuID">
+    INSERT INTO student(stu_name,phone_num,password,create_at,update_at)
+    values (#{stuName},#{phoneNum},#{passWord},#{createTime},#{updateTime})
+</insert>
+
+    <update id="updateLoginTime" >
+       update student set login_at=#{loginTime} where stu_id=#{stuID}
+    </update>
+
+    <!--   动态sqltest   -->
+    <update id="updateStudent" >
+        update student
+        <set>
+            <if test="stuName != null">stu_name=#{stuName},</if>
+            <if test="phoneNum != null">phone_num=#{phoneNum},</if>
+            <if test="passWord != null">password = #{passWord},</if>
+            <if test="course != null">course = #{course},</if>
+            <if test="job != null">job = #{job},</if>
+            <if test="selfIntro != null">self_intro = #{selfIntro},</if>
+            <if test="good != null">good = #{good},</if>
+            <if test="emailAddress != null">email_address = #{emailAddress},</if>
+            <if test="stuImage != null">stu_image = #{stuImage},</if>
+            <if test="updateTime != null">update_at = #{updateTime}</if>
+        </set>
+        where  stu_id=#{stuID}
+    </update>
+
+
+    <!--    删除所有    -->
+<delete id="deleteAll">
+    --      DELETE FROM student
+TRUNCATE student
+</delete>
+</mapper>
+
+
+
+
+
