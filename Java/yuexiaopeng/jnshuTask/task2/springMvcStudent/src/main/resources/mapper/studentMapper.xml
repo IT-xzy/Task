@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatisPool.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxpStu.dao.StudentDao">
+
+    <!--插入数据-->
+    <insert id="insertStudent" parameterType="com.yxpStu.pojo.Student" >
+    insert into student values(#{id},#{name},#{createAt},#{updateAt},#{qq},
+    #{studyType},#{joinTime},#{university},#{studyId},#{dailyLink},#{slogen},#{master} )
+
+    </insert>
+
+    <!--按照study_id删除数据-->
+    <delete id="deleteStudent" parameterType="com.yxpStu.pojo.Student" >
+		delete from student where studyId = #{studyId}
+    </delete>
+
+    <!--修改数据，根据study_id-->
+    <update id="updateStudent" parameterType="com.yxpStu.pojo.Student" >
+		update student set slogen= #{slogen},dailyLink=#{dailyLink},master=#{master}
+		where studyId=#{studyId}
+    </update>
+
+    <!--查询数据，根据study_id-->
+    <select id="selectStudent" parameterType="com.yxpStu.pojo.Student" resultType="com.yxpStu.pojo.Student">
+		select * from student  where studyId=#{studyId}
+    </select>
+
+    <!--查询数据，全部数据，用list存储-->
+    <select id="selectAllStudent"  resultType="com.yxpStu.pojo.Student">
+		select * from student
+    </select>
+
+</mapper>

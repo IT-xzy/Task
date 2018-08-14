@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- type 为接口路径   target 为实现类ID(ref) -->
+    <sca:service name="studentServer" type="com.opt.service.StudentService" target="studentServiceImpl"/>
+    <sca:service name="userServer" type="com.opt.service.UserService" target="userServiceImpl"/>
+    <sca:service name="professionServer" type="com.opt.service.ProfessionService" target="professionServiceImpl"/>
+</beans>

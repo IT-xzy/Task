@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mapper.UserMapper">
+    <!--定义resultMap-->
+    <!--学生的Map-->
+    <resultMap id="StudentMap" type="com.pojo.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="account_Number" property="accountNumber"/>
+        <result column="password" property="password"/>
+        <result column="salt" property="salt"/>
+        <result column="Oid" property="oid"/>
+        <result column="Company" property="company"/>
+        <result column="position" property="position"/>
+        <result column="Personal_Profile" property="personalProfile"/>
+        <result column="Head_Portrait" property="headPortrait"/>
+        <result column="Learning_state" property="learningState"/>
+        <result column="Job_satisfaction" property="jobSatisfaction"/>
+        <result column="mailbox" property="mailbox"/>
+        <result column="phoneNumber" property="phoneNumber"/>
+        <result column="create_at" property="create_at"/>
+        <result column="update_at" property="update_at"/>
+    </resultMap>
+    <!--职业的Map-->
+    <resultMap id="OccupationReuniteMap" type="com.pojo.OccupationReunite">
+        <id column="id" property="id"/>
+        <result column="Occupation" property="occupationName"/>
+        <result column="Career_introduction" property="careerIntroduction"/>
+        <result column="Occupation_direction" property="occupationDirection"/>
+        <result column="threshold" property="threshold"/>
+        <result column="Difficulty_Degree" property="difficultyDegree"/>
+        <result column="Growth_Cycle" property="growthCycle"/>
+        <result column="Requirement" property="requirement"/>
+        <result column="Early_Salary" property="earlySalary"/>
+        <result column="MediumTerm_Salary" property="mediumTermSalary"/>
+        <result column="Late_Salary" property="lateSalary"/>
+        <result column="Related_Skills" property="relatedSkills"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+    </resultMap>
+    <!--统计在学人数-->
+    <select id="statisticsInLearning" resultType="int" parameterType="String">
+        SELECT count(1) from studenttable where Learning_state=#{entry}
+    </select>
+    <!--统计工作满意人数-->
+    <select id="statisticaljobSatisfaction" resultType="int" parameterType="String">
+        SELECT count(1) from studenttable where Job_satisfaction=#{entry}
+    </select>
+    <!--查询4个优秀学员-->
+    <select id="queryStudent" resultMap="StudentMap" parameterType="String">
+        select name,position,Personal_Profile,Head_Portrait
+         from studenttable where Job_satisfaction=#{entry} limit 4
+    </select>
+    <!--查询职业-->
+    <select id="queryOccupationReunite" resultMap="OccupationReuniteMap" parameterType="String">
+        select * from occupationtable where Occupation_direction=#{entry}
+    </select>
+    <!--查询职业在学人数-->
+    <select id="queryStudentNumber" resultType="int" parameterType="int">
+        SELECT count(1) from studenttable where Oid=#{oid}
+    </select>
+    <!--登录逻辑-->
+    <select id="signIn" resultMap="StudentMap" parameterType="String">
+        SELECT * from studenttable where account_Number=#{accountNumber}
+    </select>
+    <!--注册逻辑-->
+    <insert id="registerStudent" keyProperty="id" useGeneratedKeys="true" parameterType="com.pojo.Student">
+        INSERT into studenttable (account_Number,password,salt)VALUES(#{accountNumber},#{password},#{salt})
+    </insert>
+    <!--账号重复判断-->
+    <select id="accountNumberRepeat" parameterType="String" resultType="int">
+        SELECT count(1) from studenttable where account_Number=#{accoun}
+    </select>
+    <!--根据ID值查询用户-->
+    <select id="queryStudnet" parameterType="int" resultMap="StudentMap">
+        SELECT * from studenttable where id=#{id}
+    </select>
+    <!--更新个人信息-->
+    <update id="updeteStudent" parameterType="com.pojo.Student">
+        UPDATE studenttable set name=#{name},position=#{position},Personal_Profile=#{personalProfile} where id=#{id}
+    </update>
+    <!--上传图片-->
+    <update id="uploadHeadPortrait" parameterType="com.pojo.Student">
+    UPDATE studenttable set Head_Portrait=#{headPortrait} where id=#{id}
+    </update>
+    <!--更新邮箱-->
+    <update id="updeteMail" parameterType="com.pojo.Student">
+        UPDATE studenttable set mailbox=#{mailbox} where id=#{id}
+    </update>
+    <!--查询邮箱，手机号-->
+    <select id="queryStudentMailAndPhoneNumber" parameterType="int" resultMap="StudentMap">
+        SELECT mailbox,phoneNumber from studenttable where id=#{id}
+    </select>
+    <!--更新密码-->
+    <update id="updatePassword" parameterType="com.pojo.Student">
+        UPDATE studenttable set password=#{password},salt=#{salt} where id=#{id}
+    </update>
+</mapper>

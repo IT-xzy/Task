@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.1.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan base-package="spring"/>
+    <context:component-scan base-package="utils"/>
+    <context:property-placeholder location="classpath:Email.properties,classpath:Message.properties,classpath:redis.properties" ignore-unresolvable="true"/>
+    <!--Memcached配置 -->
+
+    <!--<bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder"-->
+          <!--p:connectionPoolSize="${memcached.connectionPoolSize}" p:failureMode="${memcached.failureMode}">-->
+        <!--&lt;!&ndash; XMeCaseDeCclipBugEdter 有两个参数，第一服务器列表，第二权重数组。&ndash;&gt;-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<bean class="java.net.InetSocketAddress">-->
+                    <!--<constructor-arg>-->
+                        <!--<value>${memcached.server1.host}</value>-->
+                    <!--</constructor-arg>-->
+                    <!--<constructor-arg>-->
+                        <!--<value>${memcached.server1.port}</value>-->
+                    <!--</constructor-arg>-->
+                <!--</bean>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--<constructor-arg>-->
+            <!--<list>-->
+                <!--<value>${memcached.server1.weight}</value>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--<property name="commandFactory">-->
+            <!--<bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>-->
+        <!--</property>-->
+        <!--<property name="sessionLocator">-->
+            <!--<bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>-->
+        <!--</property>-->
+        <!--<property name="transcoder">-->
+            <!--<bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash;使用工厂构建memcached客户端&ndash;&gt;-->
+    <!--<bean id="memcachedClient" factory-bean="memcachedClientBuilder" factory-method="build" destroy-method="shutdown"/>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--mybatis数据库配置-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="spring.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <property name="url" value="jdbc:mysql://106.14.220.166:3306/spring?serverTimezone=GMT%2B8"/>
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations">
+            <array>
+                <value>classpath:StudentDaoMapper.xml</value>
+                <value>classpath:OccupationMapper.xml</value>
+                <value>classpath:UserMapper.xml</value>
+            </array>
+        </property>
+    </bean>
+
+    <!--jedis配置-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!--redis服务器中心-->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="poolConfig"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="hostName" value="${redis.host}"/>
+        <property name="password" value="${redis.password}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+    </bean>
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+
+    <bean id="smsBean" class="spring.model.SmsBean">
+        <property name="accessKeyId" value="${Message.accessKeyId}"/>
+        <property name="accessKeySecret" value="${Message.accessKeySecret}"/>
+        <property name="signName" value="${Message.signName}"/>
+        <property name="templateCode" value="${Message.templateCode}"/>
+    </bean>
+    <bean id="emailBean" class="spring.model.EmailBean">
+        <property name="region" value="${email.region}"/>
+        <property name="accessKeyId" value="${email.accessKeyId}"/>
+        <property name="accessKeySecret" value="${email.accessKeySecret}"/>
+        <property name="accountName" value="${email.accountName}"/>
+        <property name="tagName" value="${email.tagName}"/>
+        <property name="fromAlias" value="${email.fromAlias}"/>
+        <property name="subject" value="${email.subject}"/>
+        <property name="htmlBody" value="${email.htmlBody}"/>
+    </bean>
+</beans>

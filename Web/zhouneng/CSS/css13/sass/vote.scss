@@ -1,0 +1,221 @@
+// 变量
+$eliminate:0;
+$blue:#29BDE0;
+$white:#FFFFFF;
+$border:.01rem solid $white;
+$thick-border:.03rem solid $white;
+$border-style:solid $white;
+$sjx:solid transparent;
+
+
+
+// 混合器
+
+@mixin flex($x:center,$y:center){
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin guding{
+    position: fixed;
+    width: 100%;
+    background: $blue;
+    z-index: 1;
+}
+@mixin buttno{
+    border:none;
+    outline: none;
+}
+@mixin box($w:4.5vw,$h:4.5vw){
+    width: $w;
+    height:$h;
+}
+@mixin header{
+    @include box(.02rem,.5rem );
+    border: $border;
+    background: $white;
+}
+
+
+
+
+
+html{
+    font-size: 312.5%;
+}
+body{
+    padding: .9rem 0 1.6rem 0;
+    margin: $eliminate;
+    background: $blue;
+    font-size:initial;
+}
+p{
+    margin: $eliminate;
+}
+
+/*header 眉页*/
+header{
+    @include flex(space-between,center);
+    @include guding;
+    top:0;
+    height: .88rem;
+    font-size: .34rem;
+    letter-spacing: .15rem;
+    color: $white;
+
+    div.left-box{
+        @include flex;
+        @include box(.4rem,.43rem );
+        padding:.03rem;
+        margin-left:.23rem;
+        border: $border;
+
+        a.content{
+            @include box(.34rem,.05rem );
+            padding: .11rem 0;
+            border-top: $thick-border;
+            border-bottom : $thick-border;
+            background: $white content-box;
+        }
+    }
+    div.right-box{
+        @include flex(space-between,center);
+        width: .5rem;
+
+        a.content{
+            display: inline-block;
+            @include header;
+            transform: rotate(45deg);
+
+            &.content::after{
+                position: absolute;
+                top:-.02rem;
+                left:-.01rem;
+                content: "";
+                @include header;
+                transform: rotate(90deg);
+            }
+        }
+    }
+}
+
+// 主体
+div.top-box{
+    position: relative;
+    @include flex (space-between,center);
+    height: .82rem;
+    background: #b9e9f5;
+
+    /*三角形*/
+    &.top-box::before{
+        float: left;
+        content: "";
+        margin: .97rem 0 0 .71rem;
+        border-top: .14rem solid #b9e9f5;
+        border-left: .07rem $sjx;
+        border-right: .07rem $sjx;
+    }
+
+    p.left-font{
+        position: absolute;
+        left: .46rem;
+        font-size: .26rem;
+        color: #464646;
+    }
+    button.right-circle{
+        @include box(.52rem,.52rem );
+        margin-right: .17rem;
+        @include buttno;
+        border-radius :100%;
+        background: #FBB435;
+
+        /*三角形*/
+        &.right-circle::after{
+            display: inline-block;
+            content: "";
+            margin: .05rem 0 0 .05rem;
+            border-top: .15rem $sjx;
+            border-left:.3rem $border-style;
+            border-bottom: .15rem $sjx;
+        }
+    }
+}
+p.font{
+    margin: .24rem 0 .43rem .72rem;
+    font-size:.24rem;
+    color:$white;
+}
+div.center-box{
+    display: flex;
+    flex-flow: nowrap;
+    justify-content: center;
+
+    /*下拉框*/
+    div.dropdown{
+        @include box(23.5vw,23.5vw );
+        margin: 0 4vw 8.3vw 4vw;
+        border: .05rem $border-style;
+        background: #F5C97B;
+
+        span.role{
+            @include flex;
+            height: 75%;
+            font-size: .1rem;
+            color:#565656;
+        }
+        span.number{
+            @include flex;
+            height: 25%;
+            background: rgba(26,153,183,.5);
+            font-size: .23rem;
+            color:$white;
+        }
+        /*下拉内容*/
+        ul.dropdown-content{
+            margin: $eliminate;
+            margin-top: 2vw;
+            padding: $eliminate;
+            list-style: none;
+            display: none;
+            
+            li.killer{
+                @include box;
+                background: url(../picture/task2-css12.png) no-repeat 0 0/100%;
+            }
+            li.judge{
+                @include box;
+                background: url(../picture/task2-css12.png) no-repeat 0 30%/100%;
+            }
+            li.sniper{
+                @include box;
+                background: url(../picture/task2-css12.png) no-repeat 0 67%/100%;
+            }
+            li.doctor{
+                @include box;
+                background: url(../picture/task2-css12.png) no-repeat 0 100%/100%;
+            }
+        }
+        &.dropdown:hover .dropdown-content{
+            @include flex(space-between,flex-flow);
+        }
+    }
+}
+
+/*footer 尾页*/
+footer{
+    @include guding;
+    bottom: 0;
+    height: 1.8rem;
+    line-height: 1.9rem;
+    text-align: center;
+
+    .button-box{
+        @include box(75%,.87rem );
+        background: #FBB435;
+        font-size: .4rem;
+        /* 字符间距 */
+        letter-spacing: .15rem;
+        color: $white;
+        box-shadow: 0 0 0 1.5px #F5C97B;
+    }
+}

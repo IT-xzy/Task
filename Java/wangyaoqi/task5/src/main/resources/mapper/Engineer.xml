@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wyq.webapp.mapper.EngineerMapper">
+    <resultMap id="engineer" type="Engineer">
+        <id property="id" column="id"/>
+        <result property="photo" column="photo"/>
+        <result property="type" column="type"/>
+        <result property="threshold" column="threshold"/>
+        <result property="difficult" column="difficult"/>
+        <result property="createTime" column="create_at"/>
+        <result property="demand" column="demand"/>
+        <result property="oneYear" column="one_year"/>
+        <result property="threeYear" column="three_year"/>
+        <result property="fiveYear" column="five_year"/>
+        <result property="tenYear" column="ten_year"/>
+        <result property="studyNumber" column="study_number"/>
+    </resultMap>
+    <select id="get" resultMap="engineer">
+        select * from engineer
+    </select>
+</mapper>

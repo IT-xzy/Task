@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="com.stu.service"/>
+    <!--<context:annotation-config/>-->
+    <context:property-placeholder location="classpath*:c3p0.properties"/>
+
+    <!--<bean id="sendCloud" class="org.springframework.beans.factory.config.PropertiesFactoryBean">-->
+        <!--&lt;!&ndash; 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 &ndash;&gt;-->
+        <!--<property name="locations">-->
+            <!--<array>-->
+                <!--<value>classpath:properties/sendCloud.properties</value>-->
+            <!--</array>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${driverClass}"/>
+        <property name="jdbcUrl" value="${jdbcUrl}"/>
+        <property name="user" value="${user}"/>
+        <property name="password" value="${password}"/>
+        <!--初始化和最大最小连接数-->
+        <property name="initialPoolSize" value="${initialPoolSize}"/>
+        <property name="maxPoolSize" value="${max_size}"/>
+        <property name="minPoolSize" value="${min_size}"/>
+        <property name="acquireIncrement" value="${acquireIncrement}"/>
+        <property name="acquireRetryAttempts" value="${acquireRetryAttempts}"/>
+        <property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}"/>
+        <property name="maxIdleTime" value="${maxIdleTime}"/>
+        <property name="acquireRetryDelay" value="${acquireRetryDelay}"/>
+        <property name="autoCommitOnClose" value="${autoCommitOnClose}"/>
+        <property name="maxStatements" value="${maxStatements}"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:mapper/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.stu.dao.mapper"/>
+    </bean>
+
+    <bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--MultipartFile转File-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+    <bean id="professionService" class="com.stu.service.impl.ProfessionServiceImpl" lazy-init="true"/>
+
+    <!--<bean id="userService" class="com.stu.service.impl.UserServiceImpl"/>-->
+    <!--<bean id="studentService" class="com.stu.service.impl.StudentServiceImpl"/>-->
+
+<!--
+
+    <bean id="studentServer" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" >
+        <property name="serviceInterface" value="com.stu.service.StudentService"/>
+        <property name="serviceUrl" value="rmi://47.98.50.21:1099/studentService"/>
+    </bean>
+
+
+    <bean id="userService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" >
+        <property name="serviceInterface" value="com.stu.service.UserService"/>
+        <property name="serviceUrl" value="rmi://47.98.50.21:1098/userService"/>
+    </bean>
+
+    <bean id="studentServerB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" >
+        <property name="serviceInterface" value="com.stu.service.StudentService"/>
+        <property name="serviceUrl" value="rmi://119.29.17.188:1099/studentServiceB"/>
+    </bean>
+
+    <bean id="userServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" >
+        <property name="serviceInterface" value="com.stu.service.UserService"/>
+        <property name="serviceUrl" value="rmi://119.29.17.188:1098/userServiceB"/>
+    </bean>
+-->
+
+    <!--cluster4spring-->
+    <bean id="rmiClientSetting" abstract="true">
+        <!-- 是否启动时加载stub -->
+        <property name="refreshEndpointsOnStartup" value="false" />
+        <!-- 调用异常时，将重新加载stub -->
+        <property name="refreshEndpointsOnConnectFailure" value="true" />
+        <!-- 调用失败时是否切换到其他服务端 -->
+        <property name="switchEndpointOnFailure" value="true" />
+        <!-- 追踪拦截器启用 -->
+        <property name="registerTraceInterceptor" value="true" />
+        <!-- 缓存stub 继承AbstractRmiShortFormProxyFactoryBean才有-->
+        <property name="cacheEndpoints" value="true" />
+
+    </bean>
+    <bean id="userService"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.stu.service.UserService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://47.98.50.21:1099/studentService</value>
+                <value>rmi://119.29.17.188:1099/studentServiceB</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <bean id="studentServer"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.stu.service.StudentService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://47.98.50.21:1098/userService</value>
+                <value>rmi://119.29.17.188:1098/userServiceB</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+
+    <import resource="memcache-config.xml"/>
+    <import resource="jedis-config.xml"/>
+
+
+
+
+</beans>

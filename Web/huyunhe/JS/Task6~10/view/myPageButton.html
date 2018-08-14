@@ -1,0 +1,14 @@
+<div class="text-right">
+    <button class="btn btn-default btn-page" ng-click="head()" ng-disabled="selectedPage == 1">首页</button>
+    <button class="btn btn-info btn-page" ng-click="prevPage()" ng-disabled="selectedPage == 1">&lt</button>
+    <button class="btn btn-info btn-page" ng-if="selectedPage>1 && totalPage>5" ng-disabled="'disabled'">...</button>
+    <button href="" ng-repeat="page in displayPages" ng-click="directSelect(page.index)" class="btn btn-info btn-page" ng-class="page.isActive">{{page.index}}</button>
+    <button class="btn btn-info btn-page" ng-if="selectedPage<totalPage && selectedPage <= totalPage - displayPages.length" ng-disabled="'disabled'">...</button>
+    <button class="btn btn-info btn-page" ng-click="nextPage()" ng-disabled="selectedPage>=totalPage">&gt</button>
+    <button class="btn btn-default btn-page" ng-click="tail()" ng-disabled="selectedPage == totalPage">末页</button>
+    <span style="display: inline-block;line-height: 20px;vertical-align: middle;font-size: 12px;">去
+      <input type="number" form-control style="width: 5rem" ng-change="detectPage()" ng-model="directPage">页
+      <button class="btn btn-default" ng-click="directSelect(directPage)">确定</button>
+    </span>
+
+  </div>

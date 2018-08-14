@@ -1,0 +1,76 @@
+<div ng-controller="articleCtrl">
+  <div class="condition">
+      <form action="">
+        <div class="row">
+          <div class="col-sm-1 text-center">
+            发布时间
+          </div>
+          <div class="col-sm-3 text-center">
+            <input type="date" class="form-control" ng-model="selectedStartTime">
+          </div>
+          <div class="col-sm-1 text-center">
+            ——
+          </div>
+          <div class="col-sm-3 text-center">
+            <input type="date" class="form-control" ng-model="selectedEndTime">
+          </div>
+          <div class="col-sm-1 text-center">
+            类型
+          </div>
+          <div class="col-sm-3 text-center">
+            <select name="" id="" class="form-control" ng-model="selectedType" ng-options="item | typeFilter for item in type">
+              <option value="" selected>全部</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-1 text-center">
+            状态
+          </div>
+          <div class="col-sm-3 text-center">
+            <select name="" class="form-control" ng-model="selectedStatus" ng-options="item | statusFilter for item in status">
+              <option value="" selected>全部</option>
+            </select>
+          </div>
+        </div>
+      </form>
+      <div style="text-align: right">
+        <button type="button" class="btn btn-danger" ng-click="clear()">清空</button>
+        <button type="button" class="btn btn-success" ng-click="search(1)">搜索</button>
+      </div>
+    </div>
+
+    <div class="table">
+      <div class="result-title">
+        <span>Article列表</span>
+        <a ui-sref="articleDetails"><button type="button" class="btn btn-primary">新增</button></a>
+      </div>
+      <div class="table-header">
+        <span style="width: 5%;">ID</span>
+        <span style="width: 20%;">名称</span>
+        <span>类型</span>
+        <span>发布时间</span>
+        <span>修改时间</span>
+        <span style="width: 10%">发布者</span>
+        <span style="width: 7.5%">状态</span>
+        <span style="width: 20%" id="mainpulate">操作</span>
+      </div>
+      <div class="table-body" ng-repeat="item in list.data.data.articleList" ng-class="$odd?'odd':'even'">
+          <span style="width: 5%;">{{$index+1}}</span>
+          <span style="width: 20%;">{{item.title}}</span>
+          <span>{{item.type | typeFilter}}</span>
+          <span>{{item.createAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+          <span>{{item.updateAt | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+          <span style="width: 10%">{{item.author}}</span>
+          <span style="width: 7.5%">{{item.status | statusFilter}}</span>
+          <span id="manipulate" style="width: 20%">
+            <a class="btn btn-primary" style="font-size: 80%" href="" ng-click="modifyStatus(item.id,item.status)">{{item.status | inverseStatusFilter}}</a>
+            <a  class="btn btn-success" style="font-size: 80%" href="" id="edit{{$index}}" ng-click="edit($index)">编辑</a>
+            <a class="btn btn-danger" style="font-size: 80%" href="" ng-click="deleteInServer(item.id)">删除</a>
+          </span>
+        </div>
+    </div>
+    <div class="text-right">
+      <my-page-button total-page="totalPage" selected-page="selectedPage" page-size="pageSize" search="search" display-pages="displayPages"></my-page-button>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatisPool.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yxpStu.dao.LoginDao">
+
+    <!--插入数据-->
+    <insert id="insertLogin" parameterType="com.yxpStu.pojo.Login" >
+        insert into login values(#{loginId},#{loginPassword})
+
+    </insert>
+
+    <!--&lt;!&ndash;按照study_id删除数据&ndash;&gt;-->
+    <!--<delete id="deleteStudent" parameterType="com.yxpStu.pojo.Student" >-->
+        <!--delete from student where study_id = #{study_id}-->
+    <!--</delete>-->
+
+    <!--修改数据，根据loginId-->
+    <update id="updateLogin" parameterType="com.yxpStu.pojo.Login" >
+        update login set loginPassword= #{loginPassword} where loginId=#{loginId}
+    </update>
+
+    <!--查询数据，根据loginId-->
+    <select id="selectLogin" parameterType="com.yxpStu.pojo.Login" resultType="com.yxpStu.pojo.Login">
+        select * from login  where loginId=#{loginId}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.czm.dao.UserDao" >
+
+    <!--resultMap属性：type为java的实体类，id为此resultMap的标识-->
+
+    <select id="findUserById" parameterType="java.lang.Integer" resultType="com.jnshu.czm.model.User">
+        SELECT * FROM job WHERE id=#{id}
+    </select>
+
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultType="com.jnshu.czm.model.User">
+        select * from job
+
+    </select>
+
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) from job
+    </select>
+
+</mapper>

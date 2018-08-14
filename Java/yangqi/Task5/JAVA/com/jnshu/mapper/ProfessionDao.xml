@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.ProfessionDao">
+
+    <select id="findAlls" resultType="com.jnshu.entity.Profession">
+        select * from profession
+    </select>
+
+    <select id="findName" resultType="int">
+        select count(name ) from profession where name='IOS工程师'
+    </select>
+
+    <select id="addlist" parameterType="com.jnshu.entity.Profession">
+        insert into profession(name,picture_tx,profession_zy,proCompany)values (#{name},#{picture_tx},#{profession_zy},#{proCompan})
+    </select>
+
+</mapper>
