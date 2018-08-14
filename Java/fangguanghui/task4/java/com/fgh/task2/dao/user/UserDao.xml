@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!--prefix:在trim标签内sql语句加上前缀。-->
+        <!--suffix:在trim标签内sql语句加上后缀。-->
+        <!--suffixOverrides:指定去除多余的后缀内容，如：suffixOverrides=","，
+        去除trim标签内sql语句多余的后缀","。-->
+        <!--prefixOverrides:指定去除多余的前缀内容-->
+<mapper namespace="com.fgh.task2.dao.user.UserDao" >
+    <sql id="findBy">
+    <trim suffixOverrides=",">
+
+        <if test="username!=null and username!=''">   username=#{username},</if>
+        <if test="id!=null and id!=''">    id=#{id},</if>
+        <if test="QQ!=null and QQ!=''">      QQ=#{QQ},</if>
+        <if test="type!='' and type!=null">type=#{type}, </if>
+        <if test="joinTime!=null and joinTime!=''">     joinTime=#{joinTime},</if>
+        <if test="school!=null and school!=''">        school=#{school},</if>
+        <if test="onlineId!=null and onlineId!=''">   onlineId=#{onlineId},</if>
+        <if test="daily!=null and daily!=''">     daily=#{daily},</if>
+        <if test="description!=null and description!=''">  description=#{description},</if>
+        <if test="counsellor!=null and counsellor!=''">  counsellor=#{counsellor},</if>
+        <if test="way!=null and way!=''">    way=#{way},</if>
+        <if test="create_at!=null and create_at!=''">  create_at=#{create_at},</if>
+        <if test="update_at!=null and update_at!=''">  update_at=#{update_at},</if>
+        <if test="create_by!=null and create_by!=''">  create_by=#{create_by},</if>
+        <if test="update_by!=null and update_by!=''">  update_by=#{update_by}</if>
+    </trim>
+    </sql>
+
+    <!--自定义查询-->
+    <select id="findUserBy" parameterType="user" resultType="user">
+        SELECT * FROM taskone
+        <where>
+        <if test="username!=null and username!=''">  AND username=#{username}</if>
+        <if test="id!=null and id!=''">  AND  id=#{id}</if>
+        <if test="QQ!=null and QQ!=''">   AND   QQ=#{QQ}</if>
+        <if test="type!='' and type!=null">AND  type=#{type} </if>
+        <if test="joinTime!=null and joinTime!=''">  AND   joinTime=#{joinTime}</if>
+        <if test="school!=null and school!=''">   AND     school=#{school}</if>
+        <if test="onlineId!=null and onlineId!=''"> AND  onlineId=#{onlineId}</if>
+        <if test="daily!=null and daily!=''">  AND   daily=#{daily}</if>
+        <if test="description!=null and description!=''">  AND description=#{description}</if>
+        <if test="counsellor!=null and counsellor!=''"> AND counsellor=#{counsellor}</if>
+        <if test="way!=null and way!=''"> AND   way=#{way}</if>
+        </where>
+    </select>
+
+    <!--插入数据-->
+    <insert id="insertUser" parameterType="user" >
+        insert into taskone
+        (username,QQ,type,joinTime,school,onlineId,daily,description,counsellor,
+        way,create_at,update_at,create_by,update_by)
+        values
+        (#{username},#{QQ},#{type},#{joinTime},#{school},#{onlineId},#{daily},
+        #{description},#{counsellor},#{way},#{create_at},#{update_at},#{create_by},#{update_by})
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <!--删除数据-->
+    <delete id="delUser" parameterType="int">
+        delete from taskone where id=#{id}
+    </delete>
+
+    <!--更新数据-->
+    <update id="updateUser" parameterType="user" >
+        update taskone
+        <set>
+            <include refid="findBy"/>
+        </set>
+
+        <!--
+         username=#{username},QQ=#{QQ},type=#{type},joinTime=#{joinTime},school=#{school},
+         onlineId=#{onlineId},daily=#{daily},description=#{description},counsellor=#{counsellor},
+         way=#{way},update_at=#{update_at}
+        -->
+        where id=#{id}
+
+    </update>
+
+    <select id="findByName" parameterType="String" resultType="int">
+        select * from taskone where username like '%${value}%'
+    </select>
+    <!--查询全部数据-->
+    <select id="findAll" resultType="User">
+        select * from taskone
+    </select>
+
+    <select id="findUserById" parameterType="user" resultType="user">
+    SELECT * FROM taskone where id=#{id}
+    </select>
+</mapper>
