@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.dao.UserDTODAO">
+    <insert id="add">
+        insert into tb_user(username,password,phone,email,emailState) values (#{username},#{password},#{phone},#{email},0)
+    </insert>
+    
+    <select id="checkout" resultType="UserDTO">
+        select * from tb_user where username=#{username};
+    </select>
+
+    <select id="findByUserName" resultType="Boolean" >
+        select username from tb_user where username=#{username};
+    </select>
+
+    <select id="getByEmail" resultType="UserDTO" >
+        select username from tb_user where email=#{email};
+    </select>
+
+    <select id="getByPhone" resultType="UserDTO" >
+        select username from tb_user where phone=#{phone};
+    </select>
+
+    <select id="getByUsername" resultType="UserDTO" >
+        select * from tb_user where username=#{username};
+    </select>
+
+    <update id="update" parameterType="com.jnshu.entity.UserDTO">
+        update tb_user
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="emailState != null">
+                emailState = #{emailState},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="photo != null">
+                photo = #{photo},
+            </if>
+        </set>
+        where username = #{username}
+    </update>
+
+</mapper>

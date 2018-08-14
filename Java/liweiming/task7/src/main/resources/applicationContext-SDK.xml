@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- 容联短信 SDK -->
+    <bean id="sendSMSSDK" class="com.jnshu.sdk.SmsClient">
+        <constructor-arg name="accountSid" value="8a216da864a7c9e30164b6f647b70bf9"/>
+        <constructor-arg name="accountToken" value="0c1be21032ef4842a796ddb53d3ffae8"/>
+        <constructor-arg name="AppId" value="8a216da864a7c9e30164b6f6481a0c00" />
+    </bean>
+
+    <!-- SendCloudMail SDK -->
+    <bean id="mailApiSendCloud" class="com.jnshu.sdk.MailApiSendCloud">
+        <constructor-arg name="apiUser" value="m_ason_test_Mt2RFu" />
+        <constructor-arg name="apiKey" value="wd8j7SUWl39Z6OBI" />
+        <constructor-arg name="apiUrl" value="http://api.sendcloud.net/apiv2/mail/send" />
+    </bean>
+
+    <!-- 阿里云OSS -->
+    <bean id="ossClient" class="com.aliyun.oss.OSSClient" destroy-method="shutdown">
+        <constructor-arg name="endpoint" value="oss-cn-shenzhen.aliyuncs.com" />
+        <constructor-arg name="accessKeyId" value="LTAIDJQjj6irbhFK" />
+        <constructor-arg name="secretAccessKey" value="HDoiq8ig2Zi3eijbubQOsl02PL2tyG"/>
+    </bean>
+
+    <!-- 腾讯云COS -->
+    <bean id="basicCOSCredentials" class="com.qcloud.cos.auth.BasicCOSCredentials">
+        <constructor-arg name="accessKey" value="AKIDpUwBD2I3C5i5E7n7E4g16vUnrgGbEYAW" />
+        <constructor-arg name="secretKey" value="EDyUklW2OWR8anlW4NSIuHQN6brseBTV" />
+    </bean>
+    <bean id="clientConfig" class="com.qcloud.cos.ClientConfig">
+        <constructor-arg name="region" value="ap-chengdu"/>
+    </bean>
+    <bean id="cosClient" class="com.qcloud.cos.COSClient">
+        <constructor-arg name="cred" ref="basicCOSCredentials" index="0"/>
+        <constructor-arg name="clientConfig" ref="clientConfig" index="1"/>
+    </bean>
+    <bean id="objectMetadata" class="com.qcloud.cos.model.ObjectMetadata">
+        <property name="contentType" value="image/jpeg"/>
+    </bean>
+</beans>

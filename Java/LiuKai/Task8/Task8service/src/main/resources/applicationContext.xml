@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy />
+    <context:component-scan base-package="com.jns.service"/>
+    <context:property-placeholder location="classpath:database.properties"/>
+    <bean id="dataSource"
+          class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat" />
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="maxActive" value="20" />
+        <property name="initialSize" value="1" />
+        <property name="minIdle" value="1" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxOpenPreparedStatements" value="20" />
+
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jns.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+
+    <!--<bean id="studentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+    <!--<property name="mapperInterface" value="dao.StudentDao"/>-->
+    <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <bean id="studentRMIServiceImpl" class="com.jns.service.impl.StudentServiceImpl"> </bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="studentRMIServer"  class="org.springframework.remoting.rmi.RmiServiceExporter" >
+        <property name="serviceName" value="studentRMI"/>
+        <property name="service" ref="studentRMIServiceImpl"/>
+        <property name="serviceInterface" value="com.jns.service.StudentService"/>
+        <property name="registryPort" value="9999"/>
+        <property name="servicePort" value="9999"/>
+    </bean>
+    <bean id="courseRMIServiceImpl" class="com.jns.service.impl.CourseServiceImpl"> </bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="courseRMIServer"  class="org.springframework.remoting.rmi.RmiServiceExporter" >
+        <property name="serviceName" value="courseRMI"/>
+        <property name="service" ref="courseRMIServiceImpl"/>
+        <property name="serviceInterface" value="com.jns.service.CourseService"/>
+        <property name="registryPort" value="9999"/>
+        <property name="servicePort" value="9999"/>
+    </bean>
+
+
+
+</beans>

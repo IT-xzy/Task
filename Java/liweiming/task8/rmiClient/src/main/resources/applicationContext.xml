@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 导入数据库配置 -->
+    <context:property-placeholder location="classpath*:db.properties"/>
+
+    <!--数据源 使用dbcp-->
+    <!--BasicDataSource提供了close()方法关闭数据源，所以必须设定destroy-method=”close”属性
+    以便Spring容器关闭时，数据源能够正常关闭。-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}" />
+        <property name="maxActive" value="30"/>
+        <property name="minIdle" value="5"/>
+    </bean>
+
+    <context:component-scan base-package="com.jnshu.service" />
+
+
+    <!--sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--数据库连接池-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--加载Mybatis全局配置-->
+        <property name="configLocation"  value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:com/jnshu/mapper/**.xml" />
+    </bean>
+
+
+    <!--mappering 扫描器-->
+    <!--mapper 批量扫描，从mapper包中扫描mapper接口，自动创建代理对象并在spring容器中注入遵循规范：
+    将mapper.java和mapper.xml映射文件保持一致-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描包的路径，扫描多个包中间可以用"," 隔开-->
+        <property name="basePackage" value="com.jnshu.dao"/>
+        <!--使用SqlSessionFactory-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--事物管理-->
+    <!--对mybatis操作数据库事物控制，spring使用jdbc的事物控制-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <import resource="spring-memcached.xml"/>
+    <import resource="spring-redis.xml"/>
+</beans>

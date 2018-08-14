@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fgh.task2.dao.login.LoginDao">
+
+    <select id="quaryByName" resultType="login" parameterType="String">
+        select * from t_task4_login where name=#{name}
+    </select>
+
+    <select id="quaryLogin" resultType="login">
+        select * from  t_task4_login
+    </select>
+
+    <select id="quaryById"  parameterType="Long" resultType="Boolean">
+        select * from t_task4_login where id=#{id}
+    </select>
+
+    <insert id="insertLogin" parameterType="login">
+        insert into t_task4_login (name,password,MD5Pass) values (#{name},#{password},#{MD5Pass})
+    </insert>
+
+    <delete id="delLogin" parameterType="String">
+        delete from t_task4_login where name=#{name}
+    </delete>
+
+    <update id="updateLogin" parameterType="login" >
+        update t_task4_login set password=#{password},MD5Pass=#{MD5Pass}
+    </update>
+</mapper>
