@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task.dao.EngineerDao">
+
+    <select id="selectEngineer" parameterType="task.pojo.Engineer" resultMap="engineerResult">
+	        select * from engineer
+	</select>
+
+
+    <resultMap id="engineerResult" type="task.pojo.Engineer">
+        <id property="id" column="id"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="img" column="img"/>
+        <result property="type" column="type"/>
+        <result property="intro" column="intro"/>
+        <result property="sill" column="sill"/>
+        <result property="degree" column="degree"/>
+        <result property="growth" column="growth"/>
+        <result property="scarcity" column="scarcity"/>
+        <result property="salaryOne" column="salary_one"/>
+        <result property="salaryThree" column="salary_three"/>
+        <result property="salaryFive" column="salary_five"/>
+        <result property="proceed" column="proceed"/>
+        <result property="tip" column="tip"/>
+    </resultMap>
+
+</mapper>
