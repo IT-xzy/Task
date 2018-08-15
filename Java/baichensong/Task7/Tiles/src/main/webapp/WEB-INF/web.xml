@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+        <filter><!--编码过滤器   解决乱码问题-->
+            <filter-name>encodingFilter</filter-name>
+            <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+            <init-param>
+                <param-name>encoding</param-name>
+                <param-value>UTF-8</param-value>
+            </init-param>
+            <init-param>
+                <param-name>forceEncoding</param-name>
+                <param-value>true</param-value>
+            </init-param>
+        </filter>
+        <filter-mapping>
+            <filter-name>encodingFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
+
+
+        <!--spring 配置文件-->
+        <context-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/applicationContext-DAO.xml</param-value>
+        </context-param>
+        <listener>
+            <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        </listener>
+
+
+        <!-- log4j2-begin  -->
+
+        <!--加载log4j2 的配置文件    不指定位置默认在 src/main/resources下查找搜索 -->
+        <context-param>
+            <param-name>log4jConfiguration</param-name>
+            <param-value>classpath:log4j2.xml</param-value>
+        </context-param>
+        <!--监听器-->
+        <listener>
+            <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+        </listener>
+        <!--过滤器-->
+        <filter>
+            <filter-name>log4jServletFilter</filter-name>
+            <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+        </filter>
+        <filter-mapping>
+            <filter-name>log4jServletFilter</filter-name>
+            <url-pattern>/*</url-pattern>
+            <dispatcher>REQUEST</dispatcher>
+            <dispatcher>FORWARD</dispatcher>
+            <dispatcher>INCLUDE</dispatcher>
+            <dispatcher>ERROR</dispatcher>
+        </filter-mapping>
+        <!-- log4j2-end -->
+
+
+        <!-- spring mvc核心：分发servlet -->
+        <servlet>
+            <servlet-name>mvc-dispatcher</servlet-name>
+            <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+            <!-- spring mvc的配置文件 -->
+            <init-param>
+                <param-name>contextConfigLocation</param-name>
+                <param-value>classpath:spring-MVC.xml</param-value>
+            </init-param>
+            <load-on-startup>1</load-on-startup>
+
+            <multipart-config>
+                <max-file-size>52428800</max-file-size>
+                <max-request-size>52428800</max-request-size>
+                <file-size-threshold>0</file-size-threshold>
+            </multipart-config>
+
+        </servlet>
+        <servlet-mapping>
+            <!--拦截所有url请求-->
+            <servlet-name>mvc-dispatcher</servlet-name>
+            <url-pattern>/</url-pattern>
+        </servlet-mapping>
+
+<!--tag引用-->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <taglib-location>/WEB-INF/dateTag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+
+    <!--增加 对put 和DELETE的支持-->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+</web-app>
