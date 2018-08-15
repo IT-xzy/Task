@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c3p0-config>
+    <default-config>
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/my_db1?rewriteBatchedStatements=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <property name="user">usertwo</property>
+        <property name="password">123456</property>
+
+        <!--本地数据库-->
+        <!--<property name="driverClass">com.mysql.jdbc.Driver</property>-->
+        <!--<property name="jdbcUrl">jdbc:mysql://localhost:3306/student_task?rewriteBatchedStatements=true&amp;useSSL=true</property>-->
+        <!--<property name="user">root</property>-->
+        <!--<property name="password">774835</property>-->
+
+        <!--以上的user是数据库的用户，password是数据库的密码，driverClass是mysql的数据库驱动，jdbcUrl是连接数据库的url -->
+
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数 -->
+        <property name="acquireIncrement">5</property>
+
+        <!--初始化时获取十个连接，取值应在minPoolSize与maxPoolSize之间 -->
+        <property name="initialPoolSize">50</property>
+
+        <!--连接池中保留的最小连接数 -->
+        <property name="minPoolSize">10</property>
+
+        <!--连接池中保留的最大连接数 -->
+        <property name="maxPoolSize">100</property>
+
+        <!--JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0-->
+        <property name="maxStatements">20</property>
+
+        <!--maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
+        <property name="maxStatementsPerConnection">5</property>
+
+    </default-config>
+
+    <named-config name="mysql">
+        <property name="driverClass">com.mysql.jdbc.Driver</property>
+        <property name="jdbcUrl">jdbc:mysql://localhost:3306/my_db1?rewriteBatchedStatements=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8</property>
+        <property name="user">usertwo</property>
+        <property name="password">123456</property>
+
+        <!--<property name="driverClass">com.mysql.jdbc.Driver</property>-->
+        <!--<property name="jdbcUrl">jdbc:mysql://localhost:3306/student_task?useSSL=true</property>-->
+        <!--<property name="user">root</property>-->
+        <!--<property name="password">774835</property>-->
+
+        <property name="acquireIncrement">5</property>
+        <property name="initialPoolSize">10</property>
+        <property name="minPoolSize">10</property>
+        <property name="maxPoolSize">100</property>
+        <property name="maxStatements">20</property>
+        <property name="maxStatementsPerConnection">5</property>
+    </named-config>
+</c3p0-config>
+

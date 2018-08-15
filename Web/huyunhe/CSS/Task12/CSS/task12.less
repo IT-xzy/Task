@@ -1,0 +1,161 @@
+@small-text: 2.4rem;
+@normal-text: 3.2rem;
+@big-text: 3.6rem;
+@button-text: 3.4rem;
+@age-text: 2.8rem;
+@header-color: #5fc0cd;
+@red-text-color: #e26163;
+@border-color: #e1e5e7;
+@key-color:#999999;
+//component
+.vertical-align {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+html {
+  font-size: 62.5%;
+
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  padding: 2rem;
+  background-color: @header-color;
+  text-align: center;
+  span {
+    font-size: @big-text;
+    color: white;
+  }
+  img {
+    position: absolute;
+    left: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+main{
+  position: absolute;
+  top: 88px;
+  bottom: 14rem;
+  width: 100%;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.banner {
+  position: relative;
+  padding: 8rem 4rem;
+  background-image: url(../resource/backgroundImage.png);
+  background-size: cover;
+  .intro {
+    position: absolute;
+    .vertical-align;
+    left: 25rem;
+    color: white;
+    .name {
+      margin-right: 1em;
+      font-size: @big-text;
+    }
+    .age {
+      font-size: @age-text;
+    }
+    .location {
+      font-size: @small-text;
+    }
+    >div {
+      margin-bottom: 3%;
+    }
+    .location-wrapper {
+      img {
+        margin-right: 1em;
+      }
+    }
+    .location {
+      vertical-align: bottom;
+      font-size: @small-text;
+    }
+  }
+}
+
+.sub-title {
+  padding: 5%;
+  div {
+    font-size: @normal-text;
+    font-weight: bold;
+    padding-left: 4%;
+    border-left: 3px solid @header-color;
+  }
+  border-bottom: 1px solid @border-color;
+}
+
+.main {
+  padding: 0 5%;
+  .row-intro,
+  .row-label {
+    padding: 4% 5.5%;
+    border-bottom: 1px solid @border-color;
+    font-size: @normal-text;
+  }
+  .row-label {
+    span {
+      padding: 0 2%;
+    }
+    img {
+      margin: 0 2% 0 0;
+    }
+  }
+  .row-intro>span.key {
+    padding-right: 2%;
+    border-right: 1px solid @border-color;
+    color: @key-color;
+  }
+  .row-intro>span.value {
+    padding-left: 2%;
+  }
+  .self-intro {
+    display: inline-block;
+    width: 60%;
+    padding-left: 2%;
+    vertical-align: middle;
+    text-align: justify;
+  }
+}
+footer{
+  position: absolute;
+  bottom:0;
+  padding: 2rem 5%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.button {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    width: 45%;
+    padding: 2.7rem 0;
+    border: 1px solid @header-color;
+    border-radius: 0.2em;
+    font-size: @button-text;
+    color: @header-color;
+    background-color: white;
+  }
+  .message {
+    color: @header-color;
+    background-color: white;
+  }
+  .connect {
+    color: white;
+    background-color: @header-color;
+  }
+}

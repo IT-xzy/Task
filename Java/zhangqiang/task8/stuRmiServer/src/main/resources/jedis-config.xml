@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">-->
+        <!--&lt;!&ndash; 连接池中最大连接数。高版本：maxTotal，低版本：maxActive &ndash;&gt;-->
+        <!--<property name="maxTotal" value="50" />-->
+        <!--&lt;!&ndash; 连接池中最大空闲的连接数. &ndash;&gt;-->
+        <!--<property name="maxIdle" value="10" />-->
+        <!--&lt;!&ndash; 连接池中最少空闲的连接数. &ndash;&gt;-->
+        <!--<property name="minIdle" value="1" />-->
+        <!--&lt;!&ndash; 当连接池资源耗尽时，调用者最大阻塞的时间，超时将跑出异常。单位，毫秒数;默认为-1.表示永不超时。高版本：maxWaitMillis，低版本：maxWait &ndash;&gt;-->
+        <!--<property name="maxWaitMillis" value="3000" />-->
+        <!--&lt;!&ndash; 连接空闲的最小时间，达到此值后空闲连接将可能会被移除。负值(-1)表示不移除. &ndash;&gt;-->
+        <!--<property name="minEvictableIdleTimeMillis" value="300000" />-->
+        <!--&lt;!&ndash; 对于“空闲链接”检测线程而言，每次检测的链接资源的个数。默认为3 &ndash;&gt;-->
+        <!--<property name="numTestsPerEvictionRun" value="3" />-->
+        <!--&lt;!&ndash; “空闲链接”检测线程，检测的周期，毫秒数。如果为负值，表示不运行“检测线程”。默认为-1. &ndash;&gt;-->
+        <!--<property name="timeBetweenEvictionRunsMillis" value="60000" />-->
+        <!--&lt;!&ndash; testOnBorrow:向调用者输出“链接”资源时，是否检测是有有效，如果无效则从连接池中移除，并尝试获取继续获取。默认为false。建议保持默认值. &ndash;&gt;-->
+        <!--&lt;!&ndash; testOnReturn:向连接池“归还”链接时，是否检测“链接”对象的有效性。默认为false。建议保持默认值.&ndash;&gt;-->
+        <!--&lt;!&ndash; testWhileIdle:向调用者输出“链接”对象时，是否检测它的空闲超时；默认为false。如果“链接”空闲超时，将会被移除。建议保持默认值. &ndash;&gt;-->
+        <!--&lt;!&ndash; whenExhaustedAction:当“连接池”中active数量达到阀值时，即“链接”资源耗尽时，连接池需要采取的手段, 默认为1(0:抛出异常。1:阻塞，直到有可用链接资源。2:强制创建新的链接资源) &ndash;&gt;-->
+        <!--<property name="testOnBorrow" value="true"/>-->
+        <!--<property name="testOnReturn" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool"  scope="singleton">-->
+        <!--<constructor-arg index="0" ref="jedisPoolConfig" />-->
+        <!--<constructor-arg index="1">-->
+            <!--<list>-->
+                <!--<bean class="redis.clients.jedis.JedisShardInfo">-->
+                    <!--<constructor-arg index="0" value="127.0.0.1" />-->
+                    <!--<constructor-arg index="1" value="6379" type="int" />-->
+
+                    <!--&lt;!&ndash;<constructor-arg name="host" value="127.0.0.1" />&ndash;&gt;-->
+                    <!--&lt;!&ndash;<constructor-arg name="port" value="6379" type="int" />&ndash;&gt;-->
+                    <!--&lt;!&ndash;<constructor-arg name="weight" value="1" />&ndash;&gt;-->
+                    <!--&lt;!&ndash;<constructor-arg name="timeout" value="2000" type="int" />&ndash;&gt;-->
+                    <!--&lt;!&ndash;<property name="password" value=""/>&ndash;&gt;-->
+
+                <!--</bean>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
+
+
+
+
+    <!-- 引入jedis的properties配置文件 -->
+    <!--如果你有多个数据源需要通过<context:property-placeholder管理，且不愿意放在一个配置文件里，那么一定要加上ignore-unresolvable=“true"-->
+    <!--<context:property-placeholder location="classpath:properties/redis.properties" ignore-unresolvable="true" />-->
+
+    <!--Jedis连接池的相关配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" scope="singleton">
+        <!--新版是maxTotal，旧版是maxActive-->
+        <property name="maxTotal">
+            <value>100</value>
+        </property>
+        <property name="maxIdle">
+            <value>0</value>
+        </property>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testOnReturn" value="true"/>
+    </bean>
+
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig" />
+        <constructor-arg name="host" value="127.0.0.1" />
+        <constructor-arg name="port" value="6379" type="int" />
+        <constructor-arg name="timeout" value="2000" type="int" />
+        <constructor-arg name="password" value="foobared" />
+        <constructor-arg name="database" value="0" type="int" />
+    </bean>
+
+
+
+
+</beans>

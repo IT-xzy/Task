@@ -1,0 +1,249 @@
+%cen-spa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+%fix-wid {
+  position:fixed;
+  width:100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+body{
+  padding-bottom:4.6rem;
+}
+.header {
+  @extend %cen-spa;
+  @extend %fix-wid;
+  z-index: 10;
+  top:0;
+  height:3rem;
+  background-image: url("img6/矩形3.png");
+}
+.buttonbox {
+  background-color:#55a8b3;
+  border-radius:0.5rem;
+}
+.buttonone,.buttontow {
+  padding:0.5rem;
+  border:none;
+  outline:medium;
+  text-decoration:none;
+  font-size:1rem;
+  border-radius:0.5rem;
+}
+.buttonone{
+  background-color:#55a8b3;
+  color:#fff;
+  padding-left:1rem;
+}
+.buttontow{
+  background-color:#fff;
+  color:#5fc0cd;
+  padding-right:1rem;
+}
+.icon{
+  position:relative;
+  right:1rem;
+  width:1.5rem;
+  height:1.5rem;
+  background: url("img6/calendar2.png") no-repeat top;
+  background-size:1.3rem;
+}
+
+
+.main
+{
+  @extend %cen-spa;
+  border-bottom:1px solid #999;
+  padding:0.5rem;
+}
+.first{
+  width:12rem;
+  height:1.5rem;
+  background:url("img6/calendar2.png") no-repeat;
+  background-size:1.5rem;
+  background-position:left -35px;
+  font-size:0.8rem;
+}
+.first p{
+  padding-left:1.5rem;
+  line-height:1.5rem;
+  color:#999;
+}
+.second {
+  width:12rem;
+  height:1.5rem;
+  font-size:1rem;
+}
+.second p{
+  padding-left:1.5rem;
+  line-height:1.5rem;
+}
+.finally{
+  width:12rem;
+  height:1.5rem;
+  background-image:url("img6/calendar2.png");
+  background-repeat:no-repeat;
+  background-size:1.5rem;
+  background-position:left -62px;
+  font-size:0.8rem;
+}
+.finally p{
+  padding-left:1.5rem;
+  line-height:1.5rem;
+  color:#999;
+}
+.salary{
+  @extend %cen-spa;
+}
+.salary p{
+  color:#f00;
+  font-size:1.1rem;
+  padding-right:0.5rem;
+}
+.salary a{
+  display:inline-block;
+  width:1rem;
+  height:1.5rem;
+  background:url("img6/矢量智能对象拷贝.png") no-repeat;
+  background-size:0.8rem;
+}
+/*
+   下拉按钮
+*/
+.selectbox {
+  @extend %cen-spa;
+  @extend %fix-wid;
+  margin-top:3rem;
+  border-bottom:1px solid  #999;
+}
+.sel-first {
+  position: relative;
+  width: 33.33%;
+}
+.fir-btn {
+  width: 100%;
+  height: 2.5rem;
+  color: #999;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  border-right: 1px solid;
+  border-image: linear-gradient(white,#999999,white)2;
+}
+.fir-btn:focus ~ .fir-ul{
+  display: inline-block;
+}
+
+/*
+    下拉菜单小箭头
+*/
+.jt {
+  float: right;
+  position: relative;
+  bottom: -0.3rem;
+  margin-right: 0.5rem;
+  border-top: 0.5rem solid #AEBAC0;
+  border-left: 0.3rem solid transparent;
+  border-right: 0.3rem solid transparent;
+}
+/*
+    隐藏的下拉菜单
+*/
+.fir-ul {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  float: left;
+  display: none;
+  clear: both;
+  width: 99%;
+  font-size: 0.8rem;
+  color: #999;
+  background-color: #fff;
+  border: 1px solid #999;
+}
+.fir-ul > li {
+  padding: 0.2rem;
+}
+
+
+/*
+    页脚
+*/
+.foot{
+  @extend %cen-spa;
+  justify-content: space-around;
+  @extend %fix-wid;
+  bottom:0;
+  height:4.4rem;
+  background-color:#fff;
+}
+.btn-defaultsy,
+.btn-defaultwd {
+  border: none;
+  background-color:#fff;
+  font-size:1rem;
+  padding:0;
+}
+.btn-defaultsy{
+  color:#5fc0cd;
+}
+/*
+   页脚左边第一个按钮
+*/
+.footbox {
+  height:30px;
+  background:url("img6/形状4.png") no-repeat;
+  background-size:cover;
+}
+.footboxt{
+  position:relative;
+  width:30px;
+  height:30px;
+  background:url("img6/形状4.png") no-repeat -53px 0;
+  background-size:cover;
+}
+
+.btn-defaultwd{
+  color:#999;
+}
+.btn-defaulttp{
+  width:2rem;
+  height:2rem;
+  border:2rem solid #5fc0cd;
+  border-radius:50%;
+  padding:0;
+}
+.btn-defaulttp img{
+  width:2rem;
+  height:2rem;
+  position:relative;
+  right:0.9rem;
+  bottom:1rem;
+}
+.footone{
+  @extend %cen-spa;
+  justify-content:flex-end;
+  height:4rem;
+}
+.foottow{
+  @extend %cen-spa;
+  justify-content:center;
+}
+.footthree {
+  @extend %cen-spa;
+  justify-content:flex-start;
+  height:4rem;
+}
+li{
+  display: flex;
+  justify-content: center;
+}
+.dropdown-menu{
+  min-width:100px;
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--status是日志级别，monitorinterval是自动重新配置的时间间隔-->
+<configuration status="info" monitorinterval="60">
+    <!-- 先定义所有的appender -->
+    <appenders>
+        <!--输出到控制台-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- 控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+            <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--输出日志的格式 -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </Console>
+        <!--输出到文件。这个log每次运行程序是否自动清空由append属性决定（false清空）-->
+        <File name="log" fileName="../logs/task7.log" append="true">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>
+        </File>
+        <!--每次文件大小超过size，则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档 -->
+        <RollingFile name="RollingFile" fileName="/home/webservice/ftp_home/Ganso_mst_Shop_IF.log"
+                     filePattern="../log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd 'at' HH:mm:ss z} %-5level %class{36} %L %M - %msg%xEx%n"/>
+            <SizeBasedTriggeringPolicy size="50MB"/>
+        </RollingFile>
+    </appenders>
+    <!--定义logger，只有定义了logger并引入的appender，appender才会生效 -->
+    <loggers>
+        <!--  建立一个默认的root的logger -->
+        <root level="info">
+            <appender-ref ref="RollingFile"/>
+            <appender-ref ref="Console"/>
+            <appender-ref ref="log"/>
+        </root>
+    </loggers>
+</configuration>

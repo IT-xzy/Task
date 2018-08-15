@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.UserDao">
+    <!-- 登录 注册 -->
+    <insert id="register" parameterType="com.jnshu.entity.User">
+        insert into user (name,password,salt,despwd) value (#{name},#{password},#{salt},#{despwd})
+    </insert>
+
+    <select id="selectByid"  parameterType="long" resultType="com.jnshu.entity.User">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <select id="findUserByname" parameterType="String" resultType="com.jnshu.entity.User">
+        select * from user where name =#{name }
+    </select>
+
+    <select id="selectByuser" resultType="com.jnshu.entity.User">
+        SELECT * FROM user WHERE name=#{param1} AND password=#{param2}
+    </select>
+
+
+    <update id="updateTimeByid" parameterType="long">
+        update user set landtime = unix_timestamp(now()) WHERE id = #{id}
+    </update>
+
+</mapper>

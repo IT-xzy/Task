@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.ProfessionDao">
+    <select id="findByIdProfession" parameterType="int" resultType="Profession">
+        SELECT * FROM tb_profession WHERE id = #{id}
+    </select>
+    <select id="findByListProfession" resultType="Profession">
+        SELECT tb_profession.*, COUNT(*) AS proCount
+        FROM tb_students
+        INNER JOIN tb_profession
+        ON tb_profession.id = tb_students.stuProfession
+        GROUP BY tb_profession.id
+    </select>
+
+    <delete id="deleteByIdProfession" parameterType="int">
+        DELETE FROM tb_profession WHERE id = #{id}
+    </delete>
+
+    <insert id="insertByProfession" parameterType="Profession">
+
+    </insert>
+
+    <update id="updateByProfession" parameterType="Profession">
+
+    </update>
+</mapper>

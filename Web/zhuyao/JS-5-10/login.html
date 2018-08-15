@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<div class="wrap">
+    <div class="wrap-bg">
+        <div class="login-container">
+            <form name="loginForm" ng-controller="myControl" class="form" novalidate>
+                <p class="title">后台登录</p>
+                <div class="form-group">
+                    <input ng-model="user" type="text" id="user-name" name="user" required
+                           placeholder="用户名" ng-minlength="5" ng-maxlength="12" ng-change="date()"/>
+                    <span class="icon-user"></span>
+                </div>
+                <div class="message-user" ng-show="loginForm.user.$dirty" ng-messages="loginForm.user.$error">
+                    <div ng-message="required">请输入用户名</div>
+                    <div ng-message="minlength">用户名长度至少为5</div>
+                    <div ng-message="maxlength">用户名长度不能超过10</div>
+                </div>
+                <div class="form-group">
+                    <input ng-model="password" type="password" id="password" name="pwd" required
+                           placeholder="密码"  ng-minlength="5" ng-maxlength="15">
+                    <span class="icon-lock"></span>
+                </div>
+                <div class="message-pwd" ng-show="loginForm.pwd.$dirty" ng-messages="loginForm.pwd.$error">
+                    <div ng-message="required">请输入密码</div>
+                    <div ng-message="minlength">密码长度至少为5</div>
+                    <div ng-message="maxlength">密码长度不能超过15</div>
+                </div>
+                <div class="errorMessage">{{message}}</div>
+                <input ng-click="btn()" type="submit" class="btn-login" ng-disabled="loginForm.$invalid" id="btn-login" value="登录">
+            </form>
+        </div>
+    </div>
+</div>

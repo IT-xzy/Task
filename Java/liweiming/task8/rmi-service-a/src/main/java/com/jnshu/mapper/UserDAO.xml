@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+类名 -->
+<mapper namespace="com.jnshu.dao.UserDAO">
+
+    <!-- sql片段块  -->
+    <!-- mybatis动态查询，判断属性是否为空,为空不设置该属性-->
+    <sql id="value_not_null">
+        <trim suffixOverrides=",">
+            <if test="name!='' and name!=null">AND name =#{name}</if>
+            <if test="online_id!='' and online_id!=null">AND online_id=#{online_id}</if>
+            <if test="learning_type!='' and learning_type!=null">AND learning_type=#{learning_type}</if>
+        </trim>
+    </sql>
+
+    <!--id应该是接口中的方法，结果类型如没有配置别名则应该使用全名称 -->
+    <select id="getAllUser" resultType="User" >
+       select * from student
+    </select>
+
+    <select id="getUserById" resultType="User">
+        select * from student where id =#{id}
+    </select>
+
+    <select id="getUserMore" resultType="User" >
+        select * from student
+        <where>
+            <if test="name!='' and name!=null">AND name =#{name}</if>
+            <if test="online_id!='' and online_id!=null">AND online_id=#{online_id}</if>
+            <if test="learning_type!='' and learning_type!=null">AND learning_type=#{learning_type}</if>
+        </where>
+    </select>
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id" parameterType="User">
+       insert into student (name,qq,learning_type,entrance_time,school,online_id,daily_link,wish,tutor,create_at,update_at)
+       value (#{name},#{qq},#{learning_type},#{entrance_time},#{school},#{online_id},#{daily_link},#{wish},#{tutor},#{create_at},#{update_at})
+    </insert>
+
+    <update id="updateUser" >
+       update student set name=#{name},create_at=#{create_at},update_at=#{update_at},
+     qq=#{qq},learning_type=#{learning_type},entrance_time=#{entrance_time},school=#{school},online_id=#{online_id},daily_link=#{daily_link},wish=#{wish},tutor=#{tutor} where id=#{id}
+    </update>
+
+    <delete id="deleteUser" >
+       delete from student where id=#{id}
+    </delete>
+
+
+
+</mapper>

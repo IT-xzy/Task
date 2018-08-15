@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <import resource="springTools.xml"/>
+    <import resource="springMemcached.xml"/>
+    <import resource="springRedis.xml"/>
+    <!--加载properties文件，获取数据库连接的一些信息-->
+    <context:property-placeholder location="classpath:properties/db.properties"/>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 加载mybatis的全局配置文件，放在classpath下的mybatis文件夹中了 这个已经没有什么鸟用
+        了，以前在mybatis的时候用全局配置文件创建SqlSessionFactory是因为用到了它里面的用户名和密
+        码等信息，Spring已经在dataSource里面已经设置了这些信息，所以只需要dataSource就能得到
+        SqlSessionFactory-->
+        <!--<property name="configLocation" value="mybatis-config.xml"/>-->
+        <!-- 加载数据源，使用上面配置好的数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!--<property name="mapperLocations" value="mybatis/*.xml"/>-->
+    </bean>
+    <!--这里的id是根据扫描到的package里面的Mapper接口名来定义的，
+    这里省略了，因为扫描的结果不唯一,这个bean就是包含了增删改查方法的bean-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--
+        basePackage 属性是映射器接口文件的包路径。
+                 你可以使用分号或逗号 作为分隔符设置多于一个的包路径
+        -->
+        <property name="basePackage" value="com.dao"/>
+        <!--
+                 因为会自动装配 SqlSessionFactory和SqlSessionTemplate
+                 所以没 有 必 要 去 指 定 SqlSessionFactory或 SqlSessionTemplate
+                 因此可省略不配置；
+                 但是,如果你使 用了一个 以上的 DataSource，那么自动装配可能会失效。
+                 这种 情况下，你可以使用sqlSessionFactoryBeanName或sqlSessionTemplateBeanName属性来设置正确的 bean名称来使用；
+        -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="pttDaoService" class="com.impl.PttDaoServiceImpl">
+    </bean>
+
+    <bean id="customerService" class="com.impl.CustomerServiceImpl">
+    </bean>
+
+</beans>

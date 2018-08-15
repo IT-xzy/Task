@@ -1,0 +1,167 @@
+@charset "utf-8";
+@import "mycss";
+body{
+  padding: 1.5rem 0 1.3rem 0;
+  background-color: #29bde0;
+}
+label{
+  font-weight: normal;
+}
+.msg{
+  z-index: 1;
+  position: fixed;
+  left: 0;right: 0;
+  top: .5rem;
+  >span:nth-of-type(1){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: .2rem;
+    line-height: .5rem;
+    background-color: #b9e9f5;
+    padding:0 .2rem 0 .4rem;
+    .play{
+      width: .35rem;
+      height: .35rem;
+      background-color: #fbb435;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span{
+        display: block;
+        width: 0;
+        height: 0;
+        border: {
+          left: white .15rem solid;
+          top: .1rem solid transparent;
+          bottom: .1rem solid transparent;
+        }
+        position: relative;left: .03rem;
+
+      }
+
+    }
+  }
+  >div{
+    position: relative;
+    display: block;
+    font-size: .16rem;
+    color: white;
+    padding: .2rem 0 .03rem .5rem;
+    background-color: #29bde0;
+
+    &:before{
+      content:"";
+      display: block;
+      width: 0;
+      height: 0;
+      border: {
+        top: .14rem #b9e9f5 solid;
+        left: .08rem solid transparent;
+        right: .08rem solid transparent;
+      }
+      position: absolute;
+      top: 0;
+      left: .5rem;
+
+    }
+  }
+}
+main{
+  .content{
+    background-color: #29bde0;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    .line{
+      background-color: #29bde0;
+      display: flex;
+      justify-content: space-around;
+      margin: .2rem 0;
+    }
+    .blk{//块
+      position: relative;
+      background-color: white;
+      width: 1rem;
+      height: 1rem;
+      padding: .03rem;
+      cursor: pointer;
+
+
+
+      .job{
+        background-color: #f5c97b;
+        width: 100%;
+        height: .72rem;
+        text-align: center;
+        line-height: .72rem;
+        color: black;
+      }
+      .number{
+        width: 100%;
+        height: .22rem;
+        background-color: #83b09a;
+        font-size: .18rem;
+        text-align: center;
+        line-height: .22rem;
+        color: white;
+      }
+      .a-group{//按钮组
+        position: absolute;
+        height:.3rem ;
+        bottom:-.3rem;
+        right:0;
+        left: 0;
+        display:none;
+        width: 1rem;
+        justify-content: space-between;
+        background-color: #29bde0;
+        a{
+          display: flex;
+          width: .2rem;
+          height: .2rem;
+          background-color: white;
+          img{
+            width: .2rem;
+          }
+          &:nth-of-type(4){
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+              width: .1rem;
+              height: .1rem;
+          }
+          }
+
+        }
+      }
+      &:hover .a-group{
+        display: flex;
+        align-items: flex-end;
+      }
+
+
+
+    }
+
+  }
+}
+
+footer{
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1rem;
+  background-color: #29bde0;
+  button{
+    background-color: #f3ae33;
+    border: none;
+    width: 80%;
+    height: .6rem;
+    color: white;
+  }
+
+}

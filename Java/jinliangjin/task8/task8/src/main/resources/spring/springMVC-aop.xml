@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:contex="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <contex:component-scan base-package="com.ptt.advice"/>
+    <!--统计controller层请求执行时间-->
+    <aop:config>
+        <!--定义切点-->
+        <aop:pointcut expression="execution(* com.ptt.controller.*.*(..))" id="controllerPointcut"/>
+        <!--定义切面-->
+        <aop:aspect id="controllerAdvice" ref="controllerAdvice">
+            <!--前置增强，输出执行请求的起始时间-->
+            <aop:before method="before" pointcut-ref="controllerPointcut"/>
+            <!--后置增强，输出执行请求的结束时间已经所用时间-->
+            <aop:after method="after" pointcut-ref="controllerPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--动态调用RMI-->
+<!--    <aop:config>
+        &lt;!&ndash;&ndash;&gt;
+        <aop:pointcut id="stuServicePointcut" expression="execution(public * com.ptt.controller.StudentController.*(..))"/>
+        <aop:aspect id="stuServiceSet" ref="studentController">
+            <aop:before method="setStudentService" pointcut-ref="stuServicePointcut"/>
+        </aop:aspect>
+    </aop:config>-->
+
+</beans>

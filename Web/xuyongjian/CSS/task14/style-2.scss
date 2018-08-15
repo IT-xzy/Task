@@ -1,0 +1,175 @@
+@mixin flex($justify,$align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;}
+@mixin img($width,$height,$url) {
+  width: $width;
+  height: $height;
+  background: $url no-repeat center;}
+@mixin position($position,$side1,$side1value,$side2,$side2value) {
+  position: $position;
+  #{$side1}: $side1value;
+  #{$side2}: $side2value;}
+@mixin font($fz,$cl){
+  font-size: $fz;
+  color: $cl;}
+@mixin box($width,$height,$bg){
+  width: $width;
+  height: $height;
+  background-color: $bg;}
+%title{
+  font-size: 16px;
+  color: #333333;
+  padding: 32px 0;
+  border-bottom: 1px solid #d0d6d9;}
+%border{
+  border-top: 1px solid #edf1f2;
+  border-right: 1px solid #edf1f2;}
+
+
+
+
+.main>.content{
+  margin-left: calc( 50% - 600px);
+  width: 1200px;
+  background-color: #fafafa;
+  @include font(16px,black);}
+  .homepage{
+    padding: 31px;
+    padding-left: 0;
+    border-bottom: 1px solid #d0d6d9;}
+    .homepage>span{
+      color: #29b078;}
+  .career_choice{
+    @include flex(flex-start,center);
+    padding: 20px 0;
+    border-bottom: 1px solid #edf1f2;
+    flex-wrap: wrap;}
+    .career_choice>div{
+      @include font(14px,#999999);
+      margin-right: 25px;}
+    .career_choice>span{
+      color: #ffffff;
+      background-color: #29b078;
+      padding: 2px;
+      margin-right: 31px;}
+    .career_choice>div>span{
+      color: #000;
+      margin-right: 37px;}
+  .contentbox{
+    width: calc( 100% + 27px );
+    margin-bottom: 120px;}
+    .contentbox>.title{
+      width: calc( 100% - 27px);
+      @extend %title;}
+      .selectcardbox{
+        @include flex(flex-start,center);
+        flex-wrap: wrap;}
+      .selectcard{
+        @include flex(flex-start,flex-start);
+        align-content: flex-start;
+        position: relative;
+        flex-wrap: wrap;
+        margin-top: 47px;
+        margin-right: 27px;
+        @include box(382px,444px,white);
+        @include font(12px,#999999);
+        box-shadow: 0 0 1px;}
+        .avatarimg{
+          margin: 16px 8px;
+          @include img(139px,139px,url(images/1-17.png));}
+        .occupation_intro{
+          margin-top: 36px;
+          width: 215px;
+          height: auto;
+          word-break: break-all;}
+          .occupation_title{
+            font-size: 16px;
+            margin-bottom: 18px;}
+        .onestar{
+          @include flex(flex-start,center);
+          padding: 13px 8px;
+          width: calc( 50% - 17px);
+          @extend %border;}
+          .onestar>span{
+            color: red;
+            margin-left: 13px;}
+          .onestar>div>span{
+            color: #000;}
+        .twostar{
+          @extend .onestar;
+          border-right: none;
+          width: calc( 50% - 16px);}
+          .selectcard img{
+            margin-left: 13px;}
+        .salary{
+          @include flex(center,center);
+          @extend %border;
+          padding: 48px 0;
+          width: calc( 40% - 1px);}
+        .timebox{
+          width: calc( 60% - 33px);}
+          .career_time{
+            @include flex(space-between,center);
+            @extend %border;
+            @include font(12px,black);
+            border-right: none;
+            padding: 11px 14px 11px 20px;
+            width: 100%;}
+        .there286people{
+          padding: 13px 8px;
+          width: calc( 100% - 16px);
+          border-top: 1px solid #edf1f2;
+          color: #000000;}
+          .there286people>span{
+            color: red;}
+        .learnbasic{
+          @extend .there286people;
+          @include font(12px,grey);}
+      .hiddencontent_selectcard{
+        @include flex(center,flex-start);
+        align-content: flex-start;
+        flex-wrap: wrap;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        @include font(16px,white);
+        line-height: 20px;
+        background-color: rgba(0,0,0,.76);
+        display: none;}
+        .hiddencontent_selectcard>div{
+          margin: 10% 10%;}
+        .hiddencontent_selectcard>span{
+          margin-top: 20%;}
+      .selectcard:hover .hiddencontent_selectcard{
+        display: flex;}
+
+
+
+@media screen and (max-width:1200px){
+  %onehundred{
+    width: 100%;
+    margin-left: 0;}
+  .main>.content , .contentbox  {
+    @extend %onehundred;}
+  .homepage ,.career_choice ,.contentbox>.title{
+    margin: 0 10px;}
+  .contentbox>.title{
+    width: calc( 100% - 20px);}
+  .selectcardbox{
+    padding-left: calc( 50% - 409px);}}
+
+@media screen and (max-width:900px){
+  .selectcardbox{
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 0;}}
+
+@media screen and (max-width:768px){
+    .selectcard{
+      width: 300px;
+      height: 464px;
+      margin-right: 0;}
+      .occupation_intro{
+        width: 145px;} }

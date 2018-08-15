@@ -1,0 +1,151 @@
+@mixin header-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+@mixin sprites-position($width, $height, $xAndY) {
+    width: $width;
+    height: $height;
+    background-position: $xAndY;
+}
+
+header {
+    @include header-footer();
+    top: 0;
+    height: 1.1rem;
+    .top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        background: #5fc0cd;
+        div {
+            display: inline-flex;
+            justify-content: space-around;
+            margin-top: .1rem;
+            margin-bottom: .05rem;
+            border-radius: 5px;
+            background: #55a8b3;
+            button {
+                padding: 10px;
+                border-radius: 5px;
+                font-size: .17rem;
+                color: white;
+                &:focus {
+                    color: #7dccd6;
+                    background: white;
+                }
+            }
+        }
+        .icon1 {
+            position: absolute;
+            right: .15rem;
+            @include sprites-position(.21rem, .23rem, 0 0);
+        }
+    }
+    .down-select {
+        display: flex;
+        height: .5rem;
+        border-bottom: 1px solid #f1f1f1;
+        div {
+            position: relative;
+            flex: 1;
+            button {
+                color: #999999;
+                font-size: .14rem;
+                background: white;
+                line-height: .5rem;
+                width: 100%;
+                white-space: nowrap;
+                &::after {
+                    display: inline-block;
+                    content: "";
+                    margin-left: 3vw;
+                    border-top: 5.5px solid #999999;
+                    border-left: 5.5px solid transparent;
+                    border-right: 5.5px solid transparent;
+                    vertical-align: middle;
+                }
+            }
+            .select {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                border: 1px solid #f1f1f1;
+                width: 100%;
+                font-size: 0.14rem;
+                text-align: center;
+                box-shadow: 0px 1px 1px 0px #f1f1f1;
+                li {
+                    height: 0.3rem;
+                    color: #999999;
+                    line-height: 0.3rem;
+                    &:hover {
+                        background: #f1f1f1;
+                    }
+                }
+            }
+            &:hover .select {
+                display: block;
+            }
+            &:nth-child(2) {
+                background: white;
+                button {
+                    margin: 0.1rem auto;
+                    line-height: 0.3rem;
+                    border-left: 1px solid #e1e5e7;
+                    border-right: 1px solid #e1e5e7;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    @include header-footer();
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 0;
+    font-size: .1rem;
+    background: #f8fafb;
+    .hall {
+        .hall-icon {
+            @include sprites-position(.23rem, .2rem, -44px -43px);
+            &::after {
+                content: '主页';
+                display: block;
+                margin-top: .2rem;
+                color: #5fc0cd;
+                white-space: nowrap;
+            }
+        }
+    }
+    .circle {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        height: 0.55rem;
+        width: 0.55rem;
+        margin: 0.025rem 0;
+        border-radius: 50%;
+        background: #5fc0cd;
+        .icon {
+            @include sprites-position(.21rem, .2rem, 0 -48px);
+        }
+    }
+    .mine {
+        color: #a5a5a5;
+        .mine-icon {
+            @include sprites-position(.21rem, .205rem, -44px 0);
+            &::after {
+                content: '我的';
+                display: block;
+                margin-top: .2rem;
+                color: #999999;
+                white-space: nowrap;
+            }
+        }
+    }
+}

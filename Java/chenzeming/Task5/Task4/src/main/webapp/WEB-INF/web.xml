@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WEB-app" version="3.0">
+
+  <!--拦截器,解决中文乱码的问题-->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--前端控制器的配置-->
+  <servlet>
+    <servlet-name>appServlet</servlet-name>
+    <!--web mvc jar包里面的DispatcherServlet-->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!--contextConfigLocation配置springMVC加载的配置文件，（配置处理器映射器，适配器等等）-->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath*:/spring-mvc.xml</param-value>
+    </init-param>
+    <!--load-on-startup：表示启动容器时初始化该Servlet-->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>appServlet</servlet-name>
+    <!--url-pattern：表示哪些请求交给Spring Web MVC处理，
+    “/” 是用来定义默认servlet映射的。也可以如“*.html”表示
+    拦截所有以html为扩展名的请求。-->
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+
+  <!--处理隐藏域-->
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    <init-param>
+      <param-name>methodParam</param-name>
+      <param-value>_method</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--不拦截静态数据-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>default</servlet-name>-->
+    <!--<url-pattern>*.js</url-pattern>-->
+    <!--<url-pattern>*.css</url-pattern>-->
+    <!--<url-pattern>/assets/*"</url-pattern>-->
+    <!--<url-pattern>/images/*</url-pattern>-->
+  <!--</servlet-mapping>-->
+  <!--put请求::获取put表单中的参数-值-->
+  <!--<filter>-->
+  <!--<filter-name>httpPutFormContentFilter</filter-name>-->
+  <!--<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+  <!--<filter-name>httpPutFormContentFilter</filter-name>-->
+  <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!--<servlet>-->
+  <!--<servlet-name>SpringMVC</servlet-name>-->
+  <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+  <!--<init-param>-->
+  <!--<param-name>contextConfigLocation</param-name>-->
+  <!--<param-value>classpath:spring-mvc.xml</param-value>-->
+  <!--</init-param>-->
+  <!--<load-on-startup>1</load-on-startup>-->
+  <!--<async-supported>true</async-supported>-->
+  <!--</servlet>-->
+
+  <!-- Spring监听器 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+
+  <!-- Spring和mybatis的配置文件 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:/spring-mybatis.xml</param-value>
+  </context-param>
+
+  <!--&lt;!&ndash; jsp自定义标签 &ndash;&gt;-->
+  <!--<jsp-config>-->
+  <!--<taglib>-->
+  <!--<taglib-uri>/utils</taglib-uri>-->
+  <!--<taglib-location>WEB-INF/taglib/time.tld</taglib-location>-->
+  <!--</taglib>-->
+  <!--</jsp-config>-->
+
+</web-app>

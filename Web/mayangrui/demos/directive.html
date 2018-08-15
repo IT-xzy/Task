@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.js"></script>
+    <script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.js"></script>
+    <script src="https://cdn.bootcss.com/angular.js/1.6.0/angular.js"></script>
+    <script src="../js/demoslidbar.js"></script>
+</head>
+<body>
+<div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman dawa>大娃</superman>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman erwa dawa liuwa>二娃</superman>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman sanwa>三娃</superman>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman siwa>四娃</superman>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman wuwa>五娃</superman>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman liuwa>六娃</superman>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman qiwa dawa erwa siwa>七娃</superman>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <superman dawa erwa sanwa siwa wuwa liuwa qiwa>葫芦小金刚</superman>
+        </div>
+    </div>
+    <p></p>
+</div>
+<hello></hello>
+<hello></hello>
+<hello></hello>
+<hello></hello>
+
+
+<div ng-controller="myCtrl3">
+    <drink flavor="{{ctrlFlavor}}"></drink>
+</div>
+<div ng-controller="myCtrl4">
+    <greeting greet="sayHello(name)"></greeting>
+    <greeting greet="sayHello(name)"></greeting>
+    <greeting greet="sayHello(name)"></greeting>
+</div>
+
+<form name="myForm" ng-submit="save()" ng-controller="TestFormMoudule">
+    <input type="text" name="userName" ng-model="user.userName" required>
+    <input type="password" name="password" ng-model="user.password" required>
+    <input type="submit" ng-disabled="myForm.$invalid"/>
+</form>
+
+<div ng-controller="someCtrl">
+    <expander class="expander" expander-title="title">
+        {{text}}
+    </expander>
+</div>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.stuserver</groupId>
+  <artifactId>stuRmiServer</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>stuRmiServer Maven Webapp</name>
+  <!-- FIXME change it to the project's website -->
+  <url>http://www.example.com</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <spring.version>5.0.4.RELEASE</spring.version>
+    <junit.version>4.12</junit.version>
+    <mysql.version>5.1.40</mysql.version>
+    <slf4j.version>1.7.16</slf4j.version>
+    <log4j.version>1.2.17</log4j.version>
+    <c3p0.version>0.9.5.2</c3p0.version>
+    <mybatis.version>3.4.5</mybatis.version>
+    <mybatispring.version>1.3.2</mybatispring.version>
+  </properties>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <!--<scope>test</scope>-->
+    </dependency>
+
+    <!--Spring的核心工具包-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-remoting -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-remoting</artifactId>
+      <version>2.0.8</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aop</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--为JDBC、Hibernate、JDO、JPA等提供的一致的声明式和编程式事务管理。-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+
+    <!--SpringAop支持 -->
+    <!-- https://mvnrepository.com/artifact/aopalliance/aopalliance -->
+    <dependency>
+      <groupId>aopalliance</groupId>
+      <artifactId>aopalliance</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.8.13</version>
+    </dependency>
+    <!--Spring提供的对AspectJ框架的整合-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-aspects</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--SpringAop end-->
+
+  <!--日志与格式化 start -->
+
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+    <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <!--格式化-->
+
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.7.25</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.25</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-nop</artifactId>
+      <version>1.7.25</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.5</version>
+    </dependency>
+
+    <!--<dependency>-->
+      <!--<groupId>org.slf4j</groupId>-->
+      <!--<artifactId>slf4j-api</artifactId>-->
+      <!--<version>${slf4j.version}</version>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+      <!--<groupId>org.slf4j</groupId>-->
+      <!--<artifactId>slf4j-log4j12</artifactId>-->
+      <!--<version>${slf4j.version}</version>-->
+    <!--</dependency>-->
+
+    <!--日志与格式化 emd -->
+
+    <!--数据库持久层  start -->
+    <!--mysql数据库包-->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+
+    <!-- c3p0连接池 -->
+    <dependency>
+      <groupId>com.mchange</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>${c3p0.version}</version>
+    </dependency>
+
+    <!--mybatis包-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+
+    <!--spring-mybatis 包-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${mybatispring.version}</version>
+    </dependency>
+
+    <!--数据库持久层  end -->
+
+
+    <!-- 缓存 start -->
+
+    <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+    <dependency>
+      <groupId>redis.clients</groupId>
+      <artifactId>jedis</artifactId>
+      <version>2.9.0</version>
+    </dependency>
+
+
+    <!--memcache -->
+    <!-- https://mvnrepository.com/artifact/com.whalin/Memcached-Java-Client -->
+    <dependency>
+      <groupId>com.whalin</groupId>
+      <artifactId>Memcached-Java-Client</artifactId>
+      <version>3.0.2</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+      <version>2.5.0</version>
+    </dependency>
+
+    <!--缓存 包 End-->
+
+  </dependencies>
+
+  <build>
+    <finalName>stuRmiServer</finalName>
+
+    <!--<resources>-->
+      <!--<resource>-->
+        <!--<directory>src/main/java</directory>-->
+        <!--&lt;!&ndash;<targetPath>WEB-INF/classes</targetPath>&ndash;&gt;-->
+        <!--<includes>-->
+          <!--<include>**/*.properties</include>-->
+          <!--<include>**/*.xml</include>-->
+        <!--</includes>-->
+        <!--&lt;!&ndash; 是否替换资源中的属性&ndash;&gt;-->
+        <!--&lt;!&ndash;<filtering>true</filtering>&ndash;&gt;-->
+      <!--</resource>-->
+      <!--<resource>-->
+        <!--<directory>src/main/resources</directory>-->
+        <!--<includes>-->
+          <!--<include>**/*.properties</include>-->
+          <!--<include>**/*.xml</include>-->
+          <!--<include>**/*</include>-->
+        <!--</includes>-->
+      <!--</resource>-->
+    <!--</resources>-->
+
+    <plugins>
+      <!--选择三 maven-shade-->
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.3</version>
+
+        <!--<configuration>-->
+        <!--<createDependencyReducedPom>false</createDependencyReducedPom>-->
+        <!--</configuration>-->
+
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <mainClass>com.stu.main.Main</mainClass>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                  <resource>META-INF/spring.handlers</resource>
+                </transformer>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                  <resource>META-INF/spring.schemas</resource>
+                </transformer>
+              </transformers>
+              <!--排除影响因素-->
+              <!--<filters>-->
+              <!--<filter>-->
+              <!--<artifact>*:*</artifact>-->
+              <!--<excludes>-->
+              <!--<exclude>META-INF/*.SF</exclude>-->
+              <!--<exclude>META-INF/*.DSA</exclude>-->
+              <!--<exclude>META-INF/*.RSA</exclude>-->
+              <!--</excludes>-->
+              <!--</filter>-->
+              <!--</filters>-->
+            </configuration>
+          </execution>
+        </executions>
+
+      </plugin>
+
+    </plugins>
+
+
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+
+        <!--jar包配置-->
+
+        <!--选择一 使用maven-jar-plugin和maven-dependency-plugin插件打包-->
+        <!--通过mvn package指令打包，会在target目录下生成jar包，并将依赖包拷贝到target/lib目录下-->
+        <!--<plugin>-->
+          <!--<groupId>org.apache.maven.plugins</groupId>-->
+          <!--<artifactId>maven-jar-plugin</artifactId>-->
+          <!--<version>3.1.0</version>-->
+          <!--<configuration>-->
+            <!--<archive>-->
+              <!--&lt;!&ndash;生成的jar中，不要包含pom.xml和pom.properties这两个文件 &ndash;&gt;-->
+              <!--<addMavenDescriptor>false</addMavenDescriptor>-->
+              <!--<manifest>-->
+
+                <!--&lt;!&ndash;是否要把第三方jar放到manifest的classpath中 &ndash;&gt;-->
+                <!--&lt;!&ndash;会在MANIFEST.MF加上Class-Path项并配置依赖包&ndash;&gt;-->
+                <!--<addClasspath>true</addClasspath>-->
+
+                <!--&lt;!&ndash;生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/&ndash;&gt;-->
+                <!--&lt;!&ndash;指定依赖包所在目录&ndash;&gt;-->
+                <!--<classpathPrefix>lib/</classpathPrefix>-->
+
+                <!--<useUniqueVersions>false</useUniqueVersions>-->
+
+                <!--&lt;!&ndash;应用的main class&ndash;&gt;-->
+                <!--<mainClass>com.stu.main.Main</mainClass>-->
+
+              <!--</manifest>-->
+            <!--</archive>-->
+            <!--&lt;!&ndash;过滤掉不希望包含在jar包中的文件&ndash;&gt;-->
+            <!--&lt;!&ndash;<excludes>&ndash;&gt;-->
+              <!--&lt;!&ndash;<exclude>${project.basedir}/xml/*</exclude>&ndash;&gt;-->
+            <!--&lt;!&ndash;</excludes>&ndash;&gt;-->
+          <!--</configuration>-->
+        <!--</plugin>-->
+
+        <!--<plugin>-->
+          <!--&lt;!&ndash;用于将依赖包拷贝到<outputDirectory>指定的位置目录下&ndash;&gt;-->
+          <!--<groupId>org.apache.maven.plugins</groupId>-->
+          <!--<artifactId>maven-dependency-plugin</artifactId>-->
+          <!--<version>3.1.0</version>-->
+          <!--<executions>-->
+            <!--<execution>-->
+              <!--<id>copy-dependencies</id>-->
+              <!--<phase>package</phase>-->
+              <!--<goals>-->
+                <!--<goal>copy-dependencies</goal>-->
+              <!--</goals>-->
+              <!--<configuration>-->
+                <!--<outputDirectory>-->
+                  <!--${project.build.directory}/lib-->
+                <!--</outputDirectory>-->
+              <!--</configuration>-->
+            <!--</execution>-->
+          <!--</executions>-->
+        <!--</plugin>-->
+        <!--<plugin>-->
+          <!--<groupId>org.apache.maven.plugins</groupId>-->
+          <!--<artifactId>maven-resources-plugin</artifactId>-->
+          <!--<version>2.2</version>-->
+          <!--<configuration>-->
+            <!--<encoding>UTF-8</encoding>-->
+          <!--</configuration>-->
+        <!--</plugin>-->
+
+         <!--选择二 assembly插件-->
+         <!--打包方式 mvn package assembly:single-->
+         <!--打包生成的jar文件不但包含了自己项目中的代码和资源，还包含了所有依赖包的内容。所以可以直接通过java -jar来运行-->
+        <!--如果项目中用到spring Framework，用这种方式打出来的包运行时会出错-->
+        <!--<plugin>-->
+          <!--<artifactId>maven-assembly-plugin</artifactId>-->
+          <!--&lt;!&ndash;<version>2.5.5</version>&ndash;&gt;-->
+          <!--<configuration>-->
+            <!--<descriptorRefs>-->
+              <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
+            <!--</descriptorRefs>-->
+            <!--<archive>-->
+              <!--<manifest>-->
+                <!--<mainClass>com.stu.main.Main</mainClass>-->
+              <!--</manifest>-->
+            <!--</archive>-->
+          <!--</configuration>-->
+
+          <!--<executions>-->
+            <!--&lt;!&ndash;表示在执行package打包时，执行assembly:single&ndash;&gt;-->
+            <!--<execution>-->
+              <!--<id>make-assembly</id>-->
+              <!--<phase>package</phase>-->
+              <!--<goals>-->
+                <!--<goal>single</goal>-->
+              <!--</goals>-->
+            <!--</execution>-->
+          <!--</executions>-->
+        <!--</plugin>-->
+
+        <!--assembly插件 end-->
+
+
+        <!--选择三 maven-shade-->
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>2.4.3</version>
+
+          <!--<configuration>-->
+          <!--<createDependencyReducedPom>false</createDependencyReducedPom>-->
+          <!--</configuration>-->
+
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <transformers>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>com.stu.main.Main</mainClass>
+                  </transformer>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                    <resource>META-INF/spring.handlers</resource>
+                  </transformer>
+                  <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                    <resource>META-INF/spring.schemas</resource>
+                  </transformer>
+                </transformers>
+                <!--排除影响因素-->
+                <!--<filters>-->
+                <!--<filter>-->
+                <!--<artifact>*:*</artifact>-->
+                <!--<excludes>-->
+                <!--<exclude>META-INF/*.SF</exclude>-->
+                <!--<exclude>META-INF/*.DSA</exclude>-->
+                <!--<exclude>META-INF/*.RSA</exclude>-->
+                <!--</excludes>-->
+                <!--</filter>-->
+                <!--</filters>-->
+              </configuration>
+            </execution>
+          </executions>
+
+        </plugin>
+
+
+
+        <!--jar包配置 end-->
+
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.20.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

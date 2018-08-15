@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--隐式地向 Spring 容器注册
+        AutowiredAnnotationBeanPostProcessor，@Autowired注解
+        CommonAnnotationBeanPostProcessor，@ Resource 、@ PostConstruct、@ PreDestroy等注解
+        PersistenceAnnotationBeanPostProcessor，@PersistenceContext注解
+        RequiredAnnotationBeanPostProcessor， @Required的注解
+        这 4 个BeanPostProcessor。-->
+    <context:annotation-config />
+    <!--1 自动扫描 将标注Spring注解的类自动转化Bean-->
+    <!--配置扫描包路径选项 -->
+    <!--自动扫描，定位业务类和切面类-->
+    <context:component-scan base-package="hzw.service" />
+    <context:component-scan base-package="hzw.aspect"/>
+    <!--2 加载数据资源属性文件 -->
+    <context:property-placeholder location="classpath:mysql.properties"/>
+    <!--找到被注解了的切面类，进行切面配置-->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 3 配置数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="${url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${password}" />
+        <property name="driverClassName" value="${driverClassName}" />
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="3" />
+        <property name="minIdle" value="3" />
+        <property name="maxActive" value="20" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+    </bean>
+
+    <!-- 4   配置sessionfactory -->
+    <!--扫描存放SQL语句的Category.xml-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="hzw.model" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/StudentMapper.xml"/>
+        <!--PageHelper分页插件配置 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 5  装配dao接口 -->
+    <!-- 扫描Mapper，并将其生命周期纳入Spring的管理-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="hzw.mapper"/>
+    </bean>
+
+    <!--&lt;!&ndash; 6、声明式事务管理 &ndash;&gt;
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    &lt;!&ndash; 7、注解事务切面 &ndash;&gt;
+    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+</beans>

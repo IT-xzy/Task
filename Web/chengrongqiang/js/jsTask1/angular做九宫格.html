@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .box {
+            float: left;
+            margin: 2% 0 0 2%;
+            width: 30%;
+            padding-bottom: 30%;
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+    <!-- <div ng-repeat="item in items track by $index" class="box" ng-style="{background:items[$index].bgc}" ng-click="change($index)">{{$index}}</div> -->
+    <div ng-repeat="item in box" class="box" ng-click="change($index)">{{$index}}</div>
+    
+    <!-- <div class="box" ng-model="box[0]" ng-style="{background:bgc[0]}">{{box[0]}}</div>
+    <div class="box" ng-model="box[1]" ng-style="{background:bgc[1]}">{{box[1]}}</div>
+    <div class="box" ng-model="box[2]" ng-style="{background:bgc[2]}">{{box[2]}}</div>
+    <div class="box" ng-model="box[3]" ng-style="{background:bgc[3]}">{{box[3]}}</div>
+    <div class="box" ng-model="box[4]" ng-style="{background:bgc[4]}">{{box[4]}}</div>
+    <div class="box" ng-model="box[5]" ng-style="{background:bgc[5]}">{{box[5]}}</div>
+    <div class="box" ng-model="box[6]" ng-style="{background:bgc[6]}">{{box[6]}}</div>
+    <div class="box" ng-model="box[7]" ng-style="{background:bgc[7]}">{{box[7]}}</div>
+    <div class="box" ng-model="box[8]" ng-style="{background:bgc[0]}">{{box[8]}}</div> -->
+</body>
+</html>
+<script src="https://cdn.bootcss.com/angular.js/1.6.6/angular.js"></script>
+<script src="https://cdn.bootcss.com/angular-ui-router/1.0.18/angular-ui-router.js"></script>
+<script src="https://cdn.bootcss.com/oclazyload/1.1.0/ocLazyLoad.js"></script>
+<script>
+    var myApp = angular.module('myApp', [])
+    myApp.controller('myCtrl', ['$scope', function ($scope) {
+//         $scope.color = "red"
+//         $scope.items = [
+//             { id: 1, bgc: "red" },
+//             { id: 2, bgc: "red" },
+//             { id: 3, bgc: "red" },
+//             { id: 4, bgc: "red" },
+//             { id: 5, bgc: "red" },
+//             { id: 6, bgc: "red" },
+//             { id: 7, bgc: "red" },
+//             { id: 8, bgc: "red" },
+//             { id: 9, bgc: "red" },
+//         ]
+// console.log($scope.items)     
+// 两种实现方式 
+        // $scope.items[M].bgc = clo();
+        // function clo() {
+        //     r = Math.floor(Math.random()*255);
+        //     g = Math.floor(Math.random()*255);
+        //     b = Math.floor(Math.random()*255);
+        //     ccc = "rgb(" + r + ',' + g + ',' + b + ")";
+        //     return ccc
+        // }
+        // console.log(clo())
+
+
+    //     $scope.clo = function () {
+    //         r = Math.floor(Math.random() * 255);
+    //         g = Math.floor(Math.random() * 255);
+    //         b = Math.floor(Math.random() * 255);
+    //         ccc = "rgb(" + r + ',' + g + ',' + b + ")";
+    //         return ccc
+    //     }
+    //     var x = [];
+    //     for(i=0;i<3;i++) {
+    //         M = Math.floor(Math.random() * 9);
+    //         x[i] = M
+    //         $scope.items[x[i]].bgc = $scope.clo();
+    //     }        
+    //     console.log( $scope.clo())
+    //     console.log($scope.items[M].bgc)
+    //     console.log($scope.items[2])
+    
+// $scope.change = function (a) {
+//     for (i= 0;i<9;i++){
+//         $scope.items[i].bgc = "red"  
+//     };   
+//     $scope.items[a].bgc = "blue"; 
+//     console.log(a) ;
+//     console.log($scope.items[a])
+// };
+console.log(123)
+$scope.box = [];
+$scope.bgc = [];
+for(i=0;i<9;i++) {
+    $scope.box[i] = i
+if($scope.box[i]==3) {
+    $scope.bgc[i] = "blue"    
+}else {    
+    $scope.bgc[i] = "red"
+}    
+}
+
+
+console.log($scope.box)
+console.log($scope.box[3])
+console.log($scope.bgc[3])
+}])
+</script>

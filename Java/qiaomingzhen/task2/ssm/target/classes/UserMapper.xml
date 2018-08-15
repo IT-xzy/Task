@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+    <insert id="addUser" parameterType="com.model.User" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into sign (name,type) values (#{name},#{type})
+    </insert>
+
+    <select id="selectById" resultType="com.model.User">
+    select * from sign where id=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="com.model.User" >
+        delete from sign where id=#{id}
+    </delete>
+
+    <update id="updateTypeByName" parameterType="com.model.User" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        update sign set type=#{type} where name=#{name}
+    </update>
+
+    <update id="updateTypeById" parameterType="com.model.User" useGeneratedKeys="true" keyColumn="id"
+            keyProperty="id">
+        update sign set type=#{type} where id=#{id}
+    </update>
+
+
+
+
+
+    <select id="selectByName" resultType="com.model.User">
+    select * from sign where name=#{name}
+    </select>
+
+    <delete id="deleteByName" parameterType="com.model.User">
+        delete from sign where name=#{name}
+    </delete>
+
+    <select id="selectList" resultType="com.model.User">
+        select * from sign where name=#{name}
+    </select>
+
+    <select id="selectAll" resultType="com.model.User">
+        select * from sign
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+
+    <select id="total" resultType="int">
+        select count(*) from sign
+    </select>
+
+    <delete id="deleteById1" parameterType="com.model.User" >
+        delete from sign where id in
+        <foreach collection="list" separator="," item="user" open="(" close=")">
+            #{user.id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,116 @@
+<div ui-view>
+    <div class="list">
+        <!-- 搜索栏 -->
+        <div class="search">
+            <strong>发布时间</strong>
+            <input type="date" ng-model="vm.start"> 
+            ——
+            <input type="date" name="over" ng-model="vm.end">
+            <br>
+            <div class="line">
+                <strong class="lei">类型</strong> 
+                <!-- 类型下拉框 --> 
+                <div class="btn-group">
+                    <select class="form-control" ng-model="vm.type">
+                        <option value="">全部</option>
+                        <option value="0">首页banner</option>
+                        <option value="1">找职业banner</option>
+                        <option value="2">找精英banner</option>
+                        <option value="3">行业大图</option>
+                    </select>
+                </div>
+                <strong class="text">状态</strong>  
+                <!-- 状态下拉框 -->
+                <div class="btn-group">
+                    <select class="form-control" ng-model="vm.status">
+                        <option value="">全部</option>
+                        <option value="2">上线</option>
+                        <option value="1">草稿</option>
+                    </select>
+                </div>
+            </div>
+            <div class="btn-warp">
+                <!-- 清空按钮 -->
+                <button type="button" class="btn btn-danger" ng-click="vm.clear()">清空</button>
+                <!-- 搜索按钮 -->
+                <button type="button" class="btn btn-success" ng-click="vm.search()">搜索</button>
+            </div>
+        </div>
+        <!-- 文章列表 -->
+        <div class="article-list">
+            <div class="article-title">
+                <strong>文章列表</strong>
+                <button type="button" class="btn btn-success">
+                    <a ui-sref="backstage.write">+新增</a>
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <tbody>
+                        <!-- 文章列表标题栏 -->
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">名称</th>
+                            <th class="text-center">类型</th>
+                            <th class="text-center">发布时间</th>
+                            <th class="text-center">修改时间</th>
+                            <th class="text-center">发布者</th>
+                            <th class="text-center">状态</th>
+                            <th class="text-center">操作</th>
+                        </tr>
+                        <!-- 文章列表详情 -->
+                        <tr ng-repeat="list in vm.lists">
+                            <td class="text-center" ng-bind="$index + 1"></td>
+                            <td class="text-center" ng-bind="list.title"></td>
+                            <td class="text-center" ng-bind=" list.type | type"></td>
+                            <td class="text-center" ng-bind=" list.updateAt | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                            <td class="text-center" ng-bind=" list.createAt | date:'yyyy-MM-dd HH:mm:ss'"></td>
+                            <td class="text-center" ng-bind=" list.author"></td>
+                            <td class="text-center" ng-bind=" list.status | statusFilter"></td>
+                            <td class="text-center articleCtrl">
+                                <a><button class="btn" ng-class="{'btn-success': list.status==1,'btn-warning': list.status==2}" ng-click="vm.offline(list.id,list.status)" ng-bind="list.status | unStatusFilter">
+                                </button></a> 
+                                <a><button class="btn btn-info" ng-click="vm.write(list.id)">编辑</button></a>
+                                <a><button class="btn btn-danger" ng-click="vm.delete(list.id)">删除</button></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+            </div>
+        </div>
+        <!-- 分页栏 -->
+        <nav aria-label="Page navigation" class="text-right">
+            <ul class="pagination">
+                <li>
+                    <a ng-click="vm.indexPage()" ng-class="{'active': vm.currentPage==1}">首页</a>
+                </li>
+                <li>
+                    <a aria-label="Previous" >
+                        <span aria-hidden="true" class="glyphicon glyphicon-menu-left" ng-click="vm.prePage()"></span>
+                    </a>
+                </li>
+                <li ng-repeat="x in vm.totalPage">
+                    <a ng-click="vm.showPage(x)" ng-class="{'active': x==vm.currentPage}">
+                        {{x}}
+                    </a>
+                </li>         
+                <li>
+                    <a aria-label="Next">
+                        <span aria-hidden="true" class="glyphicon glyphicon-menu-right" ng-click="vm.nextPage()"></span>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="vm.endPage()" ng-class="{'active': vm.currentPage==vm.page}">末页</a>
+                </li>
+                <!-- <li>去第<input type="number" min="1" ng-model="y">页 
+                    <button ng-click="goPage()">确定</button>
+                </li> -->
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,305 @@
+@charset "utf-8";
+$mg-15:.15rem;
+$mg-30:.3rem;
+$green:#1db176;
+$grey:#8b8b8b;
+.mg-tb15{
+  margin-bottom: .15rem ;
+  margin-top: .15rem ;
+
+}
+.mg-tb30{
+  margin-bottom: .3rem ;
+  margin-top: .3rem ;}
+.mg-lr-10{
+  margin-left:10% ;
+  margin-right: 10%;
+}
+.pd-tb30{
+  padding-top: .3rem;
+  padding-bottom: .3rem;
+}
+.align-center{
+  text-align: center;
+}
+.b-bt{
+  border-bottom: 1px solid #c4c4c4;
+}
+
+h4{
+  color:black;
+  font-weight: 600;
+  font-size: .16rem;
+}
+h5{
+  color: white;
+  font-size: .15rem;
+  font-weight: 500;
+}
+button{
+  font-size: .16rem;
+}
+//-------------块↓----------------------
+html{
+  font-size: 625%;
+  font-family: STHeiti,"Microsoft Yahei",Arial,SimSun,sans-serif;
+}
+body{
+  background: white;
+  font-size: .14rem;
+}
+header,.wrap,nav,footer,.link{//整体内边距
+  box-sizing: border-box;
+  padding: 0 10%;
+}
+.advantage,.how,.partner,.show{
+  margin: 0 10%;
+}
+
+
+.wrap{//顶部
+  text-align: right;
+  width: 100%;
+  line-height: .3rem;
+  height: .3rem;
+  color: $green;
+  background: white;
+  a{
+    margin: .05rem 0;
+    display: inline-block;
+    height: .2rem;
+    width: .2rem;
+    &:nth-of-type(1){
+      background: url("../img/qq.png");
+      background-size: 100% 100%;
+
+    }
+    &:nth-of-type(2){
+      background: url("../img/weibo.png");
+      background-size: 100% 100%;
+
+    }
+    &:nth-of-type(3){
+      background: url("../img/weixin.png");
+      background-size: 100% 100%;
+
+    }
+  }
+  &::before{
+    content: '客服热线 ： 010-594-78634';
+    position: absolute;
+    left: 10%;
+  }
+}
+.wrap-media{
+  display: none;
+  text-align: right;
+  width: 100%;
+  line-height: .3rem;
+  height: .3rem;
+  background: white;
+  padding: 0 10%;
+  a:hover{
+    color: $green;
+  }
+}
+@media all and (max-width:768px) {
+  .wrap-media{
+    display: block;
+  }
+  .wrap{
+    display: none;
+  }
+}
+
+nav{
+  @media all and (max-width: 768px){
+    display: none;
+  }
+  position: relative;
+  height: .8rem;
+  background-color: $green;
+  &:before{
+    content: '';
+    display: block;
+    width: 1.1rem;
+    height: .8rem;
+    background: url("../img/logo.png") no-repeat center;
+    position: absolute;
+    left: 10%;
+  }
+  button{
+    color: white;
+    float: right;
+    margin-right: -.12rem;
+    margin-left: .1rem;
+    height: .8rem;
+    width: .6rem;
+    border: 2px solid $green;
+    &:hover{
+      border-bottom: 3px solid white;
+    }
+  }
+}
+.nav-media{
+  position: relative;
+  z-index: 3;
+  @media all and (min-width: 769px){
+    display: none;
+  }
+  height: .8rem;
+  background-color: $green;
+  &:before{
+    content: '';
+    display: block;
+    width: 1.1rem;
+    height: .8rem;
+    background: url("../img/logo.png") no-repeat center;
+    position: absolute;
+    left: 10%;
+  }
+  button{
+    float: right;
+    margin-right: -.12rem;
+    margin-left: .1rem;
+    height: .8rem;
+    width: .6rem;
+    border: 2px solid $green;
+    &:hover{
+      border-bottom: 3px solid white;
+    }
+  }
+
+  button{
+  }
+  label{//汉堡
+    @include position-vertically-center;
+    right: 10%;
+    display: block;
+    width: .25rem;
+    cursor: pointer;
+    div{
+      margin: 4px 0;
+      height: 3px;
+      width: 100%;
+      background: white;
+      transition: margin 200ms ease;
+    }
+  }
+}
+.nav-media--menu{
+  line-height: 0;
+  font-size: 0;
+  text-align: center;
+  margin-top: -.5rem;
+  height:0;
+  background: $green;
+  transition: all 400ms ease;
+
+  button{
+    z-index: -1;
+    width:100%;
+    background-color: $green;
+    position: relative;
+    top: -.08rem;
+    height:0;
+    font-size: 0;
+    color: white;
+    border-bottom: 2px solid #f9f9f9;
+    transition:border 200ms ease-in
+    , height 500ms ease-out
+    ,font-size 450ms ease-out;
+    &:hover{
+      background-color:#1cc286;
+    }
+  }
+
+}
+.placeholder{
+  width: 100%;
+  height: .5rem;
+  transition: all 300ms ease;
+}
+#bridge:checked ~ .nav-media label{
+  div{
+    transition: margin 400ms ease;
+    margin: 6px 0;
+  }
+}
+#bridge:checked ~ .nav-media--menu{
+  display: block;
+  @media all and(min-width: 769px){//大于断点menu消失防止bug
+    display: none;
+  }
+  margin-top: 0;
+  height: 1.6rem;
+  button{
+    z-index: 1;
+    transition:border 470ms ease,
+    height 600ms ease-out;
+    border-bottom: 2px solid $green;
+    height: .4rem;
+    font-size:.16rem;
+  }
+}
+#bridge:checked ~ .placeholder{
+  height: 0;
+}
+footer{
+  a{
+    padding:.1rem 0 ;
+    border-bottom:  1px solid $green;
+    &:hover{
+      border-bottom: 1px solid white;
+    }
+  }
+  @include flex-justify-between;
+  padding-bottom: .15rem;
+  padding-top: .15rem;
+  background-color: $green;
+  *{color: white;}
+  h5{
+    margin-bottom: .15rem;
+  }
+}
+.ft-left,.ft-mid,.ft-rt {
+  @include flex-justify-between;
+  flex-direction: column;
+}
+.ft-left{
+  padding-bottom: .15rem;
+}
+.ft-mid{
+    width: 2.2rem;
+  >div{
+    display:flex;
+    flex-wrap: wrap;
+
+    >div{
+      height: .35rem;
+      flex-basis:50%;
+
+    }
+  }
+}
+.ft-rt{
+  img{
+    width: 92px;
+    height: 92px;
+  }
+}
+@media all and (max-width: 768px) {
+   footer{
+     flex-direction: column;
+   }
+}
+
+.copyright{
+  background-color:#1db176;
+  border-top: 1px solid #63c99d;
+  font-size: .12rem;
+  color: white;
+  text-align: center;
+  padding: .05rem 0;
+}
+

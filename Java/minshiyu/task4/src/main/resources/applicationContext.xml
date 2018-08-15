@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--扫描service-->
+    <context:component-scan base-package="com.ev.service"/>
+
+    <!-- 引入jdbc配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <property name="url" value="${jdbc_url}"/>
+    <property name="username" value="${jdbc_user}"/>
+    <property name="password" value="${jdbc_password}"/>
+    <property name="filters" value="stat"/>
+    <property name="maxActive" value="20"/>
+    <property name="initialSize" value="1"/>
+    <property name="maxWait" value="60000"/>
+    <property name="minIdle" value="1"/>
+    <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+    <property name="minEvictableIdleTimeMillis" value="300000"/>
+    <property name="testWhileIdle" value="true"/>
+    <property name="testOnBorrow" value="false"/>
+    <property name="testOnReturn" value="false"/>
+    <property name="poolPreparedStatements" value="true"/>
+    <property name="maxOpenPreparedStatements" value="20"/>
+    <property name="asyncInit" value="true"/>
+    </bean>
+
+    <!-- mybatis文件配置，扫描所有mapper.xml文件 -->
+    <!-- 配置mybatisSqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource"/>
+    <property name="configLocation" value="classpath:mybatis.xml"/>
+    <property name="mapperLocations" value="classpath*:com/ev/dao/*Mapper.xml"/>
+    </bean>
+
+    <!-- 配置SqlSessionTemplate -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 配置mybatis mapper接口，扫描所有dao -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.ev.dao"/>
+    <property name="sqlSessionTemplateBeanName" value="sqlSessionTemplate"/>
+    </bean>
+
+    <!--&lt;!&ndash;两种方式开启@AspectJ的支持&ndash;&gt;-->
+    <!--&lt;!&ndash;方法一&ndash;&gt;-->
+    <!--&lt;!&ndash;<aop:aspectj-autoproxy/>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;<context:component-scan base-package="com.ev.service">&ndash;&gt;-->
+    <!--&lt;!&ndash;<context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</context:component-scan>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;方法二&ndash;&gt;-->
+    <!--&lt;!&ndash;<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator"/>&ndash;&gt;-->
+
+</beans>

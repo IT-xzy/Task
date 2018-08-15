@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- 使用RmiServiceExporter暴露服务-->
+    <bean id="bussinessServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="BussinessServer"/>
+        <property name="service" ref="businessServiceImpl"/>
+        <property name="serviceInterface" value="com.jnshu.service.BussinessService"/>
+        <property name="registryPort" value="9999"/>
+        <property name="servicePort" value="9999"/>
+    </bean>
+
+
+    <bean id="stuService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="StuService"/>
+        <property name="service" ref="stuServiceImpl"/>
+        <property name="serviceInterface" value="com.jnshu.service.StuService"/>
+        <property name="registryPort" value="9999"/>
+        <property name="servicePort" value="9999"/>
+    </bean>
+
+    <bean id="userService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="UserService"/>
+        <property name="service" ref="redisUserServiceImpl"/>
+        <property name="serviceInterface" value="com.jnshu.service.UserService"/>
+        <property name="registryPort" value="9999"/>
+        <property name="servicePort" value="9999"/>
+    </bean>
+
+</beans>

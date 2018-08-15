@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="PhoneMessage" class="com.mvc.springUtil.SendPhoneTemplate">
+        <property name="serverIP" value=""/>
+        <property name="serverPort" value=""/>
+        <property name="accounSid" value=""/>
+        <property name="accountToken" value=""/>
+        <property name="AppID" value=""/>
+        <property name="templateID" value="1"/>
+        <property name="NeedTime" value="2"/>
+    </bean>
+
+    <bean id="SendEmail" class="com.mvc.springUtil.SendEmailTemplate">
+        <property name="url" value=""/>
+        <property name="apiUser" value=""/>
+        <property name="apiKey" value=""/>
+        <property name="templateInvokeName" value="t"/>
+        <property name="from" value="1"/>
+        <property name="fromName" value="帅比叔叔"/>
+    </bean>
+
+    <bean id="AliYunOssAPI" class="com.mvc.springUtil.ALiYunOssAPI">
+        <constructor-arg name="endpoint" value="o"/>
+        <constructor-arg name="accessKeyId" value=""/>
+        <constructor-arg name="accessKeySecret" value=""/>
+        <constructor-arg name="bucketName" value="--"/>
+    </bean>
+
+    <bean id="QiNiuYunOssAPI" class="com.mvc.springUtil.QiNiuYunOssAPI">
+        <constructor-arg name="accessKey" value=""/>
+        <constructor-arg name="secretKey" value=""/>
+        <constructor-arg name="bucket" value=""/>
+    </bean>
+</beans>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <context:annotation-config/>
+
+    <!--<context:component-scan base-package="com.service.impl"/>-->
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=UTC"/>
+        <property name="username" value="root"/>
+        <property name="password" value="asong520"/>
+    </bean>
+
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.model"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:studentMapper.xml"/>
+    </bean>
+
+
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.Dao.StudentDao"/>
+        <property name="sqlSessionFactory" ref="sqlSession"/>
+    </bean>
+
+    <aop:aspectj-autoproxy expose-proxy="true"/>
+
+    <context:component-scan base-package="com.DateTag">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+
+
+<!--     memcache 的配置文件       -->
+    <bean id="memCachedPool" class="com.whalin.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize"
+          lazy-init="false" destroy-method="shutDown">
+        <!-- 构造函数 -->
+        <constructor-arg value="memCachedPool"/>
+        <!-- 可以设置多个memcachePool服务器 -->
+        <property name="servers">
+            <list>
+                <value>127.0.0.1:11211</value>
+            </list>
+        </property>
+
+        <!-- 每台服务器的初始连接 -->
+        <property name="initConn" value="10"/>
+
+        <!-- 每台服务器的最小连接 -->
+        <property name="minConn" value="5"/>
+
+        <!-- 每台服务器的最大连接数 -->
+        <property name="maxConn" value="250"/>
+
+        <!-- 主线程睡眠时间 -->
+        <property name="maintSleep" value="30"/>
+
+        <!-- Tcp/Socket 的参数, 如果是true在写数据时不会缓冲, 会立即发出 -->
+        <property name="nagle" value="false"/>
+
+        <!-- 连接超时/阻塞读取时间的超时时间 -->
+        <property name="socketTO" value="3000"/>
+    </bean>
+
+    <bean id="memCachedClient" class="com.whalin.MemCached.MemCachedClient"
+          lazy-init="false">
+        <constructor-arg value="memCachedPool"/>
+    </bean>
+
+    <!---=================短息验证========================================-->
+    <bean id="sendCode" class="com.SMSTool.SDKTestSendTemplateSMS">
+        <property name="serverIP" value="app.cloopen.com"/>
+        <property name="serverPort" value="8883"/>
+        <property name="accountSid" value="8a216da863f8e6c20164322d14651f06"/>
+        <property name="accountToken" value="3abfbf5ceb524438b94a3952ca0c792b"/>
+        <property name="appId" value="8a216da863f8e6c20164322d14b91f0c"/>
+    </bean>
+
+    <!--=========================发送图片==========================================-->
+    <bean id="sendImg" class="com.SendimagesTool.QiniuTool">
+        <property name="accessKey" value="6TXc9AIzZ0cWmCbnXPNWOWsf9r2X0rctjvKp-wVn"/>
+        <property name="secretKey" value="DvWrjs1hkOyJdHw-V7cnW4RUY_RWVBq4SmO19qw6"/>
+        <property name="bucket" value="images"/>
+    </bean>
+
+    <!--=============================发送邮件====================================-->
+    <bean id="sendEmail" class="com.sendcloud.sdk.demo.mail.SendMail">
+        <property name="cc" value="c@ifaxin.com"/>
+        <property name="bcc" value="d@ifaxin.com"/>
+        <property name="from" value="sendcloud@sendcloud.org"/>
+        <property name="fromName" value="SendCloud"/>
+        <property name="replyTo" value="reply@sendcloud.org"/>
+        <property name="subject" value="来自 SendCloud SDK 的邮件"/>
+    </bean>
+
+    <!--=======================阿里 云对象存储==========================================-->
+    <bean id="aliyunOss" class="com.FileCopy.UploadAili" >
+        <property name="accessKeyId" value="i7aAXivNEYI1ToYg" />
+        <property name="accessKeySecret" value="vJWxLmp8xL17aZMZ0R1taXFRm8L1a5" />
+        <property name="bucketname" value="baichensong" />
+        <!-- endpoint 机房 地址 -->
+        <property name="endpoint" value="http://oss-cn-qingdao.aliyuncs.com" />
+        <property name="fileUrl" value="http://oss-cn-qingdao.aliyuncs.com" />
+    </bean>
+
+</beans>

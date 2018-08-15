@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+
+    <!--校验信息-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="fileEncodings" value="utf-8"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="cacheSeconds" value="120"/>
+        <property name="basename" value="classpath:hibernateValidationMessage"/>
+    </bean>
+    <!--校验器工厂-->
+    <bean id="validatorFactoryBean" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="validationMessageSource" ref="messageSource"/>
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
+</beans>

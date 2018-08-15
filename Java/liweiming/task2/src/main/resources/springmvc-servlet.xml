@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--1、配置映射器与适配器-->
+    <mvc:annotation-driven  conversion-service="conversionService">
+    </mvc:annotation-driven>
+
+
+    <!-- Spring MVC静态资源默认处理器 -->
+    <mvc:default-servlet-handler />
+
+    <!-- 2、内部视图解析器，JSP与JSTL模板 -->
+    <bean
+            class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+            id="internalResourceViewResolver">
+        <!--指定视图渲染类 -->
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView" />
+        <!--自动添加到路径中的前缀 -->
+        <property name="prefix" value="/WEB-INF/views/" />
+        <!--自动添加到路径中的后缀 -->
+        <property name="suffix" value=".jsp" />
+        <!--设置所有视图的内容类型，如果视图本身设置内容类型视图类可以忽略 -->
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <!-- 优先级，越小越前 -->
+        <property name="order" value="2" />
+    </bean>
+
+    <!--3、 自动扫描包，SpringMVC扫描到@Controller注解的类为控制器 -->
+    <context:component-scan base-package="com.jnshu.ssm.controller" />
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+       <!--转换器-->
+       <property name="converters">
+           <list>
+               <bean class="com.jnshu.ssm.tools.Convert"/>
+           </list>
+       </property>
+   </bean>
+
+</beans>

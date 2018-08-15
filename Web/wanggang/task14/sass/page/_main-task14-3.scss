@@ -1,0 +1,209 @@
+main {
+    overflow: hidden;
+}
+// 导航栏下方选择文本
+// 路径提示文本
+.left-title .text-box {
+    @include padding($top:.15rem,$bottom:.15rem);
+    font-size: .16rem;
+    border-bottom: 1px solid #999999;
+    p {
+        display: inline-block;
+        &:nth-child(2) {
+            color: #29b078;
+        }
+    }
+
+}
+
+.list-title .text-box {
+    @include padding($top: .1rem,$bottom: .1rem);
+    font-size: .14rem;
+    border-bottom: 1px solid #d0d6d9;
+    ul {
+        display: flex; // 响应式
+    }
+    li {
+        margin-right: .2rem;
+        &:nth-child(1) {
+            color: #999999;
+        }
+        a {
+            color: black;
+            &:hover {
+                background: #29b078;
+                text-decoration: none;
+                color: white;
+            }
+        }
+    }
+    @media screen and (max-width: 575px) {
+        ul {
+            flex-direction: column;
+        }
+        li {
+            margin: 10px;
+            &:nth-child(n+2) {
+                text-align: center;
+            }
+        }
+    }
+}
+
+// 表格内容栏
+// 分标题*
+.title-box {
+    @include padding($top:.1rem,$bottom:.1rem);
+    font-size: .16rem;
+    font-weight: bold;
+    border-bottom: 1px solid #999999;
+}
+
+.table-box {
+    position: relative;
+}
+
+.professional {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    background: #ffffff;
+}
+
+.first-line {
+    font-size: 0;
+    .photo-box {
+        padding: 10px;
+        border-right: none;
+        .photo {
+            @include icon-box(139px, 139px, none);
+            background: url(../images/8-3/touxiang.png) no-repeat;
+        }
+    }
+    .text-box {
+        border-left: none;
+        p:nth-child(1) {
+            display: inline;
+            font-size: .16rem;
+            font-weight: bold;
+        }
+        p:nth-child(2) {
+            padding-right: 10px;
+            word-break: break-all;
+            font-size: .14rem;
+            text-align: justify;
+        }
+    }
+}
+
+.second-line {
+    p {
+        display: inline-block;
+        vertical-align: middle;
+        padding: 8px;
+        font-size: .12rem;
+        color: #999999
+    }
+    .star {
+        @include icon-box(16px, 16px, none);
+        vertical-align: middle;
+        margin-right: 4px;
+        background: url(../images/8-3/xingxing.png) no-repeat;
+    }
+}
+
+.third-line {
+    p {
+        display: inline-block;
+        font-size: .12rem;
+    }
+    .long {
+        padding: 8px;
+        color: #999999;
+    }
+    .year {
+        margin-right: 4px;
+    }
+    span {
+        color: red;
+    }
+}
+
+.forth-line {
+    table,
+    tr,
+    td {
+        padding: 0;
+        border: none;
+    }
+    table {
+        width: 100%;
+        .first-col {
+            width: 30%;
+            font-size: .12rem;
+            text-align: center;
+            color: #999999;
+            border-right: 1px solid #999999;
+        }
+        .second-col {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 30px;
+            font-size: .12rem;
+        }
+        tr:nth-child(2) {
+            border-top: 1px solid #999999;
+            border-bottom: 1px solid #999999;
+        }
+    }
+}
+
+.fifth-line {
+    p {
+        padding: 5px;
+        font-size: .14rem;
+        font-weight: 500;
+        span {
+            color: red;
+        }
+    }
+}
+
+.sixth-line {
+    p {
+        padding: 5px;
+        font-size: .12rem;
+        color: #999999;
+    }
+}
+
+.hidden-text {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px;
+    word-break: break-all;
+    background: rgba(0, 0, 0, .7);
+    color: white;
+    transition: transform 2s;
+    p {
+        text-align: justify;
+        font-size: 16px;
+    }
+}
+
+.table-box:hover .hidden-text {
+    visibility: visible;
+    transform: rotate(360deg);
+}
+
+@media screen and (max-width:991px) and (min-width:767px) {
+    .col-md-4 {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+}

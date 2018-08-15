@@ -1,0 +1,19 @@
+  <form  name="myFrom" class="form">
+        <div class="case">
+            <h3>喝我水站后台登录</h3>
+            <div>
+                <i class="user"></i>
+                <input type="text" placeholder="用户名" ng-model="params.name" required name="username" ng-change="rest()">
+            </div>
+            <div>
+                <i class="password"></i>
+                <input type="text" placeholder="密码" ng-model="params.pwd" required name="password" ng-change="rest()">
+            </div>
+            <div class="messageText">
+                <p ng-show="myFrom.username.$error.required&&myFrom.username.$dirty">用户名不能为空</p>
+                <p ng-show="myFrom.password.$error.required&&myFrom.password.$dirty">密码不能为空</p>
+                <p >{{name}}</p>
+            </div>
+            <button ng-click="go()">登录</button>
+        </div>
+    </form>

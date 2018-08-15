@@ -1,0 +1,53 @@
+.side-nav{
+    background: $bf-color;
+    box-shadow: 1px 1px 2px $shadow-color;
+    border-radius: 5px;
+    overflow: hidden;
+    li{
+        padding: 15px;
+        font-size: 14px;
+        list-style: none;
+        text-align: center;
+        a{
+            display: inline-block;
+            margin-left: 8px;
+            width: 80px;
+            color: $bg-color;
+            text-align: left;
+            text-decoration: none;
+            &.action{
+                color: $side-color;
+            }
+        }
+        &:hover{
+            a{
+                color: $side-color;
+            }
+            .round{
+                background: $side-color;
+            }
+        }       
+        &.action::before{
+            background: $side-color;
+        }
+    }
+}
+.side-nav-title{
+    height: 60px;
+    border-bottom: $border-ss $gray-6;
+    line-height: 60px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.round{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border: $border-ss $side-color;
+    background: transparent;
+    border-radius: 50%;
+    &action{
+        background: $side-color;
+    }
+}

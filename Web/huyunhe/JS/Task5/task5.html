@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Task5</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" media="screen" href="./CSS/task5.css" />
+  <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular.min.js"></script>
+  <script src="https://cdn.bootcss.com/angular.js/1.5.8/angular-messages.min.js"></script>
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-grid.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body ng-controller="myCtrl">
+  <div class="backImg">
+    <img src="./resource/background.jpg" alt="" srcset="">
+  </div>
+  <form name="login" novalidate>
+    <div class="title">后台登录</div>
+    <div class="user">
+      <img src="./resource/user.png" alt="" srcset="">
+      <input type="text" name="user" placeholder="用户名" ng-model="user" ng-minlength="5" required>
+      <div ng-messages="login.user.$error">
+        <div ng-message="required" style="color: red;font-size: 1rem">用户名不能为空</div>
+      </div>
+    </div>
+
+    <div class="pwd">
+      <img src="./resource/lock.png" alt="" srcset="">
+      <input type="password" name="pwd" placeholder="密码" required ng-model="pwd">
+      <div ng-show="login.pwd.$error.required" style="font-size: 1rem;color: red;">密码不能为空！</div>
+    </div>
+
+    <div class="prompt"></div>
+    <div>
+      <button class="login btn btn-primary btn-block" ng-disabled="login.$invalid">登录</button>
+    </div>
+  </form>
+</body>
+<script src="../../resource/jquery-3.3.1.min.js"></script>
+<script src="./js/task5.js"></script>
+
+</html>

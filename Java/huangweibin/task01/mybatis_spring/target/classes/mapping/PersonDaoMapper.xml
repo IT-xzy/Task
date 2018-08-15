@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/mybatis-3-mapper.dtd">
+<mapper namespace="dao.PersonDao">
+
+    <select id="getPerson" parameterType="int" resultType="modul.Person">
+        select * from mybatis_emp where id=#{id}
+    </select>
+
+    <update id="updateEmp" parameterType="modul.Person" >
+        update mybatis_emp set emp="副经理",salary=12358.5 where name=#{name}
+    </update>
+
+    <select id="findAllUser" resultType="modul.Person" parameterType="java.lang.String">
+        select * from mybatis_emp
+    </select>
+
+    <insert id="insertPerson" parameterType="modul.Person">
+        insert into mybatis_emp(name,emp,salary) values (#{name},#{emp},#{salary})
+    </insert>
+
+    <delete id="deletePerson" parameterType="int">
+        delete from mybatis_emp where id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signalLight</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .star{
+            width: 30vw;
+            height: 30vw;
+            border-radius: 50%;
+            background: green;
+        }
+        .content{
+            display: flex;
+            justify-content: space-between;
+            width: 30vw;
+            margin: 1rem 0;
+        }
+        button {
+            margin-left: 10px;
+            color: #1eaccd;
+            background: #042229;
+        }
+    </style>
+</head>
+<body>
+<!--<div class="star"  >-->
+<!--</div>-->
+<div class="ss">陌生人</div>
+<div class="content">
+    <button class="a">去去聚会</button>
+    <button class="ssss">喊女生去玩</button>
+    <button class="dd">给女生虚寒问暖</button>
+    <button class="ff">买戒指</button>
+    <button class="gg">吵架</button>
+    <button class="hh">跟某个亲戚擦出火花</button>
+
+</div>
+ <p style=" font-size: 34px;  color: red; ">线上某个师弟的恋爱史</p>
+<script src="jquery-3.3.1.min.js"></script>
+<script src="state-machine.js"></script>
+<script>
+    $(document).ready(function(){
+
+    var fsm =  StateMachine({
+        init: "hi",
+        transitions: [
+            { name: 'sayhi',  from:'hi', to: 'understand'},
+            { name: 'askout', from:'understand', to:'friend'},
+            { name: 'saylike', from:'friend',to:'girlfriend'},
+            { name: 'saylove', form:'girlfriend',  to:'wife'},
+            { name: 'saydivorce', form:'wife',  to:'ex'},
+            { name: 'introduce', form:'ex',  to:'sdf'},
+        ],
+
+        methods: {
+            onSayhi: function () {
+                $(".ss").text("恭喜你，认识一个漂亮的小姐姐");
+            },
+            onAskout: function () {
+                $(".ss").text("恭喜你，和小姐姐成为朋友");
+            },
+            onSaylike: function () {
+                $(".ss").text("恭喜你，和小姐姐关系升级成为女朋友");
+            },
+            onSaylove: function () {
+                $(".ss").text("恭喜你，女票变成妻子");
+            },
+            onSaydivorce: function () {
+                $(".ss").text("不恭喜你了，妻子没了");
+            },
+            onIntroduce: function () {
+                $(".ss").text("恭喜你，妻子变成小姨子。关系有点乱");
+            },
+        }
+    });
+
+//jieshshdfkajsssslg
+
+
+
+        $(".a").click(function () {
+            fsm.sayhi();
+        });
+
+        $(".ssss").click(function () {
+            fsm.askout();
+        });
+
+        $(".dd").click(function () {
+            fsm.saylike();
+
+        });
+        $(".ff").click(function () {
+            fsm.saylove();
+
+        });
+        $(".gg").click(function () {
+            fsm.saydivorce();
+
+        });
+        $(".hh").click(function () {
+            fsm.introduce();
+        });
+
+//jieshshdfkajsssslg
+    });
+
+</script>
+</body>
+</html>

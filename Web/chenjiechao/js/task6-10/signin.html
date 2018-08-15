@@ -1,0 +1,55 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>萝卜多登录页</title>
+    
+</head>
+
+<body>
+<link rel="stylesheet" href="./css/signin.css" type="text/css" /> -->
+<main ng-controller="signin">
+
+    <form name="loginForm" novalidate="novalidate">
+        <h4>萝卜多后台登录</h4>
+        <div class="div-text">
+            <i class="fa fa-user-circle"></i>
+            <input type="text" id="text" name="uname" ng-model="uname" autocomplete="off" ng-minlength=5 ng-maxlength=10 required>
+        </div>
+        <div class="div-password">
+            <i class="fa fa-expeditedssl"></i>
+            <input type="password" id="pwd" name="upwd" ng-model="pwd" autocomplete="off" ng-minlength=6 ng-maxlength=10 required>
+        </div>
+        
+        
+        <div class="warn">
+            <div class="error" id="er" ng-messages="loginForm.upwd.$error" style="color: red">
+                <div ng-message="required">密码不能为空</div>
+                <div ng-message="minlength">密码长度至少为6</div>
+                <div ng-message="maxlength">密码长度至多为10</div>
+            </div>
+        </div>
+        <div class="warn" ng-hide="warnShow">
+            <div class="error" id="er" ng-messages="loginForm.uname.$error" style="color: red">
+                <div ng-message="required">用户名不能为空</div>
+                <div ng-message="minlength">用户名长度至少为5</div>
+                <div ng-message="maxlength">用户名长度至多为10</div>
+                <!-- 报错信息 -->
+            </div>
+        </div>
+        <div class="warn">
+            <p class="error" ng-model="info">{{warn}}</p>
+        </div>
+        
+
+
+        <button type="submit" class="signin" ng-click="in()">登录</button>
+    </form>
+</main>
+
+<!-- </body>
+
+</html> -->

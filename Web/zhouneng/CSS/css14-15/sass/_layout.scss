@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+// 变量
+$bg:#fafafa;
+$white:#FFFFFF;
+$green:#29b078;
+$border:.01rem solid;
+$homepage-border:.01rem solid #e4e4e4;
+$black:#333333;
+$text:#999999;
+$main-border:.01rem solid #e1e1e1;
+$orange:#FF650E;
+
+
+
+
+// 混合器
+@mixin box($w:0,$h:0){
+    width: $w;
+    height: $h;
+}
+
+@mixin header{
+    @include box(.3rem,.3rem );
+    display:inline-block;
+    margin-right: .19rem;
+}
+
+@mixin flex($x:center,$y:center){
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+
+@mixin text($x:center,$y:0){
+    text-align: $x;
+    line-height: $y;
+}
+@mixin slideshow-button{
+    position: absolute;
+    top: 50%;
+    margin-top: -.2rem;
+    @include box(.4rem,.4rem );
+    border-top: .15rem solid rgba(255,255,255,.5);
+    border-right: .15rem solid rgba(255,255,255,.5);
+}
+@mixin homepage-top{
+    display: inline-block;
+    margin-top: 1.65rem;
+}
+@mixin homepage-indicate{
+    display: inline-block;
+    @include box(.13rem,.13rem );
+    border-radius: 100%;
+}

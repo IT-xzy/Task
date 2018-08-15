@@ -1,0 +1,105 @@
+@import "all"; //引用通用样式
+@import "mystyle"; //引用共用样式
+// 顶部样式和按钮
+header {
+    @extend %head;
+    .icon-home {
+        margin-left: .1rem;
+        @include icon(.25rem, .25rem, "../images/home.png");
+    }
+    .icon-message {
+        margin-right: .1rem;
+        @include icon(.25rem, .25rem, "../images/message.png");
+    }
+}
+
+// 胜利图片和下面文字
+main {
+    width: 80%;
+    margin: .7rem auto .1rem; // 胜利图片
+    img {
+        display: block;
+        width: 1.6rem;
+        height: 1rem;
+        margin: .1rem auto; // 胜利图片下橙色文字
+        &+p {
+            display: inline-block;
+            position: relative;
+            @include center(50%, 0, -50%, 0);
+            height: .9rem;
+            text-align: justify;
+            font-size: .16rem;
+            font-weight: bold;
+            color: $orange;
+        }
+    }
+    .main-top {
+        word-spacing: .10rem;
+        color: #fff;
+        p {
+            line-height: .25rem;
+        }
+        .number {
+            display: flex;
+            & span {
+                flex-basis: 33.3%;
+            }
+        }
+    }
+}
+
+// 游戏结果
+article {
+    margin: 0 auto;
+    padding-bottom: .6rem;
+    border-top: .01rem solid #ccc;
+    .day {
+        padding: {
+            left: 10%;
+            right: 10%;
+        }
+        border-bottom: .01rem solid #ccc;
+        background-color: #fff; // 游戏结果flex布局和字体，颜色
+        div {
+            @include flex(start);
+            h3 {
+                flex-basis: 66.6%;
+            }
+            span {
+                font-size: .12rem;
+            }
+        }
+        span,
+        p {
+            color: #ccc;
+            line-height: .28rem;
+        }
+    }
+}
+
+// 底部按钮
+footer {
+    @include flex(space-around);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: .6rem;
+    background: rgba(41, 189, 224, 0.5); //背景半透明
+    z-index: 1;
+    .click-message {
+        width: 45%;
+        line-height: .45rem;
+        text-align: center;
+        font-size: .2rem;
+        color: #fff;
+        background-color: #f66f6f;
+        border: none;
+        outline: none;
+        border-radius: .1rem;
+        cursor: pointer;
+    }
+    .click-contact {
+        @extend .click-message;
+        background-color: #fbb435;
+    }
+}

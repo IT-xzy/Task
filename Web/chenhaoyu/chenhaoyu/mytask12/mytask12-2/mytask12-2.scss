@@ -1,0 +1,215 @@
+@charset "utf-8";
+//变量
+$width_default: 100vw;
+$border: .5rem solid;
+$white: #fff;
+//继承
+//混合宏
+@mixin flex_ai {
+  display: flex;
+  align-items: center;
+}
+@mixin shape($width,$height) {
+  width: $width;
+  height: $height;
+}
+@mixin bg($color) {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: $color;
+}
+@mixin btn_color($color,$bgc) {
+  color: $color;
+  background-color: $bgc;
+}
+@mixin line_com {
+  background: url("../image/list.png") no-repeat;
+  background-size: 3rem 6rem;
+}
+@mixin ft_com($set) {
+  border: none;
+  background: {
+    image: url("../image/button.png") ;
+    repeat: no-repeat;
+    size: cover;
+    position: ($set) 0;
+  };
+  @include shape(2.5rem,2.5rem);
+}
+//占位符
+%reset_b {
+  margin: 0;
+  padding: 0;
+}
+%reset_html {
+  font-size: 62.5%;
+}
+%btn_no {
+  border: none;
+  outline: none;
+}
+%text_center {
+  text-align: center;
+}
+//reset
+body {
+  @extend %reset_b;
+}
+html {
+  @extend %reset_html;
+}
+//header
+header {
+  position: fixed;
+  top: 0;
+  background-color: #5ac0ce;
+  @include flex_ai;
+  justify-content: center;
+  @include shape($width_default,4.5rem)
+}
+.picture {
+  @extend %btn_no;
+  position: absolute;
+  right: $width_default/20;
+  @include bg(#5ac0ce);
+  background-image: url("../image/large.png") ;
+  @include shape(2.5rem,2.5rem);
+}
+.button-h {
+  margin: .5rem -.2rem;
+  border-radius: .5rem;
+  @extend %btn_no;
+  @include shape(8rem,80%);
+}
+.b-left {
+  @include btn_color($white,#55a8b3);
+}
+.b-right {
+  @include btn_color(#55a8b3,$white);
+}
+//下拉框
+.list {
+  position: fixed;
+  top: 4.5rem;
+  @include flex_ai;
+  justify-content: space-between;
+  border-bottom: solid .01rem #e1e5e7;
+  list-style: none;
+  font-size: 1.4rem;
+  @extend %reset_b;
+  background-color: $white;
+  li {
+    position: relative;
+    display: block;
+    width: $width_default/3;
+    @extend %text_center;
+  }
+}
+.triangle-down {
+  position: absolute;
+  top: 40%;
+  right: .5rem;
+  border: {
+    left: $border transparent;
+    right: $border transparent;
+    top: $border #afbac0;
+  };
+  @include shape(0,0);
+}
+.content {
+  display: none;
+  position: absolute;
+  width: $width_default/3;
+  padding-top: .5rem;
+  background-color: #fff;
+  top: 3rem;
+  z-index: 999;
+}
+.dropdown {
+  @include btn_color(#999,$white);
+  border: none;
+  border-right:solid .01rem #e1e5e7;
+  margin: 1rem 0;
+  &:hover .content{
+    display: block;
+  }
+}
+//列表
+.message_top {
+  margin-top: 9rem;
+}
+.message_bottom {
+  margin-bottom: 6.8rem;
+}
+.message {
+  padding: 0;
+   li {
+     list-style: none;
+     color: #999;
+     padding: .5rem 0;
+     font-size: 1.4rem;
+     text-indent: 2.5rem;
+     margin: auto 1rem;
+     white-space: nowrap;
+  }
+}
+.line-1 {
+  @include line_com;
+  background-position:  0 0;
+}
+.line-3 {
+  @include line_com;
+  background-position: 0 -2.9rem;
+  border-bottom: 1px solid #e1e5e7;
+}
+.text_right {
+  display: flex;
+  justify-content: space-between;
+}
+.missing {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+//footer
+footer {
+  background-color: #f8fafb;
+  position: fixed;
+  bottom:0;
+  @include flex_ai;
+  justify-content: space-around;
+  font-size: .84rem;
+  z-index: 5;
+  @include shape($width_default,5rem);
+}
+.footer1 {
+  @include ft_com(98%);
+}
+.footer3 {
+  @include ft_com(48%);
+}
+.footer2 {
+  border: none;
+  background: {
+    image: url("../image/Write.png");
+    repeat: no-repeat;
+    color: #5ac0ce;
+    size: 50%;
+    position: center;
+  };
+  @include shape(4rem,4rem);
+  border-radius: 50%;
+}
+footer a {
+  text-decoration: none;
+}
+.center {
+  @extend %text_center;
+}
+.color1 {
+  color: #66cccc;
+}
+.color3 {
+  color: #000;
+  opacity: .6;
+}

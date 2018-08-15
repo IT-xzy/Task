@@ -1,0 +1,101 @@
+@charset "utf-8";
+@import 'header';
+//给body初始字体尺寸，子级文字继承这个
+$body-bgcolor:#fff;
+
+body {
+    
+    font-size: .32rem;
+    background: $body-bgcolor;
+}
+
+//使用混合器
+$bottom-width:1px;
+$bottom-color:#e1e5e7;
+@mixin borer-bottom ($width:$bottom-width,$color:$bottom-color){
+    border-bottom: $width solid $color;
+}
+@mixin translateY{
+    top:50%;
+    transform: translateY(-50%);
+}
+main {
+    padding-top:.88rem;
+    padding-bottom: 1.44rem;
+    section{
+        display: flex;
+        align-items: center;
+        height: 3.28rem;
+        color:#fff;
+        background: url(../img/bgImg.png) no-repeat center/cover;
+        .head-img {
+            width: 1.69rem;
+            height: 1.69rem;
+            margin-left: .33rem;
+            margin-right: .4rem;
+        }
+        .user-msg {
+            p{
+                margin-top:.16rem;
+                padding-left: .32rem;
+            }
+        }
+        .loc-icon{
+            position: absolute;
+            width: .18rem;
+            height: .23rem;
+            margin: .06rem 0 0 -0.3rem;
+          
+        }     
+    }
+    .skill {
+        position: relative;
+        padding-left: .6rem;
+        line-height: 1rem;
+        @include borer-bottom;
+        &::before {
+            content: "";
+            position: absolute;
+            @include translateY;
+            left: .3rem;
+            width: .03rem;
+            height: .26rem;
+            background: #5fc0cd;
+        }
+    }
+    ul{
+        @import "component";
+        margin:0;
+        padding-left: .36rem;
+        list-style: none;
+        li {
+            @include borer-bottom;
+            display: flex;
+            align-items: center;    
+            padding: .33rem 0;
+        }
+        .condition {
+            div {
+                display: inline-block;
+            }
+            img {
+                width: .24rem;
+                height: .23rem;
+                margin-right: .12rem;
+            }
+        }
+        .intrduce {
+            .left-text {
+                white-space: nowrap;
+            }
+        }
+        .left-text {
+            color: #999;        
+        }
+        .text-saraly {
+            color:#e26163;
+        }
+    }
+}
+
+@import 'footer';

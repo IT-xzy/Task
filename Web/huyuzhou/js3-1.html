@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8" name="viweport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/js3-1.css">
+	<title>task4</title>
+</head>
+<body class="content" ng-app="myApp">
+	<div class="container" ng-controller="myCtrl">
+    <p>后台登陆</p>
+		<div class="form">
+			<img src="images/task4_1.png">
+		      <form name="loginForm" novalidate ng-submit="login()"  >
+						<input type="text" placeholder="请输入用户名" name="uname" ng-model="user.name" ng-minlength=
+										3 ng-maxlength=10 required />
+					<div class="error" ng-messages="loginForm.uname.$error" style="color:red;">
+							<div ng-message="required">用户名不能为空</div>
+							<div ng-message="minlength">用户名长度至少为3</div>
+							<div ng-message="maxlength">用户名长度不能超过10</div>
+					</div>
+			</form>
+		</div>
+		<div class="form">
+			<img src="images/task4_2.png">
+			<form>
+				<input ng-model="user.password" type="password"  placeholder="请输入密码"  >
+			</form>
+		</div>
+    <footer>
+      <form>
+				<p class="message"></p>
+        <input type="button" id="submit" ng-click="subMit()" value="登录" >
+      </form>
+    </footer>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js">  </script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/angular.js/1.6.10/angular.min.js"></script>
+	<script src="js/angular-ui-router.js"></script>
+	<script src="js/angular-messages.js"></script>
+	  <script type="text/javascript" src="js/js3-1.js"></script>
+</body>
+</html>

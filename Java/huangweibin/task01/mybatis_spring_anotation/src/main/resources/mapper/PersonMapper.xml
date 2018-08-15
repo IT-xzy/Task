@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须与接口Mapper的完整类名保持一致 -->
+<mapper namespace="mapper.PersonMapper">
+
+    <select id="getPerson" parameterType="int" resultType="Person">
+        select * from mybatis_emp where id=#{id}
+    </select>
+
+    <update id="updateEmp" parameterType="Person" >
+        update mybatis_emp set emp=#{emp},salary=#{salary} where name=#{name}
+    </update>
+
+    <select id="findAllUser" resultType="Person" parameterType="java.lang.String">
+        select * from mybatis_emp
+    </select>
+
+    <insert id="insertPerson" parameterType="Person">
+        insert into mybatis_emp(name,emp,salary) values (#{name},#{emp},#{salary})
+    </insert>
+
+    <delete id="deletePerson" parameterType="int">
+        delete from mybatis_emp where id=#{id}
+    </delete>
+
+</mapper>

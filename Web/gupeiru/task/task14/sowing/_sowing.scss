@@ -1,0 +1,73 @@
+#container {
+    // 图片容器
+    position: relative;
+    width: 100vw;
+    height: 28vw;
+    overflow: hidden;
+    &:hover .arrow {
+        // 鼠标放在图标上左右箭头显示
+        display: block;
+    }
+    #list {
+        // 图片列表
+        position: absolute;
+        z-index: 1;
+        width: 700vw;
+        height: 100%;
+        img {
+            float: left;
+            width: 100vw;
+            height: 100%;
+        }
+    }
+    #buttons {
+        // 底部圆点按钮
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 2%;
+        z-index: 2;
+        height: .2rem;
+        span {
+            float: left;
+            @include circle(.15rem, .15rem, #333);
+            margin-right: .05rem;
+            border: .01rem solid #fff;
+            cursor: pointer;
+            @media (max-width: 500px) {
+                // 圆点大小500px下缩小
+                height: .1rem;
+                width: .1rem;
+            }
+        }
+        .on {
+            background: $green-29;
+        }
+    }
+    .arrow {
+        //左右箭头
+        position: absolute;
+        content: "";
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        display: none;
+        width: .3rem;
+        font-size: .36rem;
+        font-weight: bold;
+        line-height: .5rem;
+        text-align: center;
+        color: #fff;
+        background-color: RGBA(0, 0, 0, .3);
+        cursor: pointer;
+        &:hover {
+            background-color: RGBA(0, 0, 0, .7);
+        }
+    }
+    #prev {
+        left: 2%;
+    }
+    #next {
+        right: 3%;
+    }
+}

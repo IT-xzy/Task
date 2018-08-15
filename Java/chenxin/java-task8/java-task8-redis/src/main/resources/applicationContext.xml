@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--<context:annotation-config/>-->
+    <context:component-scan base-package="com.ptteng"/>
+    <context:property-placeholder location="classpath:/jdbc.properties" ignore-unresolvable="true"/>
+
+    <!--引入jedis的properties配置文件-->
+    <!--如果有多个数据源需要通过context:properties-placeholder管理,且不
+    愿放在同一个配置文件中,一定要加上ignore-unresolvable="true"-->
+    <context:property-placeholder location="classpath:properties/redisPool.properties" ignore-unresolvable="true"/>
+    <!--Jedis连接池 的相关配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--新版本的jedis.jar包将maxActive 替换为maxTotal-->
+        <property name="maxTotal" value="${redis.pool.maxActive}" />
+        <property name="minIdle" value="${redis.pool.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.pool.maxActive}"/>
+        <!--<property name="testOnBorrow" value="true"/>-->
+        <!--<property name="testOnReturn" value="true"/>-->
+    </bean>
+    <!--redis连接工厂-->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig"/>
+        <!--ip-->
+        <property name="hostName" value="${redis.host}"/>
+        <!--端口号-->
+        <property name="port" value="${redis.port}"/>
+         <!--<property name="password" value="${redis.password}" />-->
+        <!--客户端超时，时间单位毫秒-->
+        <property name="timeout" value="${redis.timeout}"/>
+    </bean>
+    <!--redis操作模板，这里尽量采用面向对象的模板-->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+    <!--redis工具类（也可以通过注解的方式注入）-->
+    <bean id="redisUtil" class="com.ptteng.util.RedisUtil">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
+    <!--RMI配置-->
+    <bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean" id="occupationRMIServerA">
+        <property name="serviceInterface" value="com.ptteng.service.OccupationService"/>
+        <property name="serviceUrl" value="rmi://localhost:8086/occupationRMIServer"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+    </bean>
+    <!--<bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean" id="occupationRMIServerB">-->
+        <!--<property name="serviceInterface" value="com.ptteng.service.OccupationService"/>-->
+        <!--<property name="serviceUrl" value="rmi://localhost:8083/occupationRMIServer"/>-->
+    <!--</bean>-->
+    <bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean" id="signUserRMIServerA">
+        <property name="serviceInterface" value="com.ptteng.service.SignUserService"/>
+        <property name="serviceUrl" value="rmi://localhost:8086/signUserRMIServer"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+    </bean>
+    <!--<bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean" id="signUserRMIServerB">-->
+        <!--<property name="serviceInterface" value="com.ptteng.service.SignUserService"/>-->
+        <!--<property name="serviceUrl" value="rmi://localhost:8083/signUserRMIServer"/>-->
+    <!--</bean>-->
+    <bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean" id="userRMIServerA">
+        <property name="serviceInterface" value="com.ptteng.service.UserService"/>
+        <property name="serviceUrl" value="rmi://localhost:8086/userRMIServer"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <!--<property name="lookupStubOnStartup" value="false"/>-->
+    </bean>
+    <!--<bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean" id="userRMIServerB">-->
+        <!--<property name="serviceInterface" value="com.ptteng.service.UserService"/>-->
+        <!--<property name="serviceUrl" value="rmi://localhost:8083/userRMIServer"/>-->
+    <!--</bean>-->
+
+</beans>

@@ -1,0 +1,35 @@
+
+  
+
+    <nav class="navbar navbar-default" role="navigation" ng-controller="pageCtrl">
+        <div class="container-fluid"> 
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <a class="navbar-brand" href="#">萝卜多后台管理系统</a>
+            </div>  
+            <span class="userlogin">
+                <button ng-click="loginDown()" style="border:none;background-color:#fff;"><img src="../img/5.png"></button>
+                <button style="border:none;background-color:#fff;">admin |</button>
+                <button style="border:none;background-color:#fff;">管理员 |</button>
+            </span>      
+        </div>
+        <div class="flex">
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <div>
+                <div ng-repeat="x in aaa">
+                    <div class="change-box" ng-init="pIndex=$index" ng-click="go(pIndex)">{{x.name}}</div>
+                    <div  class="show-box" ng-class="{hihebox:cIndex==$index}">
+                        <div ng-repeat="child in x.children" class="sonbox1" ng-class="{sonbox2:sonIndex==child}" ng-click="songo(child)">{{child}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mainside" style="padding:20px;box-sizing: border-box;" ui-view>Welcome!</div>
+        </div>
+    </nav>

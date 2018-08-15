@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--数据库及mybatis相关信息-->
+    <import resource="spring-dao.xml"/>
+
+    <!--导入一些工具类的配置，如redis-->
+    <import resource="spring-util.xml"/>
+
+    <!--<import resource="classpath*:spring-servlet.xml"/>-->
+    <!--扫描包-->
+    <context:component-scan base-package="com.jns"/>
+    <context:component-scan base-package="util"/>
+
+
+</beans>
