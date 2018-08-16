@@ -1,0 +1,137 @@
+body {
+    padding: 0;
+    margin: 0;
+    background: #fafafa;
+}
+
+ul {
+    text-align: center;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration:none;    
+}
+a:hover{
+    text-decoration:none;  
+}
+
+@mixin flex-center ($between:space-between) {
+    display: flex;
+    justify-content: $between;
+    align-items: center;
+}
+
+@mixin column {
+    display: flex;
+    flex-direction: column;
+}
+@mixin subnav-column {
+    @include column;
+    align-items: center;
+    width: 21%;
+}
+@mixin title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+$green:#29b078;
+$white:#fff;
+$gray:#999;
+header {
+    .header-box {
+        @include flex-center;
+        height: 1.3rem;
+        font-size: .5rem;
+        color: $green;
+        .wx {
+            display: inline-block;
+            background: url(../img/img1.png)no-repeat 0 -5%/100%;
+            width: 20px;
+            height: 20px;
+        }
+        .qq {
+            display: inline-block;
+            background: url(../img/img1.png)no-repeat 0 29%/100%;
+            width: 20px;
+            height: 20px;
+        }
+        .wb {
+            display: inline-block;
+            background: url(../img/img1.png)no-repeat 0 62.5%/100%;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+
+@media(min-width:986px) {
+    .dropdown {
+        display: none;
+    }
+}
+
+.btn {
+    display: none;
+    padding: 0;
+    margin-right: 1rem;
+}
+
+@media(max-width:986px) {
+    .btn {
+        display: inline-block;
+    }
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropdown-menu {
+    position: initial;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+    box-shadow: initial;
+}
+
+.btn-secondary {
+    background: #29b078;
+    border: none;
+}
+
+.show {
+    position: initial !important;
+    transform: initial !important;
+}
+
+.nav-ul {
+    background: #29b078;
+    margin: 0 !important;
+}
+
+.nav-fon {
+    display: block;
+    color: #fff;
+}
+
+.nav-fon:hover {
+    background: #32c086;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}

@@ -1,0 +1,73 @@
+.subnav {
+    .subnav-left {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5rem;
+        border-right:  1px dotted #999999;
+        @media(max-width:768px){
+            @include subnav-column;
+            border: none;
+        }
+        .connection{
+            margin-right: 2.5rem;
+            @media(max-width: 768px){
+                margin-right: 0;
+            }
+        }
+        .eddicient,
+        .specification,
+        .connection {
+            @include subnav-column;
+            @media(max-width:768px){
+                margin-bottom: 2rem;
+            }
+            .eddicient-img {
+                display: inline-block;
+                background: url(../img/img2.png)no-repeat 10% 0%/100%;
+                width: 35px;
+                height: 35px;
+                margin-left: .5rem;
+            }
+            .specification-img {
+                display: inline-block;
+                background: url(../img/img2.png)no-repeat 0% 103%/100%;
+                width: 35px;
+                height: 35px;
+            }
+            .connection-img {
+                display: inline-block;
+                background: url(../img/img2.png)no-repeat 0% 52%/100%;
+                width: 35px;
+                height: 35px;
+                margin-left: .3rem;
+            }
+            .subnav-title {
+                @include title;
+                margin: 1rem 0;
+            }
+            .subnav-font {
+                font-size: 10px;
+                color: #999999;
+            }
+        }
+    }
+    .subnav-right{
+        margin-top: 6rem;
+        margin-left: 3.5rem;
+        @media(max-width:768px){
+            margin:3rem 0 0 0;
+            text-align: center;
+        }
+        
+        .number-box{
+            color: $green;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .subnav-font{
+            line-height: 2rem;
+            font-size: 10px;
+            color: #999999;
+        }
+    }
+}
