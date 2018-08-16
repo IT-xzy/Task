@@ -1,0 +1,205 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+ul,
+li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin flex-center ($just:center,$ver:center){
+    display: flex;
+    align-items: $just;
+    justify-content: $ver;
+}
+
+@mixin border-bottom {
+    border-bottom: solid 1px #e1e5e7;
+    width: 100%;
+}
+@mixin border-top {
+    border-top: solid 1px #e1e5e7;
+    width: 100%;
+}
+
+@mixin border-left {
+    border-left: solid 1px #e1e5e7;
+}
+
+@mixin border {
+    border: solid 1px #e1e5e7;
+}
+
+$green:#5fc0cd;
+header {
+    position: fixed;
+    @include flex-center;
+    top: 0;
+    width: 100%;
+    height: 4rem;
+    text-align: center;
+    font-size: 1.1rem;
+    background: $green;
+    z-index: 10;
+    .hire {
+        position: relative;
+        margin-right: 13%;
+        width: 19%;
+        line-height: 3rem;
+        border-radius: .6rem;
+        background: #55a8b3;
+        color: #ffffff;
+    }
+    .work {
+        position: absolute;
+        width: 21%;
+        left: 51%;
+        line-height: 3rem;
+        border-radius: .6rem;
+        background: #ffffff;
+        color: $green;
+    }
+    .site {
+        position: absolute;
+        right: 5%;
+        width: 1.6rem;
+    }
+}
+
+nav {
+    @include border-bottom;
+    margin-top: 4rem;
+    width: 100%;
+    line-height: 2.8rem;
+    color: #999999;
+    .nav-box-a,
+    .nav-box-b,
+    .nav-box-c {
+        @include border-left;
+        display: inline-block;
+        position: relative;
+        width: 32%;
+        text-align: center;
+    }
+    .triangle {
+        float: right;
+        margin: 1.1rem .58rem 0 0;
+        height: 0px;
+        width: 0px;
+        border-top: 9px solid #afbac0;
+        border-right: 8px solid transparent;
+        border-left: 8px solid transparent;
+        border-radius: .5rem;
+    }
+    .nav-hide-a,
+    .nav-hide-b,
+    .nav-hide-c {
+        display: none;     
+    }
+    .nav-box-a:hover .nav-hide-a,
+    .nav-box-b:hover .nav-hide-b,
+    .nav-box-c:hover .nav-hide-c {
+        display: block;  
+    }
+    .row-a,
+    .row-b {
+        @include border;
+        position: absolute;
+        width: 99.5%;
+        background: $green;
+        color: #ffffff;
+        z-index: 5;
+    }
+    .row-b {
+        top: 5.7em;
+    }
+}
+
+
+.main {
+    margin-bottom: 5rem;
+    .main-box {
+        @include border-bottom;
+        &-a {
+            display: block;
+            line-height: 3rem;
+            .date {
+                margin: 0 2% 0 3.8%;
+                width: 1rem;
+            }
+            .date-font {
+                color: #999;
+            }
+            .position {
+                margin: 0 2% 0 3.8%;
+                width: 1rem;
+            }
+        }
+        &-b {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 9.8% 0 8.8%;
+            font-weight: 600;
+            .font{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .red-font {
+                position: relative;
+                white-space: nowrap;
+                color: #e63b0e;
+            }
+            .arrow {
+                position: absolute;
+                right: -45%;
+                top: .38rem;
+                width: 10px;
+                height: 10px;
+                border-bottom: 2px solid $green;
+                border-left: 2px solid $green;
+                transform: rotate(225deg);
+            }
+        }
+    }
+}
+
+
+footer{
+    @include border-top;
+    position: fixed;
+    @include flex-center(center);
+    bottom: 0;
+    height: 5rem;
+    background: #f8fafb;
+    .footer-left{
+        display: inline-block;
+        .home{
+            width:2rem;
+        }
+        .home-font{
+            margin: 0;
+            color:$green;
+        }
+    }
+    .footer-center{
+        display: inline-block;
+        margin: 0 15%;
+        .write{
+            width: 3.8rem;
+        }
+    }
+    .footer-right{
+        display: inline-block;
+        .mine{
+            width: 2rem;
+        }
+        .mine-font{
+            margin: 0;
+            color: #999;
+        }
+    }
+}
