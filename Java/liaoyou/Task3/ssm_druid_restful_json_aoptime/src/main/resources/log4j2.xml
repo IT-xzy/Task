@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration为根标签，它有一个属性status：表示log4j2本身的日志信息打印级别
+	 若把status属性改为TRACE，再执行测试代码，可以看到在控制台打印一些log4j加载插件、组装logger等调试信息-->
+<Configuration status="WARN">
+    <Appenders>
+        <!-- 打印到控制台 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+
+        <!--打印到本地-->
+        <File name="TimeAspectControllerLogFile" fileName="D:/my_workspace/idea/task3/logs/TimeAspectController.log">
+            <PatternLayout pattern="%d %-5level %m%n"/>
+        </File>
+        <File name="TimeAspectServiceLogFile" fileName="D:/my_workspace/idea/task3/logs/TimeAspectService.log">
+            <PatternLayout pattern="%d %-5level %m%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="error">
+            <AppenderRef ref="Console" />
+        </Root>
+        <Logger name="TimeAspectControllerLog" level="info" additivity="false">
+            <AppenderRef ref="TimeAspectControllerLogFile"/>
+        </Logger>
+        <Logger name="TimeAspectServiceLog" level="info" additivity="false">
+            <AppenderRef ref="TimeAspectServiceLogFile"/>
+        </Logger>
+        <Logger name="mylog" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+    </Loggers>
+</Configuration>
