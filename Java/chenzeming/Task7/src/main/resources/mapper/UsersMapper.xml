@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.czm.dao.UsersDao" >
+
+    <!--resultMap属性：type为java的实体类，id为此resultMap的标识-->
+
+    <select id="findUserById" parameterType="java.lang.Integer" resultType="com.jnshu.czm.model.Users">
+        SELECT * FROM user_s WHERE id=#{id}
+    </select>
+
+    <select id="findUserByName" parameterType="java.lang.String" resultType="com.jnshu.czm.model.Users">
+        SELECT * FROM user_s WHERE username=#{username,jdbcType=VARCHAR}
+    </select>
+
+    <!--添加账号密码-->
+    <insert id="insertUser" parameterType="com.jnshu.czm.model.Users" >
+        insert into user_s (username,telephone,email,photo,
+       password,salt,create_at)
+        values (#{username,jdbcType=VARCHAR},
+        #{telephone,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR},
+        #{photo,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},
+        #{salt,jdbcType=VARCHAR},
+        #{create_at,jdbcType=BIGINT})
+    </insert>
+
+    <update id="updateUser" parameterType="com.jnshu.czm.model.Users" >
+        update user_s
+        set
+        photo=#{photo,jdbcType=VARCHAR}
+        where username = #{username,jdbcType=INTEGER}
+    </update>
+</mapper>

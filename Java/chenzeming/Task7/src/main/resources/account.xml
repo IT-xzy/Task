@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <context:component-scan base-package="com.jnshu.czm"></context:component-scan>
+
+    <!--切换存储空间  value:QiNiu or Ali-->
+    <bean class="com.jnshu.czm.util.SwitchStorageUtil" >
+        <property name="storageName" value="QiNiu"/>
+    </bean>
+
+    <!--阿里云账号密码以及bucket-->
+    <bean id="aLiYunUtil" class="com.jnshu.czm.util.ALiYunUtil" >
+        <property name="accessKeyId" value="LTAI0UdKXzl583bl"/>
+        <property name="accessKeySecret" value="R2wy6xcg1fXazqoRVOJiWaINbskMGS"/>
+        <property name="bucket" value="jnshuczm"/>
+    </bean>
+
+    <!--七牛云账号密码以及bucket-->
+    <bean id="qiNiuUtil" class="com.jnshu.czm.util.QiNiuUtil" >
+        <property name="accessKeyId" value="dujg3aIotWuKYFKKu_9EWjskk0JT7ADnEiITifV0"/>
+        <property name="accessKeySecret" value="z_-gBbsfr0Yo8N67wjhhqrQlbxQbbT45DMdZUJMN"/>
+        <property name="bucket" value="jnshuczm"/>
+        <property name="domainOfBucket" value="http://pdawol65w.bkt.clouddn.com"/>
+    </bean>
+
+    <!--邮箱账号密码-->
+    <bean id="emailUtil" class="com.jnshu.czm.util.EmailUtil" >
+        <property name="accessKeyId" value="LTAI0UdKXzl583bl"/>
+        <property name="accessKeySecret" value="R2wy6xcg1fXazqoRVOJiWaINbskMGS"/>
+        <property name="address" value="czm@czmllt.top"/>
+        <property name="sender" value="jnshu"/>
+        <property name="tagName" value="jnshu"/>
+        <property name="subject" value="jnshu验证码"/>
+    </bean>
+
+    <!--短信账号密码-->
+    <bean id="smsUtil" class="com.jnshu.czm.util.SmsUtil" >
+        <property name="accessKeyId" value="LTAI0UdKXzl583bl"/>
+        <property name="accessKeySecret" value="R2wy6xcg1fXazqoRVOJiWaINbskMGS"/>
+        <property name="signName" value="陈泽铭"/>
+        <property name="templateCode" value="SMS_141950029"/>
+    </bean>
+</beans>
