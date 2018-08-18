@@ -1,0 +1,109 @@
+@charset"UTF-8";
+@import"_layout";
+body {
+    background: #eff0f4;
+}
+
+// header眉页
+header {
+    @include flex(flex-start, center);
+    background: $bg;
+    height: 1rem;
+    .back {
+        display: inline-block;
+        @include box(.24rem, .24rem);
+        margin-left: .4rem;
+        border-top: $font $white;
+        border-right: $font $white;
+        transform: rotate(225deg);
+        /*鼠标指标为一只手*/
+        cursor: pointer;
+        /*返回箭头*/
+    }
+}
+
+main {
+    padding: 0 .2rem;
+    .title {
+        margin-top: .2rem;
+        background: $white;
+        line-height: .7rem;
+        text-align: center;
+        box-shadow: 0 1px 0 2.5px $gray;
+    }
+    .player {
+        @include flex(space-around, flex-start);
+        height: 3rem;
+        border-bottom: $main;
+        margin-top: .1rem;
+        padding-top: .5rem;
+        background: $white;
+        .Killer {
+            font-size: .16rem;
+            margin-left: .7rem;
+            &::before {
+                content: "";
+                position: absolute;
+                @include box(.7rem, .7rem);
+                margin: -.2rem 0 0 -.8rem;
+                border-radius: 100%;
+                background: url(../img/shashou.png)no-repeat no-repeat center/cover;
+                ;
+            }
+        }
+        .civilian {
+            @extend .Killer;
+            &::before {
+                background: url(../img/pingmin.png)no-repeat no-repeat center/cover;
+                ;
+            }
+        }
+        .player-input {
+            width: .3rem;
+            font-size: .16rem;
+            border: none;
+        }
+    }
+    .box {
+        height: 1.5rem;
+        margin-top: .15rem;
+        background: $white;
+    }
+    .quantity {
+        @include flex(space-around, flex-start);
+        height: 1.5rem;
+        margin-top: .15rem;
+        padding-top: .4rem;
+        background: $white;
+        .quantity-input {
+            @include box(.7rem, .5rem);
+            border: none;
+            background: $gray;
+            font-size: .35rem;
+            text-align: center;
+            color: $orange
+        }
+        .font {
+            font-size: .16rem;
+            color: $orange;
+            margin-left: .2rem;
+        }
+    }
+}
+
+footer {
+    margin-top: .2rem;
+    padding: 0 .2rem;
+    button {
+        @include box(100%, 1rem);
+        background: $orange;
+        font-size: .5rem;
+        /*字符间距*/
+        letter-spacing: .15rem;
+        color: $white;
+        /*鼠标指标为一只手*/
+        cursor: pointer;
+        /*阴影效果*/
+        box-shadow: 0 0 0 1.5px #FBB435;
+    }
+}

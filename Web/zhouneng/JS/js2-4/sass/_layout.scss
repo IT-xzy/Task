@@ -1,0 +1,66 @@
+// 变量
+$eliminate:0;
+$white:#FFFFFF;
+$blue:#69D1E9;
+$bg:#29BDE0;
+$gray:#E7E7E7;
+$black:#565656;
+$header:.05rem solid $white;
+$main:.01rem  solid #C9C9C9;
+$font:.05rem solid ;
+$orange: #FBB435;
+$border:.01rem solid $orange;
+
+// 混合器
+@mixin box($w:0,$h:0){
+    width: $w;
+    height: $h;
+}
+
+@mixin wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@mixin txet{
+    text-align: center;
+}
+@mixin flex($x:center,$y:center){
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin circle{
+    @include box(.17rem,.17rem );
+    border-radius: 100%;
+}
+
+//查看玩家的关闭按钮样式
+@mixin close{
+    @include box(.02rem,.5rem );
+    border: .01rem  solid $white;
+    background: $white;
+}
+
+
+//玩家角色属性盒子
+@mixin name{
+    @include box(23.5vw,23.5vw);
+    margin: 0 4vw 8.3vw 4vw;
+    border: $header;
+    background: #F5C97B;
+
+    .role{
+        @include flex(center,center);
+        height: 75%;
+        font-size: .3rem;
+        color: $black;
+    }
+    .number{
+        @include flex(center,center);
+        height: 25%;
+        background: rgba(26,153,183,.5);
+        font-size: .23rem;
+        color: $white;
+    }
+}
