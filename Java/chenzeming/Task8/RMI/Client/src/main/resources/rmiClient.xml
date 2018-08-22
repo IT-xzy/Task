@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+
+
+    <!-- rmi远程调用 -->
+    <bean id="RmiService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">
+        <property name="serviceUrl">
+            <value>rmi://127.0.0.1:9400/remoteService1</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.jnshu.czm.service.UserService</value>
+        </property>
+    </bean>
+
+
+    <bean id="RmiService2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" scope="prototype">
+        <property name="serviceUrl">
+            <value>rmi://127.0.0.1:9401/remoteService2</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.jnshu.czm.service.UserService</value>
+        </property>
+    </bean>
+
+
+</beans>

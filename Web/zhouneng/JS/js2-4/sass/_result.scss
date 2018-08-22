@@ -1,0 +1,84 @@
+@charset"UTF-8";
+@import"_layout";
+header {
+    a.left {
+        @include box(.5rem, .5rem);
+        margin-left: .2rem;
+        background: url(../img/result.png) no-repeat -2.2rem -1.9rem;
+    }
+    a.right {
+        @include box(.5rem, .5rem);
+        margin: .1rem .2rem 0 0;
+        background: url(..//img/result.png) no-repeat -.96rem -1.95rem;
+    }
+}
+
+main {
+    padding: .5rem .1rem;
+    margin: 1rem 0 1.5rem 0;
+    .logo {
+        @include box(3.51rem, 2.1rem);
+        position: relative;
+        margin: auto;
+        background: url(../img/result.png) no-repeat -4.16rem 0;
+        .logo-font {
+            position: absolute;
+            margin: 1.32rem 0 0 .7rem;
+            font-size: .48rem;
+            /* 字符间距 */
+            letter-spacing: .05rem;
+            color: $white;
+        }
+    }
+    .box {
+        margin: .7rem 0 0 15%;
+        .player {
+            font-size: .25rem;
+            /* 字符间距 */
+            letter-spacing: .05rem;
+            color: $white;
+        }
+        .killer {
+            display: inline-block;
+            margin: .25rem 0 .1rem 0;
+            @extend .player;
+        }
+        .civilian {
+            display: inline-block;
+            margin: .25rem 0 .1rem 20%;
+            @extend .player;
+        }
+    }
+    ul {
+        padding: .1rem 0 .1rem 15%;
+        border-bottom: .01rem solid #A6A6A6;
+        background: $white;
+        li {
+            margin: .1rem 0;
+            font-size: .25rem;
+            /* 字符间距 */
+            letter-spacing: .05rem;
+            color: #A6A6A6;
+        }
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    @include box(100%, 1.2rem);
+    @include flex(space-between, center);
+    background: rgba(41, 189, 224, .6);
+    button {
+        @include box(50%, .86rem);
+        margin: 0 .24rem;
+        border-radius: .15rem;
+        background: #FBB435;
+        font-size: .4rem;
+        color: $white;
+        /*鼠标指标为一只手*/
+        cursor: pointer;
+        /*阴影效果*/
+        box-shadow: 0 0 0 1.5px #FBB435;
+    }
+}

@@ -1,0 +1,325 @@
+2018-08-14 20:54:11  [ main:0 ] - [ INFO ]  
+阿里云迁移到七牛云 
+2018-08-14 20:54:11  [ main:11 ] - [ INFO ]  
+ 获取全部文件名
+2018-08-14 20:54:30  [ main:0 ] - [ INFO ]  
+阿里云迁移到七牛云 
+2018-08-14 20:54:30  [ main:13 ] - [ INFO ]  
+ 获取全部文件名
+2018-08-14 20:54:54  [ main:0 ] - [ INFO ]  
+七牛云迁移到阿里云 
+2018-08-14 20:57:59  [ main:0 ] - [ INFO ]  
+七牛云迁移到阿里云 
+2018-08-14 21:05:22  [ main:0 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-08-14 21:05:22  [ main:60 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5ae63ade, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@610694f1, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@43814d18, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5c5a1b69, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3701eaf6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@627551fb]
+2018-08-14 21:05:23  [ main:231 ] - [ INFO ]  Loading XML bean definitions from class path resource [account.xml]
+2018-08-14 21:05:23  [ main:989 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:05:23 CST 2018]; root of context hierarchy
+2018-08-14 21:05:24  [ main:1414 ] - [ WARN ]  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'register': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userService': Unsatisfied dependency expressed through field 'userDao'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2018-08-14 21:05:24  [ main:1420 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@43814d18] to prepare test instance [MoveTest@34a3d150]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:287)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:289)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:247)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'register': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userService': Unsatisfied dependency expressed through field 'userDao'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1272)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:308)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:128)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:106)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:249)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 24 more
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userService': Unsatisfied dependency expressed through field 'userDao'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:588)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1272)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:308)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:522)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:496)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:627)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:318)
+	... 40 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1493)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1104)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1066)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:585)
+	... 55 more
+2018-08-14 21:05:43  [ main:0 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-08-14 21:05:43  [ main:38 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5ae63ade, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@610694f1, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@43814d18, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5c5a1b69, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3701eaf6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@627551fb]
+2018-08-14 21:05:43  [ main:175 ] - [ INFO ]  Loading XML bean definitions from class path resource [account.xml]
+2018-08-14 21:05:44  [ main:519 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:05:44 CST 2018]; root of context hierarchy
+2018-08-14 21:05:44  [ main:951 ] - [ WARN ]  Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'register': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userService': Unsatisfied dependency expressed through field 'userDao'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2018-08-14 21:05:44  [ main:955 ] - [ ERROR ]  Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@43814d18] to prepare test instance [MoveTest@34a3d150]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:287)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:289)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:247)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:94)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:191)
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)
+	at com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:68)
+	at com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:47)
+	at com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:242)
+	at com.intellij.rt.execution.junit.JUnitStarter.main(JUnitStarter.java:70)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'register': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userService': Unsatisfied dependency expressed through field 'userDao'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1272)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:308)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:761)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:867)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:543)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:128)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:106)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:249)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 24 more
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userService': Unsatisfied dependency expressed through field 'userDao'; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:588)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:366)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1272)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:553)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:308)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:522)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:496)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:627)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:318)
+	... 40 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.jnshu.czm.dao.UserDao' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoMatchingBeanFound(DefaultListableBeanFactory.java:1493)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1104)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1066)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:585)
+	... 55 more
+2018-08-14 21:06:49  [ main:0 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-08-14 21:06:49  [ main:40 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5ae63ade, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@610694f1, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@43814d18, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5c5a1b69, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3701eaf6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@627551fb]
+2018-08-14 21:06:49  [ main:183 ] - [ INFO ]  Loading XML bean definitions from class path resource [spring-mybatis.xml]
+2018-08-14 21:06:50  [ main:713 ] - [ INFO ]  Loading XML bean definitions from class path resource [redis-context.xml]
+2018-08-14 21:06:50  [ main:939 ] - [ INFO ]  Loading XML bean definitions from class path resource [account.xml]
+2018-08-14 21:06:50  [ main:1106 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:06:50 CST 2018]; root of context hierarchy
+2018-08-14 21:06:52  [ main:2821 ] - [ INFO ]  
+七牛云迁移到阿里云 
+2018-08-14 21:06:53  [ main:4099 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:06:53  [ main:4100 ] - [ INFO ]  
+encodedFileName:     36ec7475-a8f0-4feb-8780-7bfbf8516493.png
+2018-08-14 21:06:53  [ main:4101 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/36ec7475-a8f0-4feb-8780-7bfbf8516493.png
+2018-08-14 21:06:54  [ main:5003 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@2c1b9e4b
+2018-08-14 21:06:55  [ Thread-3:5588 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:06:50 CST 2018]; root of context hierarchy
+2018-08-14 21:07:42  [ main:0 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-08-14 21:07:42  [ main:30 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5ae63ade, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@610694f1, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@43814d18, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5c5a1b69, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3701eaf6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@627551fb]
+2018-08-14 21:07:42  [ main:179 ] - [ INFO ]  Loading XML bean definitions from class path resource [spring-mybatis.xml]
+2018-08-14 21:07:43  [ main:628 ] - [ INFO ]  Loading XML bean definitions from class path resource [redis-context.xml]
+2018-08-14 21:07:43  [ main:759 ] - [ INFO ]  Loading XML bean definitions from class path resource [account.xml]
+2018-08-14 21:07:43  [ main:1057 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:07:43 CST 2018]; root of context hierarchy
+2018-08-14 21:07:45  [ main:3090 ] - [ INFO ]  
+阿里云迁移到七牛云 
+2018-08-14 21:07:45  [ main:3091 ] - [ INFO ]  
+ 获取全部文件名
+2018-08-14 21:07:47  [ main:5432 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:47  [ main:5441 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@acb0951
+2018-08-14 21:07:48  [ main:5676 ] - [ INFO ]  
+ossObject:    OSSObject [key=16dd9c9e-6646-4536-b8ab-0089f4bca8bf.png,bucket=jnshuczm]
+2018-08-14 21:07:49  [ main:6765 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:49  [ main:6768 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@62d363ab
+2018-08-14 21:07:49  [ main:7006 ] - [ INFO ]  
+ossObject:    OSSObject [key=36ec7475-a8f0-4feb-8780-7bfbf8516493.png,bucket=jnshuczm]
+2018-08-14 21:07:50  [ main:7767 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:50  [ main:7769 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@27cf3151
+2018-08-14 21:07:50  [ main:8022 ] - [ INFO ]  
+ossObject:    OSSObject [key=6f83e2bd-a222-47e0-8843-56758cfa7246.png,bucket=jnshuczm]
+2018-08-14 21:07:50  [ main:8200 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:50  [ main:8202 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@200a26bc
+2018-08-14 21:07:50  [ main:8400 ] - [ INFO ]  
+ossObject:    OSSObject [key=a1015a13-8fbd-4146-bd98-49841e3dc3f4.png,bucket=jnshuczm]
+2018-08-14 21:07:51  [ main:8828 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:51  [ main:8829 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@1494b84d
+2018-08-14 21:07:51  [ main:9129 ] - [ INFO ]  
+ossObject:    OSSObject [key=任务三.png,bucket=jnshuczm]
+2018-08-14 21:07:53  [ main:10623 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:53  [ main:10625 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@77cf3f8b
+2018-08-14 21:07:53  [ main:10831 ] - [ INFO ]  
+ossObject:    OSSObject [key=任务二.png,bucket=jnshuczm]
+2018-08-14 21:07:54  [ main:12088 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:54  [ main:12090 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@7d61eccf
+2018-08-14 21:07:54  [ main:12371 ] - [ INFO ]  
+ossObject:    OSSObject [key=任务五.png,bucket=jnshuczm]
+2018-08-14 21:07:57  [ main:14832 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:07:57  [ main:14835 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@641856
+2018-08-14 21:07:57  [ main:15205 ] - [ INFO ]  
+ossObject:    OSSObject [key=任务六.png,bucket=jnshuczm]
+2018-08-14 21:08:04  [ main:21765 ] - [ INFO ]  
+进入文件下载
+2018-08-14 21:08:04  [ main:21768 ] - [ INFO ]  
+ossClient:    com.aliyun.oss.OSSClient@2a492f2a
+2018-08-14 21:08:04  [ main:22029 ] - [ INFO ]  
+ossObject:    OSSObject [key=任务四.png,bucket=jnshuczm]
+2018-08-14 21:08:05  [ Thread-3:23225 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:07:43 CST 2018]; root of context hierarchy
+2018-08-14 21:19:04  [ main:0 ] - [ INFO ]  Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+2018-08-14 21:19:04  [ main:29 ] - [ INFO ]  Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5ae63ade, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@610694f1, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@43814d18, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5c5a1b69, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3701eaf6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@627551fb]
+2018-08-14 21:19:04  [ main:193 ] - [ INFO ]  Loading XML bean definitions from class path resource [spring-mybatis.xml]
+2018-08-14 21:19:05  [ main:685 ] - [ INFO ]  Loading XML bean definitions from class path resource [redis-context.xml]
+2018-08-14 21:19:05  [ main:757 ] - [ INFO ]  Loading XML bean definitions from class path resource [account.xml]
+2018-08-14 21:19:05  [ main:942 ] - [ INFO ]  Refreshing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:19:05 CST 2018]; root of context hierarchy
+2018-08-14 21:19:07  [ main:3174 ] - [ INFO ]  
+七牛云迁移到阿里云 
+2018-08-14 21:19:09  [ main:4307 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:09  [ main:4308 ] - [ INFO ]  
+encodedFileName:     16dd9c9e-6646-4536-b8ab-0089f4bca8bf.png
+2018-08-14 21:19:09  [ main:4309 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/16dd9c9e-6646-4536-b8ab-0089f4bca8bf.png
+2018-08-14 21:19:09  [ main:4867 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@2c1b9e4b
+2018-08-14 21:19:10  [ main:5237 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:10  [ main:5237 ] - [ INFO ]  
+encodedFileName:     36ec7475-a8f0-4feb-8780-7bfbf8516493.png
+2018-08-14 21:19:10  [ main:5237 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/36ec7475-a8f0-4feb-8780-7bfbf8516493.png
+2018-08-14 21:19:10  [ main:5286 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@1ee4730
+2018-08-14 21:19:10  [ main:5627 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:10  [ main:5628 ] - [ INFO ]  
+encodedFileName:     6f83e2bd-a222-47e0-8843-56758cfa7246.png
+2018-08-14 21:19:10  [ main:5629 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/6f83e2bd-a222-47e0-8843-56758cfa7246.png
+2018-08-14 21:19:10  [ main:5809 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@70ab80e3
+2018-08-14 21:19:10  [ main:5915 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:10  [ main:5916 ] - [ INFO ]  
+encodedFileName:     a1015a13-8fbd-4146-bd98-49841e3dc3f4.png
+2018-08-14 21:19:10  [ main:5917 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/a1015a13-8fbd-4146-bd98-49841e3dc3f4.png
+2018-08-14 21:19:10  [ main:6170 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@544630b7
+2018-08-14 21:19:11  [ main:6569 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:11  [ main:6569 ] - [ INFO ]  
+encodedFileName:     %E4%BB%BB%E5%8A%A1%E4%B8%89.png
+2018-08-14 21:19:11  [ main:6569 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/%E4%BB%BB%E5%8A%A1%E4%B8%89.png
+2018-08-14 21:19:11  [ main:6865 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@3d6300e8
+2018-08-14 21:19:12  [ main:7641 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:12  [ main:7642 ] - [ INFO ]  
+encodedFileName:     %E4%BB%BB%E5%8A%A1%E4%BA%8C.png
+2018-08-14 21:19:12  [ main:7642 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/%E4%BB%BB%E5%8A%A1%E4%BA%8C.png
+2018-08-14 21:19:12  [ main:7828 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@73511076
+2018-08-14 21:19:12  [ main:8055 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:12  [ main:8056 ] - [ INFO ]  
+encodedFileName:     %E4%BB%BB%E5%8A%A1%E4%BA%94.png
+2018-08-14 21:19:12  [ main:8056 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/%E4%BB%BB%E5%8A%A1%E4%BA%94.png
+2018-08-14 21:19:12  [ main:8153 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@7fb9f71f
+2018-08-14 21:19:13  [ main:8408 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:13  [ main:8409 ] - [ INFO ]  
+encodedFileName:     %E4%BB%BB%E5%8A%A1%E5%85%AD.png
+2018-08-14 21:19:13  [ main:8409 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/%E4%BB%BB%E5%8A%A1%E5%85%AD.png
+2018-08-14 21:19:13  [ main:8475 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@617fe9e1
+2018-08-14 21:19:13  [ main:8759 ] - [ INFO ]  
+进入下载文件
+2018-08-14 21:19:13  [ main:8759 ] - [ INFO ]  
+encodedFileName:     %E4%BB%BB%E5%8A%A1%E5%9B%9B.png
+2018-08-14 21:19:13  [ main:8760 ] - [ INFO ]  
+finalUrl:   http://pdawol65w.bkt.clouddn.com/%E4%BB%BB%E5%8A%A1%E5%9B%9B.png
+2018-08-14 21:19:13  [ main:8830 ] - [ INFO ]  
+ossClient:com.aliyun.oss.OSSClient@245a26e1
+2018-08-14 21:19:13  [ Thread-3:9047 ] - [ INFO ]  Closing org.springframework.context.support.GenericApplicationContext@78e67e0a: startup date [Tue Aug 14 21:19:05 CST 2018]; root of context hierarchy

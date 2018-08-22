@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+        <settings>
+            <!-- 开启驼峰，开启后，只要数据库字段和对象属性名字母相同，无论中间加多少下划线都可以识别 -->
+            <setting name="mapUnderscoreToCamelCase" value="true" />
+        </settings>
+    <typeAliases>
+      <typeAlias alias="Signup" type="com.iceneet.Entity.signup"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/xiuzhen?characterEncoding=UTF-8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="8891960"/>
+            </dataSource>
+        </environment>
+    </environments>
+</configuration>

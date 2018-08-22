@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须与接口Mapper的完整类名保持一致 -->
+<mapper namespace="dao.UserMapper">
+    <!--保存照片-->
+    <update id="updateUserPictureByName" parameterType="String">
+        update user set picture = #{param2} where name=#{param1}
+    </update>
+</mapper>

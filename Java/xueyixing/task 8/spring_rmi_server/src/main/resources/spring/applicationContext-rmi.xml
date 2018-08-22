@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="registry" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean">
+        <property name="port" value="1030"/>
+    </bean>
+
+    <!--service调用实现-->
+    <bean id="OssService" class="com.mvc.service.Impl.AliYunOssImpl"/>
+    <bean id="SendService" class="com.mvc.service.Impl.SendImpl"/>
+    <bean id="TypeService" class="com.mvc.service.Impl.TypeServiceImpl"/>
+    <bean id="UserService" class="com.mvc.service.Impl.UserServiceImpl"/>
+    <bean id="PersonService" class="com.mvc.service.Impl.PersonServiceImpl"/>
+
+    <bean name="rmiSend" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="SendService"/>
+        <property name="serviceName" value="userRmiServiceTest1"/>
+        <property name="serviceInterface" value="com.mvc.service.SendService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+
+    <bean name="rmiOss" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="OssService"/>
+        <property name="serviceName" value="userRmiServiceTest2"/>
+        <property name="serviceInterface" value="com.mvc.service.OssService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+
+    <bean name="rmiType" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="TypeService"/>
+        <property name="serviceName" value="userRmiServiceTest3"/>
+        <property name="serviceInterface" value="com.mvc.service.TypeService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+
+    <bean name="rmiUser" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="UserService"/>
+        <property name="serviceName" value="userRmiServiceTest4"/>
+        <property name="serviceInterface" value="com.mvc.service.UserService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+
+    <bean name="rmiPerson" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="PersonService"/>
+        <property name="serviceName" value="userRmiServiceTest5"/>
+        <property name="serviceInterface" value="com.mvc.service.PersonService"/>
+        <property name="registry" ref="registry"/>
+    </bean>
+
+</beans>

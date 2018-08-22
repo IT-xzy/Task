@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--<context:component-scan base-package="com.jnshu.czm.service"/>-->
+
+    <bean id="userService" class="com.jnshu.czm.service.impl.UserServiceImpl"></bean>
+
+    <bean id="remoteRmiService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName">
+            <value>remoteService1</value>
+        </property>
+        <property name="service" ref="userService" />
+        <property name="serviceInterface">
+            <value>com.jnshu.czm.service.UserService</value>
+        </property>
+        <property name="registryPort">
+            <value>9400</value>
+        </property>
+    </bean>
+
+
+</beans>
