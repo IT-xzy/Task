@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.PaperDao">
+    <resultMap type="Paper" id="paperResultMap" >
+        <id property="paperId" column="paper_id"/>
+        <result property="paperName" column="name"/>
+        <result property="paperNum" column="number"/>
+        <result property="paperDetail" column="detail"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        paper_id, name, number, detail
+    </sql>
+
+    <insert id="addPaper" parameterType="Paper">
+        INSERT INTO paper(paper_id,name,number,detail) VALUE (#{paperId},#{paperName}, #{paperNum}, #{paperDetail})
+    </insert>
+
+    <delete id="deletePaperById" parameterType="long">
+        DELETE FROM paper WHERE paper_id=#{paperID}
+    </delete>
+
+    <update id="updatePaper" parameterType="Paper">
+        UPDATE paper
+        SET NAME = #{paperName},NUMBER = #{paperNum},detail = #{paperDetail}
+        WHERE  paper_id = #{paperId}
+    </update>
+
+    <!--根据id查询论文信息-->
+    <select id="queryById" resultMap="paperResultMap" parameterType="int">
+        SELECT paper_id,name,number,detail
+        FROM paper
+        WHERE paper_id=#{paperId}
+    </select>
+
+    <!--根据名称查询符合条件的数据-->
+    <!--<select id="findPaperByName" resultType="Paper" parameterType="String">-->
+    <!--SELECT paper_id,name,number,detail-->
+    <!--FROM paper-->
+    <!--WHERE NAME=#{NAME}-->
+    <!--</select>-->
+
+    <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultMap="paperResultMap">
+        select *
+        from paper
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+
+    <!--<select id="getPaperById" resultType="Paper" parameterType="String">-->
+    <!--SELECT paper_id,name,number,detail-->
+    <!--FROM paper-->
+    <!--WHERE paper_id=#{paperId}-->
+    <!--</select>-->
+
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) from paper
+    </select>
+
+    <select id="queryAllPaper" resultMap="paperResultMap">
+        SELECT paper_id,name,number,detail
+        FROM paper
+    </select>
+
+</mapper>
