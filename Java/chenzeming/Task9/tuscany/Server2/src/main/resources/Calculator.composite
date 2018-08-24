@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.jnshu.service"
+           name="Calculator">
+
+
+    <component name="CalculatorComponent">
+        <implementation.spring location="ApplicationContext.xml"/>
+        <service name="UserService" >
+            <!--开放的接口-->
+            <interface.java interface="com.jnshu.czm.service.UserService"/>
+
+            <tuscany:binding.rmi  uri="rmi://127.0.0.1:8089/UserService"/>
+            <!--绑定uri-->
+        </service>
+    </component>
+</composite>

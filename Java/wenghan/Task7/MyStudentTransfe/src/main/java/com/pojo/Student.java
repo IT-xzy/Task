@@ -1,0 +1,153 @@
+package com.pojo;
+
+public class Student {
+    private int id;
+    private String name;
+    private String accountNumber;
+    private String password;
+    private String salt;
+    private int oid;
+    private String company;
+    private String position;
+    private String personalProfile;
+    private String headPortrait;
+    private String learningState;
+    private String jobSatisfaction;
+    private String mailbox;
+    private String phoneNumber;
+    private long create_at;
+    private long update_at;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public int getOid() {
+        return oid;
+    }
+
+    public void setOid(int oid) {
+        this.oid = oid;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getPersonalProfile() {
+        return personalProfile;
+    }
+
+    public void setPersonalProfile(String personalProfile) {
+        this.personalProfile = personalProfile;
+    }
+
+    public String getHeadPortrait() {
+        return headPortrait;
+    }
+
+    public void setHeadPortrait(String headPortrait) {
+        this.headPortrait = headPortrait;
+    }
+
+    public String getLearningState() {
+        return learningState;
+    }
+
+    public void setLearningState(String learningState) {
+        this.learningState = learningState;
+    }
+
+    public String getJobSatisfaction() {
+        return jobSatisfaction;
+    }
+
+    public void setJobSatisfaction(String jobSatisfaction) {
+        this.jobSatisfaction = jobSatisfaction;
+    }
+
+    public String getMailbox() {
+        return mailbox;
+    }
+
+    public void setMailbox(String mailbox) {
+        this.mailbox = mailbox;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public long getCreate_at() {
+        return create_at;
+    }
+
+    public void setCreate_at(long create_at) {
+        this.create_at = create_at;
+    }
+
+    public long getUpdate_at() {
+        return update_at;
+    }
+
+    public void setUpdate_at(long update_at) {
+        this.update_at = update_at;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" + "id=" + id + ", name='" + name + '\'' + ", accountNumber='" + accountNumber + '\'' + ", password='" + password + '\'' + ", salt='" + salt + '\'' + ", oid=" + oid + ", company='" + company + '\'' + ", position='" + position + '\'' + ", personalProfile='" + personalProfile + '\'' + ", headPortrait='" + headPortrait + '\'' + ", learningState='" + learningState + '\'' + ", jobSatisfaction='" + jobSatisfaction + '\'' + ", mailbox='" + mailbox + '\'' + ", phoneNumber='" + phoneNumber + '\'' + ", create_at=" + create_at + ", update_at=" + update_at + '}';
+    }
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- UserMapper.xml文件 -->
+
+<!-- namespace命名空间，作用就是对sql进行分类化管理，即sql隔离
+注意：使用mapper代理方法开发的话，namespace就有特殊重要的作用了,namespace=mapper接口地址
+ -->
+<mapper namespace="mapper.UserMapper">
+
+    <select id="findUserById" parameterType="int" resultType="mapper.User">
+        select * from user where id = #{id}
+    </select>
+    <select id="findUserByName" parameterType="String" resultType="mapper.User">
+        select * from user where name =#{name}
+    </select>
+    <select id="findUserByName1" parameterType="String" resultType="mapper.User">
+        select * from user where name like '%${value}%'
+    </select>
+    <insert id="Insert" parameterType="mapper.User">
+        insert into user (name,age,create_time,update_time) values(#{name},#{age},#{create_time},#{update_time})
+    </insert>
+    <update id="update" parameterType="mapper.User">
+        update user set name = #{name},age=#{age},create_time=#{create_time},update_time=#{update_time} where id = #{id}
+    </update>
+    <delete id="delete" parameterType="String">
+        delete from user where name = #{name}
+    </delete>
+
+</mapper>

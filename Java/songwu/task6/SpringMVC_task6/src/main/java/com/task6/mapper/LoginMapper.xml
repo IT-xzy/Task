@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task6.mapper.LoginMapper">
+    <select id="selectLogin" parameterType="String" resultType="Person" >
+        select * from login where username=#{username}
+
+    </select>
+    <insert id="insertLogin" parameterType="Person" useGeneratedKeys="true" keyProperty="id" >
+        insert into login (username,password) values(#{username},#{password})
+    </insert>
+<update id="updateByUsername" parameterType="person">
+    update  login set password=#{password} where username=#{username}
+</update>
+</mapper>

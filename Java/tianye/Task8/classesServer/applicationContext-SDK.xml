@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 容联短信 SDK -->
+    <bean id="SDKTestSendTemplateSMS" class="com.API.message.SDKTestSendTemplateSMS">
+        <constructor-arg name="accountSid" value="8a216da86488ce480164a2c669430d25"/>
+        <constructor-arg name="accountToken" value="e7851bad9e6145d6bd9a70f9f74901c1"/>
+        <constructor-arg name="AppId" value="8a216da86488ce480164a2c669940d2b" />
+    </bean>
+
+    <!-- SendCloudMail SDK -->
+    <bean id="SendCommonPostMail" class="com.API.mail.SendCommonPostMail">
+        <constructor-arg name="apiUser" value="wan_an_test_sJF9D4" />
+        <constructor-arg name="apiKey" value="RlpjSxxlQslNu8y2" />
+        <constructor-arg name="apiUrl" value="http://api.sendcloud.net/apiv2/mail/send" />
+    </bean>
+
+    <bean id="aliyunSDK" class="com.API.aliyun.aliyunSDK">
+        <constructor-arg name="endpoint" value="http://oss-cn-shanghai.aliyuncs.com"/>
+        <constructor-arg name="accessKeyId" value="LTAIDofFVVPETznj"/>
+        <constructor-arg name="accessKeySecret" value="c8rr1TC7cne4gouuf67rzlAx87D73M"/>
+        <constructor-arg name="bucketName" value="wan-an"/>
+        <constructor-arg name="fileUrl" value=""/>
+    </bean>
+    <bean id="OssApiQiNiuYun" class="com.API.qiniuyun.OssApiQiNiuYun">
+        <constructor-arg name="endpoint" value="zone0"/>
+        <constructor-arg name="accessKeyId" value="fht9iZiILGfz51DL1htblXtIaZxf8MQYXaVuRomT"/>
+        <constructor-arg name="accessKeySecret" value="IAK3HZeHDKwnL6URdt5QHR70v4RuvSREz625cGsr"/>
+        <constructor-arg name="bucketname" value="wan-an"/>
+        <constructor-arg name="fileUrl" value="http://pc7i8ttn1.bkt.clouddn.com"/>
+    </bean>
+    <bean id="sdkTools" class="com.Tool.SdkTools">
+    </bean>
+</beans>

@@ -1,0 +1,57 @@
+.student {
+    // margin-bottom: 2rem;
+    &-title {
+        @include title;
+        line-height: 8rem;
+        text-align: center;
+    }
+    &-boxes {
+        @include flex-center;
+        @media(max-width:768px){
+            display: inline-block;
+        }
+        .student-box {
+            text-align: center;
+            height: 19rem;
+            background: $white;
+            box-shadow: 1px 1px 1px 1px #999;
+            .portrait-a,
+            .portrait-b,
+            .portrait-c,
+            .portrait-d {
+                margin-top: 1rem;
+                width: 7rem;
+            }
+            .box-title {
+                @include title;
+                line-height: 3rem;
+            }
+            .box-font {
+                display: inline-block;
+                text-align: left !important;
+                width: 80%;
+                font-size: 13px;
+                color: #999999;
+                @media(max-width: 992px){
+                    width: 92%;
+                }
+            }
+        }
+    }
+    .circle-box {
+        text-align: center;
+        margin-top: 2rem;
+        .circle {
+            display: inline-block;
+            margin: 0 .1rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            box-shadow: 1px 1px 1px 1px #999;
+            background: $white;
+            &:hover {
+                background: $green;
+            }
+        }
+    }
+}

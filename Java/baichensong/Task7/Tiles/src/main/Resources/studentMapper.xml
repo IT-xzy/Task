@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Dao.StudentDao">
+<!--任务四-->
+<select id="findAll" parameterType="int" resultType="com.model.Student">
+    select *
+    from student where outstanding = #{outstanding}
+</select>
+<select id="findAlls" resultType="com.model.zhiwei">
+    select *
+    from zhiwei
+</select>
+
+<select id="findName" resultType="int">
+    select count(name)
+    from zhiwei
+    where name = 'IOS工程师'
+</select>
+
+
+<!--页面时间显示用-->
+
+<select id="addlist" parameterType="com.model.zhiwei">
+    insert into zhiwei (name, introduction, companyCount, URL, title, xiangqing, create_at, update_at)
+    values (#{name}, #{introduction},
+            #{companyCount}, #{URL}, #{title}, #{xiangqing}, #{create_at}, #{update_at})
+</select>
+
+
+<!--任务五的登陆-->
+<select id="login" parameterType="String" resultType="com.model.Login">
+    select * from login where username=#{username}
+</select>
+<select id="findTime" parameterType="com.model.Login">
+    update login
+    set landtime = #{landtime}
+    where username = #{username}
+</select>
+
+
+<!--任务六-->
+
+<select id="findUserById" parameterType="int" resultType="com.memcached.Cached">
+    select *
+    from memcached
+    where id = #{id}
+</select>
+
+<select id="findAllId" resultType="com.memcached.Cached">
+    select *
+    from memcached
+</select>
+
+<update id="updateById" parameterType="com.memcached.Cached">
+    update memcached
+    set name = #{name}, qq = #{qq}, kemu = #{kemu}, created_at = #{created_at}, updated_at = #{updated_at}
+    where id = #{id}
+</update>
+
+
+    <!--任务七-->
+    <insert id="addStudent" parameterType="com.model.Student" >
+
+        insert into student (studentID,username,name,introduction,img,outstanding,
+                             zhiye,phone,email,startTime,endTime,create_at,update_at)
+        values (#{studentID},#{username},#{name},#{introduction},#{img},#{outstanding},#{zhiye},#{phone},
+                         #{email},#{startTime},#{endTime},#{create_at},#{update_at})
+    </insert>
+    <select id="findstudentID" parameterType="int" resultType="com.model.Login">
+        select * from login where studentID=#{studentID}
+    </select>
+
+
+    <!--邮件的发送-->
+    <insert id="insertData" parameterType="com.model.Login">
+        insert into login (studentID,username,userpass,landtime,update_at,create_at,actiCode,email,state)
+        values (#{studentID},#{username},#{userpass},
+        #{landtime},#{update_at},#{create_at},#{actiCode},
+        #{email},#{state})
+    </insert>
+
+    <select id="findemail" parameterType="String" resultType="com.model.Login">
+        select *from login where email=#{email}
+    </select>
+
+    <update id="updateState" parameterType="com.model.Login">
+        update login set state=#{state} where email=#{email}
+    </update>
+
+    <delete id="deleteEmail" parameterType="String">
+        delete from login where email=#{email}
+    </delete>
+
+    <!--存储的迁移-->
+    <update id="updateStudent" parameterType="com.model.StudentCustom">
+        update qntoali set headurl=#{headurl} where id=#{id}
+    </update>
+
+</mapper>

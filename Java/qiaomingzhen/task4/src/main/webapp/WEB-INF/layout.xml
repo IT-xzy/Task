@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <!--定义一个主布局的名字，然后指明布局文件（模板文件）-->
+    <definition name="layout" template="/mainLayout.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp"/>
+    </definition>
+    <!-- 主布局 -->
+    <!-- 项目 -->
+    <!--定义myView继承于主布局layout-->
+    <!--方法一：加入要添加的body页面-->
+    <definition name="myView1" extends="layout">
+        <put-attribute name="body" expression="/WEB-INF/views/body.jsp"/>
+    </definition>
+    <!--方法二：使用EL表达式-->
+    <definition name="myView" extends="layout">
+        <put-attribute name="body" expression="/WEB-INF/views/${item}.jsp"/>
+    </definition>
+    <!--项目-->
+</tiles-definitions>

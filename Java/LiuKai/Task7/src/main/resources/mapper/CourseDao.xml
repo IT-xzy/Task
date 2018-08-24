@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jns.dao.CourseDao">
+    <resultMap id="CourseMapper" type="com.jns.pojo.Course">
+        <id property="id" column="id"/>
+        <result property="course" column="course"/>
+        <result property="couIntr" column="cou_intr"/>
+        <result property="compNum" column="comp_num"/>
+    </resultMap>
+    
+    <select id="allCourse" resultMap="CourseMapper">
+        select * from course
+    </select>
+
+    <select id="findCourse" resultMap="CourseMapper">
+        select * from course where id=#{id}
+    </select>
+
+
+
+
+</mapper>

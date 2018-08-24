@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                          http://www.springframework.org/schema/beans/spring-beans.xsd
+                          http://www.springframework.org/schema/sca
+                          http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd">
+
+    <!--配置服务-->
+    <sca:service name="CalculatorService" type="com.jnshu.service.Calculator" target="CalculatorService"/>
+    <bean id="CalculatorService" class="com.jnshu.service.impl.CalculatorImpl"/>
+
+</beans>

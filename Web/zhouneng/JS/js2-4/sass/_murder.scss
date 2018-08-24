@@ -1,0 +1,56 @@
+@charset"UTF-8";
+
+@import"_layout";
+
+
+header .return{
+    border: $blue;
+}
+
+
+main{
+    @include wrap;
+    margin:1.2rem 0 2rem 0;
+
+    div.top-box{
+        position: relative;
+        @include box(100%,.82rem);
+        background: #b9e9f5;
+        line-height: .82rem;
+    
+        /*三角形*/
+        &.top-box::before{
+            float: left;
+            content: "";
+            margin: .82rem 0 0 .71rem;
+            border-top: .25rem solid #b9e9f5;
+            border-left: .1rem solid transparent;
+            border-right: .1rem solid transparent;
+        }
+        p.left-font{
+            font-size: .26rem;
+            color: #464646;
+        }
+    }
+    p.font{
+        width: 100%;
+        margin: .24rem 0 .43rem .72rem;
+        font-size:.24rem;
+        color:$white;
+    }
+    
+    div.box{
+        @include name;
+
+        ul{
+            @include flex(center,center);
+        }
+        
+        .knife{
+            display: none;
+            @include box(4.5vw,4.5vw);
+            margin-top: 2vw;
+            background: url(../img/icon/knife.png) no-repeat 0 0/100%;
+        }
+    }
+}

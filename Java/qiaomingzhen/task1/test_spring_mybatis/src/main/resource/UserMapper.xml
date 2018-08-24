@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.UserMapper">
+    <!--添加用户-->
+    <insert id="addUser" parameterType="model.User">
+        insert into user (name ,qq,type) values (#{name},#{qq},#{type})
+    </insert>
+    <!--批量插入-->
+    <insert id="addAll" parameterType="model.User">
+        insert into user (name ,qq,type) values
+        <foreach collection="list" separator="," item="user">
+            (#{user.name},#{user.qq},#{user.type})
+        </foreach>
+    </insert>
+    <!--查询id-->
+    <select id="findNewId" resultType="long">
+        select id from user where name=#{name}
+    </select>
+    <!--通过id删除用户-->
+    <delete id="deleteUser" parameterType="model.User">
+        delete from user where id=#{id}
+    </delete>
+    <!--更新用户信息-->
+    <update id="updateUser" parameterType="model.User">
+        update user set type=#{type} where name=#{name}
+    </update>
+    <!--通过name查询用户信息-->
+    <select id="selectName" parameterType="model.User" resultType="model.User">
+        select * from user where name=#{name}
+    </select>
+
+    <select id="selectUser" parameterType="model.User" resultType="model.User">
+        select * from user
+        <if test="type!=null">
+            where type = #{type}
+        </if>
+    </select>
+
+</mapper>

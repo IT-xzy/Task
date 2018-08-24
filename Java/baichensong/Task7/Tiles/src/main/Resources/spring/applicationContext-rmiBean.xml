@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+
+<bean name="StudentImpl" class="com.service.impl.StudentServiceImpl"/>
+
+<bean name="RmiService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="service" ref="StudentImpl"/>
+    <property name="serviceName" value="StudentService"/>
+    <property name="serviceInterface" value="com.service.StudentService"/>
+    <property name="registryPort" value="1099"/>
+</bean>
+
+    <!--短息验证-->
+    <bean id="sendCode" class="com.request.SDKTestSendTemplateSMS">
+        <property name="serverIP" value="app.cloopen.com"/>
+        <property name="serverPort" value="8883"/>
+        <property name="accountSid" value="8a216da863f8e6c20164322d14651f06"/>
+        <property name="accountToken" value="3abfbf5ceb524438b94a3952ca0c792b"/>
+        <property name="appId" value="8a216da863f8e6c20164322d14b91f0c"/>
+    </bean>
+
+    <!--发送图片-->
+    <bean id="sendImg" class="com.SendimagesTool.Debug">
+        <property name="accessKey" value="6TXc9AIzZ0cWmCbnXPNWOWsf9r2X0rctjvKp-wVn"/>
+        <property name="secretKey" value="DvWrjs1hkOyJdHw-V7cnW4RUY_RWVBq4SmO19qw6"/>
+        <property name="bucket" value="images"/>
+    </bean>
+
+    <!--发送邮件-->
+    <bean id="sendEmail" class="com.sendcloud.sdk.demo.mail.SendMail">
+        <property name="cc" value="c@ifaxin.com"/>
+        <property name="bcc" value="d@ifaxin.com"/>
+        <property name="from" value="sendcloud@sendcloud.org"/>
+        <property name="fromName" value="SendCloud"/>
+        <property name="replyTo" value="reply@sendcloud.org"/>
+        <property name="subject" value="来自 SendCloud SDK 的邮件"/>
+    </bean>
+
+    <!--阿里 云对象存储-->
+    <bean id="aliyunOss" class="com.FileCopy.UploadAili" >
+        <constructor-arg name="accessKeyId" value="i7aAXivNEYI1ToYg" />
+        <constructor-arg name="accessKeySecret" value="vJWxLmp8xL17aZMZ0R1taXFRm8L1a5" />
+        <constructor-arg name="bucketname" value="baichensong" />
+        <!-- endpoint 机房 地址 -->
+        <constructor-arg name="endpoint" value="http://oss-cn-qingdao.aliyuncs.com" />
+        <constructor-arg name="fileUrl" value="http://oss-cn-qingdao.aliyuncs.com" />
+    </bean>
+
+
+</beans>
+

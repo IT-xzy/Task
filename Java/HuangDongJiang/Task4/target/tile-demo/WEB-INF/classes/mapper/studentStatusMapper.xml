@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须与接口Mapper的完整类名保持一致 -->
+<mapper namespace="dao.StudentStatusMapper">
+    <!--查询累计在线学习的学员人数-->
+    <select id="queryLearningStudentCount" resultType="int">
+        select count(1) from student_status;
+    </select>
+    <!--查询找到工作的学员人数-->
+    <select id="queryWorkingStudentCount" resultType="int" parameterType="String">
+        select count(1) from student_status where student_condition= #{param1}
+    </select>
+    <!--查询优秀的学员-->
+    <select id="queryExcellentStudent" resultType="StudentStatus">
+        select * from student_status order by grade desc limit 4;
+    </select>
+</mapper>
