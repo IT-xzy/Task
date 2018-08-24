@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+    <aop:aspectj-autoproxy/>
+    <!--开启扫描，注意这里指定包的扫描就不用annotation扫描了-->
+    <context:component-scan base-package="com.baidu.task8"/>
+    <!--连接池-->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${dbcp.driver}"/>
+        <property name="url" value="${dbcp.url}"/>
+        <property name="username" value="${dbcp.username}"/>
+        <property name="password" value="${dbcp.password}"/>
+    </bean>
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/studentMapper.xml"/>
+        <property name="typeAliasesPackage" value="com.baidu.task8.pojo"/>
+    </bean>
+    <!--扫描mapper接口，不用配置SqlSessionFactory,自动实现接口的方法-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.baidu.task8.dao"/>
+    </bean>
+
+    <!--配置RMI-->
+    <bean id="testSpringRMI" class="com.baidu.task8.service.StudentServiceImpl" />
+    <!-- 服务端  配置rmi服务发布 -->
+    <bean id="rmiServiceExporter1" class="org.springframework.remoting.rmi.RmiServiceExporter" >
+        <!-- 配置service -->
+        <property name="service" ref="testSpringRMI"/>
+        <!-- 客户端使用的serviceName -->
+        <property name="serviceName" value="testrmiSpring1"/>
+        <!-- 服务接口 -->
+        <property name="serviceInterface" value="com.baidu.task8.service.StudentService1"/>
+        <!-- 注册服务端口号，默认是1099 -->
+        <property name="registryPort" value="1080"/>
+    </bean>
+</beans>
