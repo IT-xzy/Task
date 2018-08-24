@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--log4j2在控制台输出-->
+<!--<Configuration status="WARN">-->
+<!--<Appenders>-->
+<!--<Console name="Console" target="SYSTEM_OUT">-->
+<!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />-->
+<!--</Console>-->
+<!--</Appenders>-->
+
+<!--<Loggers>-->
+<!--<Root level="info">-->
+<!--<AppenderRef ref="Console" />-->
+<!--</Root>-->
+<!--</Loggers>-->
+<!--</Configuration>-->
+
+<!--输出到log文件-->
+<configuration status="WARN">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [ %p ] - [%c{1}:%L]  -  %m%n" />
+        </Console>
+
+        <File name="FileAppender" fileName="D:/logs/app.log">
+            <PatternLayout pattern="%-d{yyyy-MM-dd HH:mm:ss} [ %p ] - [%c{1}:%L]  -  %m%n" />
+        </File>
+
+        <!-- 发现Async 好像PatternLayout的输出格式配置的和输出的格式不一样，不用异步就完全一样  -->
+        <Async name="AsyncAppender">
+            <AppenderRef ref="FileAppender"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="DebugLogger" level="trace" additivity="true">
+            <AppenderRef ref="AsyncAppender" />
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="Console" />
+        </Root>
+    </Loggers>
+</configuration>
+
+
+
+
+        <!--当log文件达到设置限定大小，增加一个新文件打印log-->
+        <!--<Configuration status="WARN">-->
+        <!--<properties>-->
+        <!--<property name="LOG_HOME">D:/logs</property>-->
+        <!--<property name="FILE_NAME">mylog</property>-->
+        <!--</properties>-->
+
+        <!--<Appenders>-->
+        <!--<Console name="Console" target="SYSTEM_OUT">-->
+        <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />-->
+        <!--</Console>-->
+
+        <!--<RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/${FILE_NAME}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i.log">-->
+        <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>-->
+        <!--<Policies>-->
+        <!--<TimeBasedTriggeringPolicy interval="1"/>-->
+        <!--<SizeBasedTriggeringPolicy size="10 MB"/>-->
+        <!--</Policies>-->
+        <!--<DefaultRolloverStrategy max="20"/>-->
+        <!--</RollingRandomAccessFile>-->
+
+        <!--<Async name="AsyncAppender">-->
+        <!--<AppenderRef ref="RollingRandomAccessFile"/>-->
+        <!--</Async>-->
+        <!--</Appenders>-->
+
+        <!--<Loggers>-->
+        <!--<Logger name="RollingRandomAccessFileLogger" level="info" additivity="false">-->
+        <!--<AppenderRef ref="AsyncAppender" />-->
+        <!--<AppenderRef ref="Console" />-->
+        <!--</Logger>-->
+        <!--</Loggers>-->
+        <!--</Configuration>-->
+
+        <!--<Configuration status="WARN">-->
+        <!--<properties>-->
+        <!--<property name="LOG_HOME">D:/logs</property>-->
+        <!--<property name="FILE_NAME">mylog</property>-->
+        <!--<property name="log.sql.level">info</property>-->
+        <!--</properties>-->
+
+
+        <!--<Appenders>-->
+        <!--<Console name="Console" target="SYSTEM_OUT">-->
+        <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n" />-->
+        <!--</Console>-->
+
+        <!--<RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/${FILE_NAME}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i.log">-->
+        <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n"/>-->
+        <!--<Policies>-->
+        <!--<TimeBasedTriggeringPolicy interval="1"/>-->
+        <!--<SizeBasedTriggeringPolicy size="10 MB"/>-->
+        <!--</Policies>-->
+        <!--<DefaultRolloverStrategy max="20"/>-->
+        <!--</RollingRandomAccessFile>-->
+        <!--</Appenders>-->
+
+        <!--<Loggers>-->
+        <!--<Root level="info">-->
+        <!--<AppenderRef ref="Console" />-->
+        <!--<AppenderRef ref="RollingRandomAccessFile" />-->
+        <!--</Root>-->
+
+        <!--<Logger name="com.mengdee.dao" level="${log.sql.level}" additivity="false">-->
+        <!--<AppenderRef ref="Console" />-->
+        <!--</Logger>-->
+        <!--</Loggers>-->
+        <!--</Configuration>-->

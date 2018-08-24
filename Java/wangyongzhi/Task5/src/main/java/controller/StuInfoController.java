@@ -4,9 +4,11 @@ import exercise.Base64UtilTest;
 import exercise.DesUtilTest;
 import model.StuInfo;
 import model.Users;
+import net.rubyeye.xmemcached.MemcachedClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import service.ProfService;
 import service.StuInfoService;
 import service.UsersService;
+import service.utils.GetUserUtil;
 import utils.CookieUtil;
 import utils.EncryptionUtil;
 import utils.RegexUtil;
@@ -30,7 +33,7 @@ import java.util.Map;
 @RequestMapping("")
 public class StuInfoController {
 
-    public static Logger logger = LogManager.getLogger("StudentController3.class");
+    public static Logger logger = LogManager.getLogger(StuInfoController.class);
 
     @Autowired
     StuInfoService stuInfoService;
@@ -38,10 +41,19 @@ public class StuInfoController {
     ProfService profService;
     @Autowired
     UsersService usersService;
+    @Autowired
+    GetUserUtil getUserUtil;
 
+    //原版不使用缓存
     @RequestMapping(value = "/homepage", method = RequestMethod.GET)
-    public ModelAndView listStudent() {
+    public ModelAndView listStudent(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView();
+
+        //增加检查cookie并展示用户名模块
+        Users user = getUserUtil.getUser(request);
+        mav.addObject("user", user);
+
+
         StuInfo stu = new StuInfo();
         stu.setStatus("在学");
         int countstudy = stuInfoService.selectStudyWork(stu);
@@ -70,14 +82,6 @@ public class StuInfoController {
         return mav;
     }
 
-//    @RequestMapping(value = "/profession", method = RequestMethod.GET)
-//    public ModelAndView listProf() {
-//        ModelAndView mav = new ModelAndView();
-//        mav.addObject("prof", profService.getByProf("java后端工程师"));
-//        mav.setViewName("profession");
-//        return mav;
-//    }
-
     //学习tiles测试的方法
     @RequestMapping(value = "/test")
     public String testView() {
@@ -90,12 +94,16 @@ public class StuInfoController {
     //此处@RequestParam作用是从前台获取参数，如果参数名相同，无需注明名称，如果不同，得注明。
     // required=true，则参数必须要传（为了防止前台为null，后台为类似int的基本类型）
     //defaultValue属性可以设置默认值
-    public String doLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam String username,
+    public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam String username,
                           @RequestParam(name = "pd", required = true, defaultValue = "000000") String password) {
+        ModelAndView mav = new ModelAndView();
+
         Users user = usersService.getByName(username);
+
         //严重注意，此处只能用==判断，不可以用equals方法
         if (user == null) {
-            return "errorLogin";
+            mav.setViewName("errorLogin");
+            return mav;
         }
         String salt = user.getSalt();
         password = EncryptionUtil.getSHA256Str(password + salt);
@@ -111,7 +119,6 @@ public class StuInfoController {
             username = DesUtilTest.encrypt(username);
             CookieUtil.addCookie(response, "username", username);
 
-
             HttpSession session = request.getSession();
 //            CookieUtil.addCookie(response, "username", username);
 //            CookieUtil.addCookie(response, "password", password);
@@ -121,9 +128,11 @@ public class StuInfoController {
 //            CookieUtil.delCookie(request, response, "password");
 
             //注意，此处用的是重定向
-            return "redirect:/homepage";
+            mav.setViewName("redirect:/homepage");
+            return mav;
         } else {
-            return "errorLogin";
+            mav.setViewName("errorLogin");
+            return mav;
         }
     }
 
@@ -310,28 +319,4 @@ public class StuInfoController {
         CookieUtil.delCookie(request, response, "username");
         return "redirect:homepage";
     }
-
-
-//    //前端验证的登录界面
-//    @RequestMapping(value="/login", method = RequestMethod.POST)
-//    public ModelAndView login(HttpServletRequest request){
-//        String username = request.getParameter("userid");
-//        String userpass = request.getParameter("userpass");
-//        if(username.equals("wyz1991") && userpass.equals("userpass"))
-//        {
-//            ModelAndView mav = new ModelAndView("redirect:/homepage");
-//            return mav;
-//
-//        }
-//        else {
-//            ModelAndView mav = new ModelAndView("redirect:/main");
-//            return mav;
-//        }
-//    }
-//
-//    @RequestMapping(value = "/main",method = RequestMethod.GET)
-//    public ModelAndView login(){
-//        ModelAndView mav = new ModelAndView("login");
-//        return mav;
-//    }
 }

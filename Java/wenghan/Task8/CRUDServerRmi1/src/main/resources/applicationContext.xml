@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--在ioc容器中配置数据源-->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  <property name="driverClassName" value="${jdbc.driver}"/>
+	  <property name="url" value="${jdbc.url}"/>
+	  <property name="username" value="${jdbc.username}"/>
+	  <property name="password" value="${jdbc.password}"/>
+	</bean>
+
+	<!--在ioc容器中配置会话-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:User.xml"/>
+	</bean>
+
+	<!--在ioc容器中配置数据访问层的实现类-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.mapper"/>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+	</bean>
+
+	<!--配置接口实现类到bean容器中-->
+	<bean id="userServiceImpl" class="com.service.impl.UserServiceImpl"/>
+
+	<!--RmiServiceExporter显示地支持使用RMI调用器暴露任何非RMI服务：用于服务器的类-->
+	<bean id="serviceExporter"
+		  class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<!--将远程接口实现类的对象依赖注入到属性中-->
+		<property name="service" ref="userServiceImpl"/>
+		<!--将远程接口依赖注入属性中-->
+		<property name="serviceInterface" value="com.service.UserService1"/>
+		<!--定义要暴露的服务名可以与输出的bean不同名，客户端通过这个名字来调用服务：引用名-->
+		<property name="serviceName" value ="Service"/>
+		<!--覆盖RMI注册端口号(1099)，通常应用服务器也会维护RMI注册，最好不要冲突：注册端口-->
+		<property name="registryPort" value="1120"/>
+	</bean>
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--aop注解-->
+    <aop:aspectj-autoproxy/>
+    <!--开启ioc注解扫描指定包 扫描业务层的接口实现类，通过spring注解方式在ioc容器中配置接口实现类-->
+    <context:component-scan base-package="com.Logger"/>
+
+</beans>
