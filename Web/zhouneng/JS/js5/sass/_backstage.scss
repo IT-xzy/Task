@@ -1,0 +1,61 @@
+@charset"UTF-8";
+
+
+@import"_layout";
+
+ul{
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+
+/*眉页*/
+header {
+    border-bottom: 2px solid $gray;
+
+    .box {
+        @include flex(space-between, center);
+        @include box(100%, 70px);
+
+        .right {
+            position: relative;
+
+            .login {
+                &::before {
+                    content: "";
+                    @include box(30px, 30px);
+                    position: absolute;
+                    top: 50%;
+                    margin: -15px 0 0 -35px;
+                    border-radius: 100%;
+                    display: inline-block;
+                    background: url(../img/lgoin.jpg) no-repeat center/cover;
+                }
+            }
+            button {
+                @include box(85px, 40px);
+                margin-left: 30px;
+                background: $blue;
+                font-size: 18px;
+                color: $white;
+            }
+        }
+    }
+}
+
+/*文本主体*/
+main{
+    margin-top: 20px;
+
+    li{
+        @include flex(center,center);
+        @include box(110px,40px);
+        border:1px solid $gray;
+        color: $blue;
+    }
+    .main-box{
+        height: 500px;
+        border:1px solid $blue;
+    }
+}
