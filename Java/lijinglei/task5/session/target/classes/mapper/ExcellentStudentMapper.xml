@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.dao.ExcellentStudentMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.model.ExcellentStudent" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="describe" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="image" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="creat_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modification_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from excellent_student
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="listAll" resultMap="BaseResultMap">
+    SELECT * FROM excellent_student
+  </select>
+</mapper>

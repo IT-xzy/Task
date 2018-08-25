@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.dao.StudentNumMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.model.StudentNum" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cumulative_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="find_job_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="creat_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modification_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from student_num
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="listAll" resultMap="BaseResultMap">
+    SELECT * FROM student_num
+  </select>
+</mapper>
