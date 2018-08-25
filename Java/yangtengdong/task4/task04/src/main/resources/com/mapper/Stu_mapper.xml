@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.StudentsDao">
+    <select id="findById" parameterType="java.lang.Integer" resultType="com.entity.Students">
+               select * from students where id = #{id}
+      </select>
+    <select id="listGood" resultType="com.entity.Students">
+        select * from students where status=2 order by rand() limit 4
+    </select>
+    <select id="count" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*) from students where status = #{status}
+    </select>
+    <select id="countAll" resultType="java.lang.Integer" >
+        select count(*) from students
+    </select>
+
+</mapper>
