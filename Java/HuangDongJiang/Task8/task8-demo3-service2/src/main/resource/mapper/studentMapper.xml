@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace必须与接口Mapper的完整类名保持一致 -->
+<mapper namespace="com.baidu.task8.dao.StudentMapper">
+    <!--添加学生-->
+    <insert id="saveStudent" parameterType="Student">
+        <selectKey keyProperty="id" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO students(id,name,school) VALUES(#{id},#{name},#{school})
+    </insert>
+    <!--根据id删除学生-->
+    <delete id="deleteStudentById" parameterType="Integer">
+        DELETE FROM students WHERE id = #{id}
+    </delete>
+    <!--根据id更新学生信息-->
+    <update id="updateStudent" parameterType="Student">
+        UPDATE students SET name=#{name} WHERE id=#{id}
+    </update>
+    <!--根据学生id查询学生-->
+    <select id="findStudentById" resultType="Student">
+        SELECT * FROM students WHERE id = #{id}
+    </select>
+    <!--查找所有的学生信息-->
+    <select id="findAllStudent" resultType="Student">
+        SELECT * FROM students
+    </select>
+</mapper>
