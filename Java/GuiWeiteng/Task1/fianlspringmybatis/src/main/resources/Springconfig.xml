@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--开启注解扫描：到包中扫描类、方法、属性上是否有注解-->
+    <context:component-scan base-package="mybatis_spring.dao,mybatis_spring.POJO,mybatis_spring.service"/>
+
+    <!-- 加载连接池DataSource外部jdbc.properties配置文件 -->
+    <context:property-placeholder location="classpath:jdbc.properties" />
+    <!-- 配置Druid连接池数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <!-- 数据库基本信息配置 -->
+        <property name = "url" value = "${Druid.url}" />
+        <property name = "username" value = "${jdbc.username}" />
+        <property name = "password" value = "${jdbc.password}" />
+        <property name = "driverClassName" value = "${jdbc.driverClassName}" />
+        <property name = "filters" value = "${jdbc.filters}" />
+        <!-- 最大并发连接数 -->
+        <property name = "maxActive" value = "${jdbc.maxActive}" />
+        <!-- 初始化连接数量 -->
+        <property name = "initialSize" value = "${jdbc.initialSize}" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name = "maxWait" value = "${jdbc.maxWait}" />
+        <!-- 最小空闲连接数 -->
+        <property name = "minIdle" value = "${jdbc.minIdle}" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name = "timeBetweenEvictionRunsMillis" value ="${jdbc.timeBetweenEvictionRunsMillis}" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name = "minEvictableIdleTimeMillis" value ="${jdbc.minEvictableIdleTimeMillis}" />
+        <!-- 用来检测连接是否有效的sql，要求是一个查询语句 -->
+        <property name = "validationQuery" value = "${jdbc.validationQuery}" />
+        <!-- 申请连接的时候检测 -->
+        <property name = "testWhileIdle" value = "${jdbc.testWhileIdle}" />
+        <!-- 申请连接时执行validationQuery检测连接是否有效，配置为true会降低性能 -->
+        <property name = "testOnBorrow" value = "${jdbc.testOnBorrow}" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，配置为true会降低性能 -->
+        <property name = "testOnReturn" value = "${jdbc.testOnReturn}" />
+        <!-- 超过时间限制是否回收 -->
+        <property name = "removeAbandoned" value = "${jdbc.removeAbandoned}" />
+        <!-- 超过时间限制多长 -->
+        <property name = "removeAbandonedTimeout" value ="${jdbc.removeAbandonedTimeout}" />
+        <!-- 关闭 abanded 连接时输出错误日志 -->
+        <property name = "logAbandoned" value = "${jdbc.logAbandoned}" />
+    </bean>
+
+    <!-- spring和MyBatis完美整合,原本Mybatis由SqlSessionFactoryBuilder创建SqlSessionFactory实例的功能，被
+                       SqlSessionFactoryBean取代，即由bean工厂实例化SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath:TraineeMapper.xml"/>
+    </bean>
+
+    <!--通过设值Mapper文件所在包路径配置自动配置bean-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="mybatis_spring.dao"/>
+    </bean>
+    <!--当只有一个Mapper.xml文件可以用这个替代上面的MapperScannerConfigurer-->
+<!--    <bean id="traineeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="mybatis_spring.dao.TraineeMapper" />
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>-->
+
+</beans>
