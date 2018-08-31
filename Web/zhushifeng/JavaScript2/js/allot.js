@@ -40,14 +40,20 @@ function button() {
 
 
     } else {
+        
         var n = m - 1;
+        
         a.style.display = "block";
         b.style.display = "none";
         player.style.display = "none";
-        document.getElementById("number_up").innerText = (n);
+        if(n<=order.length){
+         document.getElementById("number_up").innerText = (n);   
+        }
+        
         document.getElementById("number_box").innerText = ("查看" + n + "号身份");
         i = i + 0.5;
         I = I++;
+        console.log(n)
     }
     // if(i=arr.length){
     //     document.getElementById("number_box").innerText=("法官查看");
@@ -56,9 +62,9 @@ function button() {
     if (m - 1 > arr.length) {
         document.getElementById("number_box").innerText = ("法官查看");
     }
-    console.log(m - 1)
+    
     if (i == arr.length) {
-        location.href = "./home.html";
+        location.href = "./player.html";
     }
     console.log()
 }

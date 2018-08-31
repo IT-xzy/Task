@@ -36,6 +36,7 @@ function button() {
     var x = document.getElementById("myinput").value; //变量X为输入的总人数
     if (4 > x || 18 < x) { //判断条件
         confirm('人数不对') //对话框
+        return;
     } else {
         var res = []; //乱序，不过看不懂啊！！！！！！！！！
         for (var i = 0, len = arr.length; i < len; i++) {
@@ -75,6 +76,7 @@ document.onkeyup = function (v) { //a时按键信息对象以函数参数的形�
         var y = document.getElementById("myinput").value;
         if (y < 4 || y > 18) {
             confirm("人数不对")
+            return;
         } else {
             button()
 
