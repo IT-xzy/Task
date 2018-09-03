@@ -1,0 +1,47 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-autowire="byName">
+    <context:component-scan base-package="com.jnshu.tools"/>
+    <context:annotation-config/>
+
+    <util:properties id="util_Spring" local-override="true" location="classpath:properties/until.properties"/>
+
+    <bean id="qnOssUntil"
+          class="com.jnshu.tools.QnOssUntil">
+        <property name="accessKey" value="#{util_Spring['QNOSS.accessKey']}"/>
+        <property name="secretKey" value="#{util_Spring['QNOSS.secretKey']}"/>
+        <property name="bucket" value="#{util_Spring['QNOSS.bucket']}"/>
+        <property name="bucketName" value="#{util_Spring['Cos.bucketName']}"/>
+    </bean>
+
+    <bean id="cosClient" class="com.qcloud.cos.COSClient">
+        <constructor-arg name="clientConfig" ref="clientConfig"/>
+        <constructor-arg name="cred" ref="cred"/>
+    </bean>
+    <bean name="cred" class="com.qcloud.cos.auth.BasicCOSCredentials">
+        <constructor-arg name="accessKey" value="#{util_Spring['Cos.accessKey']}"/>
+        <constructor-arg name="secretKey" value="#{util_Spring['Cos.secretKey']}"/>
+        <constructor-arg name="appId" value="#{util_Spring['Cos.appid']}"/>
+    </bean>
+    <bean name="clientConfig" class="com.qcloud.cos.ClientConfig">
+        <constructor-arg name="region" value="#{util_Spring['Cos.region']}"/>
+    </bean>
+
+<bean id="sendEmailUtil" class="com.jnshu.tools.SendEmailUtil">
+    <property name="account" value="#{util_Spring['e.account']}"/>
+    <property name="pass" value="#{util_Spring['e.pass']}"/>
+    <property name="host" value="#{util_Spring['e.host']}"/>
+    <property name="port" value="#{util_Spring['e.port']}"/>
+    <property name="protocol" value="#{util_Spring['e.protocol']}"/>
+</bean>
+
+    <bean id="smsUtil" class="com.jnshu.tools.SmsUtil">
+        <property name="appid" value="#{util_Spring['sms.appid']}"/>
+        <property name="appkey" value="#{util_Spring['sms.appkey']}"/>
+        <property name="templateId" value="#{util_Spring['sms.templateId']}"/>
+        <property name="smsSign" value="#{util_Spring['sms.smsSign']}"/>
+    </bean>
+</beans>

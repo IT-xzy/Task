@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:property-placeholder location="classpath:properties/db.properties" ignore-unresolvable="true"/>
+
+    <bean id="eSService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName">
+            <value>eSService</value>
+        </property>
+        <property name="service">
+            <bean name="eSService" class="com.jnshu.service.impl.ESServiceImpl"/>
+        </property>
+
+        <property name="serviceInterface">
+            <value>com.jnshu.service.ESService</value>
+        </property>
+        <property name="registryPort">
+            <value>${registryPort}</value>
+        </property>
+        <property name="servicePort">
+            <value>${servicePort}</value>
+        </property>
+    </bean>
+
+    <bean id="jiService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName">
+            <value>jiService</value>
+        </property>
+        <property name="service">
+            <bean name="jiService" class="com.jnshu.service.impl.JIServiceImpl"/>
+        </property>
+
+        <property name="serviceInterface">
+            <value>com.jnshu.service.JIService</value>
+        </property>
+        <property name="registryPort">
+            <value>${registryPort}</value>
+        </property>
+        <property name="servicePort">
+            <value>${servicePort}</value>
+        </property>
+    </bean>
+
+    <bean id="snService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName">
+            <value>snService</value>
+        </property>
+        <property name="service">
+            <bean name="snService" class="com.jnshu.service.impl.SNServiceImpl"/>
+        </property>
+
+        <property name="serviceInterface">
+            <value>com.jnshu.service.SNService</value>
+        </property>
+        <property name="registryPort">
+            <value>${registryPort}</value>
+        </property>
+        <property name="servicePort">
+            <value>${servicePort}</value>
+        </property>
+    </bean>
+
+    <bean id="userService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName">
+            <value>userService</value>
+        </property>
+        <property name="service">
+            <bean name="userService" class="com.jnshu.service.impl.UserServiceImpl"/>
+        </property>
+
+        <property name="serviceInterface">
+            <value>com.jnshu.service.UserService</value>
+        </property>
+        <property name="registryPort">
+            <value>${registryPort}</value>
+        </property>
+        <property name="servicePort">
+            <value>${servicePort}</value>
+        </property>
+    </bean>
+
+    <import resource="spring-mybatis.xml"/>
+
+</beans>
