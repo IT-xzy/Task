@@ -1,0 +1,46 @@
+### 设置###
+log4j.rootLogger = INFO,stdout,D,E
+### 输出信息到控制抬 ###
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.Target=System.out
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=[%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n
+### 输出DEBUG 级别以上的日志到文件D:/log/debug.log###
+log4j.appender.D = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.D.File =D:/log/debug.log
+log4j.appender.D.Append = true
+log4j.appender.D.Threshold = INFO
+log4j.appender.D.layout = org.apache.log4j.PatternLayout
+log4j.appender.D.layout.ConversionPattern = %-d{yyyy-MM-dd HH:mm:ss}  [ %t:%r ] - [ %p ]  %m%n
+#log4j.appender.D=org.apache.log4j.FileAppender
+#log4j.appender.D.File=D:/log/debug.log
+####true表示消息增加到指定文件，false则将消息
+#log4j.appender.D.Append=true
+####全局的过滤器，把低于DEBUGDE的信息过滤不显示出来，这里设置debug没意义
+#log4j.appender.D.Threshold=DEBUG
+##指定布局模式
+#log4j.appender.D.layout=org.apache.log4j.PatternLayout
+#log4j.appender.D.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss}[ %t:%r ] method:%l%n%m%n - [ %p ]%m%n
+## 输出ERROR 级别以上的日志到文件F://logs/error.log ###
+log4j.appender.E=org.apache.log4j.FileAppender
+log4j.appender.E.File=D://log/error.log
+log4j.appender.E.Append=true
+log4j.appender.E.Threshold=ERROR
+log4j.appender.E.layout=org.apache.log4j.PatternLayout
+log4j.appender.E.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss}[ %t:%r ] - [ %p ]%m%n
+
+#aop输出目录
+log4j.log.com.iceneet.aop.DbAspect=INFO,AOP
+log4j.appender.AOP=org.apache.log4j.FileAppender
+log4j.appender.AOP.File=D://log/AOPlog.log
+log4j.appender.AOP.layout=org.apache.log4j.PatternLayout
+log4j.appender.AOP.layout.ConversionPattern=%d %p [%c] - %m%n
+#log4j.appender.AOP=org.apache.log4j.RollingFileAppender
+#log4j.appender.AOP.Append=true
+#log4j.appender.AOP.layout=org.apache.log4j.PatternLayout
+#log4j.appender.AOP.File=D://log/AOPlog.log
+#log4j.appender.AOP.Threshold =INFO
+#log4j.additivity.AOP=false
+#log4j.appender.AOP.encoding=utf-8
+#springframework
+log4j.logger.org.springframework=WARN

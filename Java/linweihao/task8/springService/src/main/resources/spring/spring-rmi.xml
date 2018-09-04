@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd  
+    http://www.springframework.org/schema/context   
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!--<import resource="spring-dao.xml"/>-->
+    <!--<import resource="spring-redis.xml"/>-->
+    <!--<import resource="spring-service.xml"/>-->
+    <!--<import resource="spring-web.xml"/>-->
+
+    <!-- RMI服务端 -->
+    <!-- RMI服务端远程接口实现类 -->
+    <bean id="SignupService" class="com.iceneet.service.impl.Sigupserviceimpl" scope="prototype"/>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter" id="serviceProxy"
+    >
+        <!-- 将远程接口实现类对象设置到RMI服务中 -->
+        <property name="service" ref="SignupService" />
+        <!-- 设置RMI服务名，为RMI客户端依据此服务名获取远程接口实现类对象引用奠定基础 -->
+        <property name="serviceName" value="signup" />
+        <!-- 将远程接口设置为RMI服务接口 -->
+        <property name="serviceInterface" value="com.iceneet.service.Signupservice" />
+        <!-- 为RMI服务端远程对象注册表设置端口号-->
+        <property name="registryPort" value="9090" />
+        <!-- 其他属性可以查看org.springframework.remoting.rmi.RmiServiceExporter的类及其子类获取到-->
+    </bean>
+
+</beans>   
