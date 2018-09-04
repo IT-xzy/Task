@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+        <!--开启自动扫描注解-->
+        <context:annotation-config/>
+
+        <!--1.1.开启校验器-->
+        <mvc:annotation-driven validator="validator"/>
+
+        <mvc:annotation-driven/>
+
+        <!--开启注解扫包定位-->
+        <context:component-scan base-package="task07.controller"/>
+
+        <!--<context:property-placeholder location="validatemessages.properties" ignore-resource-not-found="true"/>-->
+
+        <context:property-placeholder location="classpath:validatemessages.properties" />
+
+        <!--1.4.校验器是给 是给controller 使用，而加载和调用处理器的是 适配器HandlerAdapter-->
+        <mvc:annotation-driven conversion-service="conversionService" validator="validator">
+        </mvc:annotation-driven>
+
+
+        <mvc:default-servlet-handler/>
+
+        <!--开启解析器 -->
+        <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+            <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+        </bean>
+
+        <!-- 引入tiles配置文件 -->
+        <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+            <property name="definitions">
+                <list>
+                    <value>/WEB-INF/layouts/views.xml</value>
+                </list>
+            </property>
+        </bean>
+
+        <!-- jsp的ViewResolver视图定位 -->
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="viewClass"
+                      value="org.springframework.web.servlet.view.JstlView"/>
+            <property name="prefix" value="/WEB-INF/jsp/"/>
+            <property name="suffix" value=".jsp"/>
+        </bean>
+
+
+    <!-- 处理器映射器HandlerMapping -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <!-- 处理器设配器HandlerAdapter -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
+    <!--拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/u/*"/>
+            <bean class="task07.util.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--1.2.加载校验器-->
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <!--1.3.设置校验器源文件-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
+    p:basename="il8n/messages">
+        <!--<property name="basename" value="validatemessages">-->
+        <!--</property>-->
+        <!--<property name="useCodeAsDefaultMessage" value="false"/>-->
+        <!--<property name="defaultEncoding" value="utf-8"/>-->
+        <!--<property name="cacheSeconds" value="120"/>-->
+    </bean>
+
+    <!--1.5 编写 1.4中调用到的字符转换器-->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
+
+
+    <!--1.6.开启@Validated注解 用于@RequestParam参数校验-->
+    <bean class = "org.springframework.validation.beanvalidation.MethodValidationPostProcessor" />
+
+
+    <!-- 2.1. SpringMVC上传文件时,需配置MultipartResolver处理器 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxInMemorySize" value="40960" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="maxUploadSize" value="858993000000" />
+    </bean>
+
+</beans>

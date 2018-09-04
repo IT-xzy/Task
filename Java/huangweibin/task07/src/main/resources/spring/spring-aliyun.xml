@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+      ">
+
+    <!--<bean id="producer" class="com.aliyuncs"-->
+    <!--init-method="start" destroy-method="shutdown">-->
+    <!--&lt;!&ndash; Spring 接入方式支持 Java SDK 支持的所有配置项 &ndash;&gt;-->
+    <!--<property name="properties" > &lt;!&ndash;生产者配置信息&ndash;&gt;-->
+    <!--<props>-->
+    <!--<prop key="ProducerId">PID_DEMO</prop> &lt;!&ndash;请替换 XXX&ndash;&gt;-->
+    <!--<prop key="AccessKey">XXX</prop>-->
+    <!--<prop key="SecretKey">XXX</prop>-->
+    <!--</props>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+    <!--<context:component-scan base-package="task07.util"/>-->
+
+    <bean id="smsUtilsByALiYun" class="task07.util.aliyun.sms.SmsUtilsByALiYun">
+        <!--产品名称:云通信短信API产品,开发者无需替换-->
+        <property name="product" value="Dysmsapi"/>
+
+        <!--产品域名,开发者无需替换-->
+        <property name="domain" value="dysmsapi.aliyuncs.com"/>
+
+        <!--TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)-->
+        <property name="accessKeyId" value="LTAIpQdxo8Vu1bwJ"/>
+        <property name="accessKeySecret" value="WrO5knbUrHgp14PJ9650hTF45ad19U"/>
+
+        <!--短信签名-->
+        <property name="signName" value="廿一车"/>
+        <!--短信模板-->
+        <property name="templateCode" value="SMS_142387991"/>
+    </bean>
+
+
+    <bean id="emailUtilsByAliyun" class="task07.util.aliyun.email.EmailUtilsByAliYun">
+
+        <!--TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)-->
+        <property name="accessKeyId" value="LTAIpQdxo8Vu1bwJ"/>
+
+        <property name="accessKeySecret" value="WrO5knbUrHgp14PJ9650hTF45ad19U"/>
+
+        <!--邮件发送者地址-->
+        <property name="noreplyAddress" value="admin@chedou.top"/>
+
+        <property name="notifyAddress" value="admin@chedou.top"/>
+
+        <property name="fromAlias" value="廿一車"/>
+
+        <property name="tagName" value="Hwb"/>
+
+    </bean>
+
+    <bean id="oSSUtilsByALiYun" class="task07.util.aliyun.oss.OSSUtilsByALiYun">
+        <!--TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)-->
+        <property name="endpoint" value="http://oss-cn-shenzhen.aliyuncs.com"/>
+
+        <property name="accessKeyId" value="LTAIpQdxo8Vu1bwJ"/>
+
+        <property name="accessKeySecret" value="WrO5knbUrHgp14PJ9650hTF45ad19U"/>
+
+        <property name="bucketName" value="chedou1"/>
+
+        <property name="folder" value="chedou/"/>
+
+
+    </bean>
+
+
+</beans>

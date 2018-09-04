@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <definition name="DefaultTemplate" template="/WEB-INF/views/template/SiteTemplate.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="menu" value=""/>
+        <put-attribute name="head" value="/WEB-INF/views/template/head.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="foot" value="/WEB-INF/views/template/foot.jsp"/>
+    </definition>
+
+    <definition name="page01" extends="DefaultTemplate">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="body"	value="/WEB-INF/views/template/tiles10.jsp"/>
+    </definition>
+
+    <definition name="page02" extends="DefaultTemplate">
+        <put-attribute name="title" value="职业"/>
+        <put-attribute name="body"	value="/WEB-INF/views/template/tiles11.jsp"/>
+    </definition>
+
+    <definition name="SignIn" extends="DefaultTemplate">
+        <put-attribute name="title" value="登录"/>
+        <put-attribute name="body"	value="/WEB-INF/views/template/login.jsp" />
+    </definition>
+
+    <definition name="register" extends="DefaultTemplate">
+        <put-attribute name="title" value="注册"/>
+        <put-attribute name="body"	value="/WEB-INF/views/template/register.jsp" />
+    </definition>
+
+    <definition name="personalInformation" extends="DefaultTemplate">
+        <put-attribute name="title" value="照片上传"/>
+        <put-attribute name="body"	value="/WEB-INF/views/template/personalInformation.jsp" />
+    </definition>
+
+</tiles-definitions>
