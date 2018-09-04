@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-autowire="byName">
+    <!--<context:component-scan base-package="com.jnshu.tools" />-->
+    <context:property-placeholder location="classpath:properties/redis.properties" ignore-unresolvable="true"/>
+    <util:properties id="util_Spring" local-override="true" location="classpath:properties/redis.properties"/>
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig"
+          p:maxIdle="#{util_Spring['redis.maxIdle']}"
+          p:minEvictableIdleTimeMillis="#{util_Spring['redis.minEvictableIdleTimeMillis']}"
+          p:numTestsPerEvictionRun="#{util_Spring['redis.numTestsPerEvictionRun']}"
+          p:timeBetweenEvictionRunsMillis="#{util_Spring['redis.timeBetweenEvictionRunsMillis']}"
+          p:maxTotal="#{util_Spring['redis.maxActive']}"
+    />
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:host-name="#{util_Spring['redis.host']}"
+          p:port="#{util_Spring['redis.port']}"
+          p:usePool="#{util_Spring['redis.usePool']}"
+          p:timeout="#{util_Spring['redis.timeout']}"
+          p:pool-config-ref="jedisPoolConfig"/>
+
+    <!-- redis 序列化策略 ，手动指定 key 采用String序列化策略 -->
+    <bean id="stringSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer" ref="stringSerializer"/>
+        <!-- 开启事务，可以通过transcational注解控制 -->
+        <property name="enableTransactionSupport" value="true"/>
+    </bean>
+    <!--<bean id="redis" class="com.jnshu.tools.Redis">-->
+        <!--<property name="redisTemplate" ref="redisTemplate"/>-->
+    <!--</bean>-->
+</beans>
