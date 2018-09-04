@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iceneet.dao.JobMapper" >
+  <resultMap id="BaseResultMap" type="com.iceneet.entity.Job" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="needcompany" property="needcompany" jdbcType="INTEGER" />
+    <result column="descrition" property="descrition" jdbcType="VARCHAR" />
+    <result column="learnnum" property="learnnum" jdbcType="INTEGER" />
+    <result column="warning" property="warning" jdbcType="VARCHAR" />
+    <result column="skill" property="skill" jdbcType="INTEGER" />
+    <result column="diffcut" property="diffcut" jdbcType="INTEGER" />
+    <result column="pic" property="pic" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="BIGINT" />
+    <result column="update_at" property="updateAt" jdbcType="BIGINT" />
+  </resultMap>
+
+  <resultMap id="ResultMapWithBLOBs" type="com.iceneet.entity.Job" extends="BaseResultMap" >
+    <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, time, needcompany, descrition, learnnum, warning, skill,pic, diffcut, create_at,
+    update_at
+  </sql>
+  <sql id="Blob_Column_List" >
+    detail
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from job
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from job
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.iceneet.entity.Job" >
+    insert into job (id, type, time, 
+      needcompany, descrition, learnnum, 
+      warning, skill, diffcut, 
+      create_at, update_at, detail
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, 
+      #{needcompany,jdbcType=INTEGER}, #{descrition,jdbcType=VARCHAR}, #{learnnum,jdbcType=INTEGER}, 
+      #{warning,jdbcType=VARCHAR}, #{skill,jdbcType=INTEGER}, #{diffcut,jdbcType=INTEGER}, 
+      #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, #{detail,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.iceneet.entity.Job" >
+    insert into job
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="needcompany != null" >
+        needcompany,
+      </if>
+      <if test="descrition != null" >
+        descrition,
+      </if>
+      <if test="learnnum != null" >
+        learnnum,
+      </if>
+      <if test="warning != null" >
+        warning,
+      </if>
+      <if test="skill != null" >
+        skill,
+      </if>
+      <if test="diffcut != null" >
+        diffcut,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="needcompany != null" >
+        #{needcompany,jdbcType=INTEGER},
+      </if>
+      <if test="descrition != null" >
+        #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="learnnum != null" >
+        #{learnnum,jdbcType=INTEGER},
+      </if>
+      <if test="warning != null" >
+        #{warning,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null" >
+        #{skill,jdbcType=INTEGER},
+      </if>
+      <if test="diffcut != null" >
+        #{diffcut,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iceneet.entity.Job" >
+    update job
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="needcompany != null" >
+        needcompany = #{needcompany,jdbcType=INTEGER},
+      </if>
+      <if test="descrition != null" >
+        descrition = #{descrition,jdbcType=VARCHAR},
+      </if>
+      <if test="learnnum != null" >
+        learnnum = #{learnnum,jdbcType=INTEGER},
+      </if>
+      <if test="warning != null" >
+        warning = #{warning,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null" >
+        skill = #{skill,jdbcType=INTEGER},
+      </if>
+      <if test="diffcut != null" >
+        diffcut = #{diffcut,jdbcType=INTEGER},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.iceneet.entity.Job" >
+    update job
+    set type = #{type,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      needcompany = #{needcompany,jdbcType=INTEGER},
+      descrition = #{descrition,jdbcType=VARCHAR},
+      learnnum = #{learnnum,jdbcType=INTEGER},
+      warning = #{warning,jdbcType=VARCHAR},
+      skill = #{skill,jdbcType=INTEGER},
+      diffcut = #{diffcut,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iceneet.entity.Job" >
+    update job
+    set type = #{type,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      needcompany = #{needcompany,jdbcType=INTEGER},
+      descrition = #{descrition,jdbcType=VARCHAR},
+      learnnum = #{learnnum,jdbcType=INTEGER},
+      warning = #{warning,jdbcType=VARCHAR},
+      skill = #{skill,jdbcType=INTEGER},
+      diffcut = #{diffcut,jdbcType=INTEGER},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectJob" resultMap="BaseResultMap">
+    SELECT type,time,needcompany,descrition,learnnum,warning,detail,skill,diffcut,pic
+    FROM job
+  </select>
+
+  <select id="selectWebFort" resultType="com.iceneet.qo.JobQo">
+    SELECT
+	count( member.id ) num,
+	job.type,job.warning,job.time,job.pic,
+	job.needcompany,job.skill,job.learnnum,
+	job.diffcut,job.descrition,job.detail
+    FROM
+	member
+	RIGHT JOIN job ON
+	member.job = job.type
+	AND member.STATUS = 1
+    GROUP BY member.job
+  </select>
+</mapper>
