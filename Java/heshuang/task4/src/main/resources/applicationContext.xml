@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <context:annotation-config />
+
+  <!--配置全局注解-->
+  <context:component-scan base-package="com.tiles"></context:component-scan>
+
+  <context:property-placeholder location="classpath:db.properties"/>
+  <!--在ioc容器中配置数据源-->
+  <!-- 数据库连接池 -->
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="${jdbc.driver}"/>
+    <property name="jdbcUrl" value="${jdbc.url}"/>
+    <property name="user" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+    <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+    <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+    <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+    <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+    <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+  </bean>
+
+  <!--在ioc容器中配置会话-->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="typeAliasesPackage" value="com.tiles.pojo"></property>
+    <property name="dataSource" ref="dataSource"/>
+    <property name="mapperLocations">
+    <list>
+      <value>
+        classpath:com/tiles/mapper/Students.xml
+      </value>
+      <value>
+        classpath:com/tiles/mapper/Profession.xml
+      </value>
+    </list>
+    </property>
+  </bean>
+
+  <!--在ioc容器中配置数据访问层的实现类-->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.tiles.mapper"/>
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+  </bean>
+
+</beans>

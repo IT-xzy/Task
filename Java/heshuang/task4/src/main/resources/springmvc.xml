@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <!--注解配置，开启注解方式-->
+    <context:annotation-config/>
+    <!--扫描指定包：扫描指定包中的控制器-->
+    <context:component-scan base-package="com.tiles.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 扩充了注解驱动，可以将请求参数绑定到控制器参数 -->
+    <!--注解配置，开启注解方式-->
+    <mvc:annotation-driven /><context:annotation-config/>
+
+    <!--筛选器、筛选静态资源请求：在拦截器将静态资源和动态资源一起拦截前，先把静态资源筛选出来
+    这个标签起作用的前提就是需要我们把静态资源放在webapp下，而非WEB-INF下，否则还是会无效-->
+    <mvc:default-servlet-handler />
+    <!--使用spring的ioc容器配置视图控制器-->
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />-->
+        <!--<property name="prefix" value="/WEB-INF/views/" />-->
+        <!--<property name="suffix" value=".jsp" />-->
+    <!--</bean>-->
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass">
+            <value>
+                org.springframework.web.servlet.view.tiles3.TilesView
+            </value>
+        </property>
+    </bean>
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>
