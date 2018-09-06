@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="task07.dao.UserLoginDao">
+    <!--<select id="login" parameterType="UserLogin" resultType="UserLogin">-->
+    <select id="login" parameterType="UserLogin" resultType="UserLogin">
+        select
+          *
+        FROM
+          userlogin_
+        WHERE
+          name=#{name}
+    </select>
+
+    <insert id="register" parameterType="UserLogin">
+        INSERT
+        INTO
+          userlogin_
+          (name,password,salt,despassword,phone_number,head_photo,email)
+        VALUE
+          (#{name},#{password},#{salt},#{despassword},#{phone_number},#{head_photo},#{email})
+    </insert>
+
+    <select id="queryByName" parameterType="String" resultType="UserLogin">
+        SELECT
+          *
+        FROM
+          userlogin_
+        WHERE
+          name=#{name}
+    </select>
+
+    <insert id="insertDes" parameterType="String">
+        INSERT
+        INTO
+          userlogin_
+          (despassword)
+        VALUE
+          (#{despassword})
+    </insert>
+
+    <update id="updateDes">
+        UPDATE
+          userlogin_
+        SET
+          despassword=#{despassword}
+        WHERE
+          id=#{id}
+    </update>
+
+    <select id="registerQueryName" parameterType="String" resultType="String">
+        SELECT
+          *
+        FROM
+          userlogin_
+        WHERE
+          name=#{name}
+    </select>
+
+    <select id="registerQueryPhoneNumber" parameterType="String" resultType="String">
+        SELECT
+          *
+        FROM
+          userlogin_
+        WHERE
+          phone_number=#{phone_number}
+    </select>
+
+    <select id="registerQueryEmail" parameterType="String" resultType="String">
+        SELECT
+          *
+        FROM
+          userlogin_
+        WHERE
+          email=#{email}
+    </select>
+
+    <update id="updateHeadPhoto">
+        UPDATE
+          userlogin_
+        SET
+          head_photo=#{head_photo}
+        WHERE
+          name=#{name}
+    </update>
+
+
+</mapper>
