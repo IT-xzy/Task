@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.student.service" name="StudentService" >
+
+    <component name="StudentServiceComponent">
+        <implementation.spring location="spring-mybatis.xml"/>
+        <service name="StudentService">
+            <interface.java interface="com.student.service.StudentService"/>
+            <tuscany:binding.rmi uri="https://127.0.0.1:8999/TuscanyService"/>
+        </service>
+    </component>
+</composite>

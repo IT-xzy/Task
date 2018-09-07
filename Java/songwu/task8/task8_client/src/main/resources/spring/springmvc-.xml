@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven/>
+
+    <import resource="applicationContext-redis.xml"/>
+
+    <!--扫描controller层-->
+
+
+    <context:component-scan base-package="com.task8.controller"></context:component-scan>
+    <!--<context:component-scan base-package="com.task8.rmi"></context:component-scan>-->
+
+    <!--拦截器 拦截职业和介绍页面-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有URL中包含/u/的请求 -->
+            <mvc:mapping path="/u/profession"/>
+            <mvc:mapping path="/u/recommend"/>
+            <mvc:mapping path="/u/personal"/>
+
+            <bean class="com.task8.util.LoginInterceptor"></bean>
+        </mvc:interceptor>
+
+
+        <!-- 文件上传大小拦截 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/i/picture"/>
+            <bean class="com.task8.util.FileUploadInterceptor">
+                <!--限制文件大小为10M以内-->
+                <property name="maxSize" value="10485760"/>
+            </bean>
+        </mvc:interceptor>
+        <!-- 文件类型拦截 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/i/picture"/>
+            <bean class="com.task8.util.FileTypeInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
+
+    <!--文件上传-->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 请求的编码格式，必须和jSP的pageEncoding属性一致，以便正确读取表单的内容，默认为ISO-8859-1 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+
+        <!-- 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <!--<property name="maxUploadSize" value="10240000"/>-->
+    </bean>
+
+
+    <!-- Springmvc的异常处理器 -->
+
+    <!--<bean class="com.task8.util.CustomExceptionResolver"></bean>-->
+
+    <!--tiles视图解析器-->
+
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+
+    <!-- tiles配置文件 -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Spring MVC不处理静态资源 -->
+
+    <!--<mvc:default-servlet-handler/>-->
+
+    <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:resources location="/css/" mapping="/css/**"/>
+
+
+    <!-- 一个配置解决映射器和适配器的配置注解配置 -->
+    <mvc:annotation-driven enable-matrix-variables="true"></mvc:annotation-driven>
+
+
+    <!--对模型视图添加前后缀-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+    >
+        <property name="prefix" value="/WEB-INF/jsps/"/>
+        <property name="suffix" value=".jsp"/>
+
+        <!--p:prefix="WEB-INF/pages/" p:suffix=".jsp"-->
+
+    </bean>
+
+
+</beans>

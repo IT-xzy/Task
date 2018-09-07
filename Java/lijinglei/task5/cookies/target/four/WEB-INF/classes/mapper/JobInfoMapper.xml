@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.dao.JobInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.model.JobInfo" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="image" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="job_name" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="job_descripe" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="threshold" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="difficulty" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="growth_cycle" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="degree_of_scarcity" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="treatment_one" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="treatment_two" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="treatment_three" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="learning_num" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="prompt" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="work" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="work_descripe" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="creat_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modification_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from job_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="listAll" resultMap="BaseResultMap">
+    SELECT * FROM job_info
+  </select>
+</mapper>

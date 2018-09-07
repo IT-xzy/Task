@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--扫描组件-->
+    <context:component-scan base-package="com.lihoo.ssm"/>
+
+    <!--自动添加AOP-->
+    <aop:aspectj-autoproxy />
+
+    <!--加载配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <context:property-placeholder location="classpath:log4j.properties"/>
+
+    <!-- 1: 数据库连接池 -->
+    <bean id="dataSource0" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClassName}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 关键配置 -->
+        <!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+        <property name="initialPoolSize" value="${initialPoolSize}"/>
+        <!--连接池中保留的最小连接数。Default: 2 -->
+        <property name="minPoolSize" value="${minPoolSize}"/>
+        <!--连接池中保留的最大连接数。Default: 15 -->
+        <property name="maxPoolSize" value="${maxPoolSize}"/>
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="${acquireIncrement}"/>
+        <!-- 性能配置 -->
+        <!-- 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
+        <property name="maxStatements" value="${maxStatements}"/>
+        <!-- maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
+        <property name="maxStatementsPerConnection" value="${maxStatementsPerConnection}"/>
+        <!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="${maxIdleTime}"/>
+    </bean>
+
+    <!--2: sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--加载 MyBatis 的配置文件-->
+        <!--<property name="configLocation" value="mybatis-config.xml"/>-->
+        <!--映射mapper.xml-->
+        <property name="mapperLocations" value="classpath:/mapper/*Mapper.xml" />
+        <!--设置别名-->
+        <property name="typeAliasesPackage" value="com.lihoo.ssm.model" />
+        <!--数据源-->
+        <property name="dataSource" ref="dataSource0"/>
+        <!--pagehelper插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--3:  这里的id是根据扫描到的package里面的Mapper接口名来定义的，
+    因为扫描的结果不唯一,所以这里省略了,这个bean就是包含了增删改查方法的bean-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--basePackage 属性是映射器接口文件的包路径。
+         你可以使用分号或逗号 作为分隔符设置多于一个的包路径-->
+        <property name="basePackage" value="com.lihoo.ssm.dao"/>
+        <!--因为会自动装配 SqlSessionFactory和SqlSessionTemplate
+         所以没 有 必 要 去 指 定 SqlSessionFactory或 SqlSessionTemplate
+         因此可省略不配置；
+         但是,如果你使 用了一个 以上的 DataSource，那么自动装配可能会失效。
+         这种 情况下，你可以使用sqlSessionFactoryBeanName
+         或sqlSessionTemplateBeanName属性来设置正确的 bean名称来使用；-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    
+
+</beans>
+

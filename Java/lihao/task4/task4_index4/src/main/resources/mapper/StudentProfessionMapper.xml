@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihoo.ssm.dao.StudentProfessionMapper">
+  <resultMap id="BaseResultMap" type="com.lihoo.ssm.model.StudentProfession">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="job_info" jdbcType="VARCHAR" property="jobInfo" />
+    <result column="salary1" jdbcType="VARCHAR" property="salary1" />
+    <result column="salary2" jdbcType="VARCHAR" property="salary2" />
+    <result column="salary3" jdbcType="VARCHAR" property="salary3" />
+    <result column="hover_info" jdbcType="VARCHAR" property="hoverInfo" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student_profession
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lihoo.ssm.model.StudentProfession">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student_profession (id, job, job_info, 
+      salary1, salary2, salary3, 
+      hover_info, create_at, update_at
+      )
+    values (#{id,jdbcType=BIGINT}, #{job,jdbcType=VARCHAR}, #{jobInfo,jdbcType=VARCHAR}, 
+      #{salary1,jdbcType=VARCHAR}, #{salary2,jdbcType=VARCHAR}, #{salary3,jdbcType=VARCHAR}, 
+      #{hoverInfo,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lihoo.ssm.model.StudentProfession">
+    update student_profession
+    set job = #{job,jdbcType=VARCHAR},
+      job_info = #{jobInfo,jdbcType=VARCHAR},
+      salary1 = #{salary1,jdbcType=VARCHAR},
+      salary2 = #{salary2,jdbcType=VARCHAR},
+      salary3 = #{salary3,jdbcType=VARCHAR},
+      hover_info = #{hoverInfo,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, job, job_info, salary1, salary2, salary3, hover_info, create_at, update_at
+    from student_profession
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, job, job_info, salary1, salary2, salary3, hover_info, create_at, update_at
+    from student_profession
+  </select>
+
+  <select id="countAll" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM student_profession
+  </select>
+
+  <select id="findJob" resultMap="BaseResultMap">
+    SELECT *
+    FROM student_profession
+    WHERE job=#{job}
+  </select>
+
+</mapper>

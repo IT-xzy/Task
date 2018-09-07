@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 加载db.properties文件中的内容 中的key要有一定的规则 -->
+    <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:memcache.properties" ignore-unresolvable="true"/>
+    <!--数据库连接池配置-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- c3p0连接池的私有属性 -->
+        <property name="maxPoolSize" value="30" />
+        <property name="minPoolSize" value="10" />
+        <!-- 关闭连接后不自动commit -->
+        <property name="autoCommitOnClose" value="false" />
+        <!-- 获取连接超时时间 -->
+        <property name="checkoutTimeout" value="10000" />
+        <!-- 当获取连接失败重试次数 -->
+        <property name="acquireRetryAttempts" value="2" />
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 具体指定xml文件，可不配 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 自动扫描mapping.xml文件，**表示迭代查找 ,,也可在mybatis-config.xml中单独指定xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+        <!--别名-->
+        <property name="typeAliasesPackage" value="com.iceneet.entity" />
+    </bean>
+    <!--dao扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.iceneet.dao" />
+    </bean>
+    <!--memcached bean-->
+    <bean name="memcachedClient"
+          class="net.rubyeye.xmemcached.utils.XMemcachedClientFactoryBean" destroy-method="shutdown">
+        <property name="servers">
+            <value>127.0.0.1:11211</value>
+        </property>
+        <!--<property name="connectionPoolSize" value="10"></property>-->
+        <!-- Use binary protocol,default is TextCommandFactory -->
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.BinaryCommandFactory"></bean>
+        </property>
+        <!-- ByteBuffer allocator -->
+        <property name="bufferAllocator">
+            <bean class="net.rubyeye.xmemcached.buffer.SimpleBufferAllocator"></bean>
+        </property>
+        <!-- Failure mode -->
+        <property name="failureMode" value="false"/>
+    </bean>
+</beans>

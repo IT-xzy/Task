@@ -1,0 +1,49 @@
+spring:
+  freemarker:
+    template-loader-path: classpath:/templates/
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-session-attributes: true
+    expose-request-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/task4?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 8891960
+    driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 8891960lin
+    timeout: 10000
+    pool:
+      max-wait: 1
+      min-idle: 0
+
+
+mybatis:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: com.iceneet.entity
+Qcloud:
+  sms:
+    AppId: 1400127686
+    AppKey: 50e65ab0e1ca4b202614a05e59ba9ca3
+    templateId: 178034
+    smsSign: 快乐咸鱼的每一天
+  Email:
+    account: admin@iceneet.club
+    pass: Weihao2008
+    host: smtp.exmail.qq.com
+    port: 465
+    protocol: smtp
+  Cos:
+    APPID: 1252825361
+    SecretId: AKID20nQs9hNq9HF2LzgaJsGTVN3YvCJ4zYw
+    SecretKey:  MXWKwOekfPzPejcKrFSTPAk9QWVKzTls
+Qiniu:
+  AccessKey: pgnr9gx-tJmvS4mIzOQzu7kv3yhuDuiIAvVtEa_J
+  SecretKey: jPziko-UEZshNU2T8jo0KR3GTJ2yynDML_nrHY0X
+OssSign: false

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iceneet.dao.SignupDao">
+    <resultMap type="Signup" id="SignupResult">
+        <result column="id" property="id"/>
+        <result column="name"  property="name"/>
+        <result column="qq"  property="qq"/>
+        <result column="learn_type" property="learnType"/>
+        <result column="time_to_learn" property="timeToLearn"/>
+        <result column="graduated_school"  property="graduatedSchool"/>
+        <result column="online_num" property="onlineNum"/>
+        <result column="dariy_list"  property="dariyList"/>
+        <result column="helper_shixiong"  property="helperShixiong"/>
+        <result column="way_to_know"  property="wayToKnow"/>
+        <result column="wish"  property="wish"/>
+        <result column="create_at"  property="createAt"/>
+        <result column="update_at"  property="updateAt"/>
+    </resultMap>
+    <select id="GetSignupById" resultType="Signup" parameterType="long">
+        SELECT * FROM  signup WHERE id=#{id}
+    </select>
+    <select id="selectSignup"  resultMap="SignupResult">
+        SELECT * FROM signup limit #{start,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+    <insert id="insertSignup" parameterType="Signup">
+    insert into signup (id, name, qq,
+      learn_type, time_to_learn, graduated_school,
+      online_num, dariy_list, wish,
+      helper_shixiong, way_to_know)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{qq,jdbcType=INTEGER},
+      #{learnType,jdbcType=VARCHAR}, #{timeToLearn,jdbcType=VARCHAR}, #{graduatedSchool,jdbcType=VARCHAR},
+      #{onlineNum,jdbcType=VARCHAR}, #{dariyList,jdbcType=VARCHAR}, #{wish,jdbcType=VARCHAR},
+      #{helperShixiong,jdbcType=VARCHAR}, #{wayToKnow,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateSignup" parameterType="String">
+        UPDATE signup SET name=#{param1} WHERE name=#{param2}
+    </update>
+    <delete id="deleteSignup" parameterType="String">
+        DELETE FROM signup WHERE name = #{name}
+    </delete>
+    <delete id="deleteSignupById" parameterType="long">
+        DELETE FROM signup WHERE id = #{id}
+    </delete>
+    <select id="GetSignAll" resultMap="SignupResult">
+        SELECT * FROM signup
+    </select>
+  <update id="updateByPrimaryKey" parameterType="Signup">
+    update signup
+    set name = #{name,jdbcType=VARCHAR},
+    qq = #{qq,jdbcType=INTEGER},
+    learn_type = #{learnType,jdbcType=VARCHAR},
+    time_to_learn = #{timeToLearn,jdbcType=VARCHAR},
+    graduated_school = #{graduatedSchool,jdbcType=VARCHAR},
+    online_num = #{onlineNum,jdbcType=VARCHAR},
+    dariy_list = #{dariyList,jdbcType=VARCHAR},
+    wish = #{wish,jdbcType=VARCHAR},
+    helper_shixiong = #{helperShixiong,jdbcType=VARCHAR},
+    way_to_know = #{wayToKnow,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
