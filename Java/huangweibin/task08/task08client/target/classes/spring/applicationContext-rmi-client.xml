@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+    <!--配置服务一-->
+    <bean name="clentrmi1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+
+        <property name="serviceUrl" value="rmi://127.0.0.1:1021/serverRmiTest"/>
+
+        <property name="serviceInterface" value="task08client.service.CategoryService"/>
+    </bean>
+
+    <!--配置服务二-->
+    <bean name="clentrmi2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+
+        <property name="serviceUrl" value="rmi://127.0.0.1:1022/serverRmiTest"/>
+
+        <property name="serviceInterface" value="task08client.service.CategoryService"/>
+    </bean>
+
+</beans>

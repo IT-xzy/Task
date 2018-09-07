@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+
+    <bean name="serverTest" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--提供的服务名称-->
+        <property name="serviceName" value="serverRmiTest"/>
+        <!--服务实现类引用-->
+        <property name="service" ref="rmiServer"/>
+        <!--暴露的服务接口-->
+        <property name="serviceInterface" value="task8services.service.CategoryService"/>
+        <!--服务的端口-->
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+    <!--服务实现类对象-->
+    <bean name="rmiServer" class="task8services.service.CategoryServiceImpl"/>
+
+    <import resource="applicationContext.xml"/>
+
+</beans>
