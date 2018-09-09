@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+    <!--自动扫描base-package对应的路径或者该路径的子包下面的java文件并把相应的类注册为bean-->
+    <context:annotation-config/>
+    <!--1.AutowiredAnnotationBeanPostProcessor-->
+    <!--@Autowired注解-->
+    <!--2.CommonAnnotationBeanPostProcessor-->
+    <!--@ Resource注解-->
+    <!--3.PersistenceAnnotationBeanPostProcessor-->
+    <!--@ PostConstruct注解-->
+    <!--4.RequiredAnnotationBeanPostProcessor-->
+    <!--@ PreDestroy注解-->
+    <!-- 组件扫描 -->
+    <!--<context:annotation-config/>扫描全部-->
+    <context:component-scan base-package ="com.jnshu"/>
+    <!--配置完这个标签后，spring就会去自动扫描base-package对应的路径或者该路径的子包下面的java文件，如果扫描到文件中带有@Service,@Component,@Repository,@Controller等这些注解的类，则把这些类注册为bean
+    注：在注解后加上例如@Component(value=”abc”)时，注册的这个类的bean的id就是adc.-->
+    <!-- 数据库配置: 配置 jdbc.properties  -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!-- 配置 dataSource 数据源 druid -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="initialSize" value="${jdbc.initialSize}"/>
+        <property name="minIdle" value="${jdbc.minIdle}" />
+        <property name="maxActive" value="${jdbc.maxActive}" />
+    </bean>
+
+    <!-- JDBCTemplate 注入 -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+  <!--  <bean id = "StudentDaoImpl" class = "com.jnshu.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>-->
+</beans>

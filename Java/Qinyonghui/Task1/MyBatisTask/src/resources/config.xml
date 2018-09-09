@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>  <!-- 说明这是一个xml文件，编码格式为UTF-8-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!-- 加载java的配置文件或者声明属性信息 -->
+    <properties resource="db.properties"/>
+
+    <environments default="development">
+        <environment id="development"><!--使用jdbc 的事务管理模式，事物控制由mybatis管理-->
+            <transactionManager type="JDBC" />  <!--事务管理机制为JDBC-->
+            <dataSource type="POOLED"><!--使用MyBatis自带的数据库连接池管理数据库连接；
+ UNPOOLED为不适用连接池； JNDI jndi形式连接数据库，主要用于项目正常使用时-->
+                <property name="driver" value="${jdbc.driver}"  />
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"  />
+                <property name="password" value="${jdbc.password}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 加载映射文件 ,告诉MyBatis到哪里去找这些语句-->
+    <mappers>
+        <mapper resource="StudentMapper.xml"/><!-- 注册StudentMapper.xml文件，-->
+        <!-- 批量加载映射配置文件,mybatis自动扫描包下面的mapper接口进行加载遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；上边规范的前提是：使用的是mapper代理方法;-->
+    </mappers>
+</configuration>
+
