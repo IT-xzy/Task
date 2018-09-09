@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task1.StudentDao">
+
+
+    <insert id="add" useGeneratedKeys="true" parameterType="com.task1.Student" keyProperty="id">
+     insert into student_info(create_at,update_at,name,qq,curricular,school_time,college,id_num,report_link,goal,refree)values(#{create_at},#{update_at},#{name},#{qq},#{curricular},#{school_time},#{college},#{id_num},#{report_link},#{goal},#{refree})
+    </insert>
+
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM student_info WHERE id=#{id}
+    </delete>
+
+
+    <update id="update" parameterType="com.task1.Student">
+        update student_info set id=#{id},create_at=#{create_at},update_at=#{update_at},name=#{name},qq=#{qq},curricular=#{curricular},school_time=#{school_time},college=#{college},report_link=#{report_link},goal=#{goal},refree=#{refree} where id_num=#{id_num}
+    </update>
+
+    <select id="showAll" resultType="com.task1.Student">
+        SELECT *from student_info
+    </select>
+
+    <select id="showOneN" resultType="com.task1.Student">
+        select * from  student_info WHERE NAME =#{name}
+    </select>
+
+    <select id="showOneI" resultType="com.task1.Student">
+        SELECT *from student_info WHERE id_num=#{id_num}
+    </select>
+</mapper>
