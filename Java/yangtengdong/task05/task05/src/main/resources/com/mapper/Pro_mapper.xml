@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.ProfessionDao">
+      <select id="findById" parameterType="java.lang.Integer" resultType="com.entity.Profession">
+               select * from profession where id = #{id}
+      </select>
+    <select id="listAll" resultType="com.entity.Profession">
+        select * from profession
+    </select>
+
+    <insert id="insert" parameterType="com.entity.Profession" >
+        insert into profession
+        (vpt,obligation,sill,complexity,growth,rareness,monney,online,tip)
+        values
+        (#{vpt},#{obligation},#{sill},#{complexity},#{growth},#{rareness},#{monney},#{online},#{tip})
+    </insert>
+    <select id="findByStyle" resultType="com.entity.Profession" parameterType="String">
+
+        select * from profession
+        where
+        style like #{%style%}
+
+    </select>
+
+</mapper>

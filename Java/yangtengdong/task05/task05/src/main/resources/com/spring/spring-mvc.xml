@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+    <!-- 自动扫描包 -->
+    <context:component-scan base-package="com.controller"></context:component-scan>
+
+    <!-- 视图解析器 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsps/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- tiles 视图解析  -->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+
+    <!-- tiles 标签  -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+     <!--放行静态资源第一种方式-->
+    <mvc:default-servlet-handler/>
+
+    <!-- 放行静态资源第二种方式 -->
+
+   <!-- <mvc:resources location="/js/" mapping="/js/**"/>
+
+    <mvc:resources location="/css/" mapping="/js/**"/>
+
+    <mvc:resources location="/images/" mapping="/js/**"/>-->
+
+
+    <!-- 校验器 -->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!-- hibernate校验器-->
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 指定校验使用的资源文件，在文件中配置校验错误信息，
+        如果不指定则默认使用classpath下的ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <!--将校验器注入到处理器适配器中-->
+    <mvc:annotation-driven validator="validator"/>
+
+    <!-- 校验错误信息配置文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!--文件编码-->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!--如果有多个配置文件的话，可以为每一个配置文件单独指定编码-->
+        <property name="fileEncodings">
+            <props>
+                <prop key="classpath:userValidationMessage"> UTF-8</prop>
+            </props>
+        </property>
+        <!--缓存时间180s-->
+        <property name="cacheSeconds" value="180"/>
+        <!--文件位置，格式默认为properties-->
+        <property name="basenames">
+            <list>
+                <value>userValidationMessage</value>
+            </list>
+        </property>
+    </bean>
+
+
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <!--登录拦截器-->
+        <mvc:interceptor>
+            <!--mvc:mapping子标签来定义需要进行拦截的请求路径。-->
+            <mvc:mapping path="/jnshu/u/*"/>
+            <!--该拦截器的实现（继承HandlerInterceptorAdapter的类）-->
+            <bean class="com.interceptor.UserInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+</beans>
