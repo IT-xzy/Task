@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <!--自动扫描,后面跟的是包名，就是使用注解的地方-->
+    <!--<context:component-scan base-package="com.ptteng.JdbcTemplate"/>-->
+
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!--指定spring读取db.properties的配置-->
+    <!--将连接池放入spring容器-->
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+    <!--将jdbctemplate放入spring容器中，jdbctemplate的使用:jdbctemplate是spring整合jdbc的类，
+    直接在xml文件中配置，但是需要在jdbctemplate中配置连接池，然后在dao层操作数据库  -->
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="datasource"></property>
+    </bean>
+</beans>
+
+
+
+
+
+
+
+
+

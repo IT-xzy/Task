@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.UserMapper">
+    <!--指定唯一命名空间-->
+    <!--这里SQL语句，主要注意参数类型,输入和输出参数类型，尤其是插入语句返回id，需要设置两个参数-->
+    <select id="findAll" resultType="com.ptteng.User">
+select * from student
+</select>
+
+    <select id="findById" parameterType="long" resultType="com.ptteng.User">
+        select * from student where id=#{id}
+    </select>
+
+
+    <insert id="insertUser" keyProperty="id" useGeneratedKeys="true"
+            parameterType="com.ptteng.User">
+insert into student (name,QQ,wish,createAt,updateAt) values (#{name},#{QQ},#{wish},#{createAt},#{updateAt})
+</insert>
+
+    <update id="updateUser" parameterType="com.ptteng.User">
+update student set name=#{name},QQ=#{QQ},wish=#{wish},createAt=#{createAt},updateAt=#{updateAt} where id=#{id}
+</update>
+
+    <delete id="deleteUser" parameterType="long">
+delete from student where id=#{id}
+</delete>
+
+
+</mapper>

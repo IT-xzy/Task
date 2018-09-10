@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.Mapper">
+
+    <insert id="insertUser" keyProperty="id" useGeneratedKeys="true" parameterType="com.ptteng.User">
+        insert into student (name,QQ,wish,createAt,updateAt) values (#{name},#{QQ},#{wish},#{createAt},#{updateAt})
+        </insert>
+
+    <select id="findAll" resultType="com.ptteng.User">
+        select * from student
+        </select>
+
+    <update id="updateUser" parameterType="com.ptteng.User">
+        update student set name=#{name},QQ=#{QQ},wish=#{wish},createAt=#{createAt},updateAt=#{updateAt} where id=#{id}
+    </update>
+
+
+    <delete id="deleteUser" parameterType="long">
+         delete from student where id=#{id}
+    </delete>
+
+    <select id="findById" resultType="com.ptteng.User" parameterType="long">
+          select * from student where id=#{id}
+    </select>
+
+
+</mapper>
