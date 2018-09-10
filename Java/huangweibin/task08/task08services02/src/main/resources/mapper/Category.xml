@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="task8services.mapper.CategoryMapper">
+
+    <insert id="add" parameterType="task08base.pojo.Category">
+            insert into category_ ( name ) values (#{name})
+        </insert>
+
+    <delete id="delete" parameterType="task08base.pojo.Category">
+            delete from category_ where id= #{id}
+        </delete>
+
+    <select id="get" parameterType="int" resultType="task08base.pojo.Category">
+            select * from category_ where id= #{id}
+        </select>
+
+    <update id="update" parameterType="task08base.pojo.Category">
+            update category_ set name=#{name} where id=#{id}
+        </update>
+
+    <select id="list" resultType="task08base.pojo.Category">
+        select * from category_ order by id desc
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+
+    <select id="total" resultType="int">
+        select count(*) from category_
+    </select>
+
+
+</mapper>
+
