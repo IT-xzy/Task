@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="emailUtilsByAliyun" class="com.sample.EmailUtilsByAliYun">
+
+        <!--TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)-->
+        <property name="accessKeyId" value="LTAI2TGWKVTWNgdn"/>
+        <property name="accessKeySecret" value="wrYXWEhkr8MjnNZ1E2WJHthZvXRfAY"/>
+        <!--邮件发送者地址-->
+        <property name="noreplyAddress" value="zwptask07@test0506.zhuangwp8023.top"/>
+        <property name="notifyAddress" value="zwptask07@test0506.zhuangwp8023.top"/>
+        <property name="fromAlias" value="邮件验证模板"/>
+        <property name="tagName" value="zwpemail"/>
+    </bean>
+
+<!--<bean>-->
+    <!--&lt;!&ndash;邮件属性注入&ndash;&gt;-->
+    <!--<bean id="eMailUtil" class="com.utils.EMailUtil" >-->
+    <!--<property name="accessKeyId" value="LTAI2TGWKVTWNgdn"/>-->
+    <!--<property name="accessKeySecret" value="wrYXWEhkr8MjnNZ1E2WJHthZvXRfAY"/>-->
+    <!--<property name="address" value="zwptask07@zhuangwp8023.top"/>-->
+    <!--<property name="sender" value="zwp"/>-->
+    <!--<property name="tagName" value="zwpemail"/>-->
+    <!--<property name="subject" value="邮件验证模板"/>-->
+<!--</bean>-->
+</beans>
