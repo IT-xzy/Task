@@ -19,3 +19,5 @@
 
 #### 以上四种推荐第一种，简单粗暴，缺点就是有时候git的服务器链接不上，要多试几次，另外三种开始会很方便，后来内容越来越多导致其他人第一次克隆项目会非常慢。
 
+##备注
+如需要单独check out 子文件夹，需要先复制url路径，再将其中的tree/master改成trunk，例如：原url为，https://github.com/IT-xzy/Task/tree/master/Java/wangyongzhi/Task5， check out url为：https://github.com/IT-xzy/Task/trunk/Java/wangyongzhi/Task5 大家在官网提交任务的时候，填后者check out url
