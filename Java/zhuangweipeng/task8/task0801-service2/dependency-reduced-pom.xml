@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>zwp</groupId>
+  <artifactId>task0801</artifactId>
+  <name>task0801 Maven Webapp</name>
+  <version>1.0-SNAPSHOT</version>
+  <url>http://www.example.com</url>
+  <build>
+    <finalName>project-8091</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.1</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <transformers>
+                <transformer>
+                  <mainClass>com.client.TestRun</mainClass>
+                </transformer>
+                <transformer>
+                  <resource>META-INF/spring.handlers</resource>
+                </transformer>
+                <transformer>
+                  <resource>META-INF/spring.schemas</resource>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <properties>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <spring.version>4.0.2.RELEASE</spring.version>
+    <slf4j.version>1.7.7</slf4j.version>
+    <log4j.version>1.2.17</log4j.version>
+    <mybatis.version>3.2.6</mybatis.version>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>1.7</maven.compiler.target>
+  </properties>
+</project>
+
