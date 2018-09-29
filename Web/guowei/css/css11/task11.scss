@@ -1,0 +1,87 @@
+@import "task11mixins";
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: initial;
+    margin: 0;
+    background: #eff0f4;
+}
+
+header {
+    @include flex-items-center;
+    justify-content: space-between;
+    height: .88rem;
+    padding: 0 .3rem;
+    background: $blue;
+
+    span {
+        color: $white;
+        font-size: .36rem;
+    }
+
+    a {
+        color: $white;
+    }
+
+}
+
+a {
+    text-decoration: none;
+    font-size: $fnsize;
+}
+
+i {
+    display: inline-block;
+    @include wi-ht(.3rem,.44rem);
+    padding: .05rem .45rem;
+    margin-right: .35rem;
+    border-right: 1px solid #e1e5e7;
+    background: url('sprites.png') no-repeat center / .96rem .63rem content-box;
+}
+
+.iphone {
+    background-position: -.59rem -.08rem;
+}
+
+.lock {
+    background-position: -.1rem -.1rem;
+}
+
+form {
+    @include flex-items-center;
+    margin-top: .15rem;
+    background: $white;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+main input {
+    flex-grow: 1;
+    height: $ht1;
+    font-size: .28rem;
+}
+
+footer {
+    input {
+        display: block;
+        @include wi-ht;
+        margin-top: .7rem;
+        background: $blue;
+        color: $white;
+        font-size: .36rem;
+        letter-spacing: 0.16rem;
+    }
+    a {
+        float: right;
+        margin: .2rem .34rem 0 0;
+        font-size: $fnsize;
+        color: $blue;
+        letter-spacing: .07rem;
+    }
+}
