@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task.dao.LoginDao">
+        <insert id="insertLogin" parameterType="task.pojo.Login" >
+	        insert into login(id,create_at,update_at,login_id,login_password)
+	        values (#{id},#{createAt},#{updateAt},#{loginId},#{loginPassword})
+	    </insert>
+
+	    <select id="selectLogin" parameterType="task.pojo.Login" resultMap="loginResult">
+	        select * from login  where login_id= #{loginId}
+	    </select>
+
+	    <update id="updateLogin" parameterType="task.pojo.Login" >
+	        update login set login_password=#{loginPassword} where login_id=#{loginId}
+	    </update>
+
+        <resultMap id="loginResult" type="task.pojo.Login">
+            <id property="id" column="id"/>
+            <result property="createAt" column="create_at"/>
+            <result property="updateAt" column="update_at"/>
+            <result property="loginId" column="login_id"/>
+            <result property="loginPassword" column="login_password"/>
+        </resultMap>
+
+</mapper>

@@ -1,0 +1,89 @@
+@mixin fscolor($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+@mixin boxsize($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+main {
+    margin-top: .45rem;
+    padding: .13rem .15rem;
+    .last-game {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: .2rem;
+        padding-bottom: .2rem;
+        border: 1px solid #999999;
+        background: white;
+        p {
+            display: inline-block;
+            @include fscolor(.17rem, #999999);
+            white-space: nowrap;
+        }
+        .button-right {
+            position: absolute;
+            right: .1rem;
+            @include boxsize(.1rem, .1rem);
+            margin-right: .1rem;
+            border-top: 0.02rem solid #e7e7e7;
+            border-right: 0.02rem solid #e7e7e7;
+            transform: rotate(45deg);
+            background: white;
+        }
+    }
+    .select-game {
+        position: relative;
+        margin-top: .1rem;
+        border: 1px solid #999999;
+        background: white;
+        .page {
+            position: absolute;
+            top: 50%;
+            right: 1%;
+            margin-top: -.135rem;
+            @include boxsize(.1378rem, .27rem);
+            border-left: .1378rem solid #fbb435;
+            border-top: .135rem solid transparent;
+            border-bottom: .135rem solid transparent;
+        }
+        .game-name {
+            height: .45rem;
+            line-height: .45rem;
+            @include fscolor(.1887rem, #fbb435);
+            text-align: center;
+            border-bottom: 1px solid #fbb435;
+        }
+        .options {
+            margin-top: .125rem;
+            text-align: center;
+            .difficulty {
+                display: inline-block;
+                @include boxsize(84%, .67215rem);
+                line-height: .67215rem;
+                @include fscolor(.1604rem, white);
+                background: #69d1e9;
+            }
+            .users {
+                margin-top: .13rem;
+                @include fscolor(.12265rem, #9a9a9a);
+            }
+        }
+        .circle {
+            text-align: center;
+            span {
+                display: inline-block;
+                @include boxsize(.08285rem, .08285rem);
+                background: #f0f0f0;
+                border-radius: 50%;
+                &:hover {
+                    background: #69d1e9;
+                }
+            }
+        }
+    }
+}

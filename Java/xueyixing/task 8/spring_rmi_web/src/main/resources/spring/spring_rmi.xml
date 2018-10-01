@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="rmiClientSetting" class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" abstract="true">
+        <!-- 是否启动时加载stub -->
+        <property name="refreshEndpointsOnStartup" value="false" />
+        <!-- 调用异常时，将重新加载stub -->
+        <property name="refreshEndpointsOnConnectFailure" value="true" />
+        <!-- 调用失败时是否切换到其他服务端 -->
+        <property name="switchEndpointOnFailure" value="true" />
+        <!-- 追踪拦截器启用 -->
+        <property name="registerTraceInterceptor" value="true" />
+        <!-- 缓存stub 继承AbstractRmiShortFormProxyFactoryBean才有-->
+        <property name="cacheEndpoints" value="true" />
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+
+    <bean id="Send" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.mvc.service.SendService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:1025/userRmiServiceTest1</value>
+                <value>rmi://127.0.0.1:1030/userRmiServiceTest1</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="Oss" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.mvc.service.OssService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:1025/userRmiServiceTest2</value>
+                <value>rmi://127.0.0.1:1030/userRmiServiceTest2</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="Type" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.mvc.service.TypeService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:1025/userRmiServiceTest3</value>
+                <value>rmi://127.0.0.1:1030/userRmiServiceTest3</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="User" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.mvc.service.UserService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:1025/userRmiServiceTest4</value>
+                <value>rmi://127.0.0.1:1030/userRmiServiceTest4</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="Person" parent="rmiClientSetting">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.mvc.service.PersonService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:1025/userRmiServiceTest5</value>
+                <value>rmi://127.0.0.1:1030/userRmiServiceTest5</value>
+            </list>
+        </property>
+    </bean>
+</beans>

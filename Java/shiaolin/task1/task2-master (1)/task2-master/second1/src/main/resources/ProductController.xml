@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+
+    <!--<mvc:annotation-driven>会自动注册RequestMappingHandlerMapping与RequestMappingHandlerAdapter两个Bean,这是Spring MVC为@Controller分发请求所必需的，并且提供了数据绑定支持-->
+    <context:component-scan base-package="com.jnshu.controller"/>
+    <context:component-scan base-package="com.jnshu.dao"/>
+    <context:component-scan base-package="com.jnshu.serviceImpl"/>
+    <context:component-scan base-package="com.jnshu.service"/>
+    <!-- 静态资源 -->
+    <!--<mvc:resources location="/view/" mapping="/**"/>-->
+
+    <!-- 静态资源end->
+                       
+    <!-自动扫描包-->
+    <mvc:annotation-driven/>
+
+    <mvc:default-servlet-handler/>
+
+    <context:annotation-config/>
+
+
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" id = "internalResourceViewResolver">
+        <!--前缀-->
+        <property name="prefix" value = "/view/"/>
+        <!--后缀-->
+        <property name="suffix" value=".jsp"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    </bean>
+    <!-- 自动配置 处理器映射器 处理器适配器 -->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+
+    <!--自定义Spring参数绑定-->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!-- 转换器 -->
+        <property name="converters">
+            <!--日期类型转换-->
+            <bean class="convert.TimeConvert"/>
+        </property>
+        <!-- 转换器end-->
+    </bean>
+
+
+
+</beans>

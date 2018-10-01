@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+
+ <!--客户端Rmi的 注入配置文件-->
+    <bean id="client" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1088/StudentService"/>
+        <property name="serviceInterface" value="com.service.StudentService"/>
+    </bean>
+
+    <bean id="client2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1099/StudentService"/>
+        <property name="serviceInterface" value="com.service.StudentService"/>
+    </bean>
+
+
+    <!---=================短息验证========================================-->
+    <bean id="sendCode" class="com.SMSTool.SDKTestSendTemplateSMS">
+        <property name="serverIP" value="app.cloopen.com"/>
+        <property name="serverPort" value="8883"/>
+        <property name="accountSid" value="8a216da863f8e6c20164322d14651f06"/>
+        <property name="accountToken" value="3abfbf5ceb524438b94a3952ca0c792b"/>
+        <property name="appId" value="8a216da863f8e6c20164322d14b91f0c"/>
+    </bean>
+
+    <!--=========================发送图片==========================================-->
+    <bean id="sendImg" class="com.SendimagesTool.QiniuTool">
+        <property name="accessKey" value="6TXc9AIzZ0cWmCbnXPNWOWsf9r2X0rctjvKp-wVn"/>
+        <property name="secretKey" value="DvWrjs1hkOyJdHw-V7cnW4RUY_RWVBq4SmO19qw6"/>
+        <property name="bucket" value="images"/>
+    </bean>
+
+    <!--=============================发送邮件====================================-->
+    <bean id="sendEmail" class="com.sendcloud.sdk.demo.mail.SendMail">
+        <property name="cc" value="c@ifaxin.com"/>
+        <property name="bcc" value="d@ifaxin.com"/>
+        <property name="from" value="sendcloud@sendcloud.org"/>
+        <property name="fromName" value="SendCloud"/>
+        <property name="replyTo" value="reply@sendcloud.org"/>
+        <property name="subject" value="来自 SendCloud SDK 的邮件"/>
+    </bean>
+
+    <!--=======================阿里 云对象存储==========================================-->
+    <bean id="aliyunOss" class="com.FileCopy.UploadAili" >
+        <property name="accessKeyId" value="i7aAXivNEYI1ToYg" />
+        <property name="accessKeySecret" value="vJWxLmp8xL17aZMZ0R1taXFRm8L1a5" />
+        <property name="bucketname" value="baichensong" />
+        <!-- endpoint 机房 地址 -->
+        <property name="endpoint" value="http://oss-cn-qingdao.aliyuncs.com" />
+        <property name="fileUrl" value="http://oss-cn-qingdao.aliyuncs.com" />
+    </bean>
+</beans>

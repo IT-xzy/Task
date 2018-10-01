@@ -1,0 +1,167 @@
+@charset "UTF-8";
+@import "global";
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  background: #f0f0f0;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.sidebar-menu {
+  @include box(80vw, 100vh);
+  border-right: 5px solid #1fbade;
+  background: #fff;
+  position: fixed;
+  top: 0;
+
+  left: -80vw;
+  transition: left 500ms;
+  ul {
+    list-style: none;
+    li {
+      @include middle;
+      @include jc-sb;
+      @include box(auto, 45px);
+      @include b-b(#eaeaea);
+      @include text(1.5rem, #3ebfdf);
+      & > img {
+        margin-right: 27px;
+      }
+      span {
+        @include middle;
+        img {
+          margin: 0 16px;
+        }
+      }
+    }
+  }
+  #sidebar:checked ~ & {
+    left: 0;
+  }
+}
+
+/*头部开始*/
+header {
+  transition: transform 500ms;
+  @include box(100%, 40px);
+  background: #29bde0;
+  @include middle;
+  padding-left: 12px;
+  @include p-t;
+  label {
+    cursor: pointer;
+    img {
+      @include box(18px, 16px);
+
+    }
+    img:last-child {
+      display: none;
+    }
+  }
+
+  #sidebar:checked ~ & {
+    label {
+      img:first-child {
+        display: none;
+      }
+      img:last-child {
+        display: block;
+      }
+    }
+    transform: translateX(80vw);
+  }
+
+}
+
+/*头部结束*/
+
+/*主体开始*/
+.last-game {
+  transition: transform 500ms;
+  @include middle-center;
+  @include box(88vw, 65px);
+  @include border(#c9c9c9);
+  background: #fff;
+  margin: 56px auto 16px auto;
+  @include text(1.96rem, #9a9a9a);
+  &:hover {
+    @include text(1.96rem, #9a9a9a);
+  }
+  position: relative;
+  img {
+    @include box(12px, 22px);
+    position: absolute;
+    margin-top: 1px;
+    right: 2.5vw;
+  }
+  #sidebar:checked ~ & {
+    transform: translateX(80vw);
+  }
+}
+
+.nav-game {
+  transition: transform 500ms;
+  @include box(88vw, auto);
+  margin: 0 auto;
+  margin-bottom: 35px;
+  @include border(#c9c9c9);
+  background: #fff;
+  h1 {
+    @include box(auto, 50px);
+    @include middle-center;
+    @include text(2.123rem, #fbb435);
+    @include b-b(#fdd793);
+  }
+  .row {
+    @include box(auto, 108px);
+    @include middle-center;
+    .nav-item {
+      @include box(72vw, 75px);
+      @include middle-center;
+      @include text(1.805rem, #fff);
+      background: #69d1e9;
+    }
+  }
+  p {
+    @include middle-center;
+    @include text(1.38rem, #787878);
+  }
+  .row-middle {
+    position: relative;
+    .next {
+      position: absolute;
+      right: 1.5vw;
+      img {
+        @include box(15px, 30px);
+      }
+    }
+  }
+  .nav-circle {
+    @include box(inherit, 20px);
+    @include middle-center;
+    a {
+      display: block;
+      margin: 0 2.5px;
+      @include box(10px, 10px);
+      border-radius: 5px;
+      background: #f0f0f0;
+      &:hover {
+        background: #69d1e9;
+      }
+    }
+    .active {
+      background: #69d1e9;
+    }
+  }
+  #sidebar:checked ~ & {
+    transform: translateX(80vw);
+  }
+}
+
+/*主体结束*/
+
+

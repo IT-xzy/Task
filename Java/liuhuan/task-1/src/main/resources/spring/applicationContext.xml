@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 导入数据库配置 -->
+    <context:property-placeholder location="db.properties"/>
+
+    <!-- 开启注解 -->
+    <context:annotation-config/>
+
+    <!-- 扫描service包下所有使用注解的类型 -->
+    <context:component-scan base-package="com.jnshu.taskone.serviceImpl" />
+
+
+    <!-- 配置数据源 需导入commons-dbcp 包 destroy-method="close" 使用完毕后自动关闭 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${db_username}"/>
+        <property name="password" value="${db_password}"/>
+        <!-- 连接池的最大数据库连接数。设为0表示无限制。 -->
+        <property name="maxActive" value="10"/>
+        <!-- 最大空闲数，数据库连接的最大空闲时间。超过空闲时间，数据库连接将被标记为不可用，然后被释放。设为0表示无限制。-->
+        <property name="maxIdle" value="5"/>
+    </bean>
+
+    <!-- 配置工厂 需导入mybatis-spring包-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 定义使用的数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 导入mybatis配置,接管sqlSessionFactory -->
+        <property name="configLocation" value="mybatis/mybatis-config.xml"/>
+    </bean>
+
+    <!-- 定义实现类 原生dao -->
+    <!--<bean id="userDao" class="com.jnshu.taskone.dao.UserDao">-->
+        <!--&lt;!&ndash;ref="sqlSessionFactory" 调用上面的工厂 &ndash;&gt;-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <!-- 配置mapper代理 MapperFactoryBean:用于生成mapper代理对象-->
+    <!-- 手动定义-->
+     <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.jnshu.taskone.dao.UserDao"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
+
+     <!--MapperScannerConfigurer mapper自动扫描器,将包下边的mapper接口自动创建代理对象到spring容器中，bean的id是mapper的类名（首字母小写）-->
+    <!-- 配置扫描路径 -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--&lt;!&ndash; basePackage:指明一个包 &ndash;&gt;-->
+        <!--<property name="basePackage" value="com.jnshu.taskone.dao.UserDao"/>-->
+        <!--&lt;!&ndash; sqlSessionFactoryBeanName 指定注入sqlSessionFactory名称&ndash;&gt;-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+</beans>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--使用RmiProxyFactoryBean连接服务端：用于客户端的类-->
+	<bean id="serviceProxy"
+		  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+		<!--依赖注入的方式设置获取的远程对象-->
+		<property name="serviceUrl" value="rmi://localhost:1199/Service"/>
+		<!--依赖注入的方式设置目标接口-->
+		<property name="serviceInterface" value="com.service.UserService"/>
+	</bean>
+
+	<!--使用RmiProxyFactoryBean连接服务端1：用于客户端的类-->
+	<bean id="serviceProxy1"
+		  class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+		<!--依赖注入的方式设置获取的远程对象-->
+		<property name="serviceUrl" value="rmi://localhost:1120/Service"/>
+		<!--依赖注入的方式设置目标接口-->
+		<property name="serviceInterface" value="com.service.UserService1"/>
+	</bean>
+
+</beans>

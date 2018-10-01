@@ -1,0 +1,143 @@
+html {
+    font-size: 625%;
+}
+
+body {
+    margin: 0;
+    font-size: 0.16rem;
+    background-color: #29b;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: .5rem;
+    padding: 0 .15rem;
+    border-bottom: .01rem solid white;
+    font-size: 0.2rem;
+    color: #fff;
+    background-color: #29bde0;
+}
+
+header img {
+    width: .17rem;
+    cursor: pointer;
+}
+/*两句话*/
+.title {
+    margin-top: .5rem;
+    overflow: hidden;
+}
+/*第一句话*/
+.title__text {
+    position: relative;
+    line-height: .35rem;
+    margin: .1rem 0 0 0;
+    padding-left: 10vw;
+    background-color: #b9e9f5;
+}
+/*第一句话*/
+.title__text::after {
+    position: absolute;
+    left: 10vw;
+    bottom: -.12rem;
+    content: "";
+    border-top: .12rem solid #b9e9f5;
+    border-left: .06rem solid transparent;
+    border-right: .06rem solid transparent;
+}
+/*第二句话*/
+.title__tips {
+    line-height: .4rem;
+    margin: 0;
+    padding-left: 10vw;
+    font-size: 0.14rem;
+    color: #fff;
+}
+/*大盒子，里面装了很多人*/
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: .2rem 5vw;
+    margin-bottom: .8rem;
+}
+/*玩家*/
+.container .wrap {
+    position: relative;
+    box-sizing: border-box;
+    width: 20vw;
+    height: 20vw;
+    margin: 5vw;
+    border: 0.35vw solid #fff;
+    cursor: pointer;
+}
+/*盒子中的内容*/
+.container .wrap .player__text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15.3vw;
+    margin: 0;
+    background-color: #f5c97b;
+}
+/*盒子中的内容*/
+.container .wrap .player__num {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4vw;
+    margin: 0;
+    background-color: #83b09a;
+    color: #fff;
+}
+/*盒子中的图片*/
+.container .wrap-knife::after {
+    position: absolute;
+    left: 50%;
+    bottom: -8vw;
+    transform: translateX(-50%);
+    content: "";
+    width: 5vw;
+    height: 5vw;
+    background: url("../img/stroke.png") no-repeat center/5vw 5vw;
+}
+/*点击玩家后的的颜色*/
+.container .wrap-unClickable .player__text {
+    /*background-color: #e8e8e8;*/
+    background-color: #83b09a;
+}
+/*底部*/
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: .8rem;
+    background-color: #29bde0;
+}
+/*底部按钮*/
+.footer .start__btn {
+    display: inline-block;
+    line-height: .5rem;
+    width: 80%;
+    padding: 0;
+    border: none;
+    outline: none;
+    font-size: 0.24rem;
+    color: #fff;
+    background-color: #fbb435;
+    cursor: pointer;
+}

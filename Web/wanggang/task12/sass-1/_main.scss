@@ -1,0 +1,66 @@
+@mixin sprites-position($width, $height, $xAndY) {
+    width: $width;
+    height: $height;
+    background-position: $xAndY;
+}
+@mixin margin-top-right($top,$right) {
+    margin-top: $top;
+    margin-right: $right;
+}
+
+main {
+    margin-top: 1.1rem;
+    margin-bottom: .6rem;
+    font-size: .13rem;
+    color: #999999;
+    ul {
+        li {
+            padding-bottom: .08rem;
+            border-bottom: 1px solid #e1e5e7;
+            div {
+                margin-left: .15rem;
+                .first-line {
+                    display: inline-block;
+                    @include margin-top-right(.12rem, .1rem);
+                    @include sprites-position(.12rem, .12rem, -92px -26px);
+                }
+            }
+            .second-line {
+                display: flex;
+                justify-content: space-between;
+                .time {
+                    margin-top: .08rem;
+                    margin-left: .21rem;
+                    font-size: .14rem;
+                    color: black;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .money {
+                    display: inline-flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 1.2rem;
+                    color: red;
+                    white-space: nowrap;
+                   
+                    @include margin-top-right(.1rem, .15rem);
+                    .information {
+                        display: inline-block;
+                        padding-left: 10%;
+                        @include sprites-position(.1rem, .165rem, 0 -88px);
+                    }
+                }
+            }
+            .third-line {
+                .local {
+                    display: inline-block;
+                    @include margin-top-right(.08rem, .1rem);
+                    margin-bottom: -0.018rem;
+                    @include sprites-position(.095rem, .115rem, -92px 0)
+                }
+            }
+        }
+    }
+}

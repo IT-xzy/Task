@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iceneet.dao.SignupDao">
+    <resultMap type="signup" id="SignupResult">
+        <result column="id" property="id"/>
+        <result column="name"  property="name"/>
+        <result column="qq"  property="qq"/>
+        <result column="learn_type" property="learnType"/>
+        <result column="time_to_learn" property="timeToLearn"/>
+        <result column="graduated_school"  property="graduatedSchool"/>
+        <result column="online_num" property="wish"/>
+        <result column="dariy_list"  property="dariyList"/>
+        <result column="helper_shixiong"  property="helperShixiong"/>
+        <result column="way_to_know"  property="wayToKnow"/>
+        <result column="create_at"  property="createAt"/>
+        <result column="update_at"  property="updateAt"/>
+    </resultMap>
+    <select id="selectSignup"  parameterType="String" resultMap="SignupResult">
+        SELECT * FROM signup WHERE name =#{name}
+    </select>
+    <insert id="insertSignup" parameterType="Signup">
+        insert into signup (name,qq) values (#{name},#{qq})
+    </insert>
+    <update id="updateSignup" parameterType="String">
+        UPDATE signup SET name=#{param1} WHERE name=#{param2}
+    </update>
+    <delete id="deleteSignup" parameterType="String">
+        DELETE FROM signup WHERE name = #{name}
+    </delete>
+</mapper>

@@ -1,0 +1,106 @@
+$nav-blue:#5fc0cd;
+$fff:#fff;
+$t28rem:0.28rem;
+$margin-top:.16rem;
+$nub-h:1rem;
+$gray: #eaedee;
+$logo-h:.5rem;
+@mixin text($t28rem, $fff) {
+    font-size: $t28rem;
+    color: $fff;
+}
+
+@mixin flex-betweem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin massge-style {
+    display: flex;
+    align-items: center;
+    height: $nub-h;
+    margin-top: $margin-top;
+    background: #fff;
+}
+
+html {
+    font-size: 312.5%
+}
+
+body {
+    font-size: 16px;
+    margin: 0;
+    background: #eff0f4;
+}
+
+header {
+    @include flex-betweem;
+    @include text($t28rem, $fff);
+    height: .88rem;
+    background: $nav-blue;
+    padding: {
+        left: .32rem;
+        right: .32rem;
+    }
+    .nav {
+        @include text( .38rem, $fff)
+    }
+}
+
+main {
+    .logo-stye {
+        @include massge-style;
+        height: $nub-h;
+    }
+    .logo {
+        width: 1.18rem;
+        border-right: 2px solid $gray;
+        @include flex-center;
+        img {
+            height: $logo-h;
+        }
+    }
+    input {
+        height: $logo-h;
+        margin-left: .2rem;
+        font-size: .32rem;
+        border: none;
+        outline: none;
+        ::-webkit-input-placeholder {
+            color: $gray;
+        }
+        :-moz-placeholder {
+            color: $gray;
+        }
+        ::-moz-placeholder {
+            color: $gray;
+        }
+        :-ms-input-placeholder {
+            color: $gray;
+        }
+    }
+}
+
+footer {
+    p {
+        height: 1rem;
+        margin-top: .69rem;
+        margin-bottom: $margin-top;
+        background: $nav-blue;
+        @include flex-center;
+        @include text(.38rem, #fff)
+    }
+    a{
+        float: right;
+        margin-right: .34rem;
+        list-style: none;
+        @include text(.32rem,$nav-blue )
+    }
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven />
+
+
+    <!--扫描controller层-->
+    <context:component-scan base-package="com.task6.controller"></context:component-scan>
+
+
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有URL中包含/user/的请求 -->
+            <mvc:mapping path="/u/*"/>
+
+            <bean class="com.task6.util.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+
+    <!-- tiles 标签  -->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Spring MVC不处理静态资源 -->
+
+    <!--<mvc:default-servlet-handler/>-->
+
+    <mvc:resources  location="/images/" mapping="/images/**"/>
+    <mvc:resources  location="/css/" mapping="/css/**"/>
+
+
+
+    <!-- 一个配置解决映射器和适配器的配置注解配置 -->
+    <mvc:annotation-driven enable-matrix-variables="true"></mvc:annotation-driven>
+
+
+
+    <!--对模型视图添加前后缀-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+    >
+        <property name="prefix" value="/WEB-INF/jsps/"/>
+        <property name="suffix" value=".jsp"/>
+
+        <!--p:prefix="WEB-INF/pages/" p:suffix=".jsp"-->
+
+    </bean>
+
+</beans>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--<bean id="serviceAuth" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://localhost:9191/serviceAuth"/>-->
+        <!--<property name="serviceInterface" value="com.service.userService"/>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; OSS 七牛云 &ndash;&gt;-->
+    <!--<bean id="serverQiNiuYunOSS" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://localhost:9191/ServerQiNiuYunOSS" />-->
+        <!--<property name="serviceInterface" value="com.service.qiniuyunService" />-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; OSS 阿里云 &ndash;&gt;-->
+    <!--<bean id="serverALiYunOSS" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://localhost:9191/ServerQiNiuYunOSS" />-->
+        <!--<property name="serviceInterface" value="com.service.aliyunService" />-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; Mail SendCloudMail &ndash;&gt;-->
+    <!--<bean id="serverMailSendCloud" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://localhost:9191/ServerMailSendCloud" />-->
+        <!--<property name="serviceInterface" value="com.service.sendMailService" />-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; SMS 容联短信 &ndash;&gt;-->
+    <!--<bean id="serverSMSRLian" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+        <!--<property name="serviceUrl" value="rmi://localhost:9191/ServerSMSRLian" />-->
+        <!--<property name="serviceInterface" value="com.service.messageService" />-->
+    <!--</bean>-->
+
+    <bean id="serviceAuth"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" >
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.service.userService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/serviceAuth</value>
+                <value>rmi://127.0.0.1:9091/serviceAuth</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <!-- OSS 阿里云 -->
+    <bean id="serverALiYunOSS"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" >
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.service.aliyunService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerALiYunOSS</value>
+                <value>rmi://127.0.0.1:9091/ServerALiYunOSS</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <!-- OSS 七牛云 -->
+    <bean id="serverQiNiuYunOSS"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" >
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.service.qiniuyunService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerQiNiuYunOSS</value>
+                <value>rmi://127.0.0.1:9091/ServerQiNiuYunOSS</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+    <!-- SMS 容联短信 -->
+    <bean id="serverSMSRLian"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.service.messageService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerSMSRLian</value>
+                <value>rmi://127.0.0.1:9091/ServerSMSRLian</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+
+    <!-- Mail SendCloudMail -->
+    <bean id="serverMailSendCloud"
+          class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean">
+        <!-- 远程服务对象接口类 -->
+        <property name="serviceInterface" value="com.service.sendMailService"/>
+        <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+        <property name="serviceURLs">
+            <list>
+                <value>rmi://127.0.0.1:9090/ServerMailSendCloud</value>
+                <value>rmi://127.0.0.1:9091/ServerMailSendCloud</value>
+            </list>
+        </property>
+        <!-- 调用时选择那个url的策略 -->
+        <property name="endpointSelectionPolicy">
+            <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+        </property>
+    </bean>
+</beans>

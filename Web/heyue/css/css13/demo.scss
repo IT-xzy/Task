@@ -1,0 +1,85 @@
+/*if*/
+
+p {
+    @if 1+1==2 {
+        border: 1px solid;
+    }
+    @if 5 < 3 {
+        border: 2px dotted;
+    }
+    @if null {
+        border: 3px double;
+    }
+}
+
+$type: monster;
+p {
+    @if $type==ocean {
+        color: blue;
+    }
+    @else if $type==matador {
+        color: red;
+    }
+    @else if $type==monster {
+        color: green;
+    }
+    @else {
+        color: black;
+    }
+}
+
+/*for*/
+
+/*through*/
+
+@for $i from 1 through 3 {
+    .item-#{$i} {
+        width: 2em * $i;
+    }
+}
+
+/*to*/
+
+@for $i from 1 to 3 {
+    .item-#{$i} {
+        width: 2em * $i;
+    }
+}
+
+/*each*/
+
+@each $animal in puma,
+sea-slug,
+egret,
+salamander {
+    .#{$animal}-icon {
+        background-image: url('/images/#{$animal}.png');
+    }
+}
+
+
+/*多重赋值*/
+@each $animal, $color, $cursor in (puma, black, default),
+                                  (sea-slug, blue, pointer),
+                                  (egret, white, move) {
+  .#{$animal}-icon {
+    background-image: url('/images/#{$animal}.png');
+    border: 2px solid $color;
+    cursor: $cursor;
+  }
+}
+
+
+$grid: ( xm:0px, sm :768px, md:992px, lg:1200px);
+@each $e,
+$px in $grid {
+    @media screen and (min-width: $px) {
+        @for $i from 1 through 12 {
+            .col-#{$e}-#{$i} {
+                flex: 0 0 100%/12*$i;
+                padding: 0 15px;
+                position: relative;
+            }
+        }
+    }
+}

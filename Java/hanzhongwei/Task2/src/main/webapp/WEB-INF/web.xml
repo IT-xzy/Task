@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!-- spring的配置文件-->
+  <!--通过ContextLoaderListener在web app启动的时候，
+    获取contextConfigLocation配置文件的文件名applicationContext.xml，并进行Spring相关初始化工作-->
+  <context-param><!--全局范围内环境参数初始化-->
+    <param-name>contextConfigLocation</param-name>                  <!--参数名称-->
+    <param-value>classpath:applicationContext.xml</param-value>     <!--参数取值-->
+  </context-param>
+
+  <!--以下配置的加载顺序:先 ServletContext >> context-param >> listener >> filter >> servlet >>  spring-->
+
+  <!--=======================过滤器配置==========================-->
+  <!--编码过滤器-->
+  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>    <!--指定filter的名字-->
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>   <!--定义filter的类的名称-->
+    <init-param>    <!--用来定义参数,若在Servlet可以使用下列方法来获得:String param_name=getServletContext().getInitParamter("param-name里面的值");-->
+      <param-name>encoding</param-name>   <!--参数名称-->
+      <param-value>utf-8</param-value>    <!--参数值-->
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>    <!--用来定义filter所对应的URL-->
+    <filter-name>CharacterEncodingFilter</filter-name>    <!--指定对应filter的名字-->
+    <url-pattern>/*</url-pattern>   <!--指定filter所对应的URL-->
+  </filter-mapping>
+
+  <!--SpringMVC 只能处理post和get,为了还原对put和delete的处理，web.xml里面要加如下过滤器-->
+  <!-- 浏览器不支持put,delete等method,由该filter将/xxx?_method=delete转换为标准的http delete方法 -->
+  <filter>  <!-- 用来声明filter的相关设定,过滤器可以截取和修改一个Servlet或JSP页面的请求或从一个Servlet或JSP页面发出的响应-->
+    <filter-name>HiddenHttpMethodFilter</filter-name>   <!--指定filter的名字-->
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>  <!--定义filter的类的名称-->
+  </filter>
+  <filter-mapping>    <!--用来定义filter所对应的URL-->
+    <filter-name>HiddenHttpMethodFilter</filter-name>   <!--指定对应filter的名字-->
+    <url-pattern>/*</url-pattern>   <!--指定filter所对应的URL-->
+  </filter-mapping>
+
+
+  <!--========-监听器配置=================-->
+  <!--例:spring监听器-->
+  <listener>        <!--用来设定Listener接口-->
+    <listener-class>org.springframework.web.context.ContextLoaderListener  </listener-class><!--定义Listener的类名称-->
+  </listener>
+  <!-- 防止Spring内存溢出监听器  -->
+  <listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  </listener>
+
+  <!--===========-servlet配置=========================-->
+  <!-- spring mvc核心：分发servlet -->
+  <!--有任何访问，都被DispatcherServlet所拦截，这就是Spring MVC那套工作机制了。 -->
+  <servlet>   <!--用来声明一个servlet的数据 -->
+    <servlet-name>mvc-dispatcher</servlet-name>   <!--指定servlet的名称-->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>  <!--指定servlet的类名称,这里配置了前端控制器-->
+    <!-- spring mvc的配置文件 -->
+    <init-param>    <!--用来定义参数,可有多个init-param。在servlet类中通过getInitParamenter(String name)方法访问初始化参数-->
+      <param-name>contextConfigLocation</param-name>    <!--参数名称-->
+      <param-value>classpath:springMVC.xml</param-value>    <!--参数值-->
+    </init-param>
+    <load-on-startup>1</load-on-startup>  <!--当值为正数或零时：Servlet容器先加载数值小的servlet，再依次加载其他数值大的servlet.-->
+  </servlet>
+  <servlet-mapping> <!--用来定义servlet所对应的URL-->
+    <servlet-name>mvc-dispatcher</servlet-name> <!--指定servlet的名称,跟上边对应-->
+    <url-pattern>/</url-pattern>    <!--指定servlet所对应的URL-->
+  </servlet-mapping>
+  <!-- 1. /*  拦截所有   jsp  js png .css  真的全拦截
+     2. *.action *.do 拦截以do action 结尾的请求
+     3. /  拦截所有 （不包括jsp) (包含.js .png.css)  /对静态资源放行
+     -->
+
+</web-app>

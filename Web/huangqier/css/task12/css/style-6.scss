@@ -1,0 +1,235 @@
+@charset "UTF-8";
+$light-blue: #5fc0cd;
+
+@mixin middle {
+  display: flex;
+  align-items: center;
+}
+
+html,
+body {
+  font-size: 62.5%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*头部开始*/
+header {
+  position: fixed;
+  top: 0;
+  height: 44px;
+  width: 100%;
+  background: $light-blue;
+  @include middle;
+  justify-content: center;
+  .nav {
+    display: flex;
+    @mixin focused {
+      color: #5fc0cd;
+      background-color: #FFFFFF;
+    }
+    @mixin unfocused {
+      color: #FFFFFF;
+      background-color: #55a8b3;
+    }
+    a {
+      position: relative;
+      display: block;
+      @include middle;
+      justify-content: center;
+      width: 72px;
+      height: 35px;
+      border-radius: 4px;
+      font-size: 1.7rem;
+      text-decoration: none;
+      @include unfocused;
+      &:hover {
+        @include focused;
+        z-index: 1;
+      }
+    }
+    .active {
+      @include focused;
+    }
+    .btn-left {
+      &:hover ~ .active {
+        @include unfocused;
+      }
+    }
+    .btn-right {
+      margin-left: -4px;
+    }
+  }
+  .icon {
+    position: absolute;
+    right: 4vw;
+    width: 20px;
+    height: 23px;
+    background: url("../images/css-sprite.png");
+    background-position: -1px -1px;
+  }
+}
+
+/*头部结束*/
+/*下拉框开始*/
+.head-of-form {
+  display: flex;
+  position: fixed;
+  top: 44px;
+  z-index: 999999;
+  width: 100%;
+  font-size: 1.4rem;
+  color: #999999;
+  height: 40px;
+  background-color: #FFFFFF;
+  white-space: nowrap;
+  & > div {
+    position: relative;
+    width: 33.333%;
+    .icon {
+      position: absolute;
+      right: 2vw;
+      width: 7px;
+      height: 4px;
+      background: url("../images/css-sprite.png") 0 -50px;
+    }
+    & > div {
+      @include middle;
+      justify-content: center;
+      height: 40px;
+      border-bottom: 1px solid #eff1f2;
+      border-right: 1px solid #eff1f2;
+    }
+    .drop-down-content {
+      position: relative;
+      background: #fff;
+      z-index: 999999;
+      display: none;
+    }
+    &:hover {
+      .drop-down-content {
+        display: block;
+        @include middle;
+        justify-content: center;
+        border: 1px solid #eff1f2;
+        border-top: 0;
+      }
+    }
+  }
+
+}
+
+/*下拉框结束*/
+/*表单主体开始*/
+.body-of-form {
+  width: 100%;
+  margin-top: 84px;
+  margin-bottom: 55px;
+  .row {
+    border-bottom: 1px solid #eff1f2;
+    font-size: 1.4rem;
+    color: #999999;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    & > div {
+      height: 38px;
+      display: flex;
+      align-items: center;
+    }
+    .top {
+      .icon {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: url("../images/css-sprite.png") -51px -1px;
+        margin-left: 15px;
+        margin-right: 8px;
+      }
+    }
+    .middle {
+      margin: -12px 0;
+      color: #333333;
+      display: flex;
+      justify-content: space-between;
+      & > span {
+        margin-left: 35px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      > div {
+        color: #e63b0e;
+        font-size: 1.5rem;
+        display: flex;
+        .text-right {
+          white-space: nowrap;
+        }
+        .icon-right {
+          margin-right: 4vw;
+          margin-left: 10px;
+          margin-top: 2px;
+          width: 11px;
+          height: 16.5px;
+          background: url(../images/css-sprite.png) -151px -1px;
+        }
+      }
+    }
+    .bottom {
+      .icon {
+        display: inline-block;
+        width: 9.5px;
+        height: 11.5px;
+        background: url("../images/css-sprite.png") -101px -1px;
+        margin-left: 15px;
+        margin-right: 8.5px;
+      }
+    }
+  }
+
+}
+
+/*表单主体结束*/
+/*底部开始*/
+footer {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; /*垂直居中*/
+  width: 100%;
+  height: 50px;
+  background-color: #f8fafb;
+  border-top: 1px solid #e2eaec;
+  a {
+    text-decoration: none;
+  }
+  .left {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 24px;
+    height: 38px;
+    color: #85ced8;
+    background: url(../images/css-sprite.png);
+    background-position: -300.5px -1px;
+  }
+  .center {
+    width: 48px;
+    height: 48px;
+    background: url("../images/css-sprite.png");
+    background-position: -201px -1px;
+  }
+  .right {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 24px;
+    height: 38px;
+    color: #a6a6a6;
+    background: url(../images/css-sprite.png);
+    background-position: -249.5px -1px;
+  }
+}
+
+/*底部结束*/

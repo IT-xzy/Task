@@ -1,0 +1,27 @@
+<div>
+    <div class="panel panel-primary">
+        <div class="panel-heading header">
+            <p class="header-link" ng-click="go('u')">萝卜多后台管理系统{{WW}}</p>
+            <div>
+                <a ui-sref='ww' class="header-a">猎头</a>
+                <a href="#" class="header-a">user</a>
+                <a  class="header-a" ui-sref='login'><img src="../img//电源.svg" alt=""></a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="left-views">
+              <div ng-repeat="item in reader" >
+                <a ng-click="toget($index)" class="alink">
+                    <i class="logo"></i>
+                    <p class="title">{{item.headlink}}</p>
+                    <i ng-class="{true:'arrows',false:'otherarrows'}[item.show]"></i>
+                </a>
+                <p  ng-repeat=" menu in item.menu" ng-class="{true:'otherlist',false:'list'}[item.show]" ng-click="go(menu.link)">{{menu.title}} </p>
+              </div>
+            </div>
+            <div ui-view="mian" class="mianbody">
+                <h4>Welcome!</h4>
+            </div>
+        </div>
+    </div>    
+</div>

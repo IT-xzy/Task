@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.dao.StudentDAO">
+    
+    <select id="findAll" resultType="Student">
+        select stuName,stuProfession,stuIntro,isWork,isCollege from tb_student
+    </select>
+
+    <select id="findAlls" resultType="Profession">
+        SELECT proName,proIntro,proFirm,proThreshold,proSalary,proCycle,diffLevel,proCount  FROM tb_profession
+    </select>
+
+    <select id="stuCount" resultType="Integer">
+        select count(*) from tb_student
+    </select>
+
+    <select id="workCount" resultType="Integer">
+        select count(isWork) from tb_student WHERE isWork = 1
+    </select>
+
+</mapper>

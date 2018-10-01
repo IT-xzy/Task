@@ -1,0 +1,85 @@
+@charset "utf-8";
+html{
+  font-size: 625%;
+  -ms-overflow-style: scrollbar;
+}
+body{
+  padding: .5rem .2rem 0 .2rem;
+  background-color: #f0f0f0;
+  font-size: .25rem;
+}
+header{
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: .5rem;
+  padding: 0 .2rem;
+  background-color: #29bde0;
+   a:nth-of-type(1){//头部左边按钮
+    width: .25rem;
+    height: .25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: .01rem 0;
+    span{
+      display: block;
+      width: 100%;
+      height: .02rem;
+      background-color: white;
+    }
+    &:hover{
+      width: .3rem;
+      height: .3rem;
+      span{
+        height: .03rem;
+      }
+    }
+  }
+  .hdr-mid{//头部中间定位
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  a:nth-of-type(2){//头部右边按钮
+    position: absolute;
+    right: .2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: .3rem;
+    height: .3rem;
+    span:nth-of-type(1){
+      display: block;
+      width: 2px;
+      height: .3rem;
+      background-color: white;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-1px) rotate(45deg);
+    }
+    span:nth-of-type(2){
+      display: block;
+      width: 2px;
+      height: .3rem;
+      background-color: white;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-1px) rotate(-45deg);
+    }
+  }
+}
+
+
+footer{
+  position: fixed;bottom: 0;
+  left: 0;right: 0;
+}
+
+
+@import "media";

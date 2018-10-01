@@ -1,0 +1,109 @@
+header {
+  border-bottom: 1px solid #74d4eb;
+  color: #fff;
+  background-color: #29bde0;
+}
+
+.left>a,
+.right>a {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+  vertical-align: top;
+  margin-left: 25px;
+}
+
+/* 空心箭头 */
+
+.left>a::before,
+.left>a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.left>a::before {
+  border-right: 10px solid #fff;
+}
+
+.left>a::after {
+  left: 2px;
+  border-right: 10px solid #29bde0;
+}
+
+/* 叉号 */
+
+.right>a::before,
+.right>a::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 30px;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.right>a::before {
+  transform: rotate(135deg);
+}
+
+.right>a::after {
+  transform: rotate(45deg);
+}
+
+main {
+  padding-bottom: 70px;
+  margin: 60px 0;
+  background-color: #29bde0;
+}
+
+.box {
+  position: relative;
+  width: 60%;
+  padding: 40% 0;
+  margin: 15% auto;
+  border: 5px solid #fff;
+  text-align: center;
+  background: #ffedc5 url(../img/IDcheck.png) no-repeat center 50%;
+  background-size: 60%;
+}
+
+.box span {
+  position: absolute;
+  top: -1.3rem;
+  left: calc(50% - 1rem);
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #ffedc5;
+  border-radius: 50%;
+  color: #f56b81;
+  background-color: white;
+  font-size: 1.2em;
+  text-align: center;
+  line-height: 2rem;
+}
+
+.box p {
+  height: 1.5rem;
+  color: #29bde0;
+  font-size: 1.2em;
+}
+footer {
+  background-color: #29bde0;
+}
+
+footer a {
+  display: block;
+  padding: 15px;
+  margin: 20px 40px;
+  color: #fff;
+  background-color: #fbb435;
+  text-align: center;
+}

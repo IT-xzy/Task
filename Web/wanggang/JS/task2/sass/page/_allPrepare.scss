@@ -1,0 +1,57 @@
+@mixin bgposition($xAndY) {
+    height: 4vw;
+    width: 4vw;
+    background: url(../images/task21.png) no-repeat;
+    background-size: auto 100%;
+    background-position: $xAndY;
+}
+
+@mixin fscolor($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+body {
+    background: #29bde0;
+}
+main {
+    padding-top: .45rem;
+    padding-bottom: .85rem;
+    overflow: auto;
+}
+
+.players {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: .3rem; 
+    .player {
+        display: flex;
+        justify-content: center;
+        width: 33.3%;
+        margin-bottom: .3rem;
+        .photo {
+            display: inline-block;
+            border: 1vw solid white;
+            .name {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 24vw;
+                height: 20vw;
+                font-size: .15rem;
+                background: #f5c97b;
+            }
+            .number {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 24vw;
+                height: 4vw;
+                @include fscolor(.11rem, white);
+                background: #83b09a;
+            }
+        }
+    }
+}
+footer {
+    background: #29bde0 !important;
+}

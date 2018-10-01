@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--xmlns="http://docs.oasis-open.org/opencsa/sca-assembly/sca-implementation-java-1.1-csd03.xsd"-->
+<composite
+        xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+        xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+        targetNamespace="http://com.opt"
+        name="ServiceComponent" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912">
+
+  <component name="StudentImplComponent">
+    <implementation.java class="com.opt.service.impl.StudentServiceImpl"/>
+  </component>
+
+  <component name = "StudentServiceComponent" >
+    <implementation.spring location="../applicationcontext.xml" />
+    <!--这里的name属性和Spring配置文件中的<sca:service>name属性保持一致-->
+    <service name="studentServer">
+      <interface.java interface="com.opt.service.StudentService" />
+      <!--<tuscany:binding.rmi uri="rmi://119.29.17.188:1099/studentServer" />-->
+      <!--<tuscany:binding.rmi uri="rmi://47.98.50.21:1098/studentServer" />-->
+      <tuscany:binding.rmi uri="rmi://127.0.0.1:1098/studentServer" />
+    </service>
+  </component>
+
+  <component name = "UserServiceComponent" >
+    <implementation.spring location="../applicationcontext.xml" />
+    <service name="userServer">
+      <interface.java interface="com.opt.service.UserService" />
+      <!--<tuscany:binding.rmi uri="rmi://119.29.17.188:1099/userServer" />-->
+      <!--<tuscany:binding.rmi uri="rmi://47.98.50.21:1098/userServer" />-->
+      <tuscany:binding.rmi uri="rmi://127.0.0.1:1098/userServer" />
+    </service>
+  </component>
+
+  <component name = "ProfessionComponent" >
+    <implementation.spring location="../applicationcontext.xml" />
+    <service name="professionServer">
+      <interface.java interface="com.opt.service.ProfessionService" />
+      <!--<tuscany:binding.rmi uri="rmi://119.29.17.188:1099/professionServer" />-->
+      <!--<tuscany:binding.rmi uri="rmi://47.98.50.21:1098/professionServer" />-->
+      <tuscany:binding.rmi uri="rmi://127.0.0.1:1098/professionServer" />
+    </service>
+  </component>
+
+
+</composite>
+

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	   http://www.springframework.org/schema/aop
+	   http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	   http://www.springframework.org/schema/util
+	   http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+    <!--开启注解-->
+    <context:annotation-config/>
+    <!--开启扫描，注意这里指定包的扫描就不用annotation扫描了-->
+    <context:component-scan base-package="dao"/>
+    <context:component-scan base-package="service"/>
+
+    <!--连接池-->
+    <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true"/>
+    <!--OSS配置-->
+    <context:property-placeholder location="classpath:OSS.properties" ignore-unresolvable="true"/>
+    <!--短信API配置-->
+    <context:property-placeholder  file-encoding="gbk" location="classpath:ali_message.properties" ignore-unresolvable="true"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${dbcp.driver}"/>
+        <property name="url" value="${dbcp.url}"/>
+        <property name="username" value="${dbcp.username}"/>
+        <property name="password" value="${dbcp.password}"/>
+    </bean>
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--<property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml"/>-->
+        <property name="mapperLocations" value="classpath:mapper/*"/>
+        <property name="typeAliasesPackage" value="pojo"/>
+    </bean>
+    <!--扫描mapper接口，不用配置SqlSessionFactory,自动实现接口的方法-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="dao"/>
+    </bean>
+    <!--上传文件-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="104857600"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!--发送短信-->
+    <bean id="aLiMassageUtil" class="util.ALiMassageUtil">
+        <property name="accessKeyId" value="${message.accessKeyId}"/>
+        <property name="accessKeySecret" value="${message.accessKeySecret}"/>
+        <property name="singName" value="${message.singName}"/>
+        <property name="templateCode" value="${message.templateCode}"/>
+    </bean>
+
+    <!--发送邮箱-->
+    <bean id="sendCloundMailUtil" class="util.SendCloundMailUtil"/>
+
+    <!--配置阿里迁移图片程序-->
+    <bean id="aLiOssToQiNiuOssUtil" class="util.ALiOssToQiNiuOssUtil">
+        <property name="qiNiuBucket" value="${qiNiuBucket}"/>
+        <property name="qiNiuAccessKeyId" value="${qiNiuAccessKeyId}"/>
+        <property name="qiNiuAccessKeySecret" value="${qiNiuAccessKeySecret}"/>
+        <property name="aLiAccessKeyId" value="${aLiAccessKeyId}"/>
+        <property name="aLiAccessKeySecret" value="${aLiAccessKeySecret}"/>
+        <property name="aLiBucket" value="${bucket}"/>
+        <property name="aLiEndpoint" value="${endpoint}"/>
+    </bean>
+    <!--配置七牛迁移图片程序-->
+    <bean id="qiNiuOssToALiOssUtil" class="util.QiNiuOssToALiOssUtil">
+        <property name="qiNiuBucket" value="${qiNiuBucket}"/>
+        <property name="qiNiuAccessKeyId" value="${qiNiuAccessKeyId}"/>
+        <property name="qiNiuAccessKeySecret" value="${qiNiuAccessKeySecret}"/>
+        <property name="qiuNiuDomain" value="${domain}"/>
+        <property name="aLiAccessKeyId" value="${aLiAccessKeyId}"/>
+        <property name="aLiAccessKeySecret" value="${aLiAccessKeySecret}"/>
+        <property name="aLiBucket" value="${bucket}"/>
+        <property name="aLiEndpoint" value="${endpoint}"/>
+    </bean>
+
+    <!--配置七牛OSS-->
+    <bean id="operationQiNiuOSS" class="strategy.OperationQiNiuOSS">
+        <property name="accessKey" value="${qiNiuAccessKeyId}"/>
+        <property name="accessKeySecret" value="${qiNiuAccessKeySecret}"/>
+        <property name="domain" value="${domain}"/>
+        <property name="bucket" value="${qiNiuBucket}"/>
+    </bean>
+    <!--配置阿里OSS-->
+    <bean id="operrationAliOSS" class="strategy.OperrationAliOSS">
+        <property name="accessKeyId" value="${aLiAccessKeyId}"/>
+        <property name="accessKeySecret" value="${aLiAccessKeySecret}"/>
+        <property name="bucket" value="${bucket}"/>
+        <property name="endpoint" value="${endpoint}"/>
+    </bean>
+
+    <!--策略模式选择要将图片上传到哪个OSS-->
+    <bean id="context" class="strategy.Context">
+        <constructor-arg ref="operationQiNiuOSS"/>
+    </bean>
+</beans>

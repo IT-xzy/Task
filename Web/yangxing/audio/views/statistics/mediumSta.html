@@ -1,0 +1,108 @@
+<div class="row pd-top-2">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form" id="blur">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-4">开始时间：</label>
+                        <label class="col-md-8">
+                            <input type="text" class="form-control"
+                                                       ng-model="vm.params.startTime"
+                                                       data-date-format="yyyy-MM-dd"
+                                                       data-date-type="number"
+                                                       data-max-date="today"
+                                                       autoclose="true"
+                                                       bs-datepicker>
+                            <span class="glyphicon glyphicon-calendar user-icon"></span>
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-4">结束时间：</label>
+                        <label class="col-md-8">
+                            <input type="text" class="form-control"
+                                                       ng-model="vm.params.endTime"
+                                                       data-date-format="yyyy-MM-dd"
+                                                       data-date-type="number"
+                                                       data-max-date="today"
+                                                       data-min-date="{{vm.params.startTime}}"
+                                                       autoclose="true"
+                                                       bs-datepicker>
+                            <span class="glyphicon glyphicon-calendar user-icon"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <label class="control-label col-md-4">媒介名称：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.mediumName">
+                                <option value="">全部</option>
+                                <option ng-repeat="x in vm.mediumList" ng-value="x.mediumName">{{x.mediumName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label col-md-4">链接id：</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-model="vm.params.linkId">
+                                <option value="">全部</option>
+                                <option ng-repeat="x in vm.mediumList" ng-value="x.linkId">{{x.linkId}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.clear()">重置</button>
+            </div>
+            <div class="col-md-1 pull-right">
+                <button class="btn btn-primary btn-md form-group" ng-click="vm.search()">搜索</button>
+            </div>
+        </div>
+    </div>
+    <!--数据列表-->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    当前搜索条件下总用户 <a class="underline" ng-click="vm.goUser(vm.data.newIds.concat(vm.data.oldIds),'ids')">{{vm.data.newTotal + vm.data.oldTotal}}</a> 人，
+                    新用户总计 <a class="underline" ng-click="vm.goUser(vm.data.newIds,'ids')">{{vm.data.newTotal}}</a> 人，
+                    老用户总计 <a class="underline" ng-click="vm.goUser(vm.data.oldIds,'ids')">{{vm.data.oldTotal}}</a> 人
+                </div>
+                <div class="list-replace" ng-if="vm.list.length === 0">
+                    <div class="list-replace-text">暂无任何数据</div>
+                </div>
+                <div class="panel-body panel-body-noMax" ng-if="vm.list.length !== 0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>日期</th>
+                                <th>媒介名称</th>
+                                <th>链接id</th>
+                                <th>总用户</th>
+                                <th>新用户</th>
+                                <th>老用户</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="li in vm.list" class="text-center break-all">
+                                <td>{{$index + 1}}</td>
+                                <td>{{li.createAt | date:'yyyy-MM-dd'}}</td>
+                                <td>{{li.mediumName}}</td>
+                                <td>{{li.linkId}}</td>
+                                <td><a class="underline" ng-click="vm.goUser(li,'all')">{{li.newCount + li.oldCount}}</a></td>
+                                <td><a class="underline" ng-click="vm.goUser(li.newIds, 'ids')">{{li.newCount}}</a></td>
+                                <td><a class="underline" ng-click="vm.goUser(li.oldIds, 'ids')">{{li.oldCount}}</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--分页-->
+                    <page ng-if="vm.totalPage" total-page="{{vm.totalPage}}"></page>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

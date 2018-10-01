@@ -1,0 +1,160 @@
+@charset "utf-8";
+$bgcolor:#5fc0cd;
+@mixin translateY {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+body {
+    margin: 0;
+    background: $bgcolor;
+}
+// header设置相关变量
+$header-height:.88rem;
+$header-bgcolor:#5fc0cd;
+$text-color-white:#fff;
+
+// 两端的距离
+$justify-size:.24rem;
+$center-font-size:.34rem;
+header {
+    display: flex;
+    position: fixed;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: $header-height;
+    border-bottom: .01rem solid #b9e9f5;
+    font-size: $center-font-size;
+    color: $text-color-white;
+    background: $header-bgcolor;
+    z-index: 1;
+    img {
+        &:first-child {
+            width: .39rem;
+            height: .4  rem;
+            margin-left: $justify-size;
+        }
+        &:last-child {
+            width: .36rem;
+            height: .36rem;
+            margin-right: $justify-size;
+        }
+    }
+}
+//main开始
+main{
+    padding-top:.88rem;
+    padding-bottom: 1.9rem;
+    .audio-container {
+        position: relative;
+        padding-left: .47rem;
+        line-height: .82rem;
+        font-size: .26rem;
+        background: #b9e9f5;
+        i{
+            position: absolute;
+            right: .18rem;
+            @include translateY();
+            width: .52rem;
+            height: .52rem;
+            background: url(../img/video.png) center/cover;
+        }
+        .bottom-arrow {
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: .7rem;
+            margin-top:.82rem;
+            border-top: .14rem solid #b9e9f5;
+            border-left: .08rem solid transparent;
+            border-right: .08rem solid transparent;
+        }
+    }
+    .vote-body {
+        font-size: 0;
+        .v-title{
+                display: inline-block;
+                margin:.28rem 0 .44rem .72rem;
+                color:$text-color-white;
+                font-size: .24rem;
+        }
+    }
+    .gamer-vote {
+        font-size: 0;
+        .vote-container {
+            display: inline-block;
+            width: 33.3%;
+            font-size: .3rem;
+            text-align: center;
+        }
+        .gamer{
+            position: relative;
+            display: inline-flex;
+            flex-direction: column;
+            width: 20.5vw;
+            height: 20.5vw;
+            margin-bottom:40%;
+            border:.05rem solid $text-color-white;
+            
+        }
+        .gamer-id {
+            flex-basis: 75%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5c97b;
+        }
+        .gamer-num {
+            flex-basis: 25%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .22rem;
+            background: #83b09a;
+            color: #fff;
+        }
+        .gamer-select {
+            display: none;
+            position: absolute;
+            bottom:-60%;
+            left:-5%;
+            width: 110%;
+            height: 55%;
+        }
+        //四个小图标响应式开始
+        i {
+            position: absolute;
+            top:50%;
+            left:50%;
+            width: 30%;
+            height: 23%;
+            padding-bottom: 20%;
+            background-image: url(../img/sprite.png) ;
+            background-size: 100%;
+            transform: translate(-50%,-50%);
+        }
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 1.9rem;
+    background: #29bde0;
+    button{
+        width: 76.4%;
+        height: .88rem;
+        padding: 0;
+        outline: none;
+        border: none;
+        color: #fff;
+        font-size: .4rem;
+        background: #fbb435;
+        cursor: pointer;
+    }
+}

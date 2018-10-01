@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--扫描controller-->
+    <context:component-scan base-package="com.jnshu.controller"/>
+    <!-- 自动配置 处理器映射器 处理器适配器 -->
+    <!-- conversionService 自定义Spring参数绑定 -->
+    <!-- validator 效验器-->
+    <!--<mvc:annotation-driven
+                           validator="validator"/>-->
+    <mvc:annotation-driven conversion-service="conversionServiceCustom"
+                           validator="validator"/>
+
+    <!-- 校验器 -->
+    <bean id="validator"
+          class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <!-- 校验器-->
+        <property name="providerClass"
+                  value="org.hibernate.validator.HibernateValidator"/>
+        <!-- 指定校验使用的资源文件，在文件中配置校验的错误信息，如果不指定则默认使用classpath下的ValidationMessages.properties -->
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+    <!-- 校验错误信息配置文件 -->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- 资源文件名-->
+        <property name="basenames">
+            <list>
+                <!-- idea 提示错误, resources必须加classpath -->
+                <value>WEB-INF/config/other/CustomValidationMessages</value>
+            </list>
+        </property>
+        <!-- 资源文件编码格式 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 使用 fileEncodings 还是乱码 注意换为defaultEncoding-->
+        <!--<property name="fileEncodings" value="UTF-8" />-->
+        <!-- 对资源文件内容缓存时间，单位秒 -->
+        <property name="cacheSeconds" value="120"/>
+    </bean>
+    <!-- 效验器end-->
+
+    <!--自定义Spring参数绑定-->
+    <bean id="conversionServiceCustom"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <!-- 转换器 -->
+        <property name="converters">
+            <!--日期类型转换-->
+            <bean class="com.jnshu.tools.SpringAutoBind"/>
+        </property>
+        <!-- 转换器end-->
+    </bean>
+    <!-- 自定义视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--定义前缀-->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!--定义后缀-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 静态资源 -->
+    <!-- 当做了spring自定义类型转换时他会将所有的请求都尝试转换,转换该静态资源时无法完成转换会抛出一个debug异常,不影响静态资源的访问. 原因是静态资源隐式注入了一个bean id conversionService, 与Spring自定义转换冲突. 更改自定义转换的bean id更改一下即可 -->
+    <mvc:resources location="/WEB-INF/static/" mapping="/static/**"/>
+    <!-- 静态资源end-->
+    <!-- 使用默认servlet来处理未注入的handler url-->
+    <!--<mvc:default-servlet-handler />-->
+
+    <!-- 全局异常处理器 -->
+    <!-- 只要你实现了HandlerExceptionResolver接口，这个类就是一个全局异常处理器 -->
+    <bean class="com.jnshu.exception.UserExceptionResolver"/>
+
+   <!-- &lt;!&ndash; 拦截器 &ndash;&gt;
+    <mvc:interceptors>
+        &lt;!&ndash; 多个拦截器，顺序执行 &ndash;&gt;
+        &lt;!&ndash; 登录认证拦截器 &ndash;&gt;
+        <mvc:interceptor>
+            &lt;!&ndash;/** 表示所有url包括子url路径 &ndash;&gt;
+            <mvc:mapping path="/s/**"/>
+            &lt;!&ndash; Cookie 退出 使用Session加Cookie验证&ndash;&gt;
+            <bean class="com.jnshu.interceptor.LoginSessionInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <!-- 登录认证拦截器 -->
+        <mvc:interceptor>
+            <!--/** 表示所有url包括子url路径 -->
+            <mvc:mapping path="/u/**"/>
+            <!--<bean class="com.jnshu.interceptor.LoginCookieInterceptor"/>-->
+            <bean class="com.jnshu.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!-- 拦截器 测试 -->
+    <!--<mvc:interceptors>
+        &lt;!&ndash; 多个拦截器，顺序执行 &ndash;&gt;
+        <mvc:interceptor>
+            &lt;!&ndash; /**表示所有url包括子url路径 &ndash;&gt;
+            <mvc:mapping path="/**"/>
+            <bean class="com.jnshu.interceptor.HandlerInterceptor1"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.jnshu.interceptor.HandlerInterceptor2"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+
+    <!-- 添加Controller切面 -->
+    <aop:aspectj-autoproxy />
+    <bean name="timerAspectController" class="com.jnshu.aop.TimerAspectController"/>
+</beans>

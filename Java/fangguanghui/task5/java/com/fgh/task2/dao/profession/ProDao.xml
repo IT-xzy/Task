@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fgh.task2.dao.profession.ProDao">
+
+
+    <select id="getListPro" resultType="pro">
+        select t_task4_pro.*,COUNT(*) AS proCount from t_task4_student
+        INNER JOIN  t_task4_pro
+        on t_task4_pro.id = t_task4_student.f_profession_id
+        group BY t_task4_pro.id
+</select>
+
+</mapper>

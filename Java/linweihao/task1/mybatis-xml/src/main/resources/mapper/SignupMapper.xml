@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iceneet.dao.mapper.SignupDao">
+
+    <select id="selectSignup"  parameterType="String" resultType="Signup">
+        SELECT * FROM signup WHERE name =#{name}
+    </select>
+
+    <insert id="insertSignup" parameterType="Signup">
+        insert into signup (name,qq) values (#{name},#{qq})
+    </insert>
+
+    <update id="updateSignup" >
+        UPDATE signup SET name=#{name,jdbcType=VARCHAR} WHERE name=#{name1,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="deleteSignup" parameterType="String">
+        DELETE FROM signup WHERE name = #{name}
+    </delete>
+</mapper>

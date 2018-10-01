@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组迭代方法</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="every">
+    <p>every()方法</p>
+    <p>对数组中的每一项运行给定函数</p>
+    <p>都为true才为true</p>
+    <p class="append">他返回的是布尔值</p>
+</div>
+<div class="some">
+    <p>some()方法</p>
+    <p>对数组中的每一项运行给定函数</p>
+    <p>有一个true就为true</p>
+    <p class="append">他返回的是布尔值</p>
+</div>
+<div class="foreach">
+    <p>foreach ()方法</p>
+    <p>对数组中的每一项运行给定函数</p>
+    <p>没有返回值</p>
+    <p class="appendf"></p>
+    <p> forEach() 对于空数组是不会执行回调函数的。</p>
+</div>
+<div class="filter">
+    <p>filter()方法</p>
+    <p>对数组中的每一项运行给定函数</p>
+    <p>会返回结果为true的项组成的数组</p>
+</div>
+<div class="map">
+    <p>map()方法</p>
+    <p>对数组中的每一项运行给定函数</p>
+    <p>会返回每次函数调用的结果组成的数组</p>
+</div>
+</body>
+<script>
+    var numbers = [1, 4, 6];
+    var everynum = numbers.every(function (item, index, array) {
+        return (item > 4);
+    });
+    var somenum = numbers.some(function (item, index, array) {
+        return (item > 4)
+    });
+    console.log(everynum);
+    console.log(somenum);
+    console.log(numbers);
+    //给数字里的每一项加1，和for循环有点像
+    // var sum=1;
+    // numbers.forEach(function (item,index,arr) {
+    //    arr[index]=item*4;
+    //     });
+    // console.log(numbers);
+    var sum = 0;
+    numbers.forEach(function (item, index, arr) {
+        sum += item;
+    });
+    $('.appendf').append(sum);
+
+   var outcome= numbers.map(function (item,index,arr) {
+        return item*4;
+    });
+    console.log(outcome);
+   console.log(numbers);
+
+</script>
+</html>

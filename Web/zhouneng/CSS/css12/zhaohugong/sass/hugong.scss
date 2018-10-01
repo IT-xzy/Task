@@ -1,0 +1,250 @@
+// 变量
+$margin:0;
+$blue:#5FC0CD;
+$shenblue:#55A8B3;
+$white:#FFFFFF;
+$gray:#999999;
+$guding:fixed;
+$juzhong:center;
+$xiangdui:relative;
+$juedui:absolute;
+$border:.01rem solid #e1e5e7;
+$blue-border:.03rem solid #5FC0CD;
+
+
+
+
+
+// 混合器
+@mixin top-buttom{
+    width: 1.44rem;
+        height: .7rem;
+        border-radius: .15rem;
+        border: none;
+        outline:none;
+        font-size: .34rem;
+}
+@mixin weiyuxnsu{
+    display: inline-block;
+    content: "";
+}
+@mixin flex($x:center,$y:center){
+    display:flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin footer{
+    padding-top: .45rem;
+    font-size: .1rem;
+}
+
+
+
+
+
+html{
+    font-size: 312.5%;
+}
+body{
+    padding: 1.68rem 0 1.5rem 0;
+    margin: $margin;
+    font-size: initial;
+}
+p{
+    margin: $margin;
+}
+a{
+    text-decoration: none;
+}
+
+
+
+/*header眉页*/
+header{
+    position: $guding;
+    top:0;
+    width: 100%;
+    background: $blue;
+    line-height: .88rem;
+    text-align: $juzhong;
+    word-spacing: -.16rem;
+    z-index: 1;
+
+    .guzhu{
+        @include top-buttom;
+        background: $shenblue;
+        color: $white;
+    }
+    .hugong{
+        @include top-buttom;
+        background: $white;
+        color: $shenblue;
+    }
+    .top-right{
+        position: $juedui;
+        right: 0;
+        top: 50%;
+        width: .42rem;
+        height: .42rem;
+        margin: -.21rem .3rem 0 0 ;
+        background: url(../picture/task-css12.png) no-repeat -1.9rem 0;
+    }
+}
+
+ul{
+    margin: $margin;
+    padding: 0;
+    list-style: none;
+}
+
+/*下拉框*/
+div.box{
+    @include flex;
+    position: $guding;
+    top:.88rem;
+    width: 100%;
+    background: $white;
+    line-height: .8rem;
+    z-index: 1;
+
+    nav.dropdown{
+        flex:1;
+        position: $xiangdui;
+        margin-top: -.001rem;
+        border:$border;
+        text-align: $juzhong;
+        color:$gray;
+
+    
+        p.sjx{
+            &::after{
+                @include weiyuxnsu;
+                float: right;
+                margin: .36rem .12rem 0 0;
+                border: solid .1rem;
+                border-color: #AFBAC0 transparent transparent transparent;
+            }
+        }
+        ul.dropdown-content{
+            display:none;
+            position: $juedui;
+            width: 100%;
+            border-top:$border;
+            background: #f9f9f9;
+
+            li.color{
+                &:hover{
+                    background:$blue;
+                }
+            }
+        }
+        &:hover ul.dropdown-content{
+            display: block;
+        }
+        
+    }
+
+}
+
+/*main 主体*/
+ul{
+    li.main-box{
+        height: 1.8rem;
+        border-bottom: $border;
+        background: $white;
+        line-height: .55rem;
+
+        span.date{
+            padding-left:.4rem;
+            margin-left: .3rem;
+            background: url(../picture/task-css12.png) no-repeat 0 -1.93rem;
+            font-size: .24rem;
+            /* 字符间距 */
+            letter-spacing: .03rem;
+            color: $gray;
+        }
+        div.main-div{
+            display: flex;
+            justify-content: space-between;
+            white-space: nowrap;
+
+            a.left{
+                margin-left: .7rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                font-size: .28rem;
+                color: #333333;
+            }
+            a.right{
+                font-size: .3rem;
+                color: #E63B0E;
+            }
+            a.getback{
+                &::after{
+                    @include weiyuxnsu;
+                    width: .19rem;
+                    height: .19rem;
+                    margin: 0 .3rem 0 .21rem;
+                    border-top:$blue-border;
+                    border-right: $blue-border;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+        span.location{
+            padding-left:.4rem;
+            margin-left: .3rem;
+            background: url(../picture/task2-css12.png) no-repeat 0 -1.03rem;
+            font-size: .24rem;
+            /* 字符间距 */
+            letter-spacing: .03rem;
+            color: $gray;
+        }
+    }
+}
+
+
+/*footer 页尾*/
+footer{
+    position: $guding;
+    right: 0;
+    bottom: 0;
+    left:0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 1.2rem;
+    background: $white;
+    z-index: 1;
+    
+    button{
+        width: 1.5rem;
+        border: none;
+        outline: none;
+    }
+
+    .footer-left{
+        @include footer;
+        background: url(..//picture/task-css12.png) no-repeat -1.45rem -2.4rem;
+        color: $blue;
+    }
+    .footer-center{
+        width: .95rem;
+        height: .95rem;
+        border-radius: 100%;
+        background: $blue;
+
+        &.footer-center::after{
+            content: "";
+            display: block;
+            height: .4rem;
+            margin-left: .18rem;
+            background: url(../picture/task-css12.png) no-repeat 0 -2.7rem;
+        }
+    }
+    .footer-right{
+        @include footer;
+        background: url(../picture/task2-css12.png) no-repeat 0.52rem -2.76rem;
+        color: $gray;
+    }
+}

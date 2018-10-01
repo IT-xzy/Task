@@ -1,0 +1,92 @@
+<div class="add" ng-controller="Add">
+    <h4>新增Article</h4>
+    <form class="add-main" name="addForm" novalidate="novalidate">
+        <li>
+            <span>
+                <span class="redstar">*</span>标题名称
+            </span>
+            <input type="text" name="addTitle" autocomplete="off" ng-model="addTitle" required>
+            <div ng-messages="addForm.addTitle.$error">
+                <div class="add-error" ng-message="required">标题不能为空</div>
+            </div>
+        </li>
+        <li class="liSel">
+            <span>
+                <span class="redstar">*</span>类&emsp;&emsp;型</span>
+            <select name="addType" ng-model="addType" ng-options="x.value as x.text for x in type" ng-change="selCha()">
+                <option value="">类型</option>
+            </select>
+            <div class="add-error" ng-show="selError">请选择类型</div>
+            <!-- <div class="add-error" ng-messages="addForm.addType.$error">
+                <div ng-message="addForm!==undefind">请选择类型</div>
+            </div> -->
+            <select class="liSel-ind" ng-model="addInd" ng-options="y.value as y.text for y in industry" ng-show="selShow">
+                    <option value="">行业</option>
+            </select>
+        </li>
+        <li class="li-richtext">
+            <span class="li-richtext-span">
+                <span class="nostar">*</span>说&emsp;&emsp;明</span>
+            <div class="app richtext">
+                <div text-angular ng-model="htmlcontent"></div>
+            </div>
+        </li>
+        <li>
+            <span>
+                <span class="redstar">*</span>跳转链接</span>
+            <input type="url" name="addUrl" ng-model="addUrl" required>
+            <div ng-messages="addForm.addUrl.$error">
+                <div class="add-error" ng-message="required">链接不能为空</div>
+                <div class="add-error" ng-message="url">链接格式不正确</div>
+            </div>
+            <!-- <div class="add-error" ng-show="addForm.addUrl.$error.url">
+                链接不符合格式
+            </div> -->
+        </li>
+        <li class="selectimg">
+            <span>
+                <span class="redstar">*</span>配&emsp;&emsp;图</span>
+
+            <button class="addImg" type="file" ng-model="pushFile" ngf-select="uploadFiles($file, $invalidFiles)" accept="image/*" ngf-max-height="1000"
+                ngf-max-size="1MB">
+                选择文件</button>
+            <p>图片预览:</p>
+            <img ngf-src="furl"/> {{errorMsg}}
+        </li>
+    </form>
+    <table class="imgStatus">
+        <thead>
+            <tr>
+                <th>图片名</th>
+                <th>文件大小</th>
+                <th>进度</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{f.name}}</td>
+                <td>{{f.size}}</td>
+                <!-- 空进度条 -->
+                <td>
+                    <span class="progress" ng-show="f.progress >= 0">
+                        <div ng-style="{'width':f.progress + '%'}" ng-bind="f.progress + '%'"></div>
+                    </span>
+                </td>
+                <td ng-show="isShow" class="show-btn">
+                    <button class="show-btn-up" ng-click="imgUp()">
+                        <img src="./images/up.png">上传</button>
+                    <button class="show-btn-delete" ng-click="imgDel()">
+                        <img src="./images/delete.png">删除</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+    <div class="add-btn">
+        <button class="btn btn-success add-on" ng-click="addOn()" ng-disabled="addForm.$invalid || furl == undefind">立即上线</button>
+        <button class="btn btn-info add-save" ng-click="addSave()" ng-disabled="addForm.$invalid || furl == undefind">存为草稿</button>
+        <button class="btn btn-default add-cancel" ng-click="addCancel()">取消</button>
+    </div>
+    
+</div>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper标签要指定namespace属性，不然会报错，可看做包名-->
+<mapper namespace="user">
+    <select id="findUserById" parameterType="int" resultType="com.jnshu.zwp.domain.User">
+        select * from mybatis_emp where id = #{id}
+    </select>
+    <select id="findUserAll" resultType="com.jnshu.zwp.domain.User">
+        select * from mybatis_emp
+    </select>
+    <insert id="insertUser" parameterType="com.jnshu.zwp.domain.User">
+        insert into mybatis_emp(name,emp,salary) values(#{name},#{emp},#{salary})
+    </insert>
+    <delete id="deleteUserById" parameterType="int">
+        delete from mybatis_emp where id=#{id}
+    </delete>
+    <update id="updateUserEmp" parameterType="com.jnshu.zwp.domain.User">
+        update mybatis_emp set emp=#{emp},salary=#{salary} where id=#{id}
+    </update>
+</mapper>

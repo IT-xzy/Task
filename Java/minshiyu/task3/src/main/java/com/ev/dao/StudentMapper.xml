@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ev.dao.StudentMapper">
+
+    <resultMap id="StudentResult" type="com.ev.model.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="gender" property="gender"/>
+        <result column="age" property="age"/>
+        <result column="qq" property="qq"/>
+        <result column="occupation" property="occupation"/>
+        <result column="join_date" property="joinDate"/>
+        <result column="school" property="school"/>
+        <result column="number" property="number"/>
+        <result column="daily_url" property="dailyUrl"/>
+        <result column="declaration" property="declaration"/>
+        <result column="consoler" property="consoler"/>
+    </resultMap>
+
+    <!-- 根据分页数据start 和size查询数据 -->
+    <select id="findByPage" parameterType="Map" resultMap="StudentResult">
+        select
+        id, name, gender, age, qq, occupation, join_date, school, number,
+        daily_url, declaration, consoler
+        from students
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <!--查询所有用户数据 -->
+    <select id="selectStudentList" resultMap="StudentResult">
+        select id, name, gender, age, qq, occupation, join_date, school, number,
+        daily_url, declaration, consoler from students
+    </select>
+
+    <!-- 查询用户记录总数 -->
+    <select id="selectCount" resultType="int">
+        select count(*) from students
+    </select>
+
+    <!--插入一条新学员-->
+    <insert id="insertStudent" parameterType="Student">
+        INSERT INTO students
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createAt!=null">
+                create_at,
+            </if>
+            <if test="updateAt!=null">
+                update_at,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="gender!=null">
+                gender,
+            </if>
+            <if test="age!=null">
+                age,
+            </if>
+            <if test="qq!=null">
+                qq,
+            </if>
+            <if test="occupation!=null">
+                occupation,
+            </if>
+            <if test="joinDate!=null">
+                join_date,
+            </if>
+            <if test="school!=null">
+                school,
+            </if>
+            <if test="number!=null">
+                number,
+            </if>
+            <if test="dailyUrl!=null">
+                daily_url,
+            </if>
+            <if test="declaration!=null">
+                declaration,
+            </if>
+            <if test="consoler!=null">
+                consoler,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createAt!=null">
+                #{create_at},
+            </if>
+            <if test="updateAt!=null">
+                #{update_at},
+            </if>
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="gender!=null">
+                #{gender},
+            </if>
+            <if test="age!=null">
+                #{age},
+            </if>
+            <if test="qq!=null">
+                #{qq},
+            </if>
+            <if test="occupation!=null">
+                #{occupation},
+            </if>
+            <if test="joinDate!=null">
+                #{joinDate},
+            </if>
+            <if test="school!=null">
+                #{school},
+            </if>
+            <if test="number!=null">
+                #{number},
+            </if>
+            <if test="dailyUrl!=null">
+                #{dailyUrl},
+            </if>
+            <if test="declaration!=null">
+                #{declaration},
+            </if>
+            <if test="consoler!=null">
+                #{consoler},
+            </if>
+        </trim>
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <!--由主键删除-->
+    <delete id="deleteStudent" parameterType="java.lang.Long">
+        DELETE FROM students
+        WHERE id = #{id}
+    </delete>
+
+    <!--由主键查找返回-->
+    <select id="findById" parameterType="java.lang.Long" resultMap="StudentResult">
+        SELECT *
+        FROM students
+        WHERE id = #{id}
+    </select>
+
+    <!--通过姓名查找-->
+    <select id="findByName" parameterType="java.lang.String" resultMap="StudentResult">
+        SELECT *
+        FROM students
+        WHERE name LIKE '%${value}%'
+    </select>
+
+    <!--通过学号查找-->
+    <select id="findByNumber" parameterType="java.lang.String" resultMap="StudentResult">
+        SELECT *
+        FROM students
+        WHERE number LIKE '%${value}%'
+    </select>
+
+    <!--更新学员信息-->
+    <update id="updateStudent" parameterType="Student">
+        UPDATE students
+        <set>
+            <if test="updateAt!=null">
+                update_at + #{updateat},
+            </if>
+            <if test="name !=null">
+                name = #{name},
+            </if>
+            <if test="gender!= null">
+                gender = #{gender},
+            </if>
+            <if test="age!= null">
+                age = #{age},
+            </if>
+            <if test="qq != null">
+                qq = #{qq},
+            </if>
+            <if test="occupation != null">
+                occupation = #{occupation},
+            </if>
+            <if test="joinDate != null">
+                join_date= #{joinDate},
+            </if>
+            <if test="school != null">
+                school = #{school},
+            </if>
+            <if test="number != null">
+                number = #{number},
+            </if>
+            <if test="dailyUrl != null">
+                daily_url = #{dailyUrl},
+            </if>
+            <if test="declaration != null">
+                declaration = #{declaration},
+            </if>
+            <if test="consoler != null">
+                consoler= #{consoler}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+
+    <!--重置表-->
+    <!--<delete id="reset">-->
+        <!--TRUNCATE TABLE students-->
+    <!--</delete>-->
+
+</mapper>

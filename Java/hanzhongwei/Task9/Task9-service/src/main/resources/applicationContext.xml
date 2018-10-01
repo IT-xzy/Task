@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:conmtext="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/sca http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd">
+
+    <sca:service name="StudentService" type="hzw.service.StudentService" target="studentService"/>
+    <bean id="studentService" class="hzw.service.impl.StudentServiceImpl"/>
+    <sca:service name="StudentRmi" type="hzw.service.StudentRmi" target="studentService"/>
+    <bean id="studentRmi" class="hzw.service.impl.StudentRmiImpl"/>
+
+    <conmtext:annotation-config />
+
+    <!--自动扫描，定位业务类和切面类-->
+    <context:component-scan base-package="hzw.service" />
+    <context:component-scan base-package="hzw.aspect"/>
+    <!--加载数据资源属性文件 -->
+    <context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:memcached.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:SMS.properties" ignore-unresolvable="true"/>
+
+    <!--找到被注解了的切面类，进行切面配置-->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 配置数据源 -->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+        <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/chonggou}"/>
+        <property name="user" value="root"/>
+        <property name="password" value="4087787"/>
+    </bean>-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="jdbc:mysql://47.98.143.242/chonggou?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false" />
+        <property name="username" value="root" />
+        <property name="password" value="4087787" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="3" />
+        <property name="minIdle" value="3" />
+        <property name="maxActive" value="20" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="SELECT 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+    </bean>
+
+    <!-- 配置sessionfactory -->
+    <!--扫描存放SQL语句的StudentMapper.xml-->
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="hzw.model"/>
+        <property name="dataSource" ref="dataSource"/>
+        <!--用于配置mapper映射xml-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <!-- 装配dao接口 -->
+    <!-- 创建数据映射器-->
+    <!-- 扫描Mapper，并将其生命周期纳入Spring的管理-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="hzw.mapper"/>
+    </bean>
+
+    <!-- Memcached配置 -->
+    <bean id="memCachedPool" class="com.whalin.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize" destroy-method="shutDown">
+
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+
+        <property name="servers">
+            <list>
+                <value>${memcached.server}</value>
+            </list>
+        </property>
+        <property name="initConn">
+            <value>${memcached.initConn}</value>
+        </property>
+        <property name="minConn">
+            <value>${memcached.minConn}</value>
+        </property>
+        <property name="maxConn">
+            <value>${memcached.maxConn}</value>
+        </property>
+        <property name="maintSleep">
+            <value>${memcached.maintSleep}</value>
+        </property>
+        <property name="nagle">
+            <value>${memcached.nagle}</value>
+        </property>
+        <property name="socketTO">
+            <value>${memcached.socketTO}</value>
+        </property>
+    </bean>
+
+    <bean id="memCachedClient" class="com.whalin.MemCached.MemCachedClient">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+    </bean>
+
+    <!--Redis配置-->
+    <!-- redis连接池 -->
+    <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+    <!-- redis连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="password" value="${redis.password}"/>
+        <property name="poolConfig" ref="jedisConfig"/>
+    </bean>
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--     如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务-->
+        <!--<property name="enableTransactionSupport" value="true"/>-->
+    </bean>
+
+    <bean id="redisUtil" class="hzw.util.RedisUtil" >
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
+    <bean id="smsUtil" class="hzw.util.SMSUtil">
+        <constructor-arg name="accessKeyId" value="${sms.accessKeyId}"/>
+        <constructor-arg name="accessKeySecret" value="${sms.accessKeySecret}"/>
+        <constructor-arg name="SignName" value="${sms.SignName}"/>
+        <constructor-arg name="TemplateCode" value="${sms.TemplateCode}"/>
+        <!--<constructor-arg name="accessKeyId" value="LTAIw8a285xdQ9ge"/>
+        <constructor-arg name="accessKeySecret" value="mddtauRgDZd0BeW2f6DGQi8fQB3Epv"/>
+        <constructor-arg name="SignName" value="韩忠伟"/>
+        <constructor-arg name="TemplateCode" value="SMS_136465099"/>-->
+    </bean>
+
+    <bean id="sendMailSDK" class="hzw.util.SendMailSDK">
+
+    </bean>
+
+    <bean id="aliyunOSSAPI" class="hzw.util.AliyunOSSAPI">
+        
+    </bean>
+
+    <!-- 设置上传文件最大值   1M=1*1024*1024(B)=1048576 bytes -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1048576" />
+    </bean>
+
+
+
+
+
+</beans>

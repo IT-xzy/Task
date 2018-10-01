@@ -1,0 +1,98 @@
+@charset "utf-8";
+$bgcolor:#5fc0cd;
+@mixin translateY {
+    position: absolute;
+    top: 50%;
+}
+@mixin translateX {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+body {
+    margin: 0;
+}
+
+// header设置相关变量
+$header-height:.88rem;
+$header-bgcolor:#5fc0cd;
+$body-bgcolor:#29bde0;
+$text-color-white:#fff;
+// 两端的距离
+$justify-size:.2rem;
+$center-font-size:.34rem;
+html{
+    height: 100%;
+}
+body{
+    position: relative;
+    margin: 0;
+    height: 100%;
+    background: $body-bgcolor;
+}
+@import 'showHead';
+main{
+    position: absolute;
+    top: 1.8rem;
+    bottom: .6rem;
+     left: .88rem;
+    right: .88rem;
+    .num {
+        @include translateX();
+        width: .66rem;
+        margin-top:-.33rem;
+        line-height: .66rem;
+        border-radius: 50%;
+        text-align: center;
+        font-size: .4rem;
+        color: #f56b81;
+        background: #fff;
+        z-index: 1;
+    
+    }
+    .players-show {
+        box-sizing: border-box;
+        position: absolute;
+        height: 7.58rem;
+        width: 100%;
+        border: .06rem solid #fff;
+       
+        background: #ffedc5;
+
+        img{
+            @include translateX();
+            &.show-img{
+            display: none;
+            top: .6rem;
+            width: 2.22rem;
+            }
+           &.hide-img {
+               width: 3.01rem;
+               top: 50%;
+               margin-top: -1.5rem;
+           }
+        }   
+        span{
+            
+            @include translateX();
+             top: 3.2rem;
+             color:#29bde0;
+        font: .4rem bold;
+        }
+    }
+    button {
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: .86rem;
+        border: none;
+        outline: none;
+        font-size: .4rem;
+        color: #fff;
+        background-color: #fbb435;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:properties/applicationContext.properties"/>
+    <context:component-scan base-package="com.tools"/>
+    <context:component-scan base-package="com.getService"/>
+    <context:component-scan base-package="com.interceptor"/>
+    <import resource="springRedis.xml"/>
+
+    <bean id="jwtUtil" class="com.tools.JwtUtil"/>
+    <bean id="upLoadingUtil" class="com.tools.PictureUpLoadingUtil"/>
+    <bean id="serviceFactory" class="com.getService.ServiceFactory"/>
+    <!--Quartz -->
+    <bean name="quartzTest" class="com.getService.TimeTask"/>
+    <bean id="quartzTestJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="quartzTest"/>
+        <property name="targetMethod" value="setState"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+    <!--触发时间-->
+    <bean id="quartzTestTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="quartzTestJob"/>
+        <!-- 2秒后运行 -->
+        <property name="startDelay" value="2000"/>
+        <!-- 每隔0.5秒重复 -->
+        <property name="repeatInterval" value="2000"/>
+    </bean>
+    <!--调度个工厂-->
+    <bean name="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers" ref="quartzTestTrigger"/>
+    </bean>
+
+    <bean id="userDaoService1"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>rmi://localhost:8082/userDaoService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.service.UserDaoService</value>
+        </property>
+    </bean>
+    <bean id="pttDaoService1"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>rmi://localhost:8082/pttDaoService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.service.PttDaoService</value>
+        </property>
+    </bean>
+    <bean id="emptyService1"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>rmi://localhost:8082/emptyService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.service.EmptyService</value>
+        </property>
+    </bean>
+
+    <bean id="userDaoService2"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>rmi://localhost:8083/userDaoService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.service.UserDaoService</value>
+        </property>
+    </bean>
+    <bean id="pttDaoService2"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>rmi://localhost:8083/pttDaoService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.service.PttDaoService</value>
+        </property>
+    </bean>
+    <bean id="emptyService2"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl">
+            <value>rmi://localhost:8083/emptyService</value>
+        </property>
+        <property name="serviceInterface">
+            <value>com.service.EmptyService</value>
+        </property>
+    </bean>
+</beans>

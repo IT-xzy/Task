@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:mysql.properties"/>
+
+    <!--DriverManagerDataSource没有实现连接池化连接的机制，每次调用getConnection()获取新连接时，
+        只是简单地创建一个新的连接。所以，一般这种方式常用于开发时测试，不用于生产。-->
+    <!--<bean name="dataSource" class="${dataSource}">
+        <property name="driverClassName" value="${driverClassName}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${password}"/>
+    </bean>-->
+
+    <!--数据源配置,C3P0连接池-->
+    <!--设置为close使Spring容器关闭同时数据源能够正常关闭，以免造成连接泄露  -->
+    <!--<bean name="dataSource" class="${c3p0.dataSource}" destroy-method="close">
+        <property name="driverClass" value="${driverClassName}" />
+        <property name="jdbcUrl" value="${url}" />
+        <property name="user" value="${jdbc.username}" />
+        <property name="password" value="${password}"/>
+
+        &lt;!&ndash;在启动连接池初始创建的数据库连接数，默认为0&ndash;&gt;
+        <property name="initialPoolSize" value="3"/>
+        &lt;!&ndash;连接池保留的最大连接数&ndash;&gt;
+        <property name="maxPoolSize" value="15"/>
+        &lt;!&ndash;连接池保留的最小连接数&ndash;&gt;
+        <property name="minPoolSize" value="2"/>
+        &lt;!&ndash;当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。&ndash;&gt;
+        <property name="acquireIncrement" value="5"/>
+
+        &lt;!&ndash;当连接池用完时客户端调用getConnection()后等待获取新连接的时间，
+            超时后将抛出SQLException，如设为0则无限期等待。单位毫秒&ndash;&gt;
+        <property name="checkoutTimeout" value="1000"/>
+        &lt;!&ndash;最大空闲时间,1800秒内未使用则连接被丢弃。若为0或负数则永不丢弃。&ndash;&gt;
+        <property name="maxIdleTime" value="1800"/>
+    </bean>-->
+
+    <!--数据源配置，Druid-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driverClassName}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${password}"/>
+
+        <!-- 关键配置 -->
+        <!-- 初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者第一次getConnection时 -->
+        <property name="initialSize" value="3" />
+        <!-- 最小连接池数量 -->
+        <property name="minIdle" value="2" />
+        <!-- 最大连接池数量 -->
+        <property name="maxActive" value="15" />
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="10000" />
+
+        <!-- 性能配置 -->
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+
+        <!-- 其他配置 -->
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="10000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，
+             如果空闲时间大于timeBetweenEvictionRunsMillis，
+             执行validationQuery检测连接是否有效. -->
+        <property name="testWhileIdle" value="true" />
+        <!-- 这里建议配置为TRUE，防止取到的连接不可用 ,申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。-->
+        <property name="testOnBorrow" value="true" />
+        <!-- 归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能 -->
+        <property name="testOnReturn" value="false" />
+    </bean>
+
+    <!--通过注解，将Service的生命周期纳入Spring的管理-->
+    <context:annotation-config />
+    <context:component-scan base-package="com.hzw.service" />
+
+
+    <!--创建mybatis会话工厂-->
+    <!--扫描XML配置文件-->
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean name="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--自动扫描pojo类-->
+        <property name="typeAliasesPackage" value="com.hzw.pojo"/>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--分页PageHelper插件配置 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--扫描Mapper类 -->
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 可以不用指定，因为MapperScannerConfigurer会自动装配  -->
+        <!--set注入-->
+        <property name="basePackage" value="com.hzw.mapper"/>
+    </bean>
+</beans>

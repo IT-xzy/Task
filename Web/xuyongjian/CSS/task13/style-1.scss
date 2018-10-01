@@ -1,0 +1,189 @@
+@mixin flex($justify,$align) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;}
+@mixin img($width,$height,$url) {
+  width: $width;
+  height: $height;
+  background: $url no-repeat center;}
+@mixin position($position,$side,$sidevalue,$marginside,$marginsidevalue) {
+  position: $position;
+  #{$side}: $sidevalue;
+  #{$marginside}: $marginsidevalue}
+@mixin box($color,$fz,$padding) {
+  margin-top: 26px;
+  padding: $padding;
+  width: 80%;
+  height: auto;
+  font-size: $fz;
+  text-align: center;
+  color: $color;
+  border: 1px solid #c9c9c9;
+  background-color: white;}
+%version {
+  @include flex(center,center);
+  margin-top: 30px;
+  width: 60%;
+  height: 135px;
+  font-size: 32px;
+  color: #ffffff;
+  background-color: #69d1e9;}
+%ball {
+  margin: 14px 5px 9px 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;}
+@mixin greyball($bgcolor){
+  @extend %ball;
+  background-color: $bgcolor;}
+
+
+
+
+
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 1107px;
+  background-color: pink;}
+aside {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 20px;
+  width: 80%;
+  z-index: 1;}
+  aside>div {
+    @include flex(center,center);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #999999;
+    z-index: 1;}
+  aside img {
+    width: 12px;
+    position: absolute;
+    right: 20px;}
+  aside .img3 {
+    @include img(30px,30px,url(images/3-1.png));
+    @include position(absolute,left,20px,none,none);}
+  aside .img4 {
+    @include img(30px,30px,url(images/3-2.png));
+    @include position(absolute,left,20px,none,none);}
+  aside .img5 {
+    @include img(30px,30px,url(images/3-3.png));
+    @include position(absolute,left,20px,none,none);}
+  aside .img6 {
+    @include img(30px,30px,url(images/3-4.png));
+    @include position(absolute,left,20px,none,none);}
+label {
+  display: inline-block;
+  cursor: pointer;
+  margin: 40px 0 0 12px;
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  @include img(29px,24px,url(images/1.png));}
+.section {
+  position: relative;
+  width: 100%;
+  height: 1107px;
+  background-color: lightblue;
+  overflow: hidden;}
+.content {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 2;}
+input[type="checkbox"]:checked ~ .content {
+  transform: translateX(80%);}
+input[type="checkbox"]:checked ~ label {
+  margin-left: calc( 80% + 12px);}
+input[type="checkbox"]:checked ~ .header1 {
+  transform: translateX(80%);
+  z-index: 2;}
+
+.header {
+  width: 100%;
+  height: 88px;
+  background-color: #29bde0;
+  position: fixed;
+  top: 0;
+  z-index: 5;}
+.header1 {
+  @extend .header;
+  z-index: 1;}
+.main {
+  @include flex(center,center);
+  flex-wrap: wrap;
+  padding-bottom: 61px;
+  margin-top: 88px;
+  background-color: #f0f0f0;}
+  .mainheader {
+    @include flex(center,center);
+    position: relative;
+    @include box(#9a9a9a,35px,42px 0);}
+    .img2 {
+      position: absolute;
+      top: 42px;
+      right: 20px;
+      @include img(24px,40px,url(images/2.png));}
+  .maincontent {
+    @include flex(center,center);
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    @include box(#787878,24px,none);}
+    .img7 {
+      position: absolute;
+      right: 3%;
+      top: calc( 50% - 14px );
+      @include img(28px,56px,url(images/4.png));}
+    .contenttitle {
+      width:100%;
+      padding: 30px 0 27px 0;
+      color: #fbb435;
+      font-size: 37px;
+      border-bottom: 2px solid #fdd793;}
+    .gameversion {
+      @extend %version;}
+    .playerquality {
+      font-size: 24px;
+      padding-top: 27px;}
+    .ball {
+      @include flex(center,center);}
+    .blueball {
+      @include greyball(#69d1e9);}
+    .greyball {
+  @include greyball(#f0f0f0);}
+
+
+
+
+
+@media screen and (max-width:600px) {
+  body , html {
+    height: 1063px;}
+  .section {
+    height: 1063px;}
+  .img7 {
+    top: calc( 50% - 7px );
+    right: 0px;
+    background-size: 50%;}
+  .mainheader {
+    font-size: 20px;}
+    .img2 {
+      background-size: 70%;
+      top: 32px;
+      right: 10px;}
+  .contenttitle{
+    font-size: 26px;}
+  .gameversion {
+    width: 80%;}
+  .playerquality {
+    font-size: 18px;}
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!--定义主布局，templet.jsp就是主布局页面，下面分别定义了子模板页面-->
+    <!-- definition name为Controller返回的页面名称 这里定义一个基础模板页 -->
+    <definition name="home" template="/WEB-INF/jsp/tiles/templet.jsp">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="top" value="/WEB-INF/jsp/tiles/top.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/tiles/head.jsp"/>
+        <put-attribute name="nav" value="/WEB-INF/jsp/tiles/nav.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/tiles/foot.jsp"/>
+
+        <!-- 跳转页面 -->
+        <put-attribute name="dumpPage" value="profession"/>
+    </definition>
+
+    <!-- 继承直接引用父类模板 如有不同内容重写即可-->
+    <definition name="profession" extends="home">
+        <put-attribute name="title" value="职业"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/profession.jsp"/>
+        <!-- 跳转页面 -->
+        <put-attribute name="dumpPage" value="home"/>
+    </definition>
+
+</tiles-definitions>

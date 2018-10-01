@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="css/articleAdd.css">
+<link rel="stylesheet" href="css/textAngular.css">
+<link href="css/font-awesome.css" rel="stylesheet">
+<!-- 新增页 -->
+<div ng-controller="add" class="borderbox" nv-file-drop="" uploader="uploader">
+    <form class="form-horizontal" name="addForm" novalidate>
+        <div class="wrap">
+            <div class="list_title">
+                <label class="control-label">{{listTitle}}</label>
+            </div>
+        </div>
+
+        <!-- 内容 -->
+        <div class="wrap wrap-search">
+            <div class="col-md-12 row-margin">
+                <div class="form-group">
+                    <label class="control-label col-md-2 nobreak">标题名称
+                        <div ng-messages="addForm.title.$error">
+                            <div class="forminfo" ng-message="required">
+                                <b style="color: #f00">*&ensp;</b>必填项</div>
+                        </div>
+                    </label>
+                    <div class="col-md-8">
+                        <input name="title" type="text" class="form-control" ng-model="title" required>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12  row-margin">
+                <div class="form-group">
+                    <label class="control-label col-md-2 nobreak">类&ensp;&ensp;&ensp;&ensp;型
+                        <!-- <div ng-messages="addForm.type.$error"> -->
+                        <div class="forminfo">
+                            <b style="color: #f00">*&ensp;</b>必填项</div>
+                        <!-- </div> -->
+                    </label>
+                    <div class="col-md-2">
+                        <select name="type" class="form-control" ng-model="type" ng-options="type.id as type.typename for type in types">
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select ng-if="type===3" name="industry" class="form-control" ng-model="industry" ng-options="industry.id as industry.industryname for industry in industries"
+                            required>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12  row-margin">
+                <div class="form-group">
+                    <label class="control-label col-md-2 nobreak">说&ensp;&ensp;&ensp;&ensp;明
+                        <!-- <div ng-messages="addForm.title.$error">
+                                    <div class="forminfo" ng-message="required">
+                                        <b style="color: #f00">*&ensp;</b>必填项</div>
+                                </div> -->
+                    </label>
+                    <div class="col-md-8">
+                        <div text-angular ng-model="htmlVariable" ta-disable="true"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12  row-margin">
+                <div class="form-group">
+                    <label class="control-label col-md-2 nobreak">跳转链接
+                        <div ng-messages="addForm.link.$error">
+                            <div class="forminfo" ng-message="required">
+                                <b style="color: #f00">*&ensp;</b>必填项</div>
+                            <div class="forminfo" ng-message="url">
+                                请输入正确的url
+                            </div>
+                        </div>
+                    </label>
+                    <div class="col-md-8">
+                        <input type="url" name="link" class="form-control" ng-model="link" required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12  row-margin">
+                <div class="form-group">
+                    <label class="control-label col-md-2 nobreak">配&ensp;&ensp;&ensp;&ensp;图
+                        <div ng-messages="addForm.file.$error">
+                            <div class="forminfo" ng-message="required">
+                                <b style="color: #f00">*&ensp;</b>必填项</div>
+                        </div>
+                    </label>
+                    <div class="col-md-8">
+                        <label class="btn btn-primary" for="file">选择文件</label>
+                        <input id="file" name="file" style="display: none" type="file" ngf-select ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                            ngf-max-size="2MB" ng-model="myFiles">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12  row-margin">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 row-margin">
+                    <!-- 图片预览 -->
+                    <img id="img-preview" ng-model="imgView" ng-src="{{img_view}}" ng-if="img_view" ngf-size="{quality: 1}" class="col-md-12 wrap-search">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="30%">图片名</th>
+                                <th>大小</th>
+                                <th>进度</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-if="myFiles">
+                                <td>
+                                    <strong>{{ myFiles.name }}</strong>
+                                    <!-- Image preview -->
+                                    <!--auto height-->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                    <!--auto width-->
+                                    <!-- <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div> -->
+                                    <!--fixed width and height -->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                </td>
+                                <td nowrap>{{ myFiles.size/1024/1024|number:2 }} MB</td>
+                                <td ng-if="myFiles">
+                                    <div class="progress text-center" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': myFiles.progress + '%' }" style="width: 0%;"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="glyphicon glyphicon-ok" ng-if="myFiles.progress"></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="imgUpload(myFiles)">
+                                        <span class="glyphicon glyphicon-upload"></span>上传
+                                    </button>
+                                    <!-- <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> 取消
+                                    </button> -->
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="imgDelete(myFiles)">
+                                        <span class="glyphicon glyphicon-trash"></span>删除
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-md-12  row-margin">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 commit">
+                    <div class="btn-spacing">
+                        <input type="button" class="btn btn-success" ng-disabled="img_view === undefined || addForm.$invalid"  value="立即上线" ng-click="onLine()"
+                        />
+                        <input type="button" class="btn btn-success" value="存为草稿" ng-disabled="img_view === undefined || addForm.$invalid" ng-click="save()"
+                        />
+                    </div>
+                    <input type="button" class="btn btn-default" value="取消" ui-sref="backstage.list" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leo.mapper.StudentMapper">
+
+    <insert id="add" parameterType="Student">
+        INSERT INTO student (name,qq,profession,school,create_time,update_time)
+        VALUE (#{name},#{qq},#{profession},#{school},#{create_time},#{update_time})
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM student where id=#{id}
+    </delete>
+
+    <select id="get" parameterType="long" resultType="Student">
+        SELECT * FROM student WHERE id=#{id}
+    </select>
+
+    <update id="update" parameterType="Student">
+        UPDATE student set name=#{name},
+        qq=#{qq},
+        profession=#{profession},
+        school=#{school},
+        update_time=#{update_time} WHERE id=#{id}
+    </update>
+
+    <!--根据start与count是否为空分别进行全体查询与分页查询-->
+    <select id="list" resultType="Student">
+        SELECT * FROM student ORDER BY id DESC
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+
+    <select id="total" resultType="int">
+        SELECT COUNT(*) FROM student
+    </select>
+</mapper>

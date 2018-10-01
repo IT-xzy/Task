@@ -1,0 +1,101 @@
+@charset "utf-8";
+@import "basis";
+html{
+  font-size: 625%;
+}
+body{
+  font-size: .16rem;
+  background-color: #eef0f4;
+}
+
+header{
+  position: relative;
+  height: .5rem;
+  text-align: center;
+  line-height: .5rem;
+  background-color:#5ac0ce;
+  *{color: white;}
+  span{
+    font-size: .18rem;
+  }
+  .a--registered{
+    @include position-vertically-center;left: .1rem;
+  }
+  .a--close{
+    @include position-vertically-center;
+    right: .1rem;
+  }
+}
+main{
+  >div{
+    position: relative;
+    @include flex-vertical-center;
+    margin: .1rem 0;
+    height: .6rem;
+    width: 100%;
+    background-color: white;
+    &::after{
+      content: "";
+      @include position-vertically-center;
+      left: .8rem;
+      display: block;
+      width: .01rem;
+      height: .3rem;
+      background-color: #c2c2c2;
+    }
+    input{//输入框公共规则
+      position: relative;
+      width: 100%;
+      height: .25rem;
+      padding-left: 1rem;
+      font-size: .2rem;
+      border: none;
+      outline: none;
+    }
+
+
+  }
+}
+.pos{//属性继承用
+  @include position-vertically-center;
+  left: .27rem;
+  z-index: 1;
+  height: .38rem;
+  width: .25rem;
+  background-size:100% 100%;
+
+}
+.number--wrap::before{
+  content:"";
+  background-image: url("../img/iphone.png");
+  @extend .pos
+}
+.password--wrap::before{
+  content:"";
+  background-image: url("../img/locked.png");
+  @extend .pos
+}
+footer {
+  button{
+    width: 100%;
+    height: .45rem;
+    font-size: .18rem;
+    color: white;
+    background-color: #5ac0ce;
+    outline: none;
+    margin-bottom: .1rem;
+  }
+  a{
+    float: right;
+    margin-right: .2rem;
+    padding: 0 .02rem .02rem .02rem;
+    color: #5ac0ce;
+    border-bottom: 1px solid #5ac0ce;
+
+
+
+  }
+}
+
+
+

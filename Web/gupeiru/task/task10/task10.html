@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+	<title>51包装</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style10.css" type="text/css">
+</head>
+
+<body>
+    <header class="head">
+        <span>客服热线：010-594-78634</span>
+        <input type="radio" id="regsiter" name="button">
+        <label for="regsiter" class="head-button regsiter">
+            注册
+        </label>
+        <input type="radio" id="login" name="button">
+        <label for="login" class="head-button login">
+			登录
+        </label>
+    </header>
+    <nav class="nav">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="22">
+                <defs>
+                    <filter id="shadow">
+                        <feDropShadow dx="0" dy="0" stdDeviation="1.6">
+                    </filter>
+                </defs>
+                <polygon points="1,1 22,10 1,20 1,1" fill="#1d7ad9" filter="url(#shadow)"></polygon>
+            </svg>
+        </label>
+        <ul class="nav-list">
+            <li>
+                <a href="#">首页</a>
+            </li>
+            <li>
+                <a href="#">在线定制</a>
+            </li>
+            <li>
+                <a href="#">标准箱</a>
+            </li>
+            <li>
+                <a href="#">品质保障</a>
+            </li>
+        </ul>
+    </nav>
+    <main class="main">
+        <div class="step-box">
+            <div class="step">
+                <div class="circle" id="box-circle">1</div>
+                <div class="line" id="box-line"></div>
+                <p id="step-one">1.定制纸箱</p>
+            </div>
+            <div class="step">
+                <div class="circle" id="size-circle">2</div>
+                <div class="line" id="size-line"></div>
+                <p id="step-two">2.选择数量</p>
+            </div>
+            <div class="step">
+                <div class="circle" id="material-circle">3</div>
+                <div class="line" id="material-line"></div>
+                <p id="step-three">3.上传附件</p>
+            </div>
+            <div class="step">
+                <div class="circle">4</div>
+                <div class="line"></div>
+                <p>4.确认下单</p>
+            </div>
+        </div>
+        <div class="message">
+            <span>请您按照以下步骤来定制您的纸箱</span>
+        </div>
+        <div class="choose">
+            <span class="word-box">选择箱型</span>
+        </div>
+        <div class="choose-box">
+            <div class="box-one">     
+                <input type="radio" id="box-one" name="box" onclick="one()">
+                <label for="box-one" class="choice">对口箱</label> 
+            </div> 
+            <div class="box-two">                     
+                <input type="radio" id="box-two" name="box" onclick="one()">  
+                <label for="box-two" class="choice">飞机盒</label>
+            </div>
+            <div class="box-three">                     
+                <input type="radio" id="box-three" name="box" onclick="one()">  
+                <label for="box-three" class="choice">天地盖</label>
+            </div>
+            <div class="select-box">
+				<div id="cate">
+					<div class="cate_wrp">
+					    <div class="cate_inp cate_tri">查看详情</div>
+                        <a href="###" class="cate_tri"></a>        
+                    </div>
+					<div class="cate_drop" style="display:none">
+					    <ul>
+				            <li>对口箱</li>
+					        <li>飞机盒</li>
+					        <li>天地盖</li>
+					    </ul>
+                    </div>
+                </div>
+	        </div>
+        </div>
+        <div class="choose">
+            <span class="word-size">确定尺寸</span>
+        </div>
+        <div class="choose-size">
+            <div class="size-box">
+                <div class="size-one">     
+                    <input type="radio" id="size-one" name="size" onclick="two()">
+                    <label for="size-one" class="choice">外径</label> 
+                </div> 
+                <div class="number-box">
+                    <label for="number">长</label>
+                    <input type="number" id="text" name="length">
+                    <label for="number">mm</label>
+                </div>
+                <div class="number-box">
+                    <label for="number">宽</label>
+                    <input type="number" id="text" name="length">
+                    <label for="number">mm</label>
+                </div>
+                <div class="number-box">
+                    <label for="number">高</label>
+                    <input type="number" id="text" name="length">
+                    <label for="number">mm</label>
+                </div>
+            </div>
+            <div class="size-box">
+                <div class="size-two">                     
+                    <input type="radio" id="size-two" name="size" onclick="two()">  
+                    <label for="size-two" class="choice">内径</label>
+                </div>
+                <div class="number-box">
+                    <label for="number">长</label>
+                    <input type="number" id="text" name="length">
+                    <label for="number">mm</label>
+                </div>
+                <div class="number-box">
+                    <label for="number">宽</label>
+                     <input type="number" id="text" name="length">
+                     <label for="number">mm</label>                    </div>
+                <div class="number-box">
+                    <label for="number">高</label>
+                    <input type="number" id="text" name="length">
+                    <label for="number">mm</label>
+                </div>
+            </div>
+            <div class="select-box">
+                <div id="bate">
+                    <div class="cate_wrp">
+                        <div class="cate_inp cate_tri">查看详情</div>
+                        <a href="###" class="cate_tri"></a>        
+                    </div>
+                    <div class="cate_drop" style="display:none">
+                        <ul>
+                            <li>外径</li>
+                            <li>内径</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="choose">
+            <span class="word-material">选择材质</span>
+        </div>
+        <div class="choose-material">
+            <div class="material-one">     
+                <input type="radio" id="material-one" name="material" onclick="three()">
+                <label for="material-one" class="choice">三层A瓦优质</label> 
+            </div> 
+            <div class="material-two">                     
+                <input type="radio" id="material-two" name="material" onclick="three()">  
+                <label for="material-two" class="choice">三层A瓦优质</label>
+            </div>
+            <div class="material-three">                     
+                <input type="radio" id="material-three" name="material" onclick="three()">  
+                <label for="material-three" class="choice">三层A瓦优质</label>
+            </div>
+            <div class="material-four">                     
+                <input type="radio" id="material-four" name="material" onclick="three()">  
+                <label for="material-four" class="choice">三层A瓦优质</label>
+            </div>
+            <div class="material-five">                     
+                <input type="radio" id="material-five" name="material" onclick="three()">  
+                <label for="material-five" class="choice">三层A瓦优质</label>
+            </div>
+            <div class="select-box">
+                <div id="date">
+                    <div class="cate_wrp">
+                        <div class="cate_inp cate_tri">查看详情</div>
+                        <a href="###" class="cate_tri"></a>        
+                    </div>
+                    <div class="cate_drop" style="display:none">
+                        <ul>
+                            <li>三层A瓦优质</li>
+                            <li>三层A瓦优质</li>
+                            <li>三层A瓦优质</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="next-box">
+            <button type="button" class="next">下一步</button>
+        </div>
+    </main>
+    <div class="contact-box">
+        <p>51包装网 — 纸箱包装首选服务平台</p>
+        <div class="link">
+            <a href="#">关于我们</a>
+            <a href="#">配送流程</a>
+            <a href="#">联系我们</a><br />
+            <a href="#">下单指南</a>
+            <a href="#">媒体介绍</a>
+        </div>
+        <div class="contact">
+            <p>
+                <span>TEL：400-0000-000</span><br />
+                <span>企业QQ：123456789</span><br />
+                <span>微信号：XXXXXXX</span>
+            </p>
+            <img src="images/code.png" alt="二维码">
+        </div>
+    </div>
+    <footer class="foot">
+        <span>北京五一包装科技有限公司Copyright ©2015</span>
+        <span>51baozhuang.com015   All rights reserved.</span>
+        <span>京icp备99999999-1</span>
+    </footer>
+    <script src="jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+<script type="text/javascript">
+    // 点击单选按钮，步骤条变色
+    function one(){
+    document.getElementById("box-circle").style.background="#ff7f02";
+    document.getElementById("box-line").style.background="#ff7f02";
+    document.getElementById("step-one").style.color="#ff7f02";
+   }
+   function two(){
+    document.getElementById("size-circle").style.background="#ff7f02";
+    document.getElementById("size-line").style.background="#ff7f02";
+	document.getElementById("step-two").style.color="#ff7f02";
+   }
+   function three(){
+    document.getElementById("material-circle").style.background="#ff7f02";
+    document.getElementById("material-line").style.background="#ff7f02";
+    document.getElementById("step-three").style.color="#ff7f02";
+   }
+    // 下拉列表js
+    (function($) {
+      var $cate = $('#cate'),
+        $tri = $('.cate_tri', $cate),
+        $drop = $('div.cate_drop', $cate),
+        $inp = $('div.cate_inp', $cate);
+
+        $tri.on('click', function(event) {
+            var $el = $(this);
+            if( $el.data('active') !== 'on' ) {
+              $drop[0].style.display = 'block';
+              $el.data('active', 'on');
+            } else {
+              $drop[0].style.display = 'none';
+              $el.data('active', 'off')
+            }
+        });
+
+        $drop.on('mouseover', 'li', function(event) {
+          $inp[0].innerHTML = this.innerHTML; 
+        }).on('click', 'li', function(event) {
+          // do something
+          $drop[0].style.display = 'none';
+          $tri.data('active', 'off');
+        });
+    }(jQuery));
+    (function($) {
+      var $cate = $('#bate'),
+        $tri = $('.cate_tri', $cate),
+        $drop = $('div.cate_drop', $cate),
+        $inp = $('div.cate_inp', $cate);
+
+        $tri.on('click', function(event) {
+            var $el = $(this);
+            if( $el.data('active') !== 'on' ) {
+              $drop[0].style.display = 'block';
+              $el.data('active', 'on');
+            } else {
+              $drop[0].style.display = 'none';
+              $el.data('active', 'off')
+            }
+        });
+
+        $drop.on('mouseover', 'li', function(event) {
+          $inp[0].innerHTML = this.innerHTML; 
+        }).on('click', 'li', function(event) {
+          // do something
+          $drop[0].style.display = 'none';
+          $tri.data('active', 'off');
+        });
+    }(jQuery));
+    (function($) {
+      var $cate = $('#date'),
+        $tri = $('.cate_tri', $cate),
+        $drop = $('div.cate_drop', $cate),
+        $inp = $('div.cate_inp', $cate);
+
+        $tri.on('click', function(event) {
+            var $el = $(this);
+            if( $el.data('active') !== 'on' ) {
+              $drop[0].style.display = 'block';
+              $el.data('active', 'on');
+            } else {
+              $drop[0].style.display = 'none';
+              $el.data('active', 'off')
+            }
+        });
+
+        $drop.on('mouseover', 'li', function(event) {
+          $inp[0].innerHTML = this.innerHTML; 
+        }).on('click', 'li', function(event) {
+          // do something
+          $drop[0].style.display = 'none';
+          $tri.data('active', 'off');
+        });
+    }(jQuery));
+    </script>
+</html>

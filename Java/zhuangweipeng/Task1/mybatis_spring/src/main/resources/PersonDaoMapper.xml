@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/mybatis-3-mapper.dtd">
+<mapper namespace="com.jasper.dao.PersonDao">
+    <select id="getPerson" parameterType="int" resultType="com.jasper.bean.Person">
+        select * from mybatis_emp where id=#{id}
+    </select>
+
+    <update id="updateEmp" parameterType="com.jasper.bean.Person" >
+        update mybatis_emp set emp="副经理"，salary=12358.5 where name=#{name}
+    </update>
+
+    <select id="findAllById" resultType="com.jasper.bean.Person" parameterType="java.lang.String">
+        select * from mybatis_emp
+    </select>
+
+    <insert id="insertUser" parameterType="com.jasper.bean.Person">
+        insert into mybatis_emp(name,emp,salary) valuses(#{name},#{emp},#{salary})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from mybatis_emp where id=#{id}
+    </delete>
+</mapper>

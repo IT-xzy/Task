@@ -1,0 +1,18 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!--========================远程连接服务端 配置=============================-->
+<bean name="StudentImpl" class="com.service.impl.StudentServiceImpl"/>
+
+<bean name="RmiService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="service" ref="StudentImpl"/>
+    <property name="serviceName" value="StudentService"/>
+    <property name="serviceInterface" value="com.service.StudentService"/>
+    <property name="registryPort" value="1088"/>
+</bean>
+
+</beans>
+

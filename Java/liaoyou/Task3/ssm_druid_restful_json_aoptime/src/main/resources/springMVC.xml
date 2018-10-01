@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--声明使用注解的方式进行配置-->
+    <context:annotation-config/>
+
+    <!--扫描Controller并将其生命周期纳入spring管理-->
+    <context:component-scan base-package="com.leo.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--扫描包com.leo.aspect，定位切面类：针对controller类，因为controller类纳入spring进行管理是在此配置文件中进行的-->
+    <context:component-scan base-package="com.leo.aspect"/>
+    <!--找到被注解的切面类，进行切面配置-->
+    <aop:aspectj-autoproxy/>
+
+    <!--注解驱动，以使得访问路径与方法的匹配可以通过注解配置-->
+    <!--配置此驱动时，默认配置了RequestMappingHandlerAdapter，当使用@RequestBody时，该adapter根据request header中的Content-Type
+        来选取HttpMessageConverter合适的子类来解析，而@ResponseBody时，根据Response header中的Accept属性来选择合适的converter-->
+    <mvc:annotation-driven/>
+
+    <!--json中文处理-->
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes" value="text/plain;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+</beans>

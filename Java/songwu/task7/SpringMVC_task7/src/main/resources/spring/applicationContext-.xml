@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="com.task7"></context:component-scan>
+
+
+    <import resource="applicationContext-redis.xml"/>
+
+    <!--加载数据资源属性文件1 -->
+    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="location" value="classpath:db.properties"></property>-->
+    <!--</bean>-->
+
+    <!-- 引入配置文件 ，可配置多个properties文件-->
+
+    <!--<bean id="propertyConfigurer"-->
+          <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >-->
+        <!--&lt;!&ndash;<property name="location" value="classpath:jdbc.properties" />&ndash;&gt;-->
+        <!--<property name="locations">-->
+            <!--<list >-->
+                <!--<value>classpath:db.properties</value>-->
+                <!--<value>classpath:memcache.properties</value>-->
+                <!--<value>classpath:message.properties </value>-->
+            <!--</list>-->
+        <!--</property >-->
+    <!--</bean>-->
+
+    <!--加载数据资源属性文件2 -->
+    <context:property-placeholder location="classpath:db.properties" ignore-unresolvable="true" file-encoding="UTF-8"/>
+    <context:property-placeholder location="classpath:memcache.properties" ignore-unresolvable="true" file-encoding="UTF-8"/>
+    <!--<context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true" file-encoding="UTF-8"/>-->
+    <context:property-placeholder location="classpath:message.properties" ignore-unresolvable="true" file-encoding="UTF-8"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+
+        <property name="driverClassName" value="${jdbc.driver}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="initialSize" value="${InitialPoolSize}"></property>
+        <property name="maxActive" value="${MaxActive}"></property>
+        <property name="maxIdle" value="${MaxIdleTime}"></property>
+        <property name="defaultAutoCommit" value="false"></property>
+        <!--最后一个属性设置为defaultAutoCommit为false，这样数据库进行操作时就不会每进行一个数据库操作就自动提交一次事务了。-->
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="typeAliasesPackage" value="com.task7.pojo"></property>
+        <!--Mapper.xml文件与mapper接口在同一个包下时可以不用注入-->
+        <!--<property name="mapperLocations" value="classpath*:com/task2/mapper/UserMapper.xml"></property>-->
+    </bean>
+
+    <!--指定扫描的包名，如果有多个包就用逗号隔开-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描映射文件mapper-->
+        <property name="basePackage" value="com.task7.mapper"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+
+
+    </bean>
+
+<bean id="userServiceImpl" class="com.task7.service.UserServiceImpl"> </bean>
+
+    <bean id="professionServiceImpl" class="com.task7.service.ProfessionServiceImpl"></bean>
+
+    <bean id="loginServiceImpl" class="com.task7.service.LoginServiceImpl"></bean>
+
+
+
+    <!--配置memcache1-->
+
+
+    <bean id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+        <!--Xmemcached是基于java nio的client实现，默认对一个memcached节点只有一个连接-->
+        <property name="connectionPoolSize" value="1"/>
+        <!--ailure模式是指，当一个memcached节点down掉的时候，发往这个节点的请求将直接失败，而不是发送给下一个有效的memcached节点-->
+        <property name="failureMode" value="true"/>
+        <!-- XMemcachedClientBuilder have two arguments.First is server list,and
+            second is weights array. -->
+        <constructor-arg>
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg>
+                        <value>${memcached.server1.host}</value>
+                    </constructor-arg>
+                    <constructor-arg>
+                        <value>${memcached.server1.port}</value>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+        <property name="connectTimeout" value="3000"/>
+
+        <property name="commandFactory">
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory"/>
+        </property>
+
+        <property name="sessionLocator">
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator"/>
+        </property>
+
+        <property name="transcoder">
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder"/>
+        </property>
+    </bean>
+    <!-- Use factory bean to build memcached client -->
+    <bean id="memcachedClient" factory-bean="memcachedClientBuilder"
+          factory-method="build"
+          destroy-method="shutdown"/>
+
+
+
+</beans>
+

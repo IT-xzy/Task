@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <!--在java web项目启动时，容器会读取配置文件web.xml,加载顺序与web.xml中内容的先后顺序无关。配置文件加载的先后顺序为:-->
+  <!--①<context-param>,②<listener>,③<filter>,④<servlet>.-->
+
+  <display-name>Archetype Created Web Application</display-name>
+
+  <!--<listener>-->
+    <!--<listener-class>com.opt.controller.TuscanyListener</listener-class>-->
+  <!--</listener>-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationcontext.xml</param-value>
+  </context-param>
+
+  <!--&lt;!&ndash; 加载spring的配置文件&ndash;&gt;-->
+  <!--&lt;!&ndash; ContextLoaderListener监听器：监听Web容器，一旦启动，自动装配ApplicationContext的配置信息 &ndash;&gt;-->
+  <!--<listener>-->
+  <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+  <!--</listener>-->
+  <!---->
+  <!--&lt;!&ndash; 告知ApplicationContext的位置在哪，如果不配置，默认去/WEB-INF目录下找 &ndash;&gt;-->
+  <!--&lt;!&ndash; 如果是监听多个文件，可用‘,’隔开 &ndash;&gt;-->
+  <!--<context-param>-->
+  <!--<param-name>contextConfigLocation</param-name>-->
+  <!--<param-value>classpath:applicationcontext.xml</param-value>-->
+  <!--</context-param>-->
+  <!--<filter>-->
+    <!--<filter-name>TuscanyFilter</filter-name>-->
+    <!--<filter-class>com.opt.controller.TuscanyFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>TuscanyFilter</filter-name>-->
+    <!--<url-pattern>*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!-- 初始化 DispatcherServlet时，该框架在 web应用程序WEB-INF目录中寻找一个名为[servlet-名称]-servlet.xml的文件，在那里定义相关的Beans，重写在全局中定义的任何Beans -->
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/SpringMVC-servlet.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>listings</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>readonly</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <!--<load-on-startup>1</load-on-startup>-->
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!--　该servlet为tomcat,jetty等容器提供,将静态资源映射从/改为/static/目录，如原来访问　http://localhost/foo.css,现在http://localhost/static/foo.css　-->
+  <!-- 不拦截静态文件 -->
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <url-pattern>*.css</url-pattern>
+    <url-pattern>*.js</url-pattern>
+    <url-pattern>*.png</url-pattern>
+    <url-pattern>*.jpg</url-pattern>
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

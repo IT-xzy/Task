@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>杀人游戏</title>
+    <link rel="stylesheet" href="css/judeplay.css">
+    <script src="js/flex.js"></script>
+    <style>
+        .ghost-speak::before{
+            content: "";
+            position: absolute;
+            top:50%;
+            left: -82px;
+            width: 56px;
+            height: 56px;
+            margin-top: -30px;
+            border-radius: 50%;
+            border: 1px solid #888;
+            background: url(img/sun.png) no-repeat center #fff;
+        }
+        .day-num {
+            margin: 10px 0;
+        }
+        main{
+            padding-bottom: 1rem;
+        }
+        footer {
+
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            background-color: #fff;
+            z-index: 2;
+            height: 1.2rem;
+            width: 100%;
+        }
+        footer button{
+            width: 45%;
+            height: 80%;
+            font-size: .3rem;
+            border-radius: .1rem;
+            outline: none;
+            background: orange;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>    
+        <i class="back-icon" id="backBtn"></i>
+        <span class="result">法官台本</span>
+        <i class="close-icon"></i>
+    </header>
+    <main>    
+    </main>
+    <footer>
+        <button type="button" id="gameover">结束游戏</button>
+        <button type="button" id="dayLog">法官日志</button>
+    </footer>
+     <script src="js/jq.js"></script>
+     
+     <script src="js/stateMachine.js"></script>
+     <script src="js/judeplay.js"></script>
+</body>
+</html>

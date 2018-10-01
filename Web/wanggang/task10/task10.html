@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="jquery-3.3.1.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/task10.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 align-self-center">
+                    <p>客服热线：010-594-78634</p>
+                </div>
+                <div class="col-sm-8 text-right">
+                    <button class="login">登录</button>
+                    <button>注册</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- 导航栏 -->
+        <div class="box1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- 导航栏 -->
+                        <nav class="navbar navbar-expand-sm navbar-light justify-content-end">
+                            <!-- 折叠按钮 -->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-end" id="navbar1">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">首页</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">在线定制</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">标准箱</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">品质保障</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 流程图 -->
+        <div class="box2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-right">
+                        <div class="hover-box">
+                            <span class="circle">
+                                <span>1</span>
+                            </span>
+                            <span class="text1">1.定制纸箱</span>
+                        </div>
+                        <div class="hover-box">
+                            <span class="circle">
+                                <span>2</span>
+                            </span>
+                            <span class="text1">2.选择数量</span>
+                        </div>
+                        <div class="hover-box">
+                            <span class="circle">
+                                <span>3</span>
+                            </span>
+                            <span class="text1">3.上传附件</span>
+                        </div>
+                        <div class="hover-box">
+                            <span class="circle">
+                                <span>4</span>
+                            </span>
+                            <span class="text1">4.确认下单</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 表单 -->
+        <div class="title-line container">
+            <p>请您按照以下步骤来定制您的纸箱</p>
+        </div>
+        <div class="box3">
+            <div class="container">
+                <!-- 选择箱型 -->
+                <div class="row first-line">
+                    <div class="col-12">
+                        <i class="box-icon"></i>
+                        <p>选择箱型</p>
+                    </div>
+                    <!-- 选择箱型表单 -->
+                </div>
+                <div class="row second-line align-items-center">
+                    <div class="col-sm-8">
+                        <input class="circlebox" type="radio" id="duiko" name="boxtype" checked="checked">
+                        <label for="duiko">对口箱</label>
+                        <input class="circlebox" type="radio" id="planebox" name="boxtype">
+                        <label for="planebox">飞机盒</label>
+                        <input class="circlebox" type="radio" id="skybox" name="boxtype">
+                        <label for="skybox">天地箱</label>
+                    </div>
+                    <div class="col-sm-4 align-self-center text-right">
+                        <div class="down-line">
+                            <button data-toggle="collapse" data-target="#downlist">
+                                查看详情
+                                <p></p>
+                            </button>
+                            <ul id="downlist" class="collapse text-center">
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 确定尺寸 -->
+                <div class="row first-line">
+                    <div class="col-12">
+                        <i class="size-icon"></i>
+                        <p>确定尺寸</p>
+                    </div>
+                </div>
+                <div class="row third-line">
+                    <div class="col-sm-8">
+                        <div class="wai-box">
+                            <input class="circlebox" type="radio" id="wai" name="size" checked="checked">
+                            <label for="wai">外径</label>
+                            <form action="">
+                                <p>长&nbsp;
+                                    <input type="number" name="wai-long" oninput="if(value.length>5)value=value.slice(0,5)">mm
+                                </p>
+                                <p>宽&nbsp;
+                                    <input type="number" name="wai-width" oninput="if(value.length>5)value=value.slice(0,5)">mm
+                                </p>
+                                <p>高&nbsp;
+                                    <input type="number" name="wai-height" oninput="if(value.length>5)value=value.slice(0,5)">mm
+                                </p>
+                            </form>
+                        </div>
+                        <div class="wai-box">
+                            <input class="circlebox" type="radio" id="nei" name="size">
+                            <label for="nei">内径</label>
+                            <form action="">
+                                <p>长&nbsp;
+                                    <input type="number" name="wai-long" oninput="if(value.length>5)value=value.slice(0,5)">mm
+                                </p>
+                                <p>宽&nbsp;
+                                    <input type="number" name="wai-width" oninput="if(value.length>5)value=value.slice(0,5)">mm
+                                </p>
+                                <p>高&nbsp;
+                                    <input type="number" name="wai-height" oninput="if(value.length>5)value=value.slice(0,5)">mm
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 text-right align-self-center">
+                        <div class="down-line">
+                            <button data-toggle="collapse" data-target="#downlist2">
+                                查看详情
+                                <p></p>
+                            </button>
+                            <ul id="downlist2" class="collapse text-center">
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 选择材质 -->
+                <div class="row first-line">
+                    <div class="col-12">
+                        <i class="material-icon"></i>
+                        <p>选择材质</p>
+                    </div>
+                </div>
+                <!-- 第四行材料选择 -->
+                <div class="row forth-line align-items-center">
+                    <div class="col-sm-10">
+                        <input class="circlebox" type="radio" id="material1" name="box-material" checked="checked">
+                        <label for="material1">三层A瓦优质</label>
+                        <input class="circlebox" type="radio" id="material2" name="box-material">
+                        <label for="material2">三层A瓦优质</label>
+                        <input class="circlebox" type="radio" id="material3" name="box-material">
+                        <label for="material3">三层A瓦优质</label>
+                        <input class="circlebox" type="radio" id="material4" name="box-material">
+                        <label for="material4">三层A瓦优质</label>
+                        <input class="circlebox" type="radio" id="material5" name="box-material">
+                        <label for="material5">三层A瓦优质</label>
+                    </div>
+                    <div class="col-sm-2 text-right">
+                        <div class="down-line">
+                            <button data-toggle="collapse" data-target="#downlist3">
+                                查看详情
+                                <p></p>
+                            </button>
+                            <ul id="downlist3" class="collapse text-center">
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                                <li>
+                                    <a href="#">emmmm</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 下一步按钮 -->
+                <div class="row sixth-line">
+                    <div class="col-12 text-center">
+                        <button>
+                            下一步
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <p>
+                        51包装网— 纸箱包装首选服务平台
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    
+                    <p>
+                        关于我们
+                    </p>
+                    <p>配送流程</p>
+                    <p>
+                        联系我们
+                    </p>
+                    <p>
+                        下单指南
+                    </p>
+                    <p>
+                        媒体介绍
+                    </p>
+                
+                </div>
+                <div class="col-sm-4 d-flex justify-content-end">
+                    <p class="text2">
+                        <span>TEL：400-0000-000</span>
+                        <span>企业QQ：123456789</span> 
+                        <span>微信号：XXXXXXX</span>
+                    </p>
+                    <i></i>
+                </div>
+            </div>
+        </div>
+        <div class="last-title text-center">
+            <p>北京五一包装科技有限公司Copyright ©2015</p>
+            <p>   51baozhuang.com015   All rights reserved.</p>
+            <p>   京icp备99999999-1 </p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

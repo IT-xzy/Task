@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+@import"layout";
+
+// 导航栏
+ul{
+    margin: 0 0 0 -15px;
+    padding-left: 0;
+    list-style: none;
+}
+
+nav {
+    background: $green;
+    div.row {
+        display: block;
+        text-align: right;
+        
+        .col-12{
+            padding-right: 0;
+        }
+        a.box{
+            float: left;
+            margin-top: .25rem;
+        }
+        .xiuzhenyuan{
+            width: 3rem;
+        }
+        input {
+            display: none;
+        }
+        input:checked~ul {
+            @media (max-width:767px) {
+                height: 4.12rem;
+                display: block !important;
+            }
+        }
+        @media (max-width:767px) {
+            ul{
+                display: none;
+            }
+        }
+        .nav-toggle-box{
+            height: 1.1rem;
+            line-height: 1.1rem;
+            margin-right: .8rem;
+        }
+        .nav-toggle {
+            display: inline-block;
+            @include box(.6rem, .38rem);
+            padding: .1rem 0;
+            border-top: .06rem solid $white;
+            border-bottom: .06rem solid $white;
+            background: $white content-box;
+
+            &:hover{
+                border-top: .06rem solid $orange;
+                border-bottom: .06rem solid $orange;
+                background: $orange content-box;
+            }
+        }
+        @media (min-width: 768px) {
+            .nav-toggle {
+                display: none;
+            }
+        }
+        @media (max-width: 767px) {
+            .row {
+                display: block;
+            }
+        }
+        a.font{
+            display: inline-block;
+            padding: 0 .4rem;
+            color: $white;
+            border-bottom: .08rem solid $green;
+            line-height: 1.02rem;
+            letter-spacing: .03rem;
+            @media (min-width: 768px) {
+                &:hover {
+                    border-bottom: .08rem solid $white;
+                }
+            }
+        }
+        @media (max-width: 767px) {
+            a.font{
+                @include flex;
+                padding: 0;
+                border: none;
+                overflow: hidden;
+                &:hover {
+                    color: $green;
+                    background: $white;
+                    border: $main-border;
+                }
+            }
+        }
+        @media (min-width: 768px) {
+            ul {
+                display: flex;
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 1.1rem !important;
+            }
+        }
+    }
+}
