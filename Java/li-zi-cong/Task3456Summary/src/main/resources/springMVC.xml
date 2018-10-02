@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+                         http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+                        http://www.springframework.org/schema/mvc
+                        http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:component-scan base-package="jnshu.controller"/>
+
+	<!--启用AOP-->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<!--自定义的拦截器-->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!--path 是/api/get也可以/api/get/* 这样就拦截了前缀是/api/get的Controller-->
+			<mvc:mapping path="/listStudent"/>
+			<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
+			<bean class="jnshu.interceptor.TokenInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!--启用spring的一些annotation -->
+	<!--<context:annotation-config/>-->
+
+	<!--https://blog.csdn.net/my_nice_life/article/details/52910718-->
+	<!--<aop:aspectj-autoproxy proxy-target-class="true" />-->
+	<!--<context:component-scan base-package="Task4.aspect" />-->
+
+	<!--自定义的拦截器-->
+	<!--<mvc:interceptors>-->
+		<!--<mvc:interceptor>-->
+			<!--&lt;!&ndash;path 是/api/get也可以/api/get/* 这样就拦截了前缀是/api/get的Controller&ndash;&gt;-->
+			<!--<mvc:mapping path="/listStudent"/>-->
+			<!--&lt;!&ndash; 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 &ndash;&gt;-->
+			<!--<bean class="Task4.interceptor.TokenInterceptor"/>-->
+		<!--</mvc:interceptor>-->
+	<!--</mvc:interceptors>-->
+
+
+	<!--<mvc:default-servlet-handler/>-->
+
+	<!--启用spring的一些annotation -->
+	<!--<context:annotation-config/>-->
+
+	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+	<!--<context:component-scan base-package="jnshu.controller">-->
+		<!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+	<!--</context:component-scan>-->
+
+	<!--HandlerMapping 无需配置，SpringMVC可以默认启动-->
+
+	<!--静态资源映射-->
+	<!--本项目把静态资源放在了WEB-INF的子目录下，资源映射如下-->
+	<!--<mvc:resources mapping="/css/**" location="WEB-INF/css/"/>-->
+	<!--<mvc:resources mapping="/js/**" location="WEB-INF/js/"/>-->
+	<!--<mvc:resources mapping="/image/**" location="WEB-INF/image/"/>-->
+
+	<!-- 配置注解驱动 可以将request参数与绑定到controller参数上 -->
+	<task:annotation-driven/>
+	<mvc:annotation-driven />
+	<context:annotation-config/>
+	<mvc:default-servlet-handler/>
+	<mvc:resources mapping="/css/**" location="/views/"/>
+	<mvc:resources mapping="/png/**" location="/imges/"/>
+
+	<!--SpringMVC默认视图解析器-->
+	<!--对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
+	<!--默认的视图解析器在上边的解析错误时使用 (默认使用html)- -->
+	<!--<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+	<!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+	<!--&lt;!&ndash;设置JSP文件的目录位置&ndash;&gt;-->
+	<!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
+	<!--<property name="suffix" value=".jsp"/>-->
+	<!--</bean>-->
+
+	<!--Tiles框架视图解析器-->
+	<!--将收到的视图模型交由layout.xml模板处理-->
+	<bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layout.xml</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!--自动搜索切面类-->
+	<!--<context:component-scan base-package="Task4"/>-->
+	<!--启动@AspectJ支持 默认是false。
+	proxy-target-class强制类代理，可以避免无接口类的代理失败，因为我还要统计Controller层的方法,所以此处强制使用类代理-->
+	<!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+	<!--<bean id="userService" class="task2.service.UserService"/>-->
+	<!--<bean id="loggerAspect" class="Task4.aop.LoggerTime"/>-->
+	<!--<aop:config>-->
+	<!--<aop:aspect id="logAspect" ref="loggerAspect">-->
+	<!--<aop:pointcut id="login" expression="execution(* task2.service.UserServiceImpl.login(..))"/>-->
+	<!--<aop:before method="login" pointcut-ref="login"/>-->
+	<!--<aop:after method="login" pointcut-ref="login"/>-->
+	<!--</aop:aspect>-->
+	<!--</aop:config>-->
+	<!--<aop:config>-->
+	<!--<aop:pointcut id="loggerCutpointCon" expression="execution(* task2.controller.StudentController.*(..))"/>-->
+	<!--<aop:aspect id="logAspect" ref="loggerAspect">-->
+	<!--<aop:around pointcut-ref="loggerCutpointCon" method="logCon"/>-->
+	<!--</aop:aspect>-->
+	<!--</aop:config>-->
+
+</beans>
