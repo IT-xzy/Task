@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="com"/>
+    <aop:aspectj-autoproxy/>
+
+    <bean id="memcachedPool" class="com.whalin.MemCached.SockIOPool" factory-method="getInstance"
+          init-method="initialize" lazy-init="false" destroy-method="shutDown">
+        <constructor-arg>
+            <value>memcachedPool</value>
+        </constructor-arg>
+        <!-- 可以设置多个memcached服务器 -->
+        <property name="servers">
+            <list>
+                <value>127.0.0.1:11211</value>
+            </list>
+        </property>
+        <!-- 每个服务器初始连接数 -->
+        <property name="initConn">
+            <value>10</value>
+        </property>
+        <!-- 每个服务器最小连接数 -->
+        <property name="minConn">
+            <value>5</value>
+        </property>
+        <!-- 每个服务器最大连接数 -->
+        <property name="maxConn">
+            <value>250</value>
+        </property>
+        <!-- 主线程睡眠时间 -->
+        <property name="maintSleep">
+            <value>30</value>
+        </property>
+        <!-- TCP/Socket的参数，如果是true在写数据时不缓冲，立即发送出去参数 -->
+        <property name="nagle">
+            <value>false</value>
+        </property>
+        <!-- 连接超时/阻塞读取数据的超时间是 -->
+        <property name="socketTO">
+            <value>3000</value>
+        </property>
+    </bean>
+
+    <bean id="memcachedClient" class="com.whalin.MemCached.MemCachedClient" >
+        <constructor-arg>
+            <value>memcachedPool</value>
+        </constructor-arg>
+
+    </bean>
+
+</beans>
