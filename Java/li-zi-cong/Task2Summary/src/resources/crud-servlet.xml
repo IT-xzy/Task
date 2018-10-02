@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+
+    <!--开启扫描-->
+
+
+    <!-- scan the package and the sub package   接口所在路径-->
+    <context:component-scan base-package="main.com.jnshu.controller"/>
+    <!--包括 过滤器 表达
+        设置：只扫描com.how2java.controller指定下的有@Controller下的java类，并注册成bean
+        不再扫描其包下的子包中的类
+        -->
+    <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+<!--</context:component-scan>-->
+
+
+    <!-- don't handle the static resource -->
+    <!--筛选器、筛选静态资源请求：在拦截器将静态资源和动态资源一起拦截前，先把静态资源筛选出来
+    这个标签起作用的前提就是需要我们把静态资源放在webapp下，而非WEB-INF下，否则还是会无效-->
+    <mvc:default-servlet-handler />
+
+
+    <!-- if you use annotation you must configure following setting  开启MVC注解识别-->
+    <mvc:annotation-driven/>
+
+
+    <!-- 视图解析器configure the InternalResourceViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/view/jsp/" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+
+</beans>

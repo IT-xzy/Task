@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                       http://www.springframework.org/schema/context
+                       http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                       http://www.springframework.org/schema/mvc
+                       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+
+    <!--开启扫描-->
+    <!--<context:component-scan base-package="com.jnshu.task1.annotation.mapper"/>-->
+    <context:component-scan base-package="main.com.jnshu"/>
+
+    <!-- 确定数据源配置文件路径 -->
+    <!--<context:property-placeholder location="DB1.properties"/>-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:datasource.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${driver}" />
+        <property name="url" value="${url}" />
+        <property name="username" value="${username}" />
+        <property name="password" value="${password}" />
+        <!--&lt;!&ndash; 初始化连接大小 &ndash;&gt;-->
+        <!--<property name="initialSize" value="${initialSize}"/>-->
+        <!--&lt;!&ndash; 连接池最大数量 &ndash;&gt;-->
+        <!--<property name="maxActive" value="${maxActive}"/>-->
+        <!--&lt;!&ndash; 连接池最大空闲 &ndash;&gt;-->
+        <!--<property name="maxIdle" value="${maxIdle}"/>-->
+        <!--&lt;!&ndash; 连接池最小空闲 &ndash;&gt;-->
+        <!--<property name="minIdle" value="${minIdle}"/>-->
+        <!--&lt;!&ndash; 获取连接最大等待时间 &ndash;&gt;-->
+        <!--<property name="maxWait" value="${maxWait}"/>-->
+    </bean>
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="resources/mappers/StudentInfoMapper.xml"/>
+    </bean>
+
+    <!--确定mybatis SQL语句模板mapper接口-->
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="mapperInterface" value="main.com.jnshu.dao.StudentInfoMapper"/>
+    </bean>
+
+    <!--&lt;!&ndash; (事务管理)transaction manager, use JtaTransactionManager for global tx &ndash;&gt;-->
+    <!--<bean id="transactionManager"-->
+    <!--class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+    <!--<property name="dataSource" ref="dataSource" />-->
+    <!--</bean>-->
+
+</beans>
