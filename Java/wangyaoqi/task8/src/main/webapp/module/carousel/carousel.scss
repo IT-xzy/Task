@@ -1,0 +1,341 @@
+@charset "utf-8";
+body{
+  margin:0;
+}
+.carousel-main{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+   .label{
+    position: absolute;
+    top: 10vw;
+    width: 5vw;
+    height: 5vw;
+  }
+  .a1_go-3{
+    left: 0;
+  }
+  .a2_go-2{
+    right: 0;
+  }
+  .b1_go-1{
+    left: 0;
+  }
+  .b2_go-3{
+    right: 0;
+  }
+  .c1_go-2{
+    left: 0;
+  }
+  .c2_go-1{
+    right: 0;
+  }
+  .arrow-left{
+    position: absolute;
+    top: 11.085vw;
+    left: 1rem;
+    z-index: 4;
+    display: inline-block;
+    width: 2vw;
+    height: 2vw;
+    border-top: 5px solid #999;
+    border-right: 5px solid #999;
+    pointer-events: none;
+    transform: rotate(-135deg);
+  }
+  .arrow-right{
+    position: absolute;
+    top: 11.085vw;
+    right: 1rem;
+    z-index: 4;
+    display: inline-block;
+    width: 2vw;
+    height: 2vw;
+    border-top: 5px solid #999;
+    border-right: 5px solid #999;
+    pointer-events: none;
+    transform: rotate(45deg);
+  }
+}
+.label-left:hover ~ .arrow-left{
+  border-color: #fff;
+}
+.label-right:hover ~ .arrow-right{
+  border-color: #fff;
+}
+/* 使用绝对定位隐藏图片，三张图片重叠*/
+.carousel-main{
+  position: relative;
+}
+.carousel_img-1{
+  width: 100%;
+  height: 25vw;
+  pointer-events: none;
+}
+.carousel_img-2{
+  @extend .carousel_img-1;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+.carousel_img-3{
+  @extend .carousel_img-1;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+/* 隐藏input*/
+.carousel-main{
+  input{
+    display: none;
+  }
+}
+
+/* 隐藏b,c两组按钮*/
+.b1_go-1{
+  display: none;
+}
+.b2_go-3{
+  display: none;
+}
+.c1_go-2{
+  display: none;
+}
+.c2_go-1{
+  display: none;
+}
+/* input控制*/
+/* 按钮组*/
+
+/* a1 点击按钮a1后隐藏a1,a2,b1,b2,显示c1,c2,点击按钮a1后显示图片3*/
+.carousel-main_input--a1:checked ~ .a1_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a1:checked ~ .a2_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a1:checked ~  .b1_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a1:checked ~  .b2_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a1:checked ~ .c1_go-2{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--a1:checked ~ .c2_go-1{
+  display: block;
+  z-index: 3;
+}
+
+.carousel-main_input--a1:checked ~ .carousel_img-3{
+  z-index: 2;
+}
+.carousel-main_input--a1:checked .go-3{
+  background: #fff;
+}
+
+
+/* a2 点击按钮a2后隐藏a1,a2,c1,c2,显示b1,b2,.点击按钮a2后显示图片2*/
+.carousel-main_input--a2:checked ~ .a1_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a2:checked ~ .a2_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a2:checked ~  .c1_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a2:checked ~  .c2_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--a2:checked ~ .b1_go-1{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--a2:checked ~ .b2_go-3{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--a2:checked ~ .carousel_img-2{
+  z-index: 2;
+}
+
+/* b1 点击按钮b1后隐藏b1,b2,c1,c2,显示a1,a2,点击按钮b1后显示图片1*/
+.carousel-main_input--b1:checked ~ .c1_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b1:checked ~ .c2_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b1:checked ~  .b1_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b1:checked ~  .b2_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b1:checked ~ .a1_go-3{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--b1:checked ~ .a2_go-2{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--b1:checked ~ .carousel_img-2,.carousel_img-3{
+  z-index: -1;
+}
+
+/* b2 点击按钮b2后隐藏a1,a2,b1,b2,显示c1,c2,点击按钮b2后显示图片3*/
+.carousel-main_input--b2:checked ~ .a1_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b2:checked ~ .a2_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b2:checked ~  .b1_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b2:checked ~  .b2_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--b2:checked ~ .c1_go-2{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--b2:checked ~ .c2_go-1{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--b2:checked ~ .carousel_img-3{
+  z-index: 2;
+}
+
+/* c1 点击按钮c1后隐藏a1,a2,c1,c2,显示b1,b2,点击按钮c1后显示图片2*/
+.carousel-main_input--c1:checked ~ .a1_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c1:checked ~ .a2_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c1:checked ~  .c1_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c1:checked ~  .c2_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c1:checked ~ .b1_go-1{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--c1:checked ~ .b2_go-3{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--c1:checked ~ .carousel_img-2{
+  z-index: 2;
+}
+
+/* c2 点击按钮c2后隐藏b1,b2,c1,c2,显示a1,a2,点击按钮c2后显示图片1*/
+.carousel-main_input--c2:checked ~ .c1_go-2{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c2:checked ~ .c2_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c2:checked ~  .b1_go-1{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c2:checked ~  .b2_go-3{
+  display: none;
+  z-index: -2;
+}
+.carousel-main_input--c2:checked ~ .a1_go-3{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--c2:checked ~ .a2_go-2{
+  display: block;
+  z-index: 3;
+}
+.carousel-main_input--b1:checked ~ .carousel_img-2,.carousel_img-3{
+  z-index: -1;
+}
+
+/*底部样式按钮*/
+.go-1{
+  position: absolute;
+  z-index: 4;
+  bottom: 1vw;
+  left: 47.5%;
+  right: 51.5%;
+}
+.go-2{
+  position: absolute;
+  z-index: 4;
+  bottom: 1vw;
+  left: 49.5%;
+  right: 49.5%;
+}
+.go-3{
+  position: absolute;
+  z-index: 4;
+  bottom: 1vw;
+  left: 51.5%;
+  right: 47.5%;
+}
+.circle::before{
+    display: inline-block;
+    content: "";
+    width: 1vw;
+    height: 1vw;
+    border: 1px solid #fff;
+    border-radius: 50%;
+}
+.carousel-main_input--a1:checked ~ .go-3::before {
+     background-color: #fff;
+}
+.carousel-main_input--a2:checked ~ .go-2::before {
+  background-color: #fff;
+}
+.carousel-main_input--b1:checked ~ .go-1::before {
+  background-color: #fff;
+}
+.carousel-main_input--b2:checked ~ .go-3::before {
+  background-color: #fff;
+}
+.carousel-main_input--c1:checked ~ .go-2::before {
+  background-color: #fff;
+}
+.carousel-main_input--c2:checked ~ .go-1::before {
+  background-color: #fff;
+}
+
+
+
+
+
