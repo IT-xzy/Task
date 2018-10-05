@@ -1,0 +1,127 @@
+<div class="box">
+    <div class="top-box">
+        <div class="top">
+            <div class="content-box">
+                <strong>标&emsp;&emsp;题</strong>
+                <input type="text" ng-model="title">
+            </div>
+            <div class="content-box">
+                <strong>创&ensp;建&ensp;者</strong>
+                <input type="text" ng-model="user">
+            </div>
+            <div class="content-box">
+                <strong>状&emsp;&emsp;态</strong>
+                <select ng-model="selectedStatus" ng-options="x.num as x.status for x in statusItem"></select>
+            </div>
+            <div class="content-box">
+                <strong>类&emsp;&emsp;型</strong>
+                <select ng-model="selectedType" ng-options="x.num as x.type for x in typeItem"></select>
+            </div>
+            <div class="content-box">
+                <strong class="date">发布时间</strong>
+                <!-- <input type="date" ng-model="starttime"> -->
+                <input type="text" id="starttime" ng-model="starttime">
+                <!-- <img  class="date" src="../img/timg.jpg" alt=""> -->
+            </div>
+            <div class="content-box">
+                <strong class="to date"></strong>
+                <!-- <input type="date" ng-model="endtime"> -->
+                <input type="text" id="endtime" ng-model="endtime">
+                <!-- <img  class="date" src="../img/timg.jpg" alt=""> -->
+            </div>
+        </div>
+        <div class="bottom">
+            <button class="query" ng-click="query()">搜索</button>
+            <button class="delete" ng-click="delete()">重置</button>
+        </div>
+    </div>
+    <div class="bottom-box">
+        <div class="article-bg">
+            <div class="article">
+                <strong>Article列表</strong>
+                <button class="add" ng-click="add()">+新增</button>
+            </div>
+        </div>
+        <div class="grid1">
+            <table class="grid1-header">
+                <tr class="grid1-header-style">
+                    <th class="width3">序号</th>
+                    <th class="width1">图片</th>
+                    <th class="width1">名称</th>
+                    <th class="width1">类型</th>
+                    <th class="width1">发布时间</th>
+                    <th class="width1">修改时间</th>
+                    <th class="width1">发布者</th>
+                    <th class="width1">状态</th>
+                    <th class="width2">操作</th>
+                </tr>
+                <tr class="grid1-content-style" ng-repeat="x in name">
+                    <td>{{$index|indexFilter}}</td>
+                    <td><img src="{{x.img}}" alt="" srcset=""></td>
+                    <!-- <td>{{x.id}}</td> -->
+                    <td>{{x.title}}</td>
+                    <td>{{x.type|typeFilter}}</td>
+                    <td>{{x.createAt|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{x.updateAt|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    <td>{{x.author}}</td>
+                    <td>{{x.status|statusFilter}}</td>
+                    <td>
+                        <button class="grid1-content-compile" ng-click="compile($index)">编辑</button>
+                        <button class="rid1-content-offline" ng-click="swops($index)">{{swop($index)}}</button>
+                        <button class="grid1-content-delete" ng-click="deleteList($index)">删除</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="list-footer">
+    <ul>
+        <li>
+            <span class="font">总共{{sum}}页</span>
+        </li>
+        <li>
+            <!-- <span class="font">当前为第{{now}}页</span> -->
+            <span class="font">当前为第{{now}}页</span>
+        </li>
+        <li>
+            <ul ng-if="btn">
+                <li>
+                    <button class="list-btn" ng-click="start()">首页</button>
+                </li>
+                <li>    
+                    <button class="list-btn" ng-show="showForward" ng-click="forward()"><</button>
+                </li>
+                <li>
+                    <button class="list-btn" ng-hide="btn1" ng-style="bg1" ng-click="skip1()">{{value1}}</button>
+                </li>
+                <li>
+                    <button class="list-btn" ng-hide="btn2" ng-click="skip2()"  ng-style="bg2">{{value2}}</button>
+                </li>
+                <li>
+                    <button class="list-btn" ng-hide="btn3"  ng-click="skip3()"  ng-style="bg3">{{value3}}</button>
+                </li>
+                <li>
+                    <button class="list-btn" ng-hide="btn4" ng-click="skip4()"  ng-style="bg4">{{value4}}</button>
+                </li>
+                <li>
+                    <button class="list-btn" ng-hide="btn5" ng-click="skip5()"  ng-style="bg5">{{value5}}</button>
+                </li>
+                <li>
+                    <button class="list-btn" ng-show="showBackwards" ng-click="backwards()">></button>
+                </li>
+                <li>
+                    <button class="list-btn" ng-click="end()">尾页</button>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span class="font">去第</span>
+            <input ng-model="number">
+            <span class="font">页</span>
+        </li>
+        <li>
+            <button class="list-btn" ng-click="ok()">确定</button>
+        </li>
+    </ul>
+</div>

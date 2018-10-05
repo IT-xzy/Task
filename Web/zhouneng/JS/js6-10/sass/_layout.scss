@@ -1,0 +1,83 @@
+// 变量
+$blue:#03a9f4;
+$white:#ffffff;
+$gray:#f5f5f5;
+$home:#337ab7;
+$home-border:1px solid #e8e8e8;
+
+
+// 混合器
+
+// flex垂直水平居中
+@mixin flex($y,$x) {
+    display: flex;
+    justify-content: $y;
+    align-items: $x;
+}
+
+//宽高
+@mixin box($w,$h) {
+    width: $w;
+    height: $h;
+}
+
+
+// 绝对定位水平居中
+@mixin absolute-level($m-l) {
+    position: absolute;
+    left:50%;
+    margin-left: $m-l;
+}
+
+// 绝对定位垂直居中
+@mixin absolute-vertical($m-t) {
+    position: absolute;
+    top:50%;
+    margin-top:$m-t;
+}
+
+// 绝对定位水平垂直居中
+@mixin absolute-center($m-t,$m-l) {
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin:$m-t $m-l;
+}
+
+
+// input左边的线条
+@mixin name {
+    content: "";
+    display: inline-block;
+    @include box(2px,17px);
+    margin-left: 30px;
+    background: $gray;
+}
+
+
+// 重置container宽度
+@mixin name {
+    @media (min-width: 1200px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+    
+    @media (min-width: 992px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+    
+    @media (min-width: 768px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+    
+    @media (min-width: 576px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+}
