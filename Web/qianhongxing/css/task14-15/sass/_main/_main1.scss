@@ -1,0 +1,323 @@
+/* 主体开始 */
+main {
+    padding-top: 165px;
+    background: $bgfa;
+
+    .main-title {
+        /* 主体间小标题 */
+        margin: 60px 0;
+        @include font($fz18, $bg00);
+        font-weight: bolder;
+        text-align: center;
+    }
+}
+
+/* 修真院优势 */
+.main-home {
+
+    .col-25:nth-child(1) {
+        @include flex(flex-start, center);
+        flex-direction: column;
+        height: 250px;
+
+        .mh-icon {
+            @include box(60px, 62px);
+            background: url(../../images/css-s.png) no-repeat -193px -10px;
+        }
+
+        h2 {
+            @include font($fz18, $bg00);
+        }
+
+        p {
+            @include font($fz16, #bbb);
+        }
+    }
+
+    .col-25:nth-child(2) {
+        @extend .col-25:nth-child(1);
+
+        .mh-icon {
+            background: url(../../images/css-s.png) no-repeat -122px 0px;
+        }
+
+    }
+
+    .col-25:nth-child(3) {
+        @extend .col-25:nth-child(1);
+
+        .mh-icon {
+            background: url(../../images/css-s.png) no-repeat -6px -115px;
+        }
+
+    }
+
+    .col-25:nth-child(4) {
+
+        .mh-people {
+            margin-bottom: 5%;
+
+            @media screen and (max-width: 991px) {
+                text-align: center;
+            }
+
+            span:nth-child(1) {
+                display: inline-block;
+                @include box(13px, 13px);
+                vertical-align: 0;
+                background: url(../../images/css-s.png) no-repeat -167px -78px;
+            }
+
+            span:nth-child(2) {
+                @include font($fz16, $bg29);
+                line-height: 32px;
+            }
+
+            span:nth-child(4) {
+                @include font($fz18, #bbb);
+            }
+
+        }
+    }
+
+
+
+}
+
+/* 学习流程 */
+.main-study {
+
+    .col-25 {
+        position: relative;
+        @include flex(flex-start, center);
+        margin-bottom: 90px;
+
+        @media screen and (max-width: 767px) {
+            padding: 0 20%;
+        }
+
+        .ms-number {
+            // min-width: 70px;
+            flex-shrink: 0;
+            @include box(70px, 70px);
+            margin-right: 5%;
+            border-radius: 50%;
+            box-shadow: 0 0 4px 1px #ccc;
+            @include font($fz18, $bg29);
+            text-align: center;
+            line-height: 70px;
+            background: $bgff;
+        }
+
+        .ms-content {
+            // max-width: 80%;
+            @include font($fz14, #bbb);
+        }
+
+    }
+
+    @media screen and (min-width:992px) {
+        .next::after {
+            position: absolute;
+            right: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            content: "";
+            @include box(27px, 23px);
+            background: url(../../images/css-s.png) no-repeat -203px -94px;
+        }
+    }
+
+}
+
+/* 学员展示 */
+.main-student {
+    position: relative;
+
+    .col-25 {
+        margin-bottom: 90px;
+
+        div {
+            @include flex(flex-start, center);
+            flex-direction: column;
+            padding: 6%;
+            box-shadow: 0 0 1px 1px #ccc;
+            border-radius: 5px;
+            background: $bgff;
+
+            span {
+                @include box(108px, 108px);
+                border-radius: 50%;
+                overflow: hidden;
+                background: url(../../images/css-student.png) no-repeat -10px -10px;
+            }
+
+            p:nth-child(2) {
+                @include font($fz18, $bg00);
+            }
+
+            p:nth-child(3) {
+                @include font($fz16, #ccc);
+            }
+        }
+
+
+    }
+
+    .col-25:nth-child(2) {
+        span {
+            background: url(../../images/css-student.png) no-repeat -10px -138px;
+        }
+    }
+
+    .col-25:nth-child(3) {
+        span {
+            background: url(../../images/css-student.png) no-repeat -138px -138px;
+        }
+    }
+
+    .col-25:nth-child(4) {
+        span {
+            background: url(../../images/css-student.png) no-repeat -138px -10px;
+        }
+    }
+
+    @media screen and (min-width:992px) {
+
+        ul {
+            position: absolute;
+            bottom: 8%;
+            left: 0;
+            right: 0;
+            @include flex(center, center);
+
+            li {
+                float: left;
+                @include box(20px, 20px);
+                margin: 0 2%;
+                border-radius: 50%;
+                // border: 1px solid $bgff;
+                box-shadow: 0 0 1px 1px #ccc;
+                background: $bgff;
+
+                &:hover {
+                    background: $bg29;
+                }
+            }
+        }
+    }
+}
+
+
+/* 合作企业 */
+.main-partner {
+    @media screen and (max-width: 767px) {
+        justify-content: center;
+    }
+
+    .col-2 {
+        @include flex(center, center);
+        min-height: 175px;
+        margin-bottom: 90px;
+        background: $bgff;
+
+        &:hover {
+            position: relative;
+            box-shadow: 0px 0px 4px 2px #ccc;
+        }
+    }
+
+    .col-2:nth-child(1) {
+
+        span {
+            @include box(189px, 70px);
+            background: $bgff url(../../images/css-partner.png) no-repeat -10px -10px;
+            zoom: .5;
+        }
+
+    }
+
+    .col-2:nth-child(2) {
+
+        span {
+            @include box(135px, 70px);
+            background: $bgff url(../../images/css-partner.png) no-repeat -213px -3px;
+        }
+
+    }
+
+    .col-2:nth-child(3) {
+
+        span {
+            @include box(189px, 70px);
+            background: $bgff url(../../images/css-partner.png) no-repeat 0 -81px;
+        }
+
+    }
+
+    .col-2:nth-child(4) {
+
+        span {
+            @include box(156px, 70px);
+            background: $bgff url(../../images/css-partner.png) no-repeat 0 -147px;
+        }
+
+    }
+
+    .col-2:nth-child(5) {
+
+        span {
+            @include box(75px, 70px);
+            background: $bgff url(../../images/css-partner.png) no-repeat 0 -221px;
+        }
+
+    }
+}
+
+/* 友情链接 */
+.main-link {
+    overflow: hidden;
+    background: $bgff;
+
+    p {
+        @include font($fz18, $bg00);
+        font-weight: bolder;
+        text-align: center;
+    }
+
+    .row {
+        margin: 20px 0;
+
+        // @media screen and (max-width: 991px) {
+        //     padding: 0 10%;
+        // }
+
+        a {
+            position: relative;
+            margin: 5px 0;
+            @include font($fz14, #ccc);
+
+            @media screen and (max-width: 991px) {
+                padding-left: 5%;
+            }
+
+            &::before {
+                position: absolute;
+                top: 50%;
+                left: 5%;
+                transform: translateY(-50%);
+                display: inline-block;
+                content: "";
+                @include box(5px, 5px);
+                border-radius: 50%;
+                background: #ccc;
+
+            }
+
+            &:hover {
+                color: $bg29;
+                text-decoration: underline;
+            }
+        }
+    }
+}

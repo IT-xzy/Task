@@ -1,0 +1,254 @@
+@mixin box($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin font-base($f-s, $f-c) {
+    font-size: $f-s;
+    color: $f-c;
+}
+
+@mixin border($b-w, $b-t, $b-c) {
+    border: $b-w $b-t $b-c;
+}
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    // overflow: hidden;
+    margin: 0;
+    font-size: .16rem;
+    font-family: "STHeitiSC-Light";
+}
+
+p {
+    margin: 0;
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+ul {
+    margin-top: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+/* 头部开始 */
+header {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    @include box(100%, .88rem);
+    text-align: center;
+    background: #5fc0cd;
+
+    .back {
+        position: absolute;
+        left: 5%;
+        top: 33%;
+        display: inline-block;
+        @include box(.3rem, .3rem);
+        border-top: .02rem solid #fff;
+        border-right: .02rem solid #fff;
+        transform: rotate(225deg);
+    }
+
+    .h-page {
+        @include font-base(.36rem, #fff);
+        line-height: .88rem;
+    }
+}
+
+/* 主体开始 */
+/* 导航栏开始 */
+main {
+    margin-top: .88rem;
+
+    nav {
+        display: flex;
+        align-items: center;
+        @include box(100%, 3.26rem);
+        margin: 0;
+        background: url(../images/navBG.png) no-repeat;
+        background-size: cover;
+        zoom: .5;
+
+        .female {
+            overflow: hidden;
+            @include box(1.69rem, 1.69rem);
+            margin: 0 5%;
+            border-radius: 50%;
+            text-align: center;
+            background: #efefef;
+
+            span {
+                display: inline-block;
+                @include box(1.14rem, 1.57rem);
+                margin-top: 10%;
+                background: url(../images/css.png) no-repeat -.1rem -.1rem;
+            }
+        }
+
+        .personal {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 35%;
+
+            .name {
+                margin-bottom: 10%;
+                @include font-base(.36rem, #fff);
+
+                span {
+                    margin-right: 5%;
+                }
+            }
+
+            .location {
+                @include font-base(.24rem, #fff);
+
+                span {
+                    display: inline-block;
+                    @include box(.18rem, .23rem);
+                    margin-right: 5%;
+                    vertical-align: 0;
+                    background: url(../images/css.png) no-repeat -1.44rem -.53rem;
+                }
+            }
+        }
+    }
+}
+
+/* 信息区开始 */
+main ul {
+    margin-bottom: 2.28rem;
+    font-size: .32rem;
+
+    li:nth-child(1) {
+        border-bottom: .02rem solid #ccc;
+
+        span {
+            margin-left: .3rem;
+            padding-left: .3rem;
+            line-height: 1rem;
+            border-left: .05rem solid #5fc0cd;
+        }
+    }
+
+    li:nth-child(2) {
+        width: 90%;
+        margin-left: 5%;
+        padding-left: 5%;
+        border-bottom: .02rem solid #ccc;
+
+        span {
+            line-height: 1rem;
+
+            &::before {
+                display: inline-block;
+                content: "";
+                width: .24rem;
+                height: 0.23rem;
+                margin-right: 2%;
+                background: url(../images/css.png) no-repeat -1.44rem -.1rem;
+                zoom: .5;
+            }
+        }
+
+        span:nth-child(2) {
+            margin-left: 5%;
+            padding-left: 5%;
+            border-left: .02rem solid #ccc;
+        }
+    }
+
+    li:nth-child(3) {
+        width: 90%;
+        margin-left: 5%;
+        padding-left: 5%;
+        border-bottom: .02rem solid #ccc;
+
+        span:nth-child(1) {
+            line-height: 1rem;
+            color: #ccc;
+        }
+
+        span:nth-child(2) {
+            margin-left: 5%;
+            padding-left: 5%;
+            line-height: 1rem;
+            border-left: .02rem solid #ccc;
+        }
+    }
+
+    li:nth-child(4) {
+        @extend li:nth-child(3);
+    }
+
+    li:nth-child(5) {
+        @extend li:nth-child(3);
+
+        span:nth-child(2) {
+            color: #f00;
+        }
+    }
+
+    li:nth-child(6) {
+        display: flex;
+        align-items: center;
+        padding-left: 15%;
+        border-bottom: .02rem solid #ccc;
+
+        span:nth-child(1) {
+            min-width: 1.28rem;
+            min-height: .42rem;
+            margin-right: 5%;
+            padding-right: 5%;
+            color: #ccc;
+            border-right: .02rem solid #ccc;
+        }
+
+        span:nth-child(2) {
+            margin: 2% 0;
+        }
+    }
+}
+
+/* 底部开始 */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: .4rem;
+    padding-top: .4rem;
+    background: #fff;
+
+
+    .note {
+        @include box(40%, .88rem);
+        @include font-base(.34rem, #5FC0CD);
+        @include border(.02rem, solid, #5fc0cd);
+        border-radius: .1rem;
+        background: #fff;
+    }
+
+    .link {
+        @extend .note;
+
+        background: #5fc0cd;
+
+        a {
+            @include font-base(.34rem, #5FC0CD);
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}

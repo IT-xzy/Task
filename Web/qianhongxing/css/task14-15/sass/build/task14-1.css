@@ -1,0 +1,722 @@
+@charset "UTF-8";
+/* 页面重置 */
+body {
+  margin: 0;
+  font-family: "MicrosoftYaHei";
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* 头部开始 */
+header {
+  height: 39px;
+}
+
+header span {
+  font-size: 14px;
+  color: #29B078;
+  margin: auto 0;
+}
+
+header div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header div a {
+  width: 24px;
+  height: 24px;
+}
+
+header div a:nth-child(1) {
+  background: url(../../images/css-s.png) no-repeat -82px -122px;
+}
+
+header div a:nth-child(2) {
+  margin: 0 5%;
+  background: url(../../images/css-s.png) no-repeat -123px -78px;
+}
+
+header div a:nth-child(3) {
+  background: url(../../images/css-s.png) no-repeat -203px -142px;
+}
+
+/* 导航栏开始 */
+nav input {
+  display: none;
+}
+
+nav #nav-btn:checked ~ .nav-main {
+  padding-bottom: 200px;
+}
+
+nav .nav-main {
+  position: relative;
+  overflow: hidden;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  background: #29B078;
+}
+
+@media screen and (min-width: 768px) {
+  nav .nav-main label {
+    display: none;
+  }
+  nav .nav-main ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0;
+  }
+  nav .nav-main ul a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100px;
+    height: 100px;
+    font-size: 16px;
+    color: #fff;
+  }
+  nav .nav-main ul a:hover {
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid #fff;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  nav .nav-main {
+    height: 50px;
+  }
+  nav .nav-main label {
+    width: 100px;
+    height: 70px;
+    background: url(../../images/button.png) no-repeat -17px -10px;
+    -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+  }
+  nav .nav-main ul {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    margin: 0;
+  }
+  nav .nav-main ul a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 50px;
+    font-size: 16px;
+    color: #fff;
+  }
+  nav .nav-main ul a:hover {
+    background: #0f0;
+  }
+}
+
+/* 轮播图开始 */
+.banner {
+  position: relative;
+}
+
+.banner .photo {
+  overflow: hidden;
+}
+
+.banner .photo img {
+  position: absolute;
+  width: 100%;
+}
+
+.banner .photo img:nth-child(1) {
+  -webkit-animation: ban1 8s ease-out infinite;
+          animation: ban1 8s ease-out infinite;
+}
+
+.banner .photo img:nth-child(2) {
+  -webkit-animation: ban2 8s ease-out infinite;
+          animation: ban2 8s ease-out infinite;
+}
+
+.banner .photo img:nth-child(3) {
+  position: relative;
+  -webkit-animation: ban3 8s ease-out infinite;
+          animation: ban3 8s ease-out infinite;
+}
+
+.photo span {
+  position: absolute;
+  z-index: 5;
+  width: 20px;
+  height: 20px;
+}
+
+.photo span:nth-child(4) {
+  right: 5%;
+  top: 50%;
+  border-top: 4px solid #666;
+  border-right: 4px solid #666;
+  -webkit-transform: translateY(-50%) rotate(45deg);
+          transform: translateY(-50%) rotate(45deg);
+}
+
+.photo span:nth-child(5) {
+  left: 5%;
+  top: 50%;
+  border-top: 4px solid #666;
+  border-left: 4px solid #666;
+  -webkit-transform: translateY(-50%) rotate(-45deg);
+          transform: translateY(-50%) rotate(-45deg);
+}
+
+.photo ul {
+  position: absolute;
+  bottom: 2%;
+  z-index: 5;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.photo ul li {
+  width: 10px;
+  height: 10px;
+  margin: 0 2%;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+@-webkit-keyframes ban1 {
+  0%,
+  25% {
+    z-index: 3;
+  }
+  35%,
+  60% {
+    z-index: 2;
+  }
+  70%,
+  100% {
+    z-index: 1;
+  }
+}
+
+@keyframes ban1 {
+  0%,
+  25% {
+    z-index: 3;
+  }
+  35%,
+  60% {
+    z-index: 2;
+  }
+  70%,
+  100% {
+    z-index: 1;
+  }
+}
+
+@-webkit-keyframes ban2 {
+  0%,
+  25% {
+    z-index: 2;
+  }
+  35%,
+  60% {
+    z-index: 3;
+  }
+  70%,
+  100% {
+    z-index: 1;
+  }
+}
+
+@keyframes ban2 {
+  0%,
+  25% {
+    z-index: 2;
+  }
+  35%,
+  60% {
+    z-index: 3;
+  }
+  70%,
+  100% {
+    z-index: 1;
+  }
+}
+
+@-webkit-keyframes ban3 {
+  0%,
+  25% {
+    z-index: 1;
+  }
+  35%,
+  60% {
+    z-index: 2;
+  }
+  70%,
+  100% {
+    z-index: 3;
+  }
+}
+
+@keyframes ban3 {
+  0%,
+  25% {
+    z-index: 1;
+  }
+  35%,
+  60% {
+    z-index: 2;
+  }
+  70%,
+  100% {
+    z-index: 3;
+  }
+}
+
+/* 主体开始 */
+main {
+  padding-top: 165px;
+  background: #fafafa;
+}
+
+main .main-title {
+  /* 主体间小标题 */
+  margin: 60px 0;
+  font-size: 18px;
+  color: #000;
+  font-weight: bolder;
+  text-align: center;
+}
+
+/* 修真院优势 */
+.main-home .col-25:nth-child(1), .main-home .col-25:nth-child(2), .main-home .col-25:nth-child(3) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 250px;
+}
+
+.main-home .col-25:nth-child(1) .mh-icon, .main-home .col-25:nth-child(2) .mh-icon, .main-home .col-25:nth-child(3) .mh-icon {
+  width: 60px;
+  height: 62px;
+  background: url(../../images/css-s.png) no-repeat -193px -10px;
+}
+
+.main-home .col-25:nth-child(1) h2, .main-home .col-25:nth-child(2) h2, .main-home .col-25:nth-child(3) h2 {
+  font-size: 18px;
+  color: #000;
+}
+
+.main-home .col-25:nth-child(1) p, .main-home .col-25:nth-child(2) p, .main-home .col-25:nth-child(3) p {
+  font-size: 16px;
+  color: #bbb;
+}
+
+.main-home .col-25:nth-child(2) .mh-icon {
+  background: url(../../images/css-s.png) no-repeat -122px 0px;
+}
+
+.main-home .col-25:nth-child(3) .mh-icon {
+  background: url(../../images/css-s.png) no-repeat -6px -115px;
+}
+
+.main-home .col-25:nth-child(4) .mh-people {
+  margin-bottom: 5%;
+}
+
+@media screen and (max-width: 991px) {
+  .main-home .col-25:nth-child(4) .mh-people {
+    text-align: center;
+  }
+}
+
+.main-home .col-25:nth-child(4) .mh-people span:nth-child(1) {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  vertical-align: 0;
+  background: url(../../images/css-s.png) no-repeat -167px -78px;
+}
+
+.main-home .col-25:nth-child(4) .mh-people span:nth-child(2) {
+  font-size: 16px;
+  color: #29B078;
+  line-height: 32px;
+}
+
+.main-home .col-25:nth-child(4) .mh-people span:nth-child(4) {
+  font-size: 18px;
+  color: #bbb;
+}
+
+/* 学习流程 */
+.main-study .col-25 {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 90px;
+}
+
+@media screen and (max-width: 767px) {
+  .main-study .col-25 {
+    padding: 0 20%;
+  }
+}
+
+.main-study .col-25 .ms-number {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  margin-right: 5%;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 4px 1px #ccc;
+          box-shadow: 0 0 4px 1px #ccc;
+  font-size: 18px;
+  color: #29B078;
+  text-align: center;
+  line-height: 70px;
+  background: #fff;
+}
+
+.main-study .col-25 .ms-content {
+  font-size: 14px;
+  color: #bbb;
+}
+
+@media screen and (min-width: 992px) {
+  .main-study .next::after {
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    content: "";
+    width: 27px;
+    height: 23px;
+    background: url(../../images/css-s.png) no-repeat -203px -94px;
+  }
+}
+
+/* 学员展示 */
+.main-student {
+  position: relative;
+}
+
+.main-student .col-25 {
+  margin-bottom: 90px;
+}
+
+.main-student .col-25 div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 6%;
+  -webkit-box-shadow: 0 0 1px 1px #ccc;
+          box-shadow: 0 0 1px 1px #ccc;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.main-student .col-25 div span {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: url(../../images/css-student.png) no-repeat -10px -10px;
+}
+
+.main-student .col-25 div p:nth-child(2) {
+  font-size: 18px;
+  color: #000;
+}
+
+.main-student .col-25 div p:nth-child(3) {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.main-student .col-25:nth-child(2) span {
+  background: url(../../images/css-student.png) no-repeat -10px -138px;
+}
+
+.main-student .col-25:nth-child(3) span {
+  background: url(../../images/css-student.png) no-repeat -138px -138px;
+}
+
+.main-student .col-25:nth-child(4) span {
+  background: url(../../images/css-student.png) no-repeat -138px -10px;
+}
+
+@media screen and (min-width: 992px) {
+  .main-student ul {
+    position: absolute;
+    bottom: 8%;
+    left: 0;
+    right: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .main-student ul li {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 0 2%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0 1px 1px #ccc;
+            box-shadow: 0 0 1px 1px #ccc;
+    background: #fff;
+  }
+  .main-student ul li:hover {
+    background: #29B078;
+  }
+}
+
+/* 合作企业 */
+@media screen and (max-width: 767px) {
+  .main-partner {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+.main-partner .col-2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-height: 175px;
+  margin-bottom: 90px;
+  background: #fff;
+}
+
+.main-partner .col-2:hover {
+  position: relative;
+  -webkit-box-shadow: 0px 0px 4px 2px #ccc;
+          box-shadow: 0px 0px 4px 2px #ccc;
+}
+
+.main-partner .col-2:nth-child(1) span {
+  width: 189px;
+  height: 70px;
+  background: #fff url(../../images/css-partner.png) no-repeat -10px -10px;
+  zoom: .5;
+}
+
+.main-partner .col-2:nth-child(2) span {
+  width: 135px;
+  height: 70px;
+  background: #fff url(../../images/css-partner.png) no-repeat -213px -3px;
+}
+
+.main-partner .col-2:nth-child(3) span {
+  width: 189px;
+  height: 70px;
+  background: #fff url(../../images/css-partner.png) no-repeat 0 -81px;
+}
+
+.main-partner .col-2:nth-child(4) span {
+  width: 156px;
+  height: 70px;
+  background: #fff url(../../images/css-partner.png) no-repeat 0 -147px;
+}
+
+.main-partner .col-2:nth-child(5) span {
+  width: 75px;
+  height: 70px;
+  background: #fff url(../../images/css-partner.png) no-repeat 0 -221px;
+}
+
+/* 友情链接 */
+.main-link {
+  overflow: hidden;
+  background: #fff;
+}
+
+.main-link p {
+  font-size: 18px;
+  color: #000;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.main-link .row {
+  margin: 20px 0;
+}
+
+.main-link .row a {
+  position: relative;
+  margin: 5px 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+@media screen and (max-width: 991px) {
+  .main-link .row a {
+    padding-left: 5%;
+  }
+}
+
+.main-link .row a::before {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  display: inline-block;
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.main-link .row a:hover {
+  color: #29B078;
+  text-decoration: underline;
+}
+
+/* 底部开始 */
+footer {
+  background: #29B078;
+}
+
+footer .footer-ims {
+  margin: 0;
+  font-size: 14px;
+  color: #fff;
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+@media screen and (max-width: 767px) {
+  footer .footer-ims span {
+    display: block;
+  }
+}
+
+footer .row a {
+  font-size: 16px;
+  color: #fff;
+  margin-right: 20px;
+}
+
+footer .row a:hover {
+  text-decoration: underline;
+}
+
+footer .row div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 168px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+footer .row div span {
+  width: 92px;
+  height: 92px;
+  background: url(../../images/css-s.png) no-repeat -10px -10px;
+}
+/*# sourceMappingURL=task14-1.css.map */

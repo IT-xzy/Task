@@ -1,0 +1,81 @@
+main {
+    margin-top: $h82;
+    padding: 5% 5%;
+    // background: #eee;
+
+    .game {
+        position: relative;
+        @include flex(center,center);
+        text-align: center;
+        height: 1.16rem;
+        background: $bgff;
+        .game-name {
+            @include font(.35rem,#ccc);
+        }
+        span:last-child {
+            position: absolute;
+            right: 5%;
+            @include box($fz24,$fz24);
+            border-top: .02rem solid #ccc;
+            border-left: .02rem solid #ccc;
+            transform: rotate(135deg);
+        }
+    }
+}
+main {
+    .versions {
+        margin-top: .27rem;
+        padding-bottom: $fz24;
+        background: $bgff;
+        text-align: center;
+        h2 {
+            padding: $fz24 0;
+            margin-bottom: .32rem;
+            @include font($fz40,$bgfb);
+            border-bottom: .01rem solid $bgfb;
+            
+        }
+        a {
+            display: block;
+            @include box(80%,1.34rem);
+            margin: 0 auto;
+            @include font($fz30,$bgff);
+            line-height: 1.34rem;
+            background: $bgb9;
+        }
+        a:nth-child(4) {
+            position: relative;
+
+            &::after {
+                position: absolute;
+                right: -12%;
+                top: .43rem;
+                content: "";
+                @include box(0,0);
+                border-top: $fz24 solid rgba(251, 180, 53, 0);
+                border-bottom: $fz24 solid rgba(251, 180, 53, 0);
+                border-left: $fz24 solid rgba(251, 180, 53, 1);
+                border-right: $fz24 solid rgba(251, 180, 53, 0);
+            }
+        }
+        p {
+            @include font($fz24,$bg83);
+        }
+        
+        ul {
+            @include flex(space-around,center);
+            width: 40%;
+            margin: 0 auto;
+            
+            li {
+                @include box($fz24,$fz24);
+                border-radius: 50%;
+                background: #ccc;
+
+                &:hover {
+                    background: $bg29;
+                }
+            }
+        }
+    }
+}
