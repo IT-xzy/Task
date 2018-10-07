@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserMapper">
+<!--根据id查找用户信息-->
+<select id="findUserById" parameterType="int" resultType="User">
+        select * from user where id =#{id}
+     </select>
+<select id="findUserByName" parameterType="java.lang.String"
+        resultType="User">
+        select * from user where name like '%${value}%'
+    </select>
+<!--插入数据-->
+<insert id="insertUser" parameterType="User">
+        insert into user (id,name,passWord,email,birthday) values (#{id},#{name},#{passWord},#{email},#{birthday})
+    </insert>
+<!--删除用户-->
+<delete id="deleteUser" parameterType="int">
+       delete from user where id =#{id}
+    </delete>
+<!--更新用户-->
+<update id="updateUser" parameterType="User">
+        update user set name = #{name},passWord=#{passWord},email=#{email},birthday=#{birthday} where id = #{id}
+    </update>
+</mapper>
