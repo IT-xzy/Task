@@ -1,0 +1,208 @@
+@import "task12-2mixins";
+
+body {
+    margin: 84px 0 50px;
+}
+
+button {
+    @include btn; //清楚默认样式
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    margin: 0;
+}
+
+header {
+    @include flex; //垂直水平居中
+    @include posi(fixed, top, 0); //头部固定定位
+    @include wiht(100%, 44px); //宽高
+    background: $blue;
+    z-index: 1;
+
+    button {
+        @include wiht(72px, 35px);
+        font-size: 18px;
+    }
+
+    //按钮
+    &> :nth-child(1) {
+        @include backg; //背景颜色、字体颜色
+        margin-right: -2px;
+        border-radius: $fnsi /3 0 0 $fnsi /3;
+    }
+
+    &> :nth-child(2) {
+        @include backg($white, $blue);
+        border-radius: $fnsi / 3;
+    }
+
+    //右上角位置图标
+    a {
+        @include posi(absolute, right, 15px); //定位
+        @include icon(21px, 22px, -10px -10px); //雪碧图
+    }
+}
+
+//下拉框
+main>div {
+    display: flex;
+    @include posi(fixed, top, 44px);
+    @include wiht(100%, 40px); //宽高
+    @include backg($white, $gray); //背景、字体颜色
+    font-size: $fnsi;
+    text-align: center;
+    line-height: 40px;
+    z-index: 1;
+
+    &> :nth-child(2) span {
+        display: block;
+        margin: 5px 0;
+        line-height: 30px;
+
+        border: {
+            right: 1px solid $wire;
+            left: 1px solid $wire;
+        }
+
+    }
+
+    div {
+        position: relative;
+        width: 33.3333333%;
+        border-bottom: 1px solid $wire;
+
+        &::after {
+            content: '';
+            display: inline-block;
+            @include posi(absolute, right, 6px);
+            top: 50%;
+            margin-top: -2px;
+
+            border: {
+                top: 4px solid $triangle;
+                right: 3px solid transparent;
+                left: 3px solid transparent;
+            }
+        }
+
+        &:hover ul {
+            display: block;
+
+            li:hover {
+                @include backg($blue, $white)
+            }
+        }
+
+        ul {
+            display: none;
+            background: $white;
+        }
+    }
+}
+
+
+main>ul {
+
+    li {
+        padding: 15px 16px 15px 35px;
+        border-bottom: 1px solid $wire;
+
+        &>:first-child,
+        &>:last-child {
+            @include flex-item;
+            margin-left: -20px;
+            color: $gray;
+            font-size: 12px;
+        }
+
+        &>:first-child::before {
+            content: '';
+            display: inline-block;
+            @include icon(12px, 12px, -94px -10px);
+            margin-right: 7.5px;
+        }
+
+        &>:nth-child(2) {
+            @include flex-item;
+            padding: 10px 0;
+            white-space: nowrap;
+
+            :nth-child(1) {
+                font-size: $fnsi;
+                flex-grow: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            :nth-child(2) {
+                color: #e63b0e;
+                margin-right: $fnsi * .75;
+            }
+
+            a {
+                display: inline-block;
+                @include wiht(10px, 10px);
+                @include indicant(3px, 135deg);
+            }
+        }
+
+        &>:last-child::before {
+            content: '';
+            display: inline-block;
+            @include icon(10px, 12px, -94px -42px);
+            margin-right: 7.5px;
+        }
+    }
+}
+
+footer {
+    @include flex(space-around);
+    @include posi(fixed, bottom, 0);
+    @include wiht(100%, 50px);
+    background: #f8fafb;
+    font-size: 13px;
+    text-align: center;
+
+    &>:first-child {
+        button {
+            @include icon(23px, 20px, -51px -10px);
+        }
+
+        p {
+            color: $blue;
+        }
+    }
+
+    &>:nth-child(2) {
+        @include flex;
+        @include wiht(47px, 47px);
+        border-radius: 50%;
+        background: $blue;
+
+        button {
+            @include icon(20px, 21px, -51px -52px);
+            margin-right: -2px;
+        }
+    }
+
+    &>:last-child {
+        button {
+            @include icon(21px, 21px, -10px -52px)
+        }
+
+        p {
+            color: $gray;
+        }
+    }
+}

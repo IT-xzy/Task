@@ -1,0 +1,56 @@
+$lr: 15px;
+$white:#fff;
+$gray: #e1e5e7;
+$blue: #5fc0cd;
+$fnsize: 18px;
+
+
+
+//宽度-高度
+@mixin wi-ht($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+//定位
+@mixin posi($item, $trbl, $size) {
+    position: $item; //定位类型
+    #{$trbl}: $size; //方向以及距离
+}
+
+//flex和垂直居中
+@mixin flex-items-centr() {
+    display: flex;
+    align-items: center;
+}
+
+//左右margin
+@mixin mx($left, $right) {
+    margin: {
+        left: $left;
+        right: $right;
+    }
+}
+
+//箭头指示符
+@mixin indicant($border, $rotate) {
+    border: {
+        top: $border solid $white; //左右边框
+        left: $border solid $white;
+    }
+
+    transform: rotate($rotate); //旋转角度
+}
+
+// 按钮
+@mixin btn($left-right, $back: $blue, $color: $white) {
+    flex-grow: 1;
+    height: 44px;
+    margin-#{$left-right}: $lr / 1.2;
+    border: 1px solid $blue;
+    border-radius: 5px;
+    outline: none;
+    background: $back;
+    color: $color;
+}
+
