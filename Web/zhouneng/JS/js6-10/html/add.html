@@ -1,0 +1,76 @@
+<div class="add-box">
+    <div class="add-content-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 add-title">
+                    <strong>{{Title}}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="add-content">
+            <form name="myType">
+                <div class="select-type pull-down">
+                    <strong>类&emsp;&emsp;型</strong>
+                    <select ng-model="selectedType" ng-options="x.num as x.type for x in typeItem" ng-click="type()"></select>
+                </div>
+                <div class="select-type pull-down" ng-hide="industryHide">
+                    <strong>行&emsp;&emsp;业</strong>
+                    <select ng-model="selectedIndustry" ng-options="x.num as x.industry for x in industryItem"></select>
+                </div>
+                <div class="select-type">
+                    <strong>标题名称</strong>
+                    <input type="text" ng-model="title" required>
+                </div>
+                <div class="select-type flex">
+                    <strong>说&emsp;&emsp;明</strong>
+                    <!-- <input type="text" ng-model="explain" required> -->
+                    <div id="editor" ng-model="editor"></div>
+                </div>
+                <div class="select-type">
+                    <strong>跳转链接</strong>
+                    <input type="text" ng-model="skipUrl">
+                </div>
+            </form>
+            <form name="myForm">
+                <strong>配&emsp;&emsp;图</strong>
+                <input type="file" class="Upload" ngf-select ng-model="picFile" name="file" accept="image/*"
+                    ngf-max-size="2MB" required ngf-model-invalid="errorFile" ng-change="uploadImg()" required>
+                <i ng-show="myForm.file.$error.maxSize">
+                    {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb">
+                <img class="thumb" src="{{img}}" alt="" ng-hide="hideImg">
+            </form>
+            <table>
+                <tr>
+                    <th class="th-width">图片名</th>
+                    <th class="th-width">文件大小</th>
+                    <th class="th-width">进度</th>
+                    <th class="th-width">操作</th>
+                    <th class="th-width">操作</th>
+                </tr>
+                <tr>
+                    <td>{{name}}</td>
+                    <td>{{size}}</td>
+                    <td>
+                        <div class="progress" ng-show="picFile.progress >= 0">
+                            <span class="progress" ng-bind="picFile.progress + '%'"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <span ng-show="picFile.result">上传成功</span>
+                        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                    </td>
+                    <td class="button-box">
+                        <button class="button-uploading" ng-disabled="!myForm.$valid" ng-click="uploadPic(picFile)">上传</button>
+                        <button class="button-delete" ng-disabled="!myForm.$valid" ng-click="delete()">删除</button>
+                    </td>
+                </tr>
+            </table>
+            <div class="bottom-button">
+                <button class="online" ng-disabled="myType.$invalid" ng-click="online()">立即上线</button>
+                <button class="draft" ng-disabled="myType.$invalid" ng-click="draft()">存为草稿</button>
+                <button class="off" ng-click="off()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
