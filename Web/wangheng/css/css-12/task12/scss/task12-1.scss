@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+@mixin w-h($w:0,$h:0) {
+    width: $w;
+    height: $h;
+}
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: initial;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    padding: 0;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    display: inline-block;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: #5FC0CD;
+
+    div {
+        display: inline-flex;
+        justify-content: space-around;
+        margin: .1rem 0 .05rem 0;
+        border-radius: 5px;
+        background: #55a8b3;
+
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+            color:#ffffff;
+
+            &:focus {
+                color: #7dccd6;
+                background: #ffffff;
+            }
+        }
+    }
+
+    img {
+        position: absolute;
+        right: .6rem;
+    }
+}
+
+.down {
+    display: inline-flex;
+    @include w-h(100%,1rem );
+    border-bottom: 1px solid #f1f1f1;
+
+    div {
+        flex: 1;
+
+        button {
+            width: 100%;
+            line-height: 1rem;
+            font-size: 14px;
+            background: #ffffff;
+            color: #999999;
+            white-space: nowrap;
+
+            &::after {
+                display: inline-block;
+                content: "";
+                margin-left: 3vw;
+                border-top: 5.5px solid #999999;
+                border-left: 5.5px solid transparent;
+                border-right: 5.5px solid transparent;
+                vertical-align: middle;
+            }
+        }
+
+        &:nth-child(2) button {
+            margin: 0.1rem auto;
+            line-height: .8rem;
+            border-left: 1px solid #e1e5e7;
+            border-right: 1px solid #e1e5e7;
+        }
+
+        ul {
+            display: none;
+            text-align: center;
+            background: #999999;
+            li {
+                list-style-type: none;
+                background: #f9f9f9;
+
+            }
+        }
+
+        &:hover ul {
+            display: block;
+        }
+    }
+}
+
+main {
+    margin-top: 2.1rem;
+
+    ul {
+
+        li {
+            display: flex;
+            flex-direction: column;
+            line-height: .5rem;
+            border-bottom: 1px solid #f1f1f1;
+            color: #999999;
+
+            .service {
+                background: url(../img/two.png) no-repeat;
+                background-position: 10px;
+                padding: .1rem 0 .1rem .6rem;
+            }
+
+            .date {
+                display: flex;
+                justify-content: space-between;
+                position: relative;
+                padding-left: .6rem;
+                color: #333;
+                .red {
+                    margin-right: 1rem;
+                    color: red;
+                }
+                span{
+                    position: absolute;
+                    right: .5rem;
+                    top:.1rem;
+                    @include w-h(12px,12px );
+                    border-top: 2px solid #55a8b3;
+                    border-right: 2px solid #55a8b3;
+                    transform: rotate(45deg);
+
+                }
+            }
+
+            .address {
+                background: url(../img/three.png) no-repeat;
+                background-position: 11px;
+                padding: .1rem 0 .1rem .6rem;
+            }
+
+        }
+    }
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    @include w-h(100%,1.2rem );
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #F8FAFB;
+    a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration:none;
+        img{
+            width: 30px;
+        }
+        span{
+            margin-top: .1rem;
+            color: #55a8b3;
+        }
+    }
+    .pen{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       @include w-h(.94rem,.94rem );
+        border-radius: 50%;
+        background: #5FC0CD;
+        img{
+            width: 20px;
+        }
+    }
+    .my{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    img{
+        width: 25px;
+    }
+    span{
+        margin-top: .1rem;
+        color: #999999;
+    }
+}
