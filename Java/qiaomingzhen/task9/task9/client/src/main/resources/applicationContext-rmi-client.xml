@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+    <context:component-scan base-package="com"/>
+
+    <!--serverA-->
+    <bean name="userServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1113/userService"/>
+        <property name="serviceInterface" value="com.service.UserService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="companyServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1113/companyService"/>
+        <property name="serviceInterface" value="com.service.CompanyService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="profServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1113/profService"/>
+        <property name="serviceInterface" value="com.service.ProfService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="telCodeServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1113/telCodeService"/>
+        <property name="serviceInterface" value="com.service.TelCodeService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="emailServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1113/emailService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.EmailService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="telServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1113/telService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.TelService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="qiNiuServiceA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1113/qiNiuService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.QiNiuService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+
+    <!--serverB-->
+    <bean name="userServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1114/userService"/>
+        <property name="serviceInterface" value="com.service.UserService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="companyServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1114/companyService"/>
+        <property name="serviceInterface" value="com.service.CompanyService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="profServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1114/profService"/>
+        <property name="serviceInterface" value="com.service.ProfService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="telCodeServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1114/telCodeService"/>
+        <property name="serviceInterface" value="com.service.TelCodeService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+    <bean name="emailServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1114/emailService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.EmailService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="telServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1114/telService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.TelService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+    <bean name="qiNiuServiceB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1114/qiNiuService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.QiNiuService"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+        <property name="lookupStubOnStartup" value="false"/>
+    </bean>
+
+
+    <!-- aop日志 -->
+    <bean id="logInterceptor" class="com.aop.LogInterceptor"/>
+</beans>
