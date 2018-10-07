@@ -1,0 +1,82 @@
+body {
+    background: #eee;
+}
+
+ul {
+    margin: 0;
+}
+
+h2 {
+    margin: 0;
+}
+
+.home {
+    height: 100vh;
+    overflow: hidden;
+}
+
+input {
+    display: none;
+}
+
+.ban:checked~.home-page {
+    margin-left: 70vw;
+}
+
+/* 侧边导航栏开始 */
+.banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include box(70vw, 100vh);
+    background: $bgff;
+
+    li {
+        @include flex(space-between,center);
+        height: 10vh;
+        padding-left: 20%;
+        padding-right: 5%;
+        text-align: center;
+        @include font($fz30, $bg29);
+        font-weight: bold;
+
+        border-bottom: .01rem solid #ccc;
+
+        i {
+            // display: inline-block;
+            @include box($fz24,$fz24);
+            border-top: .04rem solid $bg29;
+            border-right: .04rem solid $bg29;
+            transform: rotate(45deg);
+        }
+    }
+}
+
+
+/* 主页开始 */
+.home-page {
+    position: relative;
+    @include box(100vw,100vh);
+    background: #fafafa;
+}
+
+/* 主页头部开始 */
+header {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    @include flex(flex-start, center);
+    @include box(100vw, $h82);
+    padding-left: 5%;
+    background: $bg29;
+
+    label {
+
+        @include box(.29rem, .29rem);
+        background: url(../../images/css_sprites1.png) no-repeat -.15rem -.16rem;
+        zoom: .5;
+
+    }
+
+
+}

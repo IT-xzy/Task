@@ -1,0 +1,74 @@
+/* 投票区域 */
+body {
+    background: $bg29;
+}
+
+main {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+    
+
+    .row {
+        @include flex(space-between, center);
+        width: 80%;
+        padding: 0 10% 10% 10%;
+
+        .photo {
+            @include box(20vw, 20vw);
+            border: 0.02rem solid $bgff;
+
+            span:nth-child(1) {
+                @include flex(center, center);
+                @include box(100%, 80%);
+                @include font($fz30, #000);
+                background: $bgfb;
+            }
+
+            span:nth-child(2) {
+                @include flex(center, center);
+                @include box(100%, 20%);
+                @include font($fz24, $bgff);
+                background: $bg83;
+            }
+            &:hover ul {
+                opacity: 1;
+                visibility: visible;
+    
+            }
+
+        }
+    }
+}
+
+/* 下拉标记菜单 */
+main {
+    ul {
+        @include box(100%,20%);
+        @include flex(space-between, center);
+        opacity: 0;
+        visibility: hidden;
+        transform: all 2s;
+
+        li:nth-child(1) {
+            width: 20%;
+            padding-top: 20%;
+            background: $bgff url(../../images/sprite.png) no-repeat 0 0 / 100%;
+        }
+
+        li:nth-child(2) {
+            @extend li:nth-child(1);
+            background: $bgff url(../../images/sprite.png) no-repeat 0 33% / 100%;
+        }
+
+        li:nth-child(3) {
+            @extend li:nth-child(1);
+            background: $bgff url(../../images/sprite.png) no-repeat 0 66% / 100%;
+        }
+
+        li:nth-child(4) {
+            @extend li:nth-child(1);
+            background: $bgff url(../../images/sprite.png) no-repeat 0 100% / 100%;
+        }
+
+    }
+}
