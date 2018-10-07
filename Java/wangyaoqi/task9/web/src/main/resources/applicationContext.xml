@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config/>
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
+
+    <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/sqltest?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="realmadrid"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--<property name="typeAliasesPackage" value="cn.wyq.pojo"/>-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+        <!--<property name="mapperLocations">-->
+            <!--<list>-->
+                <!--<value>-->
+                    <!--classpath:mapper/OutstandingStudent.xml-->
+                <!--</value>-->
+                <!--<value>-->
+                    <!--classpath:mapper/Engineer.xml-->
+                <!--</value>-->
+                <!--<value>-->
+                    <!--classpath:mapper/Student.xml-->
+                <!--</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="cn.wyq.mapper"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!--<sca:service name="StudentService" type="cn.wyq.service.StudentService" target="cn.wyq.service.StudentService"/>-->
+    <!--<sca:service name="OutstandingStudentService" type="cn.wyq.service.OutstandingStudentService" target="cn.wyq.service.OutstandingStudentService"/>-->
+    <!--<sca:service name="EngineerService" type="cn.wyq.service.EngineerService" target="cn.wyq.service.EngineerService"/>-->
+
+    <!--<bean id="engineerServiceImpl" class="cn.wyq.service.impl.EngineerServiceImpl"/>-->
+    <!--<bean id="outstandingStudentServiceImpl" class="cn.wyq.service.impl.OutstandingStudentServiceImpl"/>-->
+    <!--<bean id="studentServiceImpl" class="cn.wyq.service.impl.StudentServiceImpl"/>-->
+
+    <!--<bean id="rmiClientSetting" abstract="true">-->
+        <!--&lt;!&ndash; 是否启动时加载stub &ndash;&gt;-->
+        <!--<property name="refreshEndpointsOnStartup" value="false" />-->
+        <!--&lt;!&ndash; 调用异常时，将重新加载stub &ndash;&gt;-->
+        <!--<property name="refreshEndpointsOnConnectFailure" value="true" />-->
+        <!--&lt;!&ndash; 调用失败时是否切换到其他服务端 &ndash;&gt;-->
+        <!--<property name="switchEndpointOnFailure" value="true" />-->
+        <!--&lt;!&ndash; 追踪拦截器启用 &ndash;&gt;-->
+        <!--<property name="registerTraceInterceptor" value="true" />-->
+        <!--&lt;!&ndash;&lt;!&ndash; 缓存stub 继承AbstractRmiShortFormProxyFactoryBean才有&ndash;&gt;&ndash;&gt;-->
+        <!--<property name="cacheEndpoints" value="true" />-->
+    <!--</bean>-->
+
+    <!--<bean id="studentServiceProxy"-->
+          <!--class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">-->
+        <!--&lt;!&ndash; 远程服务对象接口类 &ndash;&gt;-->
+        <!--<property name="serviceInterface" value="cn.wyq.service.StudentService"/>-->
+        <!--&lt;!&ndash; 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果&ndash;&gt;-->
+        <!--<property name="serviceURLs">-->
+            <!--<list>-->
+                <!--<value>rmi://139.199.127.53:1021/StudentService</value>-->
+                <!--<value>rmi://47.104.225.105:1021/StudentService</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--&lt;!&ndash; 调用时选择那个url的策略 &ndash;&gt;-->
+        <!--<property name="endpointSelectionPolicy">-->
+            <!--<bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="outstandingStudentServiceProxy"-->
+          <!--class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">-->
+        <!--&lt;!&ndash; 远程服务对象接口类 &ndash;&gt;-->
+        <!--<property name="serviceInterface" value="cn.wyq.service.OutstandingStudentService"/>-->
+        <!--&lt;!&ndash; 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果&ndash;&gt;-->
+        <!--<property name="serviceURLs">-->
+            <!--<list>-->
+                <!--<value>rmi://139.199.127.53:1022/OutstandingStudentService</value>-->
+                <!--<value>rmi://47.104.225.105:1022/OutstandingStudentService</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--&lt;!&ndash; 调用时选择那个url的策略 &ndash;&gt;-->
+        <!--<property name="endpointSelectionPolicy">-->
+            <!--<bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="engineerServiceProxy"-->
+          <!--class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">-->
+        <!--&lt;!&ndash; 远程服务对象接口类 &ndash;&gt;-->
+        <!--<property name="serviceInterface" value="cn.wyq.service.EngineerService"/>-->
+        <!--&lt;!&ndash; 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果&ndash;&gt;-->
+        <!--<property name="serviceURLs">-->
+            <!--<list>-->
+                <!--<value>rmi://139.199.127.53:1023/EngineerService</value>-->
+                <!--<value>rmi://47.104.225.105:1023/EngineerService</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--&lt;!&ndash; 调用时选择那个url的策略 &ndash;&gt;-->
+        <!--<property name="endpointSelectionPolicy">-->
+            <!--<bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="rmiStudentClientA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://139.199.127.53:1021/StudentService"/>
+        <property name="serviceInterface" value="cn.wyq.service.StudentService"/>
+    </bean>
+
+    <bean id="rmiStudentClientB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://47.104.225.105:1021/StudentService"/>
+        <property name="serviceInterface" value="cn.wyq.service.StudentService"/>
+    </bean>
+
+    <bean id="rmiEngineerClientA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://139.199.127.53:1023/EngineerService"/>
+        <property name="serviceInterface" value="cn.wyq.service.EngineerService"/>
+    </bean>
+
+    <bean id="rmiEngineerClientB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://47.104.225.105:1023/EngineerService"/>
+        <property name="serviceInterface" value="cn.wyq.service.EngineerService"/>
+    </bean>
+
+    <bean id="rmiOutstandingStudentClientA" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://139.199.127.53:1022/OutstandingStudentService"/>
+        <property name="serviceInterface" value="cn.wyq.service.OutstandingStudentService"/>
+    </bean>
+
+    <bean id="rmiOutstandingStudentClientB" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://47.104.225.105:1022/OutstandingStudentService"/>
+        <property name="serviceInterface" value="cn.wyq.service.OutstandingStudentService"/>
+    </bean>
+</beans>
