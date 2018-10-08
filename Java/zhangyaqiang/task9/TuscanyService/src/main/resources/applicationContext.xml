@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+         http://www.springframework.org/schema/sca http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.zyq"/>
+
+    <!--</bean>-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/myjava?characterEncoding=UTF-8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="314317"/>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="3"/>
+        <property name="minIdle" value="3"/>
+        <property name="maxActive" value="20"/>
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+        <property name="validationQuery" value="SELECT 1"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.zyq.pojo"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.zyq.mapper"/>
+    </bean>
+
+
+    <!-- 载入redis.properties,这里要特别注意，如果有多个properties文件，必须用逗号分开，不能写成两个 <context:property-placeholder/> -->
+    <context:property-placeholder location="classpath:redis.properties"/>
+
+    <!-- redis连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--最大空闲数-->
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <!--连接池的最大数据库连接数  -->
+        <property name="maxTotal" value="${redis.maxTotal}"/>
+        <!--最大建立连接等待时间-->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+        <!--逐出连接的最小空闲时间 默认1800000毫秒(30分钟)-->
+        <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}"/>
+        <!--每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3-->
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}"/>
+        <!--逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1-->
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}"/>
+        <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+        <!--在空闲时检查有效性, 默认false  -->
+        <property name="testWhileIdle" value="${redis.testWhileIdle}"/>
+    </bean>
+
+
+    <!--redis连接工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
+        <!--IP地址 -->
+        <property name="hostName" value="${redis.hostName}"></property>
+        <!--端口号  -->
+        <property name="port" value="${redis.port}"></property>
+        <!--如果Redis设置有密码  -->
+        <property name="password" value="${redis.password}"/>
+        <!--客户端超时时间单位是毫秒  -->
+        <property name="timeout" value="${redis.timeout}"></property>
+    </bean>
+
+    <!--redis操作模版,使用该对象可以操作redis  -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+    </bean>
+
+    <util:properties id="telProp" location="classpath:telProp.properties"/>
+    <util:properties id="sendCloudProp" location="classpath:sendCloudProp.properties"/>
+
+    <sca:service name="ExcellentStudentService" type="com.zyq.service.ExcellentStudentService"
+                 target="ExcellentStudentImpl"/>
+    <sca:service name="ProfessionService" type="com.zyq.service.ProfessionService" target="ProfessionServiceImpl"/>
+    <sca:service name="StudentService" type="com.zyq.service.StudentService" target="StudentServiceImpl"/>
+    <sca:service name="UserService" type="com.zyq.service.UserService" target="UserServiceImpl"/>
+</beans>
