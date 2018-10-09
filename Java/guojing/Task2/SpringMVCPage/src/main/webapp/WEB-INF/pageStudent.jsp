@@ -44,11 +44,11 @@
             <td>${student.wish}</td>
             <td>${student.createAt}</td>
             <td>${student.updateAt}</td>
-            <td><a href="/studentUp/${student.id}/${page}">修改</a></td>
-            <td><a href="/studentDown/${student.id}/${page}">删除</a></td>
+            <td><a href="/student/up/${student.id}/${page}">修改</a></td>
+            <td><a href="/student/down/${student.id}/${page}">删除</a></td>
         </tr>
     </c:forEach>
-    <td><a type="button" href="/students">插入</a></td>
+    <td><a type="button" href="/student/add">插入</a></td>
 </table>
 
 <table align="center">

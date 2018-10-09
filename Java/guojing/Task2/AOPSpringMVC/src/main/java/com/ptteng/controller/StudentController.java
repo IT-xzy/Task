@@ -28,7 +28,7 @@ public class StudentController {
     @RequestMapping(value = "/student/down/{id}", method = RequestMethod.GET)
     public String beforeDelete(@PathVariable("id") long id, Model model) {
         System.out.println("第一次id=====" + id);
-        Student student = studentService.fingById(id);
+        Student student = studentService.findById(id);
         model.addAttribute("student", student);
         return "delete";
     }
@@ -46,7 +46,7 @@ public class StudentController {
     @RequestMapping(value = "/student/up/{id}", method = RequestMethod.GET)
     public String beforeUpdate(@PathVariable("id") long id, Model model) {
         System.out.println("修改位置" + id);
-        Student student = studentService.fingById(id);
+        Student student = studentService.findById(id);
         model.addAttribute("student", student);
         return "update";
     }

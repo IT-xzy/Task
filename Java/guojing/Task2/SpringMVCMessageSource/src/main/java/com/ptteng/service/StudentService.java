@@ -30,7 +30,7 @@ public class StudentService {
         return studentDao.deleteStudent(id);
     }
 
-    public Student fingById(long id){
+    public Student findById(long id){
         return studentDao.findById(id);
     }
 }
