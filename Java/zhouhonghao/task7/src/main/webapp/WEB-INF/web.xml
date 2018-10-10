@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:web="http://java.sun.com/xml/ns/javaee" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+    <session-config>
+        <session-timeout>100</session-timeout>
+    </session-config>
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/datetag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+<!--filter定义-->
+    <filter>
+        <!--定义一个filter名称-->
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <!--Spring为web开发提供的一个过滤器，主要目的是防止web开发中出现的乱码问题-->
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!--CharacterEncodingFilter类具有encoding和forceEncoding两个属性-->
+        <init-param>
+            <!--encoding是表示设置request的编码-->
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+        <init-param>
+            <!--forceEncoding表示是否同时设置response的编码。-->
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <!--过滤器映射-->
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <!--映射的URI路径-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!-- spring的配置文件-->
+	<context-param>
+        <!--设定上下文的参数名称。必须是唯一名称-->
+		<param-name>contextConfigLocation</param-name>
+        <!--设定的参数名称的值-->
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+    <!--监听器，自动装载ApplicationContext的配置信息-->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+    <!--过滤器，同时支持GET、POST、PUT与DELETE-->
+	 <filter>
+       <filter-name>HiddenHttpMethodFilter</filter-name>
+       <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+       <filter-name>HiddenHttpMethodFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<!-- spring mvc核心：分发servlet -->
+	<servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- spring mvc的配置文件 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springMVC.xml</param-value>
+		</init-param>
+        <!--标记容器是否在启动的时候就加载这个servlet。-->
+        <!--正数的值越小，启动该servlet的优先级越高。-->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.js</url-pattern>-->
+        <!--<url-pattern>*.css</url-pattern>-->
+        <!--<url-pattern>/fonts/*</url-pattern>-->
+        <!--<url-pattern>/img/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+	<servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
