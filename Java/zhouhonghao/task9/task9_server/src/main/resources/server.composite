@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.jns"
+           name="StudentService">
+
+    <component name="StudentComponent">
+        <implementation.spring location="rmiServer.xml"/>
+        <service name= "StudentService">
+            <interface.java interface="com.jns.service.StudentService"/>
+            <tuscany:binding.rmi uri="rmi://139.199.126.254:8083/StudentServer" />
+        </service>
+    </component>
+    <component name="UsersComponent">
+        <implementation.spring location="rmiServer.xml"/>
+        <service name= "UsersService">
+            <interface.java interface="com.jns.service.UsersService"/>
+            <tuscany:binding.rmi uri="rmi://139.199.126.254:8083/UsersServer" />
+        </service>
+    </component>
+</composite>

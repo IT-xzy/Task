@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.jns.mapper.StudentMapper">
+	<insert id="add"  parameterType="Student" >
+	insert into student(name,address,phone,create_up) values(#{name},#{address},#{phone},#{create_up})
+	</insert>
+	<delete id="delete" parameterType="_int">
+	delete from student where id=#{id}
+	</delete>
+	<select id="get" resultType="Student">
+	select * from student where id=#{id}
+	</select>
+	<update id="update" parameterType="Student">
+	update student set name=#{name},address=#{address},phone=#{phone} where id=#{id}
+	</update>
+	<select id="list" resultType="Student">
+	select * from student order by id asc
+	</select>
+	<select id="findByPage" parameterType="Map" resultType="Student">
+		select * from student
+		<if test="#{start} and #{size}">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<select id="total" resultType="_int">
+		select count(*) from student
+	</select>
+	</mapper>
