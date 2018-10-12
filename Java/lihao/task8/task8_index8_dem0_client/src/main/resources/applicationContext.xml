@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="baseService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <!-- baseService是调用服务端serviceName的value，1200是服务端注册的端口 -->
+        <property name="serviceUrl" value="rmi://localhost:1200/baseService" />
+        <!-- service接口 -->
+        <property name="serviceInterface" value="com.lihoo.jnshu.service.IBaseService" />
+    </bean>
+
+
+</beans>
