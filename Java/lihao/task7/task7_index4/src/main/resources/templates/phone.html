@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>手机注册页面</title>
+    <link rel="icon" href="../static/img/cock.ico" th:href="@{/img/cock.ico}" type="image/x-icon"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}"/>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js" th:src="@{https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js}"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="@{https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js}" ></script>
+    <script src="../static/js/json2.js" th:src="@{/js/json2.js}"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:inline="javascript">
+        var baseURL = [[${ctx}]];
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('#login #password').focus(function() {
+                $('#owl-login').addClass('password');
+            }).blur(function() {
+                $('#owl-login').removeClass('password');
+            });
+
+            //简单登录操作
+            $("#doLogin").click(function (e) {
+                $.ajax({
+                    type : "POST",
+                    url : baseURL+"login",
+                    data : {
+                        "userName" : $("#userName").val(),
+                        "password" : $("#password").val()
+                    },
+                    dataType : "json",
+                    success : function(data) {
+                        if (data.result == "1") {
+                            window.location.href =baseURL+"index";
+                        } else {
+                            $.messager.alert("提示",'账号密码不能为空！');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</head>
+
+<body>
+
+<div class="login-bgc" id="login">
+    <div class="container">
+        <div class="row log-main">
+            <form method="post" style="text-align: center;">
+                <div class="log-table col-xs-9 col-sm-6 col-md-4 col-lg-4">
+                    <h1>
+                        <a href="iemail.html" th:href="@{/iemail}">我要使用邮箱注册</a>
+                    </h1>
+                    <h2>手机号注册</h2>
+
+
+                    <div class="content1">手机：
+                        <input id="phone" class="write-user" type="text" name="phone" placeholder="phoneNumber"/>
+                    </div>
+                    <div class="content1">请输入验证码：
+                        <input id="verifyCode" class="write-code" type="text"
+                               name="verifyCode" style="width: 17rem;" placeholder="verifyCode">
+                        <button disabled class="btn login-btn" style="width: 9rem;">
+                                获取验证码
+                        </button>
+                    </div>
+
+
+                    <div class="content1">密码：
+                        <input id="password" class="write-code" type="password" name="password" placeholder="password"/>
+                    </div>
+                    <div id="alert1"></div>
+                    <button class="btn login-btn" id="doLogin">注册</button>
+                    <div>my-phone：17744469309</div>
+                    <div>
+                        <!--<a href="register.html" th:href="@{/join}">-->
+                            <!--<button class="btn login-btn">返回主页面</button>-->
+                        <!--</a>-->
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
