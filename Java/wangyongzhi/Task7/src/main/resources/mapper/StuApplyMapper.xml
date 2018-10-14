@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="domain.dao.StuApplyMapper">
+  <resultMap id="BaseResultMap" type="domain.entity.StuApply">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="stu_number" jdbcType="INTEGER" property="stuNumber" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="start_time" jdbcType="BIGINT" property="startTime" />
+    <result column="end_time" jdbcType="BIGINT" property="endTime" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+  </resultMap>
+
+  <!-- 插入数据并返回主键 -->
+  <insert id="insert" parameterType="domain.entity.StuApply">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into stu_apply (name, stu_number,
+      profession, status, start_time, 
+      end_time, username, telephone, 
+      email, create_time, update_time, 
+      image)
+    values (#{name,jdbcType=VARCHAR}, #{stuNumber,jdbcType=INTEGER},
+      #{profession,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{startTime,jdbcType=BIGINT}, 
+      #{endTime,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{image,jdbcType=VARCHAR})
+  </insert>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, stu_number, profession, status, start_time, end_time, username, 
+    telephone, email, create_time, update_time, image
+    from stu_apply
+  </select>
+
+  <!-- 查询总数 -->
+  <select id="selectCount" resultType="int">
+        select count(*) FROM stu_apply
+  </select>
+
+  <!-- 根据用户名查询用户数据 -->
+  <select id="getByUsername" resultMap="BaseResultMap" parameterType="String">
+    select id, name, stu_number, profession, status, start_time, end_time, username,
+    telephone, email, create_time, update_time, image
+    from stu_apply where username = #{username}
+  </select>
+
+  <!-- 根据电话号查询用户数据 -->
+  <select id="getByPhone" resultMap="BaseResultMap" parameterType="String">
+    select id, name, stu_number, profession, status, start_time, end_time, username,
+    telephone, email, create_time, update_time, image
+    from stu_apply where telephone = #{telephone}
+  </select>
+
+  <update id="updateByUsername" parameterType="domain.entity.StuApply">
+    update stu_apply
+    set id = #{id},
+    name = #{name},
+    stu_number = #{stuNumber},
+    profession = #{profession},
+    status = #{status},
+    start_time = #{startTime},
+    end_time = #{endTime},
+    telephone = #{telephone},
+    email = #{email},
+    create_time = #{createTime},
+    update_time = #{updateTime},
+    image = #{image}
+    where username = #{username}
+  </update>
+
+
+</mapper>
