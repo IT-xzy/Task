@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局，下面的项目继承此主布局 -->
+    <definition name="layout" template="/WEB-INF/jsp/mainLayout.jsp">
+        <put-attribute name="head" value="/WEB-INF/jsp/head.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
+    </definition>
+    <!-- 主布局 -->
+    <!-- 项目 -->
+    <definition name="homepage" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/jsp/home.jsp"/>
+    </definition>
+
+    <!--项目-->
+    <definition name="profession" extends="layout">
+        <put-attribute name="body" value="/WEB-INF/jsp/profess.jsp"/>
+    </definition>
+
+
+</tiles-definitions>

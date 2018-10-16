@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="domain.dao.ProfMapper">
+
+    <resultMap id="ProfMap" type="domain.entity.Prof">
+        <id property="id" column="Id"/>
+        <result property="profession" column="Profession"/>
+        <result property="introduction" column="Introduction"/>
+        <result property="threshold" column="Threshold"/>
+        <result property="difficulty" column="Difficulty"/>
+        <result property="request" column="Request"/>
+        <result property="growthPeriod" column="Growth_period"/>
+        <result property="rareness" column="Rareness"/>
+        <result property="firstSalary" column="First_salary"/>
+        <result property="secondSalary" column="Second_salary"/>
+        <result property="thirdSalary" column="Third_salary"/>
+        <result property="createAt" column="Create_at"/>
+        <result property="updateAt" column="Update_at"/>
+    </resultMap>
+
+
+    <!--<select id="getByProf" resultType="model.Prof" parameterType="String">-->
+        <!--select-->
+        <!--t.id,-->
+        <!--t.profession,-->
+        <!--t.introduction,-->
+        <!--t.threshold,-->
+        <!--t.difficulty,-->
+        <!--t.request,-->
+        <!--t.growthPeriod,-->
+        <!--t.rareness,-->
+        <!--t.firstSalary,-->
+        <!--t.secondSalary,-->
+        <!--t.thirdSalary,-->
+        <!--t.createAt,-->
+        <!--t.updateAt-->
+        <!--from prof t-->
+        <!--where t.profession = #{profession}-->
+    <!--</select>-->
+
+    <select id="getByProf" resultMap="ProfMap" parameterType="String">
+        select * FROM prof WHERE Profession = #{profession}
+    </select>
+
+
+</mapper>
