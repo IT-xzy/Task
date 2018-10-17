@@ -1,0 +1,203 @@
+@import "-reset";
+@import "-all";
+
+body {
+    background: $clrone;
+    letter-spacing: 2px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include posi1(fixed, top, 0);
+    @include wiht(100%, 45px);
+    padding: 0 15px;
+    box-sizing: border-box;
+    background: inherit;
+    color: $clrtwo;
+    z-index: 1;
+
+
+    button {
+        @include wiht-rela(22px, 22px);
+        border: 1px solid $clrtwo;
+        background: none;
+
+        &::after {
+            content: '';
+            @include posi1(absolute, left, 0);
+            top: 0;
+            @include wiht(14px, 1px);
+            padding: 4.5px 0;
+            margin: 4px 3px;
+            background: $clrtwo content-box;
+
+            border: {
+                top: 1px solid $clrtwo;
+                bottom: 1px solid $clrtwo;
+            }
+        }
+    }
+
+    a {
+        @include wiht-rela(18px, 22.5px);
+
+        &::after,
+        &::before {
+            content: '';
+            @include posi1(absolute, left, 7.5px);
+            @include wiht(2px, 22.5px);
+            background: $clrtwo;
+        }
+
+        &::after {
+            transform: rotate(45deg);
+        }
+
+        &::before {
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+main {
+    margin: 130px 0 95px;
+
+    &>:first-child {
+        @include posi1(fixed,top, 45px);
+        width: 100%;
+        background: $clrone;
+        z-index: 1;
+        p {
+            padding-left: 23px;
+        }
+
+        &>p {
+            color: $clrtwo;
+            font-size: $sft;
+            line-height: 36px;
+        }
+
+        div {
+            position: relative;
+            height: 40px;
+            background:$rgbaff;
+
+            
+        &::before {
+            content: '';
+            @include posi1(absolute, top, 100%);
+            left: 35px;
+            @include triangle(top, 6.5px, $rgbaff, right, left, 4px);            
+        }
+
+            p {
+
+                font-size: $mft;
+                line-height: 40px;
+            }
+
+            i {
+                @include posi1(absolute, right, 0);
+                top: 0;
+                @include wiht(25px, 25px);
+                margin: 7.5px 11.5px;
+                border-radius: 50%;
+                background: $clrtri;
+
+                &::after {
+                    content: '';
+                    @include posi1(absolute, top, 50%);
+                    left: 8px;
+                    @include triangle(left, 13px, $clrtwo, top, bottom, 7.5px);
+                    transform: translatey(-50%);
+                }
+            }
+        }
+    }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        &>li {
+            position: relative;
+            width: 20%;
+            margin: 0 6.6666666% 11vw 6.6666666%;
+            &:hover .icon {
+                display: flex;
+            }
+
+            &>:first-child {
+                border: .8vw solid $clrtwo;
+                background: #f5c97b;
+                text-align: center;
+
+                span {
+                    display: block;
+                }
+
+                &>:first-child {
+                    line-height: 15.5vw;
+                }
+
+                &>:last-child {
+                    background: rgba(26, 153, 183, .52);
+                    color: $clrtwo;
+                    font-size: $sft;
+                    line-height: 4.5vw;
+                }
+
+            }
+
+            &>:last-child {
+                display: none;
+                justify-content: space-between;
+                align-items: center;
+                @include posi1(absolute, top, 100%);
+                @include wiht(20vw,11vw);
+
+                button {
+                    @include wiht(4vw, 4vw);
+                    border: none;
+                    background: url(../img/css-sprites.png) no-repeat center / 1540% 1093.33%;
+                }
+
+                &>:nth-child(1) {
+                    background-position: 76.852% 89.262%;
+                }
+
+                &>:nth-child(2) {
+                    background-position: 95.37% 6.711%;
+                }
+
+                &>:nth-child(3) {
+                    background-position: 44.444% 89.262%;
+                }
+
+                &>:nth-child(4) {
+                    background-position: 60.648% 89.262%;
+                }
+            }
+        }
+    }
+}
+
+footer {
+    @include flex;
+    @include posi1(fixed, bottom, 0);
+    @include wiht(100%, 95px);
+    background: $clrone;
+
+    button {
+        width: 76.5%;
+        border: none;
+        background: $clrtri;
+        color: $clrtwo;
+        font-size: 22px;
+        line-height: 43px;
+        letter-spacing:inherit;
+    }
+
+}
