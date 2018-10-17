@@ -5,6 +5,7 @@ import com.ptteng.entity.Workroom;
 import com.ptteng.service.WorkroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,17 +26,17 @@ public class WorkroomController {
             List<Workroom> workrooms = service.findWorkroom(type);
             System.out.println(workrooms);
             modelAndView.addObject("data", workrooms);
-            modelAndView.addObject("code", 101);
+            modelAndView.addObject("code", 0);
         } catch (Exception e) {
-            modelAndView.addObject("code", 102);
+            modelAndView.addObject("code", -1);
         }
         modelAndView.setViewName("workroom");
         return modelAndView;
     }
 
 
-    @RequestMapping(value = "/a/u/workroom/search", method = RequestMethod.GET)
-    public ModelAndView findById(long id) {
+    @RequestMapping(value = "/a/u/workroom/{id}", method = RequestMethod.GET)
+    public ModelAndView findById(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);
@@ -50,8 +51,8 @@ public class WorkroomController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/a/u/workroom", method = RequestMethod.DELETE)
-    public ModelAndView deleteById(long id) {
+    @RequestMapping(value = "/a/u/workroom/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deleteById(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);

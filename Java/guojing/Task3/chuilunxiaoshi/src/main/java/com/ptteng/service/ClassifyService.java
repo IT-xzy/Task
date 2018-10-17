@@ -14,21 +14,14 @@ public class ClassifyService {
     private ClassifyDao classifyDao;
 
 
-    public List<Classify> findPageClassify(int page, int size, String keyword, Long collectionId) {
+    public List<Classify> findPageClassify(Integer page, Integer size, String keyword, Long collectionId) {
         int pageStart = (page - 1) * size;
-        List<Classify> classfyList = classifyDao.findPageClassify(pageStart, size, keyword, collectionId);
-        return classfyList;
+        List<Classify> classifyList = classifyDao.findPageClassify(pageStart, size, keyword, collectionId);
+        return classifyList;
     }
 
-    public int findClassifyAllPage(int size) {
-        int total = classifyDao.countClassify();
-        int allPage;
-        if (total % size == 0) {
-            allPage = total / size;
-        } else {
-            allPage = total / size + 1;
-        }
-        return allPage;
+    public long countClassify() {
+        return classifyDao.countClassify();
     }
 
 
@@ -41,10 +34,16 @@ public class ClassifyService {
     }
 
     public Boolean updateClassify(Classify classify){
+        classify.setUpdateAt(System.currentTimeMillis());
+        classify.setUpdateBy(33L);
         return classifyDao.updateClassify(classify);
     }
 
     public long insertClassify(Classify classify){
+        classify.setCreateAt(System.currentTimeMillis());
+        classify.setUpdateAt(System.currentTimeMillis());
+        classify.setCreateBy(11L);
+        classify.setUpdateBy(22L);
         return classifyDao.insertClassify(classify);
     }
 

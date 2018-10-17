@@ -5,6 +5,7 @@ import com.ptteng.entity.Work;
 import com.ptteng.service.WorkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,10 +19,16 @@ public class WorkController {
     private WorkService service;
 
     @RequestMapping(value = "/a/u/work/list", method = RequestMethod.GET)
-    public ModelAndView getWork(int page, int size, String keyword, Long classifyId) {
+    public ModelAndView getWork(Integer page, Integer size, String keyword, Long classifyId) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println("page===" + page + ",size===" + size + ",keyword===" + keyword+",classifyId==" + classifyId);
+        if (page == null) {
+            page = 1;
+        }
+        if (size == null) {
+            size = 10;
+        }
         try {
             List<Work> works = service.findPageWork(page, size, keyword, classifyId);
             System.out.println(works);
@@ -30,15 +37,15 @@ public class WorkController {
         } catch (Exception e) {
             modelAndView.addObject("code", -1);
         }
-        int allPage=service.findWorkAllPage(size);
+        long total=service.countWork();
         modelAndView.addObject("page",page);
-        modelAndView.addObject("allPage",allPage);
+        modelAndView.addObject("total",total);
         modelAndView.setViewName("work");
         return modelAndView;
     }
 
-    @RequestMapping(value = "/a/u/work/search", method = RequestMethod.GET)
-    public ModelAndView findById(long id) {
+    @RequestMapping(value = "/a/u/work/{id}", method = RequestMethod.GET)
+    public ModelAndView findById(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);
@@ -56,8 +63,8 @@ public class WorkController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/a/u/work", method = RequestMethod.DELETE)
-    public ModelAndView deleteById(long id) {
+    @RequestMapping(value = "/a/u/work/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deleteById(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);

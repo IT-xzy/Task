@@ -5,6 +5,7 @@ import com.ptteng.entity.Bbs;
 import com.ptteng.service.BbsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -67,8 +68,8 @@ public class BbsController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/a/u/bbs", method = RequestMethod.DELETE)
-    public ModelAndView deleteById(long id) {
+    @RequestMapping(value = "/a/u/bbs/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deleteById(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);

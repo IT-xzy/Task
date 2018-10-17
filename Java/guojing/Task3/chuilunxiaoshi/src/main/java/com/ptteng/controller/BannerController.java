@@ -5,6 +5,7 @@ import com.ptteng.entity.Banner;
 import com.ptteng.service.BannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,17 +24,17 @@ public class BannerController {
             List<Banner> bannerList = service.findBanner();
             System.out.println(bannerList);
             modelAndView.addObject("data",bannerList);
-            modelAndView.addObject("code", 101);
+            modelAndView.addObject("code", 0);
         } catch (Exception e) {
-            modelAndView.addObject("code", 102);
+            modelAndView.addObject("code", -1);
         }
         modelAndView.setViewName("banner");
         return modelAndView;
     }
 
 
-    @RequestMapping(value = "/a/u/banner", method = RequestMethod.DELETE)
-    public ModelAndView deleteByid(long id) {
+    @RequestMapping(value = "/a/u/banner/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deleteByid(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);

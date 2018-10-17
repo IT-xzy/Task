@@ -5,6 +5,7 @@ import com.ptteng.entity.Reply;
 import com.ptteng.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,8 +38,8 @@ public class ReplyController {
 
 
 
-    @RequestMapping(value = "/a/u/reply", method = RequestMethod.DELETE)
-    public ModelAndView deleteById(long id) {
+    @RequestMapping(value = "/a/u/reply/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deleteById(@PathVariable("id") long id){
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);

@@ -22,10 +22,16 @@ public class BannerService {
     }
 
     public Boolean updateBanner(Banner banner){
+        banner.setUpdateAt(System.currentTimeMillis());
+        banner.setUpdateBy(33L);
         return bannerDao.updateBanner(banner);
     }
 
     public long insertBanner(Banner banner){
+        banner.setCreateAt(System.currentTimeMillis());
+        banner.setUpdateAt(System.currentTimeMillis());
+        banner.setCreateBy(11L);
+        banner.setUpdateBy(22L);
         return bannerDao.insertBanner(banner);
     }
 

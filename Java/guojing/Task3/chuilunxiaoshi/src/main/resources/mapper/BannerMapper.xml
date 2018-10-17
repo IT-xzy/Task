@@ -18,7 +18,7 @@
 
 
     <select id="findBanner" resultMap="bannerMap">
-            select * from banner
+            select * from banner where status=1
     </select>
 
 
@@ -42,7 +42,7 @@
             <if test="introduction !=null and introduction !=''">
                 introduction=#{introduction},
             </if>
-            <if test="updateAt !=null and update !=''">
+            <if test="updateAt !=null and updateAt !=''">
                 update_at=#{updateAt},
             </if>
             <if test="updateBy !=null and updateBy != ''">

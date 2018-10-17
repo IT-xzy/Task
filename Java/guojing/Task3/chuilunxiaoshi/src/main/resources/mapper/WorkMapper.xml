@@ -22,7 +22,7 @@
         <result column="collection_name" property="collectionName"/>
     </resultMap>
 
-    <select id="countWork" resultType="int">
+    <select id="countWork" resultType="long">
         select count(*) from work
      </select>
 
@@ -34,12 +34,10 @@
             <if test="classifyId !=null and classifyId !=''">
                 work.classify_id=#{classifyId}
             </if>
-
             <if test="keyword !=null and keyword !=''">
                 and (work.name like concat(concat('%',#{keyword}),'%')
                 or work.introduction like concat(concat('%',#{keyword}),'%') )
             </if>
-
         </where>
         limit #{pageStart},#{size}
     </select>
@@ -81,7 +79,7 @@
             <if test="article !=null and article !=''">
                 article=#{article},
             </if>
-            <if test="updateAt !=null and update !=''">
+            <if test="updateAt !=null and updateAt !=''">
                 update_at=#{updateAt},
             </if>
             <if test="updateBy !=null and updateBy != ''">

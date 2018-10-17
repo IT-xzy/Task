@@ -11,9 +11,9 @@ import java.util.List;
 public interface CollectionDao {
 
     //    设置三个入参，keyword为非必传参数，为空时，按照page和size查询，不为空时，按keyword查询
-    List<Collection> findPageCollection(@Param("pageStart") int pageStart, @Param("size") int size, @Param("keyword") String keyword);
+    List<Collection> findPageCollection(@Param("pageStart") Integer pageStart, @Param("size") Integer size, @Param("keyword") String keyword);
 
-    int countCollection();
+    long countCollection();
 
     Collection findById(long id);
 

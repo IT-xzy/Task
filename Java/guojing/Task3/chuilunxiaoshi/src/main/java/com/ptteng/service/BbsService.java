@@ -13,6 +13,8 @@ public class BbsService {
     @Autowired
     private BbsDao bbsDao;
     public long insertBbs(Bbs bbs) {
+        bbs.setCreateAt(System.currentTimeMillis());
+        bbs.setUpdateAt(System.currentTimeMillis());
         return bbsDao.insertBbs(bbs);
     }
 

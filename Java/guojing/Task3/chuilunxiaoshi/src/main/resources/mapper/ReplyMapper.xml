@@ -16,22 +16,22 @@
 
 
     <insert id="insertReply" useGeneratedKeys="true" keyProperty="id" parameterType="com.ptteng.entity.Reply">
-        insert into bbs (message,bbs_id,create_at,update_at,create_by,update_by)
+        insert into reply (message,bbs_id,create_at,update_at,create_by,update_by)
         values (#{message},#{bbsId},#{createAt},#{updateAt},#{createBy},#{updateBy})
     </insert>
 
 
     <update id="updateReply" parameterType="com.ptteng.entity.Reply">
-        update bbs message=#{message},update_at=#{updateAt},update_by=#{updateBy},
+        update reply message=#{message},update_at=#{updateAt},update_by=#{updateBy},
         where id=#{id}
     </update>
 
     <select id="findReply" resultType="com.ptteng.entity.Reply" parameterType="com.ptteng.entity.Reply">
-        select * from bbs where bbs_id=#{bbsId}
+        select * from reply where bbs_id=#{bbsId}
     </select>
 
     <delete id="deleteById" parameterType="long">
-         delete from bbs where id=#{id}
+         delete from reply where id=#{id}
     </delete>
 
 

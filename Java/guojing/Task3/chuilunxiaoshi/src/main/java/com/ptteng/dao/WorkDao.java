@@ -8,10 +8,10 @@ import java.util.List;
 
 @Repository
 public interface WorkDao {
-    List<Work> findPageWork(@Param("pageStart") int pageStart, @Param("size") int size, @Param("keyword")
+    List<Work> findPageWork(@Param("pageStart") Integer pageStart, @Param("size") Integer size, @Param("keyword")
             String keyword, @Param("classifyId") Long classifyId);
 
-    int countWork();
+    long countWork();
 
 
     Work findById(long id);

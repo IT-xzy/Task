@@ -17,6 +17,8 @@ public class UserService {
     }
 
     public long register(User user) {
+        user.setCreateAt(System.currentTimeMillis());
+        user.setUpdateAt(System.currentTimeMillis());
         return userDao.register(user);
     }
 }

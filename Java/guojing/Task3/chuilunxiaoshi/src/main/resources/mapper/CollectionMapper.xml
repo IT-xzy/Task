@@ -13,7 +13,7 @@
         <result column="update_by" property="updateBy"/>
     </resultMap>
 
-    <select id="countCollection" resultType="int">
+    <select id="countCollection" resultType="long">
         select count(*) from collection
      </select>
 
@@ -49,11 +49,11 @@
             <if test="status !=null and status !=''">
                 status=#{status},
             </if>
-            <if test="updateAt !=null and update !=''">
-            update_at=#{updateAt}
+            <if test="updateAt !=null and updateAt !=''">
+            update_at=#{updateAt},
             </if>
             <if test="updateBy !=null and updateBy != ''">
-            update_by=#{updateBy}
+            update_by=#{updateBy},
             </if>
         </trim>
         where id=#{id}
@@ -62,7 +62,7 @@
 
     <insert id="insertCollection" useGeneratedKeys="true" keyColumn="id" parameterType="com.ptteng.entity.Collection">
         insert into collection (name,status,create_at,update_at,create_by,update_by)
-        value (#{name},#{status},#{createAt},#{updateAt},#{createBy},#{updateBy})
+        values (#{name},#{status},#{createAt},#{updateAt},#{createBy},#{updateBy})
     </insert>
 
 

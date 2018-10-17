@@ -4,18 +4,19 @@ package com.ptteng.entity;
 public class Reply {
     private Long id;
     private String message;
-    private Long bbdId;
+    private Long bbsId;
     private Long createAt;
     private Long updateAt;
     private Long createBy;
     private Long updateBy;;
+
 
     @Override
     public String toString() {
         return "Reply{" +
                 "id=" + id +
                 ", message='" + message + '\'' +
-                ", bbdId=" + bbdId +
+                ", bbsId=" + bbsId +
                 ", createAt=" + createAt +
                 ", updateAt=" + updateAt +
                 ", createBy=" + createBy +
@@ -39,12 +40,12 @@ public class Reply {
         this.message = message;
     }
 
-    public Long getBbdId() {
-        return bbdId;
+    public Long getBbsId() {
+        return bbsId;
     }
 
-    public void setBbdId(Long bbdId) {
-        this.bbdId = bbdId;
+    public void setBbsId(Long bbsId) {
+        this.bbsId = bbsId;
     }
 
     public Long getCreateAt() {

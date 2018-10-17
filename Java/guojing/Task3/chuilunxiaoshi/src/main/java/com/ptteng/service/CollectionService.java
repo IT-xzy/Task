@@ -13,21 +13,14 @@ public class CollectionService {
     @Autowired
     private CollectionDao collectionDao;
 
-    public List<Collection> findPageCollection(int page, int size, String keyword) {
+    public List<Collection> findPageCollection(Integer page, Integer size, String keyword) {
         int pageStart = (page - 1) * size;
         List<Collection> collections = collectionDao.findPageCollection(pageStart, size, keyword);
         return collections;
     }
 
-    public int findCollectionAllPage(int size) {
-        int total = collectionDao.countCollection();
-        int allPage;
-        if (total % size == 0) {
-            allPage = total / size;
-        } else {
-            allPage = total / size + 1;
-        }
-        return allPage;
+    public long countCollection() {
+        return collectionDao.countCollection();
     }
 
 
@@ -37,15 +30,25 @@ public class CollectionService {
 
 
     public Boolean deleteById(long id){
+
         return collectionDao.deleteById(id);
     }
 
 
     public Boolean updateCollection(Collection collection){
+
+        System.out.println("测试测试==="+collection);
+        collection.setUpdateAt(System.currentTimeMillis());
+        collection.setUpdateBy(33L);
+        System.out.println("测试测试==="+collection);
         return collectionDao.updateCollection(collection);
     }
 
     public long insertCollection(Collection collection){
+        collection.setCreateAt(System.currentTimeMillis());
+        collection.setUpdateAt(System.currentTimeMillis());
+        collection.setCreateBy(11L);
+        collection.setUpdateBy(22L);
         return collectionDao.insertCollection(collection);
     }
 

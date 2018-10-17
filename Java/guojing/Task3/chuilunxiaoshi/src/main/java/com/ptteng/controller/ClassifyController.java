@@ -4,6 +4,7 @@ import com.ptteng.entity.Classify;
 import com.ptteng.service.ClassifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,10 +18,17 @@ public class ClassifyController {
     private ClassifyService service;
 
     @RequestMapping(value = "/a/u/classify/list", method = RequestMethod.GET)
-    public ModelAndView getClassify(int page, int size, String keyword, Long collectionId) {
+    public ModelAndView getClassify(Integer page, Integer size, String keyword, Long collectionId) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println("page===" + page + ",size===" + size + ",keyword===" + keyword+",collectionId==" + collectionId);
+        if (page == null) {
+            page = 1;
+        }
+        if (size == null) {
+            size = 10;
+        }
+
         try {
             List<Classify> classifies = service.findPageClassify(page, size, keyword, collectionId);
             System.out.println(classifies);
@@ -29,16 +37,16 @@ public class ClassifyController {
         } catch (Exception e) {
             modelAndView.addObject("code", -1);
         }
-        int allPage = service.findClassifyAllPage(size);
-        modelAndView.addObject("allPage",allPage);
+        long total = service.countClassify();
+        modelAndView.addObject("total",total);
         modelAndView.addObject("page",page);
         modelAndView.setViewName("classify");
         return modelAndView;
     }
 
 
-    @RequestMapping(value = "/a/u/classify/search", method = RequestMethod.GET)
-    public ModelAndView findById(long id) {
+    @RequestMapping(value = "/a/u/classify/{id}", method = RequestMethod.GET)
+    public ModelAndView findById(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);
@@ -57,8 +65,8 @@ public class ClassifyController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/a/u/classify", method = RequestMethod.DELETE)
-    public ModelAndView deleteById(long id) {
+    @RequestMapping(value = "/a/u/classify/{id}", method = RequestMethod.DELETE)
+    public ModelAndView deleteById(@PathVariable("id") long id) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("哈哈哈！我来了");
         System.out.println(id);

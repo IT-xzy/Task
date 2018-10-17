@@ -14,21 +14,15 @@ public class WorkService {
 private WorkDao workDao;
 
 
-    public List<Work> findPageWork(int page, int size, String keyword, Long classifyId) {
+    public List<Work> findPageWork(Integer page, Integer size, String keyword, Long classifyId) {
         int pageStart = (page - 1) * size;
         List<Work> Works = workDao.findPageWork(pageStart, size, keyword, classifyId);
         return Works;
     }
 
-    public int findWorkAllPage(int size) {
-        int total = workDao.countWork();
-        int allPage;
-        if (total % size == 0) {
-            allPage = total / size;
-        } else {
-            allPage = total / size + 1;
-        }
-        return allPage;
+    public long countWork() {
+
+        return workDao.countWork();
     }
 
     public Work findById(long id){
@@ -42,10 +36,16 @@ private WorkDao workDao;
 
 
     public Boolean updateWork(Work work){
+        work.setUpdateAt(System.currentTimeMillis());
+        work.setUpdateBy(33L);
         return workDao.updateWork(work);
     }
 
     public long insertWork(Work work){
+        work.setCreateAt(System.currentTimeMillis());
+        work.setUpdateAt(System.currentTimeMillis());
+        work.setCreateBy(11L);
+        work.setUpdateBy(22L);
         return workDao.insertWork(work);
     }
 

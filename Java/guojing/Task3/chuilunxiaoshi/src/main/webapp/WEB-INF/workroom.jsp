@@ -16,10 +16,6 @@
         <spring:message code="${code}"/>
     </json:property>
 
-    <json:property name="page" value="${page}"/>
-
-    <json:property name="allPage" value="${allPage}"/>
-
     <json:array name="data" items="${data}" var="workroom">
         <json:object>
             <json:property name="id" value="${workroom.id}"/>

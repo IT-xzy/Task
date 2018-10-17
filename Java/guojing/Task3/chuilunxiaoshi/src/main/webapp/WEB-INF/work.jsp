@@ -18,7 +18,7 @@
 
     <json:property name="page" value="${page}"/>
 
-    <json:property name="allPage" value="${allPage}"/>
+    <json:property name="total" value="${total}"/>
 
     <json:array name="data" items="${data}" var="work">
         <json:object>

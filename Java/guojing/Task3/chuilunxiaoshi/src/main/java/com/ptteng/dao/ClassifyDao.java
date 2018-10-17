@@ -9,9 +9,9 @@ import java.util.List;
 @Repository
 public interface ClassifyDao {
 
-    List<Classify> findPageClassify(@Param("pageStart") int pageStart, @Param("size") int size, @Param("keyword") String keyword, @Param("collectionId") Long collectionId);
+    List<Classify> findPageClassify(@Param("pageStart") Integer pageStart, @Param("size") Integer size, @Param("keyword") String keyword, @Param("collectionId") Long collectionId);
 
-    int countClassify();
+    long countClassify();
 
     Classify findById(long id);
 
