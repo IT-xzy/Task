@@ -1,0 +1,92 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Archetype Created Web Application</display-name>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <!-- <context-param>
+       <param-name>log4jConfigLocation</param-name>
+       <param-value>
+         classpath:log4j.properties
+       </param-value>
+     </context-param>-->
+
+    <filter>
+        <!--Postaman使用的methodFilter-->
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
+        <!--<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>-->
+    </filter>
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <!--<filter>-->
+    <!--jsp页面使用的methodFilter-->
+    <!--<filter-name>HiddenHttpMethodFilterASD</filter-name>-->
+    <!--&lt;!&ndash;<filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>&ndash;&gt;-->
+    <!--<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+    <!--<filter-name>HiddenHttpMethodFilterASD</filter-name>-->
+    <!--<url-pattern>/*</url-pattern>-->
+    <!--</filter-mapping>-->
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--配置监听器-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <!--<listener>
+      <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>-->
+    <!-- springmvc前端控制器，注册springmvc核心控制器-->
+    <servlet>
+
+        <!--这是我的DispatcherServlet，浏览器的请求先到这个前端控制器-->
+        <servlet-name>springmvc</servlet-name>
+        <!-- 通知springmvc去指定的目录加载springmvc.xml文件  -->
+        <!-- 如果没有下面的配置，会去默认目录找文件： /WEB-INF/<servlet-name>-servlet.xml -->
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--这块不配置默认找springmvc-serverlet.xml[servlet的名称]这个文件-->
+        <init-param>
+            <!-- contextConfigLocation配置springmvc加载的配置文件(配置处理器映射器，适配器)  -->
+            <!-- 这里的内容contextConfigLocation不能修改，它不像其他name属性可以自己命名，它是容器内在属性  -->
+            <param-name>contextConfigLocation</param-name>
+            <!-- 这样配置后，它会去src下找该文件，或者是去和src同一级的目录找  -->
+            <param-value>classpath:springmvc.xml</param-value>
+        </init-param>
+    </servlet>
+
+
+    <!--拦截规则-->
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+
+        <!--/*拦截所有jsp js  png .css真的全拦截捕捉-->
+        <!--*.action *.dao拦截以do action结尾的请求-->
+        <!--/拦截所有（不包括jsp）(包含.js)(包含.js .png.css)/对静态资源放行-->
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>
