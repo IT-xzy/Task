@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!--mysql最简单配置-->
+
+<generatorConfiguration>
+    <!--导入数据源信息-->
+    <properties resource="jdbc.properties"/>
+
+    <!--指定特定数据库的jdbc驱动jar包位置；如果建的是web项目，因为它本身classpath路径下有jdbc的依赖包，所以可以不用配置-->
+    <classPathEntry location="${jdbc.driverPath}"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!--注：<context>的子元素有严格的配置顺序-->
+        <commentGenerator>
+            <!--是否去除时间戳-->
+            <property name="suppressDate" value="true"/>
+            <!--是否去除自动生成的注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driverClassName}" connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}"/>
+
+        <!--Model模型生成器-->
+        <javaModelGenerator targetPackage="com.lihoo.ssm.model" targetProject="src\main\java">
+            <!--
+                是否对char类型的列的数据进行trim操作
+                如果有char类型的话最好加上下面这行代码
+                <property name="trimStrings" value="true"/>
+            -->
+        </javaModelGenerator>
+
+        <!--Mapper映射文件生成所在的目录，为每一个数据库的表生成对应的sqlMap文件-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources"/>
+
+        <!--
+            客户端代码，生成mapper接口
+                type="ANNOTATEDMAPPER",生成基于注解的mapper接口。(基于注解方式)
+                type="XMLMAPPER",所有的方法都在XML中，接口调用依赖XML文件。(基于xml配置方式)
+        -->
+        <javaClientGenerator targetPackage="com.lihoo.ssm.dao" targetProject="src\main\java" type="XMLMAPPER"/>
+
+        <!--表名及对应类-->
+        <!--****-->
+        <!--<table tableName="student_home">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql"/>-->
+        <!--</table>-->
+        <!--<table tableName="student_profession">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="student_info">-->
+            <!--<generatedKey column="id" sqlStatement="Mysql"/>-->
+        <!--</table>-->
+        <table tableName="student_list">
+            <generatedKey column="id" sqlStatement="Mysql"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
