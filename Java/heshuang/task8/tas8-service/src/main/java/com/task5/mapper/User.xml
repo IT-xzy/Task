@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task5.mapper.UserDao">
+    <resultMap id="user" type="com.task5.pojo.User">
+        <result property="id" column="id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="salt" column="salt"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="headURL" column="headURL"/>
+        <result property="email" column="email"/>
+    </resultMap>
+    <select id="checkUser" resultMap="user">
+        SELECT * FROM user WHERE user_name=#{userName} AND password=#{password}
+    </select>
+    <select id="findUserByName" resultMap="user">
+        SELECT * FROM user WHERE user_name=#{userName}
+    </select>
+<insert id="addUser" parameterType="com.task5.pojo.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO user(user_name,password,salt,create_at,update_at,phone_number,headURL,email) VALUES
+    (#{userName},#{password},#{salt},#{createAt},#{updateAt},#{phoneNumber},#{headURL},#{email})
+</insert>
+    <select id="findUserByPhoneNumber" resultMap="user">
+        SELECT * FROM user WHERE phone_number=#{phoneNumber}
+    </select>
+
+    <select id="findUserByEmail" resultMap="user">
+        SELECT * FROM user WHERE email=#{email}
+    </select>
+    <select id="findUserById" resultMap="user">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+    <update id="updateUser" parameterType="com.task5.pojo.User">
+        update user SET headURL = #{headURL} WHERE id=#{id}
+        <!--<set>-->
+            <!--<if test="headURL != null">-->
+                <!--headURL = #{headURL},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--<where>-->
+            <!--userName=#{userName}-->
+        <!--</where>-->
+    </update>
+</mapper>
