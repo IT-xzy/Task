@@ -1,0 +1,171 @@
+@charset"UTF-8";
+
+// 引入变量和混合器
+@import"_layout";
+
+
+strong {
+    font-size: 14px;
+    color: black;
+}
+
+input{
+    width: 80%;
+    margin-left: 10px
+}
+
+select{
+    width: 135px;
+    margin-left: 10px;
+}
+
+h1{
+    font-size: 32px;
+}
+h2{
+    font-size: 24px;
+}
+h3{
+    font-size: 18px;
+}
+h4{
+    font-size: 16px;
+}
+h5{
+    font-size: 13px;
+}
+
+// 主体
+.add-box {
+    padding: 20px;
+    background: $white;
+
+    .add-content-box {
+        border: $home-border;
+
+        .add-title {
+            height: 40px;
+            border-bottom: $home-border;
+
+            strong {
+                font-size: 14px;
+                color: black;
+            }
+        }
+
+        .add-content {
+            padding: 20px;
+
+            .select-type {
+                margin-bottom: 25px;
+
+                #editor{
+                    display: inline-block;
+                    width: 80%;
+                    margin-left: 15px;
+
+                    .w-e-toolbar{
+                        flex-wrap: wrap;    
+                    }
+
+                    .w-e-text-container{
+                        height: 200px !important;
+                    }
+                }
+            }
+
+            .flex{
+                display: flex;
+            }
+            .Upload {
+                width: 40px
+            }
+            table {
+                width: 80%;
+                margin: 20px 70px;
+                line-height: 40px;
+                text-align: center;
+
+                tr,
+                td,
+                th {
+                    border: $home-border;
+                }
+            }
+            .th-width {
+                width: 20%;
+                background: $gray;
+            }
+
+            .thumb {
+                display: block;
+                @include box(320px, 150px);
+                margin: 20px 70px;
+            }
+
+            .progress {
+                @include box (100%, 30px);
+                border-radius: 5px;
+                background: #5ab65a;
+                font-size: 22px;
+                line-height: 30px;
+            }
+
+            .button-box {
+                @include flex(space-around, center);
+                height: 42px;
+            }
+
+            .button-uploading {
+                @include box (40%, 30px);
+                border-radius: 5px;
+                background: #5ab65a;
+                outline: #5ab65a;
+                color: $white;
+                line-height: 30px;
+            }
+
+            .button-delete {
+                @include box (40%, 30px);
+                border-radius: 5px;
+                background: #d8524e;
+                outline: #d8524e;
+                color: $white;
+                line-height: 30px;
+            }
+
+            .pull-down{
+                display: inline-block;
+                margin-right: 10%;
+            }
+        }
+
+        .bottom-button{
+            margin-left: 70px;
+
+            .online {
+                @include box (90px,40px);
+                margin-right: 10%;
+                border-radius: 5px;
+                background: #5ab65a;
+                outline: #5ab65a;
+                color: $white;
+                line-height: 40px;
+            }
+
+            .draft{
+                @extend .online;
+            }
+
+            .off{
+                @include box (90px,40px);
+                margin-left: 20%;
+                border-radius: 5px;
+                background: #d8524e;
+                outline: #d8524e;
+                color: $white;
+                line-height: 40px;
+            }
+        }
+    }
+}

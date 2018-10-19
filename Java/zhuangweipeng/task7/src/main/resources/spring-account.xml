@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <!--<context:component-scan base-package="com"/>-->
+    <!--阿里云短信号码密码注入-->
+    <bean id="msmUtil" class="com.utils.MsmUtil">
+        <property name="accessKeyId" value="LTAI2TGWKVTWNgdn"/>
+        <property name="accessKeySecret" value="wrYXWEhkr8MjnNZ1E2WJHthZvXRfAY"/>
+        <property name="signName" value="美文欣赏258"/>
+        <property name="templateCode" value="SMS_142947411"/>
+    </bean>
+
+    <!--阿里云邮件属性注入-->
+    <bean id="eMailUtil" class="com.utils.EMailUtil">
+        <property name="accessKeyId" value="LTAI2TGWKVTWNgdn"/>
+        <property name="accessKeySecret" value="wrYXWEhkr8MjnNZ1E2WJHthZvXRfAY"/>
+        <property name="address" value="zwptask07@test0506.zhuangwp8023.top"/>
+        <property name="sender" value="zwp"/>
+        <property name="tagName" value="zwpemail"/>
+        <property name="subject" value="邮件验证模板"/>
+    </bean>
+
+    <!--阿里云图片上传账号和bucket name-->
+    <!--<bean id="AliyunPhoteUploadUtil" class="com.utils.AliyunPhoteUploadUtil">-->
+        <!--<property name="accessKeyId" value="LTAI2TGWKVTWNgdn"/>-->
+        <!--<property name="accessKeySecret" value="wrYXWEhkr8MjnNZ1E2WJHthZvXRfAY"/>-->
+        <!--<property name="bucket" value="aliyunuploadphoto"/>-->
+    <!--</bean>-->
+
+
+    <!--七牛云上传-->
+    <!--<bean id="qiniuUp" class="com.utils.QiniuUp">-->
+        <!--<property name="accessKey" value="AurBmugKh-bh6pq9YoprSEHmwAOA3e0ldPaA6duj"/>-->
+        <!--<property name="secretKey" value="xLe6PDzwdmza5zYqCqXSue6xDZ26qeH47xYoXv74"/>-->
+        <!--<property name="bucket" value="zwposs"/>-->
+        <!--<property name="format" value=".png"/>-->
+        <!--<property name="remoteSrcUrl" value="http://pe94m5liz.bkt.clouddn.com"/>-->
+    <!--</bean>-->
+
+    <!--阿里云上传-->
+    <!--<bean id="aliUploadFile" class="com.utils.AliUploadFile">-->
+        <!--<property name="accessKeyId" value="LTAI2TGWKVTWNgdn"/>-->
+        <!--<property name="accessKeySecret" value="wrYXWEhkr8MjnNZ1E2WJHthZvXRfAY"/>-->
+        <!--<property name="bucketName" value="aliyunuploadphoto"/>-->
+        <!--<property name="endpoint" value="oss-cn-shenzhen.aliyuncs.com"/>-->
+        <!--<property name="format" value=".png"/>-->
+        <!--<property name="remoteSrcUrl" value="https://arnold-cheng.oss-cn-shenzhen.aliyuncs.com"/>-->
+    <!--</bean>-->
+</beans>

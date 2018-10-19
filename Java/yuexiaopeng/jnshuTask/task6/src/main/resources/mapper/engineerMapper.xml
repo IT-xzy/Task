@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yxpTask6.dao.EngineerDao">
+
+    <select id="selectEngineer" parameterType="yxpTask6.pojo.Engineer" resultMap="engineerResult">
+	        select * from engineer
+	</select>
+
+
+    <resultMap id="engineerResult" type="yxpTask6.pojo.Engineer">
+        <id property="engineerId" column="engineer_id"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="engineerImg" column="engineer_img"/>
+        <result property="engineerType" column="engineer_type"/>
+        <result property="engineerIntro" column="engineer_intro"/>
+        <result property="engineerSill" column="engineer_sill"/>
+        <result property="engineerDegree" column="engineer_degree"/>
+        <result property="engineerGrowth" column="engineer_growth"/>
+        <result property="engineerScarcity" column="engineer_scarcity"/>
+        <result property="engineerSalaryOne" column="engineer_salary_one"/>
+        <result property="engineerSalaryThree" column="engineer_salary_three"/>
+        <result property="engineerSalaryFive" column="engineer_salary_five"/>
+        <result property="engineerProceed" column="engineer_proceed"/>
+        <result property="engineerTip" column="engineer_tip"/>
+    </resultMap>
+
+</mapper>

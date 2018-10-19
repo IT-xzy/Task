@@ -1,0 +1,90 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: {
+        right: 15px;
+        left: 15px;
+    }
+    .logo {
+        width: 107px;
+        height: 49px;
+        margin: 8.5px 0;
+        background: url(../image/css-sprites1.png) 64.563% 62.217%;
+    }
+
+    ul {
+        list-style: none;
+
+        a {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+        }
+    }
+}
+
+@include media(576px) {
+    .nav ul {
+        display: flex;
+        margin-right: -15px;
+        a {
+            width: 80px;
+            height: 66px;
+            line-height: 66px;
+        }
+        .bd-b {
+            border-bottom: 4px solid #fff;
+        }
+
+        a:not(.bd-b):hover {
+            border-bottom: 4px solid #fff;
+        }
+    }
+
+    .btn {
+        display: none;
+    }
+}
+
+@include media (575px, max) {
+    .nav ul {
+        width: 100%;
+  
+        .bd-b {
+            background: #38c58a;
+        }
+
+        a {
+            margin: {
+                right: -15px;
+                left: -15px;
+            }
+            line-height: 40px;
+
+            &:not(.bd-b):hover {
+                background: #38c58a;
+            }
+        }
+    }
+.show {
+    display: none;
+}
+.btn {
+    @include wh(40px, 40px);
+    border-radius: 5px;
+    background: #47d197;
+
+    span {
+        display: block;
+        width: 20px;
+        height: 19px;
+        padding: 5px 0;
+        margin: auto;
+        border-top: 3px solid rgb(22, 156, 100);
+        border-bottom: 3px solid rgb(22, 156, 100);
+        background: rgb(22, 156, 100) content-box;
+    }
+}
+}

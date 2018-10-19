@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd
+                http://www.springframework.org/schema/tx
+                http://www.springframework.org/schema/tx/spring-tx.xsd
+                http://mybatis.org/schema/mybatis-spring
+                http://mybatis.org/schema/mybatis-spring.xsd">
+
+
+    <bean id="propertyConfiger" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="db.properties"/>
+    </bean>
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--&lt;!&ndash;dao对jdbcTemplate的使用&ndash;&gt;
+    <bean id="userDao" class="com.jnshu.Spring.daoSpring.UserDao">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+    <bean id="userService" class="com.jnshu.Spring.daoSpring.UserService">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    &lt;!&ndash;使用dao对jdbcTemplate开发&ndash;&gt;
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        &lt;!&ndash;value引用字符串
+              ref引用对象&ndash;&gt;
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+
+    <!--mybatis和Spring的整合-->
+    <bean id="sqlSessonFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="com/jnshu/Spring/SpringMybatis/sqlMapconfig.xml" />
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <bean id="mapUserDao" class="com.jnshu.Spring.SpringMybatis.MapUserDaoImpl">
+        <property name="sqlSessionFactory" ref="sqlSessonFactory"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,264 @@
+$bg-color: #5fc0cd;
+
+@mixin box($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin font-base($f-s, $f-c) {
+    font-size: $f-s;
+    color: $f-c;
+}
+
+@mixin border($b-w, $b-t, $b-c) {
+    border: $b-w $b-t $b-c;
+}
+
+@mixin flex($x, $y) {
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+
+/* 页面重置相关 */
+html {
+    font-size: 312.5%;
+}
+
+body {
+    margin: 0;
+    font-size: .16rem;
+    font-family: "STHeitiSC-Light";
+}
+
+button {
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+/* 头部开始 */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include flex(center, center);
+    height: 0.88rem;
+    background: $bg-color;
+
+    span {
+        position: absolute;
+        top: .22rem;
+        right: 5%;
+        @include box(.42rem, .44rem);
+        background: url(../images/css2.png) no-repeat -.1rem -.1rem;
+        zoom: .5;
+    }
+
+    div {
+        @include box(35%, 85%);
+        border-radius: .1rem;
+        background: #55A8B3;
+
+        button {
+            @include box(50%, 100%);
+            @include font-base(.34rem, #fff);
+            border-radius: .1rem;
+            background: #55A8B3;
+            font-family: "STHeitiSC-Light";
+        }
+
+        button:last-child {
+            color: #55a8b3;
+            background-color: #fff;
+        }
+    }
+}
+
+/* 主体开始 */
+main {
+    margin-top: .88rem;
+
+    .select {
+        @include flex(space-between, center);
+        height: 0.8rem;
+        border-bottom: .01rem solid #ccc;
+
+        div {
+            position: relative;
+            @include box(33%, .7rem);
+            text-align: center;
+
+            span {
+                @include font-base(.28rem, #ccc);
+                line-height: .7rem;
+
+                &::after {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    right: 8%;
+                    top: 0.315rem;
+                    z-index: 1;
+                    @include box(0, 0);
+                    border-top: .14rem solid rgba(153, 153, 153, 1);
+                    border-bottom: .14rem solid rgba(153, 153, 153, 0);
+                    border-right: .14rem solid rgba(153, 153, 153, 0);
+                    border-left: .14rem solid rgba(153, 153, 153, 0);
+                }
+
+            }
+
+            .drop {
+                position: absolute;
+                left: 0;
+                right: 0;
+                z-index: 2;
+                opacity: 0;
+                visibility: hidden;
+                margin-top: 3%;
+                background: rgb(0, 0, 0);
+                transition: all 1s;
+
+                li {
+                    padding: 10% 0;
+                    @include font-base(.28rem, #fff);
+                    border-bottom: .01rem solid #fff;
+                }
+
+            }
+
+            &:hover .drop {
+                opacity: 1;
+                visibility: visible;
+                transform: rotatey(360deg);
+            }
+
+        }
+
+        div:nth-child(2) {
+            border-left: .005rem solid #eee;
+            border-right: .005rem solid #eee;
+        }
+
+    }
+}
+
+main .main-area {
+    margin-bottom: 1.1rem;
+
+    li {
+        border-bottom: .01rem solid #ccc;
+
+        div:nth-child(1) {
+            span {
+                @include font-base(.24rem, #ccc);
+                line-height: 0.74rem;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    vertical-align: -.03rem;
+                    @include box(.24rem, .24rem);
+                    margin: 0 2%;
+                    background: url(../images/css2.png) no-repeat -1.77rem -.1rem;
+                    zoom: .5,
+                }
+            }
+        }
+
+        div:nth-child(3) {
+            @extend div:nth-child(1);
+
+            span {
+                &::before {
+                    @include box(.19rem, .22rem);
+                    background: url(../images/css2.png) no-repeat -1.77rem -.54rem;
+                    zoom: .5;
+                }
+            }
+        }
+
+        div:nth-child(2) {
+            @include flex(space-between, center);
+            padding-left: 10%;
+            padding-right: 5%;
+            @include font-base(.3rem, #000);
+
+            span:last-child {
+                color: #f00;
+
+                &::after {
+                    content: "";
+                    display: inline-block;
+                    @include box(.2rem, .2rem);
+                    border-top: .02rem solid $bg-color;
+                    border-right: .02rem solid $bg-color;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+    }
+}
+
+/* 底部开始 */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include flex(center, center);
+    height: 1rem;
+    border-top: .01rem solid #eee;
+    background: #F8FAFB;
+
+    div:nth-child(2) {
+        @include flex(center, center);
+        @include box(.94rem, .94rem);
+        margin: 0 15%;
+        border-radius: 50%;
+        background: $bg-color;
+
+        span {
+            display: inline-block;
+            @include box(.4rem, .4rem);
+            background: url(../images/css2.png) no-repeat -.72rem -.74rem;
+            zoom: .5;
+        }
+    }
+
+    div:nth-child(1) {
+        span:nth-child(1) {
+            @include box(.46rem, .4rem);
+            margin: 0 auto;
+            background: url(../images/css2.png) no-repeat -.72rem -.1rem;
+            zoom: .5;
+        }
+
+        span {
+            display: block;
+            @include font-base(.2rem, $bg-color)
+        }
+
+        span:nth-child(2) {
+            margin-top: 20%;
+        }
+    }
+
+    div:nth-child(3) {
+        @extend div:nth-child(1);
+
+        span:nth-child(1) {
+            @include box(.42rem, .41rem);
+            background: url(../images/css2.png) no-repeat -.1rem -.74rem;
+            zoom: .5;
+        }
+    }
+}

@@ -1,0 +1,82 @@
+<body>
+    <div class="header" ng-controller="home">
+        <div class="container top">
+            <div class="row">
+                <div class="col-12">
+                    <strong>后台管理系统</strong>
+                    <div>
+                        <span class="user">{{username}}</span>
+                        <button ng-click="logout()">登出</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container reset" ng-controller="home">
+        <div class="row reset">
+            <div class="col-md-2 reset">
+                <ul class="list">
+                    <li class="style" ng-click="home()">
+                        <a href="">主页</a>
+                    </li>
+                    <li class="style">
+                        <a href="" ng-click="article()">Article管理</a>
+                        <span class="arrows" ng-class="{'rotate':isRotate}"></span>
+                        <ul ng-hide="hidearticle">
+                            <!-- ng-hide指令隐藏元素 -->
+                            <li>
+                                <a href="" ng-click="articles(1)" class="{{i==1?'color':''}}">Article列表</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="articles(2)" class="{{i==2?'color':''}}">Article详情</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="style">
+                        <a href="" ng-click="user()">用户管理</a>
+                        <span class="arrows" ng-class="{'rotate1':isRotate1}"></span>
+                        <ul ng-hide="hideusere">
+                            <!-- ng-hide指令隐藏元素 -->
+                            <li>
+                                <a href="" ng-click="users(1)" class="{{x==1?'color':''}}">用户列表</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="users(2)" class="{{x==2?'color':''}}">用户详情</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="style">
+                        <a href="" ng-click="talents()">人才管理</a>
+                        <span class="arrows" ng-class="{'rotate2':isRotate2}"></span>
+                        <ul ng-hide="hidetalents">
+                            <!-- ng-hide指令隐藏元素 -->
+                            <li>
+                                <a href="" ng-click="talentss(1)" class="{{a==1?'color':''}}">人才列表</a>
+                            </li>
+                            <li>
+                                <a href="" ng-click="talentss(2)" class="{{a==2?'color':''}}">人才详情</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="style">
+                        <a href="" ng-click="Backstage()">后台管理</a>
+                        <span class="arrows"></span> </li>
+                    <li class="style">
+                        <a href="" ng-click="content()">内容管理</a>
+                        <span class="arrows"></span>
+                    </li>
+                    <li class="style">
+                        <a href="" ng-click="recommend()">推荐管理</a>
+                        <span class="arrows"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <div ui-view="">
+                    <h6>欢迎来到召唤师峡谷</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

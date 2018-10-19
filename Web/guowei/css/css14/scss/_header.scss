@@ -1,0 +1,52 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    line-height: 40px;
+
+    padding: {
+        right: 15px;
+        left: 15px;
+    }
+
+    @include media(376px) {
+        .tel {
+            font-size: 14px;
+            
+        }
+
+        .icon a {
+            display: inline-block;
+            @include wh(25px, 24px);
+            margin: 8px 10px;
+        }
+    }
+}
+
+@each $sprite-class,
+$position in (wechat: 92.51% 51.42%, qq: 92.51% 61.848%, sina: 92.51% 72.275%) {
+    .#{$sprite-class} {
+        background: url(../image/css-sprites1.png) no-repeat $position;
+    }
+}
+
+@include media(375px, max) {
+    header {
+        .tel {
+            font-size: 12px !important;
+        }
+
+        .icon a {
+            display: inline-block;
+            @include wh(20px, 18px);
+            margin: 10.5px 7px;
+        }
+    }
+
+    @each $sprite-class,
+    $position in (wechat: 92.51% 51.42%, qq: 92.51% 61.848%, sina: 92.51% 72.275%) {
+        .#{$sprite-class} {
+            background: url(../image/css-sprites1.png) no-repeat $position / 390px 334px;
+        }
+    }
+}

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leo.dao.Student4Mapper">
+  <resultMap id="BaseResultMap" type="com.leo.model.Student4">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="is_work" jdbcType="BIT" property="isWork" />
+    <result column="is_excellent" jdbcType="BIT" property="isExcellent" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student4
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.leo.model.Student4">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into student4 (id, name, introduction, 
+      picture, job, is_work, is_excellent, 
+      create_at, update_at)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, #{isWork,jdbcType=BIT}, #{isExcellent,jdbcType=BIT}, 
+      #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.leo.model.Student4">
+    update student4
+    set name = #{name,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      is_work = #{isWork,jdbcType=BIT},
+      is_excellent = #{isExcellent,jdbcType=BIT},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, name, introduction, picture, job, is_work, is_excellent, create_at, update_at
+    from student4
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, introduction, picture, job, is_work, is_excellent, create_at, update_at
+    from student4
+  </select>
+  <select id="selectExcellentStudent" resultMap="BaseResultMap">
+    select id, name, introduction, picture, job, is_work, is_excellent, create_at, update_at
+    from student4 WHERE is_excellent=TRUE
+  </select>
+  <select id="total" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM student4
+  </select>
+  <select id="isWork" resultType="java.lang.Integer">
+    SELECT COUNT(*) FROM student4 WHERE is_work=TRUE
+  </select>
+  <select id="jobCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT COUNT(*) FROM student4 WHERE job=#{job}
+  </select>
+</mapper>

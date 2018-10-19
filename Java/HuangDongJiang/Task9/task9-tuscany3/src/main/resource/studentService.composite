@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           targetNamespace="http://com.baidu.task8.service"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           name="StudentService" >
+
+    <component name="StudentServiceComponent">
+        <implementation.spring location="applicationContext.xml" />
+        <service name="StudentService">
+            <!--开放接口-->
+            <interface.java interface="com.baidu.task8.service.StudentService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:2222/StudentService"/>
+        </service>
+    </component>
+</composite>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--<mapper namespace="com.entity.User">-->
+<mapper namespace="com.dao.UserMapper">
+    <!--<resultMap type="User" id="UserResultMap" >-->
+    <!--<result property="name" column="name"/>-->
+    <!--<result property="password" column="password"/>-->
+    <!--<result property="create_at" column="create_at"/>-->
+    <!--<result property="update_time" column="update_time"/>-->
+    <!--<result property="salt" column="salt"/>-->
+    <!--<result property="photo" column="photo"/>-->
+    <!--<result property="phone" column="phone"/>-->
+    <!--<result property="email" column="email"/>-->
+    <!--</resultMap>-->
+
+    <!--将展示一条信息展示在学人员-->
+    <select id="getAll" resultType="Excellent_Stu">
+        select * from excellent_stu
+    </select>
+
+    <!--展示优秀学员信息-->
+    <select id="limit" resultType="Excellent_Stu">
+        select imges,consultant,introduction from excellent_stu limit 4
+    </select>
+
+    <!--取出用户信息-->
+    <select id="judgeUser" parameterType="String" resultType="User">
+        select * from user where name = #{name}
+    </select>
+
+    <!--注册用户-->
+    <insert id="addUser" parameterType="User">
+        insert into user(name,phone,email,photo,password,create_at,update_time,salt) values
+        (#{name},#{phone},#{email},#{photo},#{password},now(),now(),#{salt});
+    </insert>
+    <!--查询用户-->
+    <select id="findUserByName" parameterType="java.lang.String" resultType="com.entity.User">
+        SELECT * FROM user WHERE name=#{name,jdbcType=VARCHAR}
+    </select>
+    <!--查询手机号码是否存在-->
+    <select id="findUserByPhone" parameterType="java.lang.String" resultType="com.entity.User">
+        SELECT * FROM user WHERE phone=#{phone}
+    </select>
+
+    <!--查询邮箱号码是否存在-->
+    <select id="findUserByEmail" parameterType="java.lang.String" resultType="com.entity.User">
+    SELECT * FROM user WHERE email=#{email}
+    </select>
+
+    <!--新增头像-->
+    <update id="updateUserByName" parameterType="java.lang.String">
+        UPDATE user SET photo=#{param1} WHERE name=#{param2}
+    </update>
+
+    <!--根据用户名查询头像-->
+    <select id="findPhotoByName" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT photo FROM user WHERE name=#{name}
+    </select>
+    
+    <!--查询用户是否存在-->
+    <select id="judgeUserExist" parameterType="java.lang.String" resultType="Boolean">
+        SELECT *  FROM user where name=#{name}
+    </select>
+</mapper>

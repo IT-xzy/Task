@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ehcache:config
+        xmlns:ehcache="http://www.ehcache.org/v3"
+        xmlns:jcache="http://www.ehcache.org/v3/jsr107">
+
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <ehcache:cache alias="myCache">
+        <ehcache:key-type>java.lang.String</ehcache:key-type>
+        <ehcache:value-type>java.lang.String</ehcache:value-type>
+        <ehcache:expiry>
+            <!--存活期，从创建entry到过期的时间，不管此时间段有没有访问都将过期，unit可设置单位，默认为秒-->
+            <ehcache:ttl >300</ehcache:ttl>
+            <!--
+                <class>:自定义过期类
+                <none>:默认不过期
+                <tti>:空闲期，即一个数据多久没被访问将从缓存中移除的时间
+            -->
+        </ehcache:expiry>
+        <ehcache:heap unit="entries">100</ehcache:heap>
+    </ehcache:cache>
+
+    <ehcache:cache alias="userCache">
+        <ehcache:key-type>java.lang.String</ehcache:key-type>
+        <ehcache:expiry>
+            <ehcache:ttl unit="minutes">10</ehcache:ttl>
+        </ehcache:expiry>
+        <ehcache:heap>50</ehcache:heap>
+    </ehcache:cache>
+</ehcache:config>

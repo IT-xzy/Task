@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	   http://www.springframework.org/schema/sca
+	   http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd">
+
+
+    <!--<aop:aspectj-autoproxy/>-->
+    <!--开启注解扫描-->
+    <context:annotation-config/>
+
+    <!--连接池-->
+    <context:property-placeholder location="classpath:DB.properties"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${dbcp.driver}"/>
+        <property name="url" value="${dbcp.url}"/>
+        <property name="username" value="${dbcp.username}"/>
+        <property name="password" value="${dbcp.password}"/>
+    </bean>
+
+    <!--配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/studentMapper.xml"/>
+        <property name="typeAliasesPackage" value="com.baidu.task8.pojo"/>
+    </bean>
+
+    <!--扫描mapper接口，不用配置SqlSessionFactory,自动实现接口的方法-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.baidu.task8.dao"/>
+    </bean>
+
+    <bean id="studentServiceImpl" class="com.baidu.task8.service.impl.StudentServiceImpl"/>
+
+    <!--扫描com.fq包下的所有子类-->
+    <context:component-scan base-package="com.baidu.task8.*" >
+        <!--不包含@Controller-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!--SCA：配置一个服务-->
+    <sca:service name="StudentService" type="com.baidu.task8.service.StudentService" target="studentServiceImpl"/>
+
+</beans>

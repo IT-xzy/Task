@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<!-- Definitions for Tiles documentation -->
+<tiles-definitions>
+    <!--定义基础模块-->
+    <definition name="base.definition" template="/WEB-INF/jsps/layout.jsp">
+        <!--  定义模板-->
+        <put-attribute name="header" value="/WEB-INF/jsps/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsps/footer.jsp" />
+        <put-attribute name="body" value="" />
+    </definition>
+    <!--继承了基础模板布局-->
+    <definition name="main" extends="base.definition" template="/WEB-INF/jsps/layout.jsp">
+        <!--    //放入属性body值-->
+        <put-attribute name="body" value="/WEB-INF/jsps/body.jsp" />
+    </definition>
+
+    <definition name="recommend" extends="base.definition" template="/WEB-INF/jsps/layout.jsp">
+        <!--    //放入属性body值-->
+        <put-attribute name="body" value="/WEB-INF/jsps/recommend.jsp" />
+    </definition>
+
+    <definition name="profession" extends="base.definition" template="/WEB-INF/jsps/layout.jsp">
+        <!--    //放入属性body值-->
+        <put-attribute name="body" value="/WEB-INF/jsps/profession.jsp" />
+    </definition>
+
+    <!--注册-->
+    <definition name="register" extends="base.definition" template="/WEB-INF/jsps/layout.jsp">
+        <put-attribute name="body" value="/WEB-INF/jsps/register.jsp"/>
+    </definition>
+
+    <!--登录-->
+    <definition name="login" extends="base.definition" template="/WEB-INF/jsps/layout.jsp">
+        <put-attribute name="body" value="/WEB-INF/jsps/login.jsp"/>
+    </definition>
+
+</tiles-definitions>

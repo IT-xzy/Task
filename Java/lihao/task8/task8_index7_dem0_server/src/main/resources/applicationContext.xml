@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="baseRmiService" class="com.lihoo.jnshu.service.impl.BaseServiceImpl" />
+    <bean id="baseServiceExporter" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!-- 调用Service -->
+        <property name="service" ref="baseRmiService" />
+        <!-- value值是提供给客户端调用 -->
+        <property name="serviceName" value="baseService" />
+        <!-- service接口 -->
+        <property name="serviceInterface" value="com.lihoo.jnshu.service.IBaseService" />
+        <!-- 注册端口 -->
+        <property name="registryPort" value="1200" />
+    </bean>
+
+
+</beans>

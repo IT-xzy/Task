@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.jnshu.serviceB"
+           name="ServerB" >
+    
+    <component name="ServerBComponent">
+        <implementation.spring location="spring-mybatis.xml"/>
+        <service name="ESService" >
+            <!--开放的接口-->
+            <interface.java interface="com.jnshu.service.ESService"/>
+            <tuscany:binding.rmi  uri="rmi://127.0.0.1:1001/eSService"/>
+            <!--绑定uri-->
+        </service>
+
+        <service name="JIService" >
+            <!--开放的接口-->
+            <interface.java interface="com.jnshu.service.JIService"/>
+            <tuscany:binding.rmi  uri="rmi://127.0.0.1:1001/jiService"/>
+            <!--绑定uri-->
+        </service>
+        <service name="SNService" >
+            <!--开放的接口-->
+            <interface.java interface="com.jnshu.service.SNService"/>
+            <tuscany:binding.rmi  uri="rmi://127.0.0.1:1001/snService"/>
+            <!--绑定uri-->
+        </service>
+        <service name="UserService" >
+            <!--开放的接口-->
+            <interface.java interface="com.jnshu.service.UserService"/>
+            <tuscany:binding.rmi  uri="rmi://127.0.0.1:1001/userService"/>
+            <!--绑定uri-->
+        </service>
+    </component>
+</composite>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.ptteng.service.CategoryService"
+           name="UserService">
+
+    <component name="CategoryServiceComponent">
+
+        <implementation.spring location="spring/applicationContext.xml"/>
+        <!--service name 对应接口名字-->
+        <service name="CategoryService">
+            <interface.java interface="com.ptteng.service.CategoryService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:8998/TuscanyService"/>
+        </service>
+    </component>
+</composite>

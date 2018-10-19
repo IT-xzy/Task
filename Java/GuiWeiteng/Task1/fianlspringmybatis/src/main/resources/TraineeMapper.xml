@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis_spring.dao.TraineeMapper">
+    <insert id="addTn" parameterType="trainee" >
+        <selectKey keyProperty="t_id" resultType="int" order="AFTER" >
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into trainee (create_time,update_time,t_age,t_name,sex,t_No,registerLink)
+        VALUES (#{create_time},#{update_time},#{t_age},#{t_name},#{sex},#{t_No},#{registerLink})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+         delete FROM trainee WHERE t_id=#{t_id}
+    </delete>
+
+    <update id="updateByNo" parameterType="Trainee">
+        UPDATE trainee set t_age=#{t_age},t_name=#{t_name},sex=#{sex},registerLink=#{registerLink} WHERE t_No=#{t_No}
+    </update>
+    
+    <select id="getInfoByNo" parameterType="String" resultType="trainee">
+        SELECT * FROM trainee WHERE t_No=#{t_No}
+    </select>
+
+    <select id="getInfoByName" parameterType="String" resultType="trainee">
+        SELECT * FROM trainee WHERE t_name=#{t_name}
+    </select>
+
+    <select id="getLink" resultType="trainee">
+        SELECT * FROM trainee WHERE t_name=#{t_name} AND t_No=#{t_No}
+    </select>
+
+    <select id="getRecentInfo" resultType="trainee">
+        SELECT * FROM trainee ORDER BY t_id DESC LIMIT 3
+    </select>
+</mapper>

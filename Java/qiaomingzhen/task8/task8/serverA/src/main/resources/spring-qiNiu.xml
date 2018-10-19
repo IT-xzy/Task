@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com"/>
+
+    <!-- 注入 testSmsSdk -->
+
+    <bean id="qiNiuServiceImpl" class="com.service.thirdParty.QiNiuServiceImpl">
+        <constructor-arg name="accessKey" value="bkHLrWGW_DOZbB4D6FlcNVSL_fXAtXGzFkw-blGW"/>
+        <constructor-arg name="secretKey" value="1aeA3TGnTL6m4tLV6hhh2VmYc4i_YL0rAPF-KTZJ"/>
+        <constructor-arg name="bucket" value="qiaoxm"/>
+        <constructor-arg name="domain" value="http://peo04vwla.bkt.clouddn.com"/>
+    </bean>
+
+</beans>

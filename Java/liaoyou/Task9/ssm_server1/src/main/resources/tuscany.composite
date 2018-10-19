@@ -1,0 +1,21 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.leo.service"
+           name="ServiceComponent" >
+
+    <component name="ServerComponent">
+        <implementation.spring location="applicationContext.xml"/>
+        <service name="login5Service">
+            <interface.java interface="com.leo.service.Login5Service"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:7777/login5Service"/>
+        </service>
+        <service name="student4Service">
+            <interface.java interface="com.leo.service.Student4Service"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:7777/student4Service"/>
+        </service>
+        <service name="student5Service">
+            <interface.java interface="com.leo.service.Student5Service"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:7777/student5Service"/>
+        </service>
+    </component>
+</composite>

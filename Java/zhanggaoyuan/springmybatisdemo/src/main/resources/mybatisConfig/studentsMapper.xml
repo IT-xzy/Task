@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--namespace意义是绑定StudentsDao这个接口-->
+<mapper namespace="com.jnshu.server.dao.StudentsDao">
+    <!--插入一条信息-->
+    <insert id="insertStudents" parameterType="com.jnshu.server.po.Students" >
+        <selectKey keyProperty='id' resultType='long' order='AFTER'  >
+            select LAST_INSERT_ID();
+        </selectKey>
+        insert  into
+        entry_form( create_at,update_at,student_name, qq, profession, admission_date, graduated_from, student_id, daily_link, make_wishes, coaching_senior, approach)
+        values(#{createAt},#{updateAt},#{studentName},#{qq},#{profession},#{admissionDate},#{graduatedFrom},#{studentId},#{dailyLink},#{makeWishes},#{coachingSenior},#{approach})
+    </insert>
+    <!--更新一个学员的全部信息-->
+    <update id="updateStudents" parameterType="Students">
+        update entry_form
+        set
+        update_at=#{updateAt},student_name=#{studentName},qq=#{qq},profession=#{profession},admission_date=#{admissionDate},graduated_from=#{graduatedFrom},student_id=#{studentId},daily_link=#{dailyLink},make_wishes=#{makeWishes},coaching_senior=#{coachingSenior},approach=#{approach}
+         where id=#{id}
+    </update>
+    <!--更新学员的一些内容-->
+    <update id="updateOne" parameterType="Students">
+        update entry_form
+        <trim prefix="set" suffixOverrides=",">
+            <if test="updateAt!=null">update_at=#{updateAt},</if>
+            <if test="studentName!=null">student_name=#{studentName},</if>
+            <if test="qq!=null">qq=#{qq},</if>
+            <if test="profession!=null">profession=#{profession},</if>
+            <if test="admissionDate!=null">admission_date=#{admissionDate},</if>
+            <if test="graduatedFrom!=null">graduated_from=#{graduatedFrom},</if>
+            <if test="studentId!=null">student_id=#{studentId},</if>
+            <if test="dailyLink!=null">daily_link=#{dailyLink},</if>
+            <if test="makeWishes!=null">make_wishes=#{makeWishes},</if>
+            <if test="coachingSenior">coaching_senior=#{coachingSenior},</if>
+            <if test="approach!=null">approach=#{approach},</if>
+        </trim>
+        where id=#{id}
+    </update>
+    <!--删除一个学员的全部信息-->
+    <delete id="deleteStudents" parameterType="long">
+        delete from
+        entry_form where id=#{id}
+    </delete>
+    <!--通过id查询学员的信息-->
+    <select id="selectStudents" parameterType="long" resultMap="getRM">
+        SELECT * FROM entry_form WHERE id = #{value}
+    </select>
+    <resultMap id="getRM" type="Students">
+        <id property="id" column="id"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="student_name" property="studentName"/>
+        <result column="qq" property="qq"/>
+        <result column="profession" property="profession"/>
+        <result column="admission_date" property="admissionDate"/>
+        <result column="graduated_from" property="graduatedFrom"/>
+        <result column="student_id" property="studentId"/>
+        <result column="daily_link" property="dailyLink"/>
+        <result column="make_wishes" property="makeWishes"/>
+        <result column="coaching_senior" property="coachingSenior"/>
+        <result column="approach" property="approach"/>
+
+    </resultMap>
+
+    <!--通过姓名或者学号查询学员的信息-->
+    <select id="selectIf" resultMap="getRM">
+        select *from entry_form where 1=1
+        <if test="studentName!=null">
+            and student_name=#{studentName}
+        </if>
+        <if test="studentId!=null">
+            and student_id=#{studentId}
+        </if>
+    </select>
+<!--批量插入数据-->
+    <insert id="insertBatch" parameterType="java.util.Map">
+        INSERT INTO entry_form(create_at,update_at,student_name, qq, profession, admission_date, graduated_from, student_id, daily_link, make_wishes, coaching_senior, approach)
+        values
+        <foreach collection="array" item="item" index="index" separator=",">
+            (#{item.createAt},#{item.updateAt},#{item.studentName},#{item.qq},#{item.profession},#{item.admissionDate},#{item.graduatedFrom},#{item.studentId},#{item.dailyLink},#{item.makeWishes},#{item.coachingSenior},#{item.approach})
+        </foreach>
+    </insert>
+
+
+</mapper>

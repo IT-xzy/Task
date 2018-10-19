@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:component-scan base-package="com"/>
+
+    <bean id="telServiceImpl" class="com.service.thirdParty.TelServiceImpl">
+        <constructor-arg name="accountSid" value="8aaf070865614101016564efec02023f"/>
+        <constructor-arg name="accountToken" value="d41096fd310947d289e0c01e19bdd063"/>
+        <constructor-arg name="serverIp" value="sandboxapp.cloopen.com"/>
+        <constructor-arg name="serverPort" value="8883"/>
+        <constructor-arg name="appId" value="8aaf070865614101016564efec590245"/>
+        <constructor-arg name="templateId" value="1"/>
+        <constructor-arg name="time" value="3"/>
+    </bean>
+</beans>

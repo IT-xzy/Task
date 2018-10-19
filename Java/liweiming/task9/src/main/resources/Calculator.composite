@@ -1,0 +1,25 @@
+<composite
+        xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+        targetNamespace="http://com.jnshu"
+        name="Calculator">
+    <!--xmlns="http://www.osoa.org/xmlns/sca/1.0"-->
+    <component name="CalculatorServiceComponent">
+        <implementation.java class="servieImpl.Calculator" />
+        <reference name="add" target="AddComponent"/>
+        <reference name="subtract" target="SubtractComponent"/>
+        <reference name="multiply" target="MultiplyComponent"/>
+        <reference name="divide" target="DivideComponent"/>
+    </component>
+    <component name="AddComponent">
+        <implementation.java class="servieImpl.add"/>
+    </component>
+    <component name="SubtractComponent">
+        <implementation.java class="servieImpl.subtract"/>
+    </component>
+    <component name="MultiplyComponent">
+        <implementation.java class="servieImpl.multiply"/>
+    </component>
+    <component name="DivideComponent">
+        <implementation.java class="servieImpl.divide"/>
+    </component>
+</composite>

@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd "
+       default-autowire="byName">
+    <!--<context:component-scan base-package="com.jnshu.tools" />-->
+    <context:property-placeholder location="classpath:properties/db.properties" ignore-unresolvable="true"/>
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}"/>
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}"/>
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}"/>
+        <property name="maxTotal" value="${redis.maxActive}"/>
+    </bean>
+
+
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="usePool" value="${redis.usePool}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+        <property name="poolConfig" ref="jedisPoolConfig"/>
+    </bean>
+
+    <!-- redis 序列化策略 ，手动指定 key 采用String序列化策略 -->
+    <bean id="stringSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="keySerializer" ref="stringSerializer"/>
+        <!-- 开启事务，可以通过transcational注解控制 -->
+        <property name="enableTransactionSupport" value="true"/>
+    </bean>
+    <bean id="redis" class="com.jnshu.tools.Redis">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
+</beans>

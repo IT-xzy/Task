@@ -1,0 +1,252 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 104896 bytes for Chunk::new
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:390), pid=25656, tid=0x0000000000006f8c
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_161-b12) (build 1.8.0_161-b12)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.161-b12 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002e7e800):  JavaThread "main" [_thread_in_native, id=28556, stack(0x0000000002e80000,0x0000000002f80000)]
+
+Stack: [0x0000000002e80000,0x0000000002f80000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader.<init>(Lcom/sun/org/apache/xerces/internal/util/SymbolTable;Lcom/sun/org/apache/xerces/internal/impl/XMLErrorReporter;Lcom/sun/org/apache/xerces/internal/impl/XMLEntityManager;Lcom/sun/org/apache/xerces/internal/impl/xs/XSGrammarBucket;Lcom/sun/org/apache/xerces/internal/impl/xs/SubstitutionGroupHandler;Lcom/sun/org/apache/xerces/internal/impl/xs/models/CMBuilder;)V+348
+j  com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaLoader.<init>(Lcom/sun/org/apache/xerces/internal/impl/XMLErrorReporter;Lcom/sun/org/apache/xerces/internal/impl/xs/XSGrammarBucket;Lcom/sun/org/apache/xerces/internal/impl/xs/SubstitutionGroupHandler;Lcom/sun/org/apache/xerces/internal/impl/xs/models/CMBuilder;)V+8
+j  com.sun.org.apache.xerces.internal.impl.xs.XMLSchemaValidator.<init>()V+313
+j  com.sun.org.apache.xerces.internal.parsers.XML11Configuration.configurePipeline()V+483
+j  com.sun.org.apache.xerces.internal.parsers.XIncludeAwareParserConfiguration.configurePipeline()V+1
+j  com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Z)Z+64
+j  com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(Lcom/sun/org/apache/xerces/internal/xni/parser/XMLInputSource;)V+29
+j  com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(Lcom/sun/org/apache/xerces/internal/xni/parser/XMLInputSource;)V+76
+j  com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(Lorg/xml/sax/InputSource;)V+43
+j  com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(Lorg/xml/sax/InputSource;)Lorg/w3c/dom/Document;+57
+j  org.springframework.beans.factory.xml.DefaultDocumentLoader.loadDocument(Lorg/xml/sax/InputSource;Lorg/xml/sax/EntityResolver;Lorg/xml/sax/ErrorHandler;IZ)Lorg/w3c/dom/Document;+73
+j  org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadDocument(Lorg/xml/sax/InputSource;Lorg/springframework/core/io/Resource;)Lorg/w3c/dom/Document;+22
+j  org.springframework.beans.factory.xml.XmlBeanDefinitionReader.doLoadBeanDefinitions(Lorg/xml/sax/InputSource;Lorg/springframework/core/io/Resource;)I+3
+j  org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(Lorg/springframework/core/io/support/EncodedResource;)I+166
+j  org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(Lorg/springframework/core/io/Resource;)I+9
+j  org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions([Lorg/springframework/core/io/Resource;)I+34
+j  org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(Ljava/lang/String;Ljava/util/Set;)I+63
+j  org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(Ljava/lang/String;)I+3
+j  org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions([Ljava/lang/String;)I+34
+j  org.springframework.test.context.support.AbstractGenericContextLoader.loadBeanDefinitions(Lorg/springframework/context/support/GenericApplicationContext;Lorg/springframework/test/context/MergedContextConfiguration;)V+9
+j  org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(Lorg/springframework/test/context/MergedContextConfiguration;)Lorg/springframework/context/ConfigurableApplicationContext;+81
+j  org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(Lorg/springframework/test/context/MergedContextConfiguration;)Lorg/springframework/context/ApplicationContext;+2
+j  org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(Lorg/springframework/test/context/SmartContextLoader;Lorg/springframework/test/context/MergedContextConfiguration;)Lorg/springframework/context/ApplicationContext;+41
+j  org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(Lorg/springframework/test/context/MergedContextConfiguration;)Lorg/springframework/context/ApplicationContext;+123
+j  org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(Lorg/springframework/test/context/MergedContextConfiguration;)Lorg/springframework/context/ApplicationContext;+27
+j  org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(Lorg/springframework/test/context/MergedContextConfiguration;)Lorg/springframework/context/ApplicationContext;+24
+j  org.springframework.test.context.support.DefaultTestContext.getApplicationContext()Lorg/springframework/context/ApplicationContext;+8
+j  org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(Lorg/springframework/test/context/TestContext;)V+8
+j  org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(Lorg/springframework/test/context/TestContext;)V+45
+j  org.springframework.test.context.TestContextManager.prepareTestInstance(Ljava/lang/Object;)V+95
+j  org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest()Ljava/lang/Object;+10
+j  org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall()Ljava/lang/Object;+4
+j  org.junit.internal.runners.model.ReflectiveCallable.run()Ljava/lang/Object;+1
+j  org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(Lorg/junit/runners/model/FrameworkMethod;)Lorg/junit/runners/model/Statement;+8
+j  org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(Lorg/junit/runners/model/FrameworkMethod;Lorg/junit/runner/notification/RunNotifier;)V+24
+j  org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(Ljava/lang/Object;Lorg/junit/runner/notification/RunNotifier;)V+6
+j  org.junit.runners.ParentRunner$3.run()V+12
+j  org.junit.runners.ParentRunner$1.schedule(Ljava/lang/Runnable;)V+1
+j  org.junit.runners.ParentRunner.runChildren(Lorg/junit/runner/notification/RunNotifier;)V+44
+j  org.junit.runners.ParentRunner.access$000(Lorg/junit/runners/ParentRunner;Lorg/junit/runner/notification/RunNotifier;)V+2
+j  org.junit.runners.ParentRunner$2.evaluate()V+8
+j  org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate()V+11
+j  org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate()V+12
+j  org.junit.runners.ParentRunner.run(Lorg/junit/runner/notification/RunNotifier;)V+20
+j  org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(Lorg/junit/runner/notification/RunNotifier;)V+24
+j  org.junit.runner.JUnitCore.run(Lorg/junit/runner/Runner;)Lorg/junit/runner/Result;+37
+j  com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs([Ljava/lang/String;Ljava/lang/String;IZ)I+146
+j  com.intellij.rt.execution.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(Lcom/intellij/rt/execution/junit/IdeaTestRunner;[Ljava/lang/String;Ljava/util/ArrayList;Ljava/lang/String;IZ)I+22
+j  com.intellij.rt.execution.junit.JUnitStarter.prepareStreamsAndStart([Ljava/lang/String;Ljava/lang/String;Ljava/util/ArrayList;Ljava/lang/String;)I+116
+j  com.intellij.rt.execution.junit.JUnitStarter.main([Ljava/lang/String;)V+116
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x0000000019210000 JavaThread "Service Thread" daemon [_thread_blocked, id=14924, stack(0x0000000019b30000,0x0000000019c30000)]
+  0x00000000191be800 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=24808, stack(0x0000000019a30000,0x0000000019b30000)]
+  0x00000000191bd800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=27960, stack(0x0000000019930000,0x0000000019a30000)]
+  0x0000000019156800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=16468, stack(0x0000000019830000,0x0000000019930000)]
+  0x0000000017e2e800 JavaThread "Monitor Ctrl-Break" daemon [_thread_in_native, id=15704, stack(0x0000000019730000,0x0000000019830000)]
+  0x0000000019140800 JavaThread "Attach Listener" daemon [_thread_blocked, id=28656, stack(0x0000000019630000,0x0000000019730000)]
+  0x0000000017de0000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=8980, stack(0x0000000019530000,0x0000000019630000)]
+  0x0000000003278000 JavaThread "Finalizer" daemon [_thread_blocked, id=28604, stack(0x0000000019030000,0x0000000019130000)]
+  0x0000000003273000 JavaThread "Reference Handler" daemon [_thread_blocked, id=13364, stack(0x0000000018f30000,0x0000000019030000)]
+=>0x0000000002e7e800 JavaThread "main" [_thread_in_native, id=28556, stack(0x0000000002e80000,0x0000000002f80000)]
+
+Other Threads:
+  0x0000000017d97800 VMThread [stack: 0x0000000018e30000,0x0000000018f30000] [id=10352]
+  0x0000000019212800 WatcherThread [stack: 0x0000000019c30000,0x0000000019d30000] [id=16524]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 38400K, used 25582K [0x00000000d5d80000, 0x00000000d8800000, 0x0000000100000000)
+  eden space 33280K, 76% used [0x00000000d5d80000,0x00000000d767bab8,0x00000000d7e00000)
+  from space 5120K, 0% used [0x00000000d8300000,0x00000000d8300000,0x00000000d8800000)
+  to   space 5120K, 0% used [0x00000000d7e00000,0x00000000d7e00000,0x00000000d8300000)
+ ParOldGen       total 87552K, used 0K [0x0000000081800000, 0x0000000086d80000, 0x00000000d5d80000)
+  object space 87552K, 0% used [0x0000000081800000,0x0000000081800000,0x0000000086d80000)
+ Metaspace       used 9132K, capacity 9288K, committed 9344K, reserved 1056768K
+  class space    used 1072K, capacity 1110K, committed 1152K, reserved 1048576K
+
+Card table byte_map: [0x0000000012640000,0x0000000012a40000] byte_map_base: 0x0000000012234000
+
+Marking Bits: (ParMarkBitMap*) 0x00000000586cf860
+ Begin Bits: [0x00000000130f0000, 0x0000000015090000)
+ End Bits:   [0x0000000015090000, 0x0000000017030000)
+
+Polling page: 0x0000000002920000
+
+CodeCache: size=245760Kb used=2559Kb max_used=2559Kb free=243200Kb
+ bounds [0x0000000003280000, 0x0000000003510000, 0x0000000012280000]
+ total_blobs=849 nmethods=533 adapters=229
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 3.181 Thread 0x00000000191be800  531       1       java.util.Hashtable$Entry::getKey (5 bytes)
+Event: 3.181 Thread 0x00000000191be800 nmethod 531 0x00000000034fc390 code [0x00000000034fc4e0, 0x00000000034fc5f0]
+Event: 3.181 Thread 0x00000000191be800  532       1       java.util.Hashtable$Entry::getValue (5 bytes)
+Event: 3.181 Thread 0x00000000191be800 nmethod 532 0x00000000034fc0d0 code [0x00000000034fc220, 0x00000000034fc330]
+Event: 3.182 Thread 0x00000000191be800  533       3       java.lang.Throwable::<init> (39 bytes)
+Event: 3.182 Thread 0x00000000191be800 nmethod 533 0x00000000034fd590 code [0x00000000034fd700, 0x00000000034fda08]
+Event: 3.184 Thread 0x00000000191be800  534       3       java.util.HashSet::<init> (16 bytes)
+Event: 3.185 Thread 0x00000000191be800 nmethod 534 0x00000000034fce10 code [0x00000000034fcfa0, 0x00000000034fd3b0]
+Event: 3.189 Thread 0x00000000191be800  535       3       java.lang.String::toString (2 bytes)
+Event: 3.189 Thread 0x00000000191be800 nmethod 535 0x00000000034fbdd0 code [0x00000000034fbf20, 0x00000000034fc070]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (3 events):
+Event: 1.853 Thread 0x0000000002e7e800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x0000000003413174 method=java.lang.String.indexOf([CII[CIII)I @ 3
+Event: 2.126 Thread 0x0000000002e7e800 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00000000033907e8 method=java.lang.String.equals(Ljava/lang/Object;)Z @ 8
+Event: 2.310 Thread 0x0000000002e7e800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00000000033c8ac0 method=java.lang.CharacterData.of(I)Ljava/lang/CharacterData; @ 4
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 0.377 Thread 0x0000000002e7e800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x00000000d5d87ca0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot
+Event: 0.377 Thread 0x0000000002e7e800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x00000000d5d87f88) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\prim
+Event: 1.123 Thread 0x0000000002e7e800 Exception <a 'java/io/FileNotFoundException'> (0x00000000d60f1cc0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\prims\jni.cpp, line 709]
+Event: 1.254 Thread 0x0000000002e7e800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d613b130) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\prims\jvm.cpp, line 1390]
+Event: 1.254 Thread 0x0000000002e7e800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d613b340) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\prims\jvm.cpp, line 1390]
+Event: 1.255 Thread 0x0000000002e7e800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d613deb0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\prims\jvm.cpp, line 1390]
+Event: 1.255 Thread 0x0000000002e7e800 Exception <a 'java/security/PrivilegedActionException'> (0x00000000d613e0c0) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\prims\jvm.cpp, line 1390]
+Event: 1.829 Thread 0x0000000002e7e800 Exception <a 'java/lang/NoClassDefFoundError': org/apache/log4j/Priority> (0x00000000d64f3278) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 199]
+Event: 2.126 Thread 0x0000000002e7e800 Implicit null exception at 0x0000000003390615 to 0x00000000033907d9
+Event: 2.457 Thread 0x0000000002e7e800 Exception <a 'java/lang/NoClassDefFoundError': javax/servlet/ServletContext> (0x00000000d6d40f30) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u161\10277\hotspot\src\share\vm\classfile\systemDictionary.cpp, line 199]
+
+Events (10 events):
+Event: 3.209 loading class org/w3c/dom/DOMConfiguration
+Event: 3.209 loading class org/w3c/dom/DOMConfiguration done
+Event: 3.210 loading class com/sun/org/apache/xerces/internal/impl/xs/XMLSchemaLoader done
+Event: 3.210 loading class com/sun/org/apache/xerces/internal/util/DefaultErrorHandler
+Event: 3.210 loading class com/sun/org/apache/xerces/internal/util/DefaultErrorHandler done
+Event: 3.211 loading class java/io/PrintWriter
+Event: 3.211 loading class java/io/PrintWriter done
+Event: 3.211 loading class com/sun/org/apache/xerces/internal/impl/xs/XSMessageFormatter
+Event: 3.211 loading class com/sun/org/apache/xerces/internal/impl/xs/XSMessageFormatter done
+Event: 3.211 loading class com/sun/org/apache/xerces/internal/impl/xs/traversers/XSDHandler
+
+
+Dynamic libraries:
+0x00007ff6ddab0000 - 0x00007ff6ddae7000 	D:\Program\Java\jdk1.8.0_161\bin\java.exe
+0x00007ffa04e10000 - 0x00007ffa04ff1000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffa04990000 - 0x00007ffa04a42000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffa01e30000 - 0x00007ffa020a3000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffa04b10000 - 0x00007ffa04bb1000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffa04320000 - 0x00007ffa043be000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffa04a50000 - 0x00007ffa04aab000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffa04bc0000 - 0x00007ffa04ce4000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffa03ca0000 - 0x00007ffa03e30000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffa011e0000 - 0x00007ffa01200000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffa02540000 - 0x00007ffa02568000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffa01c10000 - 0x00007ffa01da2000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffa02100000 - 0x00007ffa0219f000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffa021a0000 - 0x00007ffa0229a000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ff9f7980000 - 0x00007ff9f7be9000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.17134.228_none_fb4599993062b194\COMCTL32.dll
+0x00007ffa044c0000 - 0x00007ffa047e3000 	C:\WINDOWS\System32\combase.dll
+0x00007ffa01db0000 - 0x00007ffa01e2a000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffa02440000 - 0x00007ffa0246d000 	C:\WINDOWS\System32\IMM32.DLL
+0x0000000059a00000 - 0x0000000059ad2000 	D:\Program\Java\jdk1.8.0_161\jre\bin\msvcr100.dll
+0x0000000057eb0000 - 0x000000005874f000 	D:\Program\Java\jdk1.8.0_161\jre\bin\server\jvm.dll
+0x00007ffa03e30000 - 0x00007ffa03e38000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ff9ea3a0000 - 0x00007ff9ea3a9000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffa04850000 - 0x00007ffa048bc000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ff9fdd20000 - 0x00007ff9fdd43000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ff9f7920000 - 0x00007ff9f792a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ff9fdce0000 - 0x00007ff9fdd0a000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ffa020b0000 - 0x00007ffa020f9000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x00000000599f0000 - 0x00000000599ff000 	D:\Program\Java\jdk1.8.0_161\jre\bin\verify.dll
+0x00000000599c0000 - 0x00000000599e9000 	D:\Program\Java\jdk1.8.0_161\jre\bin\java.dll
+0x0000000058fa0000 - 0x0000000058fc3000 	D:\Program\Java\jdk1.8.0_161\jre\bin\instrument.dll
+0x00000000599a0000 - 0x00000000599b6000 	D:\Program\Java\jdk1.8.0_161\jre\bin\zip.dll
+0x00007ffa026e0000 - 0x00007ffa03b20000 	C:\WINDOWS\System32\SHELL32.dll
+0x00007ffa02490000 - 0x00007ffa02539000 	C:\WINDOWS\System32\shcore.dll
+0x00007ffa01260000 - 0x00007ffa0196d000 	C:\WINDOWS\System32\windows.storage.dll
+0x00007ffa04ab0000 - 0x00007ffa04b01000 	C:\WINDOWS\System32\shlwapi.dll
+0x00007ffa01170000 - 0x00007ffa01181000 	C:\WINDOWS\System32\kernel.appcore.dll
+0x00007ffa01150000 - 0x00007ffa0116f000 	C:\WINDOWS\System32\profapi.dll
+0x00007ffa01190000 - 0x00007ffa011dc000 	C:\WINDOWS\System32\powrprof.dll
+0x00007ffa01120000 - 0x00007ffa0112a000 	C:\WINDOWS\System32\FLTLIB.DLL
+0x00007ff9fa450000 - 0x00007ff9fa46a000 	D:\Program\JetBrains\IntelliJ IDEA 2018.1.6\bin\breakgen64.dll
+0x0000000059980000 - 0x000000005999a000 	D:\Program\Java\jdk1.8.0_161\jre\bin\net.dll
+0x00007ffa009a0000 - 0x00007ffa00a06000 	C:\WINDOWS\system32\mswsock.dll
+
+VM Arguments:
+jvm_args: -ea -Didea.test.cyclic.buffer.size=1048576 -javaagent:D:\Program\JetBrains\IntelliJ IDEA 2018.1.6\lib\idea_rt.jar=12247:D:\Program\JetBrains\IntelliJ IDEA 2018.1.6\bin -Dfile.encoding=UTF-8 
+java_command: com.intellij.rt.execution.junit.JUnitStarter -ideVersion5 -junit4 com.jnshu.TestJdbcTemplate,insertTest
+java_class_path (initial): D:\Program\JetBrains\IntelliJ IDEA 2018.1.6\lib\idea_rt.jar;D:\Program\JetBrains\IntelliJ IDEA 2018.1.6\plugins\junit\lib\junit-rt.jar;D:\Program\JetBrains\IntelliJ IDEA 2018.1.6\plugins\junit\lib\junit5-rt.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\charsets.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\deploy.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\access-bridge-64.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\cldrdata.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\dnsns.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\jaccess.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\jfxrt.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\localedata.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\nashorn.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\sunec.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\sunjce_provider.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\sunmscapi.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\sunpkcs11.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\ext\zipfs.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\javaws.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\jce.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\jfr.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\jfxswt.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\jsse.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\management-agent.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\plugin.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\resources.jar;D:\Program\Java\jdk1.8.0_161\jre\lib\rt.jar;D:\IdeaProjects\JdbcTemplateTask\target\test-classes;D:\IdeaProjects\JdbcTemplateTask\target\classes;D:\Program\Apache\maven\repository\junit\junit\4.12\junit-4.12.jar;D:\Program\Apache\maven\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;D:\Program\Apache\maven\repository\org\springframework\spring-test\4.3.5.RELEASE\spring-test-4.3.5.RELEASE.jar;D:\Program\Apache\maven\repository\org\springframework\spring-core\4.3.5.RELEASE\spring-core-4.3.5.RELEASE.jar;D:\Program\Apache\maven\repository\commons-logging\commons-logging\1.2\commons-logging-1.2.jar;D:\
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=D:\Program\Java\jdk1.8.0_161
+CLASSPATH=.;D:\Program\Java\jdk1.8.0_161\lib;D:\Program\Java\jdk1.8.0_161\lib\tools.jar;
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;D:\Program\MySQL\MySQL Server 8.0\bin;D:\Program\Java\jdk1.8.0_161\bin;D:\Program\Java_object\bin;D:\Program\Apache\maven\apache-maven-3.5.4\bin;D:\Program\UltraEdit;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\Program\WinSCP\;D:\Program\Git\cmd;C:\Users\qyh\AppData\Local\Microsoft\WindowsApps;C:\Users\qyh\AppData\Local\GitHubDesktop\bin;D:\Program\MySQL\MySQL Server 8.0\bin;
+USERNAME=qyh
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 69 Stepping 1, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 17134 (10.0.17134.1)
+
+CPU:total 4 (initial active 4) (2 cores per cpu, 2 threads per core) family 6 model 69 stepping 1, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2
+
+Memory: 4k page, physical 8286088k(2351160k free), swap 8286088k(852k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.161-b12) for windows-amd64 JRE (1.8.0_161-b12), built on Dec 19 2017 17:52:25 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Sun Sep 09 16:49:10 2018
+elapsed time: 3 seconds (0d 0h 0m 3s)
+

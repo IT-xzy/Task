@@ -1,0 +1,142 @@
+@import "task12mixins";
+
+body {
+    margin: 42px 0 84px;
+}
+
+header {
+    @include flex-items-centr(); //flex和垂直居中
+    justify-content: center;
+    @include posi(fixed, top, 0);
+    @include wi-ht(100%, 44px); //宽度 高度
+    background: $blue;
+    color: $white;
+    font-size: $fnsize;
+
+    a {
+        @include posi(absolute, left, 17.5px);
+        @include wi-ht(14px, 14px);
+        @include indicant(3px, -45deg); //箭头指示符
+    }
+}
+
+main>:first-child {
+    @include flex-items-centr; //flex和垂直居中
+    height: 164px;
+    background: url(figure.png) no-repeat top / cover;
+    color: $white;
+
+    img {
+        @include mx($lr, 20px)
+    }
+
+    div {
+        letter-spacing: 2px;
+
+        :first-child {
+            margin-right: $lr;
+            font-size: $fnsize;
+        }
+
+        :nth-child(2) {
+            font-size: 14px;
+        }
+
+        a {
+            display: inline-block;
+            @include posi(relative, top, 1px);
+            left: 2px;
+            @include wi-ht(11px, 12px);
+            background: url(star1.png) no-repeat 0 -22px;
+        }
+
+        :nth-last-child(1) {
+            font-size: 12px;
+        }
+    }
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    line-height: 50px;
+    font-weight: 600;
+
+    li {
+        padding-left: $lr;
+        border-bottom: 1px solid $gray;
+
+        &> :first-child {
+            color: #999;
+        }
+
+        &:not(:first-child):not(:last-child) {
+            margin-left: $lr
+        }
+
+
+        &> :first-child {
+            padding-right: $lr;
+            margin-right: $lr;
+            border-right: 1px solid $gray;
+        }
+    }
+
+    &> :first-child {
+        @include flex-items-centr;
+        font-size: $fnsize;
+
+        &::before {
+            content: '';
+            display: inline-block;
+            @include wi-ht(2px, 20px);
+            margin-right: $lr;
+            border-radius: 20%;
+            background: $blue;
+        }
+    }
+
+    &> :nth-child(2) span {
+        padding-left: 17px;
+        background: url(star1.png) no-repeat 0 4.5px;
+    }
+
+    &> :nth-child(5) {
+        & :nth-child(2) {
+            font-size: 14px;
+            color: #e16163;
+        }
+    }
+
+    &> :last-child {
+        @include flex-items-centr;
+        padding: $lr $lr * 2;
+        line-height: initial;
+
+        &> :first-child {
+            white-space: nowrap;
+        }
+    }
+}
+
+footer {
+    @include flex-items-centr;
+    @include posi(fixed, bottom, 0);
+    @include wi-ht(100%, 84px);
+    box-sizing: border-box;
+    background: $white;
+
+    padding: {
+        left: $lr;
+        right: $lr;
+    }
+
+    &> :first-child {
+        @include btn(right, none, $blue);
+    }
+
+    &> :last-child {
+        @include btn(left);
+    }
+}

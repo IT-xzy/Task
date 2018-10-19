@@ -18,8 +18,11 @@ function random_digit() {
 
     // 设置三个随机格子的颜色
     initiate[one].style.backgroundColor = "rgb" + color();
+    console.log(color())
     initiate[two].style.backgroundColor = "rgb" + color();
+    console.log(color())
     initiate[three].style.backgroundColor = "rgb" + color();
+    console.log(color())
 }
 
 // 生成三个格子的随机颜色
@@ -51,3 +54,4 @@ function off() {
     }
 
 }
+

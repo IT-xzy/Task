@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+
+    <bean id="rmiClient" class="com.jnshu.RMIClient">
+        <property name="esService"  ref="eSService"/>
+        <property name="snService" ref="snService"/>
+        <property name="userService" ref="userService"/>
+        <property name="jiService" ref="jiService"/>
+    </bean>
+    <bean id="eSService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1000/eSService"/>
+        <property name="serviceInterface" value="com.jnshu.service.ESService"/>
+    </bean>
+    <bean id="jiService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1000/jiService"/>
+        <property name="serviceInterface" value="com.jnshu.service.JIService"/>
+    </bean>
+    <bean id="snService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1000/snService"/>
+        <property name="serviceInterface" value="com.jnshu.service.SNService"/>
+    </bean>
+    <bean id="userService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:1000/userService"/>
+        <property name="serviceInterface" value="com.jnshu.service.UserService"/>
+    </bean>
+</beans>

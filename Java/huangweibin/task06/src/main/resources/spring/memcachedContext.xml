@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="task06.util"/>
+
+    <!-- properties config   -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:memcached.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Memcached配置 -->
+    <bean id="memcachedPool" class="com.whalin.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize" destroy-method="shutDown">
+        <property name="servers">
+            <list>
+                <value>${memcached.server}:${memcached.port}</value>
+            </list>
+        </property>
+        <property name="initConn">
+            <value>${memcached.initConn}</value>
+        </property>
+        <property name="minConn">
+            <value>${memcached.minConn}</value>
+        </property>
+        <property name="maxConn">
+            <value>${memcached.maxConn}</value>
+        </property>
+        <property name="maintSleep">
+            <value>${memcached.maintSleep}</value>
+        </property>
+        <property name="nagle">
+            <value>${memcached.nagle}</value>
+        </property>
+        <property name="socketTO">
+            <value>${memcached.socketTO}</value>
+        </property>
+    </bean>
+</beans>

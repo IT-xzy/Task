@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+$color:#ffffff;
+
+@mixin w-h ($w:0, $h:0) {
+    width: $w;
+    height: $h;
+}
+
+$font-size:10px;
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: initial;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+}
+button{
+    @include w-h(40%,1rem );
+     padding: 0;
+     margin: 0;
+     font-size: 20px;
+     border-radius: 5px;
+     outline: none;
+     border: none;
+}
+header {
+    position: fixed;
+    @include w-h(100%, 1.2rem);
+    top: 0;
+    line-height: 1.2rem;
+    text-align: center;
+    background: #5FC0CD;
+    z-index: 1;
+
+    a {
+        position: absolute;
+        left: .7rem;
+        top: 50%;
+        margin-top: -5px;
+        @include w-h(10px, 10px);
+        border-top: 2px solid #ffffff;
+        border-right: 2px solid #ffffff;
+        transform: rotate(225deg);
+    }
+
+    span {
+        color: $color;
+        font-size: $font-size*2;
+    }
+}
+
+main {
+    margin: 60px 0 90px 0;
+
+    .backdrop {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: url(../img/beijing.png) no-repeat;
+        background-size: cover;
+        height: 3.26rem;
+        color: $color;
+        font-size: 12px;
+
+        img {
+            @include w-h(1.63rem, 1.63rem);
+            margin-left: .3rem
+        }
+
+        div {
+            margin-left: .4rem;
+
+            p {
+                font-size: 16px;
+
+                span {
+                    font-size: 14px;
+                }
+            }
+
+            img {
+                @include w-h(.18rem,.23rem );
+                margin: 0 .13rem 0 0;
+            }
+        }
+    }
+
+
+    li {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+    }
+
+   
+    .mode {
+        margin: .3rem .4rem;
+        padding-left: .4rem;
+        border-left: 2px solid #5FC0CD;
+    }
+
+
+    .meal {
+        height: .4rem;
+        margin: .3rem .4rem;
+        padding-right: .4rem;
+        border-right: 2px solid #ccc;
+        white-space: nowrap;
+    }
+
+    img {
+        @include w-h(.3rem,.3rem );
+        margin-right: .1rem;
+    }
+
+
+    .whole{
+        @extend .meal ;
+    }
+
+    .ren {
+        color: red;
+    }
+    .wash{
+        padding-right: 2%;
+    }
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background: #ffffff;
+    .message{
+        margin: 1% 2% 1% 5%;
+        background: #ffffff;
+        color: #5FC0CD;
+        border: 1px solid#5FC0CD;
+    }
+    .tel{  
+        margin: 1% 5% 1% 2%;
+        background: #5FC0CD;
+        color: #ffffff;
+        border: 1px solid#ffffff;
+    }
+}
