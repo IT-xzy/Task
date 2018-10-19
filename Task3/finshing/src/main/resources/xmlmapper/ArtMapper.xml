@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.ArtMapper">
+    <!--//新增作品 boolean insertArt(Art art);-->
+    <insert id="insertArt" parameterType="com.jnshu.entity.Art">
+      INSERT INTO art
+      (author,name,state,first_id,second_id,introduce,img_second_naill,video,
+      is_link,img_detail,article_detail,create_by,create_at,update_by,update_at)
+      VALUES
+      (#{author},#{name},state,#{firstId},#{secondId},#{introduce},#{imgSecondNaill},#{video},
+        #{isLink},#{imgDetail}, #{articleDetail},#{createBy},#{createAt},#{updateBy},#{updateAt})
+    </insert>
+
+    <!--//根据查询条件多条件模糊查询获取作品列表-->
+    <!--List<Art> findArtSelective(@Param("name")String name,
+    @Param("byte")byte state, @Param("secondId")long secondId);-->
+    <select id="findArtSelective"  resultType="com.jnshu.entity.Art">
+        SELECT * FROM art
+        <where>
+            <if test="name != null"> name LIKE CONCAT('%',#{name},'%')</if>
+            <if test="state != null"> OR state = #{state}  </if>
+            <if test="firstId != null"> OR first_Id = #{firstId}</if>
+            <if test="secondId != null"> OR second_id = #{secondId}</if>
+            <if test="introduce != null"> OR introduce = #{introduce}</if>
+        </where>
+    </select>
+
+    <!--//作品上下架 boolean updateArtSelective(long id,byte state);-->
+    <update id="isOnlineArt" parameterType="com.jnshu.entity.Art">
+        update art
+        <set>
+            <if test = "state != null">state = #{state}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+   <!-- //获取作品详情 Art findArtDetail(long id);-->
+    <select id="findArtDetail" parameterType="long" resultType="com.jnshu.entity.Art">
+         select * from art where id = #{id}
+    </select>
+
+
+   <!-- //根据主键删除作品 boolean deleteArt(long id);-->
+    <delete id="deleteArt">
+          DELETE FROM art WHERE id=#{id}
+    </delete>
+
+    <!--//根据主键选择性更新非空字段 boolean updateArtSelective(Art art);-->
+    <update id="updateArtSelective" parameterType="com.jnshu.entity.Art">
+        update art
+        <set>
+            <if test="author != null">author=#{author},</if>
+            <if test="name != null">name=#{name},</if>
+            <if test="firstId != null">first_id=#{firstId},</if>
+            <if test="secondId != null">second_id=#{secondId},</if>
+            <if test="introduce != null">introduce=#{introduce},</if>
+            <if test="imgSecondNaill != null">img_second_naill=#{imgSecondNaill},</if>
+            <if test="video != null">video=#{video},</if>
+            <if test="isLink != null">is_link=#{isLink},</if>
+            <if test="imgDetail != null">img_detail=#{imgDetail},</if>
+            <if test="articleDetail != null">article_detail=#{articleDetail},</if>
+            <if test="updateBy != null">update_by=#{updateBy},</if>
+            <if test="updateAt != null">update_at=#{updateAt}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <!--//查询作品总记录数 long findArtTotal();-->
+    <select id="findArtTotal" resultType="long">
+        SELECT COUNT(*) from art
+    </select>
+</mapper>
