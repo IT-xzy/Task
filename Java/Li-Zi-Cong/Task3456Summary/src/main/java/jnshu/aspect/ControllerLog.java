@@ -60,7 +60,7 @@ public class ControllerLog {
 //    }
 
 
-        @Around("execution(* jnshu.controller.HomePageCon.homePageCon(..))")
+        @Around("execution(* jnshu.dao.StudentMapper.*(..))")
         public Object watchPerformance(ProceedingJoinPoint joinPoint) {
             Object object=null;
             try {

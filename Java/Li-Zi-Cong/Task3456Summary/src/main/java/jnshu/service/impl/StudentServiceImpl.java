@@ -14,7 +14,7 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    @Qualifier("StudentDAOBean")
+//    @Qualifier("StudentDAOBean")
     private StudentMapper studentMapper;
 
     Logger logger = Logger.getLogger(StudentServiceImpl.class);

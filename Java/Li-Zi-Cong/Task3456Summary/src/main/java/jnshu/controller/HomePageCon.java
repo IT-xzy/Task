@@ -33,4 +33,9 @@ public class HomePageCon {
             return null;
     }
 
+//    @RequestMapping(value = "/")
+//    public String testAjax(){
+//        return "testAjax";
+//    }
+
 }

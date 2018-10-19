@@ -10,6 +10,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="ex" uri="/WEB-INF/dateTag.tld" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container  hidden-xs">
     <div class="row header-top">
         <p class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
@@ -22,7 +23,15 @@
                 <a href="#" target="_blank"> <img alt=""  src="/imges/54537.png"></a>
                 <a href="#" target="_blank"><img alt=""  src="/imges/45678678.png"></a>
                 <a href="#" target="_blank"> <img alt=""  src="/imges/54375483543.png"></a>
-                <a href="/loginRegister" target="_self" style="color: green ;font-size: 16px;font-family:'Microsoft YaHei'">登录</a>
+                <c:choose>
+                    <c:when test="${userName==null?true:false}">
+                        <a href="/loginRegister" target="_self" style="color: green ;font-size: 16px;font-family:'Microsoft YaHei'">登录</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a target="_self" style="color: green ;font-size: 16px;font-family:'Microsoft YaHei'">欢迎！[${userName}]&nbsp;</a>
+                        <a href="/cancellation" target="_self" style="color: blue ;font-size: 16px;font-family:'Microsoft YaHei'">注销</a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>
@@ -48,7 +57,7 @@
                 <li><a href="/position">职业</a></li>
                 <li><a href="/company">推荐</a></li>
                 <li><a href="">关于</a></li>
-                <li><a href="/listStudent">需要登录的展示列表</a></li>
+                <li><a href="/u/listStudent">需要登录的展示列表</a></li>
             </ul>
         </div>
     </div>

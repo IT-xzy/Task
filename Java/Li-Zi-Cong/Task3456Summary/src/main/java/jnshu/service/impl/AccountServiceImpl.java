@@ -1,7 +1,7 @@
 package jnshu.service.impl;
 
 import jnshu.dao.AccountMapper;
-import jnshu.interceptor.TokenInterceptor;
+
 import jnshu.pojo.Account;
 import jnshu.pojo.LoginAccount;
 import jnshu.pojo.RegisterAccount;
@@ -17,7 +17,7 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
-    @Qualifier("AccountDAOBean")
+//    @Qualifier("AccountDAOBean")
     private AccountMapper accountMapper;
 
     Logger logger = Logger.getLogger(AccountServiceImpl.class);

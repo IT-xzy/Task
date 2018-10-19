@@ -20,7 +20,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<!--path 是/api/get也可以/api/get/* 这样就拦截了前缀是/api/get的Controller-->
-			<mvc:mapping path="/listStudent"/>
+			<mvc:mapping path="/u/listStudent"/>
+			<!--<mvc:mapping path="/u/**"/>会拦截所有/u/前缀的路径，慎用此配置或者慎用此前缀作为路由-->
 			<!-- 定义在mvc:interceptor下面的表示是对特定的请求才进行拦截的 -->
 			<bean class="jnshu.interceptor.TokenInterceptor"/>
 		</mvc:interceptor>
@@ -67,12 +68,13 @@
 	<mvc:annotation-driven />
 	<context:annotation-config/>
 	<mvc:default-servlet-handler/>
-	<mvc:resources mapping="/css/**" location="/views/"/>
-	<mvc:resources mapping="/png/**" location="/imges/"/>
+	<!--<mvc:resources mapping="/css/**" location="/views/"/>-->
+	<!--<mvc:resources mapping="/png/**" location="/imges/"/>-->
 
 	<!--SpringMVC默认视图解析器-->
 	<!--对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
 	<!--默认的视图解析器在上边的解析错误时使用 (默认使用html)- -->
+
 	<!--<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
 	<!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
 	<!--&lt;!&ndash;设置JSP文件的目录位置&ndash;&gt;-->

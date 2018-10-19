@@ -36,6 +36,7 @@
 			<list>
 				<value>classpath:datasource.properties</value>
 				<value>classpath:memcached.properties</value>
+				<value>classpath:email.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -66,17 +67,21 @@
 	</bean>
 
 	<!--确定mybatis SQL语句模板mapper接口-->
-	<bean id="AccountDAOBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-		<property name="mapperInterface" value="jnshu.dao.AccountMapper"/>
-	</bean>
-	<bean id="StudentDAOBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-		<property name="mapperInterface" value="jnshu.dao.StudentMapper"/>
-	</bean>
-	<bean id="JOBDAOBean" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
-		<property name="mapperInterface" value="jnshu.dao.JobMapper"/>
+	<!--<bean id="accountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+		<!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+		<!--<property name="mapperInterface" value="jnshu.dao.AccountMapper"/>-->
+	<!--</bean>-->
+	<!--<bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+		<!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+		<!--<property name="mapperInterface" value="jnshu.dao.StudentMapper"/>-->
+	<!--</bean>-->
+	<!--<bean id="jobMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+		<!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+		<!--<property name="mapperInterface" value="jnshu.dao.JobMapper"/>-->
+	<!--</bean>-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="jnshu.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
 	<!-- Memcached配置 -->
@@ -106,6 +111,18 @@
 			<value>${memcached.socketTO}</value>
 		</property>
 	</bean>
+
+	<!--阿里云邮箱推送Bean类属性注入-->
+	<!--<bean id="email" class="jnshu.pojo.Email">-->
+		<!--<property name="host" value="smtp.qq.com"/>-->
+		<!--<property name="protocol" value="stmp"/>-->
+		<!--<property name="port" value="25"/>-->
+		<!--<property name="auth" value="true"/>-->
+		<!--<property name="user" value="845634109@qq.com.com"/>-->
+		<!--<property name="password" value="javainmyHEART01"/>-->
+		<!--<property name="to" value="1057340900@qq.com"/>-->
+		<!--&lt;!&ndash;<property name="cc" value="${mail.cc}"/>&ndash;&gt;-->
+	<!--</bean>-->
 
 
 

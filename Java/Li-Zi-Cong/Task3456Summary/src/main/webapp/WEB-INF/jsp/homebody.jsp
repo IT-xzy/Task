@@ -142,7 +142,7 @@
             <c:forEach items="${lists}" var="list">
                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                     <div>
-                        <img src="http://q1.qlogo.cn/g?b=qq&nk=${list.icon}&s=100">
+                        <img src="http://q2.qlogo.cn/g?b=qq&nk=${list.icon}&s=100">
                         <span>${list.student_name}</span>
                         <p class="text-left">${list.introduce}</p>
                     </div>

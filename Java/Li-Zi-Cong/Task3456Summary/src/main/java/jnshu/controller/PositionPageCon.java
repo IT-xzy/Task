@@ -23,7 +23,7 @@ public class PositionPageCon {
         System.out.println("PositionPageCon Controller Working");
         try {
             List<Job>list=jobService.listJob();
-            list.forEach(x-> System.out.println(x));
+//            list.forEach(x-> System.out.println(x));
             model.addAttribute("title","职业");
             model.addAttribute("lists",list);
             return "position";

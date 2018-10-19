@@ -13,6 +13,9 @@ public class Account {
         this.phone = phone;
     }
 
+    public Account() {
+    }
+
     private Integer id;
 
     private String account;

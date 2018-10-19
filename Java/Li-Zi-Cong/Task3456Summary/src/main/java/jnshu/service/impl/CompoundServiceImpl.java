@@ -1,7 +1,6 @@
 package jnshu.service.impl;
 
-import jnshu.util.MemcacheUtil;
-import jnshu.util.SerializeUtil;
+import jnshu.util.*;
 import jnshu.pojo.Job;
 import jnshu.pojo.LoginAccount;
 import jnshu.pojo.RegisterAccount;
@@ -10,8 +9,6 @@ import jnshu.service.CompoundService;
 
 
 //import jnshu.util.MemcachedServicesUtil;
-import jnshu.util.DES;
-import jnshu.util.MD5;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +123,7 @@ public class CompoundServiceImpl implements CompoundService {
 //        List<Student>students=(List<Student>) memcached(("listExcellent"));
 
 //        redis
-//        List<Student>students=(List<Student>) redis("listStudent");
+//        List<Student>students=(List<Student>) redis("listExcellent");
 
         if (students==null)
             return null;
@@ -194,23 +191,15 @@ public class CompoundServiceImpl implements CompoundService {
     public Cookie checkLogin(LoginAccount loginAccount) throws Exception {
         RegisterAccount registerAccount = accountService.checkLogin(loginAccount);
         List<String> lists = MD5.getText(loginAccount.getPassword(), registerAccount);
-        if (registerAccount.getPassword().equals(lists.get(1))) {
+        if (registerAccount!=null) {
+            if (registerAccount.getPassword().equals(lists.get(1))) {
                 System.out.println("验证成功，引导至首页");
 
                 //加密
-                byte[]bytes=DES.desEncodeCBC(DES.keyiv,new String(loginAccount.getAccount()+"/"+lists.get(0)).getBytes());
-                Character character = null;
-                String tokenString=null;
-                System.out.println("byteSIZE"+bytes.length);
-                for (byte b:bytes){
-                    character=(char)b;
-                    tokenString=character.toString();
-                }
-                Cookie token = new Cookie("token",tokenString);
-                token.setMaxAge(3600*24*3);//设置其生命周期
-                return token;
+                return Token.getToken(loginAccount.getAccount(), lists.get(0));
             }
-            return null;
+        }
+        return null;
     }
 
 
