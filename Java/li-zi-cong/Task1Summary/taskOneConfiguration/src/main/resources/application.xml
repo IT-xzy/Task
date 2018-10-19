@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--开启扫描-->
+    <!--<context:component-scan base-package="com.jnshu.task1.annotation.mapper"/>-->
+    <!--<context:component-scan base-package="com.jnshu.task1.annotation.mapper"/>-->
+
+    <!-- 确定数据源配置文件路径 -->
+    <!--<context:property-placeholder location="DB1.properties"/>-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:datasource.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--加载数据源到Spring容器然后注入到连接池-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--给Druid连接池注入数据源-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--dataSource属性指定要用到的连接池-->
+        <property name="dataSource" ref="dataSource" />
+        <!--configLocation属性指定mybatis的核心配置文件,annotation不需要-->
+        <!--<property name="configLocation" value=""/>-->
+        <!--<property name="mapperLocations" value=""/>-->
+    </bean>
+
+    <!--确定mybatis SQL语句模板mapper接口-->
+    <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <property name="mapperInterface" value="com.jnshu.task1.annotation.mapper.IStudentInfoMapper"/>
+    </bean>
+</beans>
+
+
