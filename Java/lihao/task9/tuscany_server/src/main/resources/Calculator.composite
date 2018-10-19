@@ -1,0 +1,37 @@
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="Calculator" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://scallop/xmlns/sca/1.1 ">
+    <!--这里的name属性可以随意写！-->
+
+    <component name="CalculatorServiceComponent">
+        <implementation.java class="com.lihoo.calculator.CalculatorImpl"/>
+        <service name="CalculatorImpl">
+            <interface.java interface="com.lihoo.calculator.Calculator"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:9999/CalculatorRMIService"/>
+        </service>
+        <reference name="add" target="AddComponent"/>
+        <reference name="subtract" target="SubtractComponent"/>
+        <reference name="multiply" target="MultiplyComponent"/>
+        <reference name="divide" target="DivideComponent"/>
+    </component>
+
+
+    <component name="AddComponent">
+        <implementation.java class="com.lihoo.add.AddImpl"/>
+    </component>
+
+    <component name="SubtractComponent">
+        <implementation.java class="com.lihoo.subtract.SubtractImpl"/>
+    </component>
+
+    <component name="MultiplyComponent">
+        <implementation.java class="com.lihoo.multiply.MultiplyImpl"/>
+    </component>
+    <component name="DivideComponent">
+        <implementation.java class="com.lihoo.divide.DivideImpl"/>
+    </component>
+</composite>
