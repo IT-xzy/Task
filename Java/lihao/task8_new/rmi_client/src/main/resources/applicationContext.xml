@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--扫描组件-->
+    <context:component-scan base-package="com.lihoo.ssm"/>
+
+    <!--自动添加AOP-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!--加载配置文件-->
+    <!--<context:property-placeholder location="classpath:redis.properties"/>-->
+    <context:property-placeholder location="classpath:redis.properties , classpath:jdbc.properties "/>
+    <!--<context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>-->
+
+    <!--**********************************************************************************-->
+    <!--tx事务-->
+    <!-- transaction config related... start -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <!--数据库事务管理-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource0" />
+    </bean>
+    <!-- transaction config related... end -->
+    <!--**********************************************************************************-->
+
+    <!-- 1: 数据库连接池 -->
+    <bean id="dataSource0" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClassName}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 关键配置 -->
+        <!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+        <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+        <!--连接池中保留的最小连接数。Default: 2 -->
+        <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
+        <!--连接池中保留的最大连接数。Default: 15 -->
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
+        <!-- 性能配置 -->
+        <!-- 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
+        <property name="maxStatements" value="${jdbc.maxStatements}"/>
+        <!-- maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
+        <property name="maxStatementsPerConnection" value="${jdbc.maxStatementsPerConnection}"/>
+        <!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
+    </bean>
+
+    <!--2: sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--加载 MyBatis 的配置文件-->
+        <!--<property name="configLocation" value="mybatis-config.xml"/>-->
+        <!--映射mapper.xml-->
+        <property name="mapperLocations" value="classpath:/mapper/*Mapper.xml" />
+        <!--设置别名-->
+        <property name="typeAliasesPackage" value="com.lihoo.ssm.model" />
+        <!--数据源-->
+        <property name="dataSource" ref="dataSource0"/>
+        <!--pagehelper插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <!--使用下面的方式配置参数，一行配置一个 -->
+                        <value>
+
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!--3:  这里的id是根据扫描到的package里面的Mapper接口名来定义的，
+    因为扫描的结果不唯一,所以这里省略了,这个bean就是包含了增删改查方法的bean-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--basePackage 属性是映射器接口文件的包路径。
+         你可以使用分号或逗号 作为分隔符设置多于一个的包路径-->
+        <property name="basePackage" value="com.lihoo.ssm.dao"/>
+        <!--因为会自动装配 SqlSessionFactory和SqlSessionTemplate
+         所以没 有 必 要 去 指 定 SqlSessionFactory或 SqlSessionTemplate
+         因此可省略不配置；
+         但是,如果你使 用了一个 以上的 DataSource，那么自动装配可能会失效。
+         这种 情况下，你可以使用sqlSessionFactoryBeanName
+         或sqlSessionTemplateBeanName属性来设置正确的 bean名称来使用；-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 4: Memcached缓存池 -->
+    <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize">
+        <constructor-arg value="needaMemcachedPool"/>
+        <property name="servers">
+            <list>
+                <value>127.0.0.1:11211</value>
+                <!--<value>192.144.173.77:11211</value>-->
+            </list>
+        </property>
+        <property name="initConn" value="20"/>
+        <property name="minConn" value="10"/>
+        <property name="maxConn" value="50"/>
+        <property name="nagle" value="false"/>
+        <property name="socketTO" value="3000"/>
+    </bean>
+    <bean id="memcachedClient" class="com.danga.MemCached.MemCachedClient">
+        <constructor-arg value="needaMemcachedPool"/>
+    </bean>
+
+
+    <!--5:Redis连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+        <!--最大空闲数-->
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <!--连接池的最大数据库连接数  -->
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <!--最大建立连接等待时间-->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <!--逐出连接的最小空闲时间 默认1800000毫秒(30分钟)-->
+        <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}" />
+        <!--每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3-->
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}" />
+        <!--逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1-->
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}" />
+        <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+        <!--在空闲时检查有效性, 默认false  -->
+        <property name="testWhileIdle" value="${redis.testWhileIdle}" />
+    </bean>
+    <!--redis连接工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig"/>
+        <!--IP地址 -->
+        <property name="hostName" value="${redis.hostName}"/>
+        <!--端口号  -->
+        <property name="port" value="${redis.port}"/>
+        <!--如果Redis设置有密码  -->
+        <property name="password" value="${redis.password}"/>
+        <!--客户端超时时间单位是毫秒  -->
+        <property name="timeout" value="${redis.timeout}"/>
+    </bean>
+    <!--redis操作模版,使用该对象可以操作redis  -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <!-- 设置 Redis 连接工厂-->
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+
+        <!-- 单独设置 keySerializer -->
+        <property name="keySerializer">
+            <!--<bean class="com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer" />-->
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <!-- 单独设置 valueSerializer -->
+        <property name="valueSerializer">
+            <!--<bean class="com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer" />-->
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+
+
+
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean >
+    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+    <bean id="redisUtil" class="com.lihoo.ssm.util.cache.RedisUtil">
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
+    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+    <bean id="redisUtilHow2j" class="com.lihoo.ssm.util.cache.RedisUtilHow2j">
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
+
+
+
+
+
+
+    <!--RMI-server-->
+    <!--***********************************-->
+    <!--service1-->
+    <bean id="studentService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1077/student"/>
+        <property name="serviceInterface" value="com.lihoo.ssm.service.StudentListService"/>
+    </bean>
+
+    <!--service2-->
+    <bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:2055/homePage"/>
+        <property name="serviceInterface" value="com.lihoo.ssm.service.StudentHomeService"/>
+    </bean>
+
+    <bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:2055/profession"/>
+        <property name="serviceInterface" value="com.lihoo.ssm.service.StudentProfessionService"/>
+    </bean>
+
+    <bean id="studentService2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:2055/student"/>
+        <property name="serviceInterface" value="com.lihoo.ssm.service.StudentListService"/>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://localhost:2055/info"/>
+        <property name="serviceInterface" value="com.lihoo.ssm.service.StudentInfoService"/>
+    </bean>
+
+
+
+
+    <!--cache配置 -->
+    <!--<bean id="methodCacheInterceptor" class="com.lihoo.ssm.util.interceptor.MethodCacheInterceptor" >-->
+        <!--<property name="redisUtil" ref="redisUtil" />-->
+    <!--</bean>-->
+
+    <!-- 需要加入缓存的类或方法 -->
+    <!--<bean id="methodCachePointCut"  class="org.springframework.aop.support.RegexpMethodPointcutAdvisor" >-->
+        <!--<property name="advice" ref="methodCacheInterceptor"/>-->
+        <!--<property name="patterns" >-->
+            <!--<list>-->
+                 <!--确定正则表达式列表-->
+                <!--<value>com\.lihoo\.ssm\.service\.impl\...*ServiceImpl.*</value >-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean >-->
+
+
+
+
+</beans>
+

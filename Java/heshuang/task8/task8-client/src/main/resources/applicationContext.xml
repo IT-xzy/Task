@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:until="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <context:annotation-config />
+  <!--配置全局注解-->
+  <context:component-scan base-package="com.task5"></context:component-scan>
+
+  <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="true"/>
+  <!--在ioc容器中配置数据源-->
+  <!-- 数据库连接池 -->
+  <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+    <!--<property name="driverClass" value="${jdbc.driver}"/>-->
+    <!--<property name="jdbcUrl" value="${jdbc.url}"/>-->
+    <!--<property name="user" value="${jdbc.username}"/>-->
+    <!--<property name="password" value="${jdbc.password}"/>-->
+    <!--<property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>-->
+    <!--<property name="minPoolSize" value="${c3p0.minPoolSize}"/>-->
+    <!--<property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>-->
+    <!--<property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>-->
+    <!--<property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>-->
+  <!--</bean>-->
+
+   <!--配置memcached -->
+  <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+    <!--<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />-->
+    <!--<property name="ignoreResourceNotFound" value="false" />-->
+    <!--<property name="locations">-->
+      <!--<list>-->
+        <!--<value>classpath:memcache.properties</value>-->
+      <!--</list>-->
+    <!--</property>-->
+  <!--</bean>-->
+  <!--<bean id="memcachedPool" class="com.whalin.MemCached.SockIOPool" factory-method="getInstance"-->
+        <!--init-method="initialize" destroy-method="shutDown">-->
+    <!--<constructor-arg><value>memcachedPool</value></constructor-arg>-->
+    <!--<property name="servers"><list><value>${memcache.server}</value></list></property>-->
+    <!--<property name="weights"><list><value>${memcache.weights}</value></list></property>-->
+    <!--<property name="initConn"><value>${memcache.initConn}</value></property>-->
+    <!--<property name="minConn"><value>${memcache.minConn}</value></property>-->
+    <!--<property name="maxConn"><value>${memcache.maxConn}</value></property>-->
+    <!--<property name="maintSleep"><value>${memcache.maintSleep}</value></property>-->
+    <!--<property name="nagle"><value>${memcache.nagle}</value></property>-->
+    <!--<property name="socketTO"><value>${memcache.socketTO}</value></property>-->
+  <!--</bean>-->
+  <!--<bean id="memCacheClient" class="com.whalin.MemCached.MemCachedClient">-->
+    <!--<constructor-arg><value>memcachedPool</value></constructor-arg>-->
+  <!--</bean>-->
+   <!--memcached结束 -->
+
+  <!--配置spring-session-redis-->
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+
+
+    <!-- redis连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+        <!--最大空闲数-->
+        <property name="maxIdle" value="300"/>
+        <!--连接池的最大数据库连接数  -->
+        <property name="maxTotal" value="100" />
+        <!--最大建立连接等待时间-->
+        <property name="maxWaitMillis" value="1000" />
+        <!--逐出连接的最小空闲时间 默认1800000毫秒(30分钟)-->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <!--每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3-->
+        <property name="numTestsPerEvictionRun" value="1024" />
+        <!--逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1-->
+        <property name="timeBetweenEvictionRunsMillis" value="30000" />
+        <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->
+        <property name="testOnBorrow" value="false" />
+        <!--在空闲时检查有效性, 默认false  -->
+        <property name="testWhileIdle" value="false" />
+    </bean >
+
+
+    <!--redis连接工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig"></property>
+        <!--IP地址 -->
+        <property name="hostName" value="127.0.0.1"></property>
+        <!--端口号  -->
+        <property name="port" value="6379"></property>
+        <!--如果Redis设置有密码  -->
+        <!--<property name="password" value="${redis.password}" />-->
+        <!--客户端超时时间单位是毫秒  -->
+        <property name="timeout" value="10000"></property>
+    </bean>
+
+    <!--redis操作模版,使用该对象可以操作redis  -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"></property>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean >
+
+  <!--配置sendCloudBean-->
+  <bean id="scBean" class="com.task5.FAQ.SendCloudBean">
+    <property name="url" value="http://api.sendcloud.net/apiv2/mail/send"/>
+    <property name="apiUser" value="heshuang_test_Uk99hU"/>
+    <property name="apiKey" value="VHQAUnlLDT001pJK"/>
+    <property name="subject" value="注册验证码"/>
+    <property name="html" value="您的验证码是"/>
+    <property name="from" value="heshuang@jnshu.com"/>
+    <property name="fromName" value="注册使用验证码"/>
+  </bean>
+  <!--配置sendCloudBean结束-->
+
+  <!--配置短信发送-->
+ <until:properties id="SDKSMS" location="classpath:sms.properties"/>
+  <!--配置短信发送结束-->
+
+  <!--配置腾讯云-->
+  <until:properties id="COSP" location="classpath:cos.properties"/>
+  <!--配置结束-->
+
+  <!--&lt;!&ndash;在ioc容器中配置会话&ndash;&gt;-->
+  <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+    <!--<property name="typeAliasesPackage" value="com.task5.pojo"></property>-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--<property name="mapperLocations">-->
+    <!--<list>-->
+      <!--<value>-->
+          <!--classpath:com/task5/mapper/EliteStudents.xml-->
+      <!--</value>-->
+      <!--<value>-->
+        <!--classpath:com/task5/mapper/Profession.xml-->
+      <!--</value>-->
+      <!--<value>-->
+        <!--classpath:com/task5/mapper/User.xml-->
+      <!--</value>-->
+      <!--<value>-->
+        <!--classpath:com/task5/mapper/StudentMapper.xml-->
+      <!--</value>-->
+    <!--</list>-->
+    <!--</property>-->
+  <!--</bean>-->
+
+  <!--在ioc容器中配置数据访问层的实现类-->
+  <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+    <!--<property name="basePackage" value="com.task5.mapper"/>-->
+    <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+  <!--</bean>-->
+
+  <!--配置rmi-->
+
+  <!--<bean id="studentService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+    <!--<property name="serviceUrl" value="rmi://127.0.0.1:1022/RMIStudentService"/>-->
+    <!--<property name="serviceInterface" value="com.task5.service.StudentService"/>-->
+  <!--</bean>-->
+
+  <!--<bean id="eliteStudentService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+    <!--<property name="serviceUrl" value="rmi://127.0.0.1:1022/RMIEliteStudentService"/>-->
+    <!--<property name="serviceInterface" value="com.task5.service.EliteStudentsService"/>-->
+  <!--</bean>-->
+
+  <!--<bean id="professionService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+    <!--<property name="serviceUrl" value="rmi://127.0.0.1:1022/RMIProfessionService"/>-->
+    <!--<property name="serviceInterface" value="com.task5.service.ProfessionService"/>-->
+  <!--</bean>-->
+
+  <!--<bean id="userService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">-->
+    <!--<property name="serviceUrl" value="rmi://127.0.0.1:1022/RMIUserService"/>-->
+    <!--<property name="serviceInterface" value="com.task5.service.UserService"/>-->
+  <!--</bean>-->
+
+  <!--部署两台server-->
+  <bean id="rmiClientSetting" abstract="true">
+    <!-- 是否启动时加载stub -->
+    <property name="refreshEndpointsOnStartup"  value="false" />
+    <!-- 调用异常时，将重新加载stub -->
+    <property name="refreshEndpointsOnConnectFailure" value="true" />
+    <!-- 调用失败时是否切换到其他服务端 -->
+    <property name="switchEndpointOnFailure" value="true" />
+    <!-- 追踪拦截器启用 -->
+    <property name="registerTraceInterceptor" value="true" />
+    <!-- 缓存stub 继承AbstractRmiShortFormProxyFactoryBean才有-->
+    <property name="cacheEndpoints" value="true" />
+
+  </bean>
+
+  <bean id="studentService"
+        class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+    <!-- 远程服务对象接口类 -->
+    <property name="serviceInterface" value="com.task5.service.StudentService"/>
+    <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+    <property name="serviceURLs">
+      <list>
+        <value>rmi://47.104.175.122:1021/RMIStudentService</value>
+        <value>rmi://192.144.168.41:1022/RMIStudentService</value>
+      </list>
+    </property>
+    <!-- 调用时选择那个url的策略 -->
+    <property name="endpointSelectionPolicy">
+      <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+    </property>
+  </bean>
+
+  <bean id="eliteStudentService"
+        class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+    <!-- 远程服务对象接口类 -->
+    <property name="serviceInterface" value="com.task5.service.EliteStudentsService"/>
+    <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+    <property name="serviceURLs">
+      <list>
+        <value>rmi://47.104.175.122:1021/RMIEliteStudentService</value>
+        <value>rmi://192.144.168.41:1022/RMIEliteStudentService</value>
+      </list>
+    </property>
+    <!-- 调用时选择那个url的策略 -->
+    <property name="endpointSelectionPolicy">
+      <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+    </property>
+  </bean>
+
+  <bean id="professionService"
+        class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+    <!-- 远程服务对象接口类 -->
+    <property name="serviceInterface" value="com.task5.service.ProfessionService"/>
+    <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+    <property name="serviceURLs">
+      <list>
+        <value>rmi://47.104.175.122:1021/RMIProfessionService</value>
+        <value>rmi://192.144.168.41:1022/RMIProfessionService</value>
+      </list>
+    </property>
+    <!-- 调用时选择那个url的策略 -->
+    <property name="endpointSelectionPolicy">
+      <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+    </property>
+  </bean>
+
+  <bean id="userService"
+        class="org.softamis.cluster4spring.rmi.RmiUrlListProxyFactoryBean" parent="rmiClientSetting">
+    <!-- 远程服务对象接口类 -->
+    <property name="serviceInterface" value="com.task5.service.UserService"/>
+    <!-- 远程对象地址list ，如果第一个无法使用，会抛异常，然后使用第二个去调用远程对象方法返回结果-->
+    <property name="serviceURLs">
+      <list>
+        <value>rmi://47.104.175.122:1021/RMIUserService</value>
+        <value>rmi://192.144.168.41:1022/RMIUserService</value>
+      </list>
+    </property>
+    <!-- 调用时选择那个url的策略 -->
+    <property name="endpointSelectionPolicy">
+      <bean class="org.softamis.cluster4spring.support.invocation.ShuffleEndpointSelectionPolicy"/>
+    </property>
+  </bean>
+
+  <!--配置rmi结束-->
+
+  <bean id="des" class="com.task5.until.DES">
+    <property name="password" value="${pwd}">
+    </property>
+  </bean>
+  <bean id="jwt" class="com.task5.until.JWT">
+    <property name="key" value="${key}"></property>
+  </bean>
+  <bean id="md5" class="com.task5.until.MD5"/>
+  <bean id="redisUntil" class="com.task5.until.RedisUntil"/>
+  <bean id="aliyunOSSClientUntil" class="com.task5.until.AliyunOSSClientUntil"/>
+    <bean id="sDKTestSendTemplateSMS" class="com.task5.until.SDKTestSendTemplateSMS"/>
+    <bean id="sendCloud" class="com.task5.until.SendCloud"/>
+</beans>

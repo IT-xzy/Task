@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <definition name="layout" template="/WEB-INF/jsp/mainLayout.jsp">
+        <put-attribute name="css_js" value="/WEB-INF/jsp/css_js.jsp"/>
+        <put-attribute name="head" value="/WEB-INF/jsp/head.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="foot" value="/WEB-INF/jsp/foot.jsp"/>
+    </definition>
+    <!-- 项目 -->
+    <definition name="myView" extends="layout">
+        <put-attribute name="body" expression="/WEB-INF/jsp/${item}.jsp"/>
+    </definition>
+</tiles-definitions>

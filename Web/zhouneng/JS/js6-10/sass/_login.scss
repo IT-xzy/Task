@@ -1,0 +1,86 @@
+@charset"UTF-8";
+
+@import"_layout";
+
+
+.login-bg{
+    @include box (100%,711px);
+    background: url(../img/bg2.png) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+.login-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include box(9rem, 6rem);
+    margin: -2.5rem -4rem;
+    background: #d3d7e0;
+    span.font {
+        display: block;
+        margin: .3rem;
+        font-size: .4rem;
+        text-align: center;
+        color: $blue;
+    }
+    div.user {
+        @include flex(flex-start, center);
+        @include box(80%, .9rem);
+        margin: .4rem auto;
+        background: $white;
+        input {
+            @include box(70%, .8rem); 
+            margin-left: 30px;
+            border: none;
+            /*清除点击imput后的边框*/
+            outline: none;
+        }
+        .iphone {
+            @include box(.4rem, .4rem);
+            margin-left: 15px;
+            background: url(../img/input.png) no-repeat 0 0;
+
+            &::after{
+                @include name;
+            }
+        }
+    }
+    div.password {
+        @extend div.user ;
+        .lock {
+            @include box(.4rem, .4rem);
+            margin-left: 15px;
+            background: url(../img/input.png) no-repeat 0 -35px;
+
+            &::after{
+               @include name;
+            }
+        }
+    }
+
+    .hint{
+        @include flex (center,center);
+        position: absolute;
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+        font-size: 18px;
+        letter-spacing:5px;
+        color: red;
+    }
+
+    button{
+        @include flex(center,center);
+        @include box (80%,45px);
+        margin: 60px auto 0 auto;
+        background:$blue;
+        outline: $blue;
+        font-size: 18px;
+        color: $white;
+        /*字符间距*/
+        letter-spacing:5px;
+        box-shadow: 0 0 0 1px $blue;
+    }
+}

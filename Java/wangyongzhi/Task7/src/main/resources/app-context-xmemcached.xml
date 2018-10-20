@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+      http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="service"/>
+
+
+    <!-- properties config   -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:/xmemcached/xmemcached.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!-- Memcached配置 -->
+    <!-- p:connectionPoolSize="${memcached.connectionPoolSize}"   p:failureMode="${memcached.failureMode}" -->
+    <bean   id="memcachedClientBuilder" class="net.rubyeye.xmemcached.XMemcachedClientBuilder">
+        <constructor-arg>
+            <list>
+                <bean class="java.net.InetSocketAddress">
+                    <constructor-arg>
+                        <value>${memcached.server1.host}</value>
+                    </constructor-arg>
+                    <constructor-arg>
+                        <value>${memcached.server1.port}</value>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+
+        <!-- server's weights -->
+        <constructor-arg>
+            <list>
+                <value>${memcached.server1.weight}</value>
+            </list>
+        </constructor-arg>
+
+        <!-- nio连接池大小，默认为1 -->
+        <property name="connectionPoolSize" value="${memcached.connectionPoolSize}" />
+        <!-- 协议工厂 -->
+        <property name="commandFactory" >
+            <bean class="net.rubyeye.xmemcached.command.TextCommandFactory" />
+        </property>
+        <!-- 分布策略，一致性哈希 -->
+        <property name="sessionLocator" >
+            <bean class="net.rubyeye.xmemcached.impl.KetamaMemcachedSessionLocator" />
+        </property>
+        <!-- 序列化转换器 -->
+        <property name="transcoder" >
+            <bean class="net.rubyeye.xmemcached.transcoders.SerializingTranscoder" />
+        </property>
+        <!-- 是否启用failure模式，true为启用，默认不启用 -->
+        <property name="failureMode" value="${memcached.failureMode}" />
+    </bean>
+    <!-- Use factory bean to build memcached client -->
+    <bean id="memcachedClient" factory-bean="memcachedClientBuilder" factory-method="build"  destroy-method="shutdown">
+
+    </bean>
+
+</beans>

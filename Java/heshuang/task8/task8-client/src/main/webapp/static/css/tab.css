@@ -1,0 +1,119 @@
+/* 选项卡 */
+#tabs {
+    position: relative;
+    width: 475px;
+    height: 500px;
+    margin: 5px auto;
+}
+.clearfix::before,
+.clearfix::after{
+    content: '';
+    display: table;    
+}
+.clearfix::after{
+    clear: both;
+}
+.tabs {
+    padding-left: 0;
+    margin: 0;
+    border-bottom: 1px solid #0081c1;
+    list-style: none;
+    box-shadow: 2px 2px 5px 0px #666;
+}
+
+.tabs li {
+    float: left;
+    display: block;
+    width: 50%;
+}
+
+.tabs input[type="radio"] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+.tabs .tab-title {
+    position: relative;
+    top: 0;
+    display: block;
+    padding: 14px 21px;
+    border-bottom: 1px solid #dfdfdf;
+    border-radius: 2px 2px 0 0;
+    text-align: center;
+    background: #eee;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.tab-title:hover {
+    background: #ddd;
+}
+
+.tabs .tab-content {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    display: none;
+    width: 100%;
+    /*padding: 0 25px;*/
+    padding-left: 30px;
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.tabs [id^="tab"]:checked+label {
+    background: #ddd;
+}
+
+.tabs [id^="tab"]:checked~[id^="tab-content"] {
+    display: block;
+}
+
+/* 内容 */
+.login,
+.register {
+    display: inline-block;
+    padding-right: 30px;
+    margin: 0 auto;
+    /*text-align: center;*/
+    background-color: #eee;
+    box-shadow: 2px 2px 5px 0px #666;
+}
+
+.input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login label,
+.register label {
+    display: inline-block;
+    width: 80px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+button {
+    display: inline-block;
+    padding: 10px 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    letter-spacing: 5px;
+    color: #fff;
+    background-color: #2795dc;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #0081c1;
+}

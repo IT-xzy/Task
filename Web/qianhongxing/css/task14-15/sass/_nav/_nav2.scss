@@ -1,0 +1,80 @@
+/* 导航栏开始 */
+
+
+nav {
+
+    input {
+        display: none;
+    }
+
+    #nav-btn:checked~.nav-main {
+        padding-bottom: 200px;
+    }
+
+    .nav-main {
+        position: relative;
+        overflow: hidden;
+        justify-content: flex-end;
+        background: $bg29;
+    }
+
+}
+
+nav {
+    .nav-main {
+
+        @media screen and (min-width: 768px) {
+            label {
+                display: none;
+            }
+
+            ul {
+                @include flex(center, center);
+                margin: 0;
+
+                a {
+                    @include flex(center, center);
+                    @include box($h100, $h100);
+                    @include font($fz16, $bgff);
+
+                    &:hover {
+                        border-top: 4px solid transparent;
+                        border-bottom: 4px solid $bgff;
+                        box-sizing: border-box;
+                    }
+                }
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            height: 50px;
+
+            label {
+                @include box(100px, 70px);
+                background: url(../../images/button.png) no-repeat -17px -10px;
+                transform: scale(.5);
+            }
+
+
+
+            ul {
+                position: absolute;
+                top: 50px;
+                left: 0;
+                right: 0;
+                margin: 0;
+
+                a {
+                    @include flex(center, center);
+                    height: 50px;
+                    @include font($fz16, $bgff);
+
+                    &:hover {
+                        background: #0f0;
+                    }
+                }
+            }
+        }
+
+    }
+}

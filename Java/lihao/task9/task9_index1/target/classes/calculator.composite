@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite
+        xmlns="http://www.osoa.org/xmlns/sca/1.0"
+        xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.0"
+        targetNamespace="http://calc"
+        xmlns:c="http://calc"
+        name="Calculator" >
+    <component name="CalculatorServiceComponent">
+        <implementation.java class="com.tuscany.demo.server.ICalculatorImpl" />
+        <reference name="add" target="SumComponent"/>
+        <reference name="divide" target="DivideComponent"/>
+    </component>
+    <component name="SumComponent">
+        <implementation.java class="com.tuscany.demo.server.ISumImpl" />
+    </component>
+    <component name="DivideComponent">
+        <implementation.java class="com.tuscany.demo.server.IDivideImpl" />
+    </component>
+</composite>

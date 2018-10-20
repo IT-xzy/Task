@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihoo.ssm.dao.StudentListMapper">
+  <resultMap id="BaseResultMap" type="com.lihoo.ssm.model.StudentList">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="qq_num" jdbcType="BIGINT" property="qqNum" />
+    <result column="study_type" jdbcType="VARCHAR" property="studyType" />
+    <result column="study_time" jdbcType="BIGINT" property="studyTime" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="study_id" jdbcType="VARCHAR" property="studyId" />
+    <result column="daily_link" jdbcType="VARCHAR" property="dailyLink" />
+    <result column="promise" jdbcType="VARCHAR" property="promise" />
+    <result column="teach_bro" jdbcType="VARCHAR" property="teachBro" />
+    <result column="know_us_from" jdbcType="VARCHAR" property="knowUsFrom" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from student_list
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.lihoo.ssm.model.StudentList">
+    <!--<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">-->
+      <!--SELECT LAST_INSERT_ID()-->
+    <!--</selectKey>-->
+    insert into student_list (id, username, qq_num, 
+      study_type, study_time, school, 
+      study_id, daily_link, promise, 
+      teach_bro, know_us_from, create_at, 
+      update_at)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{qqNum,jdbcType=BIGINT}, 
+      #{studyType,jdbcType=VARCHAR}, #{studyTime,jdbcType=BIGINT}, #{school,jdbcType=VARCHAR}, 
+      #{studyId,jdbcType=VARCHAR}, #{dailyLink,jdbcType=VARCHAR}, #{promise,jdbcType=VARCHAR}, 
+      #{teachBro,jdbcType=VARCHAR}, #{knowUsFrom,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, 
+      #{updateAt,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lihoo.ssm.model.StudentList">
+    update student_list
+    set username = #{username,jdbcType=VARCHAR},
+      qq_num = #{qqNum,jdbcType=BIGINT},
+      study_type = #{studyType,jdbcType=VARCHAR},
+      study_time = #{studyTime,jdbcType=BIGINT},
+      school = #{school,jdbcType=VARCHAR},
+      study_id = #{studyId,jdbcType=VARCHAR},
+      daily_link = #{dailyLink,jdbcType=VARCHAR},
+      promise = #{promise,jdbcType=VARCHAR},
+      teach_bro = #{teachBro,jdbcType=VARCHAR},
+      know_us_from = #{knowUsFrom,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, username, qq_num, study_type, study_time, school, study_id, daily_link, 
+    promise, teach_bro, know_us_from, create_at, update_at
+    from student_list
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, username, qq_num, study_type, study_time, school, study_id, daily_link, 
+    promise, teach_bro, know_us_from, create_at, update_at
+    from student_list
+  </select>
+
+  <select id="getJavaList" resultMap="BaseResultMap">
+    SELECT *
+    FROM student_list
+    WHERE find_in_set('java', study_type)
+  </select>
+
+  <select id="getWebList" resultMap="BaseResultMap">
+    SELECT *
+    FROM student_list
+    WHERE find_in_set('web', study_type)
+  </select>
+
+
+
+
+</mapper>

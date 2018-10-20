@@ -1,0 +1,61 @@
+$blue: #5fc0cd;
+$white:#fff;
+$gray: #999;
+$triangle: #afbac0;
+$wire: #e1e5e7;
+$fnsi :14px;
+
+// 垂直水平居中
+@mixin flex($center: center) {
+    display: flex;
+    justify-content: $center;
+    align-items: center;
+}
+
+//垂直排列方式
+@mixin flex-item($items: center) {
+    display: flex;
+    align-items: center;
+}
+
+// 定位
+@mixin posi($item, $trbl, $size) {
+    position: $item;
+    #{$trbl}: $size;
+}
+
+//宽高
+@mixin wiht($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+//清除按钮默认样式
+@mixin btn {
+    border: none;
+    outline: none;
+}
+
+//按钮背景颜色和字体颜色
+@mixin backg($bgcolor: #55a8b3, $color: $white) {
+    background: $bgcolor;
+    color: $color;
+
+}
+
+
+//图标
+@mixin icon($width, $height, $posi) {
+    width: $width;
+    height: $height;
+    background: url(task6sprite.png) no-repeat $posi;
+}
+// 箭头指示符
+@mixin indicant($border, $rotate) {
+    border: {
+        top: $border solid $blue; //左右边框
+        left: $border solid $blue;
+    }
+
+    transform: rotate($rotate); //旋转角度
+}

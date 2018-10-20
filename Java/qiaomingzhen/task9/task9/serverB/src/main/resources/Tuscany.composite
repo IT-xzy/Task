@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这里的头文件是需要手动配置的 -->
+<!--这里注意命名空间需要加上接口的路劲，后面的name是接口的名字。———— 待验证-->
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+
+           targetNamespace="http://com.service"
+
+           name="service">
+
+    <component name="ServiceComponent">
+        <implementation.spring location="applicationContext.xml"/>
+        <!--service标签用于配置SCA服务-->
+        <!--这里的name属性要和Spring配置文件中的<sca:service  里的name属性保持一致 。-->
+        <service name="userService">
+            <interface.java interface="com.service.UserService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:1114/userService"/>
+        </service>
+        <service name="companyService">
+            <interface.java interface="com.service.CompanyService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:1114/companyService"/>
+        </service>
+        <service name="profService">
+            <interface.java interface="com.service.ProfService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:1114/profService"/>
+        </service>
+        <service name="telCodeService">
+            <interface.java interface="com.service.TelCodeService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:1114/telCodeService"/>
+        </service>
+        <service name="emailService">
+            <interface.java interface="com.service.thirdParty.EmailService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:1114/emailService"/>
+        </service>
+        <service name="telService">
+            <interface.java interface="com.service.thirdParty.TelService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:1114/telService"/>
+        </service>
+        <service name="qiNiuService">
+            <interface.java interface="com.service.thirdParty.QiNiuService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:1114/qiNiuService"/>
+        </service>
+
+    </component>
+
+
+
+
+</composite>

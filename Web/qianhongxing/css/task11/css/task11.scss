@@ -1,0 +1,136 @@
+/* 变量、混合器 */
+$border: .01rem solid;
+$bg-color: #5fc0cd;
+$color: #fff;
+
+@mixin font-base($f-s,$f-c,$f-lh) {
+    font-size: $f-s;
+    color: $f-c;
+    line-height: $f-lh;
+}
+@mixin flex ($x,$y) {
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin area-input {
+    align-items: center;
+    margin-top: .16rem;
+    padding: .1rem;
+    height: 1rem;
+    background: $color;
+}
+
+@mixin s-input {
+    height: 80%;
+    width: 80%;
+    padding-left: .2rem;
+    font-size: .32rem;
+    border-left: $border #ccc;
+}
+
+@mixin icon($width, $height) {
+    display: inline-block;
+    width: $width;
+    height: $height;
+    margin: 0 .2rem;
+    zoom: .5;
+}
+@mixin box($w,$h) {
+    width: $w;
+    height: $h;
+}
+
+/* 页面重置 */
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-family: "STHeitiSC-Light";
+    font-size: .16rem;
+    background: #eff0f4;
+}
+
+button {
+    border: none;
+}
+
+input {
+    border: none;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/*头部开始*/
+header {
+    background: $bg-color;
+
+    .f-title {
+        @include font-base(.32rem, #fff,.88rem);
+    }
+
+    .m-title {
+        @include flex(center,center);
+        @include font-base(.38rem, #fff, .88rem)
+    }
+
+    .f-title2 {
+        @extend .f-title;
+        @include flex(flex-end,center);
+    }
+}
+
+/* 主体开始 */
+main {
+
+    .i-text {                    /* 手机号码输入框 */
+        @include area-input();
+
+        span {
+            @include icon(.27rem,.41rem);
+            background: url(../images/css.png) no-repeat -.59rem -.1rem;
+        }
+
+        input {
+            @include s-input();
+        }
+    }
+
+    
+    .i-pass {                       /* 密码输入框 */
+        @include area-input;
+
+        span {
+            @include icon(.29rem, .43rem);
+            background: url(../images/css.png) no-repeat -.1rem -.1rem;
+        }
+
+        input {
+            @include s-input();
+        }
+    }
+
+    
+    .b-log button {                 /* 登陆按钮 */
+        margin-top: .7rem;
+        @include box(100%,1rem );
+        outline: none;
+        @include font-base(.38rem, #fff, 1rem);
+        background: $bg-color;
+    }
+
+    
+    .reset {                /* 忘记密码 */
+        justify-content: flex-end;
+        @include font-base(.32rem,#5fc0cd, .88rem);
+    }
+}
+

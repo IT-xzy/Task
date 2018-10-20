@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>技能树首页</title>
+    <link rel="icon" href="../static/img/cock.ico" th:href="@{/img/cock.ico}" type="image/x-icon" />
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/base.css" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" href="../static/css/head-foot.css" th:href="@{/css/head-foot.css}" />
+    <link rel="stylesheet" href="../static/css/main-1.css" th:href="@{/css/main-1.css}" />
+    <link rel="stylesheet" href="../static/css/main-2.css" th:href="@{/css/main-2.css}" />
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js" th:src="@{https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js}"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="@{https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+    <script src="../static/js/json2.js" th:src="@{/js/json2.js}"></script>
+    <script type="text/javascript">
+        /*将post method 改变为delete*/
+        $(function(){
+            $(".delete").click(function(){
+                var href=$(this).attr("href");
+                $("#form_delete").attr("action",href).submit();
+                return false;
+            })
+        })
+    </script>
+
+</head>
+
+
+<body>
+<header>
+    <div class="container">
+        <div class="top-bar">
+            <div class="hotline-bling flex-box">
+                <span>客服热线：010-5985-9123</span>
+            </div>
+            <div class="web-bling flex-box">
+                <a href="#"><img class="head-icon" src="../static/img/wechat.png" th:src="@{/img/wechat.png}" alt=""/></a>
+                <a href="#"><img class="head-icon" src="../static/img/qq.png" th:src="@{/img/qq.png}"  alt=""/></a>
+                <a href="#"><img class="head-icon" src="../static/img/weibo.png" th:src="@{/img/weibo.png}"  alt=""/></a>
+
+
+                <div class="login-regs">
+                    <a th:text="${status[4]}"></a>
+                    <a href="#">|</a>
+                    <a th:text="${status[5]}"></a>
+                    <a href="#">|</a>
+                    <a href="login.html" th:href="@{${status[2]}}" th:text="${status[0]}"></a>
+                    <a href="#">|</a>
+                    <a href="register.html" th:href="@{${status[3]}}" th:text="${status[1]}"></a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <nav class="bgc-green font-size-header font-white " role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <!--手机导航-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+                    <img src="../static/img/menu.png" th:src="@{/img/menu.png}" alt="#" >
+                </button>
+            </div>
+            <div id="example-navbar-collapse" class="collapse navbar-collapse  " aria-expanded="false" style="height: 1px;">
+                <img style="width: 2.5rem; position: relative; top: 0.24rem; right: 2.6rem;" src="../static/img/home-logo-hs.png" th:src="@{/img/home-logo-hs.png}" alt=""/>
+                <ul class="navbar-nav my-nav nav">
+                    <li><a href="../templates/home.html" th:href="@{/home}">首页</a></li>
+                    <li><a href="../templates/profession.html" th:href="@{/profession}">职业</a></li>
+                    <li><a href="../templates/recommend.html" th:href="@{/recommend}">推荐</a></li>
+                    <li><a href="#" th:href="@{/list}">用户列表</a></li>
+                    <li><a href="#">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+<main>
+    <div class="container">
+        <h1>增删改查页面</h1>
+        <br/>
+        <table style="font-size: initial; table-border-color-dark: #000000;padding: 1rem;" class="table">
+            <tr>
+                <th class="tac">id</th>
+                <th class="tac">用户名</th>
+                <th class="tac">头像</th>
+                <th class="tac">邮箱</th>
+                <th class="tac">手机号</th>
+                <!--<th>QQ</th>-->
+                <!--<th class="tac">学习类型</th>-->
+                <!--<th>开学时间</th>-->
+                <!--<th class="tac">毕业学校</th>-->
+                <!--<th>学号</th>-->
+                <!--<th>日报链接</th>-->
+                <!--<th>立愿</th>-->
+                <!--<th class="tac">师兄</th>-->
+                <!--<th>何处得知修真院</th>-->
+                <!--<th class="tac">创建时间</th>-->
+                <!--<th class="tac">更新时间</th>-->
+                <!--<th class="tac">*编辑*</th>-->
+                <!--<th class="tac">*删除*</th>-->
+                <th class="tac">上传头像</th>
+            </tr>
+            <!--/*@thymesVar id="stuList" type=""*/-->
+            <tr th:each="c : ${stuList}">
+                <td th:text="${c.id}"></td>
+                <td th:text="${c.username}"></td>
+                <td th:text="${c.headImg}"></td>
+                <td th:text="${c.email}"></td>
+                <td th:text="${c.phone}"></td>
+                <!--<td th:text="${c.qqNum}"></td>-->
+                <!--<td th:text="${c.studyType}"></td>-->
+                <!--<td th:text="${c.studyTime}"></td>-->
+                <!--<td th:text="${c.school}"></td>-->
+                <!--<td th:text="${c.studyId}"></td>-->
+                <!--<td th:text="${c.dailyLink}" style="word-break: break-word"></td>-->
+                <!--<td th:text="${c.promise}" style="word-break: break-word"></td>-->
+                <!--<td th:text="${c.teachBro}"></td>-->
+                <!--<td th:text="${c.knowUsFrom}"></td>-->
+                <!--<td th:text="${c.createAt}"></td>-->
+                <!--<td th:text="${c.updateAt}"></td>-->
+
+                <td>
+                    <a href="#" target="_blank">
+                        <input class="btn-primary" type="submit" value="上传" />
+                    </a>
+                </td>
+
+
+                <!--<td>-->
+                    <!--<a th:href="/list/${c.id}" target="_blank">-->
+                        <!--<input class="btn-primary" type="submit" value="编辑" />-->
+                    <!--</a>-->
+                <!--</td>-->
+                <!--<td>-->
+                    <!--<a th:href="/list/${c.id}" class="delete" target="_blank">-->
+                        <!--<input class="btn-danger" type="submit" value="删除" />-->
+                    <!--</a>-->
+                <!--</td>-->
+            </tr>
+
+
+
+        </table>
+        <div style="text-align: center;font-size: x-large">
+            <a href="?start=0" >首  页</a>
+
+            <!--<a th:href="?start=${page.start - page.count}">上一页</a>-->
+            <a href="?start=${page.start - page.count}">上一页</a>
+            <a href="?start=${page.start + page.count}">下一页</a>
+            <a href="?start=${page.last}">末  页</a>
+        </div>
+        <!--增加用户-->
+        <div style="text-align: center; margin-top: 40px; font-size: small">
+            <form method="post" action="userList">
+                <input type="hidden" name="_method" value="POST"/>
+
+                <div class="panel-body">
+                    <div style="margin-bottom: .2rem;" class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">学生姓名：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="username" value="安度因"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">学生QQ: </label>
+                                <div class="col-md-8">
+                                    <input type="number" name="qqNum" value="932233560"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">学生职业类型：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="studyType" value="java" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: .2rem;" class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">预计入学时间：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="studyTime" value="1533712935"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">毕业院校：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="school" value="艾泽拉斯大学"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">线上学号： </label>
+                                <div class="col-md-8">
+                                    <input type="text" name="studyId" value="java-4835"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: .2rem;" class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">日报链接：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="dailyLink" value="www.real_shit.com"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">立愿：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="promise" value="我再上四个我就是狗"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">辅导师兄：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="teachBro" value="舞厅鸭Bill"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: .2rem;" class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">何处了解修真院：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="knowUsFrom" value="知乎"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">创建时间： </label>
+                                <div class="col-md-8">
+                                    <input type="text" name="createAt" value="1533713315"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">最后更新时间：</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="updateAt" value="1533714545"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <input style="font-size: x-large" class="btn-success" type="submit" value="试试增加一个用户" />
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+        <!--删除-->
+        <form id="form_delete" action="" method="POST">
+            <input type="hidden" name="_method" value="DELETE"/>
+        </form>
+    </div>
+</main>
+
+
+<footer>
+    <div class="container">
+        <div class="row foot-items">
+            <div class="col-sm-4 col-xs-12 foot-jnshu ">
+                <h4>技能树&ensp;一&ensp;改变你我</h4>
+                <span>关于我们&nbsp;|&nbsp;联系我们&nbsp;|&nbsp;合作企业</span>
+            </div>
+            <div class="col-sm-4 col-xs-12 foot-website">
+                <h4>旗下网站</h4>
+                <div class="website-set">
+                    <span>草船云孵化器</span>
+                    <span>最强IT特训营</span>
+                </div>
+                <div class="website-set">
+                    <span>葡萄藤轻游戏</span>
+                    <span>桌游精灵</span>
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 foot-wechat">
+                <h4>微信公众平台</h4>
+                <img src="../static/img/QRcode.jpg" th:src="@{/img/QRcode.jpg}" alt=""/>
+            </div>
+        </div>
+    </div>
+    <div class="corp-info">
+        <span>Copyright © 2015技能树 www.jnshu.com  All Rights Reserved | 京ICP</span>
+    </div>
+
+</footer>
+
+</body>
+</html>

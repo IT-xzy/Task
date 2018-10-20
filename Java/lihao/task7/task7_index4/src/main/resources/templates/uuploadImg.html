@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>上传图片</title>
+    <link rel="icon" href="../static/img/cock.ico" th:href="@{/img/cock.ico}" type="image/x-icon"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" th:href="@{https://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <!--<link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}"/>-->
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js" th:src="@{https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js}"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js" th:src="@{https://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js}" ></script>
+    <script src="../static/js/json2.js" th:src="@{/js/json2.js}"></script>
+    <script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/imgUpload.js" th:src="@{/js/imgUpload.js}"></script>
+    <script type="text/javascript">
+        function uploadPic() {
+            alert(666);
+            // console.log(777);
+            var fileName = $("#fileName").val();
+            alert(fileName);
+            if (fileName != null) {
+                $.ajax({
+                    url: "/uploadImg",
+                    type: "GET",
+                    data: {"fileName" : fileName}
+                })
+            }
+        }
+    </script>
+    <script type="text/javascript">
+
+        function handleFile(){
+            // alert(666);
+            var file = document.getElementById("file");
+            alert("file:" + file.value);
+            var fileName = document.getElementById("fileName");
+            // alert("fileName:" + fileName.value);
+            // inputNode.value = fileInput.value.replace("C:\\fakepath\\", "");
+            fileName.value = file.value;
+            alert("fileName:" + fileName.value);
+        }
+    </script>
+
+</head>
+
+<body style="text-align: center;font-size: xx-large; padding: 22rem;">
+
+<form method="post" enctype="multipart/form-data">
+    <input id="file" name="file" type="file" style="margin: 0 auto;" onchange="handleFile()" />
+    <label for="fileName" style="padding-top: 2rem;">
+        <input id="fileName" type="text" disabled="disabled" value="文件名"  />
+    </label>
+    <!--<input id="token" name="token" type="hidden" value="" >-->
+    <!--<input id="" name="key" type="hidden" value="">-->
+    <input type="submit" value="上传图片" onclick="uploadPic()"/>
+</form>
+
+
+</body>
+</html>

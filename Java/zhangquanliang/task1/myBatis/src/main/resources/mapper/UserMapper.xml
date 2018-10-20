@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mybatis.dao.UserDao">
+    <!--  一般在查询时使用-->
+    <!--已经在mybatis配置中设置别名  所以可以用 user,实际为对应实体类-->
+    <!-- 如果没有设置别名，则采用全类名  com.java.pojo.user 写起来累-->
+    <resultMap type="user" id="userResultMap">
+        <!--实体类属性 与 数据表字段对应  主键用 id ,其他为result-->
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="qq" column="qq"/>
+        <result property="profession" column="profession"/>
+        <result property="startTime" column="start_time"/>
+        <result property="graduatedFrom" column="graduated_from"/>
+        <result property="onlineId" column="online_id" />
+        <result property="dailyLink" column="daily_link"/>
+        <result property="wish" column="wish"/>
+        <result property="counselor" column="counselor"/>
+        <result property="way" column="way" />
+        <result property="createAt" column="create_at" />
+        <result property="updateAt" column="update_at" />
+    </resultMap>
+    <!-- 定义插入的sql语句，通过命名空间+id方式被定位  应接口存在对应方法-->
+    <insert id="insert" parameterType="user" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" >
+        insert into user(user_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at)
+        values(#{userName},#{qq},#{profession},#{startTime},#{graduatedFrom},#{onlineId},#{dailyLink},#{wish},#{counselor},#{way},#{createAt},#{updateAt});
+    </insert>
+
+    <update id="update" parameterType="user" >
+        update user set profession=#{profession},update_at=#{updateAt} where user_id = #{userId};
+    </update>
+
+    <delete id="delete" parameterType="long">
+        delete from user where user_id = #{userId};
+    </delete>
+
+    <select id="getUsers" resultMap="userResultMap">
+        select user_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at
+        from user;
+    </select>
+
+    <select id="getUserByName" parameterType="string" resultMap="userResultMap" >
+        select  user_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at
+        from user where user_name like #{userName};
+    </select>
+
+    <select id="getUserByonlineId" parameterType="int" resultMap="userResultMap">
+        select user_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at
+        from user where online_id = #{onlineId};
+    </select>
+
+</mapper>
