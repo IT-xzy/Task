@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding= "UTF-8"?>
+<taglib>
+    <tlib-version >1.0</tlib-version>
+    <jsp-version >1.2</jsp-version>
+    <short-name>date</short-name>    <!-- 定义一个短名,可以随意取 -->
+    <!-- 配置成tld文件的位置，uri用于在jsp页面中引入自定义标签，需要特别一致 -->
+    <!--<uri>/WEB-INF/dateTag</uri>-->
+
+    <tag >
+        <name>date</name>    <!-- 标签在jsp中使用的名称 -->
+        <tag-class>com.ptteng.util.DateTag</tag-class> <!-- 标签实现类 -->
+        <body-content>JSP</body-content><!--标签体-->
+        <!--标签属性的信息(现在没有) 如果有属性，在标签实现类中set/get-->
+        <attribute>
+            <name>value</name>     <!-- 参数名称 -->
+            <required>true</required>    <!-- 是否必传 -->
+            <rtexprvalue>true</rtexprvalue>   <!-- 是否可用jsp表达式 -->
+        </attribute>
+    </tag >
+</taglib>

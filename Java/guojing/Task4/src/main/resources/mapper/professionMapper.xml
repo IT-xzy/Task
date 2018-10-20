@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.ProfessionDao">
+
+    <resultMap id="professionMap" type="com.ptteng.entity.Profession">
+        <id column="id" property="id"/>
+        <result column="direction" property="direction"/>
+        <result column="classify" property="classify"/>
+        <result column="duty" property="duty"/>
+        <result column="strip" property="strip"/>
+        <result column="difficulty_level" property="difficultyLevel"/>
+        <result column="growth_cycle" property="growthCycle"/>
+        <result column="scarcity_degree" property="scarcityDegree"/>
+        <result column="first_salary" property="firstSalary"/>
+        <result column="second_salary" property="secondSalary"/>
+        <result column="third_salary" property="thirdSalary"/>
+        <result column="basic_knowledge" property="basicKnowledge"/>
+        <result column="engineer" property="engineer"/>
+        <result column="engineer_intro" property="engineerIntro"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="count" property="count"/>
+    </resultMap>
+
+
+    <select id="findProfession" resultMap="professionMap">
+        select profession.*,count(student.id) count from profession
+        left join student on profession.id=student.classify_id
+        group by profession.id
+    </select>
+
+
+</mapper>
