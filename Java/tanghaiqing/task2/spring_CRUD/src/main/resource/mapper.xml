@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admincrud.dao.AdminDao">
+    <select id="findAdmins" resultMap="Admin">
+        select * from admin
+    </select>
+    <select id="findAdmin" parameterType="Integer" resultMap="Admin">
+        select * from admin where id=#{id}
+    </select>
+    <insert id="saveAdmin" parameterType="com.admincrud.pojo.Admin">
+        insert into admin (adminCode,password,name,telephone,email,enrolldate) values (#{adminCode},#{password},#{name},
+        #{telephone},#{email},#{enrolldate});
+    </insert>
+    <delete id="delAdmin" parameterType="Integer">
+        delete from admin where id=#{id}
+    </delete>
+    <delete id="delAdmins">
+        delete from admin
+    </delete>
+    <update id="updateAdmin" parameterType="com.admincrud.pojo.Admin">
+        update admin set adminCode=#{adminCode},password=#{password},name=#{name},telephone=#{telephone},email=#{email},enrolldate=#{enrolldate}
+        where id=#{adminId}
+    </update>
+    <resultMap id="Admin" type="com.admincrud.pojo.Admin">
+        <result property="adminId" column="id"/>
+    </resultMap>
+</mapper>
