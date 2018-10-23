@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="base" template="/WEB-INF/jsp/pages.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+    </definition>
+    <!--<definition name="firstPage" extends="base">-->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/firstPage.jsp" />-->
+    <!--</definition>-->
+    <!--<definition name="secondPage" extends="base">-->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/secondPage.jsp" />-->
+    <!--</definition>-->
+    <!--<definition name="thirdPage" extends="base">-->
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/thirdPage.jsp" />-->
+    <!--</definition>-->
+
+    <definition name="*" extends="base">
+        <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp"  />
+    </definition>
+
+</tiles-definitions>
