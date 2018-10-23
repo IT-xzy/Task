@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理界面</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>user数据</p>
+    <table border="1">
+        <tr>
+            <th>用户Id</th>
+            <th>用户名称</th>
+            <th>#编辑</th>
+            <th>#删除</th>
+        </tr>
+        <tr th:each="tu : ${listTU}">
+            <td th:text="${tu.userId}"></td>
+            <th th:text="${tu.username}"></th>
+            <th><a th:href="@{/bs/user/one(userId=${tu.userId})}">编辑</a></th>
+            <th><a th:href="@{/bs/user/delete(userId=${tu.userId})}">删除</a></th>
+        </tr>
+
+    </table>
+    <form th:action="@{/bs/user/add}" style="text-align: center" method="post">
+        **用户名(例:user111)
+        <input type="text" name="username" th:value="user111"><br>
+        **密码(例:数字1,2,3)
+        <input type="text" name="password" th:value="123456"><br>
+        **用户描述信息(例:我是测试哈哈)
+        <input type="text" name="description" th:value="我是测试哈哈"><br>
+        **user-role表的rolId(例：18)
+        <input type="text" name="roleId" th:value="2"><br>
+        <button type="submit">增加</button>
+    </form>
+
+</div>
+</body>
+
+</html>

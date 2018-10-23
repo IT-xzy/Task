@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册界面</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box">
+    <form class="login-table" action="/login/u/register/mb" method="post">
+        <p class="title">手机号注册</p>
+        <div class="user-name">
+            <img src="/img/user.png">
+            <input type="text" name="loginMobile" placeholder="手机号"
+                   th:value="${login.loginMobile}">
+            <!-- 用户名登录提示 -->
+            <span class="login-prompt" th:text="${tip}">暂时只支持中国地区手机号</span>
+        </div>
+        <!--<div class="pwd">-->
+        <!--<img src="/img/locked.png">-->
+        <!--<input  type="text" name="loginCode" placeholder="验证码"-->
+        <!--th:value="${loginCode}">-->
+        <!--</div>-->
+        <button type="submit" class="login-btn">获取验证码</button>
+    </form>
+    <form class="login-table" action="/login/u/register/mbing" method="post">
+        <!--提交的账号隐藏-->
+        <div>
+            <input type="hidden" name="loginMobile" placeholder="手机号"
+                   th:value="17744404682">
+        </div>
+        <div class="pwd2">
+            <img src="/img/locked.png">
+            <input type="text" name="loginCode" placeholder="手机验证码"
+                   th:value="${loginCode}">
+            <span class="login-prompt" th:text="${status}"></span>
+        </div>
+        <div class="pwd">
+            <img src="/img/locked.png">
+            <input type="text" name="loginPassword" placeholder="密码"
+                   th:value="${login.loginPassword}">
+            <!-- 密码登录提示 -->
+            <span class="login-prompt">6-16位字母数字或下划线</span>
+        </div>
+        <button type="submit" class="login-btn">注册手机账号</button>
+    </form>
+</div>
+</body>
+
+</html>

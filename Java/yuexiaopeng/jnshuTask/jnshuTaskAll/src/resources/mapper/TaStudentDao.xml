@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshutask.dao.TaStudentDao">
+  <resultMap id="BaseResultMap" type="com.jnshutask.pojo.TaStudent">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    <result column="qq" jdbcType="INTEGER" property="qq" />
+    <result column="study_type" jdbcType="VARCHAR" property="studyType" />
+    <result column="join_time" jdbcType="BIGINT" property="joinTime" />
+    <result column="university" jdbcType="VARCHAR" property="university" />
+    <result column="study_id" jdbcType="VARCHAR" property="studyId" />
+    <result column="daily_link" jdbcType="VARCHAR" property="dailyLink" />
+    <result column="slogen" jdbcType="VARCHAR" property="slogen" />
+    <result column="master" jdbcType="VARCHAR" property="master" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, create_at, update_at, qq, study_type, join_time, university, study_id, 
+    daily_link, slogen, master
+  </sql>
+  <select id="selectByExample" parameterType="com.jnshutask.pojo.example.TaStudentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ta_student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.jnshutask.pojo.example.TaStudentExample">
+    delete from ta_student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jnshutask.pojo.TaStudent">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ta_student (name, create_at, update_at, 
+      qq, study_type, join_time, 
+      university, study_id, daily_link, 
+      slogen, master)
+    values (#{name,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, 
+      #{qq,jdbcType=INTEGER}, #{studyType,jdbcType=VARCHAR}, #{joinTime,jdbcType=BIGINT}, 
+      #{university,jdbcType=VARCHAR}, #{studyId,jdbcType=VARCHAR}, #{dailyLink,jdbcType=VARCHAR}, 
+      #{slogen,jdbcType=VARCHAR}, #{master,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshutask.pojo.TaStudent">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ta_student
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="studyType != null">
+        study_type,
+      </if>
+      <if test="joinTime != null">
+        join_time,
+      </if>
+      <if test="university != null">
+        university,
+      </if>
+      <if test="studyId != null">
+        study_id,
+      </if>
+      <if test="dailyLink != null">
+        daily_link,
+      </if>
+      <if test="slogen != null">
+        slogen,
+      </if>
+      <if test="master != null">
+        master,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=INTEGER},
+      </if>
+      <if test="studyType != null">
+        #{studyType,jdbcType=VARCHAR},
+      </if>
+      <if test="joinTime != null">
+        #{joinTime,jdbcType=BIGINT},
+      </if>
+      <if test="university != null">
+        #{university,jdbcType=VARCHAR},
+      </if>
+      <if test="studyId != null">
+        #{studyId,jdbcType=VARCHAR},
+      </if>
+      <if test="dailyLink != null">
+        #{dailyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="slogen != null">
+        #{slogen,jdbcType=VARCHAR},
+      </if>
+      <if test="master != null">
+        #{master,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jnshutask.pojo.example.TaStudentExample" resultType="java.lang.Long">
+    select count(*) from ta_student
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ta_student
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createAt != null">
+        create_at = #{record.createAt,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateAt != null">
+        update_at = #{record.updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="record.qq != null">
+        qq = #{record.qq,jdbcType=INTEGER},
+      </if>
+      <if test="record.studyType != null">
+        study_type = #{record.studyType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joinTime != null">
+        join_time = #{record.joinTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.university != null">
+        university = #{record.university,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyId != null">
+        study_id = #{record.studyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dailyLink != null">
+        daily_link = #{record.dailyLink,jdbcType=VARCHAR},
+      </if>
+      <if test="record.slogen != null">
+        slogen = #{record.slogen,jdbcType=VARCHAR},
+      </if>
+      <if test="record.master != null">
+        master = #{record.master,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ta_student
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      create_at = #{record.createAt,jdbcType=BIGINT},
+      update_at = #{record.updateAt,jdbcType=BIGINT},
+      qq = #{record.qq,jdbcType=INTEGER},
+      study_type = #{record.studyType,jdbcType=VARCHAR},
+      join_time = #{record.joinTime,jdbcType=BIGINT},
+      university = #{record.university,jdbcType=VARCHAR},
+      study_id = #{record.studyId,jdbcType=VARCHAR},
+      daily_link = #{record.dailyLink,jdbcType=VARCHAR},
+      slogen = #{record.slogen,jdbcType=VARCHAR},
+      master = #{record.master,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+
+</mapper>
