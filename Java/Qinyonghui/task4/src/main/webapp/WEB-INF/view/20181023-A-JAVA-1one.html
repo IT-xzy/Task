@@ -1,0 +1,362 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/lib/reveal/css/zenburn.css">
+	<style>
+	</style>	
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+</head>
+<body>
+<img src="https://ptteng.github.io/PPT/img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal" style="text-align:left">
+    <div class="slides" style="text-align:left">
+        <section style="text-align:center">
+            <P>jvm如何运行以及内存如何分配?</P>
+			<p></p>
+            <h4>java分享会</h4>
+            <p>分享人：秦永辉</p>
+        </section>
+        <section>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.常见问题</p>
+            <p>4.解决方案</p>
+            <p>5.编码实战</p>
+            <p>6.扩展思考</p>
+            <p>7.参考文献</p>
+            <p>8.更多讨论</p>
+        </section>
+        <section style="text-align:left">
+            <h4>1.背景介绍</h4 >
+            <p>作为一名Java使用者，掌握JVM的体系结构也是必须的。说起Java，人们首先想到的是Java编程语言，
+			然而事实上，Java是一种技术，它由四方面组成：Java编程语言、Java类文件格式、
+			Java虚拟机和Java应用程序接口(Java API)。它们的关系如下图所示：</p>
+		<img src="D:\HTTP-PPT简介\img\java与jvm的关系.gif"  alt="java与jvm的关系" />
+        </section>
+	
+	<section><h4>2.知识剖析</h4></section>
+		<section style="text-align:left">
+		<p>2.1 JAVA虚拟机工作原理和流程</p>
+		<p>2.2 JVM内存区域与内存分配</p>
+        </section>
+	<section style="text-align:left">
+		<h4>Java平台由Java虚拟机和Java应用程序接口搭建，Java语言则是进入这个平台的通道，
+		用Java语言编写并编译的程序可以运行在这个平台上。这个平台的结构如下图所示：</h4>
+			<p>在Java平台的结构中, 可以看出，Java虚拟机(JVM) 处在核心的位置，是程序与底层操作系统和硬件无关的关键。
+			它的下方是移植接口，移植接口由两部分组成：适配器和Java操作系统, 
+			其中依赖于平台的部分称为适配器；JVM 通过移植接口在具体的平台和操作系统上实现；</p> 
+			<img src="D:\HTTP-PPT简介\img\jvm的平台结构.jpg"  alt="jvm的平台结构" />
+	</section>
+	<section style="text-align:left">	
+			<p>在JVM 的上方是Java的基本类库和扩展类库以及它们的API， 
+			利用Java API编写的应用程序(application) 和小程序(Java applet) 
+			可以在任何Java平台上运行而无需考虑底层平台, 就是因为有Java虚拟机(JVM)实现了程序与操作系统的分离，
+			从而实现了Java 的平台无关性。 JVM在它的生存周期中有一个明确的任务，那就是运行Java程序，
+			因此当Java程序启动的时候，就产生JVM的一个实例；当程序运行结束的时候，该实例也跟着消失了。
+			下面我们从JVM的体系结构和它的运行过程这两个方面来对它进行比较深入的研究。</p> 
+	</section>
+		 
+	<section style="text-align:left">
+		<h4>一、Java虚拟机的体系结构</h4>
+		<p>①类装载子系统：装载具有适合名称的类或接口②执行引擎：负责执行包含在已装载的类或接口中的指令 </p>
+		<p>每个JVM都包含：</p>
+		<p>方法区、Java堆、Java栈、本地方法栈、指令计数器及其他隐含寄存器</p>
+	</section>
+	<section style="text-align:left">
+		<img src="D:\HTTP-PPT简介\img\jvm的组成结构.jpg"  alt="jvm的组成结构" />
+	</section>
+	<section style="text-align:left">
+		<p>对于JVM的学习，在我看来这么几个部分最重要：
+			<p>Java代码编译和执行的整个过程</p>
+			<p>JVM内存管理及垃圾回收机制</p>
+			<p>下面分别对这几部分进行说明:</p>
+		<p>2、Java代码编译和执行的整个过程</p>
+	</section>
+		
+	<section style="text-align:left">
+		<p>（1）Java代码编译是由Java源码编译器来完成，也就是Java代码到JVM字节码（.class文件）的过程。
+		流程图如下所示：</p>
+        <img src="D:\HTTP-PPT简介\img\java源码级编译器.jpg"  alt="java源码级编译器" />
+        <p>（2）Java字节码的执行是由JVM执行引擎来完成，流程图如下所示：</p>
+	</section>
+	<section style="text-align:left">
+		<img src="D:\HTTP-PPT简介\img\java字节码解释器.jpg"  alt="java字节码解释器" />
+        <p>Java代码编译和执行的整个过程包含了以下三个重要的机制:·Java源码编译机制·类加载机制·类执行机制</p>
+	</section>	
+	<section style="text-align:left">
+	<p>（1）Java源码编译机制</p>
+		<p>Java 源码编译由以下三个过程组成：①分析和输入到符号表②注解处理③语义分析和生成class文件
+流程图如下所示：</p>
+		<img src="D:\HTTP-PPT简介\img\java源码编译机制.jpg"  alt="java源码编译机制" />
+	</section>
+		
+	<section style="text-align:left">
+            <p>最后生成的class文件由以下部分组成：</p>
+
+			<p>①结构信息：包括class文件格式版本号及各部分的数量与大小的信息</p>
+
+			<p>②元数据：对应于Java源码中声明与常量的信息。包含类/继承的超类/实现的接口的声明信息、域与方法声明信息和常量池</p>
+
+			<p>③方法信息：对应Java源码中语句和表达式对应的信息。包含字节码、异常处理器表、求值栈与局部变量区大小、求值栈的类型记录、调试符号信息</p>
+		
+			<p>（2）类加载机制JVM的类加载是通过ClassLoader及其子类来完成的，类的层次关系和加载顺序可以由下图来描述：</p>
+	</section>
+	<section style="text-align:left">
+		<img src="D:\HTTP-PPT简介\img\java类的加载机制.png"  alt="java类的加载机制" />
+		<p>为什么研究类加载全过程</p>
+		<p>有助于连接JVM运行过程</p>
+		<p>更深入了解java动态性（解热部署，动态加载），提高程序的灵活性</p>
+	</section>
+	<section style="text-align:left">
+		<p>类加载机制</p>
+		<p>JVM把class文件加载到内存，并对数据进行校验、解析和初始化，最终形成JVM可以直接使用
+		的java类型的全过程。如下图所示，JVM类加载机制分为五个部分：
+		加载，验证，准备，解析，初始化，下面我们就分别来看一下这五个过程。</p>
+		<img src="D:\HTTP-PPT简介\img\加载过程1.png"  alt="加载过程1"/>
+	</section>
+	<section style="text-align:left">
+		<p>加载</p>
+		<p>将class文件字节码内容加载到内存中，并将这些静态数据转换成方法区中的运行时数据结构，在堆中生成一个代表这个类的java.lang.Class对象，
+		作为方法区类数据的访问入口，这个过程需要类加载器参与。
+		加载是类加载过程中的一个阶段，这个阶段会在内存中生成一个代表这个类的java.lang.Class对象，作为方法区这个类的各种数据的入口。
+		注意这里不一定非得要从一个Class文件获取，这里既可以从ZIP包中读取（比如从jar包和war包中读取），
+		也可以在运行时计算生成（动态代理），也可以由其它文件生成（比如将JSP文件转换成对应的Class类）。</p>
+	</section>
+	<section style="text-align:left">
+		<img src="D:\HTTP-PPT简介\img\java类加载.png"  alt="java类加载" />
+	</section>
+	<section style="text-align:left">
+	<p>链接</p>    
+	<p>将java类的二进制代码合并到JVM的运行状态之中的过程</p>
+　　<p>验证：这一阶段的主要目的是为了确保Class文件的字节流中包含的信息是否符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+　　<p>准备：正式为类变量（static变量）分配内存并设置类变量初始值的阶段，即在方法区中分配这些变量所使用的内存空间。
+	注意这里所说的初始值概念，</p>
+	<p>比如一个类变量定义为：public static int v = 8080;</p>
+	<p>在编译阶段会为v生成ConstantValue属性，在准备阶段虚拟机会根据ConstantValue属性将v赋值为8080。</p>
+	</section>
+	<section style="text-align:left">
+　　<p>解析：解析阶段是指虚拟机将常量池中的符号引用替换为直接引用的过程。符号引用就是class文件中的：<p>
+	<p>CONSTANT_Class_info</p>
+	<p>CONSTANT_Field_info</p>
+	<p>CONSTANT_Method_info
+	等类型的常量。</p>
+	</section>
+	<section style="text-align:left">
+	<p>下面我们解释一下符号引用和直接引用的概念：
+	符号引用与虚拟机实现的布局无关，引用的目标并不一定要已经加载到内存中。
+	各种虚拟机实现的内存布局可以各不相同，但是它们能接受的符号引用必须是一致的，
+	因为符号引用的字面量形式明确定义在Java虚拟机规范的Class文件格式中。</p>
+	<p>直接引用可以是指向目标的指针，相对偏移量或是一个能间接定位到目标的句柄。
+	如果有了直接引用，那引用的目标必定已经在内存中存在。</p>
+	</section>
+	
+	<section style="text-align:left">
+	<p>初始化</p>
+	<p>初始化阶段是类加载最后一个阶段，前面的类加载阶段之后，除了在加载阶段可以自定义类加载器以外，
+	其它操作都由JVM主导。到了初始阶段，才开始真正执行类中定义的Java程序代码。</p>
+	<p>初始化阶段是执行类构造器<client>方法的过程。<client>方法是由编译器自动收集类中的类变量的赋值操作和静态语句块中的语句合并而成的。虚拟机会保证<client>方法执行之前，父类的<client>方法已经执行完毕。
+	p.s: 如果一个类中没有对静态变量赋值也没有静态语句块，那么编译器可以不为这个类生成<client>()方法。</p>
+	</section>
+	
+	<section style="text-align:left">
+	<p>注意以下几种情况不会执行类初始化：</p>
+	<p>通过子类引用父类的静态字段，只会触发父类的初始化，而不会触发子类的初始化。</p>
+	<p>定义对象数组，不会触发该类的初始化。</p>
+	<p>常量在编译期间会存入调用类的常量池中，本质上并没有直接引用定义常量的类不会触发定义常量所在的类。</p>
+	<p>通过类名获取Class对象，不会触发类的初始化。</p>
+	<p>通过Class.forName加载指定类时，如果指定参数initialize为false时，也不会触发类初始化，
+	其实这个参数是告诉虚拟机，是否要对类进行初始化。</p>
+	<p>通过ClassLoader默认的loadClass方法，也不会触发初始化动作。</p>
+	</section>
+	<section style="text-align:left">
+	<p>类加载器</p>
+	<p>虚拟机设计团队把加载动作放到JVM外部实现，以便让应用程序决定如何获取所需的类，JVM提供了3种类加载器：</p>
+	<p>启动类加载器(Bootstrap ClassLoader)：负责加载 JAVA_HOME\lib 目录中的，或通过-Xbootclasspath参数指定路径中的，且被虚拟机认可（按文件名识别，如rt.jar）的类</p>
+	<p>应用程序类加载器(Application ClassLoader)：负责加载用户路径（classpath）上的类库。</p>
+	</section>
+	<section style="text-align:left">
+	<p>JVM通过双亲委派模型进行类的加载，当然我们也可以通过继承java.lang.ClassLoader实现自定义的类加载器。</p>
+	<img src="D:\HTTP-PPT简介\img\类加载器.png"  alt="类加载器" />
+	</section>
+	<section style="text-align:left">
+	<p>当一个类加载器收到类加载任务，会先交给其父类加载器去完成，
+		因此最终加载任务都会传递到顶层的启动类加载器，
+	只有当父类加载器无法完成加载任务时，才会尝试执行加载任务。</p>
+	<p>采用双亲委派的一个好处是比如加载位于rt.jar包中的类java.lang.Object，
+	不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，
+	这样就保证了使用不同的类加载器最终得到的都是同样一个Object对象。</p>
+	<p>在有些情境中可能会出现要我们自己来实现一个类加载器的需求，这里
+	我们直接看一下jdk中的ClassLoader的源码实现：</p>
+	</section>
+	<section style="text-align:left">
+	<code>protected synchronized Class<?> loadClass(String name, boolean resolve)
+        throws ClassNotFoundException {
+    // First, check if the class has already been loaded
+    Class c = findLoadedClass(name);
+    if (c == null) {
+        try {
+            if (parent != null) {
+                c = parent.loadClass(name, false);
+            } else {
+                c = findBootstrapClass0(name);
+            }
+        } catch (ClassNotFoundException e) {
+            // If still not found, then invoke findClass in order
+            // to find the class.
+            c = findClass(name);
+        }
+    }
+    if (resolve) {
+        resolveClass(c);
+    }
+    return c;
+}</code>
+</section>
+<section style="text-align:left">
+	<p>首先通过Class c = findLoadedClass(name);判断一个类是否已经被加载过。</p>
+	<p>如果没有被加载过执行if (c == null)中的程序，遵循双亲委派的模型，
+	首先会通过递归从父加载器开始找，直到父类加载器是Bootstrap ClassLoader为止。</p>
+	<p>最后根据resolve的值，判断这个class是否需要解析。</p>
+	<p><而上面的findClass()的实现如下，直接抛出一个异常，并且方法是protected，
+	很明显这是留给我们开发者自己去实现的></p>
+	</p>protected Class<?> findClass(String name) throws ClassNotFoundException {
+    throw new ClassNotFoundException(name);
+}</p>
+	</section>
+	
+	<section style="text-align:left">	
+		<p>①Bootstrap ClassLoader负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，
+		由C++实现，不是ClassLoader子类</p>
+		<p>②Extension ClassLoader负责加载java平台中扩展功能的一些jar包，
+		包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包</p>
+		<p>③App ClassLoader负责记载classpath中指定的jar包及目录中class</p>
+		<p>④Custom ClassLoader属于应用程序根据自身需要自定义的ClassLoader，
+		如tomcat、jboss都会根据j2ee规范自行实现ClassLoader</p>
+	</section>
+	<section style="text-align:left">	
+		<p>加载过程中会先检查类是否被已加载，检查顺序是自底向上，从Custom ClassLoader到BootStrap ClassLoader逐层检查</p>
+		<p>只要某个classloader已加载就视为已加载此类，保证此类只所有ClassLoader加载一次。</p>
+	</section>
+	<section style="text-align:left">
+		<p>而加载的顺序是自顶向下，也就是由上层来逐层尝试加载此类。</p>
+		<p>（3）类执行机制</p>
+		<p>JVM是基于堆栈的虚拟机。JVM为每个新创建的线程都分配一个堆栈.也就是说,对于一个Java程序来说</p>
+		<p>它的运行就是通过对堆栈的操作来完成的。堆栈以帧为单位保存线程的状态。</p>
+		<p>JVM对堆栈只进行两种操作:以帧为单位的压栈和出栈操作。</p>		
+     </section>
+<section>
+<h4>3.常见问题</h4>
+</section>
+
+        <section style="text-align:left">
+            <p>1、什么是堆内存，什么是栈内存？有何区别</p>
+            <p>2、JVM是如何实现java解热部署的</p>
+        </section>
+        <section>
+            <h4>4.解决方案</h4>
+        </section>
+ <section style="text-align:left">
+			<p>当类被引用的加载，类会加载几次？</p>
+			<p>类的主动引用（一定会发生类的初始化）new一个类的对象用类的静态成员（除了final常量）和静态方法
+			使用java.lang.reflect包的方法对类进行反射调用当虚拟机启动，java Demo01,则一定会初始化Demo01类，
+			说白了就是先启动main方法所在的类当初始化一个类，如果其父类没有被初始化，则先初始化它父类</p>
+			<p>类的被动引用（不会发生类的初始化）当访问一个静态域时，
+			只有真正声名这个域的类才会被初始化通过子类引用父类的静态变量
+			不会导致子类初始化过数组定义类的引用，不会触发此类初始化
+			引用常量不会触发此类的初始化（常量在编译阶段就存入调用类的常量池中了） </p>
+            <p></p>
+			<p></p>
+  </section>
+		
+		
+<section>
+            <p></p>
+</section>
+
+<section>
+
+</section>
+		
+<section><h4>5.编码实战</h4></section>
+		
+		<section>
+            <h4>6.扩展思考</h4>
+            <p></p>
+			<p></p>
+        </section>
+
+        <section>
+            <h4>7.参考文献</h4>
+            <p>https://www.cnblogs.com/lishun1005/p/6019678.html</p>
+            <p>http://www.importnew.com/25295.html</p>
+        </section>
+        <section>
+            <h4>8.更多讨论</h4>
+            <p></p>
+        </section>
+        <section>
+            <h4>鸣谢</h4>
+            <p>感谢观看,如有出错,恳请指正</p>
+            <p><small>BY : 秦永辉</small></p>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://ptteng.github.io/PPT/lib/reveal/js/head.min.js"></script>
+<script src="https://ptteng.github.io/PPT/lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true },
+            { src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+</script>
+</body>
+</html>
