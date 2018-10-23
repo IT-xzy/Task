@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+        xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    ">
+
+    <!--========================service configuration=====================-->
+
+
+    <!--阿里云账户信息-->
+    <bean id="aliyunAccount" class="yxpTask6.pojo.ServicePojo.AliyunAccount">
+        <property name="accessKeyId" value="LTAIRCsXBFyzT2Vh"/>
+        <property name="accessKeySecret" value="8FTutNLsK8qJNu7g3epUyzXLFj3VzE"/>
+        <property name="bucketName" value="yxp-picture"/>
+    </bean>
+    <!--SMS短信账户信息-->
+    <bean id="sMSAccount" class="yxpTask6.pojo.ServicePojo.SMSAccount">
+        <property name="accountSid" value="8a216da86560c0cd016566def56f03e6"/>
+        <property name="accountToken" value="3afe4905d6cf464083654bfb7e6210d7"/>
+        <property name="appId" value="8a216da86560c0cd016566def5c703ed"/>
+    </bean>
+    <!--邮箱账户信息-->
+    <bean id="mailSLAccount" class="yxpTask6.pojo.ServicePojo.MailSLAccount">
+        <property name="apiUser" value="yuefeifei123_test_NLQmz7"/>
+        <property name="apiKey" value="ZNBJOeakmPdq0bYn"/>
+        <property name="from" value="sendcloud@sendcloud.org"/>
+        <property name="fromName" value="SendCloud"/>
+        <!--<property name="rcpt_to" value="892499056@qq.com"/>-->
+    </bean>
+    <!--七牛云账户信息-->
+    <bean id="qNossAccount" class="yxpTask6.pojo.ServicePojo.QNossAccount">
+        <property name="accessKey" value="oIE8xgGBcahpKh6Ow4LCGO_aIDqvkZHWDOGTSuEU"/>
+        <property name="secretKey" value="o2mwXhbvohZpsZrGa8vFK9j17h6OggJSLssdeR8O"/>
+        <property name="bucketName" value="yxp-testpicture"/>
+        <property name="domainOfBucket" value="http://pe3kqzomh.bkt.clouddn.com"/>
+        <property name="imgType" value="?imageView2/5/w/200/h/200/q/75|imageslim"/>
+        <property name="imgLocalPath" value="c:\imgFile\"/>
+    </bean>
+</beans>

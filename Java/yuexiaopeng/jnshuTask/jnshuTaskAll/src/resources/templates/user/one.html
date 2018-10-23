@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>one login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>user数据</p>
+    <table border="1">
+        <tr>
+            <th>用户Id</th>
+            <th>用户名称</th>
+            <th>用户状态</th>
+            <th>用户角色id</th>
+        </tr>
+        <tr>
+            <td th:text="${tu.userId}"></td>
+            <td th:text="${tu.username}"></td>
+            <th th:text="${tu.status}"></th>
+            <th th:text="${tur.roleId}"></th>
+        </tr>
+    </table>
+    <form th:action="@{/bs/user/update}" style="text-align: center">
+        <input type="hidden" name="userId" th:value="${tu.userId}">
+        **角色密码(登录的密码)
+        <input type="text" name="password" th:value="复杂简单都行"><br>
+        **用户角色id(数字1,2,3)
+        <input type="text" name="roleId" th:value="${tur.roleId}"><br>
+        <button type="submit">修改</button>
+    </form>
+
+</div>
+</body>
+
+</html>

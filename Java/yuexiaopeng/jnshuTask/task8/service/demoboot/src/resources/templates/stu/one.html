@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>one login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>student分页数据</p>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>修改时间</th>
+            <th>name</th>
+            <th>qq</th>
+            <th>studyType</th>
+            <th>joinTime</th>
+            <th>university</th>
+            <th>dailyLink</th>
+            <th>slogen</th>
+            <th>master</th>
+        </tr>
+        <tr>
+            <td th:text="${stu.id}">loginId</td>
+            <th th:text="${stu.updateAt}">loginMail</th>
+            <td th:text="${stu.name}">loginAccount</td>
+            <td th:text="${stu.qq}">loginPassword</td>
+            <th th:text="${stu.studyType}">loginName</th>
+            <th th:text="${stu.joinTime}">loginPicture</th>
+            <th th:text="${stu.university}">loginSalt</th>
+            <th th:text="${stu.dailyLink}">loginMobile</th>
+            <th th:text="${stu.slogen}">loginMail</th>
+            <th th:text="${stu.master}">loginMail</th>
+        </tr>
+    </table>
+    <form th:action="@{/fs/stu/update}" style="text-align: center">
+        <input type="hidden" name="id" th:value="${stu.id}">
+        name：<input type="text" name="name" th:value="${stu.name}"><br>
+        qq：<input type="text" name="qq" th:value="${stu.qq}"><br>
+        studyType：<input type="text" name="studyType" th:value="${stu.studyType}"><br>
+        joinTime：<input type="text" name="joinTime" th:value="${stu.joinTime}"><br>
+        university：<input type="text" name="university" th:value="${stu.university}"><br>
+        dailyLink：<input type="text" name="dailyLink" th:value="${stu.dailyLink}"><br>
+        slogen：<input type="text" name="slogen" th:value="${stu.slogen}"><br>
+        master：<input type="text" name="master" th:value="${stu.master}"><br>
+
+        <button type="submit">修改</button>
+
+    </form>
+
+</div>
+</body>
+
+</html>

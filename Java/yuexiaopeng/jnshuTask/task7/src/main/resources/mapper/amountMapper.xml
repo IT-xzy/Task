@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yxpTask6.dao.AmountDao">
+    <!--根据更新时间查询-->
+    <select id="selectAmount" parameterType="yxpTask6.pojo.Amount" resultMap="amountResult">
+	        select * from amount  where update_at= #{updateAt}
+	</select>
+
+    <!--结果映射集-->
+    <resultMap id="amountResult" type="yxpTask6.pojo.Amount">
+        <id property="amountId" column="amount_Id"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="amountOnline" column="amount_online"/>
+        <result property="amountGraduation" column="amount_graduation"/>
+    </resultMap>
+
+</mapper>

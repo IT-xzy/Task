@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="Calculator"> <!--这里的name属性可以随意写！-->
+
+    <component name="CalculatorServiceComponent">
+
+        <!--把spring定义为SCA一个组件-->
+        <implementation.spring location="applicationContext.xml"/>
+
+        <!--&lt;!&ndash;报红不用管，就是一个字，干&ndash;&gt;-->
+        <!--<implementation.java class="tuscanyTest.impl.CalculatorServiceImpl"/>-->
+
+        <!--增加远程调用的端口，类似于rmi。严重注意，此处name不能乱起，如果组件本身是java实现类必须和实现类同名-->
+        <!--如果是spring组件，则和组件接口名同名-->
+        <service name="CalculatorService">
+            <interface.java interface="tuscanyTest.service.CalculatorService"/>
+            <!--需要暴露host,port和serviceName-->
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:9090/CalculatorRMIService"/>
+            <!--&lt;!&ndash;<tuscany:binding.rmi port="9090" host="localhost" serviceName="CalculatorRMIService"/>&ndash;&gt; 这种写法已淘汰！-->
+        </service>
+
+
+        <!--这里的reference name不能随便填，换其他的会报异常找不到reference,应该是要和Calculator中的组件名称一样-->
+        <!--如果采用spring，则和spring里的ref一样-->
+        <reference name="addService" target="AddComponent"/>
+        <reference name="multiplyService" target="MultiplyComponent"/>
+
+    </component>
+
+    <component name="AddComponent">
+        <implementation.java class="tuscanyTest.impl.AddServiceImpl"/>
+    </component>
+
+    <component name="MultiplyComponent">
+        <implementation.java class="tuscanyTest.impl.MultiplyServiceImpl"/>
+    </component>
+</composite>

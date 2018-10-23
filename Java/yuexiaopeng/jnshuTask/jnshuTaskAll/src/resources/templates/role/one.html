@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>one login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>role数据</p>
+    <table border="1">
+        <tr>
+            <th>角色Id</th>
+            <th>权限Id</th>
+            <th>权限名称</th>
+        </tr>
+        <tr>
+            <td th:text="${rm.roleId}"></td>
+            <td th:text="${rm.menuId}"></td>
+        </tr>
+    </table>
+    <form th:action="@{/bs/role/update}" style="text-align: center">
+        <input type="hidden" name="roleId" th:value="${rm.roleId}">
+        **权限id(数字3-20)
+        <input type="text" name="menuId" th:value="${rm.menuId}"><br>
+        <!--**权限描述(权限的说明)-->
+        <!--<input type="text" name="description" th:value="${spr.description}"><br>-->
+        <button type="submit">修改</button>
+    </form>
+
+</div>
+</body>
+
+</html>
