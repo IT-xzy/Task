@@ -31,9 +31,8 @@ public class StudentService {
     }
 
     public Student fingById(long id){
-        return studentDao.findById(id).get(0);
+        return studentDao.findById(id);
     }
-
 
     public long count(){
         return studentDao.count();

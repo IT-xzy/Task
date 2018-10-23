@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.CompanyDao">
+
+    <resultMap id="companyMap" type="com.ptteng.entity.Company">
+        <id column="id" property="id"/>
+        <result column="company" property="company"/>
+        <result column="brief" property="brief"/>
+        <result column="introduction" property="introduction"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+
+    <select id="findCompany" resultMap="companyMap">
+            select * from company
+    </select>
+
+
+
+
+</mapper>

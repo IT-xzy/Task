@@ -9,7 +9,7 @@
 
     <!-- 自动扫描。包名所在的包及其子包中，如果类的头上带有特定的注解（@Component@Repository
     @Service@Controller）,就会将这个对象作为Bean注入进Spring容器中。  -->
-    <context:component-scan base-package="com.ptteng"></context:component-scan>
+    <context:component-scan base-package="com.ptteng"/>
 
     <!-- 引入外置文件 -->
     <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
@@ -30,6 +30,7 @@
     的属性，就是Jdbc的datasource。-->
     <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="datasource"/>
+        <property name="mapperLocations" value="classpath:DaoMapper.xml"/>
     </bean>
 
 

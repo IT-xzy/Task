@@ -1,34 +1,30 @@
 package com.ptteng;
 
 public class Student {
-    private long id;
+    private Long id;
     private String name;
-    private long QQ;
+    private Long QQ;
     private String wish;
-    private long createAt;
-    private long updateAt;
+    private Long createAt;
+    private Long updateAt;
 
-    public Student() {
-    }
-
-    public Student(long id, String name, long QQ, String wish, long createAt, long updateAt) {
-        this.id = id;
-        this.name = name;
-        this.QQ = QQ;
-        this.wish = wish;
-        this.createAt = createAt;
-        this.updateAt = updateAt;
-    }
-
+    @Override
     public String toString() {
-        return "id=" + id + ",name=" + name + ",QQ=" + QQ + ",wish=" + wish + ",createAt=" + createAt + ",updateAt=" + updateAt;
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", QQ=" + QQ +
+                ", wish='" + wish + '\'' +
+                ", createAt=" + createAt +
+                ", updateAt=" + updateAt +
+                '}';
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,11 +36,11 @@ public class Student {
         this.name = name;
     }
 
-    public long getQQ() {
+    public Long getQQ() {
         return QQ;
     }
 
-    public void setQQ(long QQ) {
+    public void setQQ(Long QQ) {
         this.QQ = QQ;
     }
 
@@ -56,19 +52,19 @@ public class Student {
         this.wish = wish;
     }
 
-    public long getCreateAt() {
+    public Long getCreateAt() {
         return createAt;
     }
 
-    public void setCreateAt(long createAt) {
+    public void setCreateAt(Long createAt) {
         this.createAt = createAt;
     }
 
-    public long getUpdateAt() {
+    public Long getUpdateAt() {
         return updateAt;
     }
 
-    public void setUpdateAt(long updateAt) {
+    public void setUpdateAt(Long updateAt) {
         this.updateAt = updateAt;
     }
 }

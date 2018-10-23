@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.BannerDao">
+
+    <resultMap id="bannerMap" type="com.ptteng.entity.Banner">
+        <id column="id" property="id"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="status" property="status"/>
+        <result column="turn_url" property="turnUrl"/>
+        <result column="introduction" property="introduction"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+
+
+    <select id="findBanner" resultMap="bannerMap">
+            select * from banner where status=1
+    </select>
+
+
+    <delete id="deleteById" parameterType="long">
+            delete from banner where id=#{id}
+    </delete>
+
+    <update id="updateBanner" parameterType="com.ptteng.entity.Banner">
+        update banner
+        <trim prefix="set" suffixOverrides=",">
+            <if test="coverUrl !=null">
+                cover_url=#{coverUrl},
+            </if>
+            <if test="status !=null and status !=''">
+                status=#{status},
+            </if>
+
+            <if test="turnUrl !=null and turnUrl !=''">
+                turn_url=#{turnUrl},
+            </if>
+            <if test="introduction !=null and introduction !=''">
+                introduction=#{introduction},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at=#{updateAt},
+            </if>
+            <if test="updateBy !=null and updateBy != ''">
+                update_by=#{updateBy},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+
+    <insert id="insertBanner" useGeneratedKeys="true" keyColumn="id" parameterType="com.ptteng.entity.Banner">
+        insert into banner (cover_url,status,turnUrl,introduction,create_at,update_at,create_by,update_by)
+        value (#{coverUrl},#{status},#{turnUrl},#{introduction},#{createAt},#{updateAt},#{createBy},#{updateBy})
+    </insert>
+
+
+
+
+
+
+</mapper>

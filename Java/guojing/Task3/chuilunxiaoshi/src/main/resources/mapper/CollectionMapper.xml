@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.CollectionDao">
+
+    <resultMap id="collectionMap" type="com.ptteng.entity.Collection">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="status" property="status"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+    <select id="countCollection" resultType="long">
+        select count(*) from collection
+     </select>
+
+    <select id="findPageCollection" resultMap="collectionMap">
+        select * from collection
+        <if test="keyword !=null">
+            where name like concat(concat('%',#{keyword}),'%')
+        </if>
+        limit #{pageStart},#{size}
+    </select>
+
+    <select id="findById"  resultMap="collectionMap">
+            select * from collection where id=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="long">
+            delete collection,classify,work from collection
+            left join classify on collection.id=classify.collection_id
+            left join work on classify.id=work.classify_id
+            where collection.id=#{id}
+    </delete>
+
+
+
+
+
+    <update id="updateCollection" parameterType="com.ptteng.entity.Collection">
+        update collection
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name !=null">
+                name=#{name},
+            </if>
+            <if test="status !=null and status !=''">
+                status=#{status},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+            update_at=#{updateAt},
+            </if>
+            <if test="updateBy !=null and updateBy != ''">
+            update_by=#{updateBy},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+
+    <insert id="insertCollection" useGeneratedKeys="true" keyColumn="id" parameterType="com.ptteng.entity.Collection">
+        insert into collection (name,status,create_at,update_at,create_by,update_by)
+        values (#{name},#{status},#{createAt},#{updateAt},#{createBy},#{updateBy})
+    </insert>
+
+
+
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.BbsDao">
+
+
+    <resultMap id="bbsMap" type="com.ptteng.entity.Bbs">
+        <id column="id" property="id"/>
+        <result column="visitor" property="visitor"/>
+        <result column="message" property="message"/>
+        <result column="status" property="status"/>
+        <result column="work_id" property="workId"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+    </resultMap>
+
+
+    <insert id="insertBbs" useGeneratedKeys="true" keyProperty="id" parameterType="com.ptteng.entity.Bbs">
+        insert into bbs (work_name,visitor,message,status,work_id,create_at,update_at)
+        values (#{workName},#{visitor},#{message},#{status},#{workId},#{createAt},#{updateAt})
+    </insert>
+
+
+    <update id="updateBbs" parameterType="com.ptteng.entity.Bbs">
+        update bbs
+        <trim prefix="set" suffixOverrides=",">
+            <if test="message !=null">
+                message=#{message},
+            </if>
+            <if test="status !=null and status !=''">
+                status=#{status},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at=#{updateAt},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <select id="findMessage" resultType="com.ptteng.entity.Bbs" parameterType="com.ptteng.entity.Bbs">
+        select * from bbs where work_id=#{workId}
+        <if test="status !=null and status !=''">
+            and status=#{status}
+        </if>
+    </select>
+
+    <delete id="deleteById" parameterType="long">
+         delete from bbs where id=#{id}
+    </delete>
+
+
+</mapper>
