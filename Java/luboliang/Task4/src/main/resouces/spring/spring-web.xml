@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+
+    <!-- scan the package and the sub package -->
+    <context:component-scan base-package="com.jnshu.controller"/>
+
+    <!--&lt;!&ndash; don't handle the static resource &ndash;&gt;-->
+    <!--<mvc:default-servlet-handler />-->
+
+    <!--&lt;!&ndash; if you use annotation you must configure following setting &ndash;&gt;-->
+    <!--<mvc:annotation-driven />-->
+
+    <!-- configure the InternalResourceViewResolver -->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
+          <!--id="internalResourceViewResolver">-->
+        <!--&lt;!&ndash; 前缀 &ndash;&gt;-->
+        <!--<property name="prefix" value="/WEB-INF/jsp/" />-->
+        <!--&lt;!&ndash; 后缀 &ndash;&gt;-->
+        <!--<property name="suffix" value=".jsp" />-->
+    <!--</bean>-->
+    <!-- tiles整合 start-->
+    <bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1">
+    </bean>
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!-- tiles整合 end-->
+    <!-- 对静态资源文件的访问(使静态资源由WEB服务器默认的Servlet来处理) -->
+    <mvc:default-servlet-handler />
+    <mvc:annotation-driven />
+
+    <mvc:default-servlet-handler/>
+    <mvc:resources location="/WEB-INF/images/" mapping="/images/**"/>
+
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+
+    <mvc:resources location="/WEB-INF/jsp/" mapping="/jsp/**"/>
+
+</beans>
+

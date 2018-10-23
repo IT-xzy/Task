@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.WorksDao">
+    <insert id="addWorkss"  keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.Workss" >
+   INSERT INTO workss (create_at,update_at,works_ame,works_introduction,works_class1,works_class2,works)VALUES (#{create_at},#{update_at},#{works_name},#{works_introduction},#{works_class1},#{works_class2},#{works})
+</insert>
+    <delete id="deleteWorkss" parameterType="long">
+DELETE FROM workss WHERE id=#{id}
+</delete>
+    <update id="updateWorkss" parameterType="com.jnshu.model.Workss">
+        UPDATE workss SET create_at=#{create_at},update_at=#{update_at},works_name=#{works_name},works_introduction=#{works_introduction},works_class1=#{works_class1},works_class2=#{works_class2},works=#{works} WHERE id=#{id}
+    </update>
+    <select id="findByWorkss" resultType="com.jnshu.model.Workss">
+        SELECT * FROM workss WHERE id=#{id}
+    </select>
+    <select id="findAllWorkss" resultType="com.jnshu.model.Workss">
+        SELECT * FROM  workss
+    </select>
+</mapper>

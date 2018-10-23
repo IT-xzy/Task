@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.LoginDao">
+    <insert id="addLogin"  keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.Login" >
+        INSERT INTO login (create_at,update_at,user_name,password,editor)VALUES (#{create_at},#{update_at},#{user_name},#{password},#{editor})
+    </insert>
+    <delete id="deleteLogin" parameterType="long">
+        DELETE FROM login WHERE id=#{id}
+    </delete>
+    <update id="updateLogin" parameterType="com.jnshu.model.Login">
+        UPDATE login SET create_at=#{create_at},update_at=#{update_at},user_name=#{user_name},password=#{password},editor=#{editor} WHERE id=#{id}
+    </update>
+    <select id="findByLogin" resultType="com.jnshu.model.Login">
+        SELECT * FROM login WHERE id=#{id}
+    </select>
+    <select id="findAllLogin" resultType="com.jnshu.model.Login">
+        SELECT * FROM  login
+    </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.MessageDao">
+    <insert id="addMessage"  keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.Message" >
+        INSERT INTO message (works_name,message_time,tourist_name,state,update_at,editor,message_contents)VALUES (#{works_name},#{message_time},#{tourist_name},#{state},#{update_at},#{editor},#{message_contents})
+    </insert>
+    <delete id="deleteMessage" parameterType="long">
+        DELETE FROM message WHERE id=#{id}
+    </delete>
+    <update id="updateMessage" parameterType="com.jnshu.model.Message">
+        UPDATE message SET work_name=#{works_name},message_time=#{message_time},tourist_name=#{tourist_name},state=#{state},update_at=#{update_at},editor=#{editor},message_contents=#{message_contents} WHERE id=#{id}
+    </update>
+    <select id="findByMessage" resultType="com.jnshu.model.Message">
+        SELECT * FROM message WHERE id=#{id}
+    </select>
+    <select id="findAllMessage" resultType="com.jnshu.model.Message">
+        SELECT * FROM  message
+    </select>
+</mapper>

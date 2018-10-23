@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.Mapper">
+    <select id="findUser" resultType="mybatis.User">
+        select * from test where  id=#{id}
+    </select>
+    <!--结果映射-->
+    <select id="findAll" resultType="mybatis.User">
+        SELECT * FROM test
+    </select>
+    <!--keyProperty 和useGeneratedKeys是获取增长的主键id-->
+    <insert id="addUser" keyProperty="id" useGeneratedKeys="true" parameterType="mybatis.User">
+        INSERT INTO test (name,create_at,update_at,qq,course_type,entrance_time,graduate_school,wish,daily_link,set_to,brother,learn)  VALUES (#{name},#{create_at},#{update_at},#{qq},#{course_type},#{entrance_time},#{graduate_school},#{wish},#{daily_link},#{set_to},#{brother},#{learn})
+    </insert>
+    <!--参数类型-->
+    <update id="updateUser" parameterType="mybatis.User" >
+        UPDATE test SET name=#{name},update_at=#{update_at},qq=#{qq},course_type=#{course_type},entrance_time=#{entrance_time},graduate_school=#{graduate_school},wish=#{wish},daily_link=#{daily_link},set_to=#{set_to},brother=#{brother},learn=#{learn} WHERE ID=#{id}
+
+    </update>
+
+    <delete id="deleteUser" parameterType="long">
+        DELETE FROM  test where id=#{id}
+    </delete>
+</mapper>
