@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.MyBatis.StudentMapper">
+    <insert id="addStudent" keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.Student">
+       INSERT INTO test (name,update_at,qq,course_type,entrance_time,graduate_school,wish,daily_link,set_to,brother,learn)  VALUES (#{name},#{update_at},#{qq},#{course_type},#{entrance_time},#{graduate_school},#{wish},#{daily_link},#{set_to},#{brother},#{learn})
+ </insert>
+    <delete id="deleteStudent" parameterType="long">
+        DELETE FROM test where id=#{id}
+    </delete>
+    <update id="updateStudent" parameterType="com.jnshu.model.Student">
+        UPDATE test SET name=#{name},update_at=#{update_at},qq=#{qq},course_type=#{course_type},entrance_time=#{entrance_time},graduate_school=#{graduate_school},wish=#{wish},daily_link=#{daily_link},set_to=#{set_to},brother=#{brother},learn=#{learn} WHERE id=#{id}
+    </update>
+    <select id="findById" resultType="com.jnshu.model.Student">
+        SELECT*FROM test WHERE id=#{id}
+    </select>
+    <select id="findAll" resultType="com.jnshu.model.Student">
+        SELECT * FROM test
+    </select>
+
+</mapper>

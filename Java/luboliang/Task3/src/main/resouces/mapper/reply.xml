@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.ReplyDao">
+    <insert id="addReply"  keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.Reply" >
+        INSERT INTO reply (works_name,message_contents,reply_content,reply_time,editor,create_at,update_at)VALUES (#{works_name},#{message_contents},#{reply_content},#{reply_time},#{editor},#{create_at},#{update_at})
+    </insert>
+    <delete id="deleteReply" parameterType="long">
+        DELETE FROM reply WHERE id=#{id}
+    </delete>
+    <update id="updateReply" parameterType="com.jnshu.model.Reply">
+        UPDATE reply SET works_name#={works_name},message_contents=#{message_contents},reply_content=#{reply_content},reply_time=#{reply_time},editor=#{editor},create_at=#{create_at},update_at=#{update_at} WHERE id=#{id}
+    </update>
+    <select id="findByReply" resultType="com.jnshu.model.Reply">
+        SELECT * FROM reply WHERE id=#{id}
+    </select>
+    <select id="findAllReply" resultType="com.jnshu.model.Reply">
+        SELECT * FROM  reply
+    </select>
+</mapper>

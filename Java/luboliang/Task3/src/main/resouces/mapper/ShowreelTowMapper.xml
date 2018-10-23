@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.ShowreelTwoDao">
+    <insert id="addShowreelTow"  keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.ShowreelTwo" >
+        INSERT INTO showreeltwo (showreel_name,showreel_one_name,state,create_at,update_at,editor)VALUES (#{showreel_name},#{showreel_one_name},#{state},#{create_at},#{update_at},#{editor})
+    </insert>
+    <delete id="deleteShowreelTow" parameterType="long">
+        DELETE FROM showreeltwo WHERE id=#{id}
+    </delete>
+    <update id="updateShowreelTow" parameterType="com.jnshu.model.ShowreelTwo">
+        UPDATE showreeltwo SET showreel_name=#{showreel_name},#{showreel_one_name},state=#{state},create_at=#{create_at},update_at=#{update_at},editor=#{editor} WHERE id=#{id}
+    </update>
+    <select id="findByShowreelTow" resultType="com.jnshu.model.ShowreelTwo">
+        SELECT * FROM showreeltwo WHERE id=#{id}
+    </select>
+    <select id="findAllShowreelTow" resultType="com.jnshu.model.ShowreelTwo">
+        SELECT * FROM  showreeltwo
+    </select>
+</mapper>
