@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>one login</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>login分页数据</p>
+    <h3 th:text="'总条数'+${conuntAll}"></h3>
+    <table border="1">
+        <tr>
+            <th>账号loginId</th>
+            <th>账号loginAccount</th>
+            <th>账号loginPassword</th>
+            <th>账号loginName</th>
+            <th>账号loginPicture</th>
+            <th>账号loginSalt</th>
+            <th>账号loginMobile</th>
+            <th>账号loginMail</th>
+        </tr>
+        <tr>
+            <td th:text="${login.loginId}">loginId</td>
+            <td th:text="${login.loginAccount}">loginAccount</td>
+            <td th:text="${login.loginPassword}">loginPassword</td>
+            <td th:text="${login.loginName}">loginName</td>
+            <td th:text="${login.loginPicture}">loginPicture</td>
+            <td th:text="${login.loginSalt}">loginSalt</td>
+            <td th:text="${login.loginMobile}">loginMobile</td>
+            <td th:text="${login.loginMail}">loginMail</td>
+        </tr>
+    </table>
+    <form th:action="@{/bs/login/update}" style="text-align: center">
+        <input type="hidden" name="loginId" th:value="${login.loginId}">
+        昵称<input type="text" name="loginName" th:value="${login.loginName}"><br>
+        图片<input type="text" name="loginPicture" th:value="${login.loginPicture}"><br>
+        手机号<input type="text" name="loginMobile" th:value="${login.loginMobile}"><br>
+        邮箱号<input type="text" name="loginMail" th:value="${login.loginMail}"><br>
+        <button type="submit">修改</button>
+
+    </form>
+
+</div>
+</body>
+
+</html>
