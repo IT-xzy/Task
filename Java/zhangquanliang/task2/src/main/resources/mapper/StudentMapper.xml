@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间可以任选命名，但最好要定义一定规则，-->
+<mapper namespace="com.suger.dao.StudentDao">
+    <!--  一般在查询时使用-->
+    <!--已经在mybatis配置中设置别名  所以可以用 student,实际为对应实体类-->
+    <resultMap type="student" id="studentResultMap">
+        <!--实体类属性 与 数据表字段对应  主键用 id ,其他为result-->
+        <id property="id" column="s_id"/>
+        <result property="name" column="s_name"/>
+        <result property="qq" column="qq"/>
+        <result property="profession" column="profession"/>
+        <result property="startTime" column="start_time"/>
+        <result property="graduatedFrom" column="graduated_from"/>
+        <result property="onlineId" column="online_id"/>
+        <result property="dailyLink" column="daily_link"/>
+        <result property="wish" column="wish"/>
+        <result property="counselor" column="counselor"/>
+        <result property="way" column="way"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+    <!-- 定义插入的sql语句，通过命名空间+id方式被定位  应接口存在对应方法-->
+    <insert id="addStudent" parameterType="student" useGeneratedKeys="true" keyProperty="id" keyColumn="s_id">
+        insert into
+        student(s_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at)
+        values(#{name},#{qq},#{profession},#{startTime},#{graduatedFrom},#{onlineId},#{dailyLink},#{wish},#{counselor},#{way},#{createAt},#{updateAt})
+    </insert>
+
+    <update id="updateStudent" parameterType="student">
+        update student
+        set s_name=#{name},qq=#{qq},profession=#{profession},start_time=#{startTime},graduated_from=#{graduatedFrom},
+        online_id=#{onlineId},daily_link=#{dailyLink},wish=#{wish},counselor=#{counselor},way=#{way},update_at=#{updateAt}
+        where s_id = #{id}
+    </update>
+
+    <delete id="deleteStudent" parameterType="long">
+        delete from student where s_id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="studentResultMap">
+        select
+        s_id,s_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at
+        from student
+        <if test="start != null and count != null">limit #{start},#{count}</if>
+    </select>
+    <select id="total" resultType="int">
+        select count(1) from student
+    </select>
+
+    <select id="getStudentById" parameterType="long" resultMap="studentResultMap">
+        select
+        s_id,s_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at
+        from student where s_id = #{id};
+    </select>
+    <select id="getStudentByName" parameterType="string" resultMap="studentResultMap">
+        select
+        s_id,s_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at
+        from student where s_name like CONCAT(CONCAT('%',#{name}),'%');
+    </select>
+
+    <select id="getStudentByonlineId" parameterType="int" resultMap="studentResultMap">
+        select
+        s_id,s_name,qq,profession,start_time,graduated_from,online_id,daily_link,wish,counselor,way,create_at,update_at
+        from student where online_id = #{onlineId}
+    </select>
+
+</mapper>
