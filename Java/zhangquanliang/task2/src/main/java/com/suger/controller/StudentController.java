@@ -43,6 +43,7 @@ public class StudentController {
         return mav;
     }
 
+
     // 根据姓名查询，支持模糊查询，以jsong格式返回
     @RequestMapping(value = "/student/search/", method = RequestMethod.GET)
     public ModelAndView getStudent(@RequestParam String name) throws Exception {

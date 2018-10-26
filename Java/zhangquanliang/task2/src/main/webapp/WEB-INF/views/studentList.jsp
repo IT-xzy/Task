@@ -2,37 +2,42 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-<script type="text/javascript">
-    /*将post method 改变为delete*/
-    $(function () {
-        $(".delete").click(function () {
-            var href = $(this).attr("href");
-            $("#formdelete").attr("action", href).submit();
-            return false;
-        })
-    });
-</script>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
     <title>查询学生列表</title>
 </head>
 <body>
-<h1>学生管理系统</h1>
-<form action="/student/search/">
-    <table width="100%" border=1 cellpadding="0">
-        <tr><input type="text" name="name" placeholder="请输入姓名"></tr>
-        <tr><input type="submit" value="根据姓名查询"/></tr>
-    </table>
-</form>
-<form action="/student" method="post">
-    <input type="submit" value="添加">
-</form>
-<table border="1" cellpadding="0">
-    <caption>学生列表</caption>
+    <script type="text/javascript">
+        /*将post method 改变为delete*/
+        $(function () {
+            $(".delete").click(function () {
+                var href = $(this).attr("href");
+                $("#formdelete").attr("action", href).submit();
+                return false;
+            })
+        });
+    </script>
+
+    <form action="/student/search/">
+         <input type="text" name="name" placeholder="请输入姓名">
+         <input type="submit" value="根据姓名查询"/>
+    </form>
+    <form action="/student" method="post">
+        <input type="submit" value="添加">
+    </form>
+
+    <form id="formdelete" action="${pageContext.request.contextPath}/student/{id}" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+    </form>
+
+
+    <table border="1" cellpadding="0">
     <tr>
         <th>学生Id</th>
         <th>学生姓名</th>
@@ -73,39 +78,34 @@
                 <a href="/student/${s.id}">编辑</a>
                 <a class="delete" href="/student/${s.id}">删除</a>
             <td>
-
-                    <%-- <td>
-                    <form method="post" action="/student/${s.id}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="id" value="${s.id}">
-                        <input type="submit" value="删除">
-                    </form>
-                <td>--%>
-                    <%-- <form action="/student/${s.id}" method="get">
-                          <input type="hidden" name="id" value="${s.id}">
-                          <input type="submit" value="编辑">
-                      </form>--%>
         </tr>
     </c:forEach>
-</table
+    </table>
 
-<div style="text-align:center">
-    <a href="?start=0">首 页</a>
-    <c:if test="${page.start-page.count>=0}">
-        <a href="?start=${page.start-page.count}">上一页</a>
-    </c:if>
-    <c:if test="${page.start-page.count<0}">
-        <a href="javascript:void(0)">上一页</a>
-    </c:if>
-    <c:if test="${page.start+page.count<=page.last}">
-        <a href="?start=${page.start+page.count}">下一页</a>
-    </c:if>
-    <c:if test="${page.start+page.count>page.last}">
-        <a href="javascript:void(0)">下一页</a>
-    </c:if>
-    <a href="?start=${page.last}">末页</a>
-</div>
+    <div style="text-align:center">
+        <a href="?start=0">首 页</a>
+        <c:if test="${page.start-page.count>=0}">
+            <a href="?start=${page.start-page.count}">上一页</a>
+        </c:if>
+        <c:if test="${page.start-page.count<0}">
+            <a href="javascript:void(0)">上一页</a>
+        </c:if>
+        <c:if test="${page.start+page.count<=page.last}">
+            <a href="?start=${page.start+page.count}">下一页</a>
+        </c:if>
+        <c:if test="${page.start+page.count>page.last}">
+            <a href="javascript:void(0)">下一页</a>
+        </c:if>
+        <a href="?start=${page.last}">末页</a>
+    </div>
+
 </body>
-<form id="formdelete" action="${pageContext.request.contextPath}/student/{id}" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-</form>
+</html>
+
+
+
+
+
+
+
+

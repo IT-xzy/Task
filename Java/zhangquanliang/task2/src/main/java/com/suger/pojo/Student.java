@@ -18,9 +18,8 @@ public class Student {
     @Size(min = 2, max = 15, message = "长度在2-15之间")
     private String name;
 
-    @NotEmpty(message = "请输入正确的qq")
     private String qq;
-    @NotNull
+   // @NotNull
     @Range(min = 1, max = 9999,message = "范围必须在1-9999")
     private int onlineId;
 

@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: suger
-  Date: 2018/10/3
-  Time: 12:52
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -15,18 +8,39 @@
     <title>添加学生信息</title>
     <%--统一样式--%>
     <style>
-        .a {
-            color: red;
-        }
+        .a { color: red;  }
+        label {display:inline-block; width: 10em; margin-right: 1em; text-align: right; }
     </style>
 <body>
+<div>
+    <form:form modelAttribute="student"  action="${pageContext.request.contextPath}/student" method="post">
+        <input type="hidden" name="createAt" value="<%=System.currentTimeMillis()%>">
+        <input type="hidden" name="updateAt" value="<%=System.currentTimeMillis()%>">
+        <label>姓名：</label><input type="text" name="name" placeholder="姓名长度为2-15"/>
+        <br/>
+        <label>QQ：</label><input type="text" name="qq" />
+        <br/>
+        <label>修真类型：</label><input type="text" name="profession"/>
+        <br/>
+        <label>入学时间：</label><input type="date"  name="startTime"/>
+        <br/>
+        <label>毕业院校：</label><input type="text" name="graduatedFrom"/>
+        <br/>
+        <label>学号：</label><input type="text" name="onlineId" min="1" max="9999" placeholder="学号范围必须在1-9999"/>
+        <br/>
+        <label>日报连接：</label><input type="url" name="dailyLink"/>
+        <br/>
+        <label>立愿：</label><input type="text" name="wish"/>
+        <br>
+        <label>辅导师兄：</label><input type="text" name="counselor"/>
+        <br/>
+        <label>哪里知道修真院：</label><input type="text" name="way"/>
+        <br/>
+        <label></label><input type="submit" name="ok" value="保存"/><input type="reset" name="r" value="清空">
+    </form:form>
+</div>
 
-
-<c:if (day==1) |（day==7)今天周末</c:if>
-<form:form modelAttribute="student" action="${pageContext.request.contextPath}/student" method="post">
-    <input type="hidden" name="createAt" value="<%=System.currentTimeMillis()%>">
-    <input type="hidden" name="updateAt" value="<%=System.currentTimeMillis()%>">
-    <table>
+   <%-- <table>
         <tr>
             <td>姓名：</td>
             <td><form:input path="name"/></td>
@@ -74,6 +88,6 @@
             <td></td>
             <td><input type="submit" name="ok" value="保存"><input type="reset" name="r" value="清空"></td>
         </tr>
-    </table>
-</form:form>
+    </table>--%>
 </body>
+</html>
