@@ -4,90 +4,74 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <title>添加学生信息</title>
     <%--统一样式--%>
     <style>
-        .a { color: red;  }
         label {display:inline-block; width: 10em; margin-right: 1em; text-align: right; }
     </style>
+    <title>Document</title>
+</head>
 <body>
+
+
 <div>
-    <form:form modelAttribute="student"  action="${pageContext.request.contextPath}/student" method="post">
+    <form  action="${pageContext.request.contextPath}/student" method="post">
+
+        <!-- 将POST请求转化为PUT请求 -->
+        <input type="hidden" name="_method" value="PUT"/>
         <input type="hidden" name="createAt" value="<%=System.currentTimeMillis()%>">
         <input type="hidden" name="updateAt" value="<%=System.currentTimeMillis()%>">
-        <label>姓名：</label><input type="text" name="name" placeholder="姓名长度为2-15"/>
+
+        <%--
+          解决数据库中字段全为not null 时，表单中string类型----默认为字符长度为0，不是null,可以正常提交
+          而int,long基本类型，没有默认值，要求必填，不填的话，页面400错误，同时数据库操作失败
+
+          required 属性 要求必填或者必选，是html5的新特性·
+          oninvalid="this.setCustomValidity('请输入姓名')" ------在字段无效时显示自定义消息
+          oninput="setCustomValidity('')"---------------------- 删除经过验证的字段上的invalidate消息 --%>
+
+
+        <label>姓名：</label><input name="name" type="text" required=""
+                                 oninvalid="this.setCustomValidity('请输入姓名')" oninput="setCustomValidity('')" />
         <br/>
-        <label>QQ：</label><input type="text" name="qq" />
+        <label>QQ：</label><input type="text" name="qq"  required="" maxlength="15"
+                                 oninvalid="this.setCustomValidity('请输入qq')" oninput="setCustomValidity('')" />
         <br/>
-        <label>修真类型：</label><input type="text" name="profession"/>
+        <label>修真类型：</label><input type="text" name="profession" required=""
+                                   oninvalid="this.setCustomValidity('修正类型不能为空')" oninput="setCustomValidity('')" />
         <br/>
-        <label>入学时间：</label><input type="date"  name="startTime"/>
+        <label>入学时间：</label><input type="date"  name="startTime" required=""
+                                   oninvalid="this.setCustomValidity('入学时间不能为空')" oninput="setCustomValidity('')"/>
         <br/>
-        <label>毕业院校：</label><input type="text" name="graduatedFrom"/>
+        <label>毕业院校：</label><input type="text" name="graduatedFrom"  required=""
+                                   oninvalid="this.setCustomValidity('毕业院校不能为空')" oninput="setCustomValidity('')"/>
         <br/>
-        <label>学号：</label><input type="text" name="onlineId" min="1" max="9999" placeholder="学号范围必须在1-9999"/>
+
+        <label>学号：</label><input type="number" name="onlineId" min="1" max="2147483647" required />
+
         <br/>
-        <label>日报连接：</label><input type="url" name="dailyLink"/>
+        <label>日报连接：</label><input type="text" name="dailyLink"  required=""
+                                   oninvalid="this.setCustomValidity('日报链接不能为空')" oninput="setCustomValidity('')"/>
         <br/>
-        <label>立愿：</label><input type="text" name="wish"/>
+        <label>立愿：</label><input type="text" name="wish"  required=""
+                                 oninvalid="this.setCustomValidity('立愿不能为空')" oninput="setCustomValidity('')"/>
         <br>
-        <label>辅导师兄：</label><input type="text" name="counselor"/>
+        <label>辅导师兄：</label><input type="text" name="counselor"  required=""
+                                   oninvalid="this.setCustomValidity('辅导师兄不能为空')" oninput="setCustomValidity('')"/>
         <br/>
-        <label>哪里知道修真院：</label><input type="text" name="way"/>
+        <label>哪里知道修真院：</label><input type="text" name="way"  required=""
+                                      oninvalid="this.setCustomValidity('了解方式不能为空')" oninput="setCustomValidity('')"/>
         <br/>
-        <label></label><input type="submit" name="ok" value="保存"/><input type="reset" name="r" value="清空">
-    </form:form>
+        <label></label><input id="btn" type="submit" name="ok" value="保存"/><input type="reset" name="r" value="清空">
+    </form>
+
 </div>
 
-   <%-- <table>
-        <tr>
-            <td>姓名：</td>
-            <td><form:input path="name"/></td>
-            <td><form:errors path="name" cssStyle="color: red"/></td>
-        </tr>
-        <tr>
-            <td>QQ：</td>
-            <td><form:input path="qq"/></td>
-            <td><form:errors path="qq" cssClass="a"/></td>
-        </tr>
-        <tr>
-            <td>修真类型：</td>
-            <td><input type="text" name="profession"></td>
-        </tr>
-        <tr>
-            <td>入学时间：</td>
-            <td><input type="date"  name="startTime"></td>
-        </tr>
-        <tr>
-            <td>毕业院校：</td>
-            <td><input type="text" name="graduatedFrom"></td>
-        </tr>
-        <tr>
-            <td>学号：</td>
-            <td><input type="text" name="onlineId" min="1" max="2000"></td>
-            <td><form:errors path="onlineId" cssClass="a"/></td>
-        </tr>
-        <tr>
-            <td>日报链接：</td>
-            <td><input type="url" name="dailyLink"></td>
-        </tr>
-        <tr>
-            <td>立愿：</td>
-            <td><input type="text" name="wish"></td>
-        </tr>
-        <tr>
-            <td>辅导师兄：</td>
-            <td><input type="text" name="counselor"></td>
-        </tr>
-        <tr>
-            <td>从哪里知道修真院：</td>
-            <td><input type="text" name="way"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" name="ok" value="保存"><input type="reset" name="r" value="清空"></td>
-        </tr>
-    </table>--%>
 </body>
 </html>

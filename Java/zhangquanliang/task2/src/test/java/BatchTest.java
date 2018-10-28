@@ -12,7 +12,7 @@ public class BatchTest {
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring/spring-mybatis.xml");
         StudentDao studentDao = ctx.getBean(StudentDao.class);
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 20; i++) {
             Student student = new Student();
             student.setName(DataUtils.getName());
             student.setQq(DataUtils.getNumber(10));

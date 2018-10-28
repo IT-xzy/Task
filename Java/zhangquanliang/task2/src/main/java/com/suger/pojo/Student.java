@@ -14,15 +14,9 @@ import javax.validation.constraints.*;
 public class Student {
     private Long id;
 
-    @NotNull(message = "请输入姓名")
-    @Size(min = 2, max = 15, message = "长度在2-15之间")
     private String name;
-
     private String qq;
-   // @NotNull
-    @Range(min = 1, max = 9999,message = "范围必须在1-9999")
     private int onlineId;
-
     private String profession;
     private String startTime;
     private String graduatedFrom;

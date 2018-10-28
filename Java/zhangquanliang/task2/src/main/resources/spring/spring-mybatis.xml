@@ -52,27 +52,5 @@
     </bean>
     <!--开启aop-->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <!-- 以下 validator  ConversionService 在使用 mvc:annotation-driven 会 自动注册-->
-    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
-        <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->
-        <property name="validationMessageSource" ref="messageSource"/>
-    </bean>
 
-    <!--spring MessageSource,多用于国际化，这里简单传递下消息-->
-    <!-- MessageSource接口 常用实现类ResourceBundleMessageSource 和 ReloadableResourceBundleMessageSource-->
-    <!--ResourceBundleMessageSource 和 ReloadableResourceBundleMessageSource选择一个就好-->
-
-    <bean id="messageSource"
-          class="org.springframework.context.support.ResourceBundleMessageSource">
-        <property name="defaultEncoding" value="UTF-8"/>
-        <property name="basenames">
-            <list>
-                <value>message/msg</value>
-                <value>message/ValidationMessages</value>
-            </list>
-        </property>
-        <!--缓存时间,有2个属性cacheMillis毫秒，cacheSeconds秒-->
-        <property name="cacheSeconds" value="120"/>
-    </bean>
 </beans>

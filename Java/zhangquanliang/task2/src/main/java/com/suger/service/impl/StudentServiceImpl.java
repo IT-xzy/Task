@@ -7,6 +7,7 @@ import com.suger.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class StudentServiceImpl implements StudentService {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentServiceImpl.class);
 
+    // 使用注解自动注入dao接口
     @Autowired
     StudentDao studentDao;
 
@@ -31,14 +33,18 @@ public class StudentServiceImpl implements StudentService {
         studentDao.addStudent(student);
         Long id = student.getId();
         logger.info("插入Id：{}", id);
+        logger.info("添加的学生信息:"+student);
         return id;
     }
 
     @Override
     public Boolean updateStudent(Student student) {
         boolean flag = false;
+        // i 为更新操作受影响的行数
         int i = studentDao.updateStudent(student);
         logger.info("更新id:{}", student.getId());
+        logger.info("更新的学生信息:"+student);
+
         if (i != 0) {
             flag = true;
         }
@@ -49,6 +55,8 @@ public class StudentServiceImpl implements StudentService {
     public Boolean deleteStudent(Long id) {
         boolean flag = false;
         logger.info("删除id为：{}的学生", id);
+        // 记录将要删除的信息
+        logger.info("删除的学生信息:"+studentDao.getStudentById(id));
         int i = studentDao.deleteStudent(id);
         if (i != 0) {
             flag = true;
@@ -65,6 +73,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> findAll() {
+        logger.info("正在进行查询所有操作！");
         return studentDao.findAll();
     }
 
@@ -86,9 +95,5 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.getStudentByName(name);
     }
 
-    @Override
-    public List<Student> getStudentByonlineId(int onlineId) {
-        return studentDao.getStudentByonlineId(onlineId);
-    }
 
 }

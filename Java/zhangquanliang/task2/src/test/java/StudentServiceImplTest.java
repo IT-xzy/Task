@@ -82,10 +82,5 @@ public class StudentServiceImplTest {
         log.info(studentService.getStudentByName(name));
     }
 
-    @Test
-    public void getStudentByOnlineId() throws Exception {
-        int onlineId = 16233;
-        log.info(studentService.getStudentByonlineId(onlineId));
-    }
 
 }

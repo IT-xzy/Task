@@ -6,9 +6,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
     <title>查询学生列表</title>
 </head>
@@ -24,7 +21,7 @@
         });
     </script>
 
-    <form action="/student/search/">
+    <form action="/student/name/">
          <input type="text" name="name" placeholder="请输入姓名">
          <input type="submit" value="根据姓名查询"/>
     </form>
@@ -56,6 +53,7 @@
     </tr>
     <c:set var="now" value="<%=new java.util.Date()%>"/>
     <c:forEach items="${students}" var="s">
+        <%-- 时间戳转化为日期--%>
         <jsp:useBean id="createAt" class="java.util.Date" scope="page"/>
         <jsp:setProperty property="time" name="createAt" value="${s.createAt}"/>
         <jsp:useBean id="updateAt" class="java.util.Date" scope="page"/>
@@ -72,6 +70,7 @@
             <td>${s.wish}</td>
             <td>${s.counselor}</td>
             <td>${s.way}</td>
+            <%--formDmatDate 格式化日期显示--%>
             <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${createAt}"/></td>
             <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${updateAt}"/></td>
             <td>
