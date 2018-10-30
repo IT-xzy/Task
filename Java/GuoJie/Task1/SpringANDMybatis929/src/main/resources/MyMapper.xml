@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.Spring.SpringMybatisAnnotation.dao.MyDao">
+    <select id="QueryById" parameterType="int" resultType="com.jnshu.Spring.User">
+        selec * from demo where id=#{id}
+    </select>
+
+   <select id="QueryAll" resultType="com.jnshu.Spring.User">
+       se;ect * from demo
+   </select>
+
+    <insert id="insert" parameterType="com.jnshu.Spring.User">
+        insert into demo(id,name,email)  values(#{id},#{name},#{email})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from demo where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="com.jnshu.Spring.User">
+        update demo set(name=#{name},email=#{email}) where id=#{id}
+    </update>
+</mapper>

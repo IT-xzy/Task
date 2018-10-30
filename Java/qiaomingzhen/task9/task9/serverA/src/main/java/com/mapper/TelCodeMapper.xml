@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.TelCodeMapper">
+
+    <resultMap type="com.model.Code" id="CodeMap">
+        <id property="codeId" column="code_id"/>
+        <result property="userId" column="u_id"/>
+        <result property="tel" column="tel"/>
+        <result property="telCode" column="telCode"/>
+        <result property="creatTime" column="creat_at"/>
+        <result property="updateTime" column="update_at"/>
+        <result property="telSum" column="tel_sum"/>
+    </resultMap>
+
+    <insert id="addTel" parameterType="com.model.Code" keyColumn="codeId" keyProperty="codeId" useGeneratedKeys="true">
+        insert into rand_code (tel,telCode,creat_at,update_at) values (#{tel},#{telCode},#{creatTime},#{updateTime})
+    </insert>
+
+    <select id="findTel" parameterType="long" resultMap="CodeMap">
+        select telCode,tel,update_at,creat_at,tel_sum from rand_code where tel=#{tel}
+    </select>
+
+    <select id="findTelList" parameterType="long" resultType="list">
+        select telCode,update_at,tel_sum from rand_code where tel=#{tel}
+    </select>
+
+    <update id="updateSum" parameterType="com.model.Code">
+        update rand_code
+        <set>
+            <if test="telSum!=null">
+                tel_sum=#{telSum}
+            </if>
+            <if test="tel!=null">
+                ,tel=#{tel}
+            </if>
+            <if test="creatTime!=null">
+                ,creat_at=#{creatTime}
+            </if>
+            <if test="updateTime!=null">
+                ,update_at=#{updateTime}
+            </if>
+            <if test="telCode!=null">
+                ,telCode=#{telCode}
+            </if>
+        </set>
+        where tel=#{tel}
+    </update>
+
+</mapper>

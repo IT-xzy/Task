@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd
+                http://www.springframework.org/schema/aop
+                http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config/>
+    <!--被代理对象-->
+    <bean id="math" class="com.springAOP.MyMath"/>
+    <!--通知类-->
+    <bean id="advices" class="com.springAOP.Advices"/>
+    <!--aop设置-->
+    <aop:config>
+        <!--配置切面 把增强用到方法上面-->
+        <aop:aspect ref="advices">
+            <!--配置切点-->
+            <aop:pointcut id="pointcut1" expression="execution(* com.springAOP.MyMath.*(..))"/>
+            <aop:before method="before" pointcut-ref="pointcut1"/>
+            <aop:after-returning method="after" pointcut-ref="pointcut1"/>
+           <!-- <aop:after method="after" pointcut-ref="pointcut1"/>-->
+            <aop:around method="around" pointcut-ref="pointcut1"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

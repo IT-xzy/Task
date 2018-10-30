@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="add"> <!--这里的name属性可以随意写！-->
+
+    <component name="CalculatorServiceComponent">
+        <!--报红不用管，就是一个字，干-->
+        <implementation.java class="tuscanyTest.CalculatorImp"/>
+        <!--增加远程调用的端口，类似于rmi-->
+        <service name="Calculator">
+            <interface.java interface="tuscanyTest.Calculator"/>
+            <!--需要暴露host,port和serviceName-->
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:9090/CalculatorRMIService"/>
+            <!--&lt;!&ndash;<tuscany:binding.rmi port="9090" host="localhost" serviceName="CalculatorRMIService"/>&ndash;&gt; 这种写法已淘汰！-->
+        </service>
+
+        <!--这里的reference name不能随便填，换其他的会报异常找不到reference,应该是要和Calculator中的组件名称一样-->
+        <reference name="add" target="AddComponent"/>
+    </component>
+
+    <component name="AddComponent">
+        <implementation.java class="tuscanyTest.AddImp"/>
+    </component>
+</composite>

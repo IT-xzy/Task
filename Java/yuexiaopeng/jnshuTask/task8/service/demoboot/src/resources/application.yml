@@ -1,0 +1,100 @@
+server:
+  port: 8000
+#  port: 8050
+spring:
+#  连接数据库
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/taskAll?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    password: 123456
+    username: root
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+          max-active: 10
+          initial-size: 1
+          min-idle: 3
+          max-wait: 60000
+          time-between-eviction-runs-millis: 60000
+          min-evictable-idle-time-millis: 30000
+          test-while-idle: true
+          test-on-borrow: false
+          test-on-return: false
+
+  # redis配置，默认没有密码
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        min-idle: 8
+        max-idle: 500
+        max-active: 2000
+        max-wait: 10000
+    timeout: 0
+  #定义使用的日志配置格式;
+  profiles:
+    active: local
+#    active: online
+#  使用默认配置只用改cache
+  thymeleaf:
+     cache: false
+#  redis进行session存储
+  session:
+    store-type: redis
+#连接池的配置
+#    hikari:
+#      driver-class-name: com.mysql.jdbc.Driver
+#      username: root
+#      password: 123456
+#      jdbc-url: jdbc:mysql://localhost:3306/task5?useUnicode=true&characterEncoding=utf-8
+
+
+#mybatis的配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jnshutask.pojo
+#引用定义的日志文件
+logging:
+  config: classpath:logback-spring.xml
+#阿里云账户信息
+aliyun:
+  access-key-id: LTAIRCsXBFyzT2Vh
+  access-key-secret: 8FTutNLsK8qJNu7g3epUyzXLFj3VzE
+  bucket-name: yxp-picture
+  end-point: oss-cn-beijing.aliyuncs.com
+#邮箱相关信息
+mail:
+  api-key: ZNBJOeakmPdq0bYn
+  api-user: yuefeifei123_test_NLQmz7
+  from: sendcloud@sendcloud.org
+  from-name: SendCloud
+#  rcpt-to: 892499056@qq.com
+#  七牛相关信息
+qniuoss:
+  secret-key: o2mwXhbvohZpsZrGa8vFK9j17h6OggJSLssdeR8O
+  access-key: oIE8xgGBcahpKh6Ow4LCGO_aIDqvkZHWDOGTSuEU
+  bucket-name: yxp-testpicture
+  domain-of-bucket: http://pe3kqzomh.bkt.clouddn.com
+  img-local-path: c:\imgFile\
+  img-type: ?imageView2/5/w/200/h/200/q/75|imageslim
+#  荣联短信相关信息
+sms:
+  account-sid: 8a216da86560c0cd016566def56f03e6
+  account-token: 3afe4905d6cf464083654bfb7e6210d7
+  app-id: 8a216da86560c0cd016566def5c703ed
+
+#secuirty的相关信息配置
+tasksecurity:
+    # 登录路径
+    login-url: /denglu
+    # 登出路径
+    logout-url: /dengchu
+    # 首页路径
+    index-url: /index
+    # 免认证资源路径
+    anon-resources-url: /css/**,/js/**,/fonts/**,/img/**,/hello,/index,/fail,/denglu,/dengchu,/va/**,/bsHome
+    # 记住我有效时间，单位为秒
+    remember-me-timeout: 36000
+    #session的同时存在；-1表示无限制
+    maximum-sessions: 1

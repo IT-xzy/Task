@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wyq.mapper.UserMapper">
+    <resultMap id="user" type="User">
+        <id property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="salt" column="salt"/>
+        <result property="email" column="email"/>
+        <result property="telephone" column="telephone"/>
+    </resultMap>
+    <select id="addUser" parameterType="User">
+        insert into user(user_name,password,salt,telephone,email) values(#{userName},#{password},#{salt},#{telephone},#{email})
+    </select>
+    <select id="findUserByNameAndPwd" resultMap="user">
+		select user_name,password from user where user_name=#{userName} and password=#{password}
+	</select>
+    <select id="findUserByNameAndPhone" resultMap="user">
+		select user_name,telephone from user where user_name=#{userName} and telephone=#{telephone}
+	</select>
+    <select id="findUserByNameAndEmail" resultMap="user">
+		select user_name,email from user where user_name=#{userName} and email=#{email}
+	</select>
+    <select id="findUserName" resultMap="user">
+        select user_name from user where user_name=#{userName}
+    </select>
+    <select id="findPhone" resultMap="user">
+        select telephone from user where telephone=#{telephone}
+    </select>
+    <select id="findEmail" resultMap="user">
+        select email from user where email=#{email}
+    </select>
+    <select id="getSalt" resultMap="user">
+        select distinct salt from user where user_name=#{userName}
+    </select>
+</mapper>

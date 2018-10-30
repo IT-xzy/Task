@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+    <!--UserService-->
+    <bean name="userServiceImpl" class="com.service.UserServiceImpl"/>
+    <bean name="userService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="userServiceImpl"/>
+        <property name="serviceName" value="userService"/>
+        <property name="serviceInterface" value="com.service.UserService"/>
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+    <!--CompanyService-->
+    <bean name="companyServiceImpl" class="com.service.CompanyServiceImpl"/>
+    <bean name="companyService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="companyServiceImpl"/>
+        <property name="serviceName" value="companyService"/>
+        <property name="serviceInterface" value="com.service.CompanyService"/>
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+    <!--ProfService-->
+    <bean name="profServiceImpl" class="com.service.ProfServiceImpl"/>
+    <bean name="profService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="profServiceImpl"/>
+        <property name="serviceName" value="profService"/>
+        <property name="serviceInterface" value="com.service.ProfService"/>
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+    <!--TelCodeService-->
+    <bean name="telCodeServiceImpl" class="com.service.TelCodeServiceImpl"/>
+    <bean name="telCodeService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="telCodeServiceImpl"/>
+        <property name="serviceName" value="telCodeService"/>
+        <property name="serviceInterface" value="com.service.TelCodeService"/>
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+    <!--EmailService-->
+    <import resource="classpath:spring-email.xml"/>
+    <bean name="emailService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="emailServiceImpl"/>
+        <property name="serviceName" value="emailService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.EmailService"/>
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+    <!--TelService-->
+    <import resource="classpath:spring-note.xml"/>
+    <bean name="telService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="telServiceImpl"/>
+        <property name="serviceName" value="telService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.TelService"/>
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+    <!--QiNiuService-->
+    <import resource="classpath:spring-qiNiu.xml"/>
+    <bean name="qiNiuService" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="qiNiuServiceImpl"/>
+        <property name="serviceName" value="qiNiuService"/>
+        <property name="serviceInterface" value="com.service.thirdParty.QiNiuService"/>
+        <property name="registryPort" value="1022"/>
+    </bean>
+
+
+</beans>

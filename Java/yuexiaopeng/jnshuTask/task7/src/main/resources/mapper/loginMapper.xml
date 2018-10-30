@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yxpTask6.dao.LoginDao">
+        <insert id="insertLogin" parameterType="yxpTask6.pojo.Login" >
+	        insert into login
+	        (create_at,update_at,login_id,login_account,login_password,
+	        login_name,login_picture,login_salt,login_mobile,login_mail)
+	        values
+	        (#{createAt},#{updateAt},#{loginId},#{loginAccount},#{loginPassword},
+	        #{loginName},#{loginPicture},#{loginSalt},#{loginMobile},#{loginMail})
+	    </insert>
+		<!--根据账户查询信息-->
+	    <select id="selectLogin" parameterType="yxpTask6.pojo.Login" resultMap="loginResult">
+	        select * from login
+	        where
+	        login_account=#{loginAccount}
+	    </select>
+		<!--修改密码-->
+	    <update id="updatePassword" parameterType="yxpTask6.pojo.Login" >
+	        update login
+	        set login_password=#{loginPassword},update_at=#{updateAt}
+	        where login_account=#{loginAccount}
+	    </update>
+		<!--修改其他信息,包括密码	-->
+		<update id="updateLogin" parameterType="yxpTask6.pojo.Login" >
+	        update login
+	        set
+	        login_password=#{loginPassword},update_at=#{updateAt},
+	        login_name=#{loginName},login_picture=#{loginPicture}
+	        where
+	        login_account=#{loginAccount}
+	    </update>
+		<!--修改第二账户-->
+		<update id="updateSecAccount" parameterType="yxpTask6.pojo.Login" >
+	        update login
+	        set login_mobile=#{loginMobile},update_at=#{updateAt},login_mail=#{loginMail}
+	        where login_account=#{loginAccount}
+	    </update>
+		<!--结果映射-->
+        <resultMap id="loginResult" type="yxpTask6.pojo.Login">
+            <result property="loginId" column="login_id"/>
+            <result property="createAt" column="create_at"/>
+            <result property="updateAt" column="update_at"/>
+            <result property="loginAccount" column="login_account"/>
+            <result property="loginPassword" column="login_password"/>
+			<result property="loginName" column="login_name"/>
+			<result property="loginPicture" column="login_picture"/>
+			<result property="loginSalt" column="login_salt"/>
+			<result property="loginMobile" column="login_mobile"/>
+			<result property="loginMail" column="login_mail"/>
+        </resultMap>
+
+</mapper>

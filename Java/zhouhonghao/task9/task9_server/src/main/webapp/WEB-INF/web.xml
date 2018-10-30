@@ -1,0 +1,38 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+<!--<context-param>-->
+  <!--<param-name>contextConfigLocation</param-name>-->
+  <!--<param-value>classpath:rmiServer.xml</param-value>-->
+<!--</context-param>-->
+  <!--&lt;!&ndash; spring mvc核心：分发servlet &ndash;&gt;-->
+  <!--<servlet>-->
+    <!--<servlet-name>mvc-dispatcher</servlet-name>-->
+    <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+    <!--&lt;!&ndash; spring mvc的配置文件 &ndash;&gt;-->
+    <!--<init-param>-->
+      <!--<param-name>contextConfigLocation</param-name>-->
+      <!--<param-value>classpath:springMVC.xml</param-value>-->
+    <!--</init-param>-->
+    <!--&lt;!&ndash;标记容器是否在启动的时候就加载这个servlet。&ndash;&gt;-->
+    <!--&lt;!&ndash;正数的值越小，启动该servlet的优先级越高。&ndash;&gt;-->
+    <!--<load-on-startup>1</load-on-startup>-->
+  <!--</servlet>-->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>mvc-dispatcher</servlet-name>-->
+    <!--<url-pattern>/</url-pattern>-->
+  <!--</servlet-mapping>-->
+  <!--监听器会直接访问spring.xml中的配置，而spring.xml中有间接获取的sca:service-->
+  <!--加入会造成，sca:service没有声明。所以监听器不能添加。-->
+  <listener>
+    <listener-class>com.jns.utils.Listener</listener-class>
+  </listener>
+  <!--&lt;!&ndash;监听器，自动装载ApplicationContext的配置信息&ndash;&gt;-->
+  <!--<listener>-->
+    <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+  <!--</listener>-->
+
+</web-app>

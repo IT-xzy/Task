@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.ProfMapper">
+
+    <resultMap type="com.model.Profession" id="ProfessionMap">
+        <id property="profId" column="profId"/>
+        <result property="profName" column="profName"/>
+        <result property="profIntro" column="profIntro"/>
+        <result property="profSill" column="profSill"/>
+        <result property="profLevel" column="profLevel"/>
+        <result property="profCycle" column="profCycle"/>
+        <result property="profNeed" column="profNeed"/>
+        <result property="profTime1" column="profTime1"/>
+        <result property="profTime3" column="profTime3"/>
+        <result property="profTime5" column="profTime5"/>
+        <result property="profGroup" column="profGroup"/>
+        <result property="profLanguage" column="profLanguage"/>
+        <result property="sum" column="sum"/>
+    </resultMap>
+
+    <select id="group" resultMap="ProfessionMap">
+      select profession.*,count(people.id) as sum from people right join profession on people.type=profession.profId group by profession.profname
+    </select>
+
+</mapper>

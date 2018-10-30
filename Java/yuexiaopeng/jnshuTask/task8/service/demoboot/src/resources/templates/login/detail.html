@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login界面</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>login分页数据</p>
+    <h3 th:text="'总条数'+${conuntAll}"></h3>
+    <table border="1">
+        <tr>
+            <th>账号loginId</th>
+            <th>账号loginAccount</th>
+            <th>账号loginPassword</th>
+            <th>账号loginName</th>
+            <th>账号loginPicture</th>
+            <th>账号loginSalt</th>
+            <th>账号loginMobile</th>
+            <th>账号loginMail</th>
+            <th>#编辑</th>
+            <th>#删除</th>
+        </tr>
+        <tr th:each="login : ${listLogin}">
+            <td th:text="${login.loginId}">loginId</td>
+            <td th:text="${login.loginAccount}">loginAccount</td>
+            <td th:text="${login.loginPassword}">loginPassword</td>
+            <th th:text="${login.loginName}">loginName</th>
+            <th th:text="${login.loginPicture}">loginPicture</th>
+            <th th:text="${login.loginSalt}">loginSalt</th>
+            <th th:text="${login.loginMobile}">loginMobile</th>
+            <th th:text="${login.loginMail}">loginMail</th>
+            <th><a th:href="@{/bs/login/detail(loginId=${login.loginId})}">编辑</a></th>
+            <th><a th:href="@{/bs/login/delete(loginId=${login.loginId})}">删除</a></th>
+        </tr>
+
+    </table>
+    <table style="text-align: center">
+        <tr>
+            <th><a th:href="@{/bs/login/list(pageNum=${page.pageHome})}">首页</a></th>
+            <th><a th:href="@{/bs/login/list(pageNum=${page.pageLast})}">上一页</a></th>
+            <th>
+                <li th:text="'当前页数'+${page.pageNum}"></li>
+            </th>
+            <th><a th:href="@{/bs/login/list(pageNum=${page.pageNext})}">下一页</a></th>
+            <th><a th:href="@{/bs/login/list(pageNum=${page.pageFinal})}">末页</a></th>
+            <th><p th:text="'本页总条数'+${page.pageNumTotal}"></p></th>
+        </tr>
+    </table>
+    <table style="text-align: center">
+        <tr>
+            <th th:text="${page.pageHome}">首页</th>
+            <th th:text="${page.pageLast}">上一页</th>
+            <th th:text="${page.pageNext}">下一页</th>
+            <th th:text="${page.pageFinal}">末页</th>
+        </tr>
+    </table>
+
+</div>
+</body>
+
+</html>

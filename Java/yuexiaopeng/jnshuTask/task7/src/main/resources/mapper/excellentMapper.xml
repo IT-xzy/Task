@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="yxpTask6.dao.ExcellentDao">
+
+    <select id="selectExcellent" parameterType="yxpTask6.pojo.Excellent" resultMap="excellentResult">
+	        select * from excellent
+	    </select>
+
+
+    <resultMap id="excellentResult" type="yxpTask6.pojo.Excellent">
+        <id property="excellentId" column="excellent_id"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+        <result property="excellentImg" column="excellent_img"/>
+        <result property="excellentName" column="excellent_name"/>
+        <result property="excellentCompany" column="excellent_company"/>
+        <result property="excellentIntro" column="excellent_intro"/>
+    </resultMap>
+
+</mapper>

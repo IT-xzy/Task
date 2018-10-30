@@ -1,0 +1,126 @@
+/* 轮播图开始 */
+// body {
+    // overflow: hidden;
+// }
+
+.banner {
+    position: relative;
+    // height: 809px;
+    // width: 100%;
+
+    .photo {
+        // width: 100%;
+        overflow: hidden;
+
+        img {
+            position: absolute;
+            width: 100%;
+        }
+
+        img:nth-child(1) {
+            animation: ban1 8s ease-out infinite;
+        }
+
+        img:nth-child(2) {
+            animation: ban2 8s ease-out infinite;
+        }
+
+        img:nth-child(3) {
+            position: relative;
+            animation: ban3 8s ease-out infinite;
+        }
+    }
+}
+
+.photo {
+    span {
+        position: absolute;
+        z-index: 5;
+        @include box(20px,20px);
+    }
+    span:nth-child(4) {
+        right: 5%;
+        top: 50%;
+        border-top: 4px solid #666;
+        border-right: 4px solid #666;
+        transform: translateY(-50%) rotate(45deg);
+    }
+    span:nth-child(5) {
+        left: 5%;
+        top: 50%;
+        border-top: 4px solid #666;
+        border-left: 4px solid #666;
+        transform: translateY(-50%) rotate(-45deg);
+    }
+    ul {
+        position: absolute;
+        bottom: 2%;
+        z-index: 5;
+        @include flex(center,center);
+        width: 100%;
+
+        li {
+            // float: left;
+            @include box(10px,10px);
+            margin: 0 2%;
+            border-radius: 50%;
+            // border: 1px solid $bgff;
+            background: #ccc;
+        }
+    }
+}
+
+
+@keyframes ban1 {
+
+    0%,
+    25% {
+        z-index: 3;
+    }
+
+    35%,
+    60% {
+        z-index: 2;
+    }
+
+    70%,
+    100% {
+        z-index: 1;
+    }
+}
+
+@keyframes ban2 {
+
+    0%,
+    25% {
+        z-index: 2;
+    }
+
+    35%,
+    60% {
+        z-index: 3;
+    }
+
+    70%,
+    100% {
+        z-index: 1;
+    }
+}
+
+@keyframes ban3 {
+
+    0%,
+    25% {
+        z-index: 1;
+    }
+
+    35%,
+    60% {
+        z-index: 2;
+    }
+
+    70%,
+    100% {
+        z-index: 3;
+    }
+}

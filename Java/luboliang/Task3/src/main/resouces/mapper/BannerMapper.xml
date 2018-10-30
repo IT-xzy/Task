@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.BannerDao">
+    <resultMap id="Banner" type="com.jnshu.model.Banner">
+        <id column="id" property="id"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+    </resultMap>
+
+    <insert id="addBanner"  keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.Banner" >
+        INSERT INTO  banner (state,img,url,create_at,update_at)VALUES (#{state},#{img},#{url},#{createAt},#{updateAt})
+    </insert>
+    <delete id="deleteBanner" parameterType="long">
+        DELETE FROM  banner WHERE id=#{id}
+    </delete>
+    <update id="updateBanner" parameterType="com.jnshu.model.Banner">
+        UPDATE  banner SET create_at=#{create_at},update_at=#{update_at},state=#{state},img=#{img},url=#{url}, WHERE id=#{id}
+    </update>
+    <select id="findByBanner" resultType="com.jnshu.model.Banner">
+        SELECT * FROM  banner WHERE id=#{id}
+    </select>
+    <select id="findAllBanner" resultType="com.jnshu.model.Banner">
+        SELECT * FROM   banner
+    </select>
+</mapper>

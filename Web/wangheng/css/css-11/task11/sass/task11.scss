@@ -1,0 +1,93 @@
+// 变量
+$color:#ffffff;
+$font-size:15px;
+$direction:.16rem;
+
+html{
+    font-size: 625%;
+}
+body{
+    font-size: initial;
+    margin: 0;
+    padding: 0;  
+    background: #EFF0F4;
+}
+
+button{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    background: none;
+    border: none;
+}
+
+input{
+    outline: none;
+    border: none;
+}
+
+@mixin button($size:$font-size ) {
+    font-size: $size;
+    color: $color;
+}
+
+@mixin w-h ($w:0,$h:0){
+    width:$w;
+    height: $h;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include w-h(100%,.44rem );
+    background: #5FC0CD;
+       .close{
+        margin-left: $direction; 
+        @include button;
+
+       }
+       .login{
+       @include button(16px) ;
+
+       }
+       .register{
+        margin-right: $direction;
+        @include button;
+       }
+}
+
+.user,.pass{
+    display: flex;
+    align-items: center;
+    height: .5rem;
+    margin-top:$direction;
+    background: $color;
+    img{
+        position: absolute;
+        left: .21rem;
+        @include w-h(.15rem,.22rem );
+    }
+    input{
+        @include w-h(100%,.2rem);
+        margin-left: .5rem;
+        padding-left: .2rem;
+        border-left: 2px solid #E1E5E7;
+    }
+}
+
+.login-bottom {
+    @include w-h(100%, .5rem);
+    margin-top: .2rem;
+    background: #5FC0CD;
+    color: #ffffff;
+    font-size: $font-size + $font-size/5;
+}
+
+a{
+    display: block;
+    text-align: right;
+    margin: .1rem .2rem 0 0;
+    text-decoration: none;
+    color: #5FC0CD;
+}

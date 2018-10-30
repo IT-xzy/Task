@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lihoo.ssm.dao.StudentHomeMapper">
+
+  <resultMap id="BaseResultMap" type="com.lihoo.ssm.model.StudentHome">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="user_info" jdbcType="VARCHAR" property="userInfo" />
+    <result column="work_status" jdbcType="INTEGER" property="workStatus" />
+    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="great_user" jdbcType="INTEGER" property="greatUser" />
+  </resultMap>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, username, user_info, work_status, head_img, great_user
+    from student_home
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectGreatStudent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT *
+    FROM student_home
+    WHERE great_user=1
+    order by rand() limit 4
+  </select>
+
+  <select id="workingCount" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM student_home
+    WHERE work_status =1
+  </select>
+
+  <select id="countAll" resultType="java.lang.Integer">
+    SELECT COUNT(*)
+    FROM student_home
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from student_home
+  </select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.artist.dao.ImgAndVideDao">
+    <resultMap id="imgAndVideo" type="com.artist.pojo.ImageAndVideo">
+        <result property="imgVideoId" column="image_video_id"/>
+        <result property="imgVideName" column="image_video_name"/>
+        <result property="productionId" column="production_id"/>
+        <result property="type" column="type"/>
+        <result property="uploadTime" column="upload_time" />
+        <result property="updateTime" column="update_at"/>
+    </resultMap>
+    <select id="queryImgVides" resultMap="imgAndVideo" parameterType="Integer">
+        select image_video_id,image_video_name,production_id,type,upload_time,update_at
+        from image_video
+        where production_id=#{productionId}
+    </select>
+    <insert id="saveImgVide" parameterType="com.artist.pojo.ImageAndVideo" >
+        insert into image_video (image_video_name,production_id,type,upload_time,update_at)
+        values (#{imgVideName},#{productionId},#{type},#{uploadTime},#{updateTime})
+    </insert>
+    <delete id="delImgVides" parameterType="Integer">
+        delete from image_video where production_id=#{productionId}
+    </delete>
+    <delete id="delImgVide" parameterType="Integer" >
+        delete from image_video where image_video_id=#{imgVideoId}
+    </delete>
+    <update id="updateImgVide" parameterType="com.artist.pojo.ImageAndVideo" >
+        update image_video
+        set image_video_name=#{imgVideName},production_id=#{productionId},type=#{type},upload_time=#{uploadTime},update_at=#{updateTime}
+        where image_video_id=#{imgVideoId}
+    </update>
+</mapper>

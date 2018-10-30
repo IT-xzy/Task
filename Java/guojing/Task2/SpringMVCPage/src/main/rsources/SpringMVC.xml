@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 启用spring mvc注解 -->
+    <context:annotation-config/>
+    <!--  扫描包,扫描注解-->
+    <context:component-scan base-package="com.ptteng"/>
+
+
+    <!-- 对转向页面的路径解析（视图解析）。prefix：前缀， suffix：后缀   如：http://127.0.0.1:8080/springmvc/jsp/****.jsp-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/" p:suffix=".jsp"
+    >
+    </bean>
+    <!--使用默认的servlet响应静态文件,在springMVC-servlet.xml中配置<mvc:default-servlet-handler />后，
+    会在Spring MVC上下文中定义一个org.springframework.web.servlet.resource.
+    DefaultServletHttpRequestHandler，它会像一个检查员，对进入DispatcherServlet的URL进行筛查，
+    如果发现是静态资源的请求，就将该请求转由Web应用服务器默认的Servlet处理，如果不是静态资源的请求，
+    才由DispatcherServlet继续处理。-->
+    <!--<mvc:default-servlet-handler/>-->
+</beans>

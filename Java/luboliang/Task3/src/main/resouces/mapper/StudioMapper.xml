@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.StudioDao">
+    <insert id="addStudio"  keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.model.Studio" >
+        INSERT INTO studio (type,state,create_at,update_at,editor,content)VALUES (#{type},#{state},#{create_at},#{update_at},#{editor},#content)
+    </insert>
+    <delete id="deleteStudio" parameterType="long">
+        DELETE FROM studio WHERE id=#{id}
+    </delete>
+    <update id="updateStudio" parameterType="com.jnshu.model.Studio">
+        UPDATE studio SET create_at=#{create_at},update_at=#{update_at},type=#{type},state=#{state},editor=#{editor},content=#{content} WHERE id=#{id}
+    </update>
+    <select id="findByStudio" resultType="com.jnshu.model.Studio">
+        SELECT * FROM studio WHERE id=#{id}
+    </select>
+    <select id="findAllStudio" resultType="com.jnshu.model.Studio">
+        SELECT * FROM  studio
+    </select>
+</mapper>
