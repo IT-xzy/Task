@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.artist.dao.TouristDao">
+    <resultMap id="tourist" type="com.artist.pojo.Tourist">
+        <result property="touristId" column="tourist_id"/>
+        <result property="touristName" column="tourist_name"/>
+        <result property="createTime" column="login_time"/>
+        <result property="exitTime" column="exit_at"/>
+    </resultMap>
+    <resultMap id="message" type="com.artist.pojo.Message">
+        <result property="nick" column="nick" />
+    </resultMap>
+    <select id="queryTourists" resultMap="tourist">
+        select tourist_id,tourist_name,login_time,exit_at from tourist
+    </select>
+    <select id="queryTourists1" resultMap="tourist" parameterType="Integer" >
+        select tourist_id,tourist_name,login_time,exit_at
+        from tourist
+        where tourist_name in (select nick from message where production_id=#{productionId})
+    </select>
+    <insert id="saveTourist" parameterType="com.artist.pojo.Tourist">
+        insert into tourist (tourist_name,login_time,exit_at) 
+        values (#{touristName},#{createTime},#{exitTime})
+    </insert>
+    <update id="updateTourist" parameterType="com.artist.pojo.Tourist">
+        update tourist set tourist_name=#{touristName},login_time=#{createTime},exit_at=#{exitTime}
+        where tourist_id=#{touristId}
+    </update>
+    <delete id="delTourist" parameterType="Integer" >
+        delete from tourist where tourist_id=#{touristId}
+    </delete>
+</mapper>

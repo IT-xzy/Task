@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+
+    <resultMap type="com.model.People" id="PeopleMap">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="info" column="info"/>
+        <result property="creatTime" column="creat_at"/>
+        <result property="picture" column="picture"/>
+        <!--<collection property="interests" column="interestname" ofType="Interests">-->
+        <!--<id property="id" column="interestid"/>-->
+        <!--<result property="name" column="interestname"/>-->
+        <!--</collection>-->
+    </resultMap>
+
+    <insert id="addUser" parameterType="com.model.People" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into people (name,creat_at,password) values (#{name},#{creatTime},#{password})
+    </insert>
+
+    <update id="job" parameterType="com.model.People">
+       update people set job=#{job} where id=#{id}
+    </update>
+
+    <select id="selectAll" resultType="int">
+        select count(*) from people
+    </select>
+
+    <select id="findJob" resultType="int">
+        select count(*) from people where job=1
+    </select>
+
+
+    <select id="selectPeople" parameterType="com.model.People" resultMap="PeopleMap">
+        select name,info,creat_at,picture from people where id=#{id}
+    </select>
+
+    <select id="listJob" parameterType="com.model.People" resultMap="PeopleMap">
+        select name,info,creat_at,picture from people where job=1
+    </select>
+
+    <select id="selectByName" parameterType="string" resultMap="PeopleMap">
+      select name,password,creat_at from people where name =#{name}
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.model.People">
+        select * from people where id=#{id}
+    </select>
+
+
+</mapper>

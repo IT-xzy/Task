@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="service"/>
+
+    <!-- scanner redis properties  -->
+    <context:property-placeholder location="classpath:/redis/redis.properties" ignore-unresolvable="true"/>
+
+    <!--（1）如果你有多个数据源需要通过<context:property-placeholder管理，且不愿意放在一个配置文件里，那么一定要加上ignore-unresolvable=“true"-->
+    <!--（2）注意新版的（具体从哪个版本开始不清楚，有兴趣可以查一下）JedisPoolConfig的property name，不是maxActive而是maxTotal，而且没有maxWait属性，建议看一下Jedis源码。-->
+    <!-- redis连接池 -->
+    <!--配置 jedis pool-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 最大连接数 -->
+        <property name="maxTotal" value="${redis.maxTotal}"/>
+        <!-- 最大空闲时间 -->
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <!-- 每次最大连接数 -->
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}"/>
+        <!-- 释放扫描的扫描间隔 -->
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}"/>
+        <!-- 连接的最小空闲时间 -->
+        <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}"/>
+        <!-- 连接控歘按时间多久后释放，当空闲时间>该值且空闲连接>最大空闲连接数时直接释放 -->
+        <property name="softMinEvictableIdleTimeMillis" value="${redis.softMinEvictableIdleTimeMillis}"/>
+        <!-- 获得链接时的最大等待毫秒数，小于0：阻塞不确定时间，默认-1 -->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+        <!-- 在获得链接的时候检查有效性，默认false -->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+        <!-- 在空闲时检查有效性，默认false -->
+        <property name="testWhileIdle" value="${redis.testWhileIdle}"/>
+        <!-- 连接耗尽时是否阻塞，false报异常，true阻塞超时 默认：true-->
+        <property name="blockWhenExhausted" value="${redis.blockWhenExhausted}"/>
+    </bean>
+    <!-- redis连接工厂 -->
+    <!--spring data redis -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.hostName}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="timeout" value="${redis.timeout}"/>
+        <property name="database" value="${redis.dbIndex}"/>
+        <property name="usePool" value="${redis.usePool}"/>
+        <!--可以通过构造注入或者Set注入两种方式-->
+        <property name="poolConfig" ref="jedisPoolConfig"/>
+    </bean>
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <!--     如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务-->
+        <property name="enableTransactionSupport" value="true"/>
+    </bean>
+
+
+    <!--  SDR默认采用的序列化策略有两种，一种是String的序列化策略，一种是JDK的序列化策略。
+       StringRedisTemplate默认采用的是String的序列化策略，保存的key和value都是采用此策略序列化保存的。
+       RedisTemplate默认采用的是JDK的序列化策略，保存的key和value都是采用此策略序列化保存的。
+       就是因为序列化策略的不同，即使是同一个key用不同的Template去序列化，结果是不同的。所以根据key去删除数据的时候就出现了删除失败的问题。
+    -->
+    <!-- redis 序列化策略 ，通常情况下key值采用String序列化策略， -->
+    <!-- 如果不指定序列化策略，StringRedisTemplate的key和value都将采用String序列化策略； -->
+    <!-- 但是RedisTemplate的key和value都将采用JDK序列化 这样就会出现采用不同template保存的数据不能用同一个template删除的问题 -->
+    <!--<bean id="stringRedisSerializer"  class="org.springframework.data.redis.serializer.StringRedisSerializer" />-->
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">-->
+        <!--<property name="connectionFactory" ref="connectionFactory" />-->
+        <!--<property name="keySerializer" ref="stringRedisSerializer" />-->
+        <!--<property name="hashKeySerializer" ref="stringRedisSerializer" />-->
+        <!--<property name="valueSerializer" ref="stringRedisSerializer"/>-->
+    <!--</bean>-->
+
+
+    <!-- redis jedisCluster集群配置 -->
+    <!-- <bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig" >
+            <property name="maxWaitMillis" value="-1" />
+            <property name="maxTotal" value="1000" />
+            <property name="minIdle" value="8" />
+            <property name="maxIdle" value="100" />
+    </bean>
+    <bean id="jedisCluster" class="cn.zsmy.palmdoctor.redis.JedisClusterFactory">
+        <property name="addressConfig">
+            <value>classpath:redis.properties</value>
+        </property>
+        <property name="addressKeyPrefix" value="address" />    属性文件里  key的前缀
+        <property name="password" value="123456" /> redis密码
+        <property name="timeout" value="300000" />
+        <property name="maxRedirections" value="6" />
+        <property name="genericObjectPoolConfig" ref="genericObjectPoolConfig" />
+    </bean> -->
+</beans>

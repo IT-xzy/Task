@@ -1,0 +1,94 @@
+@charset "UTF-8";
+@import"layout";
+// 轮播图
+main {
+    div.loop-wrap {
+        position: relative;
+        width:100%;
+        overflow: hidden;
+        margin-top: -.01rem;
+
+        div.loop-images-container {
+            width: 300vw;
+            /* 横向排列 3张图片 宽度应为主容器3倍 */
+            white-space: nowrap;
+            transform: translate(0, 0);
+            /* 初始位置位移 */
+            animation: loop 10s linear infinite;
+
+            img.loop-image {
+                width: 100vw;
+            }
+            img.gap{
+                margin-left: -.08rem;
+            }
+        }
+
+        
+        @keyframes loop {
+             /* 创建loop动画规则 */
+            /* 轮播3张，总耗时10s，单张应为3.3s(33.3%)
+            单张切换动画耗时800ms，停留2600ms*/
+            0% {
+                transform: translate(0, 0);
+            }
+            26% {
+                transform: translate(0, 0);
+            }
+            /* 停留2600ms */
+            34% {
+                transform: translate(-33.3%, 0);
+            }
+            /* 切换800ms 位移-33.3% */
+            60% {
+                transform: translate(-33.3%, 0);
+            }
+            68% {
+                transform: translate(-66.7%, 0);
+            }
+            94% {
+                transform: translate(-66.7%, 0);
+            }
+            100% {
+                transform: translate(0, 0);
+                
+            }
+            /* 复位到第一张图片 */
+        }
+
+
+         
+        a.left{
+            /* 左右按钮 */
+            @include slideshow-button;
+            left: 5%;
+            transform: rotate(225deg);
+        }
+        a.right{
+            @include slideshow-button;
+            right: 5%;
+            transform: rotate(45deg);
+        }
+      
+
+        
+        ul.circle-box{
+            /* 指示符 */
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            @include flex(space-between,center);
+            @include box(1rem,.3rem);
+            margin: 0 0 0 -.5rem;
+            padding: 0;
+
+            li.circle{
+                display: inline-block;
+                @include box(.2rem,.2rem );
+                border-radius: 100%;
+                background: rgba(255,255,255,.5);
+            }
+        }
+    }
+}
+

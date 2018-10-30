@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>Mypackage</groupId>
+    <artifactId>Mypackage</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <build>
+        <plugins>
+
+            <!--maven.jar插件-->
+            <!-- <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-jar-plugin</artifactId>
+                 <version>3.1.0</version>
+                 <configuration>
+                     <archive>
+                         <manifest>
+                             &lt;!&ndash;打包时MANIFEST>MF文件不记录时间戳版本&ndash;&gt;
+                            <useUniqueVersion>false</useUniqueVersion>
+                             <addClasspath>true</addClasspath>
+                             <classpathPrefix>lib/</classpathPrefix>
+                             &lt;!&ndash;主函数入口&ndash;&gt;
+                             <mainClass>main.MainApp</mainClass>
+                         </manifest>
+                     </archive>
+                 </configuration>
+             </plugin>
+             <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-dependency-plugin</artifactId>
+                 <version>3.1.1</version>
+                 <executions>
+                     <execution>
+                         <id>copy-dependencies</id>
+                         <phase>package</phase>
+                         <goals>
+                             <goal>copy-dependencies</goal>
+                         </goals>
+                         <configuration>
+                             <type>jar</type>
+                             <includeTypes>jar</includeTypes>
+                             <outputDirectory>
+                                 target/classes/lib
+                             </outputDirectory>
+                         </configuration>
+                     </execution>
+                 </executions>
+             </plugin>-->
+
+
+            <!--使用assembly插件打包-->
+             <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.1.0</version>
+            <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>main.MainApp</mainClass>
+                    </manifest>
+                </archive>
+                <descriptors>
+                    <descriptor>D:\java\idea\IDEA WorkSpace\Mypackage\src\main\java\assembly\jar_dependency.xml</descriptor>
+                </descriptors>
+                <!--<descriptorRefs>
+                    <descriptorRef>jar-with-dependencies</descriptorRef>
+                </descriptorRefs>-->
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
+            <!--shade2-->
+           <!-- <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>main.MainApp</mainClass>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                            </transformers>
+                            <artifactSet>
+                            </artifactSet>
+                            &lt;!&ndash;<outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>&ndash;&gt;
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+            <!--使用shade的插件打包-->
+          <!--  <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    &lt;!&ndash; put your configurations here &ndash;&gt;
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                           &lt;!&ndash; <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>&ndash;&gt;
+                            <transformers>
+                                &lt;!&ndash;主方法&ndash;&gt;
+                                <transformer
+                                        implements="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>main.MainApp</mainClass>
+                                </transformer>
+                                &lt;!&ndash;使用这个方法防止重复&ndash;&gt;
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+        </plugins>
+    </build>
+</project>

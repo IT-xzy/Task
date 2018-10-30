@@ -1,0 +1,46 @@
+.container {
+    margin: {
+        right: auto;
+        left: auto;
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+[class|="col"], [class~="col"] {
+    width: 100%;
+    padding: {
+        right: 15px;
+        left: 15px;
+    }
+}
+
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        width: (100 / 12) * $i + %;
+    }
+}
+
+@each $grid-prefix, $grid-width, $con-width in $grid-prefix-list {
+    @media only screen and (min-width: $grid-width) {
+        .container {
+            width: $con-width;
+        }
+        @for $i from 1 through 12 {
+            .col#{$grid-prefix}-#{$i} {
+                width: (100 / 12) * $i + %;
+            }
+        }
+    }
+}
+
+@include media(1200px) {
+    .col-xl {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+}

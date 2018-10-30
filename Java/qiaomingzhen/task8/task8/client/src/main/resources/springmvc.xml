@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--<aop:aspectj-autoproxy/>-->
+
+    <context:component-scan base-package="com.controller"/>
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+    <!--静态资源映射-->
+    <!--本项目把静态资源放在了webapp的statics目录下，资源映射如下-->
+    <mvc:resources mapping="/css/**" location="/WEB-INF/statics/css/"/>
+    <!--<mvc:resources mapping="/js/**" location="/WEB-INF/statics/js/"/>-->
+    <mvc:resources mapping="/img/**" location="/WEB-INF/statics/img/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/statics/js/"/>
+
+    <mvc:resources mapping="u/css/**" location="/WEB-INF/statics/css/"/>
+    <mvc:resources mapping="u/img/**" location="/WEB-INF/statics/img/"/>
+
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
+    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/><!--设置JSP文件的目录位置-->
+        <property name="suffix" value=".jsp"/>
+        <property name="exposeContextBeansAsAttributes" value="true"/>
+    </bean>
+
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/layout.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="10000000"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+
+    <!--<mvc:view-controller path="/" view-name="redirect:/people"/>-->
+
+    <mvc:interceptors>
+        <!--配置登陆拦截器-->
+        <mvc:interceptor>
+            <!--拦截后台页面的请求-->
+            <mvc:mapping path="/u/**"/>
+            <bean class="com.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <!--拦截后台页面的请求-->
+            <mvc:mapping path="/people"/>
+            <bean class="com.interceptor.PeopleInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+</beans>

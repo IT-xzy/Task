@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.UserMapper">
+
+    <resultMap type="com.model.People" id="PeopleMap">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="info" column="info"/>
+        <result property="creatTime" column="creat_at"/>
+        <result property="picture" column="picture"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <!--新增用户-->
+    <insert id="addUser" parameterType="com.model.People" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into people (name,creat_at,password,info,type,tel,email,status) values (#{name},#{creatTime},#{password},#{info},#{type},#{tel},#{email},#{status})
+    </insert>
+
+    <!--更新有无工作-->
+    <update id="job" parameterType="com.model.People">
+       update people set job=#{job} where id=#{id}
+    </update>
+    <!--用户总条数-->
+    <select id="selectAll" resultType="int">
+        select count(1) from people
+    </select>
+    <!--找到工作用户数-->
+    <select id="findJob" resultType="int">
+        select count(1) from people where job=1
+    </select>
+
+
+    <select id="selectPeople" parameterType="com.model.People" resultMap="PeopleMap">
+        select name,info,creat_at,picture from people where id=#{id}
+    </select>
+    <!--学员展示list-->
+    <select id="listJob" parameterType="com.model.People" resultMap="PeopleMap">
+        select name,info,creat_at,picture from people where job=1
+    </select>
+
+    <select id="selectByName" parameterType="string" resultMap="PeopleMap">
+      select id,name,info,type,picture,tel,email,password,creat_at,status from people where name =#{name}
+    </select>
+
+    <select id="selectById" parameterType="long" resultType="com.model.People">
+       select id,name,info,type,picture,tel,email,password,creat_at,status from people where id=#{id}
+    </select>
+
+    <select id="selectByTel" parameterType="long" resultType="com.model.People">
+      select id,name,info,type,picture,tel,email,password,creat_at,status from people where tel =#{tel}
+    </select>
+
+    <select id="selectByEmail" parameterType="String" resultType="com.model.People">
+     select id,name,info,type,picture,tel,email,password,creat_at,status from people where email =#{email}
+    </select>
+
+    <!--修改个人信息-->
+    <update id="updatePeople" parameterType="com.model.People">
+        update people
+        <set>
+            <if test="updateTime!=null">
+                update_at=#{updateTime}
+            </if>
+            <if test="info!=null">
+                ,info=#{info}
+            </if>
+            <if test="job!=null">
+                ,job=#{job}
+            </if>
+            <if test="type!=null">
+                ,type=#{type}
+            </if>
+            <if test="tel>0">
+                ,tel=#{tel}
+            </if>
+            <if test="email!=null">
+                ,email=#{email}
+            </if>
+            <if test="picture!=null">
+                ,picture=#{picture}
+            </if>
+            <if test="status>0">
+                ,status=#{status}
+            </if>
+        </set>
+        where name=#{name}
+    </update>
+
+
+</mapper>

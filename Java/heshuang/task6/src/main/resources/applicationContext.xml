@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+  <context:annotation-config />
+  <!--配置全局注解-->
+  <context:component-scan base-package="com.task5"></context:component-scan>
+
+  <context:property-placeholder location="classpath:*.properties"/>
+  <!--在ioc容器中配置数据源-->
+  <!-- 数据库连接池 -->
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <property name="driverClass" value="${jdbc.driver}"/>
+    <property name="jdbcUrl" value="${jdbc.url}"/>
+    <property name="user" value="${jdbc.username}"/>
+    <property name="password" value="${jdbc.password}"/>
+    <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+    <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+    <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+    <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+    <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+  </bean>
+
+   <!--配置memcached -->
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+    <property name="ignoreResourceNotFound" value="false" />
+    <property name="locations">
+      <list>
+        <value>classpath:memcache.properties</value>
+      </list>
+    </property>
+  </bean>
+  <bean id="memcachedPool" class="com.whalin.MemCached.SockIOPool" factory-method="getInstance"
+        init-method="initialize" destroy-method="shutDown">
+    <constructor-arg><value>memcachedPool</value></constructor-arg>
+    <property name="servers"><list><value>${memcache.server}</value></list></property>
+    <property name="weights"><list><value>${memcache.weights}</value></list></property>
+    <property name="initConn"><value>${memcache.initConn}</value></property>
+    <property name="minConn"><value>${memcache.minConn}</value></property>
+    <property name="maxConn"><value>${memcache.maxConn}</value></property>
+    <property name="maintSleep"><value>${memcache.maintSleep}</value></property>
+    <property name="nagle"><value>${memcache.nagle}</value></property>
+    <property name="socketTO"><value>${memcache.socketTO}</value></property>
+  </bean>
+  <bean id="memCacheClient" class="com.whalin.MemCached.MemCachedClient">
+    <constructor-arg><value>memcachedPool</value></constructor-arg>
+  </bean>
+   <!--memcached结束 -->
+
+  <!--配置spring-session-redis-->
+  <!--<bean id="redisHttpSessionConfiguration"-->
+        <!--class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">-->
+    <!--<property name="maxInactiveIntervalInSeconds" value="600"/>-->
+  <!--</bean>-->
+
+  <!--配置redis-->
+  <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+    <!--最大空闲数-->
+    <property name="maxIdle" value="${redis.maxIdle}" />
+    <!--连接池的最大数据库连接数  -->
+    <property name="maxTotal" value="${redis.maxTotal}" />
+    <!--最大建立连接等待时间-->
+    <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+    <!--逐出连接的最小空闲时间 默认1800000毫秒(30分钟)-->
+    <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}" />
+    <!--每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3-->
+    <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}" />
+    <!--逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1-->
+    <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}" />
+    <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->
+    <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    <!--在空闲时检查有效性, 默认false  -->
+    <property name="testWhileIdle" value="${redis.testWhileIdle}" />
+  </bean >
+
+  <!--redis连接工厂 -->
+  <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+    <property name="poolConfig" ref="jedisPoolConfig"></property>
+    <!--IP地址 -->
+    <property name="hostName" value="${redis.hostName}"></property>
+    <!--端口号  -->
+    <property name="port" value="${redis.port}"></property>
+    <!--如果Redis设置有密码  -->
+    <property name="password" value="${redis.password}" />
+    <!--客户端超时时间单位是毫秒  -->
+    <property name="timeout" value="${redis.timeout}"></property>
+  </bean>
+
+  <!--redis操作模版,使用该对象可以操作redis  -->
+  <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+    <property name="connectionFactory" ref="jedisConnectionFactory"></property>
+    <property name="keySerializer">
+      <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+    </property>
+    <property name="hashKeySerializer">
+      <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+    </property>
+    <property name="valueSerializer">
+      <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+    </property>
+    <property name="hashValueSerializer">
+      <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+    </property>
+  </bean >
+
+  <!--在ioc容器中配置会话-->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="typeAliasesPackage" value="com.task5.pojo"></property>
+    <property name="dataSource" ref="dataSource"/>
+    <property name="mapperLocations">
+    <list>
+      <value>
+          classpath:com/task5/mapper/EliteStudents.xml
+      </value>
+      <value>
+        classpath:com/task5/mapper/Profession.xml
+      </value>
+      <value>
+        classpath:com/task5/mapper/User.xml
+      </value>
+      <value>
+        classpath:com/task5/mapper/StudentMapper.xml
+      </value>
+    </list>
+    </property>
+  </bean>
+
+  <!--在ioc容器中配置数据访问层的实现类-->
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="com.task5.mapper"/>
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+  </bean>
+  <bean id="des" class="com.task5.until.DES">
+    <property name="password" value="${pwd}">
+    </property>
+  </bean>
+  <bean id="jwt" class="com.task5.until.JWT">
+    <property name="key" value="${key}"></property>
+  </bean>
+  <bean id="md5" class="com.task5.until.MD5"/>
+  <bean id="redisUntil" class="com.task5.until.RedisUntil"/>
+</beans>

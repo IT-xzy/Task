@@ -1,0 +1,210 @@
+@charset"UTF-8";
+@import"_layout";
+
+/*Article列表顶部搜索框*/
+.box {
+    background: $white;
+    padding: 33px 20px 20px 20px;
+
+    .top-box {
+        padding: 15px 15px 15px 0;
+        border: $home-border;
+        border-radius: 10px;
+
+        .top {
+            display: flex;
+            flex-wrap: wrap;
+
+            .content-box {
+                position: relative;
+                @include flex(space-between, center);
+                @include box(300px, 30px);
+                margin: 0 0 20px 40px;
+
+                .date {
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        right: 0;
+                        top: -0.5px;
+                        @include box(30px, 30px);
+                        background: url(../img/timg.jpg) no-repeat center/cover;
+                    }
+                }
+
+                .to {
+                    // 时间起始横杆
+                    @include box(20px, 2px);
+                    margin-left: 30px;
+                    background: black;
+                }
+
+                input {
+                    @include box(182px, 30px);
+                    border-radius: 5px;
+                    outline: none;
+                }
+
+                select {
+                    @extend input;
+                }
+            }
+        }
+
+        .bottom {
+            text-align: right;
+            margin-right: 60px;
+
+            .query {
+                @include box(70px, 35px);
+                border-radius: 5px;
+                background: #5ab65a;
+                outline: #5ab65a;
+                color: $white;
+            }
+
+            .delete {
+                @include box(70px, 35px);
+                margin: 0 10px;
+                border-radius: 5px;
+                background: #d8524e;
+                outline: #d8524e;
+                color: $white;
+            }
+        }
+    }
+
+    .bottom-box {
+        margin-top: 30px;
+        border: $home-border;
+        border-radius: 10px;
+
+        .article-bg {
+            border-radius: 10px;
+            background: $gray;
+        }
+
+        .article {
+            @include flex(space-between, center);
+            @include box(100%, 40px);
+            padding: 0 40px;
+            border-bottom: 5px solid #e8e8e8;
+
+            .add {
+                @include box(60px, 30px);
+                border-radius: 5px;
+                background: #5ab65a;
+                outline: #5ab65a;
+                font-size: 14px;
+                color: $white;
+            }
+        }
+
+        .grid1 {
+            /*表格*/
+            margin: 15px;
+            border: $home-border;
+
+            .grid1-header {
+                width: 100%;
+
+                tr.grid1-header-style {
+                    line-height: 45px;
+                    text-align: center;
+                    border-bottom: $home-border;
+
+                    th.width1 {
+                        /*定义表头所占据的空间比率*/
+                        width: 10%;
+                    }
+
+                    th.width3 {
+                        width: 5%;
+                    }
+
+                    th.width2 {
+                        width: 25%;
+                    }
+                }
+
+                tr.grid1-content-style {
+                    line-height: 20px;
+                    text-align: center;
+                    border-bottom: $home-border;
+
+                    img {
+                        @include box(130px, 100px);
+                    }
+
+                    .grid1-content-compile {
+                        @include box(50px, 30px);
+                        border-radius: 5px;
+                        background: #5ab65a;
+                        outline: #5ab65a;
+                        font-size: 12px;
+                        color: $white;
+                    }
+
+                    .rid1-content-offline {
+                        @extend .grid1-content-compile;
+                        margin: 0 10px;
+                        background: #ff9aa3;
+                        outline: #ff9aa3;
+                    }
+
+                    .grid1-content-delete {
+                        @extend .grid1-content-compile;
+                        background: #d8524e;
+                        outline: #d8524e;
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+.list-footer {
+    margin: 40px 40px 0 0;
+    text-align: right;
+    font-size: 10px;
+
+    li {
+        display: inline-block;
+
+    }
+
+    .list-btn {
+        margin: 0 4px;
+        line-height: 20px;
+        color: $home;
+    }
+
+    .bg1,
+    .bg2,
+    .bg3,
+    .bg4,
+    .bg5 {
+        background: $home;
+        color: $white;
+    }
+
+    .font {
+        margin: 0 4px;
+        font-size: 15px;
+    }
+
+    pre {
+        display: inline-block;
+        margin: 0;
+        font-size: 15px;
+        overflow: initial !important;
+    }
+
+    input {
+        width: 40px;
+        line-height: 20px;
+        text-align: center;
+        outline: none;
+    }
+}

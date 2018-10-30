@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leo.dao.Student5Mapper">
+    <insert id="insert" parameterType="com.leo.model.Student5DO">
+        INSERT INTO student5 (id,name,password_hash,salt,create_at,update_at,phone,email)
+        VALUES (#{id},#{name},#{password_hash},#{salt},#{create_at},#{update_at},#{phone},#{email})
+    </insert>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.leo.model.Student5DO">
+        SELECT id,name,password_hash,salt,create_at,update_at,phone,email,image FROM student5 WHERE id=#{id}
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.leo.model.Student5DO">
+        SELECT id,name,password_hash,salt,create_at,update_at,phone,email,image FROM student5 WHERE name=#{name}
+    </select>
+
+    <select id="selectByPhone" parameterType="java.lang.String" resultType="com.leo.model.Student5DO">
+        SELECT id,name,password_hash,salt,create_at,update_at,phone,email,image FROM student5 WHERE phone=#{phone}
+    </select>
+
+    <select id="selectByEmail" parameterType="java.lang.String" resultType="com.leo.model.Student5DO">
+        SELECT id,name,password_hash,salt,create_at,update_at,phone,email,image FROM student5 WHERE email=#{email}
+    </select>
+
+    <select id="selectAll" resultType="com.leo.model.Student5DO">
+        SELECT id,name,create_at,update_at,image FROM student5
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM student5 WHERE id=#{id}
+    </delete>
+    <update id="updateByPrimaryKey" parameterType="com.leo.model.Student5DO">
+        update student5
+        set name = #{name},
+        phone = #{phone},
+        email = #{email},
+        image = #{image},
+        update_at = #{update_at}
+        where id = #{id}
+    </update>
+</mapper>

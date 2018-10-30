@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.StudentDao">
+
+
+    <select id="findAll" resultType="com.ptteng.Student">
+        select * from student
+    </select>
+
+
+    <select id="findById" resultType="com.ptteng.Student">
+        select * from student where id=#{id}
+    </select>
+
+    <insert id="insertStudent" useGeneratedKeys="true" keyProperty="id" parameterType="com.ptteng.Student">
+       insert into student (name,QQ,wish,createAt,updateAt) values (#{name},#{QQ},#{wish},#{createAt},#{updateAt})
+    </insert>
+
+    <delete id="deleteStudent" parameterType="long">
+      delete from student where id=#{id}
+    </delete>
+
+
+    <update id="updateStudent" parameterType="com.ptteng.Student">
+        update student
+        <trim prefix="set" suffixOverrides=",">
+             <if test="name !=null and name !=''">
+                 name=#{name},
+             </if>
+             <if test="QQ !=null and QQ !=''">
+                 QQ=#{QQ},
+             </if>
+             <if test="wish !=null and wish !=''">
+                 wish=#{wish},
+             </if>
+             <if test="updateAt !=null and updateAt !=''">
+                 updateAt=#{updateAt},
+             </if>
+        </trim>
+         where id=#{id}
+    </update>
+
+
+    <select id="count" resultType="long">
+        select count(*) from student
+    </select>
+
+
+    <select id="findPage" resultType="com.ptteng.Student">
+        select * from student limit #{pageStart},10
+    </select>
+
+</mapper>

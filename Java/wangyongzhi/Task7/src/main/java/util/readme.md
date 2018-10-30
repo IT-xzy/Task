@@ -1,0 +1,9 @@
+<h2>工具包增加了不少工具类</h2>
+<h4>CookieUtil封装了cookie操作;</h4>
+<h4>EncryptionUtil用于给密码SH256加密;</h4>
+<h4>GetUserUtil用于从cookie信息获得用户所有数据;</h4>
+<h4>PhoneFormatCheckUtils验证手机号格式;</h4>
+<h4>PropertyUtil用于读取properties属性文件;</h4>
+<h4>RandomCode用于生成手机验证码;</h4>
+<h4>RegexUtil用于正则验证;</h4>
+<h4>TokenUtil主要是封装生成Token相关操作;</h4>

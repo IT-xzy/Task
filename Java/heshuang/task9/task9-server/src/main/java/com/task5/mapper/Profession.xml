@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.task5.mapper.ProfessionDao">
+    <resultMap id="profession" type="com.task5.pojo.Profession">
+        <result property="id" column="id"/>
+        <result property="icon" column="icon"/>
+        <result property="proName" column="pro_name"/>
+        <result property="careerDirection" column="career_direction"/>
+        <result property="proIntroduction" column="pro_introduction"/>
+        <result property="proThreshold" column="pro_threshold"/>
+        <result property="proDifficulty" column="pro_difficulty"/>
+        <result property="growthCycle" column="growth_cycle"/>
+        <result property="proCompany" column="pro_company"/>
+        <result property="proSalaryMin" column="pro_salary_min"/>
+        <result property="proSalaryNormal" column="pro_salary_normal"/>
+        <result property="proSalaryMax" column="pro_salary_max"/>
+        <result property="studyNumber" column="study_number"/>
+        <result property="hint" column="hint"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+<select id="getAllProfession" resultMap="profession">
+    SELECT  * FROM profession
+</select>
+    <!--<insert id="addProfession" parameterType="profession">-->
+        <!--INSERT INTO profession(icon,pro_name,career_direction,pro_introduction,pro_threshold,pro_difficulty,growth_cycle,pro_company,-->
+       <!--pro_salary_min, pro_salary_normal,pro_salary_max,study_number,hint,create_at,update_at)VALUES (#{icon},#{proName},#{careerDirection},#{proIntroduction},#{proThreshold},#{proDifficulty},-->
+       <!--#{growthCycle},#{proCompany},#{proSalaryMin},#{proSalaryNormal},#{proSalaryMax},#{studyNumber},#{hint},#{createAt},#{updateAt})-->
+    <!--</insert>-->
+</mapper>

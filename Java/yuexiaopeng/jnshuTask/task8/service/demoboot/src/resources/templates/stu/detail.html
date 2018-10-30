@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>login界面</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>login分页数据</p>
+    <a>登录的账户信息为:</a>
+
+    <a th:text="${username}"></a>
+        <a href="/dengchu">注销</a>
+    <h3 th:text="'总条数'+${countAll}"></h3>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>修改时间</th>
+            <th>name</th>
+            <th>qq</th>
+            <th>studyType</th>
+            <th>joinTime</th>
+            <th>university</th>
+            <th>dailyLink</th>
+            <th>slogen</th>
+            <th>master</th>
+            <th>#编辑</th>
+            <th>#删除</th>
+        </tr>
+        <tr th:each="stu : ${listStu}">
+            <td th:text="${stu.id}">loginId</td>
+            <td th:text="${stu.updateAt}">loginMail</td>
+            <td th:text="${stu.name}">loginAccount</td>
+            <td th:text="${stu.qq}">loginPassword</td>
+            <td th:text="${stu.studyType}">loginName</td>
+            <td th:text="${stu.joinTime}">loginPicture</td>
+            <td th:text="${stu.university}">loginSalt</td>
+            <td th:text="${stu.dailyLink}">loginMobile</td>
+            <td th:text="${stu.slogen}">loginMail</td>
+            <td th:text="${stu.master}">loginMail</td>
+            <th><a th:href="@{/fs/stu/one(id=${stu.id})}">编辑</a></th>
+            <th><a th:href="@{/fs/stu/delete(id=${stu.id})}">删除</a></th>
+        </tr>
+
+    </table>
+    <table style="text-align: center">
+        <tr>
+            <th><a th:href="@{/fs/stu/list(pageNum=${page.pageHome})}">首页</a></th>
+            <th><a th:href="@{/fs/stu/list(pageNum=${page.pageLast})}">上一页</a></th>
+            <th>
+                <li th:text="'当前页数'+${page.pageNum}"></li>
+            </th>
+            <th><a th:href="@{/fs/stu/list(pageNum=${page.pageNext})}">下一页</a></th>
+            <th><a th:href="@{/fs/stu/list(pageNum=${page.pageFinal})}">末页</a></th>
+            <th><p th:text="'本页总条数'+${page.pageNumTotal}"></p></th>
+        </tr>
+    </table>
+    <table style="text-align: center">
+        <tr>
+            <th th:text="${page.pageHome}">首页</th>
+            <th th:text="${page.pageLast}">上一页</th>
+            <th th:text="${page.pageNext}">下一页</th>
+            <th th:text="${page.pageFinal}">末页</th>
+        </tr>
+    </table>
+
+</div>
+</body>
+
+</html>

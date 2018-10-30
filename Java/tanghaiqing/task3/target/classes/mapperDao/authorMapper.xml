@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.artist.dao.AuthorDao">
+    <resultMap id="author" type="com.artist.pojo.Author">
+        <result property="authorId" column="author_id"/>
+        <result property="authorName" column="author_name"/>
+        <result property="telephone" column="telephone"/>
+        <result property="intro" column="intro" />
+        <result property="createTime" column="create_at"/>
+        <result property="updateTime" column="update_at"/>
+    </resultMap>
+    <select id="queryAuthors" resultMap="author">
+        select author_id,author_name,telephone,intro,create_at,update_at from author
+    </select>
+    <select id="queryAuthor" resultMap="author">
+        select author_id,author_name,telephone,intro,create_at,update_at from author where author_name=#{authorName}
+    </select>
+    <insert id="saveAuthor" parameterType="com.artist.pojo.Author">
+        insert into author (author_name,telephone,intro,create_at,update_at)
+        values (#{authorName},#{telephone},#{intro},#{createTime},#{updateTime})
+    </insert>
+    <update id="updateAuthor" parameterType="com.artist.pojo.Author">
+        update author set author_name=#{authorName},telephone=#{telephone},intro=#{intro},
+        create_at=#{createTime},update_at=#{updateTime}
+        where author_id=#{authorId}
+    </update>
+    <delete id="delAuthor" parameterType="Integer">
+        delete from author where author_id=#{authorId}
+    </delete>
+</mapper>

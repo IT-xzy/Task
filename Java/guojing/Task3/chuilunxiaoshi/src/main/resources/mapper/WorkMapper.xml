@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.WorkDao">
+
+
+    <resultMap id="workMap" type="com.ptteng.entity.Work">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="status" property="status"/>
+        <result column="classify_id" property="classifyId"/>
+        <result column="introduction" property="introduction"/>
+        <result column="thumbnail_url" property="thumbnailUrl"/>
+        <result column="video_url" property="videoUrl"/>
+        <result column="detail_url" property="detailUrl"/>
+        <result column="article" property="article"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="classify_name" property="classifyName"/>
+        <result column="collection_name" property="collectionName"/>
+    </resultMap>
+
+    <select id="countWork" resultType="long">
+        select count(*) from work
+     </select>
+
+    <select id="findPageWork" resultMap="workMap">
+        select work.name,work.status,work.create_at,work.update_at,work.create_by,work.update_by,classify.name classify_name,collection.name collection_name from work
+        left join classify on work.classify_id=classify.id
+        left join collection on classify.collection_id=collection.id
+        <where>
+            <if test="classifyId !=null and classifyId !=''">
+                work.classify_id=#{classifyId}
+            </if>
+            <if test="keyword !=null and keyword !=''">
+                and (work.name like concat(concat('%',#{keyword}),'%')
+                or work.introduction like concat(concat('%',#{keyword}),'%') )
+            </if>
+        </where>
+        limit #{pageStart},#{size}
+    </select>
+
+
+    <select id="findById" resultMap="workMap">
+            select * from work where id=#{id}
+    </select>
+
+    <delete id="deleteById" parameterType="long">
+            delete from work
+            where id=#{id}
+    </delete>
+
+    <update id="updateWork" parameterType="com.ptteng.entity.Work">
+        update work
+        <trim prefix="set" suffixOverrides=",">
+            <if test="name !=null">
+                work_name=#{name},
+            </if>
+            <if test="status !=null and status !=''">
+                status=#{status},
+            </if>
+            <if test="classifyId !=null and classifyId !=''">
+                classifyId=#{classifyId},
+            </if>
+            <if test="introduction !=null and introduction !=''">
+                introduction=#{introduction},
+            </if>
+            <if test="thumbnailUrl !=null and thumbnailUrl !=''">
+                thumbnail_url=#{thumbnailUrl},
+            </if>
+            <if test="videoUrl !=null and videoUrl !=''">
+                vido_url=#{vidoUrl},
+            </if>
+            <if test="detailUrl !=null and detailUrl !=''">
+                detail_url=#{detailUrl},
+            </if>
+            <if test="article !=null and article !=''">
+                article=#{article},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at=#{updateAt},
+            </if>
+            <if test="updateBy !=null and updateBy != ''">
+                update_by=#{updateBy},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+
+    <insert id="insertWork" useGeneratedKeys="true" keyColumn="id" parameterType="com.ptteng.entity.Work">
+        insert into work (name,status,classify_id,introduction,thumbnail_url,
+        video_url,detail_url,article,create_at,update_at,create_by,update_by)
+        value (#{name},#{status},#{classify},#{introduction},#{thumbnailUrl},
+        #{videoUrl},#{detailUrl},#{article},#{createAt},#{updateAt},#{createBy},#{updateBy}
+        )
+    </insert>
+
+
+</mapper>

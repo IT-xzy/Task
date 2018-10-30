@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="login5Service" class="com.leo.service.impl.Login5ServiceImpl"/>
+    <!--将一个类发布为一个RMI服务-->
+    <bean id="login5ServiceRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--服务名称-->
+        <property name="serviceName" value="login5Service"/>
+        <!--服务实现类-->
+        <property name="service" ref="login5Service"/>
+        <!--调用服务的接口-->
+        <property name="serviceInterface" value="com.leo.service.Login5Service"/>
+        <!--注册端口号-->
+        <property name="registryPort" value="7788"/>
+        <!-- <property name="servicePort" value="7777"/> 可以使用固定端口-->
+    </bean>
+
+    <bean id="student4Service" class="com.leo.service.impl.Student4ServiceImpl"/>
+    <!--将一个类发布为一个RMI服务-->
+    <bean id="student4ServiceRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--服务名称-->
+        <property name="serviceName" value="student4Service"/>
+        <!--服务实现类-->
+        <property name="service" ref="student4Service"/>
+        <!--调用服务的接口-->
+        <property name="serviceInterface" value="com.leo.service.Student4Service"/>
+        <!--注册端口号-->
+        <property name="registryPort" value="7788"/>
+        <!-- <property name="servicePort" value="7777"/> 可以使用固定端口-->
+    </bean>
+
+    <bean id="student5Service" class="com.leo.service.impl.Student5ServiceImpl"/>
+    <!--将一个类发布为一个RMI服务-->
+    <bean id="student5ServiceRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--服务名称-->
+        <property name="serviceName" value="student5Service"/>
+        <!--服务实现类-->
+        <property name="service" ref="student5Service"/>
+        <!--调用服务的接口-->
+        <property name="serviceInterface" value="com.leo.service.Student5Service"/>
+        <!--注册端口号-->
+        <property name="registryPort" value="7788"/>
+        <!-- <property name="servicePort" value="7777"/> 可以使用固定端口-->
+    </bean>
+</beans>

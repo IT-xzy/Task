@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.WorkroomDao">
+
+
+    <resultMap id="workroomMap" type="com.ptteng.entity.Workroom">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="text" property="text"/>
+        <result column="picture_url" property="pictureUrl"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+
+    <select id="findWorkroom" resultMap="workroomMap">
+        select * from workroom
+        <if test="type !=null">
+            where type=#{type}
+        </if>
+    </select>
+
+
+    <select id="findById" resultMap="workroomMap">
+            select * from workroom where id=#{id}
+    </select>
+
+
+    <delete id="deleteById" parameterType="long">
+            delete from workroom where id=#{id}
+    </delete>
+
+
+    <update id="updateWorkroom" parameterType="com.ptteng.entity.Workroom">
+        update workroom
+        <trim prefix="set" suffixOverrides=",">
+            <if test="type !=null and type !=''">
+                type=#{type},
+            </if>
+            <if test="text !=null and text !=''">
+                text=#{text},
+            </if>
+            <if test="pictureUrl !=null and pictureUrl !=''">
+                picture_url=#{pictureUrl},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at=#{updateAt},
+            </if>
+            <if test="updateBy !=null and updateBy != ''">
+                update_by=#{updateBy},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+
+    <insert id="insertWorkroom" useGeneratedKeys="true" keyColumn="id" parameterType="com.ptteng.entity.Workroom">
+        insert into workroom (type,text,picture_url,create_at,update_at,create_by,update_by)
+        value (#{type},#{text},#{pictureUrl},#{createAt},#{updateAt},#{createBy},#{updateBy}
+        )
+    </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

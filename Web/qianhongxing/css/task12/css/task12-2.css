@@ -1,0 +1,287 @@
+@charset "UTF-8";
+/* 页面重置相关 */
+html {
+  font-size: 312.5%;
+}
+
+body {
+  margin: 0;
+  font-size: .16rem;
+  font-family: "STHeitiSC-Light";
+}
+
+button {
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+/* 头部开始 */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 0.88rem;
+  background: #5fc0cd;
+}
+
+header span {
+  position: absolute;
+  top: .22rem;
+  right: 5%;
+  width: 0.42rem;
+  height: 0.44rem;
+  background: url(../images/css2.png) no-repeat -0.1rem -0.1rem;
+  zoom: .5;
+}
+
+header div {
+  width: 35%;
+  height: 85%;
+  border-radius: .1rem;
+  background: #55A8B3;
+}
+
+header div button {
+  width: 50%;
+  height: 100%;
+  font-size: 0.34rem;
+  color: #fff;
+  border-radius: .1rem;
+  background: #55A8B3;
+  font-family: "STHeitiSC-Light";
+}
+
+header div button:last-child {
+  color: #55a8b3;
+  background-color: #fff;
+}
+
+/* 主体开始 */
+main {
+  margin-top: .88rem;
+}
+
+main .select {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 0.8rem;
+  border-bottom: .01rem solid #ccc;
+}
+
+main .select div {
+  position: relative;
+  width: 33%;
+  height: 0.7rem;
+  text-align: center;
+}
+
+main .select div span {
+  font-size: 0.28rem;
+  color: #ccc;
+  line-height: .7rem;
+}
+
+main .select div span::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 8%;
+  top: 0.315rem;
+  z-index: 1;
+  width: 0;
+  height: 0;
+  border-top: 0.14rem solid #999999;
+  border-bottom: 0.14rem solid rgba(153, 153, 153, 0);
+  border-right: 0.14rem solid rgba(153, 153, 153, 0);
+  border-left: 0.14rem solid rgba(153, 153, 153, 0);
+}
+
+main .select div .drop {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  margin-top: 3%;
+  background: black;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+main .select div .drop li {
+  padding: 10% 0;
+  font-size: 0.28rem;
+  color: #fff;
+  border-bottom: .01rem solid #fff;
+}
+
+main .select div:hover .drop {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: rotatey(360deg);
+          transform: rotatey(360deg);
+}
+
+main .select div:nth-child(2) {
+  border-left: .005rem solid #eee;
+  border-right: .005rem solid #eee;
+}
+
+main .main-area {
+  margin-bottom: 1.1rem;
+}
+
+main .main-area li {
+  border-bottom: .01rem solid #ccc;
+}
+
+main .main-area li div:nth-child(1) span, main .main-area li div:nth-child(3) span {
+  font-size: 0.24rem;
+  color: #ccc;
+  line-height: 0.74rem;
+}
+
+main .main-area li div:nth-child(1) span::before, main .main-area li div:nth-child(3) span::before {
+  content: "";
+  display: inline-block;
+  vertical-align: -.03rem;
+  width: 0.24rem;
+  height: 0.24rem;
+  margin: 0 2%;
+  background: url(../images/css2.png) no-repeat -1.77rem -0.1rem;
+  zoom: 0.5;
+}
+
+main .main-area li div:nth-child(3) span::before {
+  width: 0.19rem;
+  height: 0.22rem;
+  background: url(../images/css2.png) no-repeat -1.77rem -0.54rem;
+  zoom: .5;
+}
+
+main .main-area li div:nth-child(2) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 10%;
+  padding-right: 5%;
+  font-size: 0.3rem;
+  color: #000;
+}
+
+main .main-area li div:nth-child(2) span:last-child {
+  color: #f00;
+}
+
+main .main-area li div:nth-child(2) span:last-child::after {
+  content: "";
+  display: inline-block;
+  width: 0.2rem;
+  height: 0.2rem;
+  border-top: 0.02rem solid #5fc0cd;
+  border-right: 0.02rem solid #5fc0cd;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+/* 底部开始 */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 1rem;
+  border-top: .01rem solid #eee;
+  background: #F8FAFB;
+}
+
+footer div:nth-child(2) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 0.94rem;
+  height: 0.94rem;
+  margin: 0 15%;
+  border-radius: 50%;
+  background: #5fc0cd;
+}
+
+footer div:nth-child(2) span {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: url(../images/css2.png) no-repeat -0.72rem -0.74rem;
+  zoom: .5;
+}
+
+footer div:nth-child(1) span:nth-child(1), footer main .main-area li div:nth-child(3) span:nth-child(1), main .main-area li footer div:nth-child(3) span:nth-child(1), footer div:nth-child(3) span:nth-child(1) {
+  width: 0.46rem;
+  height: 0.4rem;
+  margin: 0 auto;
+  background: url(../images/css2.png) no-repeat -0.72rem -0.1rem;
+  zoom: .5;
+}
+
+footer div:nth-child(1) span, footer main .main-area li div:nth-child(3) span, main .main-area li footer div:nth-child(3) span, footer div:nth-child(3) span {
+  display: block;
+  font-size: 0.2rem;
+  color: #5fc0cd;
+}
+
+footer div:nth-child(1) span:nth-child(2), footer main .main-area li div:nth-child(3) span:nth-child(2), main .main-area li footer div:nth-child(3) span:nth-child(2), footer div:nth-child(3) span:nth-child(2) {
+  margin-top: 20%;
+}
+
+footer div:nth-child(3) span:nth-child(1) {
+  width: 0.42rem;
+  height: 0.41rem;
+  background: url(../images/css2.png) no-repeat -0.1rem -0.74rem;
+  zoom: .5;
+}
+/*# sourceMappingURL=task12-2.css.map */

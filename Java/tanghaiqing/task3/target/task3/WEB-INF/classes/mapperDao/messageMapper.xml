@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.artist.dao.MessageDao">
+    <resultMap id="message" type="com.artist.pojo.Message">
+        <result property="messageId" column="message_id" />
+        <result property="nick" column="nick" />
+        <result property="message" column="message" />
+        <result property="productionId" column="production_id"/>
+        <result property="type" column="type" />
+        <result property="selection" column="selection"/>
+        <result property="replyId" column="reply_to_id"  />
+        <result property="createTime" column="create_at" />
+        <result property="update_at" column="updateTime"/>
+    </resultMap>
+    <select id="queryMessages" resultMap="message" parameterType="Integer">
+        select message_id,nick,message,production_id,type,selection,reply_to_id,create_at,update_at
+        from message where production_id=#{productionId}
+    </select>
+    <insert id="saveMessage" parameterType="com.artist.pojo.Message">
+        insert into message (nick,message,production_id,type,selection,reply_to_id,create_at,update_at)
+        values (#{nick},#{message},#{productionId},#{type},#{selection},#{replyId},#{createTime},#{updateTime})
+    </insert>
+    <update id="updateMessage" parameterType="com.artist.pojo.Message">
+        update message set nick=#{nick},message=#{message},production_id=#{productionId},type=#{type},
+        selection=#{selection},reply_to_id=#{replyId},create_at=#{createTime},update_at=#{updateTime}
+        where message_id=#{messageId}
+    </update>
+    <delete id="delMdessage" parameterType="Integer" >
+        delete from message where message_id=#{messageId}
+    </delete>
+</mapper>

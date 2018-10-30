@@ -1,0 +1,88 @@
+// @import"../_base/base";
+/* 头部开始 */
+header {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: $bg29;
+}
+.head {
+    @include flex(space-between,center);
+    height: $h82;
+    padding: 0 5%;
+
+    
+    span:nth-child(2) {
+        @include font($fz34,$bgff);
+    }
+    span:nth-child(1) {
+        @include box(.39rem,.4rem);
+        background: url(../../images/css_sprites1.png) no-repeat -.1rem -.1rem;
+        zoom: .5;
+    }
+    span:nth-child(3) {
+        @include box(.35rem,.36rem);
+        background: url(../../images/css_sprites1.png) no-repeat -.7rem -.1rem;
+        zoom: .5;
+    }
+}
+
+/* 提示区域 */
+
+/* 主要提示区域 */
+.tips {  
+    position: relative;
+   
+    .tips-main { 
+        @include flex (space-between,center);
+        height: $h82;
+        padding-left: 10%;
+        padding-right: 5%;
+        margin-bottom: .2rem;
+        background: $bgb9;
+
+        span {
+            @include font($fz26,#000);
+        }
+        div {
+            position: relative;
+            @include box(.52rem,.52rem);
+            border-radius: 50%;
+            background: $bgfb;
+
+            span {
+                position: absolute;
+                left: .21rem;
+                top: .04rem;
+                @include box(0,0);
+                border-top: .2rem solid rgba(255, 255, 255,0);
+                border-right: .2rem solid rgba(255, 255, 255,0);
+                border-bottom: .2rem solid rgba(255, 255, 255,0);
+                border-left: .2rem solid rgba(255, 255, 255,1);
+            }
+        }
+        
+    }
+}
+
+/* 次级提示区域 */
+.tips {
+    
+    .tips-foot {
+        margin-left: 15%;
+        @include font($fz24,$bgff);
+
+        &::after {
+            position: absolute;
+            left: 15%;
+            top: .82rem;
+            content: "";
+            @include box(0,0);
+            border-top: .15rem solid rgba(185, 233, 245,1);
+            border-right: .15rem solid rgba(255, 255, 255,0);
+            border-bottom: .15rem solid rgba(255, 255, 255,0);
+            border-left: .15rem solid rgba(255, 255, 255,0);
+        }
+    }
+}

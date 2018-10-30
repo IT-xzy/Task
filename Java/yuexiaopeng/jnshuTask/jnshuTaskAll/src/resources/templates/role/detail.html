@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户管理界面</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+
+<body>
+<div class="login-box3">
+
+    <p>role数据</p>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>角色Id</th>
+            <th>权限Id</th>
+            <th>角色名称</th>
+            <th>权限名称</th>
+            <th>#编辑</th>
+            <th>#删除</th>
+        </tr>
+        <tr th:each="lr : ${listRole}">
+            <td th:text="${lr.roleId}"></td>
+            <td th:text="${lr.roleId}"></td>
+            <th th:text="${lr.roleName}"></th>
+            <th th:text="${lr.description}"></th>
+            <th><a th:href="@{/bs/role/one(roleId=${lr.roleId})}">编辑</a></th>
+            <th><a th:href="@{/bs/role/delete(roleId=${lr.roleId})}">删除</a></th>
+        </tr>
+
+    </table>
+    <form th:action="@{/bs/role/add}" style="text-align: center" method="post">
+        **角色表角色名(例:ROLE_USER)
+        <input type="text" name="roleName" th:value="ROLE_USER"><br>
+        **角色表的角色信息(例:USER权限)
+        <input type="text" name="description" th:value="USER权限"><br>
+        **权限表的权限名称(3-20)
+        <input type="text" name="menuId" th:value="13"><br>
+        <button type="submit">增加</button>
+    </form>
+
+</div>
+</body>
+
+</html>

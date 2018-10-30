@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd ">
+
+    <!-- 指定spring读取db.properties配置 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <context:annotation-config/>
+    <!--扫描包进行注入-->
+    <context:component-scan base-package="com.jnshu"/>
+
+    <!-- 1.将连接池放入spring容器 -->
+    <bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="jdbcUrl" value="${jdbc.jdbcUrl}"></property>
+        <property name="driverClass" value="${jdbc.driverClass}"></property>
+        <property name="user" value="${jdbc.user}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
+    <context:component-scan base-package="springTest" />
+    <!-- 2.将JDBCTemplate放入spring容器 (JDBCTemplate 和 DBUtils中的QueryRunner几乎一模一样）
+    　　　　JdbcTemplate使用：
+    　　　　　　1、JdbcTemplate是spring整合jdbc的类，直接在xml中配置，但是需要在jdbcTemplate中配置连接池，然后在dao层操作数据库
+    　　　　　　2、也可以让dao层中的类继承JdbcDaoSupport，这样applicationContext.xml中就不用再配置JdbcTemplate了，
+    　　　　　　　 只需要在每个dao层中的对象中配置连接池就行了，如3. -->
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--<bean id="userImpl" class="springTest.UserImpl"/>-->
+    <!--&lt;!&ndash;<bean id="user" class="springTest.User"/>&ndash;&gt;-->
+    <!--<bean id="userDao" class="springTest.UserDao" abstract="true"/>-->
+
+    <!-- 3.将UserDao放入spring容器 -->
+
+
+</beans>

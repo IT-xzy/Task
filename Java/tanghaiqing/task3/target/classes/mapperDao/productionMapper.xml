@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.artist.dao.ProductionDao">
+<resultMap id="Production" type="com.artist.pojo.Production">
+    <id property="productionId" column="production_id"/>
+    <result property="headline" column="headline" />
+    <result property="introduce" column="introduce"/>
+    <result property="authorName" column="author_name"/>
+    <result property="category" column="category" />
+    <result property="content" column="content" />
+    <result property="theme" column="theme"/>
+    <result property="state"  column="state" />
+    <result property="createTime" column="create_at"/>
+    <result property="updateTime" column="update_at"/>
+    <collection property="imageAndVideos" ofType="com.artist.pojo.ImageAndVideo">
+        <id property="imgVideoId" column="image_video_id"/>
+        <result property="imgVideName" column="image_video_name"/>
+        <result property="productionId" column="production_id"/>
+        <result property="type" column="type"/>
+        <result property="uploadTime" column="upload_time"/>
+        <result property="updateTime"  column="update_at"/>
+    </collection>
+    <collection property="messages" ofType="com.artist.pojo.Message">
+        <result property="messageId" column="message_id"/>
+        <result property="nick" column="nick" />
+        <result property="message" column="message"/>
+        <result property="type" column="type"/>
+        <result property="productionId" column="production_id" />
+        <result property="selection" column="selection" />
+        <result property="replyId" column="reply_to_id"/>
+        <result property="createTime" column="create_at"/>
+        <result property="updateTime" column="update_at"/>
+    </collection>
+</resultMap>
+    <select id="queryProductions" parameterType="String" resultMap="Production">
+        select p.headline,p.introduce,p.production_id,i.image_video_name
+        from production p
+         LEFT JOIN image_video i
+        ON p.production_id = i.production_id
+        where (LOCATE(#{word},headline) or LOCATE(#{word},content))
+        and i.type='1'
+        order by p.update_at desc
+    </select>
+    <select id="queryProductions1" parameterType="String" resultMap="Production">
+        select p.headline,p.introduce,p.production_id,i.image_video_name
+        from production p
+        LEFT JOIN image_video i
+        ON p.production_id = i.production_id
+        where (p.category=#{category} or theme=#{category})
+        and i.type='1'
+        order by p.update_at desc
+    </select>
+    <select id="queryProduction" resultMap="Production" parameterType="Integer">
+        SELECT p.*,i.*,m.*
+		FROM production p
+		LEFT JOIN image_video i
+		on p.production_id=i.production_id
+		lEFT JOIN message m
+		ON p.production_id=m.production_id
+		WHERE p.production_id=#{productionId}
+        ORDER BY m.create_at
+    </select>
+
+    <insert id="saveProduction" parameterType="com.artist.pojo.Production">
+        insert into production (headline,introduce,author_name,category,theme,state,content,create_at,update_at)
+        values (#{headline},#{introduce},#{authorName},#{category},#{theme},#{state},#{content},#{createTime},#{updateTime})
+    </insert>
+    <delete id="delProduction" parameterType="Integer" >
+        delete from production where production_id=#{productionId}
+    </delete>
+    <update id="updateProduction" parameterType="com.artist.pojo.Production">
+        update production
+        set headline=#{headline},introduce=#{introduce},author_name=#{authorName},category=#{category},theme=#{theme},
+        state=#{state},content=#{content},create_at=#{createTime},update_at=#{updateTime}
+        where production_id=#{productionId}
+    </update>
+</mapper>

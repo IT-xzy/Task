@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://cn.wyq"
+           name="student">
+
+    <component name="StudentServiceComponent">
+        <implementation.spring location="applicationContext.xml"/>
+        <service name="StudentService">
+            <interface.java interface="cn.wyq.service.StudentService"/>
+            <tuscany:binding.rmi uri="rmi://47.104.255.105:1021/StudentService"/>
+        </service>
+    </component>
+
+    <component name="OutstandingStudentServiceComponent">
+        <implementation.spring location="applicationContext.xml"/>
+        <service name="OutstandingStudentService">
+            <interface.java interface="cn.wyq.service.OutstandingStudentService"/>
+            <tuscany:binding.rmi uri="rmi://47.104.255.105:1022/OutstandingStudentService"/>
+        </service>
+    </component>
+
+    <component name="EngineerServiceComponent">
+        <implementation.spring location="applicationContext.xml"/>
+        <service name="EngineerService">
+            <interface.java interface="cn.wyq.service.EngineerService"/>
+            <tuscany:binding.rmi uri="rmi://47.104.255.105:1023/EngineerService"/>
+        </service>
+    </component>
+</composite>
