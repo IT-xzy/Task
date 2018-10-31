@@ -1,0 +1,235 @@
+/* 页面设置样式 */
+html {
+    font-size: 62.5%;
+}
+
+* {
+    list-style-type: none;
+}
+
+// 定义混合器
+@mixin flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// 定义变量
+$bgc:#29BDE0 white;
+
+body {
+    margin: 0;
+    font-size: 1.6rem;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        top: 0;
+        height: 4.8rem;
+        background-color: #29BDE0;
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+
+        .thb {
+            @include flex;
+            margin: auto 1.15rem;
+            width: 2rem;
+            height: 2rem;
+            padding: 3px;
+            border: 1.5px solid white;
+            background-color: #29BDE0;
+            outline: none;
+
+            .itb {
+                width: 4rem;
+                height: 1.5px;
+                padding: 4px 0;
+                border: 1px solid white;
+                border-top: 1.5px solid white;
+                border-bottom: 1.5px solid white;
+                border-left: 0;
+                border-right: 0;
+                background-clip: content-box;
+                background-color: white;
+            }
+        }
+
+        .vote {
+            font-size: 17px;
+            color: white;
+            margin: auto;
+        }
+
+        .rb {
+            background-color: #29BDE0;
+            border: 0;
+
+            .icon_false {
+                display: inline-block;
+                width: 20px;
+                height: 2px;
+                background: white;
+                line-height: 0;
+                font-size: 0;
+                vertical-align: middle;
+                -webkit-transform: rotate(45deg);
+            }
+
+            .icon_false:after {
+                content: '/';
+                display: block;
+                width: 20px;
+                height: 2px;
+                background: white;
+                -webkit-transform: rotate(-90deg);
+            }
+
+
+        }
+    }
+
+    main {
+        margin-bottom: 5rem;
+        background-color: #29BDE0;
+
+        .pb {
+            display: flex;
+            height: 4.1rem;
+            background-color: #b9e9f5;
+            padding-top: 4.8rem;
+            justify-content: space-between;
+
+            .vw {
+                padding: 1.3rem 0;
+                padding-left: 2.3rem;
+                font-size: 13px;
+            }
+
+            .rd {
+                position: relative;
+                @include flex;
+                width: 2.6rem;
+                height: 2.6rem;
+                background-color: #FBB435;
+                border-radius: 50%;
+                margin: auto 1rem;
+
+                .tg {
+                    width: 0;
+                    height: 0;
+                    border-width: 8px;
+                    border-right-width: 0px;
+                    border-style: solid;
+                    border-color: transparent transparent transparent white;
+                    margin-left: 10%;
+                }
+            }
+
+        }
+        .st {
+            width: 0;
+            height: 0;
+            border-width: 10px;
+            border-style: solid;
+            border-color: #b9e9f5 transparent transparent transparent;
+            margin-left: 3.55rem;
+        }
+
+        .hint {
+            color: white;
+            margin-left: 3.6rem;
+        }
+        .choice {
+            width: 28.9%;
+            height: 28.9vw;
+            padding: 0;
+            margin: 1rem .6% 8.3vw 2.5%;
+            border: 3px solid #FFFFFF;
+            background: #F5C97B;
+            outline: none;
+            .status {
+                @include flex;
+                height: 75%;
+                color: #565656;
+                font-size: 15px;
+            }
+            .number {
+                @include flex;
+                height: 25%;
+                font-size: 11.5px;
+                color: white;
+                background-color: #83B09A;
+            }
+            .dropdown-content {
+                display: none;
+                padding: 0;
+                .one {
+                    display: inline-block;
+                    width: 4.5vw;
+                    height: 4.5vw;  
+                    background: url(./css_sprite2s.png) no-repeat;
+                    background-position: 14.286% 14.286%;
+                    background-size: 333.33%;
+                }
+                .two {
+                    display: inline-block;
+                    width: 4.5vw;
+                    height: 4.5vw;
+                    background: url(./css_sprite2s.png) no-repeat;
+                    background-position: 85.714% 14.286%;
+                    background-size: 333.33%;
+                }
+                .three {
+                    display: inline-block;
+                    width: 4.5vw;
+                    height: 4.5vw;
+                    background: url(./css_sprite2s.png) no-repeat;
+                    background-position: 14.286% 85.714%;
+                    background-size: 333.33%;
+                }
+                .four {
+                    display: inline-block;
+                    width: 4.5vw;
+                    height: 4.5vw;
+                    background: url(./css_sprite2s.png) no-repeat;
+                    background-position: 85.714% 85.714%;
+                    background-size: 333.33%;
+                }
+                
+                
+            }
+            @at-root.choice:hover .dropdown-content {
+                display: inline-block;
+                padding: 0;
+            }           
+        }      
+    }
+    footer {
+        position: fixed;
+        @include flex;
+        height: 12%;
+        width: 100%;
+        bottom: 0;
+        background-color: #29BDE0;
+        .yu{
+            @include flex;
+            width: 94%;
+            height: 100%;
+            border: 1px solid white;
+            border-left: 0;
+            border-right: 0;
+            a{
+                @include flex;
+                width: 70%;
+                height: 65%;
+                border: 0;
+                font-size: 20px;
+                color: white;
+                background-color: #FBB435;
+                outline: none;
+                text-decoration: none;
+            }
+        }
+    }
+}

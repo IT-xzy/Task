@@ -1,0 +1,248 @@
+// 整体的页面文字大小设置
+html {
+    font-size: 65.2%;
+}
+
+// 声明混合器
+@mixin flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// 声明变量颜色部分
+$bgc:white #29BDE0 #787878 #F0F0F0 #D7D7D7 #E7E7E7 #FBB435 #FFFFFF #69D1E9;
+
+// 声明变量长宽度部分
+$wh:100%;
+$hg:100%;
+
+body{
+    margin: 0;
+    list-style-type: none;
+    font-size: 1.6rem;
+}
+.nav{
+    position: relative;
+    overflow: hidden;
+    p {
+        color: #787878;
+        font-size: 12.5px;
+    }
+    
+    .input{
+        width: 3rem;
+        height: 2rem;
+        -webkit-appearance: none;
+        border-radius: 0;
+    }
+    .menu-box{
+        position: absolute;
+        padding-left: 0;
+        margin: 0;
+        width: 46.5%;
+        height: 100%;
+        line-height: 3.5rem;
+        font-size: 16px;
+        color: #29bde0;
+        background: #fff;
+        list-style-type: none;
+        li:nth-child(1){
+           border-bottom: 1px solid #D7D7D7;
+            .notice{
+                color: #29bde0
+            }
+            .hide-arrow{
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                width: 15px;
+                height: 15px;
+                border-bottom: 3px solid #29bde0;
+                border-left: 3px solid #29bde0;
+                transform: rotate(225deg);
+            }
+        }
+        li:nth-child(2){
+            border-bottom: 1px solid #D7D7D7;
+            .setting{
+                color: #29bde0
+            }
+            .hide-arrow1{
+                position: absolute;
+                top: 5rem;
+                right: 1rem;
+                width: 15px;
+                height: 15px;
+                border-bottom: 3px solid #29bde0;
+                border-left: 3px solid #29bde0;
+                transform: rotate(225deg);
+            }
+        }
+        li:nth-child(3){
+            border-bottom: 1px solid #D7D7D7;
+            .help{
+                color: #29bde0
+            }
+            .hide-arrow2{
+                position: absolute;
+                top: 8.6rem;
+                right: 1rem;
+                width: 15px;
+                height: 15px;
+                border-bottom: 3px solid #29bde0;
+                border-left: 3px solid #29bde0;
+                transform: rotate(225deg);
+            }
+        }
+        li:nth-child(4){
+            border-bottom: 1px solid #D7D7D7;
+            .as{
+                color: #29bde0  
+            }
+            .hide-arrow3{
+                position: absolute;
+                top: 11.8rem;
+                right: 1rem;
+                width: 15px;
+                height: 15px;
+                border-bottom: 3px solid #29bde0;
+                border-left: 3px solid #29bde0;
+                transform: rotate(225deg);
+            }
+        }
+        
+    }
+    .content{
+        position: relative;
+        width: 100%;
+        background: #fff;
+        header {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            top: 0;
+            width: 100%;
+            height: 4.8rem;
+            background-color: #29BDE0;
+            z-index: 1;
+            .tab {
+                width: 20px;
+                height: 3px;
+                padding: 5.4px 0;
+                margin-left: 1.1rem;
+                border-top: 3px solid white;
+                border-bottom: 3px solid white;
+                border-right: 0;
+                border-left: 0;
+                background-color: white;
+                background-clip: content-box;
+                outline: none;
+            }
+            
+        }
+        main {
+            flex-direction: column;
+            @include flex;
+            padding: 1.35rem 1.75rem 3.1rem;
+            background-color: #F0F0F0;
+            .tmb {
+                display: block;
+                width: 90%;
+                height: 5.8rem;
+                margin-top: 6.15rem;
+                color: #9A9A9A;
+                font-size: 17.5px;
+                border: 1px solid #D7D7D7;
+                background-color: white;
+                outline: none;
+                .tlb {
+                    display: flex;
+                    align-items: center;
+                    height: 2.3rem;
+                    float: right;
+                    .triangleone {
+                        width: 10px;
+                        height: 10px;
+                        border-right: 3px solid #E7E7E7;
+                        border-bottom: 3px solid #E7E7E7;
+                        transform: rotate(-45deg);
+                    }
+                }
+                
+            }
+            .tbb {
+                width: 90%;
+                height: 70%;
+                margin-top: 1.35rem;
+                font-size: 19px;
+                color: #FBB435;
+                border: 1px solid #D7D7D7;
+                background-color: white;
+                .tbbone {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 4.5rem;
+                    border-bottom: 1px solid #FBB435;
+                }
+                .tbbtwo {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-top: 1.55rem;
+                    .boo {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 80%;
+                        height: 6.7rem;
+                        border: 0;
+                        font-size: 16px;
+                        color: #FFFFFF;
+                        background-color: #69D1E9;
+                        outline: none;
+                    }
+                    .boob {
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        width: 100%;
+                    }
+                    .triangletwo {
+                        position: absolute;
+                        top: 50%;
+                        right: .4rem;
+                        margin-top: -.7rem;
+                        border: 2rem solid;
+                        border-color: white white white #FBB435;
+                        border-top-width: 12.5px;
+                        border-right-width: 0px;
+                        border-bottom-width: 12.5px;
+                        border-left-width: 14px;
+                        outline: none;
+                    }
+                    .bsb {
+                        @include flex;
+                        width: 5rem;
+                        margin-top: .7rem;
+                        .roundness {
+                            width: .85rem;
+                            height: .85rem;
+                            background: rgba(240, 240, 240, 1);
+                            border-radius: 50%;
+                            margin: auto;
+                            &.roundness:hover {
+                                background-color: #69D1E9;
+                            }       
+                        }                       
+                    }                                  
+                }     
+            }         
+        }
+    }  
+    #menu:checked ~.content{
+        margin-left: 45vw;
+    }
+       
+}
