@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+<!--扫描-->
+    <context:annotation-config />
+
+    <!--连接池的配置-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" >
+        <property name="jdbcUrl" value="jdbc:mysql://188.131.142.171:3306/tesk?characterEncoding=utf-8&amp;useSSL=true"></property>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="123456789"></property>
+        <!--使用配置文件进行属性注入-->
+    </bean>
+    <!--扫描实体类-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.lyh.pojo"/>
+        <!--扫描数据池-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--扫描映射配置文件-->
+        <property name="mapperLocations" value="classpath:student.xml"/>
+    </bean>
+    <!--扫描接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lyh.mapper"/>
+    </bean>
+</beans>

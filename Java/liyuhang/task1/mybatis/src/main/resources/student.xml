@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyh.mapper.StudentMapper">
+    <select id="selectById" parameterType="int" resultMap="student">
+        select * from student where id = #{id}
+    </select>
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+     <resultMap type="Student" id="student">
+        <id property="id" column="id"  />
+        <result property="enrolmentTime" column="enrolment_time"  />
+        <result property="knowFrom" column="know_from"  />
+        <result property="createAt" column="create_at"  />
+        <result property="updateAt" column="update_at"  />
+    </resultMap>
+     <!--返回list的select语句，注意 student的值是指向前面定义好的 -->
+    <select id="selectByName" parameterType="string" resultMap="student">
+        select * from student where name = #{name}
+    </select>
+    <!--执行增加操作的SQL语句。id和parameterType分别与StudentMapper接口中的addStudent方法的名字和参数类型一致。
+    useGeneratedKeys设置为"true"表明要MyBatis获取由数据库自动生成的主键；keyProperty="id"指定把获取到的主键值注入到Student的id属性-->
+    <insert id="addStudent" parameterType="Student" useGeneratedKeys="true" keyProperty="id">
+        insert into student(name,qq,wish,school,enrolment_time,type,know_from,create_at,update_at) values (#{name},#{qq},#{wish},#{school},#{enrolmentTime},#{type},#{knowFrom},#{createAt},#{updateAt})
+    </insert>
+    <update id="updateStudent" parameterType="Student">
+        update student set name = #{name},qq = #{qq},wish = #{wish},school = #{school},enrolment_time = #{enrolmentTime},type = #{type},know_from = #{knowFrom},create_at = #{createAt},update_at = #{updateAt} where id = #{id}
+    </update>
+    <delete id="deleteStudent" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
+</mapper>
