@@ -5,12 +5,15 @@ body{
     margin: 0;
     font-size: initial;
 }
+p{
+    margin: 0;
+}
 header{
     position: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .29rem 0 .29rem 0;
+    padding: .29rem 0;
     top: 0;
     left: 0;
     right: 0;
@@ -24,18 +27,20 @@ header{
      color: #FFFFFF;
      border-style: none;
      outline: none;
-     border-radius: 15%;
+     border-radius: 10%;
      background-color: #55A8B3;
 }
 .workers{
-    width: 1.44rem;
+     margin-left: -.1rem;
+     width: 1.44rem;
      height: .7rem;
      font-size: .34rem;
      color: #5FC0CD;
      outline: none;
      border-style: none;
-     border-radius: 15%;
+     border-radius: 10%;
      background-color: #FFFFFF;
+     z-index: 1;
 }
 .navigation{
     position: absolute;
@@ -80,9 +85,6 @@ main{
     border-right: .02rem solid #E1E5E7;
     text-align: center;
 }
-.dropdown-content p{
-    margin: 0;
-}
 .dropdown-content{
     display: none;
     position: absolute;
@@ -103,22 +105,22 @@ main{
 }
 ul{
     margin: 0;
-    margin-bottom: 50%;
+    margin-bottom: 1.6rem;
     padding-top: .8rem ;
     padding-left: 0;
     list-style: none;
 }
 li{
-    left: 0;
-    right: 0;
-    height: 1.8rem;
-    padding-bottom: 15px;
+    padding: .3rem 0 ;
     border-bottom: .02rem solid #E1E5E7;
 }
 .date{
     margin-left: .3rem;
     font-size: .24rem;
     white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    letter-spacing: .06rem;
     color: #5D5D5D;
 }
 .date::before{
@@ -130,41 +132,49 @@ li{
     background: url(../img/css_sprite.png) no-repeat -.2rem -.2rem;
 }
 .time{
-    position: relative;
-    margin-left: .69rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 .32rem 0 .69rem;
+    line-height: .69rem;
     font-size: .3rem;
+    font-weight: 800;
 }
 .years{
     white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
     color: #333333;
 }
 .money{
-    position: absolute;
-    right: .31rem;
     color: #E63B0E;
+    font-size: .3rem;
     white-space: nowrap;
+    text-overflow:ellipsis;
 }
 .money::after{
     display: inline-block;
+    margin-bottom: -.03rem;
     content: "";
     width: .26rem;
     height: .26rem;
-    border-top: .04rem solid #5FC0CD;
-    border-right: .04rem solid #5FC0CD;
+    border-top: .06rem solid #5FC0CD;
+    border-right: .06rem solid #5FC0CD;
     transform:rotate(45deg); 
 }
 .address{
+    margin-left: .3rem;
     font-size: .26rem;
     color: #999999;
     white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
 }
 .address::before{
     display: inline-block;
-    margin-left: 13px;
     content: "";
-    height: .45rem;
-    width: .38rem;
-    background: url(../img/css_sprite.png) no-repeat -.2rem -.56rem;
+    height: .3rem;
+    width: .3rem;
+    background: url(../img/css_sprite.png) no-repeat -.2rem -.73rem;
 }
 footer{
     position: fixed;
@@ -187,7 +197,7 @@ footer{
     display: block;
     margin-bottom: .14rem;
     content: "";
-    width: .46rem;
+    width: .48rem;
     height: .4rem;
     background: url(../img/css_sprite.png) no-repeat -.2rem -1.4rem;
 }
@@ -215,9 +225,9 @@ footer{
 }
 .my::before{
     display: block;
-    margin-bottom: .16rem;
+    margin-bottom: .13rem;
     content: "";
-    width: .42rem;
+    width: .48rem;
     height: .42rem;
-    background: url(../img/css_sprite.png) no-repeat -.2rem -2.88rem;
+    background: url(../img/css_sprite.png) no-repeat -.17rem -2.9rem;
 }
