@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyh.mapper.StudentMapper">
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+    <resultMap type="Student" id="student">
+        <id property="id" column="id"  />
+        <result property="enrolmentTime" column="enrolment_time"  />
+        <result property="knowFrom" column="know_from"  />
+        <result property="createAt" column="create_at"  />
+        <result property="updateAt" column="update_at"  />
+    </resultMap>
+    <insert id="addStudent" useGeneratedKeys="true" keyProperty="id" parameterType="student">
+        insert into student(name,qq,wish,school,enrolment_time,type,know_from,create_at,update_at) values (#{name},#{qq},#{wish},#{school},#{enrolmentTime},#{type},#{knowFrom},#{createAt},#{updateAt})
+    </insert>
+    <delete id="deleteStudent" parameterType="int">
+        delete from student where id = #{id}
+    </delete>
+    <update id="updateStudent" parameterType="student">
+          update student set name = #{name},qq = #{qq},wish = #{wish},school = #{school},enrolment_time = #{enrolmentTime},type = #{type},know_from = #{knowFrom},create_at = #{createAt},update_at = #{updateAt} where id = #{id}
+    </update>
+    <select id="selectById" resultMap="student">
+        select * from student where id = #{id}
+    </select>
+    <select id="selectByName" resultMap="student">
+       select * from student where name = #{name}
+    </select>
+    <select id="selectAll" resultType="student">
+        select * from student
+    </select>
+</mapper>
