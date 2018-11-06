@@ -1,0 +1,92 @@
+.bg-green{
+    background-color: #1DB176;
+}
+.nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    @media screen and (max-width: 575px) {
+        justify-content: space-between;
+    } // logo
+    .nav-brand {
+        display: flex;
+        align-items: center;
+    } // 折叠按钮样式
+    .nav-button-border {
+        display: none;
+        margin: 5px;
+        padding: 5px;
+        border: .03rem solid #3fb886;
+        label {
+            display: inline-block;
+            padding: .06rem 0;
+            width: .24rem;
+            height: .18rem;
+            border-top: .02rem solid #94d8bc;
+            border-bottom: .02rem solid #94d8bc;
+            background: #94d8bc;
+            background-clip: content-box;
+        }
+        @media screen and (max-width: 575px) {
+            display: flex;
+            align-items: center;
+        }
+    } // 文本样式
+    .nav-text {
+        flex-grow: 1;
+        transition: height 1s;
+        @media screen and (max-width: 575px) {
+            height: 0;
+            li {
+                height: 0 !important;
+                .nav-link {
+                    height: 0 !important;
+                }
+            }
+        } //导航栏文字换行响应式
+        @media screen and (max-width: 575px) {
+            flex-basis: 100%;
+            flex-grow: 1;
+            text-align: center;
+        }
+        .navbar-nav {
+            display: flex;
+            justify-content: flex-end;
+            margin-right: -10px;
+            li {
+                transition: height 1s;
+                height: 0.6rem;
+                margin-left: .8vw;
+                padding: 0 10px;
+                .nav-link {
+                    transition: height 1s;
+                    padding: 0;
+                    line-height: .575rem;
+                    font-size: .16rem;
+                    color: white;
+                    white-space: nowrap;
+                }
+                &:hover {
+                    border-bottom: .02rem solid white;
+                } // 清除边距
+                @media screen and (max-width: 575px) {
+                    margin-left: 0;
+                }
+            } //导航栏文字缩小垂直排列
+            @media screen and (max-width: 575px) {
+                flex-direction: column;
+            }
+        }
+    } //点击事件
+    @media screen and (max-width: 575px) {
+        #nav-button:checked~.nav-text {
+            height: 2.4rem;
+            li {
+                height: .6rem !important;
+            }
+            .nav-link {
+                height: .575rem !important;
+            }
+        }
+    }
+}
