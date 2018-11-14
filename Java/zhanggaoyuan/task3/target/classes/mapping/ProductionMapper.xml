@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.ProductionMapper" >
+  <resultMap id="BaseResultMap" type="jnshu.model.Production" >
+    <id column="production_id" property="productionId" jdbcType="INTEGER" />
+    <result column="production_name" property="productionName" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="production_putaway" property="productionPutaway" jdbcType="BIT" />
+    <result column="production_putaway_time" property="productionPutawayTime" jdbcType="BIGINT" />
+    <result column="submenu_id" property="submenuId" jdbcType="INTEGER" />
+    <result column="artist_name" property="artistName" jdbcType="VARCHAR" />
+    <result column="production_finish_time" property="productionFinishTime" jdbcType="VARCHAR" />
+    <result column="production_synopsis" property="productionSynopsis" jdbcType="VARCHAR" />
+    <result column="production_detail" property="productionDetail" jdbcType="VARCHAR" />
+    <result column="production_experience" property="productionExperience" jdbcType="VARCHAR" />
+    <result column="image_links" property="imageLinks" jdbcType="VARCHAR" />
+    <result column="video_link" property="videoLink" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    production_id, production_name, creat_time, update_time, production_putaway, production_putaway_time, 
+    submenu_id, artist_name, production_finish_time, production_synopsis, production_detail,
+    production_experience, image_links, video_link
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from production
+    where production_id = #{productionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from production
+    where production_id = #{productionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.Production" >
+    insert into production (production_id, production_name, creat_time, 
+      update_time, production_putaway, production_putaway_time, 
+      submenu_id, artist_name, production_finish_time,
+      production_synopsis, production_detail, production_experience, 
+      image_links, video_link)
+    values (#{productionId,jdbcType=INTEGER}, #{productionName,jdbcType=VARCHAR}, #{creatTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT}, #{productionPutaway,jdbcType=BIT}, #{productionPutawayTime,jdbcType=BIGINT}, 
+      #{submenuId,jdbcType=INTEGER}, #{artistName,jdbcType=VARCHAR}, #{productionFinishTime,jdbcType=VARCHAR},
+      #{productionSynopsis,jdbcType=VARCHAR}, #{productionDetail,jdbcType=VARCHAR}, #{productionExperience,jdbcType=VARCHAR}, 
+      #{imageLinks,jdbcType=VARCHAR}, #{videoLink,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.Production" >
+    update production
+    <set >
+      <if test="productionName != null" >
+        production_name = #{productionName,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="productionPutaway != null" >
+        production_putaway = #{productionPutaway,jdbcType=BIT},
+      </if>
+      <if test="productionPutawayTime != null" >
+        production_putaway_time = #{productionPutawayTime,jdbcType=BIGINT},
+      </if>
+      <if test="submenuId != null" >
+        submenu_id = #{submenuId,jdbcType=INTEGER},
+      </if>
+      <if test="artistName != null" >
+        artist_name = #{artistName,jdbcType=VARCHAR},
+      </if>
+      <if test="productionFinishTime != null" >
+        production_finish_time = #{productionFinishTime,jdbcType=VARCHAR},
+      </if>
+      <if test="productionSynopsis != null" >
+        production_synopsis = #{productionSynopsis,jdbcType=VARCHAR},
+      </if>
+      <if test="productionDetail != null" >
+        production_detail = #{productionDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="productionExperience != null" >
+        production_experience = #{productionExperience,jdbcType=VARCHAR},
+      </if>
+      <if test="imageLinks != null" >
+        image_links = #{imageLinks,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLink != null" >
+        video_link = #{videoLink,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where production_id = #{productionId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <!--分页查询作品简单信息-->
+  <select id="selectProduction" parameterType="Map" resultMap="BaseResultMap">
+    select production_id,production_name,image_links,production_synopsis,production_putaway_time
+    from production
+    <if test="start!=null and pagesize!=null">
+    limit #{start},#{pagesize}
+    </if>
+  </select>
+
+  <!--  查询作品的总记录数-->
+  <select id="selectTotal" resultType="int" >
+    select count(*) from production
+  </select>
+  <!--模糊查询作品名，作品简介-->
+  <select id="selectKeyword" parameterType="String" resultMap="BaseResultMap">
+    select production_id,production_name,image_links,production_synopsis,production_putaway_time
+    from production
+    where (production_name like "%"#{data}"%" or production_synopsis like "%"#{data}"%")and production_putaway=1
+  </select>
+<!--查询二级菜单对应的作品-->
+  <select id="selectSubmenu" parameterType="int" resultMap="BaseResultMap">
+    select production_id,production_name,production_putaway_time,production_synopsis,image_links
+from production
+where production_putaway=1 and submenu_id=#{submenuId}
+  </select>
+  
+  <!--查询图片详细信息-->
+  <select id="selectProductionDetail" parameterType="int" resultMap="BaseResultMap">
+    select production_id,production_name,artist_name,production_detail,production_putaway_time,image_links,video_link
+    from production
+    where production_putaway=1 and production_id=#{production_id}
+  </select>
+  
+  
+</mapper>

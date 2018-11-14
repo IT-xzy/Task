@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.SubmenuMapper" >
+  <resultMap id="BaseResultMap" type="jnshu.model.Submenu" >
+    <id column="submenu_id" property="submenuId" jdbcType="INTEGER" />
+    <result column="submenu_name" property="submenuName" jdbcType="VARCHAR" />
+    <result column="cmenu_id" property="cmenuId" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    submenu_id, submenu_name, cmenu_id, creat_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from submenu
+    where submenu_id = #{submenuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from submenu
+    where submenu_id = #{submenuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.Submenu" >
+    insert into submenu (submenu_id, submenu_name, cmenu_id, 
+      creat_time, update_time)
+    values (#{submenuId,jdbcType=INTEGER}, #{submenuName,jdbcType=VARCHAR}, #{cmenuId,jdbcType=INTEGER}, 
+      #{creatTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT})
+  </insert>
+  <!--<insert id="insertSelective" parameterType="Submenu" >-->
+    <!--insert into submenu-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="submenuId != null" >-->
+        <!--submenu_id,-->
+      <!--</if>-->
+      <!--<if test="submenuName != null" >-->
+        <!--submenu_name,-->
+      <!--</if>-->
+      <!--<if test="cmenuId != null" >-->
+        <!--cmenu_id,-->
+      <!--</if>-->
+      <!--<if test="creatTime != null" >-->
+        <!--creat_time,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="submenuId != null" >-->
+        <!--#{submenuId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="submenuName != null" >-->
+        <!--#{submenuName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="cmenuId != null" >-->
+        <!--#{cmenuId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="creatTime != null" >-->
+        <!--#{creatTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--#{updateTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.Submenu" >
+    update submenu
+    <set >
+      <if test="submenuName != null" >
+        submenu_name = #{submenuName,jdbcType=VARCHAR},
+      </if>
+      <if test="cmenuId != null" >
+        cmenu_id = #{cmenuId,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where submenu_id = #{submenuId,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

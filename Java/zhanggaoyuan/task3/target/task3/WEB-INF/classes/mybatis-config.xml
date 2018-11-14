@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--设置别名-->
+<configuration>
+    <typeAliases>
+        <typeAlias alias="Author" type="jnshu.model.Author" />
+        <typeAlias type="jnshu.model.Banner" alias="Banner" />
+        <typeAlias type="jnshu.model.Cmenu" alias="Cmenu" />
+        <typeAlias type="jnshu.model.People" alias="People" />
+        <typeAlias type="jnshu.model.Production" alias="Production" />
+        <typeAlias type="jnshu.model.Studio" alias="Studio" />
+        <typeAlias type="jnshu.model.Submenu" alias="Submenu" />
+        <typeAlias type="jnshu.model.Visitor" alias="Visitor" />
+    </typeAliases>
+    <!--
+    plugins在配置文件中的位置必须符合要求，否则会报错，顺序如下:
+    properties?, settings?,
+    typeAliases?, typeHandlers?,
+    objectFactory?,objectWrapperFactory?,
+    plugins?,
+    environments?, databaseIdProvider?, mappers?
+-->
+    <plugins>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+            <property name="rowBoundsWithCount" value="true"/>
+            <!-- 指定数据库类型，不指定的话分页插件会自动检测-->
+            <property name="helperDialect" value="mysql"/>
+        </plugin>
+    </plugins>
+
+</configuration>

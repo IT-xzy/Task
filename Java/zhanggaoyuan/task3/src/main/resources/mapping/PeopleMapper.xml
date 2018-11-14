@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.PeopleMapper" >
+  <resultMap id="BaseResultMap" type="jnshu.model.People" >
+    <id column="people_id" property="peopleId" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="people_name" property="peopleName" jdbcType="VARCHAR" />
+    <result column="people_image" property="peopleImage" jdbcType="VARCHAR" />
+    <result column="people_detail" property="peopleDetail" jdbcType="VARCHAR" />
+    <result column="people_production_intro" property="peopleProductionIntro" jdbcType="VARCHAR" />
+    <result column="people_contact_way" property="peopleContactWay" jdbcType="VARCHAR" />
+    <result column="if_artist" property="ifArtist" jdbcType="BIT" />
+    <result column="if_worker" property="ifWorker" jdbcType="BIT" />
+    <result column="people_putaway" property="peoplePutaway" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    people_id, creat_time, update_time, people_name, "people_image", people_detail,
+    people_production_intro, people_contact_way, if_artist, if_worker, people_putaway
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from people
+    where people_id = #{peopleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from people
+    where people_id = #{peopleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.People" >
+    insert into people (people_id, creat_time, update_time, 
+      people_name, people_image, people_detail,
+      people_production_intro, people_contact_way, 
+      if_artist, if_worker, people_putaway
+      )
+    values (#{peopleId,jdbcType=INTEGER}, #{creatTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{peopleName,jdbcType=VARCHAR}, #{peopleImage,jdbcType=VARCHAR}, #{peopleDetail,jdbcType=VARCHAR}, 
+      #{peopleProductionIntro,jdbcType=VARCHAR}, #{peopleContactWay,jdbcType=VARCHAR}, 
+      #{ifArtist,jdbcType=BIT}, #{ifWorker,jdbcType=BIT}, #{peoplePutaway,jdbcType=BIT}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.People" >
+    update people
+    <set >
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="peopleName != null" >
+        people_name = #{peopleName,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleImage != null" >
+        "people_image" = #{peopleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleDetail != null" >
+        people_detail = #{peopleDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleProductionIntro != null" >
+        people_production_intro = #{peopleProductionIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleContactWay != null" >
+        people_contact_way = #{peopleContactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="ifArtist != null" >
+        if_artist = #{ifArtist,jdbcType=BIT},
+      </if>
+      <if test="ifWorker != null" >
+        if_worker = #{ifWorker,jdbcType=BIT},
+      </if>
+      <if test="peoplePutaway != null" >
+        people_putaway = #{peoplePutaway,jdbcType=BIT},
+      </if>
+    </set>
+    where people_id = #{peopleId,jdbcType=INTEGER}
+  </update>
+
+  <!--查询艺术家信息-->
+  <select id="selectArtist" resultMap="BaseResultMap">
+    select people_id,people_name,people_detail,people_production_intro,people_contact_way
+    from people
+    where if_artist=1 and people_putaway=1
+  </select>
+
+  <!--查询成员的信息-->
+  <select id="selectWorker" resultMap="BaseResultMap">
+    select people_id,people_name,people_detail,people_production_intro,people_contact_way
+    from people
+    where if_worker=1 and people_putaway=1
+  </select>
+</mapper>
