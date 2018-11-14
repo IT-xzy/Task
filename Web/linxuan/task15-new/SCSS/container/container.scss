@@ -1,0 +1,58 @@
+$px15: 15px;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto; 
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -$px15;
+    margin-left: -$px15;
+}
+@media (min-width:576px) {
+    .container {
+        max-width: 540px
+    }
+}
+
+@media (min-width:768px) {
+    .container {
+        max-width: 720px
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 960px
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1140px
+    }
+}
+$screen: (
+    xs: 576px,
+    sm: 768px,
+    md: 992px,
+    lg: 1200px
+);
+@for $col from 1 through 12 {
+    .col-#{$col} {
+        width: 100%;
+        padding-right: $px15;
+        padding-left: $px15;
+        flex: 0 0 #{$col*100%/12};
+        min-height: 1px;
+    }
+}
