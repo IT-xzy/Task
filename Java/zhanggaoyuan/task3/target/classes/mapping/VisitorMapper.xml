@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.VisitorMapper" >
+  <resultMap id="BaseResultMap" type="jnshu.model.Visitor" >
+    <id column="visitor_id" property="visitorId" jdbcType="INTEGER" />
+    <result column="visitor_creat_time" property="visitorCreatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="visitor_name" property="visitorName" jdbcType="VARCHAR" />
+    <result column="visitor_comment" property="visitorComment" jdbcType="VARCHAR" />
+    <result column="visitor_choiceness" property="visitorChoiceness" jdbcType="BIT" />
+    <result column="production_id" property="productionId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    visitor_id, visitor_creat_time, update_time, visitor_name, visitor_comment, visitor_choiceness, 
+    production_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from visitor
+    where visitor_id = #{visitorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from visitor
+    where visitor_id = #{visitorId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.Visitor" >
+    insert into visitor (visitor_id, visitor_creat_time, update_time, 
+      visitor_name, visitor_comment, visitor_choiceness, 
+      production_id)
+    values (#{visitorId,jdbcType=INTEGER}, #{visitorCreatTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{visitorName,jdbcType=VARCHAR}, #{visitorComment,jdbcType=VARCHAR}, #{visitorChoiceness,jdbcType=BIT}, 
+      #{productionId,jdbcType=INTEGER})
+  </insert>
+  <!--<insert id="insertSelective" parameterType="Visitor" >-->
+    <!--insert into visitor-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="visitorId != null" >-->
+        <!--visitor_id,-->
+      <!--</if>-->
+      <!--<if test="visitorCreatTime != null" >-->
+        <!--visitor_creat_time,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time,-->
+      <!--</if>-->
+      <!--<if test="visitorName != null" >-->
+        <!--visitor_name,-->
+      <!--</if>-->
+      <!--<if test="visitorComment != null" >-->
+        <!--visitor_comment,-->
+      <!--</if>-->
+      <!--<if test="visitorChoiceness != null" >-->
+        <!--visitor_choiceness,-->
+      <!--</if>-->
+      <!--<if test="productionId != null" >-->
+        <!--production_id,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="visitorId != null" >-->
+        <!--#{visitorId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="visitorCreatTime != null" >-->
+        <!--#{visitorCreatTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--#{updateTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="visitorName != null" >-->
+        <!--#{visitorName,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="visitorComment != null" >-->
+        <!--#{visitorComment,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="visitorChoiceness != null" >-->
+        <!--#{visitorChoiceness,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="productionId != null" >-->
+        <!--#{productionId,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.Visitor" >
+    update visitor
+    <set >
+      <if test="visitorCreatTime != null" >
+        visitor_creat_time = #{visitorCreatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="visitorName != null" >
+        visitor_name = #{visitorName,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorComment != null" >
+        visitor_comment = #{visitorComment,jdbcType=VARCHAR},
+      </if>
+      <if test="visitorChoiceness != null" >
+        visitor_choiceness = #{visitorChoiceness,jdbcType=BIT},
+      </if>
+      <if test="productionId != null" >
+        production_id = #{productionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where visitor_id = #{visitorId,jdbcType=INTEGER}
+  </update>
+
+  
+  <!--查询对应作品中游客和作者的留言信息-->
+  <select id="selectGuestbook" parameterType="int" resultMap="guestbookMap">
+    select visitor.visitor_id,visitor_creat_time,visitor_name,visitor_comment,author_id,author_creat_time,author_name,author_comment
+    from visitor left join author on visitor.visitor_id=author.visitor_id and visitor.production_id=author.production_id
+    where visitor_choiceness=1 and visitor.production_id=#{production_id}
+  </select>
+  <resultMap id="guestbookMap" type="Visitor">
+    <id column="visitor_id" property="visitorId"/>
+    <result column="visitor_creat_time" property="visitorCreatTime"/>
+    <result column="visitor_name" property="visitorName"/>
+    <result column="visitor_comment" property="visitorComment"/>
+    <collection property="list" ofType="Author">
+      <id column="author_id" property="authorId"/>
+      <result column="author_creat_time" property="authorCreatTime"/>
+      <result column="author_name" property="authorName"/>
+      <result column="author_comment" property="authorComment"/>
+    </collection>
+  </resultMap>
+
+
+</mapper>

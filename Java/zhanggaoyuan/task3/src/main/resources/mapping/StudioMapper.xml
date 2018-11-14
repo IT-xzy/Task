@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.StudioMapper" >
+  <resultMap id="BaseResultMap" type="Studio" >
+    <id column="studio_id" property="studioId" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="studio_name" property="studioName" jdbcType="VARCHAR" />
+    <result column="studio_detail" property="studioDetail" jdbcType="VARCHAR" />
+    <result column="studio_contact_way" property="studioContactWay" jdbcType="VARCHAR" />
+    <result column="studio_putaway" property="studioPutaway" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    studio_id, creat_time, update_time, studio_name, studio_detail, studio_contact_way,
+    studio_putaway
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from studio
+    where studio_id = #{studioId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from studio
+    where studio_id = #{studioId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="Studio" >
+    insert into studio (studio_id, creat_time, update_time,
+    studio_name, studio_detail, studio_contact_way,
+    studio_putaway)
+    values (#{studioId,jdbcType=INTEGER}, #{creatTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT},
+    #{studioName,jdbcType=VARCHAR}, #{studioDetail,jdbcType=VARCHAR}, #{studioContactWay,jdbcType=VARCHAR},
+    #{studioPutaway,jdbcType=BIT})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="Studio" >
+    update studio
+    <set >
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="studioName != null" >
+        studio_name = #{studioName,jdbcType=VARCHAR},
+      </if>
+      <if test="studioDetail != null" >
+        studio_detail = #{studioDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="studioContactWay != null" >
+        studio_contact_way = #{studioContactWay,jdbcType=VARCHAR},
+      </if>
+      <if test="studioPutaway != null" >
+        studio_putaway = #{studioPutaway,jdbcType=BIT},
+      </if>
+    </set>
+    where studio_id = #{studioId,jdbcType=INTEGER}
+  </update>
+
+  <!--查询工作室信息-->
+  <select id="selectStudio" resultMap="BaseResultMap">
+    select studio_id,studio_name,studio_detail,studio_contact_way
+    from studio
+    where studio_putaway=1
+  </select>
+</mapper>
