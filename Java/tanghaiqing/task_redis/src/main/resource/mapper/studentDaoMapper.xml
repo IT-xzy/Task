@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task6_redis.dao.StudentDao">
+    <select id="count" resultType="Integer">
+        select count(stu_id) from student
+    </select>
+    <select id="countJob" resultType="Integer">
+        select count(stu_id) from student where taking_work='1'
+    </select>
+    <insert id="savaStudent" parameterType="task6_redis.pojo.Student">
+        insert into student (name,gender,age,school_time,job,graduate,taking_work,create_at,update_at)
+        values (#{name},#{gender},#{age},#{schoolTime},#{job},#{graduate},#{takingWork},#{createTime},#{updateTime})
+    </insert>
+</mapper>
