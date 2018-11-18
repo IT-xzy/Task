@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task8_service.dao.PositionStuDao">
+    <resultMap id="positionStu" type="task8_service.pojo.PositionStu">
+        <result property="posId" column="pos_id"/>
+        <result property="name" column="name"/>
+        <result property="position" column="position"/>
+        <result property="intro" column="intro"/>
+        <result property="image" column="image"/>
+        <result property="salary" column="salary"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+    <select id="goodShow" resultMap="positionStu">
+        select name,position,intro,image,salary from stu_position  order by  salary desc limit 0,4
+    </select>
+    <insert id="savePosition" parameterType="task8_service.pojo.PositionStu">
+        insert into stu_position
+      (name,position,intro,image,salary,create_time,update_time)
+        values (#{name},#{position},#{intro},#{image},#{salary},#{createTime},#{updateTime})
+    </insert>
+</mapper>

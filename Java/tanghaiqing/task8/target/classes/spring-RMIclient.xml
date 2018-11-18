@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:rmi="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
+    <!--端口1访问接口的配置-->
+    <bean id="positionService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1086/PositionService"/>
+        <property name="serviceInterface" value="task8_service.service.PositionService"/>
+    </bean>
+
+    <bean id="jobService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1086/JobService"/>
+        <property name="serviceInterface" value="task8_service.service.JobService"/>
+    </bean>
+
+    <bean id="studentService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1086/StudentService"/>
+        <property name="serviceInterface" value="task8_service.service.StudentService"/>
+    </bean>
+
+    <bean id="userService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1086/UserService"/>
+        <property name="serviceInterface" value="task8_service.service.UserService"/>
+    </bean>
+    <!--端口2的访问接口配置-->
+    <bean id="positionService-2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1088/PositionService"/>
+        <property name="serviceInterface" value="task8_service.service.PositionService"/>
+    </bean>
+
+    <bean id="jobService-2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1088/JobService"/>
+        <property name="serviceInterface" value="task8_service.service.JobService"/>
+    </bean>
+
+    <bean id="studentService-2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1088/StudentService"/>
+        <property name="serviceInterface" value="task8_service.service.StudentService"/>
+    </bean>
+
+    <bean id="userService-2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+        <property name="serviceUrl" value="rmi://localhost:1088/UserService"/>
+        <property name="serviceInterface" value="task8_service.service.UserService"/>
+    </bean>
+</beans>

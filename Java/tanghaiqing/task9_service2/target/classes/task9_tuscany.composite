@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://task9.service"
+           xmlns:sample="http://task9.service"
+           xmlns:scallop="http://scallop/xmlns/sca/1.1"
+           name="task9_tuscany">
+    <component name="PositionServiceComponent">
+        <implementation.spring location="spring-servlet.xml"/>
+        <service name="PositionService2">
+            <interface.java interface="task9.service.PositionService"/>
+            <tuscany:binding.rmi uri="rmi://localhost:1089/PositionService"/>
+        </service>
+    </component>
+    <component name="JobServiceComponent">
+        <implementation.spring location="spring-servlet.xml"/>
+        <service name="JobService2">
+            <interface.java interface="task9.service.JobService"/>
+            <tuscany:binding.rmi uri="rmi://localhost:1089/JobService"/>
+        </service>
+    </component>
+    <component name="StudentServiceComponent">
+        <implementation.spring location="spring-servlet.xml"/>
+        <service name="StudentService2">
+            <interface.java interface="task9.service.StudentService"/>
+            <tuscany:binding.rmi uri="rmi://localhost:1089/StudentService"/>
+        </service>
+    </component>
+    <component name="UserServiceComponent">
+        <implementation.spring location="spring-servlet.xml"/>
+        <service name="UserService2">
+            <interface.java interface="task9.service.UserService"/>
+            <tuscany:binding.rmi uri="rmi://localhost:1089/UserService"/>
+        </service>
+    </component>
+
+</composite>
