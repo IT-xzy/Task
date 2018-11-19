@@ -1,0 +1,97 @@
+html{
+    font-size: 312.5%;
+}
+a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+//变量
+$margin: 0;
+$font-size: .36rem;
+$color: #FFFFFF,#E1E5E7,#5FC0CD;
+$background: #5FC0CD,#FFFFFF,#EFF0F4;
+
+//混合器
+@mixin flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* 内嵌 */
+body{
+    margin: $margin;
+    font-size: initial;
+    background: nth($background,3);
+    /* 头部 */
+    header{
+        @include flex;
+        position: fixed;
+        height: 1.28rem;
+        top: 0;
+        left: 0;
+        right: 0;
+        font-size: $font-size;
+        background: nth($background,1);
+        z-index: 1;
+        .header-left{
+            margin-left: .32rem;
+        }
+        .header-right{
+            margin-right: .32rem;
+        }
+    }
+    /* 中间部分 */
+    main{
+        margin-top: 1.28rem;
+        padding-top: .16rem;
+        .input-box{
+            display: flex;
+            align-items: center;
+            margin-bottom: .16rem;
+            height: 1rem;
+            background: nth($background,2);
+            input{
+                padding-left: .34rem;
+                outline: none !important;
+                border: none;
+                border-left: .03rem solid #E1E5E7 !important;
+            }
+        }
+        .phone{
+            margin: 0 .46rem 0 .42rem;
+            width: .28rem;
+            height: .42rem;
+            background: url(../img/suoo.png) no-repeat 0 0;
+        }
+        
+        .lock{
+            margin: 0 .46rem 0 .42rem;
+            width: .29rem;
+            height: .43rem;
+            background: url(../img/suoo.png) no-repeat -34px 0;
+        }
+    }
+    /* 底部 */
+    footer{
+        margin-top: .7rem;
+        text-align: right;
+        button{
+            line-height: 1rem;
+            width: 100%;
+            font-size: $font-size;
+            outline: none;
+            border: none;
+            color: nth($color,1);
+            background: nth($background,1);
+        }
+        a{
+            display: block;
+            margin-top: .33rem;
+            margin-right: .33rem;
+            font-size: .32rem;
+            color: nth($color,3);
+        }
+    }
+   
+}
+
