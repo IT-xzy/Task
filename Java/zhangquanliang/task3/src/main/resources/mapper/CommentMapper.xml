@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.art.mapper.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.art.pojo.Comment" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="nick" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="work_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="from_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="to_by" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_at" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="update_at" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, nick, work_id, from_by, to_by, type, status, content, create_at, update_at
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from comment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByCondition" resultMap="BaseResultMap">
+    select * from comment
+    <where>
+      <if test="status !=null">
+        status=#{status}
+      </if>
+      <if test="fromBy !=null">
+        AND from_by=#{fromBy}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from comment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.art.pojo.Comment" >
+    insert into comment (id, nick, work_id,
+      from_by, to_by, type, status,
+      content, create_at, update_at
+      )
+    values (#{id,jdbcType=INTEGER}, #{nick,jdbcType=VARCHAR}, #{workId,jdbcType=INTEGER},
+      #{fromBy,jdbcType=VARCHAR}, #{toBy,jdbcType=VARCHAR}, #{type,jdbcType=BIT}, #{status,jdbcType=BIT},
+      #{content,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.art.pojo.Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nick != null" >
+        nick,
+      </if>
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="fromBy != null" >
+        from_by,
+      </if>
+      <if test="toBy != null" >
+        to_by,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nick != null" >
+        #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null" >
+        #{workId,jdbcType=INTEGER},
+      </if>
+      <if test="fromBy != null" >
+        #{fromBy,jdbcType=VARCHAR},
+      </if>
+      <if test="toBy != null" >
+        #{toBy,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.art.pojo.Comment" >
+    update comment
+    <set >
+      <if test="nick != null" >
+        nick = #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null" >
+        work_id = #{workId,jdbcType=INTEGER},
+      </if>
+      <if test="fromBy != null" >
+        from_by = #{fromBy,jdbcType=VARCHAR},
+      </if>
+      <if test="toBy != null" >
+        to_by = #{toBy,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.art.pojo.Comment" >
+    update comment
+    set nick = #{nick,jdbcType=VARCHAR},
+      work_id = #{workId,jdbcType=INTEGER},
+      from_by = #{fromBy,jdbcType=VARCHAR},
+      to_by = #{toBy,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIT},
+      status = #{status,jdbcType=BIT},
+      content = #{content,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
