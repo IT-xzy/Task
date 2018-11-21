@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE generatorConfiguration
+            PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+          "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="jdbc.properties"/><!--导入属性配置-->
+         <!--因为生成过程中需要连接db，所以第3行指定了驱动jar包的位置,我在pom文件的插件中添加中配置过了-->
+     <!--   <classPathEntry location="D:\Program\Apache\maven\repository\mysql\mysql-connector-java\5.1.47\
+         mysql-connector-java-5.0.47.jar"/>-->
+    <!-- 一个数据库一个context -->
+    <context id="Mysql" targetRuntime="tk.mybatis.mapper.generator.TkMyBatis3Impl" defaultModelType="flat">
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <!-- 生成的pojo，将implements Serializable-->
+        <plugin type="${mapper.plugin}">
+            <property name="mappers" value="${mapper.Mapper}"/>
+        </plugin>
+
+        <commentGenerator><!-- optional，旨在创建class时，对注释进行控制 -->
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+             <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <!-- 非必需，类型处理器，在数据库类型和java类型之间的转换控制-->
+        <!--  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer
+           true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal       -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- Model模型生成器,用来生成含有主键key的类，记录类 以及查询Example类
+           targetPackage     指定生成的model生成所在的包名
+           targetProject     指定在该项目下所在的路径
+       -->
+        <!-- 生成model模型，对应的包路径，以及文件存放路径(targetProject)，targetProject可以指定具体的路径,如./src/main/java，
+        也可以使用“MAVEN”来自动生成，这样生成的代码会在target/generatord-source目录下
+        -->
+        <javaModelGenerator targetPackage="${targetModelPackage}" targetProject="${targetJavaProject}">
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否对model添加 构造函数 -->
+            <property name="constructorBased" value="true"/>
+            <!-- 是否对类CHAR类型的列的数据进行trim操作 -->
+            <!-- 从数据库返回的值被清理前后的空格  -->
+            <property name="trimStrings" value="true"/>
+            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+        <!--Mapper映射文件生成所在的目录 为每一个数据库的表生成对应的SqlMap文件 -->
+        <sqlMapGenerator targetPackage="${targetXMLPackage}"  targetProject="${targetResourcesProject}">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator targetPackage="${targetMapperPackage}" targetProject="${targetJavaProject}" type="XMLMAPPER" >
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+       <!-- 一次生成所有实体类，mapper,mapper.xml-->
+        <table tableName="%" mapperName="{0}Mapper"  enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <!-- 参考 javaModelGenerator 的 constructorBased属性-->
+            <property name="constructorBased" value="false"/>
+            <!-- 默认为false，如果设置为true，在生成的SQL中，table名字不会加上catalog或schema； -->
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <!-- 参考 javaModelGenerator 的 immutable 属性 -->
+            <property name="immutable" value="false"/>
+            <!-- 指定是否只生成domain类，如果设置为true，只生成domain类，如果还配置了sqlMapGenerator，那么在mapper XML文件中，只生成resultMap元素 -->
+            <property name="modelOnly" value="false"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+                      type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+                      type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+                      type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口 -->
+            <!--具体要生成的表，如果有多个表，复制这一段，改下表名即可-->
+        <!-- 列出要生成代码的所有表，这里配置的是不生成Example文件 -->
+       <!-- <table tableName="comment" domainObjectName="Comment"
+               delimitIdentifiers="true"
+               selectByPrimaryKeyQueryId="true"
+                enableCountByExample="false"
+               enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            &lt;!&ndash; 参考 javaModelGenerator 的 constructorBased属性&ndash;&gt;
+            <property name="constructorBased" value="false"/>
+            &lt;!&ndash; 默认为false，如果设置为true，在生成的SQL中，table名字不会加上catalog或schema； &ndash;&gt;
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            &lt;!&ndash; 参考 javaModelGenerator 的 immutable 属性 &ndash;&gt;
+            <property name="immutable" value="false"/>
+            &lt;!&ndash; 指定是否只生成domain类，如果设置为true，只生成domain类，如果还配置了sqlMapGenerator，那么在mapper XML文件中，只生成resultMap元素 &ndash;&gt;
+            <property name="modelOnly" value="false"/>
+        </table>-->
+    </context>
+</generatorConfiguration>

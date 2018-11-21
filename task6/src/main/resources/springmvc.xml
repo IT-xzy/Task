@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/mvc
+         http://www.springframework.org/schema/mvc/spring-mvc.xsd
+         http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 启用spring mvc注解 -->
+    <context:annotation-config/>
+    <!--  扫描包,扫描注解-->
+    <context:component-scan base-package="com.jnshu.controller"/>
+    <context:component-scan base-package="com.jnshu.aspect"/>
+    <context:component-scan base-package="com.jnshu.service"/>
+
+    <aop:aspectj-autoproxy/><!--Spring在aop命名空间中提供了一个自定义的配置元素-->
+    <!--  - 配置扫描的包，可以注解映射器，注册HandlerMapper、HandlerAdapter映射类 -->
+    <mvc:annotation-driven/>
+    <!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置-->
+    <!--  访问静态资源-->
+    <mvc:default-servlet-handler/>
+   <!-- <resources/>用来访问静态资源，它指示WEB-INF哪些静态资源需要单独处理，不通过dispatcher servlet。-->
+    <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:resources location="/images/" mapping="/u/images/**"/>
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <!-- 对转向页面的路径解析（视图解析）。prefix：前缀， suffix：后缀   如：http://127.0.0.1:8080/springmvc/jsp/****.jsp-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 配置jsp路径的前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 配置jsp路径的后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!--tiles的路径配置-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/layout.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--这里是Spring MessageResource的配置，用于输出资源文件信息的-->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                    <value>message</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+        <mvc:view-controller path="/task6" view-name="register"/>
+    <mvc:interceptors>
+        <!--配置拦截器-->
+        <mvc:interceptor>
+            <!--配置拦截器的作用路径-->
+            <mvc:mapping path="/u/**"/>
+            <!--定义在<mvc:interceptor>下面的表示匹配指定路径的请求才进行拦截-->
+            <bean class="com.jnshu.aspect.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+   <!-- <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="staticMethod" value="plm.common.utils.CheckUtil.setResources" />
+        &lt;!&ndash; 这里配置参数 &ndash;&gt;
+        <property name="arguments" ref="messageSource"/>
+    </bean>-->
+
+    <!--使用默认的servlet响应静态文件,在springMVC-servlet.xml中配置<mvc:default-servlet-handler />后，
+       会在Spring MVC上下文中定义一个org.springframework.web.servlet.resource.
+       DefaultServletHttpRequestHandler，它会像一个检查员，对进入DispatcherServlet的URL进行筛查，
+       如果发现是静态资源的请求，就将该请求转由Web应用服务器默认的Servlet处理，如果不是静态资源的请求，
+       才由DispatcherServlet继续处理。-->
+    <!--<mvc:default-servlet-handler/>-->
+</beans>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- 主布局 -->
+    <!--定义一个主布局的名字，然后指明布局文件（模板文件）-->
+    <definition name="layout" template="/WEB-INF/jsp/mainLayout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp"/>
+        <!--<put-attribute name="menu"  value="/WEB-INF/tiles/menu.jsp"/>-->
+    </definition>
+    <!--首页-->
+   <!-- <definition name="task-91" extends="layout">
+        <put-attribute name="title" value="首页"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/body/task-91.jsp"/>
+    </definition>
+    &lt;!&ndash;推荐&ndash;&gt;
+    <definition name="task-92" extends="layout">
+        <put-attribute name="title" value="推荐"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/body/task-92.jsp"/>
+    </definition>
+    &lt;!&ndash;职业&ndash;&gt;
+    <definition name="task-93" extends="layout">
+        <put-attribute name="title" value="职业"/>
+        <put-attribute name="body" value="/WEB-INF/jsp/body/task-93.jsp"/>
+    </definition>-->
+
+    <!-- 主布局 -->
+    <!-- 项目 -->
+    <!--定义myView继承于主布局layout-->
+    <!--方法一：加入要添加的body页面-->
+   <!-- <definition name="myView1" extends="layout">
+        <put-attribute name="body" expression="/WEB-INF/jsp/body.jsp"/>
+    </definition>-->
+       <!-- 使用通配符可以将多个body组合起来，layout是基本的模板 -->
+            <definition name="myView1" extends="layout">
+                <put-attribute name="body" expression="/WEB-INF/jsp/body/${bodyname}.jsp"  />
+            </definition>
+  <!--  <definition name="base" template="WEB-INF/jsp/pages.jsp">
+        <put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+    </definition>-->
+
+
+    <!--<definition name="*" extends="base">
+        <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp"  />
+    </definition>-->
+    <!--方法二：使用EL表达式-->
+  <!--  <definition name="myView" extends="layout">
+        <put-attribute name="body" expression="/WEB-INF/views/${item}.jsp"/>
+    </definition>-->
+    <!--项目-->
+</tiles-definitions>

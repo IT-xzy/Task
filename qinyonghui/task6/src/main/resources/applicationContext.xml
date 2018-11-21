@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+         http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-4.0.xsd ">
+    <!-- 加载配置文件 -->
+    <context:annotation-config/>
+        <!-- 自动扫描。包名所在的包及其子包中，如果类的头上带有特定的注解（@Component@Repository
+        @Service@Controller）,就会将这个对象作为Bean注入进Spring容器中。  -->
+        <context:component-scan base-package="com.jnshu"/>
+    <!-- 引入外置文件 -->
+   <!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location" value="classpath:jdbc.properties"/>
+    </bean>-->
+    <!--下面这一行数和上面三行代表相同的意思，引入外置文件jdbc.properties-->
+   <!-- <context:property-placeholder location="classpath:jdbc.properties"/>-->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:memcache.properties</value>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--数据库连接池配置,这里是Spring自带的连接。-->
+    <bean id="dataSource" class="${jdbc.dataSource}"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="${jdbc.pool.maxActive}"/>
+        <property name="maxIdle" value="${jdbc.pool.maxIdle}"/>
+        <property name="minIdle" value="${jdbc.pool.minIdle}"/>
+        <property name="initialSize" value="${jdbc.pool.initialSize}"/>
+    </bean>
+
+    <!-- 引入同文件夹下的redis属性配置文件 -->
+    <import resource="classpath:spring-redis.xml"/>
+
+      <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
+            <property name="basePackage" value="com.jnshu.mapper"/>
+            <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+      </bean>
+
+    <!--sqlSessionFactoryBean实现了Spring的FactoryBean接口，就是说由Spring最终创建了Bean而不是
+ sqlSessionFactory本身，是工厂类的getObject（）返回的方法的结果。SqlSessionFactory有一个必须
+ 的属性，就是Jdbc的datasource。-->
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.jnshu.entity"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:xmlmapper/*.xml"/>
+    </bean>
+
+  <!--  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="typeAliasesPackage" value="com.jnshu.entity"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:xmlmapper/ArtMapper.xml"/>
+    </bean>-->
+
+    <!-- Mapper代理的方式开发方式一，配置Mapper代理对象 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 如果是多个包名可用",; \t\n"中任意符号分隔开，详见：MapperScannerConfigurer[269行] -->
+        <property name="basePackage" value="com.jnshu.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <!-- 配置sqlSessionFactory -->
+    <!--  <bean id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+          <property name="mapperInterface" value="com.jnshu.mapper.StudentMapper" />
+          <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+      </bean>-->
+    <!-- 客户端：java_memcached-release_2.6.6 -->
+    <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize"
+          destroy-method="shutDown">
+       <!-- 构造函数-->
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+        <!-- 可以设置多个memcached服务器 -->
+        <property name="servers">
+            <list>
+                <value>${memcache.server}</value>
+            </list>
+        </property>
+        <!-- 每个服务器初始连接数 -->
+        <property name="initConn">
+            <value>${memcache.initConn}</value>
+        </property>
+        <!-- 每个服务器最小连接数 -->
+        <property name="minConn">
+            <value>${memcache.minConn}</value>
+        </property>
+        <!-- 每个服务器最大连接数 -->
+        <property name="maxConn">
+            <value>${memcache.maxConn}</value>
+        </property>
+        <!-- 主线程睡眠时间 -->
+        <property name="maintSleep">
+            <value>${memcache.maintSleep}</value>
+        </property>
+        <!-- TCP/Socket的参数，如果是true在写数据时不缓冲，立即发送出去参数 -->
+        <property name="nagle">
+            <value>${memcache.nagle}</value>
+        </property>
+        <!-- 连接超时/阻塞读取数据的超时间是 -->
+        <property name="socketTO">
+            <value>${memcache.socketTO}</value>
+        </property>
+    </bean>
+
+    <bean id="memCachedClient" class="com.danga.MemCached.MemCachedClient">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+    </bean>
+   <!-- <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize">
+        <constructor-arg>
+            <value>neeaMemcachedPool</value>
+        </constructor-arg>
+        <property name="servers">
+            <list>
+                <value>127.0.0.1:11211</value>
+            </list>
+        </property>
+        <property name="initConn">
+            <value>20</value>
+        </property>
+        <property name="minConn">
+            <value>10</value>
+        </property>
+        <property name="maxConn">
+            <value>50</value>
+        </property>
+        <property name="nagle">
+            <value>false</value>
+        </property>
+        <property name="socketTO">
+            <value>3000</value>
+        </property>
+    </bean>
+    <bean id="memcachedClient" class="com.danga.MemCached.MemCachedClient">
+        <constructor-arg>
+            <value>neeaMemcachedPool</value>
+        </constructor-arg>
+    </bean>-->
+</beans>
