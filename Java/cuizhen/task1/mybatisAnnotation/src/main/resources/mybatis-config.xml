@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--<configuration>：声明在标签里面的信息是配置信息-->
+
+    <settings>
+        <!--允许 JDBC 支持自动生成主键-->
+        <setting name="useGeneratedKeys" value="false"/>
+        <!--是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典
+ Java 属性名 aColumn 的类似映射。 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <package name="pojo"/>
+    </typeAliases>
+    <!--<typeAliases>：声明在该标签里面的信息是一个个的别名-->
+    <environments default="development">
+        <!--default表示默认的环境变量-->
+        <environment id="development">
+            <!--一个environment表示一个jdbc连接数据库-->
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/task?characterEncoding=UTF-8&amp;useSSL=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="5525"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--<environments>：声明在该标签内的环境变量-->
+
+    <mappers>
+        <mapper class="mapper.StudentMapper"/>
+        <!--<mapper>：声明Mapper的路径-->
+    </mappers>
+    <!--<mappers>：声明我们定义的一个个Mapper类，或者说是关联-->
+</configuration>
