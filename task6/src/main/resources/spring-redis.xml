@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 缓存的层级-->
+  <!--  <context:component-scan base-package="com.niit.cache" />-->
+
+    <!-- 引入redis配置 -->
+   <!-- <context:property-placeholder location="classpath:redis.properties" ignore-unresolvable="true"/>-->
+
+    <!-- redis配置-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 最大空闲数 -->
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <!-- 最大空连接数 -->
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <!-- 最大等待时间 -->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <!-- 连接超时时是否阻塞，false时报异常,ture阻塞直到超时, 默认true -->
+        <property name="blockWhenExhausted" value="${redis.blockWhenExhausted}" />
+        <!-- 返回连接时，检测连接是否成功 -->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+
+    <!-- Spring-redis连接池管理工厂,redis单节点数据库连接配置 -->
+    <!-- redis服务器中心 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <!-- IP地址 -->
+        <property name="hostName" value="${redis.host}" />
+    <!--    <property name="password" value="${redis.pass}" />-->
+        <!-- 端口号 -->
+        <property name="port" value="${redis.port}" />
+        <!-- 超时时间 默认2000-->
+        <property name="timeout" value="${redis.timeout}" />
+        <!-- 连接池配置引用 -->
+        <property name="poolConfig" ref="poolConfig" />
+        <!-- usePool：是否使用连接池 -->
+        <property name="usePool" value="true"/>
+    </bean>
+
+    <!-- redisTemplate配置，redisTemplate是对Jedis的对redis操作的扩展，有更多的操作，封装使操作更便捷 -->
+    <!-- redis操作模板，面向对象的模板 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        <!-- 如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 -->
+        <!--Spring提供的两种序列化策略StringRedisSerializer或者JdkSerializationRedisSerializer-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <!--<property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>-->
+       <!-- 开启事务  -->
+        <property name="enableTransactionSupport" value="false"/>
+    </bean>
+
+    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+    <bean id="redisCache" class="com.jnshu.myutils.RedisCache">
+   <!--<property name="redisCache" ref="redisTemplate" />-->
+    </bean>
+</beans>
