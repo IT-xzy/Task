@@ -1,0 +1,182 @@
+@charset"UTF-8";
+
+//变量
+$background:#29BDE0;
+$yellow:#fbb435;
+$color:#ffffff;
+$orang:#FFEDC5;
+
+
+//混合器
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin flex($j, $a) {
+    display: flex;
+    justify-content: $j;
+    align-items: $a;
+}
+
+// 样式重置
+html{
+    font-size: 312.5%;
+}
+body{
+    margin: 0;
+    font-size: initial;
+}
+p,h4{
+    margin: 0;
+}
+a{
+    text-decoration:none;
+    outline: none;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include flex(space-between, center);
+    height: 1rem;
+    background: $background;
+    border-bottom: solid 1px #74d4eb;
+    z-index: 1;
+
+    .back {
+        @include wh(.24rem, .24rem);
+        margin-left: .4rem;
+        border-top: 0.05rem solid $color;
+        border-right: 0.05rem solid $color;
+        transform: rotate(225deg);
+        cursor: pointer;
+    }
+
+    .font {
+        font-size: .45rem;
+        color: $color;
+        letter-spacing: .15rem;
+    }
+
+    .close {
+        display: inline-block;
+        margin-right: .64rem;
+        @include wh(2px, 30px);
+        transform: rotate(45deg);
+        background: $color;
+
+        &::after {
+            content: "";
+            display: block;
+            @include wh(2px, 30px);
+            transform: rotate(-90deg);
+            background: $color;
+        }
+    }
+
+}
+
+
+/*主体*/
+main {
+    padding: .1rem .15rem;
+    margin: 1rem 0 1.5rem 0;
+
+    h4{
+        border: 0.01rem solid #C9C9C9;
+        margin-top: .2rem;
+        background: #FFFFFF;
+        line-height: 1rem;
+        text-align: center;
+         color: #69D1E9;
+    }
+    ul {
+        position: relative;
+        margin-top: .2rem;
+        padding: .6rem .3rem .6rem 1.5rem;
+        border: 0.01rem solid #C9C9C9;
+        background: $color;
+        
+    }
+    .top-sjx{
+        position: absolute;
+            top: -.4rem;
+            left: 50%;
+            margin-left: -.25rem;
+            border-bottom: .5rem solid $color;
+            border-left: .3rem solid transparent;
+            border-right: .3rem solid transparent;
+            /*顶部三角形*/
+    }
+    .bar{
+        position: absolute;
+            left: .6rem;
+            @include wh(.05rem,75%);
+            background:#C9C9C9;
+            .moon{
+                display: inline-block;
+                @include wh(.6rem,.6rem);
+                margin-left: -.3rem;
+                border: 0.01rem solid #C9C9C9;
+                border-radius: 100%;
+                background: $color;
+
+                img{
+                    @include wh (.4rem,.4rem);
+                    margin: 0.11rem 0 0 .08rem;
+                }
+            }
+            .sun{
+                @extend .moon;
+                margin-top: .4rem;
+            }
+    }
+    .step {
+        background: #24A7C6;
+        line-height: .76rem;
+        margin-bottom: .2rem;
+        /*字符间距*/
+        letter-spacing: .05rem;
+        text-align: center;
+        color: $color;
+}
+.sjx{
+    position: absolute;
+    left: 1.15rem;
+    margin-top: .2rem;
+    border-right: .35rem solid #24A7C6;
+    border-top: .2rem solid transparent;
+    border-bottom: .2rem solid transparent;
+    /*三角形*/
+}
+}
+footer{
+    position: fixed;
+    bottom: 0;
+    @include wh(100%,1.2rem);
+    @include flex (space-between, center);
+    background:rgba(41,189,224,.6);
+
+    button{
+        @include wh(50%,.86rem);
+        margin:0  .24rem;
+        border-radius: .15rem;
+        background: #FBB435;
+        font-size: .4rem;
+        color: $color;    
+       /*鼠标指标为一只手*/
+       cursor:pointer;
+       /*阴影效果*/
+       box-shadow: 0 0 0 1.5px #FBB435;
+    }
+}
