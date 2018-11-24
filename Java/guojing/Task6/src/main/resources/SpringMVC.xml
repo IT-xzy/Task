@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 启用spring注解 -->
+    <context:annotation-config/>
+    <!--  扫描包,扫描注解-->
+    <!--这个xml文件是前端控制器下面加载的，由于前端控制器需要分发请求
+    (用户访问时，会从前端控制器下的MVC配置开始找@Controller注解的bean，如果找不到就不能访问)，
+    必须在这里进行扫描，ApplicationContext.xml做为父容器是不能访问子容器
+    （SpringMVC.xml）的，而子容器是可以访问父容器的；当然也可以将所有的配置全都放在SpringMVC
+    配置中，但是只在一个配置文件中不利于扩展，非常麻烦-->
+    <context:component-scan base-package="com.ptteng.controller"/>
+
+
+    <!--返回json格式的数据数据需要的，就是启动@ResponseBody注解-->
+    <mvc:annotation-driven/>
+
+    <!--启动AOP注解-->
+    <!--<aop:aspectj-autoproxy/>-->
+
+
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
+    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/><!--设置JSP文件的目录位置-->
+        <property name="suffix" value=".jsp"/>
+
+    </bean>
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>message</value>
+            </list>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false" />
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="cacheSeconds" value="60" />
+    </bean>
+
+
+
+</beans>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 启动扫描，扫描注解所在的包-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.ptteng.dao"/>
+    <context:component-scan base-package="com.ptteng.service"/>
+    <context:component-scan base-package="com.ptteng.CahcheUtil"/>
+
+
+    <!-- 引入外置资源文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!--<property name="location" value="classpath:db.properties"/>-->
+       <property name="locations">
+           <list>
+               <value>classpath:db.properties</value>
+               <value>classpath:memCached.properties</value>
+               <value>classpath:redis.properties</value>
+           </list>
+       </property>
+    </bean>
+    <!--数据库连接池配置-->
+    <bean id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--创建工厂bean。要注意SqlSessionFactoryBean实现了Spring 的FactoryBean接口
+    这就说明了由 Spring 最终创建的 bean 不是SqlSessionFactoryBean本身。
+    而是工厂类的 getObject()返回的方法的结果。
+    SqlSessionFactory 有一个单独的必须属性,就是 JDBC 的 DataSource。-->
+    <!--mapperLocations 属性使用一个资源位置的 list。
+   这个属性可以用来指定 MyBatis的XML映射器文件的位置。
+   它的值可以包含 Ant 样式来加载一个目录中所有文件, 或者从基路径下递归搜索所有路径-->
+
+    <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <!--使用一个 MapperScannerConfigurer,它将会查找类路径下的映射器并自动将它们创建成MapperFactoryBean。-->
+    <!--basePackage 属性是让你为映射器接口文件设置基本的包路径。你可以使用分号或逗号作为分隔符设置多于一个的包路径。-->
+    <!--每个映射器将会在指定的包路径中递归地被搜索到。-->
+
+    <!--注意,没有必要去指定SqlSessionFactory或SqlSessionTemplate,因为MapperScannerConfigurer将会创建-->
+    <!--MapperFactoryBean,之后自动装配。但是,如果你使用了一个以上的 DataSource,那么自动装配可能会失效。-->
+    <!--这种情况下 ,你可以使用sqlSessionFactoryBeanName或sqlSessionTemplateBeanName属性来设置正确的bean名称来使用。-->
+    <!--这就是它如何来配置的,注意bean的名称是必须的,而不是bean的引用,因此,value属性在这里替代通常的ref:-->
+    <!--MapperScannerConfigurer支持过滤由指定的创建接口或注解创建映射器。annotationClass-->
+    <!--属性指定了要寻找的注解名称。markerInterface 属性指定了要寻找的父接口。如果两者都被指定了，-->
+    <!--加入到接口中的映射器会匹配两种标准。默认情况下,这两个属性都是 null,所以在基包中给定的所有接口可以作为映射器加载。-->
+
+
+    <!--//这里的写法是省去了bean的name。MapperScannerConfigurer会搜索包名所在，
+    查找路径下的映射器自动生成一个MapperFactoryBean。-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 如果是多个包名可用",; \t\n"中任意符号分隔开，详见：MapperScannerConfigurer[128行] -->
+        <property name="basePackage" value="com.ptteng.dao"/>
+        <!-- 下面这一句可以省略，为默认 -->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    </bean>
+
+    <!--引入memcache的配置文件-->
+    <import resource="classpath:memCacheClient.xml"/>
+    <import resource="classpath:redis.xml"/>
+
+
+
+</beans>

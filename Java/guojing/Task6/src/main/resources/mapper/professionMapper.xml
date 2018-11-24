@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.ProfessionDao">
+
+    <resultMap id="professionMap" type="com.ptteng.entity.Profession">
+        <id column="id" property="id"/>
+        <result column="direction" property="direction"/>
+        <result column="classify" property="classify"/>
+        <result column="duty" property="duty"/>
+        <result column="strip" property="strip"/>
+        <result column="difficulty_level" property="difficultyLevel"/>
+        <result column="growth_cycle" property="growthCycle"/>
+        <result column="scarcity_degree" property="scarcityDegree"/>
+        <result column="first_salary" property="firstSalary"/>
+        <result column="second_salary" property="secondSalary"/>
+        <result column="third_salary" property="thirdSalary"/>
+        <result column="basic_knowledge" property="basicKnowledge"/>
+        <result column="engineer" property="engineer"/>
+        <result column="engineer_intro" property="engineerIntro"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="count" property="count"/>
+    </resultMap>
+
+    <resultMap id="idMap" type="java.util.HashMap">
+        <result column="id" property="id"/>
+    </resultMap>
+
+
+    <select id="findProfession" resultMap="professionMap">
+        select * from profession
+        limit #{pageStart},#{size}
+    </select>
+
+    <select id="findId" resultMap="idMap">
+        select id from profession
+        limit #{pageStart},#{size}
+    </select>
+
+    <select id="findOnePro" resultMap="professionMap">
+        select * from profession where id=#{id}
+    </select>
+
+
+    <update id="updatePro" parameterType="com.ptteng.entity.Profession">
+    update profession
+        <trim prefix="set" suffixOverrides=",">
+            <if test="direction !=null and direction !=''">
+                direction=#{direction},
+            </if>
+            <if test="classify !=null and classify !=''">
+                classify=#{classify},
+            </if>
+            <if test="duty !=null and duty !=''">
+                duty=#{duty},
+            </if>
+            <if test="strip !=null and strip !=''">
+                strip=#{strip},
+            </if>
+            <if test="difficultyLevel !=null and difficultyLevel !=''">
+                difficulty_level=#{difficultyLevel},
+            </if>
+            <if test="growthCycle !=null and growthCycle !=''">
+                growth_cycle=#{growthCycle},
+            </if>
+            <if test="scarcityDegree !=null and scarcityDegree !=''">
+                scarcity_degree=#{scarcityDegree},
+            </if>
+            <if test="firstSalary !=null and firstSalary !=''">
+                first_salary=#{firstSalary},
+            </if>
+            <if test="secondSalary !=null and secondSalary !=''">
+                second_salary=#{secondSalary},
+            </if>
+            <if test="thirdSalary !=null and thirdSalary !=''">
+                third_salary=#{thirdSalary},
+            </if>
+            <if test="basicKnowledge !=null and basicKnowledge !=''">
+                basic_knowledge=#{basicKnowledge},
+            </if>
+            <if test="engineer !=null and engineer !=''">
+                engineer=#{engineer},
+            </if>
+            <if test="engineerIntro !=null and engineerIntro !=''">
+                engineer_intro=#{engineerIntro},
+            </if>
+            <if test="createAt !=null and createAt !=''">
+                create_at=#{createAt},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at=#{updateAt},
+            </if>
+            <if test="updateBy !=null and updateBy !=''">
+                update_by=#{updateBy},
+            </if>
+            <if test="createBy !=null and createBy !=''">
+                create_by=#{createBy},
+            </if>
+        </trim>
+        where id=#{id}
+    </update>
+
+
+    <insert id="insertPro" useGeneratedKeys="true" keyProperty="id" parameterType="com.ptteng.entity.Profession">
+        <!--<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">-->
+            <!--SELECT LAST_INSERT_ID()-->
+        <!--</selectKey>-->
+    insert into profession
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="direction !=null and direction !=''">
+                direction,
+            </if>
+            <if test="classify !=null and classify !=''">
+                classify,
+            </if>
+            <if test="duty !=null and duty !=''">
+                duty,
+            </if>
+            <if test="strip !=null and strip !=''">
+                strip,
+            </if>
+            <if test="difficultyLevel !=null and difficultyLevel !=''">
+                difficulty_level,
+            </if>
+            <if test="growthCycle !=null and growthCycle !=''">
+                growth_cycle,
+            </if>
+            <if test="scarcityDegree !=null and scarcityDegree !=''">
+                scarcity_degree,
+            </if>
+            <if test="firstSalary !=null and firstSalary !=''">
+                first_salary=#{firstSalary},
+            </if>
+            <if test="secondSalary !=null and secondSalary !=''">
+                second_salary,
+            </if>
+            <if test="thirdSalary !=null and thirdSalary !=''">
+                third_salary,
+            </if>
+            <if test="basicKnowledge !=null and basicKnowledge !=''">
+                basic_knowledge,
+            </if>
+            <if test="engineer !=null and engineer !=''">
+                engineer,
+            </if>
+            <if test="engineerIntro !=null and engineerIntro !=''">
+                engineer_intro,
+            </if>
+            <if test="createAt !=null and createAt !=''">
+                create_at,
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at,
+            </if>
+            <if test="updateBy !=null and updateBy !=''">
+                update_by,
+            </if>
+            <if test="createBy !=null and createBy !=''">
+                create_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="direction !=null and direction !=''">
+                #{direction},
+            </if>
+            <if test="classify !=null and classify !=''">
+               #{classify},
+            </if>
+            <if test="duty !=null and duty !=''">
+               #{duty},
+            </if>
+            <if test="strip !=null and strip !=''">
+               #{strip},
+            </if>
+            <if test="difficultyLevel !=null and difficultyLevel !=''">
+               #{difficultyLevel},
+            </if>
+            <if test="growthCycle !=null and growthCycle !=''">
+                #{growthCycle},
+            </if>
+            <if test="scarcityDegree !=null and scarcityDegree !=''">
+               #{scarcityDegree},
+            </if>
+            <if test="firstSalary !=null and firstSalary !=''">
+                #{firstSalary},
+            </if>
+            <if test="secondSalary !=null and secondSalary !=''">
+                #{secondSalary},
+            </if>
+            <if test="thirdSalary !=null and thirdSalary !=''">
+                #{thirdSalary},
+            </if>
+            <if test="basicKnowledge !=null and basicKnowledge !=''">
+                #{basicKnowledge},
+            </if>
+            <if test="engineer !=null and engineer !=''">
+                #{engineer},
+            </if>
+            <if test="engineerIntro !=null and engineerIntro !=''">
+                #{engineerIntro},
+            </if>
+            <if test="createAt !=null and createAt !=''">
+                #{createAt},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                #{updateAt},
+            </if>
+            <if test="updateBy !=null and updateBy !=''">
+                #{updateBy},
+            </if>
+            <if test="createBy !=null and createBy !=''">
+                #{createBy},
+            </if>
+        </trim>
+    </insert>
+
+
+    <delete id="deletePro" parameterType="long">
+    delete from profession where id=#{id}
+    </delete>
+
+</mapper>
