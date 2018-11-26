@@ -1,0 +1,24 @@
+<div ng-controller="LoginController" class="Loginmian">
+    <div class="Landbox">
+        <h1 class="Landframe">
+            登陆
+        </h1>
+        <form name="myForm">
+            <input name="nameinput" class="Landname" id="nameNumber" ng-model="nameNb" ng-focus="change=false" ng-blur="change=true"
+                type="text" placeholder="请输入账号" required>
+            <div style="height: 21.8px;">
+                <span class="prompt" ng-show="myForm.nameinput.$error.required && change">必填项</span>
+                <p class="prompt">{{nametext}}</p>
+            </div>
+            <input name="pwdinput" class="Landkey" id="keyNumber" ng-model="pwdNb" type="password" placeholder="请输入密码"
+                ng-focus="chan=false" ng-blur="chan=true" required>
+            <div style="height: 21.8px;">
+                <span class="prompt" ng-show="myForm.pwdinput.$error.required && chan">必填项</span>
+                <p class="prompt">{{pwdtext}}</p>
+            </div>
+        </form>
+        <button class="Landbutton btn" ng-click="LoginKey()" ng-disabled="myForm.$invalid">
+            登陆
+        </button>
+    </div>
+</div>
