@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" name ="viewport" content ="width=device-width,initial-scale=1.0">
+    <title>杀人游戏</title>
+    <link href="css/proportion.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<header>
+    <a class="back" onclick="Back()"></a>
+    <h2>参数设置</h2>
+    <a class="circled-help"></a>
+</header>
+<main>
+    <div class="box-top">
+    <h3 class="bor-r">玩家配比</h3>
+        <div class="bg-fff">
+                <ul id="player" class="player">
+
+                </ul>
+        </div>
+        <button class="cl-blue" onclick="Playermix()" id="btm-set">
+            点击设置
+        </button>
+    </div>
+    <div class="box-container">
+        <input id="civTxt" class="input-top" type="text" placeholder="水民词组">
+        <input id="killTxt" class="input-button" type="text" placeholder="杀手词组">
+    </div>
+    <div class="box-bottom">
+        <div class="box-bottom-player">
+            玩家人数
+            <input id="PlayerNumber" class="box-bottom-people" type="text" value="4" onchange="playernumber()">
+            人
+        </div>
+        <div class="box-bottom-input">
+            <input class="bottom-input-minus" type="button" onclick="btmmin()">
+            <input class="bottom-input-slider" type="range" id="RangeNumber" value="4" min="4" max="18" step="1" onchange="rangenumber()">
+            <input class="bottom-input-add" type="button" onclick="btmadd()">
+        </div>
+    </div>
+</main>
+<footer>
+    <button class="footer-button-start" onclick="start()">去发牌</button>
+</footer>
+<script src="task-2.js"></script>
+</body>
+</html>
