@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 启用spring注解 -->
+    <context:annotation-config/>
+    <!--  扫描包,扫描注解-->
+    <context:component-scan base-package="com"/>
+
+    <!--返回json格式的数据数据需要的，就是启动@ResponseBody注解-->
+    <mvc:annotation-driven/>
+
+    <!--启动AOP注解-->
+    <aop:aspectj-autoproxy/>
+
+
+    <!--加载静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <!--配置静态资源映射-->
+    <mvc:resources location="/WEB-INF/static/images/" mapping="/images/**"/>
+
+    <mvc:resources location="/WEB-INF/static/css/" mapping="/css/**"/>
+
+    <!--配置拦截器后，配置静态资源映射-->
+    <mvc:resources location="/WEB-INF/static/images/" mapping="/u/images/**"/>
+
+    <mvc:resources location="/WEB-INF/static/css/" mapping="/u/css/**"/>
+
+
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀(如果最后一个还是表示文件夹,则最后的斜杠不要漏了) 使用JSP-->
+    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/><!--设置JSP文件的目录位置-->
+        <property name="suffix" value=".jsp"/>
+        <property name="exposeContextBeansAsAttributes" value="true"/>
+    </bean>
+
+    <!--tiles的视图解析器-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+    <!--配置布局文件-->
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/layout.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <mvc:interceptors>
+        <!--配置登录拦截器-->
+        <mvc:interceptor>
+            <!--拦截后台页面的请求，在LoginInterceptor中进行判断，true则放行-->
+            <mvc:mapping path="/u/**"/>
+
+            <bean class="com.Interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+</beans>

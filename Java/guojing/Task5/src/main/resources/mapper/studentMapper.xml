@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dao.StudentDao">
+
+    <resultMap id="studentMap" type="com.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="photo" property="photo"/>
+        <result column="classify_id" property="classifyId"/>
+        <result column="type" property="type"/>
+        <result column="position" property="position"/>
+        <result column="introduction" property="introduction"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+
+    <select id="findStudent" resultMap="studentMap">
+            select * from student order by salary desc limit 4
+    </select>
+
+
+    <select id="countStudent" resultType="Long">
+        select count(*) from student
+        <if test="classifyId !=null">
+            where classify_id=#{classifyId}
+        </if>
+    </select>
+
+
+
+</mapper>
