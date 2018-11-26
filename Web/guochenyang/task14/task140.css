@@ -1,0 +1,239 @@
+@charset "UTF-8";
+/*css reset start*/
+* {
+    margin: 0;
+    padding: 0;
+}
+ul, li {
+    list-style: none;
+}
+
+/*css reset end*/
+
+/*github展示统一样式start*/
+a {
+    text-decoration: none;
+    color: #fff;
+}
+/*css public start*/
+.floatfix {
+    *zoom: 1;
+}
+.floatfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/*css public end*/
+
+/*slider start*/
+.slider-contaner {
+    width: 100%;
+    position: relative;
+}
+.slider-item + .slider-item {
+    opacity: 0;
+}
+.slider-item {
+    width: 100%;
+    position: absolute;
+    animation-timing-function: linear;
+    animation-name: fade;
+    animation-iteration-count: infinite;
+    background-size: 100%;
+}
+.focus-container {
+    position: absolute;
+    z-index: 7;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+.focus-container li {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+    background: #fff;
+}
+.focus-item {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    animation-timing-function: linear;
+    animation-name: fade;
+    animation-iteration-count: infinite;
+}
+.focus-item2, .focus-item3, .focus-item4, .focus-item5 {
+    opacity: 0;
+}
+.focus-container ul {
+    margin-left: 46%;
+}
+
+/*设置轮播焦点的位置*/
+.focus-container {
+    bottom: 2%;
+}
+
+/*设置当前图片焦点的颜色*/
+.focus-item {
+    background: #51B1D9;
+}
+
+/*设置动画，请根据实际需要修改秒数*/
+.slider-item, .focus-item {
+    animation-duration: 20s;
+}
+.slider-item1, .focus-item1, .slider-ite1 {
+    animation-delay: -1s;
+}
+.slider-item2, .focus-item2, .slider-ite2 {
+    animation-delay: 3s;
+}
+.slider-item3, .focus-item3, .slider-ite3 {
+    animation-delay: 7s;
+}
+.slider-item4, .focus-item4, .slider-ite4 {
+    animation-delay: 11s;
+}
+.slider-item5, .focus-item5, .slider-ite5 {
+    animation-delay: 15s;
+}
+@keyframes fade {
+    0% {
+        opacity: 0;
+        z-index: 2;
+    }
+    5% {
+        opacity: 1;
+        z-index: 1;
+    }
+    20% {
+        opacity: 1;
+        z-index: 1;
+    }
+    25% {
+        opacity: 0;
+        z-index: 0;
+    }
+    100% {
+        opacity: 0;
+        z-index: 0;
+    }
+}
+
+/*设置背景，响应式请利用媒体查询根据断点修改路径*/
+.slider-item1 {
+    background-image: url(backimage1.png);
+}
+.slider-item2 {
+    background-image: url(backimage2.png);
+}
+.slider-item3 {
+    background-image: url(backimage3.jpg);
+}
+.slider-item4 {
+    background-image: url(backimage4.jpg);
+}
+.slider-item5 {
+    background-image: url(backimage5.png);
+}
+
+/*设置图片的高度，请根据具体需要修改百分比，响应式及时修改此值*/
+.slider, .slider-item {
+    padding-bottom: 30%;
+}
+.navbar-self {
+    background-color: #29b078; }
+
+.navbar-self::after {
+    content: "";
+    display: block;
+    clear: both; }
+
+.xs-hidden-btn {
+    float: right;
+    display: none;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    text-align: center;
+    margin: 8px;
+    background-color: #29b078; }
+
+.xs-hidden-btn span {
+    margin: 5px;
+    display: block;
+    width: 30px;
+    height: 2px;
+    background-color: #fff; }
+
+.nav-drop-menu li {
+    padding: 15px 15px;
+    list-style: none;
+    float: left;
+    background-color: #29b078; }
+
+.nav-drop-menu li:hover {
+     }
+
+.nav-drop-menu {
+    padding: 0;
+    text-align: center;
+    float: right;
+    clear: both; }
+
+#nav-btn {
+    display: none; }
+
+#nav-btn:checked ~ .nav-drop-menu {
+    display: block; }
+
+@media screen and (min-width: 768px) {
+    .xs-hidden-btn {
+        display: none; }
+
+    .nav-drop-menu {
+        margin-right: 15px;
+        margin-top: 0;
+        display: block;
+        float: right; }
+
+    .nav-drop-menu li {
+        float: left; } }
+@media screen and (max-width: 600px) {
+    .xs-hidden-btn {
+        display: block; }
+
+    .nav-drop-menu {
+        display: none;
+        float: none; }
+
+    .nav-drop-menu li {
+        float: none; } }
+.banner-arrow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 40%;
+}
+.banner-left {
+    width: 20px;
+    height: 38px;
+    background-image: url(cirsqu1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 999;
+}
+.banner-right {
+    width: 20px;
+    height: 38px;
+    background-image: url(cirsqu2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 999;
+}
+

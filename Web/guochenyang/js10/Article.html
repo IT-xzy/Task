@@ -1,0 +1,130 @@
+<div ng-controller="articleListCtrl"  style="position: absolute;;left:250px;top:76px;right: 30px;" >
+  <div class="articletopbox">
+    <div class="articletop">
+      <div class="titlecreator">
+        <p class="calendartitle">标&emsp;题：</p>
+        <input type="text" ng-model="title" class="form-control" style="border-radius: 5px;width:170px;">
+      </div>
+      <div class="titlecreator">
+        <p class="calendartitle">创建者：</p>
+        <input ng-model="author" type="text" class="form-control" style="border-radius: 5px;width:170px;">
+      </div>
+      <div class="calendar">
+        <p class="calendartitle">修改时间：</p>
+        <div class="calendarbox">
+          <p class="input-group">
+            <input type="text" class="form-control" ng-click="open2()" uib-datepicker-popup ng-model="dt1" is-open="popup2.opened" datepicker-options="dateOptions1"
+              ng-required="true" close-text="关闭" clear-text="清空" current-text="今天" style="border-radius: 5px;width:170px;text-align: center;"
+            />
+          </p>
+          <p class="sideways"></p>
+          <p class="input-group">
+            <input type="text" class="form-control" ng-click="open1()" uib-datepicker-popup ng-model="dt2" is-open="popup1.opened" datepicker-options="dateOptions2"
+              ng-required="true" close-text="关闭" clear-text="清空" current-text="今天" style="border-radius: 5px;width:170px;text-align: center;"
+            />
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="articlebttom">
+      <div class="titlecreator">
+        <p class="calendartitle">状&emsp;态：</p>
+        <select class="form-control" ng-model="status" ng-options="x.id as x.name for x in statusselect" style="width:170px;">
+
+        </select>
+      </div>
+      <div class="titlecreator">
+        <p class="calendartitle">类&emsp;型：</p>
+        <select class="form-control" ng-model="type" ng-options="x.id as x.name for x in typeselect" style="width:170px;">
+
+        </select>
+      </div>
+      <div class="buttonbox">
+        <button ng-click="searchbutton()" class="buttonrightgreen">
+          搜索
+        </button>
+        <button ng-click="emptybutton()" class="buttonleftred">
+          清空
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="particularsbox">
+    <div class="addedbox">
+      <h4 class="addedtitle">Article</h4>
+      <button class="addedbutton" ui-sref="organ.Added">+新增</button>
+    </div>
+    <table class="table table-striped table-bordered">
+      <tbody>
+        <tr>
+          <th>序号</th>
+          <th>图片</th>
+          <th>标题</th>
+          <th>类型</th>
+          <th>创建时间</th>
+          <th>修改时间</th>
+          <th>创建者</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        <tr ng-repeat="x in articleList | orderBy:'-id'">
+          <td ng-bind="$index + 1">1</td>
+          <!--<td>{{}}</td>-->
+          <td><img ng-src="{{ x.img }}" width="50" height="50" alt=""></td>
+          <td>{{ x.title }}</td>
+          <td>{{ x.type | filterType }}</td>
+          <td>
+            <div class="table-time">{{x.createAt | date: "yyyy-MM-dd"}} </div>
+            <div class="table-time">{{x.createAt | date: "HH:mm:ss"}}</div>
+          </td>
+          <td>
+            <div class="table-time"> {{x.updateAt | date: "yyyy-MM-dd"}}</div>
+            <div class="table-time"> {{x.updateAt | date: "HH:mm:ss"}}</div>
+          </td>
+          <td>{{ x.author }}</td>
+          <td>{{ x.status | filterStatus }}</td>
+          <td>
+            <button class="btn btn-warning f14 wh" ng-class="{true : 'background gray',false : '' }[x.status==2]"
+                    ng-click="changeStatus(x.id,x.status)">
+              {{ x.status | filterUnStates }}
+            </button>
+            <button class="btn btn-success f14" ui-sref="background.add-article({id:x.id})">编辑</button>
+            <button class="btn btn-danger f14" ng-click="delete(x.id)">删除</button>
+          </td>
+          <!-- <td>说明{{ x.content }}</td> -->
+          <!-- <td>链接{{ x.url }}</td> -->
+        </tr>
+
+      </tbody>
+    </table>
+    <div style="padding:1px;">
+
+    </div>
+  </div>
+  <div class="articlepagingbox">
+    <div  class="articlepagingbox">
+      每页显示
+      <input class="form-control" ng-model="size1" type="text" oninput="value=value.replace(/[^\d]/g,'')" style="width:66px;text-align:center;margin:20px 0;">
+      条
+    </div>
+    <ul uib-pagination ng-change="pageChanged()" total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" class="pagination-sm"
+    items-per-page="size" boundary-links="true" force-ellipses="true" first-text="首页" last-text="末页" previous-text="上一页" next-text="下一页"></ul>
+    <div class="articlepagingbox">
+      跳转至
+      <input class="form-control" ng-model="page" type="text"  oninput="value=value.replace(/[^\d]/g,'')" style="width:66px;text-align:center;margin:20px 0;">
+      页
+    </div>
+    <button class="btn btn-success" ng-click="inputChanged()"
+    style="background-color:#9bf3ff;border: none;color: #4d4d4d;font-weight: 700;">确定</button>
+  </div>
+
+  <!--分页directive-->
+  <!--<pagination page="page" max-page="maxPage" ng-click="pageTo()"></pagination>-->
+  <!--&lt;!&ndash;显示文本框&ndash;&gt;-->
+  <!--<p>当前页数：{{showPage}}</p>-->
+  <!--<p>总页数：-->
+    <!--<input type="text" ng-model="showMaxPage" ng-change="resetMaxPage()" title="显示的页码"/>-->
+  <!--</p>-->
+</div>
+<!-- ng-class="{true:'articlebtncolor1',false:'articlebtncolor2'}[articlebtnclass]" -->
+
