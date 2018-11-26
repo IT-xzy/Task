@@ -1,0 +1,70 @@
+@mixin border {
+  border: none;
+  border-left-style:solid;
+  border-width: 1px;
+  border-color: #eaedee;
+  vertical-align:middle;
+  padding-left: 20px;
+  outline:none;
+  font-size: 13px;
+}
+$bule : #5fc0cd;
+
+body{
+  min-width: 320px;
+  margin: 0;
+  background-color: #eff0f4;
+}
+.title1{
+  background-color: $bule;
+  text-align: center;
+  line-height: 40px;
+}
+.text1{
+  float: left;
+  color: white;
+  padding-left: 10px;
+}
+.text2{
+  color: white;
+  font-size: 18px;
+}
+.text3{
+  float: right;
+  color: white;
+  padding-right: 10px;
+}
+.main1{
+  background-color: white;
+  margin: 20px 0;
+  height: 40px;
+  padding: 15px 0 0 20px;
+}
+.main2{
+  @extend .main1;
+}
+.number{
+  @include border
+}
+.password{
+  @include border;
+}
+.button{
+  background-color: $bule;
+  text-align: center;
+  margin-top: 10px;
+  min-width: 100%;
+  height: 50px;
+  font-size: 18px;
+  color: white;
+  border:none;
+}
+.main3{
+  float: right;
+  color: $bule;
+  font-size: 13px;
+  padding-right: 20px;
+}
+input::-webkit-input-placeholder{
+  color: #eaedee;
+}
