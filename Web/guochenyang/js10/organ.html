@@ -1,0 +1,33 @@
+<div ng-controller="AccordionDemoCtrl" class="Organmian">
+  <div>
+    <div class="Organ">
+      <h1 class="OrganTitle">
+        后台管理系统
+      </h1>
+      <uib-accordion close-others="oneAtATime">
+        <div uib-accordion-group class="panel-default" 
+        is-open="group.open" ng-repeat="group in groups" ng-click="clickopen($index)"
+          style="margin:0;border-radius: 0;background-color: #6b6565;border: 0;">
+          <uib-accordion-heading>
+            {{group.title}}
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': group.open, 'glyphicon-chevron-right': !group.open}"></i>
+          </uib-accordion-heading>
+          <div ng-repeat="x in group.content">
+            <div class="organcolor2" 
+            ng-class="{true:'organcolor1'}[x.isOrgancolor1]" 
+            ng-click="clickclass($parent.$index,$index)" ui-sref={{x.url}}>
+              {{x.a}}
+              <span class="OrganMenuArrows"></span>
+            </div>
+          </div>
+        </div>
+      </uib-accordion>
+    </div>
+    <header>
+      <a class="IdentityQuit" href="" ng-click="quitclick()">退出</a>
+      <a class="Identity" href="">admin</a>
+      <a class="Identity" href="">玉藻前</a>
+    </header>
+  </div>
+  <div ui-view></div>
+</div>

@@ -1,0 +1,104 @@
+<div ng-controller="ArticleController" style="position: absolute;;left:250px;top:55px;right: 30px;">
+    <form name="addedform">
+        <div class="particularsbox">
+            <div class="addedbox">
+                <h4 class="addedtitle">{{addedtoptitle}}</h4>
+                <div></div>
+            </div>
+            <div class="addedinputbox">
+                标题名称：<input name="titleinput" ng-model="addedtitlemodel" ng-blur="titlechange = true" ng-focus="titlechange = false"
+                    class="form-control" style="width:70%;" required>
+                <p ng-show="addedform.titleinput.$error.required && titlechange" class="addedp">
+                    &emsp;*标题不可为空
+                </p>
+            </div>
+            <div class="addedinputbox">
+                类&emsp;&emsp;型：<select ng-model="addedtype" ng-options="x.id as x.name for x in addedtypeselect" class="form-control"
+                    style="width:20%;" required></select>
+                <p ng-show="addedtype == null" class="addedp">
+                    &emsp;*请选择类型
+                </p>
+                <select ng-show="addedtype == 3" ng-model="addedindustry" ng-options="x.id as x.name for x in addedindustryselect"
+                    class="form-control" style="width:20%;margin-left: 20px;"></select>
+                <p ng-show="addedindustry == null && addedtype == 3" class="addedp">
+                    &emsp;*请选择行业
+                </p>
+            </div>
+            <div class="richtextbox">
+                说&emsp;&emsp;明：
+                <div id="editor" class="richtext">
+
+                </div>
+            </div>
+            <div class="addedinputbox">
+                跳转链接：<input name="addedurlname" type="url" ng-model="addedurl" class="form-control" style="width:70%;"
+                    required>
+                <p ng-show="addedform.addedurlname.$error.url" class="addedp">
+                    &emsp;*请输入正确链接
+                </p>
+            </div>
+            <div class="addedinputbox">
+                配&emsp;&emsp;图：
+                <div class="filestyle btn btn-success">
+                    选择图片
+                    <input type="file" ng-model="tdmodel" onchange="angular.element(this).scope().addedinputchange()"
+                        name="file" id="fileid" accept="image/*">
+                </div>
+                <div class="addedimgbox">
+                    <img src="" id="portrait" height="100%">
+                </div>
+            </div>
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <th>图片名称</th>
+                        <th>文件大小</th>
+                        <th>上传进度</th>
+                        <th>上传状态</th>
+                        <th>图片操作</th>
+                    </tr>
+                    <tr>
+                        <td>{{picturename}}</td>
+                        <td>{{picturesize}}</td>
+                        <td>
+                            <div ng-show="picturename" class="progress" style="margin:0;">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                    aria-valuemin="0" aria-valuemax="100" id="progress" style="width: 0%;">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p ng-show="succeed" style="color:green;">上传成功</p>
+                            <p ng-show="defeated" style="color:red;">上传失败</p>
+                        </td>
+                        <td>
+                            <button ng-click="addedbutton()" ng-disabled="uploadDD" ng-show="picturename" class="btn btn-success"
+                                style="background-color:#5cb85c;border: none;">
+                                上传
+                            </button>
+                            <button ng-click="delbutton()" ng-show="picturename" class="btn btn-success" style="background-color:#c9302c;border: none;">
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="addedbottombox">
+                <div>
+                    <button class="btn btn-success" ng-disabled="!imgurl || addedform.$invalid || addedform.addedurlname.$error.url || addedtype == 3 && addedindustry == null"
+                        ng-click="onlineclick($event)" style="background-color:#5cb85c;border: none;">
+                        立即上线
+                    </button>
+                    <button class="btn btn-success" ng-disabled="!imgurl || addedform.$invalid || addedform.addedurlname.$error.url || addedtype == 3 && addedindustry == null"
+                        ng-click="onlineclick($event)" style="background-color:#5cb85c;border: none;">
+                        存为草稿
+                    </button>
+                </div>
+                <button ng-click="cancel()" class="btn btn-success" style="background-color:#c9302c;border: none;"
+                    formnovalidate>
+                    取消
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

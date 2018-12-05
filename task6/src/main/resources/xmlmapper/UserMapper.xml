@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.mapper.UserMapper">
+  <select id="findOne" parameterType="com.jnshu.entity.User" resultType="java.lang.Boolean">
+    SELECT  *FROM  user WHERE username = #{username} AND password = MD5(#{password})
+  </select>
+    <insert id="addOne" keyProperty="id" parameterType="com.jnshu.entity.User" useGeneratedKeys="true">
+          INSERT INTO user(username,password) SELECT #{username},MD5(#{password})
+          FROM DUAL WHERE NOT EXISTS(SELECT username FROM user WHERE username = #{username})
+    </insert>
+    <select id="findByName" parameterType="com.sun.org.apache.xpath.internal.operations.String" resultType="com.jnshu.entity.User">
+    SELECT  *FROM  user WHERE username = #{username}
+  </select>
+</mapper>

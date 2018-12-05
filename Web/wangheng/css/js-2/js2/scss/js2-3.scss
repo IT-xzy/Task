@@ -1,0 +1,153 @@
+@charset"UTF-8";
+
+//变量
+$red:#F56B81;
+$background:#29BDE0;
+$yellow:#FBB435;
+$color:#ffffff;
+$orang:#FFEDC5;
+
+
+//混合器
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin flex($j, $a) {
+    display: flex;
+    justify-content: $j;
+    align-items: $a;
+}
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: initial;
+    margin: 0;
+    background: $background;
+}
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include flex(space-between, center);
+    height: 1rem;
+    background: $background;
+    border-bottom: solid 1px #74d4eb;
+    z-index: 1;
+
+    .back {
+        @include wh(.24rem, .24rem);
+        margin-left: .4rem;
+        border-top: 0.05rem solid $color;
+        border-right: 0.05rem solid $color;
+        transform: rotate(225deg);
+        cursor: pointer;
+    }
+
+    .font {
+        font-size: .45rem;
+        color: $color;
+        letter-spacing: .15rem;
+    }
+
+    .close {
+        display: inline-block;
+        margin-right: .64rem;
+        @include wh(2px, 30px);
+        transform: rotate(45deg);
+        background: $color;
+
+        &::after {
+            content: "";
+            display: block;
+            @include wh(2px, 30px);
+            transform: rotate(-90deg);
+            background: $color;
+        }
+    }
+
+}
+
+main {
+    margin-top: 1rem;
+    padding: .9rem .88rem 0 .88rem;
+
+    .box {
+        @include flex(center, center);
+        flex-direction: column;
+        position: relative;
+        height: 6.64rem;
+        border: 0.05rem solid $color;
+        background: $orang;
+
+        .circle {
+            position: absolute;
+            left: 50%;
+            top: -.36rem;
+            @include flex(center, center);
+            @include wh(.68rem, .68rem);
+            margin-left: -.34rem;
+            border-radius: 100%;
+            background: #FFFFFF;
+
+            .figure {
+                font-size: .4rem;
+                color: $red;
+            }
+        }
+
+        .picture {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 100%;
+            background: url(../img/block.png) no-repeat center/cover;
+        }
+
+
+
+        .look { 
+            @include wh(2.5rem, 2.5rem);
+            border-radius: 100%;
+            background: url(../img/none.png) no-repeat center/cover;
+            display: none;
+        }
+
+        .describe {
+            margin-top: .3rem;
+            text-align: center;
+            font-size: .4rem;
+            color: $background;
+            display: none;
+        }
+
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include flex(center, center);
+    @include wh(100%, 2rem);
+    background: $background;
+    z-index: 1;
+
+    button {
+        @include wh(100%, 1rem);
+        margin: 0 .75rem;
+        background: $yellow;
+        font-size: .5rem;
+        letter-spacing: .15rem;
+        color: $color;
+        cursor: pointer; //移动上去鼠标为小手
+        box-shadow: 0 0 0 1.5px $yellow;
+    }
+}

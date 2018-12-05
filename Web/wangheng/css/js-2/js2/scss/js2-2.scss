@@ -1,0 +1,133 @@
+@charset"UTF-8";
+
+//变量
+$bodycolor:#eff0f4;
+$background:#29BDE0;
+$yellow:#FBB435;
+$color:#ffffff;
+
+//混合器
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin flex($j, $a) {
+    display: flex;
+    justify-content: $j;
+    align-items: $a;
+}
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: initial;
+    margin: 0;
+    background: $bodycolor;
+}
+
+h4 {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+//头部的班会标签
+header {
+    @include flex(flex-start, center);
+    background: $background;
+    height: 1rem;
+
+    .back {
+        @include wh(.24rem, .24rem);
+        margin-left: .4rem;
+        border-top: 0.05rem solid $color;
+        border-right: 0.05rem solid $color;
+        transform: rotate(225deg);
+        cursor: pointer;
+    }
+}
+
+main {
+    margin: .2rem;
+    text-align: center;
+
+    h4 {
+        margin-top: .2rem;
+        line-height: .7rem;
+        background: $color;
+    }
+    //分配玩家种杀手和平民数量
+    .player {
+        @include flex(space-around, flex-start);
+        height: 3rem;
+        margin-top: .1rem;
+        padding-top: .5rem;
+        background: $color;
+
+        span {
+            font-size: .16rem;
+            margin-left: .7rem;
+            input {
+                width: .3rem;
+                border: none;
+            }
+        }
+
+        span::before {
+            content: "";
+            position: absolute;
+            width: 0.7rem;
+            height: 0.7rem;
+            margin: -.2rem 0 0 -.8rem;
+            border-radius: 100%;
+            background: url(../img/pingmin.png) no-repeat center/cover;
+
+        }
+    }
+
+    .box {
+        height: 1.5rem;
+        margin-top: .15rem;
+        background: $color;
+    }
+    //玩家总人数再此输入
+    .quantity {
+        height: 1.5rem;
+        margin-top: .15rem;
+        padding-top: .4rem;
+        background: $color;
+
+        input {
+            @include wh(.7rem, .5rem);
+            border: none;
+            background: $color;
+            font-size: .35rem;
+            text-align: center;
+            color: $yellow;
+        }
+
+        span {
+            font-size: .16rem;
+            color: $yellow;
+            margin-left: .2rem;
+        }
+    }
+}
+//底部button标签
+footer {
+    margin: 0 .2rem;
+    button {
+       @include wh(100%,1rem );
+        background: $yellow;
+        font-size: .5rem;
+        letter-spacing: .15rem;
+        color: $color;
+        cursor: pointer;//移动上去鼠标为小手
+        box-shadow: 0 0 0 1.5px $yellow;
+    }
+}
