@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyh.dao.StudentDao">
+
+    <!-- 定义的resultMap，可以解决类的属性名和数据库列名不一致的问题-->
+    <resultMap type="Student" id="student">
+        <id property="id" column="id"  />
+        <result property="studentNumber" column="student_number"  />
+        <result property="enrolmentTime" column="enrolment_time"  />
+        <result property="knowFrom" column="know_from"  />
+        <result property="createAt" column="create_at"  />
+        <result property="updateAt" column="update_at"  />
+    </resultMap>
+
+    <!--插入-->
+    <insert id="addStudent" useGeneratedKeys="true" keyProperty="id" parameterType="student">
+        insert into student(student_number,name,qq,wish,school,enrolment_time,type,know_from,create_at,update_at)
+        values (
+        #{studentNumber},
+        #{name},
+        #{qq},
+        #{wish},
+        #{school},
+        #{enrolmentTime},
+        #{type},
+        #{knowFrom},
+        #{createAt},
+        #{updateAt})
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteStudent" parameterType="long">
+        delete
+        from student
+        where id = #{id}
+    </delete>
+
+    <!--修改-->
+    <update id="updateStudent" parameterType="student">
+          update student
+          set student_number = #{studentNumber},name = #{name},qq = #{qq},wish = #{wish},school = #{school},enrolment_time = #{enrolmentTime},type = #{type},know_from = #{knowFrom},create_at = #{createAt},update_at = #{updateAt}
+           where id = #{id}
+    </update>
+
+    <!--根据id查询数据-->
+    <select id="getStudent" resultMap="student">
+        select * from student
+        where id = #{id}
+    </select>
+
+    <!--查询全部数据-->
+    <select id="listStudent" resultMap="student">
+        select * from student
+    </select>
+
+    <!--分页查询-->
+    <select id="listPageStudent" resultMap="student">
+        select * from  student
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+
+    <!--查询数据条数-->
+    <select id="total" resultType="int">
+	        select count(*) from   student
+	    </select>
+
+    <select id="byName" parameterType="string" resultMap="student">
+        select * from student where name like CONCAT('%',#{name},'%')
+    </select>
+</mapper>
