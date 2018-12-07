@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.ProfessionMapper" >
+  <resultMap id="BaseResultMap" type="jnshu.model.Profession" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="profession_name" property="professionName" jdbcType="VARCHAR" />
+    <result column="profession_description" property="professionDescription" jdbcType="VARCHAR" />
+    <result column="profession_detail" property="professionDetail" jdbcType="VARCHAR" />
+    <result column="threshold" property="threshold" jdbcType="VARCHAR" />
+    <result column="difficulty_level" property="difficultyLevel" jdbcType="VARCHAR" />
+    <result column="growth_cycle" property="growthCycle" jdbcType="VARCHAR" />
+    <result column="need" property="need" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="learning" property="learning" jdbcType="VARCHAR" />
+    <result column="hint" property="hint" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, img, profession_name, profession_description, profession_detail, threshold, difficulty_level,
+    growth_cycle, need, salary, learning, hint, creat_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from profession
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from profession
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.Profession" >
+    insert into profession (id, img, profession_name,
+    profession_description, profession_detail,
+    threshold, difficulty_level, growth_cycle,
+    need, salary, learning,
+    hint, creat_time, update_time
+    )
+    values (#{id,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR}, #{professionName,jdbcType=VARCHAR},
+    #{professionDescription,jdbcType=VARCHAR}, #{professionDetail,jdbcType=VARCHAR},
+    #{threshold,jdbcType=VARCHAR}, #{difficultyLevel,jdbcType=VARCHAR}, #{growthCycle,jdbcType=VARCHAR},
+    #{need,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, #{learning,jdbcType=VARCHAR},
+    #{hint,jdbcType=VARCHAR}, #{creatTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="jnshu.model.Profession" >
+    insert into profession
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="professionName != null" >
+        profession_name,
+      </if>
+      <if test="professionDescription != null" >
+        profession_description,
+      </if>
+      <if test="professionDetail != null" >
+        profession_detail,
+      </if>
+      <if test="threshold != null" >
+        threshold,
+      </if>
+      <if test="difficultyLevel != null" >
+        difficulty_level,
+      </if>
+      <if test="growthCycle != null" >
+        growth_cycle,
+      </if>
+      <if test="need != null" >
+        need,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="learning != null" >
+        learning,
+      </if>
+      <if test="hint != null" >
+        hint,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="professionName != null" >
+        #{professionName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionDescription != null" >
+        #{professionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="professionDetail != null" >
+        #{professionDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="threshold != null" >
+        #{threshold,jdbcType=VARCHAR},
+      </if>
+      <if test="difficultyLevel != null" >
+        #{difficultyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="growthCycle != null" >
+        #{growthCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="need != null" >
+        #{need,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="learning != null" >
+        #{learning,jdbcType=VARCHAR},
+      </if>
+      <if test="hint != null" >
+        #{hint,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.Profession" >
+    update profession
+    <set >
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="professionName != null" >
+        profession_name = #{professionName,jdbcType=VARCHAR},
+      </if>
+      <if test="professionDescription != null" >
+        profession_description = #{professionDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="professionDetail != null" >
+        profession_detail = #{professionDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="threshold != null" >
+        threshold = #{threshold,jdbcType=VARCHAR},
+      </if>
+      <if test="difficultyLevel != null" >
+        difficulty_level = #{difficultyLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="growthCycle != null" >
+        growth_cycle = #{growthCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="need != null" >
+        need = #{need,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="learning != null" >
+        learning = #{learning,jdbcType=VARCHAR},
+      </if>
+      <if test="hint != null" >
+        hint = #{hint,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jnshu.model.Profession" >
+    update profession
+    set img = #{img,jdbcType=VARCHAR},
+      profession_name = #{professionName,jdbcType=VARCHAR},
+      profession_description = #{professionDescription,jdbcType=VARCHAR},
+      profession_detail = #{professionDetail,jdbcType=VARCHAR},
+      threshold = #{threshold,jdbcType=VARCHAR},
+      difficulty_level = #{difficultyLevel,jdbcType=VARCHAR},
+      growth_cycle = #{growthCycle,jdbcType=VARCHAR},
+      need = #{need,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      learning = #{learning,jdbcType=VARCHAR},
+      hint = #{hint,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectProfession" resultMap="BaseResultMap">
+    select * from profession limit 0,24;
+  </select>
+</mapper>

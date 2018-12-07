@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.ExcellentStudentMapper" >
+  <resultMap id="BaseResultMap" type="jnshu.model.ExcellentStudent" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="img" property="img" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="if_excellent" property="ifExcellent" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, img, position, name, description, salary, creat_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from excellent_student
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from excellent_student
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.ExcellentStudent" >
+    insert into excellent_student (id, img, position, 
+      name, description, salary, 
+      creat_time, update_time,if_excellent)
+    values (#{id,jdbcType=BIGINT}, #{img,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{salary,jdbcType=VARCHAR}, 
+      #{creatTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT},#{ifExcellent,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="jnshu.model.ExcellentStudent" >
+    insert into excellent_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="img != null" >
+        img,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="img != null" >
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.ExcellentStudent" >
+    update excellent_student
+    <set >
+      <if test="img != null" >
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="ifExcellent !=null" >
+        if_excellent=#{ifExcellent,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jnshu.model.ExcellentStudent" >
+    update excellent_student
+    set img = #{img,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!--rand()-->
+  <select id="selectStudent" resultMap="BaseResultMap">
+    select img,position,name,description,update_time from excellent_student where if_excellent=1;
+  </select>
+
+  <!--查询学员信息-->
+  <select id="selectInfo" resultMap="BaseResultMap">
+    select * from excellent_student
+  </select>
+
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from excellent_student where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+</mapper>
