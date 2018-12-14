@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suger.dao.StudentDao">
+    <resultMap id="studentMap" type="student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="img" column="img"/>
+        <result property="position" column="position" />
+        <result property="salary" column="salary"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+    <select id="listStudent"  resultMap="studentMap">
+        SELECT * FROM student ;
+    </select>
+    <select id="getStudentByType" parameterType="java.lang.Boolean" resultMap="studentMap">
+        SELECT * FROM student WHERE type=#{type}
+    </select>
+
+    <insert id="insertStudent" parameterType="student" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into
+        student(name,password,type,img,position,profession,intro,salary,create_at,update_at)
+        values(#{name},#{password},#{type},#{img},#{position},#{profession},#{intro},#{salary},#{createAt},#{updateAt})
+
+    </insert>
+
+    <update id="updateStudent" parameterType="student">
+        update student
+        set
+        <if test="name != null">
+            name=#{name},
+        </if>
+        <if test="img != null">
+            img=#{img},
+        </if>
+        <if test="position != null">
+          position=#{position},
+        </if>
+        <if test="profession != null">
+          profession=#{profession},
+        </if>
+        <if test="intro != null">
+            intro=#{intro},
+        </if>
+        <if test="salary != null">
+            salary=#{salary},
+        </if>
+        <if test="createAt != null">
+            create_at=#{createAt},
+        </if>
+        <if test="updateAt != null">
+            update_at=#{updateAt}
+        </if>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStudent" parameterType="long">
+        delete from student where id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="studentMap">
+        select id,name,type,img,position,profession,intro,salary,create_at,update_at from student
+        <if test="start != null and count != null">limit #{start},#{count}</if>
+    </select>
+    <select id="total" resultType="int">
+        select count(1) from student
+    </select>
+
+    <select id="getStudentById" parameterType="long" resultMap="studentMap">
+        select id,name,type,img,position,profession,intro,salary,create_at,update_at
+        from student where id = #{id};
+    </select>
+
+
+    <!--根据姓名模糊查询-->
+    <select id="getStudentByName"  resultMap="studentMap">
+        select id,name,type,img,position,profession,intro,salary,create_at,update_at from student
+        where name like CONCAT('%',#{name},'%')
+
+    </select>
+
+</mapper>
