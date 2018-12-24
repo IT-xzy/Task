@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.RestUserMapper">
+    <resultMap id="BaseResultMap" type="jnshu.model.RestUser">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="img" property="img" jdbcType="VARCHAR"/>
+        <result column="salt" property="salt" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="creat_time" property="creatTime" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, pwd, img, salt, phone, email, creat_time, update_time
+  </sql>
+
+    <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from rest_user
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from rest_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="jnshu.model.RestUser">
+    insert into rest_user (id, name, pwd, img,
+      salt, phone, email, creat_time,
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{img,jdbcType=VARCHAR},
+      #{salt,jdbcType=VARCHAR}, #{phone}, #{email,jdbcType=VARCHAR}, #{creatTime,jdbcType=BIGINT},
+      #{updateTime,jdbcType=BIGINT})
+  </insert>
+
+
+    <update id="updateByName" parameterType="jnshu.model.RestUser">
+        update rest_user
+        <set>
+            <!--<if test="name != null" >-->
+            <!--name = #{name,jdbcType=VARCHAR},-->
+            <!-- </if>-->
+            <if test="pwd != null">
+                pwd = #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creat_time = #{creatTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+        </set>
+        where name = #{name,jdbcType=VARCHAR}
+    </update>
+
+    <!--通过id查询盐-->
+    <select id="selectSalt" resultType="java.lang.String">
+    select salt from rest_user where id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+</mapper>

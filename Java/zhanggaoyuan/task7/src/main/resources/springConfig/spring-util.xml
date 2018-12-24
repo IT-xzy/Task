@@ -1,0 +1,47 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
+    <!--<context:component-scan base-package="jnshu.tool"/>-->
+    <!--<context:annotation-config/>-->
+    <context:property-placeholder location="classpath:properties/util.properties" ignore-unresolvable="true" file-encoding="UTF-8"/>
+    <!--<util:properties id="util" local-override="true" location="classpath:properties/util.properties"/>-->
+
+
+    <bean id="SmsUtil" class="jnshu.tool.api.Sms" >
+        <property name="appid" value="${sms.appid}"/>
+        <property name="appkey" value="${sms.appkey}"/>
+        <property name="templateId" value="${sms.templateId}"/>
+        <!--<property name="smsSign" value="${sms.smsSign}"/>-->
+    </bean>
+
+    <bean id="email" class="jnshu.tool.api.Email">
+        <property name="accessKeyId" value="${email.accessKeyId}"/>
+        <property name="accessKeySecret" value="${email.accessKeySecret}"/>
+        <property name="accountName" value="${email.accountName}"/>
+        <property name="fromAlias" value="${email.fromAlias}"/>
+        <property name="regionId" value="${email.regionId}"/>
+        <property name="tagName" value="${email.tagName}"/>
+        <property name="subject" value="${email.subject}"/>
+    </bean>
+
+    <bean id="cos" class="jnshu.tool.api.Cos">
+        <property name="accessKey" value="${cos.accessKey}"/>
+        <property name="secretKey" value="${cos.secretKey}"/>
+        <property name="regionName" value="${cos.regionName}"/>
+        <property name="bucketName" value="${cos.bucketName}"/>
+        <property name="contentType" value="${cos.contentType}"/>
+    </bean>
+
+
+    <bean id="oss" class="jnshu.tool.api.Oss">
+        <property name="accessKeyId" value="${oss.accessKeyId}"/>
+        <property name="accessKeySecret" value="${oss.accessKeySecret}"/>
+        <property name="endpoint" value="${oss.endpoint}"/>
+        <property name="bucketName" value="${oss.bucketName}"/>
+        <property name="keyPrefix" value="${oss.KeyPrefix}"/>
+
+    </bean>
+</beans>
