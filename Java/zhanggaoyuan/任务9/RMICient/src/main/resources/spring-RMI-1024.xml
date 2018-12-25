@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+
+    <bean id="RMIClient" class="jnshu.tool.RMI.RMIClient">
+        <property name="studentService" ref="stClient"/>
+        <property name="professionService" ref="prClient"/>
+    </bean>
+
+    <bean name="prClient" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1024/serverRmiPf"/>
+        <property name="serviceInterface" value="jnshu.service.ProfessionService"/>
+    </bean>
+
+    <bean name="stClient" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://127.0.0.1:1024/serverRmiSt"/>
+        <property name="serviceInterface" value="jnshu.service.StudentService"/>
+    </bean>
+
+</beans>
