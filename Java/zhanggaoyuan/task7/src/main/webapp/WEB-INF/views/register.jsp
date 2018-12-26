@@ -33,7 +33,7 @@
     <form action="/emailRegister" method="post">
         <p>用户名：<input type="text" name="name"></p>
         <p>密码：<input type="password" name="pwd"></p>
-        <p>邮箱：<input type="text" id="email0" name="email" value="13760757853@163.com"></p>
+        <p>邮箱：<input type="text" id="email0" name="email" value=""></p>
         <p>验证码：<input  type="text" name="code"></p>
         <input type="submit" value="注册">
     </form>
