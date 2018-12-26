@@ -18,10 +18,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@PropertySource("classpath:properties/util.properties")
 @Service
 public class ApiServiceImpl implements ApiService {
     private static Logger logger = Logger.getLogger (String.valueOf (ApiServiceImpl.class));
@@ -36,12 +36,12 @@ public class ApiServiceImpl implements ApiService {
     Sms sms;
     @Autowired
     Email emailServe;
-    @Value("${uploadByWay}")
-    String uploadByWay;
+
     @Autowired
     Cos cos;
     @Autowired
     Oss oss;
+
 
     /**
      * @param telNum 手机号码
@@ -297,18 +297,24 @@ public class ApiServiceImpl implements ApiService {
 
         String fileName = MultipartFileUtil.fileName (multipartFile);
         logger.info ("生成的fileName：" + fileName);
-        logger.info ("使用的上传方式为" + uploadByWay);
+//        logger.info ("使用的上传方式为" + uploadByWay);
+//        try {
+//            logger.info ("_________________________________________________");
+//            if (uploadByWay != null && uploadByWay.equals ("oss")) {
+//                logger.info ("使用阿里云上传图片");
+//                url = oss.upload (fileName, multipartFile.getInputStream ());
+//            } else {
+//                logger.info ("使用腾讯云上传图片");
+//                url = cos.upload (fileName, multipartFile.getInputStream ());
+//            }
+//        } catch ( IOException e ) {
+//            logger.info ("图片上传失败");
+//            e.printStackTrace ();
+//        }
         try {
-            logger.info ("_________________________________________________");
-            if (uploadByWay != null && uploadByWay.equals ("oss")) {
-                logger.info ("使用阿里云上传图片");
-                url = oss.upload (fileName, multipartFile.getInputStream ());
-            } else {
-                logger.info ("使用腾讯云上传图片");
-                url = cos.upload (fileName, multipartFile.getInputStream ());
-            }
+            url=UploadPhoto.photoUpload (fileName,multipartFile );
+            logger.info ("上传图片后返回的url为："+url);
         } catch ( IOException e ) {
-            logger.info ("图片上传失败");
             e.printStackTrace ();
         }
         if (url == null) {
@@ -328,85 +334,98 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public String tranToCos() throws Exception {
+    public List<String> tranToCos() throws Exception {
         logger.info ("开始阿里云转到腾讯云");
+        List<String> rsurl = new ArrayList ();
         List<String> urlList = oss.ListforOss ();
-        String key = urlList.get (1);
-        logger.info ("获取列表成功");
 
-        String OssKey = ("https://jnshuz.oss-cn-shenzhen.aliyuncs.com/" + key);
-        logger.info ("得到的阿里云的图片链接为：" + OssKey);
+        for (String urlKey : urlList) {
 
-        URL url = new URL (OssKey);
+            String key = urlKey;
+            logger.info ("获取列表成功");
+
+            String OssKey = ("https://jnshuz.oss-cn-shenzhen.aliyuncs.com/" + key);
+            logger.info ("得到的阿里云的图片链接为：" + OssKey);
+
+            URL url = new URL (OssKey);
 //        通过url对象打开连接,这里需要注意打开连接之后，这个函数返回的是不是httpUrlconnection类型而是 URLConnection类型，可以直接强转。
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection ();
-        //设置请求方式
-//        conn.setRequestMethod ("GET");
-        conn.setRequestProperty ("Charset", "UTF-8");// 设置文件字符集:
-        conn.setRequestProperty ("Content-type", "image/jpeg");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection ();
+            //设置请求方式
+            conn.setRequestProperty ("Charset", "UTF-8");// 设置文件字符集:
+            conn.setRequestProperty ("Content-type", "image/jpeg");
 
-        conn.setDoInput (true);//是否打开输入流 ， 此方法默认为true
-        conn.setDoOutput (true);//是否打开输出流， 此方法默认为false
+            conn.setDoInput (true);//是否打开输入流 ， 此方法默认为true
+            conn.setDoOutput (true);//是否打开输出流， 此方法默认为false
 
-        logger.info ("开始连接");
-        conn.connect ();// 开始连接请求
-        int code = conn.getResponseCode ();//服务器会返回一个响应码
-        logger.info ("连接返回的状态码" + code);
+            logger.info ("开始连接");
+            conn.connect ();// 开始连接请求
+            int code = conn.getResponseCode ();//服务器会返回一个响应码
+            logger.info ("连接返回的状态码" + code);
 
-        String rs = null;
-        InputStream inputstream = conn.getInputStream ();
-        if (inputstream != null) {
-            rs = cos.upload (key, inputstream);
+            String rs = null;
+            InputStream inputstream = conn.getInputStream ();
+            if (inputstream != null) {
+                rs = cos.upload (key, inputstream);
+            }
+            rsurl.add (rs);
+            logger.info ("连接结束");
+            inputstream.close ();
+            conn.disconnect ();
         }
-        logger.info ("连接结束");
-        inputstream.close ();
-        conn.disconnect ();
-        return rs;
+
+        return rsurl;
     }
 
-    /**
-     * 文件迁移，腾讯云到阿里云
-     *
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public String trantoOss() throws Exception {
-        logger.info ("开始腾讯云转到阿里云");
-        List<String> keyList = cos.ListCos ();
-//        取出文件的key
-        String key = keyList.get (3);
-        logger.info ("获取列表成功");
+        /**
+         * 文件迁移，腾讯云到阿里云
+         *
+         * @return
+         * @throws Exception
+         */
+        @Override
+        public List trantoOss () throws Exception {
+            logger.info ("开始腾讯云转到阿里云");
+            List rsurl = new ArrayList ();
+            List<String> keyList = cos.ListCos ();
 
-        String CosKey = ("https://jnshu-1257664104.cos.ap-guangzhou.myqcloud.com/" + key);
-        logger.info ("得到的Cos的图片链接为：" + CosKey);
+            for (String urlKey:keyList) {
+//                取出文件的key
+                String key = urlKey;
+                logger.info ("获取列表成功");
 
-        URL url = new URL (CosKey);
+                String CosKey = ("https://jnshu-1257664104.cos.ap-guangzhou.myqcloud.com/" + key);
+                logger.info ("得到的Cos的图片链接为：" + CosKey);
+
+                URL url = new URL (CosKey);
 //        通过url对象打开连接,这里需要注意打开连接之后，这个函数返回的是不是httpUrlconnection类型而是 URLConnection类型，可以直接强转。
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection ();
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection ();
 
-        //设置请求方式
+                //设置请求方式
 //        conn.setRequestMethod ("GET");
-        conn.setRequestProperty ("Charset", "UTF-8");// 设置文件字符集:
-        conn.setRequestProperty ("Content-type", "image/jpeg");
+                conn.setRequestProperty ("Charset", "UTF-8");// 设置文件字符集:
+                conn.setRequestProperty ("Content-type", "image/jpeg");
 
-        conn.setDoInput (true);//是否打开输入流 ， 此方法默认为true
-        conn.setDoOutput (true);//是否打开输出流， 此方法默认为false
+                conn.setDoInput (true);//是否打开输入流 ， 此方法默认为true
+                conn.setDoOutput (true);//是否打开输出流， 此方法默认为false
 
-        logger.info ("开始连接");
-        conn.connect ();// 开始连接请求
-        int code = conn.getResponseCode ();//服务器会返回一个响应码
-        logger.info ("连接返回的状态码" + code);
+                logger.info ("开始连接");
+                conn.connect ();// 开始连接请求
+                int code = conn.getResponseCode ();//服务器会返回一个响应码
+                logger.info ("连接返回的状态码" + code);
 
-        String rs = null;
-        InputStream inputstream = conn.getInputStream ();
-        if (inputstream != null) {
-            rs = oss.upload (key, inputstream);
-        }
-        logger.info ("连接结束");
-        inputstream.close ();
-        conn.disconnect ();
-        return rs;
+                String rs = null;
+                InputStream inputstream = conn.getInputStream ();
+                if (inputstream != null) {
+                    rs = oss.upload (key, inputstream);
+                    rsurl.add (rs);
+                }else {
+                    logger.info ("迁移失败的图片URL为："+urlKey);
+                }
+                logger.info ("连接结束");
+                inputstream.close ();
+                conn.disconnect ();
+            }
+        return rsurl;
     }
 
 }

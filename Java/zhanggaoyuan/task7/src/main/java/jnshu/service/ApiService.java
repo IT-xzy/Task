@@ -3,6 +3,8 @@ package jnshu.service;
 import jnshu.model.RestUser;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface ApiService {
 
     /**
@@ -44,12 +46,12 @@ public interface ApiService {
      * @return
      * @throws Exception
      */
-    String tranToCos() throws Exception;
+    List tranToCos() throws Exception;
 
     /**
      * 文件迁移，腾讯云到阿里云
      * @return
      * @throws Exception
      */
-    String trantoOss()throws Exception;
+    List trantoOss()throws Exception;
 }

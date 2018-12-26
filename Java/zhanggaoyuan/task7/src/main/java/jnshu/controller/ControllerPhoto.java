@@ -18,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 @Controller
 public class ControllerPhoto {
@@ -88,7 +89,7 @@ public class ControllerPhoto {
      */
     @ResponseBody
     @RequestMapping(value = "/OssToCos", method = RequestMethod.GET)
-    public String tranToCos() throws Exception {
+    public List tranToCos() throws Exception {
         return apiService.tranToCos ();
     }
 
@@ -100,7 +101,7 @@ public class ControllerPhoto {
      */
     @ResponseBody
     @RequestMapping(value = "/CosToOss", method = RequestMethod.GET)
-    public String tranToOss() throws Exception {
+    public List tranToOss() throws Exception {
         return apiService.trantoOss ();
     }
 }

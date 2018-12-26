@@ -37,7 +37,7 @@
     <form action="/phoneRegister" method="post">
         <p>用户名：<input type="text" name="name"></p>
         <p>密码：<input type="password" name="pwd"></p>
-        <p>手机号码：<input id="phone1" type="text" name="phone" value="13760757853"></p>
+        <p>手机号码：<input id="phone1" type="text" name="phone" value=""></p>
         <p>验证码：<input  type="text" name="code"></p>
         <input type="submit" value="注册">
     </form>
