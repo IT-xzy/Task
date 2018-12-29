@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<link rel="stylesheet" href="../scss/js-demo.css">
+	<script src="../js/js-demo.js"></script>
+</head>
+
+<body>
+	<h1 id="dsg">万年单身狗</h1>
+	<button id="sh">送花</button>
+	<button id="bb">表白</button>
+	<button id="qh">求婚</button>
+	<button id="fs">分手</button>
+	<h2>艾克</h2>
+	<p id="jx"></p>
+	<p id="xb"></p>
+	<p id="nl"></p>
+
+	<script>
+		//获取节点
+		var dsg = document.getElementById('dsg'),
+			sh = document.getElementById('sh'),
+			bb = document.getElementById('bb'),
+			qh = document.getElementById('qh'),
+			fs = document.getElementById('fs');
+
+
+		var ztj = new StateMachine({
+			// 当前状态
+			init: 'dsgg',
+			// 状态转换
+			transitions: [{
+					name: 'sh1',
+					from: 'dsgg',
+					to: 'hg'
+				},
+				{
+					name: 'sh2',
+					from: 'hg',
+					to: 'py'
+				},
+				{
+					name: 'bb',
+					from: 'py',
+					to: 'nvpy'
+				},
+				{
+					name: 'qh',
+					from: ['hg', 'nvpy'],
+					to: 'jh'
+				},
+				{
+					name: 'fs',
+					from: '*',
+					to: 'dsgg'
+				}
+			],
+			// 点击之后输出的对话框
+			methods: {
+				onEnterDsgg: function () {
+					dsg.innerHTML = '万年单身狗';
+				},
+				onEnterHg: function () {
+					dsg.innerHTML = '朋友还没有到';
+				},
+				onEnterPy: function () {
+					dsg.innerHTML = '炮友';
+				},
+				onEnterNvpy: function () {
+					dsg.innerHTML = '亲密恋人';
+				},
+				onEnterJh: function () {
+					dsg.innerHTML = '结婚';
+				}
+			}
+		})
+		sh.onclick = function () {
+			switch (ztj.state) {
+				case 'dsgg':
+					ztj.sh1(); //如果是上面的那个状态的话，就执行了上方的name:sh的代码
+					break;
+				case 'hg':
+					ztj.sh2();
+					break
+				case 'py':
+					alert('滚去表白，屌丝');
+					break;
+				case 'nvpy':
+					alert('滚去结婚吧，傻吊')
+					break;
+				case 'jh':
+					alert('好感+1')
+					break;
+			}
+			console.log(ztj.state);
+		}
+		bb.onclick = function () {
+			switch (ztj.state) {
+				case 'dsgg':
+					alert('你要先送花');
+					break;
+				case 'hg':
+					alert("连炮友都不是，还想表白");
+					break;
+				case 'py':
+					ztj.bb();
+					break;
+				case 'jh':
+					alert("已经结婚就不要秀恩爱了");
+					break;
+					// 以上状态都不存在时候执行的代码
+				default:
+					alert("尝试着送花或者求婚吧");
+			}
+			console.log(ztj.state);
+		}
+		qh.onclick = function () {
+			switch (ztj.state) {
+				case 'dsgg':
+					alert("先送花建立友情吧");
+					break
+				case 'hg':
+					alert('你要先建立关系');
+					break;
+				case 'nvpy':
+					ztj.qh();
+					break;
+				case 'py':
+					alert('去表白');
+					break;
+				default:
+					alert("不要在求婚了");
+			}
+			console.log(ztj.state);
+		}
+		fs.onclick = function () {
+			switch (ztj.state) {
+				case 'dsgg':
+					alert("(o゜▽゜)o☆单身狗不需要分手");
+					break;
+				default:
+					ztj.fs();
+			}
+		}
+	</script>
+
+</body>
+
+</html>

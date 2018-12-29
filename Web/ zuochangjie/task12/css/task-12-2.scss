@@ -1,0 +1,235 @@
+html{
+    font-size: 312.5%;
+}
+/* 变量 */
+$direction: 0;
+$font-size: .28rem;
+$font-weight: 600;
+$color: #999999;
+$background: #FFFFFF;
+$border: none;
+$outline: none;
+$list-style:none;
+/* 混合 */
+@mixin f-j-a ($f:flex,$j:center,$a:center){
+    display: $f;
+    justify-content: $j;
+    align-items: $a;
+}
+@mixin w-h($w:0,$h:0) {
+    width: $w;
+    height: $h;
+}
+@mixin header-button {
+     line-height: .7rem;
+     width: 1.44rem;
+     text-align: center;
+     border-radius: .2rem;
+     border: $border;
+     outline: $outline;
+}
+body{
+    margin: $direction;
+    font-size: initial;
+    background: $background;
+    p{
+        margin: $direction;
+        white-space: nowrap;
+    }
+    span{
+        white-space: nowrap;
+    }
+    ul,li{
+        margin: $direction;
+        padding: $direction;
+        list-style: $list-style;
+    }
+    /* 头部 */
+    header{
+        @include f-j-a;
+        position: fixed;
+        top: $direction;
+        left: $direction;
+        right: $direction;
+        height: 1.28rem;
+        background: #5FC0CD;
+        z-index: 1;
+        .btn-left{
+            @include header-button;
+            margin-right: -.1rem;
+            color: #FFFFFF;
+            background: #55A8B3;
+        }
+        .btn-right{
+            @include header-button;
+            color: #5FC0CD;
+            background: $background;
+        }
+        a{
+            position: absolute;
+            right: .3rem;
+            @include w-h(.44rem,.44rem);
+            background: url(../img/css_sprite.png) no-repeat -.2rem -3.72rem; 
+        }
+    }
+    /* 主要内容 */
+    main{
+        margin-bottom: 1.2rem;
+        /* 主要内容顶部 */
+        .main-top{
+            display: flex;
+            position: fixed;
+            width: 100%;
+            top: 1.28rem;
+            background: $background;
+            z-index: 1;
+            /* 1/3 盒子中间左右边框 */
+            .in{
+                border-left: .01rem solid #E1E5E7;
+                border-right: .01rem solid #E1E5E7;
+            }
+            /* 1/3 盒子 */
+            div{
+                position: relative;
+                @include f-j-a;
+                flex-grow: 1;
+                line-height: .8rem;
+                font-size: .28rem;
+                color: #999999;
+                border-bottom: .01rem solid #E1E5E7;
+                z-index: 1;
+                /* 小三角形 */
+                .triangle{
+                    position: absolute;
+                    right: .2rem;
+                    border-top: .14rem solid #AFBAC0;
+                    border-left: .07rem solid transparent;
+                    border-right: .07rem solid transparent;
+                }
+                /* 下拉框 */
+                ul{
+                    display: none;
+                    position: absolute;
+                    top: .81rem;
+                    width: 100%;
+                    text-align: center;
+                    background: $background;
+                    /* 下拉点击显示背景颜色 */
+                    li{
+                        &:hover{
+                            background: #5FC0CD;
+                        }                     
+                    }
+                }
+                /* 点击显示下拉内容 */
+                &:hover ul{
+                    display: block;
+                }
+            }
+        }
+        /* 主要内容中部 */
+        .main-in{
+            margin-top: 2.08rem;
+            /* 行-格式 */
+            .line{
+                position: relative;
+                padding: .3rem .72rem;
+                font-size: .26rem;
+                color: #999999;
+                border-bottom: .01rem solid #E1E5E7;
+                /* 行-顶部 */
+                .line-top{
+                    position: relative;
+                    @include f-j-a(flex,flex-start);
+                
+                    /* 行-顶部伪元素 */
+                    &::before{
+                        position: absolute;
+                        content: "";
+                        @include w-h(.24rem,.24rem);
+                        left: -.44rem;
+                        background: url(../img/css_sprite.png) no-repeat -.2rem -.2rem;
+                    }
+                }
+                /* 行中部 */
+                .line-in{
+                    @include f-j-a(flex,space-between);
+                    position: relative;
+                    margin: .25rem 0;
+                    p{
+                        font-size: .28rem;
+                        font-weight: $font-weight;
+                        color: #333333;
+                    }
+                    span{
+                        font-size: .3rem;
+                        font-weight: $font-weight;
+                        color: #E63B0E;
+                    }
+                    
+                    /* 行中部伪元素 */
+                    &::after{
+                       position: absolute;
+                       content: "";
+                       right: -.4rem;
+                       @include w-h(.24rem,.24rem);
+                       border-top: .03rem solid #5FC0CD;
+                       border-right: .03rem solid #5FC0CD;
+                       transform: rotate(45deg);
+                    }
+                }
+                /* 行底部伪元素 */
+                .line-top.bottom{
+                    &::before{
+                    height: .3rem;
+                    background: url(../img/css_sprite.png) no-repeat -.2rem -.75rem;
+                    }
+                }
+            }
+        }
+    }
+    /* 底部 */
+    footer{
+        @include f-j-a(flex,space-evenly);
+        position: fixed;
+        bottom: $direction;
+        left: $direction;
+        right: $direction;
+        background: #F8FAFB;
+        div{
+            @include f-j-a(flex,flex-start);
+            flex-direction: column;
+            font-size: .2rem;
+            span{
+                margin-bottom: .18rem;
+                width: .48rem;
+                height: .4rem;
+                background: url(../img/css_sprite.png) no-repeat -.2rem -1.4rem;
+            }
+            a{
+                text-decoration: none;
+                color: #5FC0CD;
+            }
+            .people{
+                @include w-h(.48rem,.42rem);
+                background: url(../img/css_sprite.png) no-repeat -.17rem -2.9rem;
+            }
+            .my{
+                color: #999999;
+            }
+        }
+        /* 底部蓝色大圆圈 */
+        .circular{
+            justify-content: center;
+            @include w-h(1.2rem,1.2rem);
+            border-radius: 50%;
+            background: #5FC0CD;
+            span{
+                margin: $direction;
+               @include w-h(.4rem,.4rem);
+                background: url(../img/css_sprite.png) no-repeat -.17rem -2.18rem;
+            }
+        }
+        
+    }
+}

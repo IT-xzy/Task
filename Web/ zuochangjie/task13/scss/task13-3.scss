@@ -1,0 +1,183 @@
+/* 变量 */
+$font-size: .34rem;
+$color: #FFFFFF;
+$background: #29BDE0;
+$eliminate: 0;
+/* 混合 */
+@mixin flex($x:center,$y:center) {
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin  w-h($w,$h) {
+    width: $w;
+    height: $h;
+}
+@mixin fixed {
+    position: fixed;
+    left: $eliminate;
+    right: $eliminate;
+    z-index: 1;
+}
+@mixin font($t:ellipsis,$o:hidden,$w:nowrap) {
+    text-overflow: $t;
+    white-space: $w;
+    overflow: $o;
+}
+@mixin time {
+    @include flex(space-between);
+    margin: 0 10% .28rem 10%;            
+}
+@mixin button {
+    @include w-h(42vw,.86rem);
+    @include font;
+    font-size: .4rem;
+    letter-spacing: .04rem;
+    border-radius: .2rem;
+    border-style: none;
+    outline: none;
+    color: $color;
+    background-color: #F66F6F;
+}
+/* 去除标签属性 */
+html{
+    font-size: 312.5%;
+}
+body{
+    margin: $eliminate;
+    font-size: initial;
+}
+ul,li,p,h3{
+    margin: $eliminate;
+    padding: $eliminate;
+    list-style: none;
+}
+/* 头部 */
+header{
+    @include flex(space-between);
+    @include fixed;
+    top: $eliminate;
+    padding: 0 .2rem;
+    height: 1.28rem;
+    font-size: $font-size;
+    color: $color;
+    background: $background;
+    border-bottom: .01rem solid rgba(255,255,255,0.9);
+    /* 左边房子 */
+    .house{
+        @include w-h(.5rem,.42rem);
+        background: url(../img/css_spritees.png) no-repeat -.2rem -1rem;
+    }
+    /* 右边图标 */
+    .tips{
+        @include w-h(.4rem,.4rem);
+        background: url(../img/css_spritees.png) no-repeat -.2rem -.2rem;
+    }
+}
+main{
+    /* 主体部分 */
+    margin: 1.28rem 0;
+    .main-top{
+         /* 主体上 */
+        padding-top: .23rem;
+        background: $background;
+        .picture{
+             /* 背景图 */
+            display: block;
+            position: relative;
+            margin: auto;
+            @include w-h(3.51rem,2.05rem);
+            background: url(../img/css_spritees.png) no-repeat -10px -90px;
+            &::before{
+                /* 背景图中文字 */
+                    position: absolute;
+                    bottom: 7.5px;
+                    left: 41px;
+                    content: "卧底胜利";
+                    color: rgb(255, 255, 255);
+                    font-size: 0.45rem;
+                    letter-spacing: 0.04rem;
+            }
+        }
+        .yellow-font{
+            /*黄色字体*/
+            margin: .22rem auto 0 auto;
+            width: 80%;
+            font-size: .33rem;
+            font-weight: 700;
+            letter-spacing: .02rem;
+            color: #FFC865;
+        }
+        .result{
+            /* 显示结果的段落*/
+            margin: .61rem auto 0 auto;
+            padding-bottom: .1rem;
+            width: 80%;
+            p{
+                /* 段落里的行 */
+                @include font(clip,visible);
+                margin-bottom: .14rem;
+                font-size: .26rem;
+                letter-spacing: .04rem;
+                color: #FFFFFF;
+            }
+        }
+    }
+    .main-in{
+        /* 主体中 */
+        padding: .13rem 0 .33rem 0;
+        border-bottom: .03rem solid rgba(83, 83, 83, 0.2);
+        .time{
+            /* 时间 */
+           @include time;      
+           .time-left{
+            @include font;
+            font-size: .3rem;                 
+            letter-spacing: .02rem;
+            color: #515151;
+           }
+           .time-right{
+            @include font;
+            font-size: .2rem;
+            color: #C7C7C7;
+           }
+        }
+        p{
+            /* 晚上，白天 */
+            @include font;
+            margin-left: 10%;
+            font-size: .26rem;
+            letter-spacing: .02rem;
+            color: #A6A6A6;
+           }
+    }
+    .main-bottom{
+        /* 主体下 */
+        @include time;
+        padding-top: .12rem;
+        color: #29BDE0;
+        .left-blue{
+            @include font;
+            letter-spacing: .02rem;
+            font-size: .4rem;
+        }
+        .right-blue{
+            font-size: .27rem;
+        }
+    }
+}
+footer{
+    /* 底部 */
+    @include fixed;
+    @include flex(space-around);
+    bottom: $eliminate;
+    padding: .24rem 0;
+    background-color: rgba(153, 223, 240, 0.5);
+    .left{
+        @include button;
+    }
+    .right{
+        @extend .left;
+        background-color: #FBB435;
+    }
+}

@@ -1,0 +1,38 @@
+//变量
+$width: #FFFFFF;
+$green: #29B078;
+$black: #333333;
+$gray: #999999;
+$red: #F01400;
+$orange: #FF650E;
+$bg: #FFFFFF;
+//混合
+@mixin flex($x:center,$y:center) {
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin w-h($w:0,$h:0) {
+    width: $w;
+    height: $h;
+}
+@mixin text($t:center,$l:0) {
+    text-align: $t;
+    line-height: $l;
+}
+//占位符
+%head{
+    display: inline-block;
+    margin-top: .19rem;
+    @include w-h(2.08rem,2.08rem);
+    border-radius: 50%;
+    background-size: 100% !important;
+}
+$list:a,b,c,d;
+//@each 指令
+@each $i in $list {
+    .#{$i}{
+       @extend %head;
+       background: url(../img/#{$i}.png) no-repeat;
+    }
+}
