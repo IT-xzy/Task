@@ -1,0 +1,94 @@
+/*隐藏checked复选框*/
+#menu{
+    display: none;
+}
+#menu:checked ~ .container{
+    right: -70vw !important;
+}
+/* 菜单框 */
+.menu-box{
+    position: absolute;
+    @include w-h(70vw,100vh);
+    background: #FFFFFF;
+    /* 菜单列表 */
+    li{
+        @include flex (space-between);
+        padding: 0 .6rem;
+        line-height: 1rem;
+        font-size: $font-size;
+        border-bottom: .01rem solid #C9C9C9;
+        /* 列表中的指示箭头 */
+        span{
+            @include w-h(.24rem,.24rem);
+            border-top: .05rem solid #69D1E9;
+            border-right: .05rem solid #69D1E9;
+            transform: rotate(45deg);
+        }
+    }
+}
+.container{
+    position: relative;
+    right: $eliminate;
+    height: 100vh;
+    background: #F0F0F0;
+    transition: 0.8s;
+    main{
+        margin: .27rem .37rem 0 .37rem;
+        .main-top{
+            position: relative;
+            @include flex;
+            height: 1.16rem;
+            font-size: $font-size;
+            color: $color;
+            background: #FFFFFF;
+            box-shadow: 0 0 10px -3px;
+            span{
+                position: absolute;
+                right: .14rem;
+                @include w-h(.2rem,.2rem );
+                border-top: .05rem solid $color;
+                border-right: .05rem solid $color;
+                transform: rotate(45deg);
+            }
+        }
+        .main-in{
+            position: relative;
+            text-align: center;
+            box-shadow: 0 0 10px -3px;
+            background: #FFFFFF;
+            /* 三角形 */
+             a{
+                position: absolute;
+                right: .1rem;
+                top: 50%;
+                margin-top: -.13rem;
+                border-left: .26rem solid #FBB435;
+                border-top: .22rem solid transparent;
+                border-bottom: .22rem solid transparent;
+            }
+            .in-top{
+                @include flex;
+                margin-top: .27rem;
+                height: .9rem;
+                font-size: .36rem;
+                color: #FBB435;
+                border-bottom: .01rem solid RGBA(251, 180, 53, 1);
+            }
+            .button{
+                @include button;
+            }
+            p{
+                font-size: .24rem;
+                color: #787878;
+            }
+        } 
+        .in-bottom{
+            @include flex(space-between);
+            @include w-h(1.2rem,.4rem);
+            margin: auto;
+            span{
+                @include ball;
+            }
+        }
+    }
+}

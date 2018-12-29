@@ -1,0 +1,105 @@
+body {
+    background: #29BDE0;
+}
+
+header {
+    @include flex(space-between);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 .4rem;
+    height: 1.28rem;
+    background: #29BDE0;
+    color: #FFFFFF;
+    font-size: .6rem;
+
+    .return {
+        @include w-h(15px, 15px);
+        border-top: .06rem solid #FFFFFF;
+        border-left: .06rem solid #FFFFFF;
+        transform: rotate(-45deg);
+    }
+
+    #close {
+        position: relative;
+        margin-right: .16rem;
+        @include w-h(.05rem, .5rem);
+        background: #FFFFFF;
+        transform: rotate(45deg);
+
+        span {
+            position: absolute;
+            @include w-h(.05rem, .5rem);
+            background: #FFFFFF;
+            transform: rotate(-90deg);
+        }
+    }
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1.28rem 0;
+    padding-top: .9rem;
+    border-top: .01rem solid rgba(255, 255, 255, 0.8);
+
+    .player {
+        display: inline-block;
+        width: 33.33333%;
+        text-align: center;
+        .game_box {
+            display: inline-block;
+            margin-bottom: 11vw;
+            @include w-h(20.22vw, 20.22vw);
+            border: 1.5vw solid #FFFFFF;
+
+            .name {
+                @include flex;
+                height: 78%;
+                font-size: 4.5vw;
+                letter-spacing: .93vw;
+                color: #565656;
+                background-color: #FBB435;
+            }
+
+            .number {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 22%;
+                font-size: 3.5vw;
+                letter-spacing: .93vw;
+                color: #FFFFFF;
+                background-color: #83B09A;
+            }
+        }
+    }
+
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 0.8rem;
+    text-align: center;
+    background-color: #29BDE0;
+    z-index: 1;
+
+    button {
+        line-height: 1rem;
+        width: 76.5vw;
+        text-align: center;
+        font-size: .36rem;
+        letter-spacing: .02rem;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        color: #FFFFFf;
+        border-style: none;
+        outline: none;
+        background-color: #FBB435;
+    }
+}
