@@ -1,0 +1,188 @@
+/* 变量 */
+$font-size: .34rem;
+$eliminate: 0;
+$border: none;
+$color: #FFFFFF;
+$background: #29BDE0;
+/* 混合 */
+@mixin flex ($x:center,$y:center) {
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin w-h($w,$h) {
+    width: $w;
+    height: $h;
+}
+@mixin fixed{
+    position: fixed;
+    left: $eliminate;
+    right: $eliminate;
+    background: $background;
+    z-index: 1;
+}
+@mixin button {
+    border: $border;
+    outline: $border;
+}
+html{
+    font-size: 312.5%;
+}
+body{
+    margin: $eliminate;
+    font-size: initial;
+    background: $background;
+}
+ul,li,button,p,h3{
+    margin: $eliminate;
+    padding: $eliminate;
+    list-style: $border;
+}
+/* 头部 */
+header{
+    @include fixed;
+    @include flex(space-between);
+    padding: 0 .5rem;
+    top: $eliminate;
+    height: 1.28rem;
+    font-size: .34rem;
+    color: #FFFFFF;
+    /* 头部左侧按钮 */
+    button{
+        @include w-h(.5rem,.5rem);
+        @include flex;
+        border: .03rem solid $color;
+        background: $background;
+        outline: $border;
+        span{
+            padding: .1rem 0;
+            @include w-h(.3rem,.03rem);
+            border-top: .03rem solid $color;
+            border-bottom: .03rem solid $color;
+            background: content-box $color;
+        }
+    }
+    /* 右侧关闭 */
+    .close{
+        position: relative;
+       @include w-h(.05rem,.6rem);
+       margin-right: .2rem;
+       background: #FFFFFF;
+       transform: rotate(-45deg);
+       span{
+           @extend .close;
+           position: absolute;
+           transform: rotate(90deg);
+       }
+    }
+}
+/* 主要部分 */
+main{
+    margin: 1.28rem 0 2rem 0;
+    .main-top{
+        @include flex(space-between);
+        position: relative;
+        padding: 0 .17rem 0 .46rem;
+        height: .82rem;
+        font-size: .26rem;
+        color: #464646;
+        background: #B9E9F5;
+        /* 小三角伪元素 */
+        &::before{
+            position: absolute;
+            bottom: -.13rem;
+            left: .71rem;
+            content: "";
+            border-top: .15rem solid #B9E9F5;
+            border-left: .075rem solid transparent;
+            border-right: .075rem solid transparent;
+        }
+        /* 右侧音频 */
+        button{
+            @include w-h(.52rem,.52rem);
+            border-radius: 50%;
+            background: #FBB435;
+            border: $border;
+            outline: $border;
+            span{
+                display: inline-block;
+                margin: .06rem 0 0 .06rem;
+                border-left: .26rem solid $color;
+                border-top: .13rem  solid transparent;
+                border-bottom: .13rem solid transparent;
+            }
+        }
+    }
+    .click{
+        /* 发言 */
+        margin: .25rem 0 .43rem .72rem;
+        font-size: .24rem;
+        color: $color;
+    }
+    ul{ /* 游戏盒子 */
+        @include flex(space-around,flex-start);
+        margin-bottom: 11.5vw;
+        li{
+            @include w-h(21vw,21vw);
+            border: .7vw solid $color;
+            .li-top{
+                @include flex;
+                height: 75%;
+                font-size: 4.6vw;
+                color: #565656;
+                background: #F5C97B;
+            }
+            .li-bottom{
+                @include flex;
+                height: 25%;
+                font-size: 3.6vw;
+                color: $color;
+                background: #83B09A;
+            }
+            .dropdown{
+                /* 下拉 */
+                @include flex(space-between);
+                display: none;
+                margin: 4vw 0 0 -.75vw;
+                width: 22.5vw;
+                /* 下拉图片 */
+                button{
+                    @include button;
+                    @include w-h(4.6vw,4.6vw);
+                    background: url(../img/css_spritesq.png) no-repeat 49% 36%/230%;
+                }
+                .fdj{
+                    background: url(../img/css_spritesq.png) no-repeat 49% 8%/230%;
+                }
+                .mz{
+                    background: url(../img/css_spritesq.png) no-repeat 49% 64%/230%;
+                }
+                .zl{
+                    background: url(../img/css_spritesq.png) no-repeat 49% 92%/230%;
+                }
+            }
+            &:hover .dropdown{
+                display: flex;
+            }
+        }
+    }
+}
+/* 底部 */
+footer{
+    @include fixed;
+    bottom: $eliminate;
+    .footer-top{
+        margin: auto;
+        padding: .42rem 0 .6rem 0;
+        width: 89vw;
+        text-align: center;
+        border-top: .01rem solid $color;
+        button{
+            @include button;
+            @include w-h(76.5vw,.87rem);
+            font-size: .36rem;
+            color: $color;
+            background: #FBB435;
+        }
+    }
+}

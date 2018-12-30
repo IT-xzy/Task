@@ -1,0 +1,38 @@
+body{
+    background: $background;
+}
+header{
+    @include flex(space-between);
+    position: fixed;
+    padding: 0 .3rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.28rem;
+    background: $background;
+    z-index: 1;
+    .left{
+        @include w-h(.3rem,.3rem);
+        border-top: .05rem solid #FFFFFF;
+        border-left: .05rem solid #FFFFFF;
+        transform: rotate(-45deg);
+    }
+    h4{
+        font-size: .34rem;
+        color: #FFFFFF;
+        letter-spacing: .06rem;
+    }
+    .right{
+        position: relative;
+        margin-right: .16rem;
+        @include w-h(.05rem,.5rem);
+        background: #FFFFFF;
+        transform: rotate(45deg);
+        span{
+            position: absolute;
+            @include w-h(.05rem,.5rem);
+            background: #FFFFFF;
+            transform: rotate(-90deg);
+        }
+    }
+}

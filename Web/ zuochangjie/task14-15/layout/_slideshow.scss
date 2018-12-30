@@ -1,0 +1,64 @@
+.rotation-chart{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    //轮播图片
+    .images{
+        width: 300vw;
+        white-space: nowrap;
+        animation: Naruto 10s linear infinite; //线性  重复循环
+        img{
+            margin-right: -.1rem;
+            width: 100vw;
+        }
+    }
+    @keyframes Naruto {
+        0%    {transform: translate(0,0);}
+        11.11%  {transform: translate(0,0);}
+       22.22%  {transform: translate(-33.3%,0);}
+       33.33%  {transform: translate(-33.3%,0);}
+       44.44% {transform: translate(-66.6%,0);}
+       55.55%  {transform: translate(-66.6%,0);}
+       66.66% {transform: translate(-33.3%,0);}
+       77.77% {transform: translate(-33.3%,0);}
+       88.88% {transform: translate(0,0);}
+       100% {transform: translate(0,0);}
+    }
+    //左切换
+    .left{
+        position: absolute;
+        top: 50%;
+        margin-top: -.2rem;
+        left: 15%;
+       @include w-h(.4rem,.4rem);
+        border-top: .1rem solid $bg;
+        border-left: .1rem solid $bg;
+        transform: rotate(-45deg);
+    }
+    //右切换
+    .right{
+        position: absolute;
+        top: 50%;
+        margin-top: -.2rem;
+        right: 15%;
+       @include w-h(.4rem,.4rem);
+        border-top: .1rem solid $bg;
+        border-right: .1rem solid $bg;
+        transform: rotate(45deg);
+    }
+    //指示符
+    .indicators{
+        position: absolute;
+        bottom: 15%;
+        left: 50%;
+        margin-left: -.5rem;
+        @include flex(space-between);
+        @include w-h(1rem,.2rem);
+        li{
+            @include w-h(.16rem,.16rem);
+            border-radius: 50%;
+            border: .01rem solid $bg;
+        }
+    }
+    
+}

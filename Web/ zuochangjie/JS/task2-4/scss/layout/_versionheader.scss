@@ -1,0 +1,39 @@
+body {
+    background-color: #F0F0F0;
+
+    header {
+        position: fixed;
+        @include flex(space-between);
+        padding: 0 .3rem;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1.28rem;
+        font-size: .34rem;
+        color: #FFFFFF;
+        background-color: #29BDE0;
+        z-index: 1;
+
+        .return {
+            @include w-h(.3rem, .3rem);
+            border-top: .05rem solid #FFFFFF;
+            border-left: .05rem solid #FFFFFF;
+            transform: rotate(-45deg);
+        }
+
+        .right {
+            position: relative;
+            margin-right: .16rem;
+            @include w-h(.05rem, .5rem);
+            background: #FFFFFF;
+            transform: rotate(45deg);
+
+            span {
+                position: absolute;
+                @include w-h(.05rem, .5rem);
+                background: #FFFFFF;
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}

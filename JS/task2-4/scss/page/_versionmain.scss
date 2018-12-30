@@ -1,0 +1,86 @@
+main {
+    margin: 1.28rem 0;
+    padding: .36rem .1rem 0 .1rem;
+    text-align: center;
+
+    .day {
+        position: relative;
+        @include flex;
+        height: .84rem;
+        border: .01rem solid #C9C9C9;
+        font-size: .34rem;
+        color: #29BDE0;
+        background-color: #FFFFFF;
+
+        .dropdown {
+            position: absolute;
+            right: .2rem;
+            @include w-h(.2rem, .2rem);
+            border-top: .03rem solid #29BDE0;
+            border-right: .03rem solid #29BDE0;
+            transform: rotate(135deg);
+        }
+    }
+    .none{
+        display: none;
+    }
+
+    .order {
+        position: relative;
+        margin-top: .15rem;
+        padding: .54rem 0;
+        background-color: #FFFFFF;
+
+        .triangle {
+            display: inline-block;
+            position: absolute;
+            top: -.15rem;
+            border-left: .15rem solid transparent;
+            border-right: .15rem solid transparent;
+            border-bottom: .15rem solid #FFFFFF;
+        }
+
+        .box {
+            position: relative;
+            margin-left: 10%;
+            border-left: .02rem solid #C9C9C9;
+
+            .one {
+                position: absolute;
+                left: -.3rem;
+                @include flex;
+                @include w-h(.6rem, .6rem);
+                border: .01rem solid #C9C9C9;
+                border-radius: 50%;
+                background: #FFFFFF;
+            }
+
+            .two {
+                @extend .one;
+                margin-top: 1rem;
+            }
+
+            button {
+                position: relative;
+                margin-bottom: .18rem;
+                @include w-h(70%, 38px);
+                font-size: .3rem;
+                color: #FFFFFF;
+                background: #24A7C6;
+                border: none;
+                outline: none;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    margin-top: -.1rem;
+                    top: 50%;
+                    left: -.2rem;
+                    border-top: 5px solid transparent;
+                    border-bottom: 5px solid transparent;
+                    border-right: 10px solid #24A7C6;
+                }
+            }
+        }
+    }
+}
