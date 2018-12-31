@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mutesaid.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.mutesaid.pojo.Student">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="qq" jdbcType="BIGINT" property="qq"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="time_of" jdbcType="DATE" property="timeOf"/>
+        <result column="grade_school" jdbcType="VARCHAR" property="gradeSchool"/>
+        <result column="online_id" jdbcType="VARCHAR" property="onlineId"/>
+        <result column="link" jdbcType="VARCHAR" property="link"/>
+        <result column="wish" jdbcType="VARCHAR" property="wish"/>
+        <result column="fellow" jdbcType="VARCHAR" property="fellow"/>
+        <result column="understand" jdbcType="VARCHAR" property="understand"/>
+        <result column="create_at" jdbcType="BIGINT" property="createAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from students
+        <where>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="qq != null">
+                and qq = #{qq}
+            </if>
+            <if test="onlineId != null">
+                and online_id = #{onlineId}
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select * from students where id = #{id}
+    </select>
+
+    <delete id="delete">
+        delete from students where id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.mutesaid.pojo.Student"
+            keyProperty="id" useGeneratedKeys="true">
+        insert into students (id, name, qq, type,
+        time_of, grade_school, online_id,
+        link, wish, fellow,
+        understand, create_at, update_at
+        )
+        values (null, #{name,jdbcType=VARCHAR}, #{qq,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR},
+        #{timeOf,jdbcType=DATE}, #{gradeSchool,jdbcType=VARCHAR}, #{onlineId,jdbcType=VARCHAR},
+        #{link,jdbcType=VARCHAR}, #{wish,jdbcType=VARCHAR}, #{fellow,jdbcType=VARCHAR},
+        #{understand,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}
+        )
+    </insert>
+
+    <update id="update">
+        update students set ${key} = #{value},update_at = #{updateTime} where id = #{id}
+    </update>
+
+
+</mapper>
+    
