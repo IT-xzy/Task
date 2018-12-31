@@ -1,0 +1,8 @@
+上传图片的方法在UsrController中
+接口为post /a/u/upload
+使用MultipartFile类型接收文件，通过上传的文件名获取文件类型，并以MD5(用户id)命名文件
+
+调用上传图片的工具类，工具类名UploadPicUtil
+工具类文件流和要命名的文件名
+setInfo方法使用阿里云的接口将文件上传到服务器，并返回response响应
+uploadPic是外部调用方法，该方法通过调用setInfo方法上传文件，并通过返回的状态码判断文件是否上传成功并返回布尔值
