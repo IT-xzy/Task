@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mutesaid.mapper.MessageMapper">
+    <resultMap id="BaseResultMap" type="com.mutesaid.pojo.Message">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="status" jdbcType="BIT" property="status" />
+        <result column="name" jdbcType="VARCHAR" property="workName" />
+        <result column="visitor_name" jdbcType="VARCHAR" property="visitorName" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="admin_id" jdbcType="BIGINT" property="adminId" />
+        <result column="create_at" jdbcType="BIGINT" property="createAt" />
+        <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    </resultMap>
+    <select id="getMsgList" resultMap="BaseResultMap">
+        select *, work.name from message inner join work on message.work_id = work.id
+        <where>
+            <if test="workId != null">
+                message.work_id = #{workId}
+            </if>
+            <if test="status != null">
+               and message.status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="getMsg" resultMap="BaseResultMap">
+        select * from message where id = #{msgId}
+    </select>
+    <insert id="insertMsg" parameterType="com.mutesaid.pojo.Message" useGeneratedKeys="true" keyProperty="id">
+        insert into message (id, work_id, status, visitor_name,
+          content, admin_id, create_at,
+          update_at)
+        values (#{id,jdbcType=BIGINT}, #{workId,jdbcType=BIGINT}, #{status,jdbcType=BIT}, #{visitorName,jdbcType=VARCHAR},
+          #{content,jdbcType=VARCHAR}, #{adminId,jdbcType=BIGINT}, #{createAt,jdbcType=BIGINT},
+          #{updateAt,jdbcType=BIGINT})
+    </insert>
+    <delete id="deleteMsg">
+        delete from message where id = #{msgId}
+    </delete>
+    <delete id="deleteWork">
+        delete from message where work_id = #{workId}
+    </delete>
+    <update id="updateStatus">
+        update message set status = #{status} where id = #{msgId}
+    </update>
+</mapper>
+    

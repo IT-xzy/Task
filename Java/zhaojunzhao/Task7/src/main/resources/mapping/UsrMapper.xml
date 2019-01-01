@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mutesaid.bootdemo.mapper.UsrMapper">
+    <resultMap id="BaseResultMap" type="com.mutesaid.bootdemo.model.Usr">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="pwd" jdbcType="VARCHAR" property="pwd"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="pic" jdbcType="VARCHAR" property="pic"/>
+        <result column="create_at" jdbcType="BIGINT" property="createAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        id, name, pwd, phone, email, pic, create_at, update_at
+    </sql>
+    
+    <insert id="insert" parameterType="com.mutesaid.bootdemo.model.Usr" useGeneratedKeys="true" keyProperty="id">
+        insert into usr (id, name, pwd, phone, email, create_at, update_at)
+        values (#{id}, #{name}, #{pwd}, #{phone}, #{email}, #{createAt}, #{updateAt})
+    </insert>
+    
+    <select id="select" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from usr where name = #{value} or phone = #{value} or email = #{value}
+    </select>
+    
+    <select id="getPic" resultType="String">
+        select pic from usr where id = #{id}
+    </select>
+    
+    <update id="setPic">
+        update usr set pic = #{pic} where id = #{id}
+    </update>
+    
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from usr
+        where id = #{id}
+    </select>
+
+    <update id="update">
+        update usr
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="pwd != null">
+                pwd = #{pwd},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="createAt != null" >
+                create_at = #{createAt},
+            </if>
+            <if test="updateAt != null" >
+                update_at = #{updateAt},
+            </if>
+        </set>
+        where
+        id = #{id}
+    </update>
+</mapper>

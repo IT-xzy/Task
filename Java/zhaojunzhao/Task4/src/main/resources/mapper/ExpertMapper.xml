@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mutesaid.mapper.ExpertMapper">
+    <resultMap id="BaseResultMap" type="com.mutesaid.pojo.Expert">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="position" jdbcType="VARCHAR" property="position" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="icon" jdbcType="VARCHAR" property="icon" />
+        <result column="intro" jdbcType="VARCHAR" property="intro" />
+        <result column="salary" jdbcType="INTEGER" property="salary" />
+        <result column="create_at" jdbcType="BIGINT" property="createAt" />
+        <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    </resultMap>
+    <select id="getAllExpert" resultMap="BaseResultMap">
+        select * from expert order by salary desc limit 4
+    </select>
+</mapper>
