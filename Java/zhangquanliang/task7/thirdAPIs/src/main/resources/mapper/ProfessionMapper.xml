@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.suger.dao.ProfessionDao">
+    <resultMap id="professionMap" type="profession">
+        <result property="id" column="id"/>
+        <result property="onlineCount" column="online_count" />
+        <result property="payOne" column="pay_one" />
+        <result property="payTwo" column="pay_two" />
+        <result property="payThree" column="pay_three" />
+        <result property="createAt" column="create_at" />
+        <result property="updateAt" column="update_at" />
+    </resultMap>
+
+    <select id="listProfession" resultMap="professionMap">
+       SELECT * FROM  profession
+    </select>
+    <select id="getOnlineCount" resultType="java.lang.Integer">
+        select count(*) from profession
+    </select>
+
+</mapper>
