@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mutesaid.mapper.ProfessionMapper">
+    <resultMap id="BaseResultMap" type="com.mutesaid.model.Profession">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+        <result column="direction" jdbcType="VARCHAR" property="direction"/>
+        <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
+        <result column="condition" jdbcType="TINYINT" property="condition"/>
+        <result column="difficult" jdbcType="TINYINT" property="difficult"/>
+        <result column="priod_from" jdbcType="TINYINT" property="priodFrom"/>
+        <result column="priod_to" jdbcType="TINYINT" property="priodTo"/>
+        <result column="want" jdbcType="INTEGER" property="want"/>
+        <result column="studying" jdbcType="INTEGER" property="studying"/>
+        <result column="prompt" jdbcType="VARCHAR" property="prompt"/>
+        <result column="salary_one" jdbcType="INTEGER" property="salaryOne"/>
+        <result column="salary_two" jdbcType="INTEGER" property="salaryTwo"/>
+        <result column="salary_three" jdbcType="INTEGER" property="salaryThree"/>
+        <result column="salary_four" jdbcType="INTEGER" property="salaryFour"/>
+        <result column="create_at" jdbcType="BIGINT" property="createAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, `name`, img, direction, introduce, `condition`, difficult, priod_from, priod_to,
+        want, studying, prompt, salary_one, salary_two, salary_three, salary_four, create_at,
+        update_at
+    </sql>
+
+    <select id="findDirectionList" resultType="String">
+        select distinct direction from profession
+    </select>
+
+    <select id="findProfessionList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from profession
+        where direction = #{direction}
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://sample"
+           xmlns:sample="http://sample"
+           name="ServiceComponent" >
+
+    <component name="ServiceComponent">
+        <implementation.spring location="applicationContext.xml"/>
+
+        <service name="ExpertService">
+            <tuscany:binding.rmi uri="rmi://localhost:8099/ExpertService"/>
+        </service>
+
+        <service name="ProfessionService">
+            <tuscany:binding.rmi uri="rmi://localhost:8099/ProfessionService"/>
+        </service>
+
+        <service name="StudentService">
+            <tuscany:binding.rmi uri="rmi://localhost:8099/StudentService"/>
+        </service>
+    </component>
+
+</composite>

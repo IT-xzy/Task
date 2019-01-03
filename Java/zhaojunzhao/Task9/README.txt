@@ -1,0 +1,8 @@
+服务组件配置在tuscany_server模块的 tuscany.composite 文件中
+
+部署两台Service切换在tuscany_web模块的utils包下的AccessService类
+改用随机访问
+其他的都没变，就是取Service的方法变了一下
+
+取随机数，随机数的范围是根据部署的Service服务器数量来取的
+根据随机数随机访问两台服务器，如果当前访问的服务器出现故障则去访问另一台服务器
