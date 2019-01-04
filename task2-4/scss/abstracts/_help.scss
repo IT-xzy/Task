@@ -1,0 +1,29 @@
+/* 变量 */
+$eliminate: 0;
+$font-size: .34rem;
+$border: none;
+$color: #787878;
+$background: #69D1E9;
+/* 混合 */
+@mixin flex($x:center,$y:center){
+    display: flex;
+    justify-content: $x;
+    align-items: $y;
+}
+@mixin w-h ($w,$h){
+    width: $w;
+    height: $h;
+}
+@mixin button {
+    @include w-h(80%,1.34rem);
+    margin: .3rem 0;
+    color: #FFFFFF;
+    background: $background;
+    border:$border;
+    outline: $border;
+}
+@mixin ball {
+    @include w-h(.17rem,.17rem);
+    border-radius: 50%;
+    background: #F0F0F0;
+}

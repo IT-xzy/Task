@@ -1,0 +1,79 @@
+//IE盒模型
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+//容器
+.container{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+//sm
+@media (min-width: 576px)
+{  .container{
+   max-width: 540px;
+}
+}
+//md
+@media (min-width: 768px)
+{   .container{
+   max-width: 720px;
+}
+}
+//lg
+@media (min-width: 992px)
+{
+   .container{
+       max-width: 960px;
+}
+}
+//xl
+@media (min-width: 1200px)
+{   .container{
+   max-width: 1140px;
+}
+}
+//行
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+//col 实现for循环
+@for $i from 1 through 12 {
+    .col-#{$i}{
+        flex: 0 0 100%/12*$i;
+        max-width: 100%/12*$i;
+        position: relative;
+        width: 100%;
+        padding: 0 15px;         
+   } 
+}
+//col 实现@each指令 媒体查询for循环
+$list:(sm: 576px,md:768px,lg:992px,xl:1200px);
+@each $m,$px in $list {
+    @media (min-width:$px) {
+       @for $i from 1 through 12 {
+           .col-#{$m}-#{$i}{
+             flex: 0 0 100%/12*$i;
+             max-width: 100%/12*$i;
+             position: relative;
+             padding: 0 15px;
+             
+           }
+       }
+     }
+}
+@each $m,$px in $list {
+    @for $i from 1 through 12 {
+        .col-#{$m}-#{$i}{
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding: 0 15px;     
+        }
+    }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--在全域配置文件中引入资源文件-->
+    <!--<context:property-placeholder location="classpath:redis.properties" />-->
+
+    <!--redis数据源，最大空闲数；可用连接实例的最大数目，默认值为8；如果赋值为-1，则表示不限制，
+    如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)；
+     最大等待时间；返回连接时，检测连接是否成功-->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxActive" value="${redis.maxActive}" />
+        <property name="maxWait" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+
+
+    <!--redis连接池管理工厂：IP地址，端口，数据源属性-->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+  p:host-name="${redis.host}" p:port="${redis.port}" p:pool-config-ref="poolConfig"/>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
+
+
+
+
+
+
+</beans>

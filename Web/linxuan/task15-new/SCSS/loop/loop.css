@@ -1,0 +1,115 @@
+@charset "UTF-8";
+.loop-wrap {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.loop-wrap .loop-images-container {
+  width: 300vw;
+  /* 横向排列 3张图片 宽度应为主容器3倍 */
+  font-size: 0;
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+  /* 初始位置位移 */
+  -webkit-animation: loop 10s linear infinite;
+          animation: loop 10s linear infinite;
+}
+
+.loop-wrap .loop-images-container .loop-image {
+  width: 100vw;
+}
+
+.loop-wrap .focus-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 5%;
+}
+
+.loop-wrap .focus-container li {
+  float: left;
+  width: .1rem;
+  height: .1rem;
+  border-radius: 50%;
+  margin: 0 .05rem;
+  border: 1px solid #fff;
+}
+
+@-webkit-keyframes loop {
+  0% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  30% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  /* 停留1500ms */
+  35% {
+    -webkit-transform: translate(-33.3%, 0);
+            transform: translate(-33.3%, 0);
+  }
+  /* 切换500ms 位移-20% */
+  60% {
+    -webkit-transform: translate(-33.3%, 0);
+            transform: translate(-33.3%, 0);
+  }
+  65% {
+    -webkit-transform: translate(-66.6%, 0);
+            transform: translate(-66.6%, 0);
+  }
+  95% {
+    -webkit-transform: translate(-66.6%, 0);
+            transform: translate(-66.6%, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  /* 复位到第一张图片 */
+}
+
+@keyframes loop {
+  0% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  30% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  /* 停留1500ms */
+  35% {
+    -webkit-transform: translate(-33.3%, 0);
+            transform: translate(-33.3%, 0);
+  }
+  /* 切换500ms 位移-20% */
+  60% {
+    -webkit-transform: translate(-33.3%, 0);
+            transform: translate(-33.3%, 0);
+  }
+  65% {
+    -webkit-transform: translate(-66.6%, 0);
+            transform: translate(-66.6%, 0);
+  }
+  95% {
+    -webkit-transform: translate(-66.6%, 0);
+            transform: translate(-66.6%, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  /* 复位到第一张图片 */
+}
+/*# sourceMappingURL=loop.css.map */

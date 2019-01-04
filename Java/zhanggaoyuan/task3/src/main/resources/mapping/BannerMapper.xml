@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jnshu.dao.BannerMapper" >
+  <resultMap id="BaseResultMap" type="jnshu.model.Banner" >
+    <id column="banner_id" property="bannerId" jdbcType="INTEGER" />
+    <result column="creat_time" property="creatTime" jdbcType="BIGINT" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="banner_status" property="bannerStatus" jdbcType="BIT" />
+    <result column="banner_putaway_time" property="bannerPutawayTime" jdbcType="BIGINT" />
+    <result column="banner_redactor" property="bannerRedactor" jdbcType="VARCHAR" />
+    <result column="production_id" property="productionId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    banner_id, creat_time, update_time, banner_status, banner_putaway_time, banner_redactor, 
+    production_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where banner_id = #{bannerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from banner
+    where banner_id = #{bannerId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.Banner" >
+    insert into banner (banner_id, creat_time, update_time, 
+      banner_status, banner_putaway_time, banner_redactor, 
+      production_id)
+    values (#{bannerId,jdbcType=INTEGER}, #{creatTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, 
+      #{bannerStatus,jdbcType=BIT}, #{bannerPutawayTime,jdbcType=BIGINT}, #{bannerRedactor,jdbcType=VARCHAR}, 
+      #{productionId,jdbcType=INTEGER})
+  </insert>
+  <!--<insert id="insertSelective" parameterType="Banner" >-->
+    <!--insert into banner-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+      <!--<if test="bannerId != null" >-->
+        <!--banner_id,-->
+      <!--</if>-->
+      <!--<if test="creatTime != null" >-->
+        <!--creat_time,-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--update_time,-->
+      <!--</if>-->
+      <!--<if test="bannerStatus != null" >-->
+        <!--banner_status,-->
+      <!--</if>-->
+      <!--<if test="bannerPutawayTime != null" >-->
+        <!--banner_putaway_time,-->
+      <!--</if>-->
+      <!--<if test="bannerRedactor != null" >-->
+        <!--banner_redactor,-->
+      <!--</if>-->
+      <!--<if test="productionId != null" >-->
+        <!--production_id,-->
+      <!--</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+      <!--<if test="bannerId != null" >-->
+        <!--#{bannerId,jdbcType=INTEGER},-->
+      <!--</if>-->
+      <!--<if test="creatTime != null" >-->
+        <!--#{creatTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="updateTime != null" >-->
+        <!--#{updateTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="bannerStatus != null" >-->
+        <!--#{bannerStatus,jdbcType=BIT},-->
+      <!--</if>-->
+      <!--<if test="bannerPutawayTime != null" >-->
+        <!--#{bannerPutawayTime,jdbcType=BIGINT},-->
+      <!--</if>-->
+      <!--<if test="bannerRedactor != null" >-->
+        <!--#{bannerRedactor,jdbcType=VARCHAR},-->
+      <!--</if>-->
+      <!--<if test="productionId != null" >-->
+        <!--#{productionId,jdbcType=INTEGER},-->
+      <!--</if>-->
+    <!--</trim>-->
+  <!--</insert>-->
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.Banner" >
+    update banner
+    <set >
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="bannerStatus != null" >
+        banner_status = #{bannerStatus,jdbcType=BIT},
+      </if>
+      <if test="bannerPutawayTime != null" >
+        banner_putaway_time = #{bannerPutawayTime,jdbcType=BIGINT},
+      </if>
+      <if test="bannerRedactor != null" >
+        banner_redactor = #{bannerRedactor,jdbcType=VARCHAR},
+      </if>
+      <if test="productionId != null" >
+        production_id = #{productionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where banner_id = #{bannerId,jdbcType=INTEGER}
+  </update>
+  <!--<update id="updateByPrimaryKey" parameterType="Banner" >-->
+    <!--update banner-->
+    <!--set creat_time = #{creatTime,jdbcType=BIGINT},-->
+      <!--update_time = #{updateTime,jdbcType=BIGINT},-->
+      <!--banner_status = #{bannerStatus,jdbcType=BIT},-->
+      <!--banner_putaway_time = #{bannerPutawayTime,jdbcType=BIGINT},-->
+      <!--banner_redactor = #{bannerRedactor,jdbcType=VARCHAR},-->
+      <!--production_id = #{productionId,jdbcType=INTEGER}-->
+    <!--where banner_id = #{bannerId,jdbcType=INTEGER}-->
+  <!--</update>-->
+
+
+  <!--<resultMap id="BaseResultMap" type="Banner" >-->
+  <!--<id column="banner_id" property="bannerId" jdbcType="INTEGER" />-->
+  <!--<result column="creat_time" property="creatTime" jdbcType="BIGINT" />-->
+  <!--接收存放联表查询得到的数据-->
+  <!--主表的数据存放-->
+  <resultMap id="BannerResultMap" type="jnshu.model.Banner" >
+    <id column="banner_id" property="bannerId" />
+    <result column="banner_putaway_time" property="bannerPutawayTime" />
+    <!--副表的数据存放-->
+    <collection property="list" ofType="jnshu.model.Production" >
+      <id column="production_id" property="productionId" />
+      <result column="production_name" property="productionName"/>
+      <result column="image_links" property="imageLinks"/>
+      <result column="production_synopsis" property="productionSynopsis"/>
+    </collection>
+  </resultMap>
+
+  <!--联表查询语句-->
+  <select id="selectBanner" resultMap="BannerResultMap" >
+    select banner.banner_id,banner.banner_putaway_time,production.production_name,production.image_links
+,production.production_synopsis from banner left join production on banner.production_id=production.
+production_id where banner_status=1 ORDER BY banner_putaway_time desc;
+  </select>
+
+  <!--<resultMap id="BannerAndProductionResultMap" type="jnshu.model.BannerAndProduction" >-->
+    <!--<id column="banner_id" property="bannerId"/>-->
+    <!--<result column="banner_putaway_time" property="bannerPutawayTime" />-->
+    <!--<result column="production_name" property="productionName"/>-->
+    <!--<result column="image_links" property="imageLinks"/>-->
+    <!--<result column="production_synopsis" property="productionSynopsis"/>-->
+  <!--</resultMap>-->
+
+
+
+</mapper>

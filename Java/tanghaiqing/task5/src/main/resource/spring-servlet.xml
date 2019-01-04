@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
+    <!--配置组件扫描-->
+    <context:component-scan base-package="task5"/>
+
+    <!-- 配置使用阿里巴巴的fastjson转换器    这里的配置最好放在最后   否则可能受到上面转换器的影响 -->
+    <!-- 启动Springmvc注解驱动 -->
+    <!-- <mvc:annotation-driven/> -->
+    <!-- 返回json 方法一 需要导入 fastjson.jar包 -->
+    <!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+    <!-- 这里顺序不能反，一定先写text/html,不然ie下出现下载提示 -->
+    <mvc:annotation-driven>
+        <!--<mvc:message-converters register-defaults="true">-->
+            <!--<bean id="fastJsonHttpMessageConverter" class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
+                <!--<property name="supportedMediaTypes">-->
+                    <!--<list>-->
+                        <!--<value>text/html;charset=UTF-8</value>-->
+                        <!--<value>application/json;charset=UTF-8</value>-->
+                    <!--</list>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</mvc:message-converters>-->
+    </mvc:annotation-driven>
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--/WEB-INF/view/ 一定要加斜杠“/”-->
+        <property name="prefix" value="/WEB-INF/view/visit/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/u/**"/>
+            <bean class="task5.Interceptor.CookieInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--配置连接池-->
+    <util:properties id="config" location="classpath:db.properties"/>
+    <bean id="ds" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="#{config.driverClass}"/>
+        <property name="jdbcUrl" value="#{config.jdbcUrl}"/>
+        <property name="user" value="#{config.user}"/>
+        <property name="password" value="#{config.password}"/>
+    </bean>
+    <!--配置SqlSessionFactoryBean-->
+    <!--spring集成mybatis，不在需要mybatis的配置文件（SqlSessionFactoryBean来代替mybatis的配置文件）-->
+    <bean id="ssfb" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入连接池-->
+        <!--不在使用mybatis自带的连接池，而是使用spring管理的连接池-->
+        <property name="dataSource" ref="ds"/>
+        <property name="mapperLocations" value="classpath*:mapper/**Mapper.xml"/>
+    </bean>
+    <!--配置MapperScannerConfigurer
+    负责扫描指定包下的所有的Mapper映射器，然后生成符合这些映射器要求的对象
+    （其实就是调用SqlSession的getMapper方法），另外还会将这些对象添加到spring容器里面。（bean的id就是对应接口首字母小写的接口名）
+    也可以使用@Respository（）来设置id，可以不用加组件扫描，下面的会帮你扫-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--mapper映射器所在的包（相当于jdbc dao层里面的接口，只是这么叫而已）-->
+        <property name="basePackage" value="task5.dao"/>
+        <!--只扫描特定的接口-->
+        <!--开发一个注解，比如@MybatisRepostory，2.将该注解添加到需要扫描的映射器。3.配置MapperScannerConfigurer，设置annotationClass，指定注解类-->
+        <!--<property name="annotationClass" value="com.mybatis.annotations.MybatisRepository"/>-->
+    </bean>
+</beans>

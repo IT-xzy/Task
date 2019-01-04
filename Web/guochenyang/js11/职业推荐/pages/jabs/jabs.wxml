@@ -1,0 +1,49 @@
+<view class='text-center'>
+    <text class='title'>最适合你的职业推荐</text>
+  </view>
+  <view class='main-title'>
+    <block wx:for="{{viewList2}}" wx:key="btn">
+      <view  data-btn='{{item.btn}}' bindtap='bindChange' class="key-style {{(click==item.btn)?'click-style':''}}">{{item.name}}</view>
+    </block>
+  </view>
+  <view  class='main-style'>
+  <view class='row'>
+    <text>职业门槛:</text>
+    <text>{{viewList1[click].threshold}}星</text>
+  </view>
+  <view class='row'>
+    <text>难易程度:</text>
+    <text>{{viewList1[click].difficult}}星</text>
+  </view>
+  <view class='row'>
+    <text>成长周期:</text>
+    <text>{{viewList1[click].cycle}}</text>
+  </view>
+  <view class='row'>
+    <text>求贤职业:</text>
+    <text>{{viewList1[click].company}}家</text>
+  </view>
+  <view class='row'>
+    <text>入学基础:</text>
+    <text>{{viewList1[click].basis}}</text>
+  </view>
+
+  <view class='flex-wrp'>
+      <text>薪资待遇:</text>
+    <view>
+      <view>
+        <text>{{viewList3[click][0].time}}</text>约
+        <text>{{viewList3[click][0].salary}}k</text>
+      </view>
+      <view>
+        <text>{{viewList3[click][1].time}}</text>约
+        <text>{{viewList3[click][1].salary}}k</text>
+        </view>
+      <view wx:if="{{viewList3[click][2]?true:false}}">
+        <text>{{viewList3[click][2].time}}</text>约
+        <text>{{viewList3[click][2].salary}}k</text>
+      </view>
+    </view>
+  </view>
+
+</view>

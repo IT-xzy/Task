@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="mapper.StudentMapper">
+    <!--namespace用于绑定Dao接口-->
+    <resultMap type="pojo.Student" id="StudentResultMap">
+        <!--实体类属性 与 数据表字段对应  主键用 id ,其他为result-->
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="qq" column="qq"/>
+        <result property="type" column="type"/>
+        <result property="time" column="time"/>
+        <result property="graduateInstitutions" column="graduate_institutions"/>
+        <result property="dailyLink" column="daily_link"/>
+        <result property="volunteer" column="volunteer"/>
+        <result property="createAt" column="create_at" />
+        <result property="updateAt" column="update_at" />
+    </resultMap>
+
+    <select id="findAll" resultType="pojo.Student">
+    <!--<select id="findAll" resultMap="StudentResultMap">-->
+        select * from student1
+        </select>
+
+    <insert id="addStudent" parameterType="Student">
+        insert into student1 (name,qq,type ,time ,graduate_institutions,daily_link,volunteer, create_at,update_at)
+         values (#{name},#{qq},#{type} ,#{time} ,#{graduateInstitutions},#{dailyLink},#{volunteer},#{createAt},#{updateAt})
+--         将插入数据的主键返回，返回到student对象中
+         <selectKey keyProperty="id" order="AFTER" resultType="int">
+--              keyproperty：将查询到的主键值设置到parameterType对象的哪个属性中
+             select last_insert_id()
+         </selectKey>
+    </insert>
+
+    <delete id="deleteStudent" parameterType="Student">
+        delete from student1 where id=#{id}
+    </delete>
+
+    <update id="updateStudent" parameterType="Student">
+        update student1 set name = #{name},qq = #{qq},type = #{type} ,time = #{time} ,graduate_institutions = #{graduateInstitutions},daily_link = #{dailyLink},volunteer = #{volunteer},create_at = #{createAt},update_at = #{updateAt}
+        where id=#{id}
+    </update>
+
+    <select id="selectStudent" parameterType="int" resultType="pojo.Student">
+    <!--<select id="selectStudent" parameterType="int" resultMap="StudentResultMap">-->
+        select *from  student1 where id=#{id}
+    </select>
+
+    <select id="selectStudentName" parameterType="String" resultType="Student">
+        <!--<select id="selectStudent" parameterType="int" resultMap="StudentResultMap">-->
+        select *from  student1 where name =#{name }
+    </select>
+
+<!--每个标签的方法（id）要和接口中的方法名相对应-->
+</mapper>

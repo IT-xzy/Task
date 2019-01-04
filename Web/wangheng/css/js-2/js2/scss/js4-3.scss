@@ -1,0 +1,175 @@
+@charset"UTF-8";
+
+//变量
+$background:#29BDE0;
+$yellow:#fbb435;
+$color:#ffffff;
+$orang:#FFEDC5;
+$black:#565656;
+
+// 样式重置
+html{
+    font-size: 312.5%;
+}
+body{
+    margin: 0;
+    font-size: initial;
+}
+p,h4{
+    margin: 0;
+}
+a{
+    text-decoration:none;
+    outline: none;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+//混合器
+@mixin wh($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+@mixin flex($j, $a) {
+    display: flex;
+    justify-content: $j;
+    align-items: $a;
+}
+@mixin wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+//玩家角色属性盒子
+@mixin name{
+    @include wh(23.5vw,23.5vw);
+    margin: 0 4vw 8.3vw 4vw;
+    border: .05rem solid $color;
+    background: #F5C97B;
+
+    .role{
+        @include flex(center,center);
+        height: 75%;
+        font-size: .3rem;
+        color: $black;
+    }
+    .number{
+        @include flex(center,center);
+        height: 25%;
+        background: rgba(26,153,183,.5);
+        font-size: .23rem;
+        color: $color;
+    }
+}
+
+html {
+    font-size: 312.5%;
+}
+
+body {
+    font-size: initial;
+    margin: 0;
+    background: $background;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    @include flex(space-between, center);
+    height: 1rem;
+    background: $background;
+    border-bottom: solid 1px #74d4eb;
+    z-index: 1;
+
+    .font {
+        font-size: .45rem;
+        color: $color;
+        letter-spacing: .15rem;
+    }
+
+    .close {
+        display: inline-block;
+        margin-right: .64rem;
+        @include wh(2px, 30px);
+        transform: rotate(45deg);
+        background: $color;
+
+        &::after {
+            content: "";
+            display: block;
+            @include wh(2px, 30px);
+            transform: rotate(-90deg);
+            background: $color;
+        }
+    }
+
+}
+main{
+    @include wrap;
+    margin:1.2rem 0 2rem 0;
+    div.top-box{
+        position: relative;
+        @include wh(100%,.82rem);
+        background: #b9e9f5;
+        line-height: .82rem;
+        &.top-box::before{
+            float: left;
+            content: "";
+            margin: .82rem 0 0 .71rem;
+            border-top: .25rem solid #b9e9f5;
+            border-left: .1rem solid transparent;
+            border-right: .1rem solid transparent;
+        }
+        p.left-font{
+            font-size: .26rem;
+            color: #464646;
+        }
+    }
+    p.font{
+        width: 100%;
+        margin: .24rem 0 .43rem .72rem;
+        font-size:.24rem;
+        color:$color;
+    }
+    div.box{
+        @include name;
+
+        ul{
+            @include flex(center,center);
+        }
+        
+        .knife{
+            display: none;
+            @include wh(4.5vw,4.5vw);
+            margin-top: 2vw;
+            background: url(../img/knife.png) no-repeat 0 0/100%;
+        }
+    }
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    @include flex(center, center);
+    @include wh(100%, 2rem);
+    background: $background;
+    z-index: 1;
+
+    button {
+        @include wh(100%, 1rem);
+        margin: 0 .75rem;
+        background: $yellow;
+        font-size: .5rem;
+        letter-spacing: .15rem;
+        color: $color;
+        cursor: pointer; //移动上去鼠标为小手
+        box-shadow: 0 0 0 1.5px $yellow;
+    }
+}

@@ -1,0 +1,78 @@
+@mixin flex-center($justify:center,$align:center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;  
+}
+.loop-wrap {
+    position: relative;
+    width: 100%;
+
+    overflow: hidden;
+
+    .loop-images-container {
+
+        width: 300vw;
+        /* 横向排列 3张图片 宽度应为主容器3倍 */
+        font-size: 0;
+        transform: translate(0, 0);
+        /* 初始位置位移 */
+        animation: loop 10s linear infinite;
+
+        .loop-image {
+            width: 100vw;
+
+        }
+    }
+
+    .focus-container {
+        @include flex-center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 5%;
+
+        li {
+            float: left;
+            width: .1rem;
+            height: .1rem;
+            border-radius: 50%;
+            margin: 0 .05rem;
+            border: 1px solid #fff;
+        }
+
+    }
+}
+
+@keyframes loop {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    30% {
+        transform: translate(0, 0);
+    }
+
+    /* 停留1500ms */
+    35% {
+        transform: translate(-33.3%, 0);
+    }
+
+    /* 切换500ms 位移-20% */
+    60% {
+        transform: translate(-33.3%, 0);
+    }
+
+    65% {
+        transform: translate(-66.6%, 0);
+    }
+
+    95% {
+        transform: translate(-66.6%, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+
+    /* 复位到第一张图片 */
+}

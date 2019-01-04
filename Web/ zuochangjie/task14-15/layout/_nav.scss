@@ -1,0 +1,86 @@
+
+//导航背景
+.nav-bg{
+    background: $green;
+}    
+nav{
+    @include flex(space-between);
+    flex-wrap: wrap;
+    div{
+        .nav-text {
+            margin-top: .27rem;
+            line-height: 0;
+            letter-spacing: .08rem;
+            font-size: .34rem;
+            text-align: left;
+            color: #FFFFFF;
+         }
+         .website {
+            font-size: .08rem;
+            color: #FFFFFF;
+        }
+    }
+    //按钮
+    label{
+        display: none;
+        padding: 6px;
+        margin: 12px 0;
+        border-radius: .2rem;
+        background: $green;
+        &:hover{
+            background: green;
+        }
+        .nav-icon{
+            display: block;
+            padding: .1rem 0;
+            @include w-h(.5rem,.38rem);
+            border-top:.06rem solid $width;
+            border-bottom:.06rem solid $width;
+            background: content-box $width;
+        }
+    }
+    #dropdown{
+        display: none;
+    }
+    ul{
+        display: flex;
+        margin-right: -.3rem;
+        .item{
+            padding: 0 .3rem;
+            border-top: .05rem solid #29B078;
+            border-bottom: .05rem solid #29B078;
+            &:hover{
+                border-bottom: .05rem solid $width;
+            }
+            .nav-link{
+                line-height: 1rem;
+                font-size: .16rem;
+                color: #FFFFFF;
+            }
+         }
+         @media (max-width:767px) {
+             .item{
+                 border: none;
+                 &:hover {
+                    border: none;
+                    background: green;
+                 }
+             }
+         }
+    }
+    @media (max-width:767px){
+        label {
+            display: block;
+        }
+        ul{
+            display: none;
+            flex-direction: column;
+            flex-basis: 100%;
+            text-align: center;
+        }
+        #dropdown:checked ~ ul{
+            display: block !important;
+        }
+    }
+}
+

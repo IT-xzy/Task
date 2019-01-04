@@ -1,0 +1,70 @@
+main {
+    margin: 1.28rem 0;
+    padding-top: .32rem;
+    border-top: .01rem solid rgba(255, 255, 255, 0.9);
+
+    .main_top {
+        position: relative;
+        @include flex(flex-start);
+        padding-left: .6rem;
+        height: .82rem;
+        font-size: .26rem;
+        background-color: #B9E9F5;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: -.14rem;
+            border-left: .07rem solid transparent;
+            border-right: .07rem solid transparent;
+            border-top: .14rem solid #B9E9F5;
+        }
+    }
+
+    .sign {
+        margin: .32rem 0 .36rem .7rem;
+        font-size: .24rem;
+        color: #FFFFFF;
+    }
+
+    .container {
+        display: flex;
+       flex-wrap: wrap;
+
+        .player {
+            margin: 0 5.05666vw 11vw 5.056666vw;
+            @include w-h(20.22vw, 20.22vw);
+            text-align: center;
+            border: 1.5vw solid #FFFFFF;
+
+            .name {
+                @include flex;
+                height: 78%;
+                font-size: 4.5vw;
+                letter-spacing: .93vw;
+                color: #565656;
+                background-color: #FBB435;
+            }
+
+            .number {
+                @include flex;
+                height: 22%;
+                font-size: 3.5vw;
+                letter-spacing: .93vw;
+                color: #FFFFFF;
+                background-color: #83B09A;
+            }
+
+            i {
+                display: none;
+                margin-top: 2.5vw;
+                @include w-h(4.6vw, 4.6vw);
+                background: url(../img/css_spritesq.png) no-repeat 49% 36%/230%;
+            }
+
+            &:hover>ul {
+                display: inline-block;
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mutesaid.mapper.WorkMapper">
+    <resultMap id="BaseResultMap" type="com.mutesaid.pojo.Work">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="status" jdbcType="BIT" property="status" />
+        <result column="work_list_id" jdbcType="BIGINT" property="workListId" />
+        <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
+        <result column="intro" jdbcType="VARCHAR" property="intro" />
+        <result column="thum" jdbcType="VARCHAR" property="thum" />
+        <result column="video" jdbcType="VARCHAR" property="video" />
+        <result column="picture" jdbcType="VARCHAR" property="picture" />
+        <result column="article" jdbcType="VARCHAR" property="article" />
+        <result column="admin_id" jdbcType="BIGINT" property="adminId" />
+        <result column="create_at" jdbcType="BIGINT" property="createAt" />
+        <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    </resultMap>
+    <select id="getWorkList" resultMap="BaseResultMap">
+        select * from work
+        <where>
+            <if test="name != null">
+                name = #{name}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+    <select id="getWork" resultMap="BaseResultMap">
+        select * from work where id = #{workId}
+    </select>
+    <select id="getWorkId" resultType="Long">
+        select id from work where name = #{workName}
+    </select>
+    <delete id="deleteWork">
+        delete from work where id = #{workId}
+    </delete>
+    <update id="updateStatus">
+        update work set status = #{status} where id = #{workId}
+    </update>
+    <insert id="insert" parameterType="com.mutesaid.pojo.Work">
+    insert into work (id, name, status,
+      work_list_id, sub_title, intro,
+      thum, video, picture,
+      article, admin_id, create_at,
+      update_at)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=BIT},
+      #{workListId,jdbcType=BIGINT}, #{subTitle,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR},
+      #{thum,jdbcType=VARCHAR}, #{video,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR},
+      #{article,jdbcType=VARCHAR}, #{adminId,jdbcType=BIGINT}, #{createAt,jdbcType=BIGINT},
+      #{updateAt,jdbcType=BIGINT})
+  </insert>
+</mapper>
+    

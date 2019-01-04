@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tool http://www.springframework.org/schema/tool/spring-tool.xsd">
+    <!--指定两个端口启动两个服务-->
+    <bean id="registry1" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean">
+        <property name="port" value="1086"/>
+    </bean>
+    <bean id="registry2" class="org.springframework.remoting.rmi.RmiRegistryFactoryBean">
+        <property name="port" value="1088"/>
+    </bean>
+
+<!--端口1暴露的接口-->
+    <bean id="serviceExporter1" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="PositionService"/>
+        <property name="service" ref="positionService"/>
+        <property name="serviceInterface" value="task8_service.service.PositionService"/>
+        <property name="registry" ref="registry1"/>
+    </bean>
+    <bean id="positionService" class="task8_service.service.PositionServiceImpl"/>
+
+    <bean id="serviceExporter2" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="JobService"/>
+        <property name="service" ref="jobService"/>
+        <property name="serviceInterface" value="task8_service.service.JobService"/>
+        <property name="registry" ref="registry1"/>
+    </bean>
+    <bean id="jobService" class="task8_service.service.JobServiceImpl"/>
+
+    <bean id="serviceExporter3" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="StudentService"/>
+        <property name="service" ref="studentService"/>
+        <property name="serviceInterface" value="task8_service.service.StudentService"/>
+        <property name="registry" ref="registry1"/>
+    </bean>
+    <bean id="studentService" class="task8_service.service.StudentServiceImpl"/>
+
+    <bean id="serviceExporter4" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="UserService"/>
+        <property name="service" ref="userService"/>
+        <property name="serviceInterface" value="task8_service.service.UserService"/>
+        <property name="registry" ref="registry1"/>
+    </bean>
+    <bean id="userService" class="task8_service.service.UserServiceImpl"/>
+
+<!--端口2暴露的接口-->
+    <bean id="serviceExporter1-2" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="PositionService"/>
+        <property name="service" ref="positionService"/>
+        <property name="serviceInterface" value="task8_service.service.PositionService"/>
+        <property name="registry" ref="registry2"/>
+    </bean>
+    <bean id="positionService-2" class="task8_service.service.PositionServiceImpl"/>
+
+    <bean id="serviceExporter2-2" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="JobService"/>
+        <property name="service" ref="jobService"/>
+        <property name="serviceInterface" value="task8_service.service.JobService"/>
+        <property name="registry" ref="registry2"/>
+    </bean>
+    <bean id="jobService-2" class="task8_service.service.JobServiceImpl"/>
+
+    <bean id="serviceExporter3-2" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="StudentService"/>
+        <property name="service" ref="studentService"/>
+        <property name="serviceInterface" value="task8_service.service.StudentService"/>
+        <property name="registry" ref="registry2"/>
+    </bean>
+    <bean id="studentService-2" class="task8_service.service.StudentServiceImpl"/>
+
+    <bean id="serviceExporter4-2" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="UserService"/>
+        <property name="service" ref="userService"/>
+        <property name="serviceInterface" value="task8_service.service.UserService"/>
+        <property name="registry" ref="registry2"/>
+    </bean>
+    <bean id="userService-2" class="task8_service.service.UserServiceImpl"/>
+</beans>

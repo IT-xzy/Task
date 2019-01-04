@@ -1,0 +1,138 @@
+//主页
+.page {
+    padding-bottom: 2.6rem;
+    //顶部文字
+    .top-word {
+        font-size: .16rem;
+        line-height: .8rem;
+        //黑
+        .black-word {
+            color: #333333;
+        }
+        //绿
+        .green-word {
+            color: $green;
+        }
+    }
+    //方向
+    .direction {
+        display: flex;
+        padding: .24rem 0;
+        font-size: .14rem;
+        color: #333333;
+        .direction-left {
+            margin-left: .34rem;
+            color: black;
+            &:hover{
+                color: $bg;
+                background: $green;
+            }
+        }
+    }
+    @media screen and (max-width:450px) {
+        .direction{
+            flex-direction: column;
+            text-align: center;
+            .direction-left {
+                margin-left: 0;
+                line-height: .6rem;
+            }
+        }
+    }
+    //方向下面
+    .direction-bottom {
+        display: block;
+        margin-bottom: .5rem;
+        font-size: .16rem;
+        line-height: .8rem;
+    }
+    //表格 空表单
+    table{
+        box-shadow: 0 1px 5px 1px;
+    }
+    .width-40 {
+        width: 40%;
+        padding: 0 ;
+    }
+    .width-10 {
+        width: 10%;
+        padding: 0;
+    }
+    .width-50 {
+        width: 50%;
+        padding: 0;
+    }
+    //行 边框线
+    tr {
+        .table-box {
+            padding: .2rem .1rem;
+            .photo {
+                width: 100%;
+            }
+        }
+        .borde {
+            .img-right {
+                font-size: .14rem;
+                color: #333333;
+            }
+            .right-word {
+                margin-top: .16rem;
+                margin-right: 5px;
+                word-break: break-all;
+            }
+        }
+        //第二行
+        .cell {
+            padding: .2rem;
+            font-size: .12rem;
+            color: #999999;
+            .xingxing {
+                vertical-align: baseline;
+            }
+        }
+        //第三行
+        td>p{
+            white-space: nowrap;
+        }
+        //第四行
+        .wages {
+            float: right;
+        }
+        //第七行
+        .weight-word {
+            font-size: .14rem;
+            font-weight: 700;
+            color: #333333;
+            span {
+                color: red;
+            }
+        }
+    }
+    //背景动画
+    .animatiom{
+        visibility: hidden;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        font-size: .16rem;
+        word-break: break-all;
+        color: $bg;
+        background: RGBA(61, 61, 61, 0.9);
+        transition: 0.2s;
+        z-index: 1;
+        .text-center{
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .animatiom-word{
+            width: 75%;
+            margin: .37rem auto 0 auto;
+        }
+    }
+    table:hover + .animatiom{
+        visibility: visible;
+        transform: rotate(360deg);
+    }
+}

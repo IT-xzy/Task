@@ -1,0 +1,443 @@
+// 全部的字体大小设置
+html {
+    font-size: 62.5%;
+}
+
+// 去除Ul标签和butom标签的默认样式
+* {
+    list-style-type: none;
+    outline: none;
+}
+
+// 声明变量
+$bgc:#5FC0CD #55A8B3 white #E1E5E7 
+#999999 #AFBAC0 #5D5D5D #E63B0E #F8FAFB;
+
+// 声明混合器
+@mixin flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// 设置全局尺寸大小
+body {
+    margin: 0;
+    font-size: 1.6rem;
+
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1;
+
+        .alt {
+            @include flex;
+            height: 4.4rem;
+            background-color: nth($bgc, 1);
+            .menul {
+                z-index: 1; 
+                width: 7.2rem;
+                height: 3.5rem;
+                margin-right: -5px;
+                border-radius: .5rem;
+                font-size: 1.7rem;
+                color: #5FC0CD;
+                background-color: white;
+                border: 1px solid white;    
+            }
+            .menu-right {
+                width: 7.2rem;
+                height: 3.5rem;
+                margin-right: -5px;
+                font-size: 1.7rem;
+                color: white;
+                background-color: #55A8B3;
+                border: 1px solid #55A8B3;
+                border-radius: .5rem;
+            }
+
+            .demandbox {
+                border-radius: .5rem;
+                background-color: nth($bgc, 2);
+
+                .demand {
+                    width: 7.2rem;
+                    height: 3.5rem;
+                    margin-right: -.5rem;
+                    padding: 0;
+                    border: 0;
+                    border-radius: .5rem;
+                    font-size: 17px;
+                    color: nth($bgc, 3);
+                    background-color: nth($bgc, 2);
+                    outline: none;
+                }
+
+                .demand2 {
+                    width: 7.2rem;
+                    height: 3.5rem;
+                    padding: 0;
+                    border: 0;
+                    border-radius: .5rem;
+                    font-size: 17px;
+                    color: nth($bgc, 1);
+                    background-color: nth($bgc, 3);
+                    outline: none;
+                }
+            }
+
+            .location {
+                position: absolute;
+                right: 1.5rem;
+                top: 1.1rem;
+                width: 2.1rem;
+                height: 2.2rem;
+                padding: 0;
+                border: 0;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -10px -10px;
+                zoom: .5;
+                outline: none;
+            }
+
+        }
+        .ddbbox {
+            display: flex;
+            text-align: center;
+            height: 4rem;
+            border-bottom: 1px solid nth($bgc,4);
+            background-color: nth($bgc,3);
+            .ddb {
+                position: relative;
+                width: 100%;
+                .site {
+                    color: nth($bgc,5);
+                    font-size: 1.4rem;
+                    line-height: 4rem;
+                }
+                .triangle {
+                    position: absolute;
+                    top: 50%;
+                    right: 5%;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-top: 6px solid nth($bgc,6);
+                    transform: translate(-50%, -50%);
+                }
+                .ddbbox2 {
+                    width: 100%;
+                    margin: 5px auto;
+                    border-left: 1px solid nth($bgc,4);
+                    border-right: 1px solid nth($bgc,4);
+                    .rad {
+                        line-height: 3rem;
+                        color: nth($bgc,5);
+                        font-size: 1.4rem;
+                    }
+                    .triangle1 {
+                        position: absolute;
+                        top: 50%;
+                        right: 5%;
+                        border-left: 5px solid transparent;
+                        border-right: 5px solid transparent;
+                        border-top: 6px solid nth($bgc,6);
+                        transform: translate(-50%, -50%);
+                    }
+                }
+                
+            }
+            .dropdown-content {
+                display: none;
+                margin: 0;
+                padding: 0;
+                background-color: nth($bgc,1);
+                .ddb1 {
+                    display: block;
+                    font-size: 1.4rem;
+                }
+                
+            }
+            .dropdown-content1 {
+                display: none;
+                margin: 0;
+                padding: 0;
+                margin-top: 6px;
+                background-color:nth($bgc,1);
+            }
+            .ddb1:hover {
+                background: nth($bgc,6);
+            }
+            .cdt {
+                color: nth($bgc,5);
+                font-size: 1.4rem;
+                line-height: 4rem;
+            }
+            
+        }
+        .ddb:hover .dropdown-content {
+            display: block;
+        }
+        .ddb:hover .dropdown-content1 {
+            display: block;
+        }
+    }
+    main {
+        margin-top: 100px;
+        margin-bottom: 69px;
+        .ibbox1 {
+            padding: 10px 0;
+            border-bottom: 1px solid nth($bgc,4);
+            .ibbox2 {
+                margin-left: 1.5rem;
+                .icon1 {
+                    display: inline-block;
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    vertical-align: middle;
+                    background: url(./css_sprites.png) no-repeat;
+                    background-position: -138px -10px;
+                    zoom: .5; 
+                }
+                .sd {
+                    font-size: 12px;
+                    color: nth($bgc,7);
+                }
+                
+            }
+            .ttb {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 0 20px;
+                .time {
+                    color: nth($bgc,8);
+                    font-size: 15px;
+                    margin: 0;
+                }
+            }
+            .tfb {
+                margin-left: 1.5rem;
+                .icon2 {
+                    display: inline-block;
+                    width: .95rem;
+                    height: 1.15rem;
+                    vertical-align: middle;
+                    background: url(./css_sprites.png) no-repeat;
+                    background-position: -138px -54px;
+                    zoom: .5;
+                  
+                }
+                .place {
+                    font-size: 13px;
+                    color: nth($bgc,5);
+                }
+                
+            }
+            
+        }
+    }
+    footer {
+        position: fixed;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        bottom: 0;
+        border-top: 1px solid nth($bgc,4);
+        background-color: nth($bgc,9);
+        .buttom-menu {
+            margin: auto;
+            .icon3 {
+                display: block;
+                width: 2.3rem;
+                height: 2rem;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -72px -10px;
+                zoom: .5;
+            }
+            .home-page {
+                border: 0;
+                padding: 0;
+                font-size: 10px;
+                color: nth($bgc,1);
+                background-color: nth($bgc,9);
+                outline: none;
+            }
+            .icon5 {
+                display: block;
+                width: 2.3rem;
+                height: 2rem;
+                zoom: .5;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -8px -74px;
+            }
+            .my {
+                border: 0;
+                padding: 0;
+                font-size: 10px;
+                color: nth($bgc,5);
+                background-color: nth($bgc,9);
+                outline: none;
+            }
+            
+            
+        }
+        .bottom-conten {
+            width: 4.7rem;
+            height: 4.7rem;
+            background-color: nth($bgc,1);
+            -webkit-border-radius: 50%;
+            .icon4 {
+                display: block;
+                width: 2rem;
+                height: 2rem;
+                margin-top: 1.35rem;
+                margin-left: 1.5rem;
+                border: 0;
+                zoom: .5;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -71px -77px;
+                outline: none;
+            }
+
+        } 
+        .menu-right {
+            width: 7.2rem;
+            height: 3.5rem;
+            margin-right: -5px;
+            font-size: 1.7rem;
+            color: white;
+            background-color: #55A8B3;
+            border: 1px solid #55A8B3;
+            border-radius: .5rem;
+           
+           
+            
+        }
+        .right-optionn {
+            position: relative;
+            height: 3.45rem;
+            .icon5 {
+                display: block;
+                width: 2.3rem;
+                height: 2rem;
+                zoom: .5;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -8px -74px;
+            }
+            .my {
+                border: 0;
+                padding: 0;
+                font-size: 10px;
+                color: nth($bgc,5);
+                background-color: nth($bgc,9);
+                outline: none;
+            }
+        }
+               
+    }
+    footer{
+        position: fixed;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        bottom: 0;
+        border-top: 1px solid #E1E5E7;
+        background-color: #F8FAFB;
+        .buttom-menu {
+            margin: auto;
+            .icon3 {
+                display: block;
+                width: 2.3rem;
+                height: 2rem;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -72px -10px;
+                zoom: .5;
+            }
+            .home-page {
+                border: 0;
+                padding: 0;
+                font-size: 10px;
+                color: #5FC0CD;
+                background-color: #F8FAFB;
+                outline: none;
+            }
+        }
+        .bottom-conten {
+            width: 4.7rem;
+            height: 4.7rem;
+            background-color: #5FC0CD;
+            -webkit-border-radius: 50%;
+            .icon4 {
+                display: block;
+                width: 2rem;
+                height: 2rem;
+                margin-top: 1.35rem;
+                margin-left: 1.5rem;
+                border: 0;
+                zoom: .5;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -71px -77px;
+                outline: none;
+            }
+        
+        }
+        .right-optionn {
+            position: relative;
+            height: 3.45rem;
+            .icon5 {
+                display: block;
+                width: 2.3rem;
+                height: 2rem;
+                zoom: .5;
+                background: url(./css_sprites.png) no-repeat;
+                background-position: -8px -74px;
+            }
+            .my {
+                border: 0;
+                padding: 0;
+                font-size: 10px;
+                color: #999999;
+                background-color: #F8FAFB;
+                outline: none;
+            }
+        }
+        
+             
+    }
+      
+}
+.icon3 {
+    display: block;
+    width: 2.3rem;
+    height: 2rem;
+    background: url(./css_sprites.png) no-repeat;
+    background-position: -72px -10px;
+    zoom: .5;
+}
+.home-page {
+    border: 0;
+    padding: 0;
+    font-size: 10px;
+    color: #5FC0CD;
+    background-color: #F8FAFB;
+    outline: none;
+}
+.icon5 {
+    display: block;
+    width: 2.3rem;
+    height: 2rem;
+    zoom: .5;
+    background: url(./css_sprites.png) no-repeat;
+    background-position: -8px -74px;
+}
+.my {
+    border: 0;
+    padding: 0;
+    font-size: 10px;
+    color: #999999;
+    background-color: #F8FAFB;
+    outline: none;
+}
+
+
