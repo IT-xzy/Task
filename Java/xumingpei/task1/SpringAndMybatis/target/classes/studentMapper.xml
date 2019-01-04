@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，作用就是对SQL进行分类化管理，理解为SQL隔离(使用Mapper代理开发时，namespace有特殊作用)-->
+<mapper namespace="com.jnshu.dao.StudentDao">
+
+    <!-- 在配置文件中配置很多SQL语句-->
+    <!-- 需求：通过id查询用户表的记录-->
+    <!-- id：标识映射文件中的SQL，称为statement的id。将SQL语句封装在MapperStatement的对象中，队友id称为Statement的id；
+    parameterType：制定输入参数的类型；
+    #{}：表示一个占位符；
+    #{id}：其中id表示接收输入的参数，参数名称就是id,如果输入参数是简单类型，#{}就是中的参数名可以任意，可以是value或其他名称；
+    resultType:指定输出结果所映射的Java对象类型，select指定resultType表示将单条记录映射成Java对象-->
+    <resultMap id="student" type="com.jnshu.pojo.Student">
+        <!-- 通过id元素 property表示哪个属性为主键-->
+        <id property="id" column="id" />
+        <!-- 通过result 元素定义普通列的映射关系，将SQL返回结果的列和type属性和定义的Pojo的属性一一对应-->
+        <result property="name" column="name"/>
+        <result property="qq" column="qq"/>
+        <result property="type" column="type"  />
+        <result property="enrolmentTime" column="enrolmentTime"/>
+        <result property="school" column="school"/>
+        <result property="onlineId" column="onlineId"/>
+        <result property="dailyUrl" column="dailyUrl"/>
+        <result property="wish" column="wish"/>
+        <result property="brother" column="brother"  />
+        <result property="whereToKnowJnshu" column="whereToKnowJnshu"/>
+        <result property="createAt" column="createAt"/>
+        <result property="updateAt" column="updateAt"/>
+    </resultMap>
+
+    <insert id="addStudent" useGeneratedKeys="true" keyProperty="id" parameterType="com.jnshu.pojo.Student" >
+        INSERT into students(name,qq,type,enrolmentTime,school,onlineId,dailyUrl,wish,brother,whereToKnowJnshu,createAt,updateAt)
+        VALUES (#{name},#{qq},#{type},#{enrolmentTime},#{school},#{onlineId},#{dailyUrl},#{wish},#{brother},#{whereToKnowJnshu},#{createAt},#{updateAt})
+    </insert>
+
+    <delete id="deleteStudent" parameterType="int" >
+        DELETE FROM students WHERE id =#{id}
+    </delete>
+
+    <update id="updateStudent" parameterType="com.jnshu.pojo.Student">
+        UPDATE students SET name=#{name} WHERE id=#{id}
+    </update>
+
+
+    <select id="findStudentById"  resultMap="student">
+        SELECT * from students where id=#{id}
+    </select>
+
+    <select id="findAll" resultMap="student">
+        select *  from students
+    </select>
+</mapper>
