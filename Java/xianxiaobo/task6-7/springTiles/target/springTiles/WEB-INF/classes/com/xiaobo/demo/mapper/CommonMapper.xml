@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.CommonMapper">
+    <select id="getTotal" resultType="Integer" statementType="STATEMENT">
+        select count(1) from ${tableName}
+    </select>
+    <select id="isDataExist" resultType="Integer" statementType="STATEMENT">
+        select count(*) from ${tableName} where ${column} = ${value}
+    </select>
+</mapper>

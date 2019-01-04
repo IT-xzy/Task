@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.WorkDao">
+    <select id="getList" resultType="Work">
+        select id,work_name,status,introduction,image_mini,video,image,article,category_id,create_at,create_by,update_at,update_by from work
+        <where>
+            <if test="work.work_name!=null">
+                and work_name like concat('%',#{work.work_name},'%')
+            </if>
+            <if test="work.introduction!=null">
+                and introduction like concat('%',#{work.introduction},'%')
+            </if>
+            <if test="work.article!=null">
+                and article like concat('%',#{work.article},'%')
+            </if>
+            <if test="work.status!=null">
+                and status = #{work.status}
+            </if>
+            <if test="work.id!=null">
+                and id = #{work.id}
+            </if>
+            <if test="work.category_id!=null">
+                and category_id = #{work.category_id}
+            </if>
+        </where>
+        limit #{pageData.offset},#{pageData.limit}
+    </select>
+    <insert id="add" parameterType="Work" useGeneratedKeys="true" keyProperty="id">
+        insert into work (work_name,status,introduction,image_mini,video,image,article,category_id,create_at,create_by,update_at,update_by) values
+        (#{work_name},#{status},#{introduction},#{image_mini},#{video},#{image},#{article},#{category_id},#{create_at},#{create_by},#{update_at},#{update_by})
+    </insert>
+    <update id="update" parameterType="Work">
+        update work set
+        <if test="work_name!=null">
+            work_name=#{work_name},
+        </if>
+        <if test="status!=null">
+            status=#{status},
+        </if>
+        <if test="introduction!=null">
+            introduction=#{introduction},
+        </if>
+        <if test="image_mini!=null">
+            image_mini=#{image_mini},
+        </if>
+        <if test="video!=null">
+            video=#{video},
+        </if>
+        <if test="image!=null">
+            image=#{image},
+        </if>
+        <if test="article!=null">
+            article=#{article},
+        </if>
+        <if test="category_id!=null">
+            category_id=#{category_id},
+        </if>
+        update_at=#{update_at},update_by=#{update_by} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Work">
+        delete from work where id = #{id}
+    </delete>
+    <select id="getWorkSearchList" resultType="Work">
+        select id,work_name,status,introduction,image_mini,video,image,article,category_id,create_at,create_by,update_at,update_by from work
+        <where>
+            (work_name like concat('%',#{searchText},'%') or introduction like concat('%',#{searchText},'%'))
+            and status = 1
+            and category_id in
+            <foreach collection="categoryIdList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+        limit #{pageData.offset},#{pageData.limit}
+    </select>
+</mapper>

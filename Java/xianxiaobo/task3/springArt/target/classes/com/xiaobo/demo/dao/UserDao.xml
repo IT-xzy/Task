@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.UserDao">
+    <select id="getList" resultType="User">
+        select id,username,role,create_at,create_by,update_at,update_by from user
+        <where>
+            <if test="user.username!=null">
+                and username like concat('%',#{user.username},'%')
+            </if>
+            <if test="user.id!=null">
+                and id = #{user.id}
+            </if>
+        </where>
+        limit #{pageData.offset},#{pageData.limit}
+    </select>
+    <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (username,role,password,create_at,create_by,update_at,update_by) values
+        (#{username},#{role},#{password},#{create_at},#{create_by},#{update_at},#{update_by})
+    </insert>
+    <update id="update" parameterType="User">
+        update user set username=#{username},role=#{role},password=${password},update_at=#{update_at},update_by=#{update_by} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="User">
+        delete from user where id = #{id}
+    </delete>
+</mapper>

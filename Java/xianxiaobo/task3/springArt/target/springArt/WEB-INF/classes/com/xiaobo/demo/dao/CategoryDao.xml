@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.CategoryDao">
+    <select id="getList" resultType="Category">
+        select id,category_name,status,collection_id,create_at,create_by,update_at,update_by from category
+        <where>
+            <if test="category.category_name!=null">
+                and category_name like concat('%',#{category.category_name},'%')
+            </if>
+            <if test="category.status!=null">
+                and status = #{category.status}
+            </if>
+            <if test="category.id!=null">
+                and id = #{category.id}
+            </if>
+            <if test="category.collection_id!=null">
+                and collection_id = #{category.collection_id}
+            </if>
+        </where>
+        limit #{pageData.offset},#{pageData.limit}
+    </select>
+    <insert id="add" parameterType="Category" useGeneratedKeys="true" keyProperty="id">
+        insert into category (category_name,status,collection_id,create_at,create_by,update_at,update_by) values
+        (#{category_name},#{status},#{collection_id},#{create_at},#{create_by},#{update_at},#{update_by})
+    </insert>
+    <update id="update" parameterType="Category">
+        update category set
+        <if test="category_name!=null">
+            category_name=#{category_name},
+        </if>
+        <if test="status!=null">
+            status=#{status},
+        </if>
+        <if test="collection_id!=null">
+            collection_id=#{collection_id},
+        </if>
+        update_at=#{update_at},update_by=#{update_by} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Category">
+        delete from category where id = #{id}
+    </delete>
+    <select id="getListInCollectionIdList" resultType="Category">
+        select id,category_name,status,collection_id,create_at,create_by,update_at,update_by from category
+        <where>
+            <if test="category.status!=null">
+                and status = #{category.status}
+            </if>
+            <if test="collectionIdList!=null">
+                and collection_id in
+                <foreach collection="collectionIdList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+        limit #{pageData.offset},#{pageData.limit}
+    </select>
+</mapper>
