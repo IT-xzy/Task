@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <properties resource="jdbc.properties"/>
+    <!-- <classPathEntry location="/ProgramFiles/IBM/SQLLIB/java/db2java.zip" /> maven的pom中有mysql驱动jar了 -->
+    <context id="mysql" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/> <!--数据库注释-->
+            <property name="suppressAllComments" value="false"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接信息-->
+        <!--<jdbcConnection driverClass="com.mysql.jdbc.Driver"-->
+        <!--connectionURL="jdbc:mysql://127.0.0.1:3306/art"-->
+        <!--userId="xianxiaobo"-->
+        <!--password="123456"></jdbcConnection>-->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}" password="${jdbc.password}"/>
+        <javaTypeResolver>
+            <!--官方解释:默认的Java Type Resolver尝试通过替换Integral类型（Long，Integer，Short等）.-->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--实体生成路径和Package路径-->
+        <javaModelGenerator targetPackage="com.xiaobo.demo.pojo" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--mapper生成路径和Package路径-->
+        <sqlMapGenerator targetPackage="com.xiaobo.demo.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--接口成路径和Package路径-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xiaobo.demo.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--表映射-->
+
+
+        <table schema="tiles" tableName="excellent_student" domainObjectName="ExcellentStudent" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table schema="tiles" tableName="profession" domainObjectName="Profession" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+    </context>
+</generatorConfiguration>

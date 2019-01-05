@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.CommentDao">
+    <select id="getList" resultType="Comment">
+        select id,author,type,content,work_id,create_at,create_by,update_at,update_by from comment
+        <where>
+            <if test="comment.author!=null">
+                and author like concat('%',#{comment.author},'%')
+            </if>
+            <if test="comment.content!=null">
+                and content like concat('%',#{comment.content},'%')
+            </if>
+            <if test="comment.type!=null">
+                and type = #{comment.type}
+            </if>
+            <if test="comment.id!=null">
+                and id = #{comment.id}
+            </if>
+            <if test="comment.work_id!=null">
+                and work_id = #{comment.work_id}
+            </if>
+        </where>
+        limit #{pageData.offset},#{pageData.limit}
+    </select>
+    <insert id="add" parameterType="Comment" useGeneratedKeys="true" keyProperty="id">
+        insert into comment (author,type,content,work_id,create_at,create_by,update_at,update_by) values
+        (#{author},#{type},#{content},#{work_id},#{create_at},#{create_by},#{update_at},#{update_by})
+    </insert>
+    <update id="update" parameterType="Comment">
+        update comment set
+        <if test="author!=null">
+            author=#{author},
+        </if>
+        <if test="type!=null">
+            type=#{type},
+        </if>
+        <if test="content!=null">
+            content=#{content},
+        </if>
+        <if test="work_id!=null">
+            work_id=#{work_id},
+        </if>
+        update_at=#{update_at},update_by=#{update_by} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Comment">
+        delete from comment where id = #{id}
+    </delete>
+</mapper>

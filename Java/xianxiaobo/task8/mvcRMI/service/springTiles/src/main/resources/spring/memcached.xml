@@ -1,0 +1,50 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:memcached.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="memCachedPool" class="com.whalin.MemCached.SockIOPool"
+    factory-method="getInstance" init-method="initialize"
+    lazy-init="false" destroy-method="shutDown">
+
+    <!-- 构造函数 -->
+    <constructor-arg value="memCachedPool"/>
+
+    <!-- 可以设置多个memcachePool服务器 -->
+    <property name="servers">
+        <list>
+            <value>${memcached.server}:${memcached.port}</value>
+        </list>
+    </property>
+
+    <!-- 每台服务器的初始连接 -->
+    <property name="initConn" value="${memcached.initConn}"/>
+
+    <!-- 每台服务器的最小连接 -->
+    <property name="minConn" value="${memcached.minConn}"/>
+
+    <!-- 每台服务器的最大连接数 -->
+    <property name="maxConn" value="${memcached.maxConn}"/>
+
+    <!-- 主线程睡眠时间 -->
+    <property name="maintSleep" value="${memcached.maintSleep}"/>
+
+    <!-- Tcp/Socket 的参数, 如果是true在写数据时不会缓冲, 会立即发出 -->
+    <property name="nagle" value="${memcached.nagle}"/>
+
+    <!-- 连接超时/阻塞读取时间的超时时间 -->
+    <property name="socketTO" value="${memcached.socketTO}"/>
+</bean>
+
+<bean id="memCachedClient" class="com.whalin.MemCached.MemCachedClient"
+        lazy-init="false">
+<constructor-arg value="memCachedPool"/>
+</bean>
+</beans>

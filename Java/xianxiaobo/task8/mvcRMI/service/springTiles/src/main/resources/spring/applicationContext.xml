@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!--自动扫描包，实现支持注解的IOC-->
+
+    <context:component-scan base-package="com.xiaobo.demo" />
+    <!--配置RMI-->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="serviceName" value="CommonService"></property>
+    <property name="service" ref="CommonServiceImpl"></property>
+    <property name="serviceInterface" value="com.xiaobo.demo.service.CommonService"></property>
+    <property name="registryPort" value="1191"></property>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="serviceName" value="EmailCodeService"></property>
+    <property name="service" ref="EmailCodeServiceImpl"></property>
+    <property name="serviceInterface" value="com.xiaobo.demo.service.EmailCodeService"></property>
+    <property name="registryPort" value="1191"></property>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="serviceName" value="ExcellentStudentService"></property>
+    <property name="service" ref="ExcellentStudentServiceImpl"></property>
+    <property name="serviceInterface" value="com.xiaobo.demo.service.ExcellentStudentService"></property>
+    <property name="registryPort" value="1191"></property>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="serviceName" value="PhoneCodeService"></property>
+    <property name="service" ref="PhoneCodeServiceImpl"></property>
+    <property name="serviceInterface" value="com.xiaobo.demo.service.PhoneCodeService"></property>
+    <property name="registryPort" value="1191"></property>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="serviceName" value="ProfessionService"></property>
+    <property name="service" ref="ProfessionServiceImpl"></property>
+    <property name="serviceInterface" value="com.xiaobo.demo.service.ProfessionService"></property>
+    <property name="registryPort" value="1191"></property>
+    </bean>
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+    <property name="serviceName" value="UserService"></property>
+    <property name="service" ref="UserServiceImpl"></property>
+    <property name="serviceInterface" value="com.xiaobo.demo.service.UserService"></property>
+    <property name="registryPort" value="1191"></property>
+    </bean>
+
+    <context:annotation-config/>
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+                <value>classpath:memcached.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!--<cache:annotation-driven />-->
+    <import resource="memcached.xml"/>
+    <import resource="redis.xml"/>
+    <cache:annotation-driven cache-manager="redisCacheManager"/>
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"></property>
+        <property name="jdbcUrl" value="${jdbc.url}"></property>
+        <property name="user" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+        <property name="testConnectionOnCheckout" value="${jdbc.c3p0.testConnectionOnCheckout}"></property>
+        <property name="testConnectionOnCheckin" value="${jdbc.c3p0.testConnectionOnCheckin}"></property>
+        <property name="idleConnectionTestPeriod" value="${jdbc.c3p0.idleConnectionTestPeriod}"></property>
+        <property name="initialPoolSize" value="${jdbc.c3p0.initialPoolSize}"></property>
+        <property name="minPoolSize" value="${jdbc.c3p0.minPoolSize}"></property>
+        <property name="maxPoolSize" value="${jdbc.c3p0.maxPoolSize}"></property>
+        <property name="maxIdleTime" value="${jdbc.c3p0.maxIdleTime}"></property>
+    </bean>
+    <!-- 配置SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"></property>
+        <!-- 指定Mybatis配置文件的路径 -->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"></property>
+        <property name="mapperLocations" value="classpath:com/xiaobo/demo/mapper/*.xml"></property>
+    </bean>
+    <!-- 配置mapper的扫描包 -->
+    <!-- 去扫描bean的时候，有一个取名字的规则：bean的名字=原先类的类名小写，这个是为了做测试的时候看看spring和Mybatis有没有整合成功的时候需要使用到 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.xiaobo.demo.dao"></property>
+    </bean>
+
+    <!--开启基于注解的事务，使用xml配置形式的事务（必要主要的都是使用配置式）  -->
+</beans>

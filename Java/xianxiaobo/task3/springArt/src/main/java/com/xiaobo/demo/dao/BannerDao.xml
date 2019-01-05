@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.BannerDao">
+    <select id="getList" resultType="Banner">
+        select id,url,status,image,sort,create_at,create_by,update_at,update_by from banner
+        <where>
+            <if test="banner.status!=null">
+                and status = #{banner.status}
+            </if>
+            <if test="banner.id!=null">
+                and id = #{banner.id}
+            </if>
+        </where>
+        order by sort limit #{pageData.offset},#{pageData.limit}
+    </select>
+    <insert id="add" parameterType="Banner" useGeneratedKeys="true" keyProperty="id">
+        insert into banner (url,status,image,sort,create_at,create_by,update_at,update_by) values
+        (#{url},#{status},#{image},#{sort},#{create_at},#{create_by},#{update_at},#{update_by})
+    </insert>
+    <update id="update" parameterType="Banner">
+        update banner set
+        <if test="url!=null">
+            url=#{url},
+        </if>
+        <if test="status!=null">
+            status=#{status},
+        </if>
+        <if test="sort!=null">
+            sort=#{sort},
+        </if>
+        <if test="image!=null">
+            image=#{image},
+        </if>
+        update_at=#{update_at},update_by=#{update_by} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Banner">
+        delete from banner where id = #{id}
+    </delete>
+    <update id="updateBatch">
+        update banner set
+        <if test="banner.url!=null">
+            url=#{banner.url},
+        </if>
+        <if test="banner.status!=null">
+            status=#{banner.status},
+        </if>
+        <if test="banner.sort!=null">
+            sort=#{banner.sort},
+        </if>
+        <if test="banner.image!=null">
+            image=#{banner.image},
+        </if>
+        update_at=#{banner.update_at},update_by=#{banner.update_by}
+        where id in
+        <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+    <update id="updateBatchSort">
+        update banner
+        <trim prefix="set" suffixOverrides=",">
+        <trim prefix="sort =case" suffix="end,">
+            <foreach collection="bannerList" item="item">
+                <if test="item.sort !=null">
+                    when id = #{item.id} then #{item.sort}
+                </if>
+            </foreach>
+        </trim>
+        </trim>
+
+        where id in
+        <foreach collection="bannerList" index="index" item="item" open="(" separator="," close=")">
+            #{item.id}
+        </foreach>
+    </update>
+</mapper>

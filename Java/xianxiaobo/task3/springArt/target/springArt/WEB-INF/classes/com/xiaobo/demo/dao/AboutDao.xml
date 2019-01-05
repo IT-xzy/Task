@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.AboutDao">
+    <select id="getList" resultType="About">
+        select id,about_type,status,image,content,create_at,create_by,update_at,update_by from about
+        <where>
+            <if test="about.about_type!=null">
+                and about_type  = #{about.about_type}
+            </if>
+            <if test="about.content!=null">
+                and content like concat('%',#{about.content},'%')
+            </if>
+            <if test="about.status!=null">
+                and status = #{about.status}
+            </if>
+            <if test="about.id!=null">
+                and id = #{about.id}
+            </if>
+        </where>
+        limit #{pageData.offset},#{pageData.limit}
+    </select>
+    <insert id="add" parameterType="About" useGeneratedKeys="true" keyProperty="id">
+        insert into about (about_type,status,image,content,create_at,create_by,update_at,update_by) values
+        (#{about_type},#{status},#{image},#{content},#{create_at},#{create_by},#{update_at},#{update_by})
+    </insert>
+    <update id="update" parameterType="About">
+        update about set
+        <if test="about_type!=null">
+            about_type=#{about_type},
+        </if>
+        <if test="status!=null">
+            status=#{status},
+        </if>
+        <if test="image!=null">
+            image=#{image},
+        </if>
+        <if test="content!=null">
+            content=#{content},
+        </if>
+        update_at=#{update_at},update_by=#{update_by} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="About">
+        delete from about where id = #{id}
+    </delete>
+</mapper>
