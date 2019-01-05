@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           ">
+
+    <!-- 自动帮助你完成声明，并且还自动搜索@Component , @Controller , @Service , @Repository等标注的类。-->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.jnshu"/>
+
+     <!--加载数据库配置文件-->
+    <!--<context:property-placeholder location="db.properties"/>-->
+
+    <!-- 配置数据源-->
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--&lt;!&ndash;<property name="driverClass" value="${jdbc.driver}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="jdbcUrl" value="${jdbc.url}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="user" value="${jdbc.user}"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="password" value="${jdbc.password}"/>&ndash;&gt;-->
+    <!--</bean>-->
+
+    <!-- 设置sqlSessionFactory的bean实现类为Mybatis与Spring整合jar包中的sqlSessionFactoryBean在其中只需要注入两个参数，
+    一个是Mybatis的全局配置文件，一个是上面配置的数据源Bean-->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--<property name="typeAliasesPackage" value="com.jnshu.pojo"/>-->
+        <!--<property name="mapperLocations" value="classpath:StudentMapper.xml"/>-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+
+    <!-- 对于上面的mapper虽然可以整合spring开发，但每个mapper，我们都需要配置，这样很费事。我们采用MapperScannerConfigurer-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.jnshu.dao"/>
+    </bean>
+</beans>
