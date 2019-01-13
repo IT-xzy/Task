@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sca="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/sca http://www.osoa.org/xmlns/sca/1.0/spring-sca.xs ">
+
+    <sca:service name="CalculatorService"
+                 type="com.suger.service.CalculatorService" target="CalculatorServiceImpl"/>
+
+    <bean id="CalculatorServiceImpl" class="com.suger.service.impl.CalculatorServiceImpl">
+        <property name="add" ref="addService"/>
+        <property name="subtract" ref="subtractService"/>
+        <property name="multiply" ref="multiplyService"/>
+        <property name="divide" ref="divideService"/>
+    </bean>
+
+    <sca:reference name="addService" type="com.suger.service.AddService"/>
+    <sca:reference name="subtractService" type="com.suger.service.SubtractService"/>
+    <sca:reference name="multiplyService" type="com.suger.service.MultiplyService"/>
+    <sca:reference name="divideService" type="com.suger.service.DivideService"/>
+</beans>

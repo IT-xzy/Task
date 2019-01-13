@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--启动扫描机制，扫描对应包-->
+    <context:annotation-config/>
+
+    <!--<context:component-scan base-package="com.suger.service"/>-->
+    <context:component-scan base-package="com.suger"/>
+
+    <!-- 导入资源文件 -->
+    <!-- 载入redis.properties,如果有多个properties文件，必须用逗号分开 -->
+    <context:property-placeholder location="classpath:properties/redis.properties" ignore-unresolvable="true"/>
+
+    <!-- redis连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+        <!--最大空闲数-->
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <!--连接池的最大数据库连接数  -->
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <!--最大建立连接等待时间-->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <!--逐出连接的最小空闲时间 默认1800000毫秒(30分钟)-->
+        <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}" />
+        <!--每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3-->
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}" />
+        <!--逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1-->
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}" />
+        <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+        <!--在空闲时检查有效性, 默认false  -->
+        <property name="testWhileIdle" value="${redis.testWhileIdle}" />
+    </bean >
+
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+
+    <!--redis连接工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig" />
+        <!--IP地址 -->
+        <property name="hostName" value="${redis.hostName}"/>
+        <!--端口号  -->
+        <property name="port" value="${redis.port}" />
+        <!--如果Redis设置有密码  -->
+        <property name="password" value="${redis.password}" />
+        <!--客户端超时时间单位是毫秒  -->
+        <property name="timeout" value="${redis.timeout}" />
+    </bean>
+
+    <!--使用 -->
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean >
+
+    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+    <bean id="redisUtils" class="com.suger.util.RedisUtils">
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
+    <bean id="studentService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:8099/StudentService"/>
+        <property name="serviceInterface" value="com.suger.service.StudentService"/>
+    </bean>
+    <bean id="userService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:8099/UserService"/>
+        <property name="serviceInterface" value="com.suger.service.UserService"/>
+    </bean>
+    <bean id="professionService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:8099/ProfessionService"/>
+        <property name="serviceInterface" value="com.suger.service.ProfessionService"/>
+    </bean>
+    <bean id="uploadService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:8099/UploadService"/>
+        <property name="serviceInterface" value="com.suger.service.UploadService"/>
+    </bean>
+
+    <bean id="studentService2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:9099/StudentService"/>
+        <property name="serviceInterface" value="com.suger.service.StudentService"/>
+    </bean>
+    <bean id="userService2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:9099/UserService"/>
+        <property name="serviceInterface" value="com.suger.service.UserService"/>
+    </bean>
+    <bean id="professionService2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:9099/ProfessionService"/>
+        <property name="serviceInterface" value="com.suger.service.ProfessionService"/>
+    </bean>
+    <bean id="uploadService2" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://172.17.13.209:9099/UploadService"/>
+        <property name="serviceInterface" value="com.suger.service.UploadService"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--启动扫描机制，扫描对应包-->
+    <context:annotation-config/>
+
+    <!--<context:component-scan base-package="com.suger.service"/>-->
+    <context:component-scan base-package="com.suger"/>
+
+    <!-- 导入资源文件 -->
+    <!-- 载入redis.properties,如果有多个properties文件，必须用逗号分开 -->
+    <context:property-placeholder
+            location="classpath:properties/jdbc.properties,classpath:properties/redis.properties" ignore-unresolvable="true"/>
+
+    <!-- 配置 c3p0 数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!-- 关键配置 -->
+        <!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
+        <property name="initialPoolSize" value="3"/>
+        <!--连接池中保留的最小连接数。Default: 2 -->
+        <property name="minPoolSize" value="2"/>
+        <!--连接池中保留的最大连接数。Default: 15 -->
+        <property name="maxPoolSize" value="15"/>
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+        <property name="acquireIncrement" value="3"/>
+        <!-- 性能配置 -->
+        <!-- 控制数据源内加载的PreparedStatements数量。如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default: 0 -->
+        <property name="maxStatements" value="15"/>
+        <!-- maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。Default: 0 -->
+        <property name="maxStatementsPerConnection" value="5"/>
+        <!--最大空闲时间,1800秒内未使用则连接被丢弃。若为0则永不丢弃。Default: 0 -->
+        <property name="maxIdleTime" value="3600"/>
+
+    </bean>
+
+    <!--集成MyBatis-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!--指定MyBatis配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--指定mapper映射文件的位置-->
+        <property value="classpath*:mapper/*.xml" name="mapperLocations"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.suger.dao"/>
+    </bean>
+
+
+    <!-- redis连接池配置-->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+        <!--最大空闲数-->
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <!--连接池的最大数据库连接数  -->
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <!--最大建立连接等待时间-->
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <!--逐出连接的最小空闲时间 默认1800000毫秒(30分钟)-->
+        <property name="minEvictableIdleTimeMillis" value="${redis.minEvictableIdleTimeMillis}" />
+        <!--每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3-->
+        <property name="numTestsPerEvictionRun" value="${redis.numTestsPerEvictionRun}" />
+        <!--逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1-->
+        <property name="timeBetweenEvictionRunsMillis" value="${redis.timeBetweenEvictionRunsMillis}" />
+        <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+        <!--在空闲时检查有效性, 默认false  -->
+        <property name="testWhileIdle" value="${redis.testWhileIdle}" />
+    </bean >
+
+    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
+
+    <!--redis连接工厂 -->
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="poolConfig" ref="jedisPoolConfig" />
+        <!--IP地址 -->
+        <property name="hostName" value="${redis.hostName}"/>
+        <!--端口号  -->
+        <property name="port" value="${redis.port}" />
+        <!--如果Redis设置有密码  -->
+        <property name="password" value="${redis.password}" />
+        <!--客户端超时时间单位是毫秒  -->
+        <property name="timeout" value="${redis.timeout}" />
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean >
+
+    <!--自定义redis工具类,在需要缓存的地方注入此类  -->
+    <bean id="redisUtils" class="com.suger.util.RedisUtils">
+        <property name="redisTemplate" ref="redisTemplate" />
+    </bean>
+
+
+    <bean id="smsSDK" class="com.suger.util.SMS">
+        <constructor-arg name="serverIp" value="app.cloopen.com"/>
+        <constructor-arg name="serverPort" value="8883" />
+        <constructor-arg name="accountSid" value="8a216da8679d0e9d0167a6570b5f0629"/>
+        <constructor-arg name="accountToken" value="8c53815fe6a24fc1960d3b2b4c20abd9"/>
+        <constructor-arg name="appId" value="8a216da8679d0e9d0167a6570bd70630"/>
+    </bean>
+
+    <!--阿里图片存储-->
+    <context:property-placeholder location="classpath:properties/oss.properties" ignore-unresolvable="true"/>
+    <bean id="ossBean" class="com.suger.pojo.OssBean">
+        <property name="accessKeyId" value="${oss.accessKeyId}"/>
+        <property name="accessKeySecret" value="${oss.accessKeySecret}"/>
+        <property name="bucketName" value="${oss.bucketName}"/>
+        <property name="contentype" value="${oss.contentype}"/>
+        <property name="endpoint" value="${oss.endpoint}"/>
+    </bean>
+    <!--sendCloud邮件发送-->
+    <context:property-placeholder location="classpath:properties/sendCloud.properties" ignore-unresolvable="true"/>
+    <bean id="sendCloudBean" class="com.suger.pojo.SendCloudBean">
+        <property name="url" value="${sendCloud.url}"/>
+        <property name="apiUser" value="${sendCloud.apiUser}"/>
+        <property name="apiKey" value="${sendCloud.apiKey}"/>
+        <property name="from" value="${sendCloud.from}"/>
+    </bean>
+
+
+    <bean id="RMIStudentServiceImpl" class="com.suger.service.impl.StudentServiceImpl"/>
+    <!--将一个类发布为一个RMI服务-->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="RMIStudent"/>
+        <property name="service" ref="RMIStudentServiceImpl"/>
+        <property name="serviceInterface" value="com.suger.service.StudentService"/>
+        <property name="registryPort" value="28388"/>
+        <property name="servicePort" value="28388"/>
+    </bean>
+    <bean id="RMIProfessionServiceImpl" class="com.suger.service.impl.ProfessionServiceImpl"/>
+    <!--将一个类发布为一个RMI服务-->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="RMIProfession"/>
+        <property name="service" ref="RMIProfessionServiceImpl"/>
+        <property name="serviceInterface" value="com.suger.service.ProfessionService"/>
+        <property name="registryPort" value="28388"/>
+        <property name="servicePort" value="28388"/>
+    </bean>
+    <bean id="RMIUserServiceImpl" class="com.suger.service.impl.UserServiceImpl"/>
+    <!--将一个类发布为一个RMI服务-->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="RMIUser"/>
+        <property name="service" ref="RMIUserServiceImpl"/>
+        <property name="serviceInterface" value="com.suger.service.UserService"/>
+        <property name="registryPort" value="28388"/>
+        <property name="servicePort" value="28388"/>
+    </bean>
+    <bean id="RMIUploadServiceImpl" class="com.suger.service.impl.UploadServiceImpl"/>
+    <!--将一个类发布为一个RMI服务-->
+    <bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="RMIUpload"/>
+        <property name="service" ref="RMIUploadServiceImpl"/>
+        <property name="serviceInterface" value="com.suger.service.UploadService"/>
+        <property name="registryPort" value="28388"/>
+        <property name="servicePort" value="28388"/>
+    </bean>
+</beans>
