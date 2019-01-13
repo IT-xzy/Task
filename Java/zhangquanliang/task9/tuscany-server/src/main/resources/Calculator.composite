@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://tuscanyComponent"
+           name="tuscanyComponent" >
+
+    <component name="tuscanyComponent">
+
+        <!--该服务的spring配置文件地址-->
+        <implementation.spring location="spring/spring-mybatis.xml"/>
+        <!-- 绑定服务-->
+        <service name="UserService">
+            <!--服务的接口-->
+            <interface.java interface="com.suger.service.UserService"/>
+            <tuscany:binding.rmi uri="rmi://172.27.0.6:38388/UserService"/>
+        </service>
+        <!-- 绑定服务-->
+        <service name="ProfessionService">
+            <!--服务的接口-->
+            <interface.java interface="com.suger.service.ProfessionService"/>
+            <tuscany:binding.rmi uri="rmi://172.27.0.6:38388/ProfessionService"/>
+        </service>
+        <service name="StudentService">
+            <!--服务的接口-->
+            <interface.java interface="com.suger.service.StudentService"/>
+            <tuscany:binding.rmi uri="rmi://172.27.0.6:38388/StudentService"/>
+        </service>
+        <service name="UploadService">
+            <!--服务的接口-->
+            <interface.java interface="com.suger.service.UploadService"/>
+            <tuscany:binding.rmi uri="rmi://172.27.0.6:38388/UploadService"/>
+        </service>
+    </component>
+
+</composite>
