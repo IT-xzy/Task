@@ -30,7 +30,6 @@ public class StudentController {
             model.addAttribute("code",201);
             return "json";
         }
-
     }
 
     @RequestMapping(value = "/student", method = RequestMethod.POST)
