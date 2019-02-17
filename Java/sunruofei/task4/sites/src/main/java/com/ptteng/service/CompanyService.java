@@ -1,6 +1,6 @@
 package com.ptteng.service;
 
-import com.ptteng.model.Company;
+import com.ptteng.entity.Company;
 
 import java.util.List;
 

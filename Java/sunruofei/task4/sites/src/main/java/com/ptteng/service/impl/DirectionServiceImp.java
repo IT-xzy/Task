@@ -1,7 +1,7 @@
 package com.ptteng.service.impl;
 
 import com.ptteng.dao.DirectionMapper;
-import com.ptteng.model.Direction;
+import com.ptteng.entity.Direction;
 import com.ptteng.service.DirectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

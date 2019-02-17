@@ -25,6 +25,8 @@
         <li data-slide-to="2" data-target="#myCarousel"></li>
         <li data-slide-to="3" data-target="#myCarousel"></li>
     </ol>
+
+
     <div class="carousel-inner">
         <div class="item active">
             <img alt="First slide" src="images/547567.jpg">
@@ -50,6 +52,12 @@
 
 <div class="main container">
     <!--第一部分开始-->
+
+
+    <a href="register"><input type="button" value="注册"></a>
+    <a href="login"> <input type="button"  value="登录"></a>
+
+
     <div class="main-a row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
             <div class="row text-center">

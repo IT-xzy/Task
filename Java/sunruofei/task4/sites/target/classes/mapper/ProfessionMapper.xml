@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ptteng.dao.ProfessionMapper">
-    <resultMap id="BaseResultMap" type="com.ptteng.model.Profession">
+    <resultMap id="BaseResultMap" type="com.ptteng.entity.Profession">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="introduction" property="introduction" jdbcType="VARCHAR"/>
@@ -19,7 +19,7 @@
         <result column="picture" property="picture" jdbcType="VARCHAR"/>
         <result column="direction_id" property="directionId" jdbcType="BIGINT"/>
     </resultMap>
-    <resultMap id="Second" type="com.ptteng.model.Temp">
+    <resultMap id="Second" type="com.ptteng.entity.Temp">
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="total" property="total" jdbcType="BIGINT"/>
     </resultMap>
@@ -38,7 +38,7 @@
     delete from profession
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.ptteng.model.Profession">
+    <insert id="insert" parameterType="com.ptteng.entity.Profession">
     insert into profession (id, name, introduction, 
       threshold, complexity, growth_cycle, 
       scarcity, stage_one, stage_two, 
@@ -52,7 +52,7 @@
       #{createBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
       #{directionId,jdbcType=BIGINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.ptteng.model.Profession">
+    <insert id="insertSelective" parameterType="com.ptteng.entity.Profession">
         insert into profession
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -155,7 +155,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ptteng.model.Profession">
+    <update id="updateByPrimaryKeySelective" parameterType="com.ptteng.entity.Profession">
         update profession
         <set>
             <if test="name != null">
@@ -206,7 +206,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ptteng.model.Profession">
+    <update id="updateByPrimaryKey" parameterType="com.ptteng.entity.Profession">
     update profession
     set name = #{name,jdbcType=VARCHAR},
       introduction = #{introduction,jdbcType=VARCHAR},
@@ -225,7 +225,7 @@
       direction_id = #{directionId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
-    <select id="selectByDynamicCondition" resultMap="BaseResultMap" parameterType="com.ptteng.model.Profession">
+    <select id="selectByDynamicCondition" resultMap="BaseResultMap" parameterType="com.ptteng.entity.Profession">
         select * from profession where 1 = 1
         <if test="directionId != null">
             and direction_id = #{directionId}

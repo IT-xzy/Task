@@ -1,7 +1,7 @@
 package com.ptteng.service.impl;
 
 import com.ptteng.dao.CompanyMapper;
-import com.ptteng.model.Company;
+import com.ptteng.entity.Company;
 import com.ptteng.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

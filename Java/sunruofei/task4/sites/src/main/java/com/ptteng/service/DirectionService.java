@@ -1,6 +1,6 @@
 package com.ptteng.service;
 
-import com.ptteng.model.Direction;
+import com.ptteng.entity.Direction;
 
 import java.util.List;
 

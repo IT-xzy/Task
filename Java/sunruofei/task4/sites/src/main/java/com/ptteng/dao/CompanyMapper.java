@@ -1,6 +1,6 @@
 package com.ptteng.dao;
 
-import com.ptteng.model.Company;
+import com.ptteng.entity.Company;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

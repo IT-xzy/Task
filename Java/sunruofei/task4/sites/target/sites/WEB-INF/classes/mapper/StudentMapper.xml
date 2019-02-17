@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ptteng.dao.StudentMapper" >
-  <resultMap id="BaseResultMap" type="com.ptteng.model.Student" >
+  <resultMap id="BaseResultMap" type="com.ptteng.entity.Student" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="position" property="position" jdbcType="VARCHAR" />
@@ -28,7 +28,7 @@
     delete from student
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.ptteng.model.Student" >
+  <insert id="insert" parameterType="com.ptteng.entity.Student" >
     insert into student (id, name, position, 
       state, introduction, picture, 
       create_at, update_at, create_by, 
@@ -38,7 +38,7 @@
       #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR}, 
       #{updateBy,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ptteng.model.Student" >
+  <insert id="insertSelective" parameterType="com.ptteng.entity.Student" >
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -105,7 +105,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ptteng.model.Student" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ptteng.entity.Student" >
     update student
     <set >
       <if test="name != null" >
@@ -138,7 +138,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ptteng.model.Student" >
+  <update id="updateByPrimaryKey" parameterType="com.ptteng.entity.Student" >
     update student
     set name = #{name,jdbcType=VARCHAR},
       position = #{position,jdbcType=VARCHAR},

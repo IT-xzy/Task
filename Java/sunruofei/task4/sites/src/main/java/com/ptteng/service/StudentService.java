@@ -1,6 +1,6 @@
 package com.ptteng.service;
 
-import com.ptteng.model.Student;
+import com.ptteng.entity.Student;
 
 import java.util.List;
 

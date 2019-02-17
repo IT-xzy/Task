@@ -1,7 +1,7 @@
 package com.ptteng.service.impl;
 
 import com.ptteng.dao.StudentMapper;
-import com.ptteng.model.Student;
+import com.ptteng.entity.Student;
 import com.ptteng.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

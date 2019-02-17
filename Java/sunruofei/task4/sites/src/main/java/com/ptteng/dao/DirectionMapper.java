@@ -1,6 +1,6 @@
 package com.ptteng.dao;
 
-import com.ptteng.model.Direction;
+import com.ptteng.entity.Direction;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

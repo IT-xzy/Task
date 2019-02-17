@@ -1,6 +1,6 @@
 package com.ptteng.dao;
 
-import com.ptteng.model.Student;
+import com.ptteng.entity.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

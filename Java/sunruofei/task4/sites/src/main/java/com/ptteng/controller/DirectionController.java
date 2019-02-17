@@ -1,8 +1,8 @@
 package com.ptteng.controller;
 
-import com.ptteng.model.Direction;
-import com.ptteng.model.Profession;
-import com.ptteng.model.Temp;
+import com.ptteng.entity.Direction;
+import com.ptteng.entity.Profession;
+import com.ptteng.entity.Temp;
 import com.ptteng.service.DirectionService;
 import com.ptteng.service.ProfessionService;
 import org.apache.log4j.Logger;
@@ -32,19 +32,20 @@ public class DirectionController {
     ProfessionService professionService;
 
 
-    @RequestMapping(value = "/profession", method = RequestMethod.GET)
-    public String select(Model model, Long directionId) {
-
-
+    @RequestMapping(value = "/u/profession", method = RequestMethod.GET)
+    public String selectPageData(Model model) {
         try {
+//            查找所有职业
             List<Profession> professions = professionService.selectAll();
+            logger.info("所有职业==================" + professions);
+//            查找所有方向
             List<Direction> directions = directionService.selectAll();
-            List<Profession> profession = professionService.selectByDynamicCondition(directionId);
-
-
+            logger.info("所有方向==================" + directions);
+//            查找当前每个职业有多少人在学,得到职业与人数对应的一个集合
             List<Temp> tempList = professionService.selectStudentNumber();
-            model.addAttribute("temList",tempList);
-            model.addAttribute("profession", profession);
+            logger.info("职业与人数对应的一个集合=======================" + tempList);
+
+            model.addAttribute("temList", tempList);
             model.addAttribute("professions", professions);
             model.addAttribute("directions", directions);
             model.addAttribute("code", 1);

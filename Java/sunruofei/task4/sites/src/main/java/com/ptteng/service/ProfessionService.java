@@ -1,7 +1,7 @@
 package com.ptteng.service;
 
-import com.ptteng.model.Profession;
-import com.ptteng.model.Temp;
+import com.ptteng.entity.Profession;
+import com.ptteng.entity.Temp;
 
 import java.util.List;
 

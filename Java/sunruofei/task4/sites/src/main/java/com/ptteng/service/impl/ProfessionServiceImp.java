@@ -1,8 +1,8 @@
 package com.ptteng.service.impl;
 
 import com.ptteng.dao.ProfessionMapper;
-import com.ptteng.model.Profession;
-import com.ptteng.model.Temp;
+import com.ptteng.entity.Profession;
+import com.ptteng.entity.Temp;
 import com.ptteng.service.ProfessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

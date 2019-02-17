@@ -28,18 +28,18 @@
 
 
 
-    <!-- configure the InternalResourceViewResolver -->
+     <!--configure the InternalResourceViewResolver-->
     <!--放一个视图解析器，解析视图（所有的jsp文件），就是浏览器上看到的东西，解析我才能看见-->
-    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"-->
-          <!--id="internalResourceViewResolver">-->
-        <!--&lt;!&ndash; 前缀 &ndash;&gt;-->
-        <!--<property name="prefix" value="/WEB-INF/jsp/" />-->
-        <!--&lt;!&ndash; 后缀 &ndash;&gt;-->
-        <!--<property name="suffix" value=".jsp" />-->
-    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp" />
+    </bean>
 
 
-
+<!--tiles框架的视图解析器-->
     <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
     <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
         <property name="definitions">
@@ -48,6 +48,19 @@
             </list>
         </property>
     </bean>
+
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <!-- 登录认证拦截器 -->
+        <mvc:interceptor>
+            <!--/** 表示所有url包括子url路径 -->
+            <mvc:mapping path="/u/**"/>
+            <bean class="com.ptteng.Interceptor.LoginInterceptor"/>
+            <!--设置拦截器路径-->
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>
 

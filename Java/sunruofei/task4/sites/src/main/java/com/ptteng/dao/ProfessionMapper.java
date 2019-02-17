@@ -1,7 +1,7 @@
 package com.ptteng.dao;
 
-import com.ptteng.model.Profession;
-import com.ptteng.model.Temp;
+import com.ptteng.entity.Profession;
+import com.ptteng.entity.Temp;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
