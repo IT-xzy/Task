@@ -43,7 +43,7 @@ public class JWT {
             //添加构成JWT的参数
             JwtBuilder builder = Jwts.builder().setHeaderParam("typ", "JWT")
                     .claim("username", username)
-//                    .claim("roles", roles)
+//
 //                    .claim("privileges", privileges)
                     .signWith(signatureAlgorithm, signingKey);
             //添加Token过期时间

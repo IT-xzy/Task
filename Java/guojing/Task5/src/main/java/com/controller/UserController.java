@@ -27,7 +27,10 @@ public class UserController {
         }
 //       对姓名和密码分别进行加密，传入数据库,使用的是不同的加密算法，每次姓名加密后是一样的，密码每次加密后是不一样的
         user.setName(MD5Util.MD5(user.getName()));
+
         user.setPassword(MD5Util.generate(user.getPassword()));
+
+
         user.setUpdateAt(System.currentTimeMillis());
         user.setCreateAt(System.currentTimeMillis());
        if(userService.login(user.getName())!=null){
