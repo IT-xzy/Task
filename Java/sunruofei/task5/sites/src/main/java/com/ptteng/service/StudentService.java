@@ -18,8 +18,11 @@ public interface StudentService {
     int updateByPrimaryKey(Student record);
 
     List<Student> selectAll();
-    List<Student> selectBySalary();
+
+    List<Student> selectBySalary(Long figure);
+
     int selectCount();
-    int selectCountBySalary();
+
+    int selectCountBySalary(Long income);
 
 }

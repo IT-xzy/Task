@@ -41,8 +41,7 @@ public class JWT {
             Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
             //添加构成JWT的参数
-            JwtBuilder builder = Jwts.builder().setHeaderParam("typ", "JWT")
-                    .claim("username", username)
+            JwtBuilder builder = Jwts.builder().setHeaderParam("typ", "JWT").claim("username", username)
 //
 //                    .claim("privileges", privileges)
                     .signWith(signatureAlgorithm, signingKey);

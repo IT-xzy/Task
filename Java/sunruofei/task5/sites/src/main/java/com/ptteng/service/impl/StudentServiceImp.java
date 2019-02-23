@@ -55,9 +55,12 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public List<Student> selectBySalary() {
-        return studentMapper.selectBySalary();
+    public List<Student> selectBySalary(Long figure) {
+        System.out.println("进来没============================="+figure);
+        return studentMapper.selectBySalary(figure);
     }
+
+
 
     @Override
     public int selectCount() {
@@ -65,7 +68,7 @@ public class StudentServiceImp implements StudentService {
     }
 
     @Override
-    public int selectCountBySalary() {
-        return studentMapper.selectCountBySalary();
+    public int selectCountBySalary(Long  income) {
+        return studentMapper.selectCountBySalary(income);
     }
 }

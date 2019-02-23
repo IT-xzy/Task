@@ -124,6 +124,7 @@ public class Student {
                 ", updateAt=" + updateAt +
                 ", createBy='" + createBy + '\'' +
                 ", updateBy='" + updateBy + '\'' +
+
                 ", salary=" + salary +
                 '}';
     }

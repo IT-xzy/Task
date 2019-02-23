@@ -21,9 +21,10 @@ public interface StudentMapper {
 
     List<Student> selectAll();
 
-    List<Student> selectBySalary();
+
+    List<Student> selectBySalary(Long figure);
 
     int selectCount();
 
-    int selectCountBySalary();
+    int selectCountBySalary(Long income);
 }

@@ -57,8 +57,8 @@
     <!--第一部分开始-->
 
 
-    <a href="register"><input type="button" value="注册"></a>
-    <a href="loginOK"> <input type="button" value="登录"></a>
+    <a href="/p/register"><input type="button" value="注册"></a>
+    <a href="/p/login"> <input type="button" value="登录"></a>
     <a href="logout"><input type="button" value="注销"></a>
     在线人数为：<%=Listener.getActiveSessions() %>
 
@@ -164,7 +164,7 @@
         <h3 class="text-center main-tab">优秀学员展示</h3>
         <ul class="list-unstyled text-center">
 
-            <c:forEach items="${students}" varStatus="now">
+            <c:forEach items="${students}" varStatus="now" >
                 <%--定义了一个now名的对象作为varStatus的绑定值。该绑定值也就是now封装了当前遍历的状态--%>
                 <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                     <div>

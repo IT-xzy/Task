@@ -33,33 +33,41 @@ public class StudentController {
     Logger logger = Logger.getLogger(StudentController.class);
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String selectProfessionData(Model model) {
-        try {
-//           通过Salary对学员进行降序排列,只得到前4个学员,返到页面上
-            List<Student> students = studentService.selectBySalary();
-            logger.info("salary排名前四的学员=================="+students);
-//            查出所有的合作公司
-            List<Company> companies = companyService.selectAll();
-            logger.info("合作公司=================="+companies);
-//            查出所有的在学学员数
-            int counts = studentService.selectCount();
-            logger.info("在学学员数===================="+counts);
-//            查出薪水大于5000的学员数
-            int countBySalary = studentService.selectCountBySalary();
-            logger.info("salary大于5000的学员数================"+countBySalary);
+    public String selectProfessionData(Model model,  Long figure,  Long income) {
+        if (figure == null | income == null) {
+            model.addAttribute("code", -2);
+            return "one/blank";
+        } else {
+            try {
+                logger.info("参数进来没+++++++++++++++++++++++++++++++" +
+                        figure + "-----------" +
+                        income + "----------");
+//           通过Salary对学员进行降序排列,返到页面上
+                List<Student> students = studentService.selectBySalary(figure);
+                logger.info("salary排名前几的学员==================" + students);
 
-            model.addAttribute("countBySalary", countBySalary);
-            model.addAttribute("counts", counts);
-            model.addAttribute("students", students);
-            model.addAttribute("companies", companies);
-            model.addAttribute("code", 1);
-            return "home";
-        } catch (Exception e) {
-            model.addAttribute("code", -1);
-            return "home";
+//            查出所有的合作公司
+                List<Company> companies = companyService.selectAll();
+                logger.info("合作公司==================" + companies);
+//            查出所有的在学学员数
+                int counts = studentService.selectCount();
+                logger.info("在学学员数====================" + counts);
+
+                int countBySalary = studentService.selectCountBySalary(income);
+                logger.info("salary大于多少的学员数================" + countBySalary);
+
+                model.addAttribute("countBySalary", countBySalary);
+                model.addAttribute("counts", counts);
+                model.addAttribute("students", students);
+                model.addAttribute("companies", companies);
+                model.addAttribute("code", 1);
+                return "home";
+            } catch (Exception e) {
+                model.addAttribute("code", -1);
+                return "home";
+            }
         }
     }
-
 
 }
 

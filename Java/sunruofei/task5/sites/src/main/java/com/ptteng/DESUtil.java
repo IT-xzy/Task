@@ -18,7 +18,7 @@ import javax.crypto.spec.DESKeySpec;
 public class DESUtil {
 
     //安全密钥
-    private String keyData = "ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstwxyz0123456789-_.";
+    private static String keyData = "ABCDEFGHIJKLMNOPQRSTWXYZabcdefghijklmnopqrstwxyz0123456789-_.";
 
     //无参构造
     public DESUtil() {
@@ -35,7 +35,7 @@ public class DESUtil {
      * @return
      * @throws UnsupportedEncodingException
      */
-    public String encryptFromLong(long source)throws UnsupportedEncodingException{
+    public static String encryptFromLong(long source)throws UnsupportedEncodingException{
         String source1=String.valueOf(source);//先将long类型转化为String类型
         return encrypt(source1, "UTF-8");
     }
@@ -46,7 +46,7 @@ public class DESUtil {
      * @return
      * @throws UnsupportedEncodingException
      */
-    public long decryptToLong(String encryptedData) {
+    public static long decryptToLong(String encryptedData) {
         long  decryptLong=0;
         try {
             decryptLong=Long.valueOf(decrypt(encryptedData, "UTF-8"));
@@ -62,7 +62,7 @@ public class DESUtil {
      * @throws UnsupportedEncodingException
      * 异常
      */
-    public String encrypt(String source)throws UnsupportedEncodingException{
+    public static String  encrypt(String source)throws UnsupportedEncodingException{
         return encrypt(source, "UTF-8");
     }
 
@@ -73,7 +73,7 @@ public class DESUtil {
      * @throws UnsupportedEncodingException
      * 异常
      */
-    public String decrypt(String encryptedData) {
+    public static String decrypt(String encryptedData) {
         String miwen=null;
         try {
             miwen= decrypt(encryptedData, "UTF-8");
@@ -91,7 +91,7 @@ public class DESUtil {
      * @throws UnsupportedEncodingException
      * 异常
      */
-    public String encrypt(String source, String charSet)
+    public static String encrypt(String source, String charSet)
             throws UnsupportedEncodingException {
         String encrypt = null;
         byte[] ret = encrypt(source.getBytes(charSet));
@@ -107,7 +107,7 @@ public class DESUtil {
      * @throws UnsupportedEncodingException
      * 异常
      */
-    public String decrypt(String encryptedData, String charSet)
+    public static String decrypt(String encryptedData, String charSet)
             throws UnsupportedEncodingException {
         String decryptedData = null;
         byte[] ret = decrypt(Base64.decode(encryptedData.toCharArray()));
@@ -120,7 +120,7 @@ public class DESUtil {
      * @param primaryData
      * @return
      */
-    private byte[] encrypt(byte[] primaryData) {
+    private static byte[] encrypt(byte[] primaryData) {
 
         //取得安全密钥
         byte rawKeyData[] = getKey();
@@ -186,7 +186,7 @@ public class DESUtil {
      * @param encryptedData
      * @return
      */
-    private byte[] decrypt(byte[] encryptedData) {
+    private static byte[] decrypt(byte[] encryptedData) {
 
         /** DES算法要求有一个可信任的随机数源 */
         SecureRandom sr = new SecureRandom();
@@ -254,7 +254,7 @@ public class DESUtil {
      *获得密钥
      * @return
      */
-    private byte[] getKey() {
+    private static byte[] getKey() {
 
         /** DES算法要求有一个可信任的随机数源 */
         SecureRandom sr = new SecureRandom();

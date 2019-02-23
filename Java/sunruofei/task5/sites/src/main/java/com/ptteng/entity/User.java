@@ -12,6 +12,12 @@ public class User {
     private String password;
     private long id;
 
+    public User(String name, String password) {
+    }
+    public User(){
+
+    }
+
     public String getName() {
         return name;
     }
