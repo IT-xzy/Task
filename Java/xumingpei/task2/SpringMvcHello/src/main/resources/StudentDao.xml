@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace命名空间，作用就是对SQL进行分类化管理，理解为SQL隔离(使用Mapper代理开发时，namespace有特殊作用)-->
+<mapper namespace="com.jnshu.dao.StudentDao">
+    <!-- 在配置文件中配置很多SQL语句-->
+    <!-- 需求：通过id查询用户表的记录-->
+    <resultMap id="student" type="com.jnshu.pojo.Student">
+        <!-- 通过id元素 property表示哪个属性为主键-->
+        <id property="id" column="id" />
+        <result property="enrolmentTime" column="enrolment_time"/>
+        <result property="onlineId" column="online_id"/>
+        <result property="dailyUrl" column="daily_url"/>
+        <result property="whereToKnowJnshu" column="where_to_know_jnshu"/>
+        <result property="createAt" column="create_at"/>
+        <result property="updateAt" column="update_at"/>
+    </resultMap>
+
+    <insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="com.jnshu.pojo.Student">
+        INSERT into students(name,qq,type,enrolment_time,school,online_id,daily_url,wish,brother,where_to_know_jnshu,create_at,update_at)
+        VALUES (#{name},#{qq},#{type},#{enrolmentTime},#{school},#{onlineId},#{dailyUrl},#{wish},#{brother},#{whereToKnowJnshu},#{createAt},#{updateAt})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM students WHERE id =#{id}
+    </delete>
+
+    <update id="update" parameterType="com.jnshu.pojo.Student">
+        UPDATE students SET name=#{name},qq=#{qq},type=#{type},enrolment_time=#{enrolmentTime},school=#{school},online_id=#{onlineId},daily_url=#{dailyUrl},wish=#{wish},brother=#{brother},where_to_know_jnshu=#{whereToKnowJnshu},create_at=#{createAt},update_at=#{updateAt} WHERE id=#{id}
+    </update>
+
+
+    <select id="get"  resultMap="student">
+        SELECT * from students where id=#{id}
+    </select>
+
+    <select id="findAll" resultMap="student">
+        select *  from students
+    </select>
+
+    <select id="list" resultMap="student">
+        select *  from students
+      <if test="start!=null and count!=null">
+          limit #{start},#{count}
+      </if>
+    </select>
+
+    <select id="total" resultType="int">
+        select count(*) from students
+    </select>
+
+    <select id="byName" parameterType="string" resultMap="student">
+        select * from students where name like CONCAT('%',#{name},'%')
+    </select>
+</mapper>
