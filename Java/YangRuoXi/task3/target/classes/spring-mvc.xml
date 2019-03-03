@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:content="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--mvc配置映射器和适配器-->
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+
+    <!--配置处理器,组件扫描,自动识别@controller标签标注的类或方法-->
+    <content:component-scan base-package="com.jnshu.clroom" use-default-filters="false">
+        <content:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </content:component-scan>
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--配置视图解析器,设置前后缀-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>

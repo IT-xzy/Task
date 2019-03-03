@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.task5.mapper.ProfessionMapper">
+
+    <resultMap id="profession" type="com.jnshu.task5.beans.Profession">
+        <id column="id" property="id"/>
+        <result column="img" property="img"/>
+        <result column="development_directior" property="developmentDirectior"/>
+        <result column="profession_name" property="professionName"/>
+        <result column="description" property="description"/>
+    </resultMap>
+
+    <!--List<Profession> selectAllProfession();-->
+    <select id="selectAllProfession" resultMap="profession">
+    SELECT * from profession
+    </select>
+    
+    <select id="selectProfessionByName" resultMap="profession">
+        select * from profession group by development_directior
+    </select>
+    <!--&lt;!&ndash;private User addUser(User user);&ndash;&gt;-->
+    <!--<insert id="addUser" parameterType="com.jnshu.task4.beans.User" >-->
+        <!--INSERT INTO USER VALUES (#{userId},-->
+        <!--#{userName},#{password},#{userRole},#{createTime},#{createId},#{privileges}-->
+        <!--)-->
+    <!--</insert>-->
+
+    <!--&lt;!&ndash;private User updateUser(Integer id, User user);&ndash;&gt;-->
+    <!--<update id="updateUserById" parameterType="com.jnshu.task4.beans.User">-->
+        <!--UPDATE  USER  SET-->
+        <!--user_name = #{userName},-->
+        <!--password = #{password},-->
+        <!--user_role = #{userRole}-->
+        <!--WHERE  user_id = #{userId};-->
+    <!--</update>-->
+
+    <!--&lt;!&ndash;private User selectUser(Integer id);&ndash;&gt;-->
+    <!--<select id="selectUserById" resultMap="user">-->
+        <!--SELECT * from USER WHERE  id = #{id};-->
+    <!--</select>-->
+
+    <!--<select id="selectAllUser" resultMap="user">-->
+        <!--SELECT  * from USER-->
+    <!--</select>-->
+
+    <!--<delete id="delectUserById" parameterType="com.jnshu.task4.beans.User">-->
+        <!--DELETE FROM USER WHERE user_id = #{userId}-->
+    <!--</delete>-->
+
+    <!--&lt;!&ndash;List<User> selectUserBySalary();&ndash;&gt;-->
+    <!--<select id="selectUserBySalaryDESC" resultMap="user">-->
+        <!--select img,position,NAME ,description-->
+        <!--from user-->
+        <!--ORDER  BY salary DESC-->
+    <!--</select>-->
+
+
+</mapper>

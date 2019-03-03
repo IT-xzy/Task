@@ -1,0 +1,27 @@
+<composite
+        xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+        targetNamespace="http://com.jnshu"
+        name="Calculator">
+    <!--xmlns="http://www.osoa.org/xmlns/sca/1.0"-->
+    <component name="ServiceClient">
+        <implementation.java class="com.jnshu.service.impl.CalculatorImpl" />
+        <reference name="add" target="AddComponent"/>
+        <reference name="minus" target="MinusComponent"/>
+        <reference name="time" target="TimeComponent"/>
+        <reference name="divide" target="DivideComponent"/>
+    </component>
+
+    <component name="AddComponent">
+        <implementation.java class="com.jnshu.service.impl.AddImpl" />
+    </component>
+    <component name="MinusComponent">
+        <implementation.java class="com.jnshu.service.impl.MinusImpl" />
+    </component>
+    <component name="TimeComponent">
+        <implementation.java class="com.jnshu.service.impl.TimeImpl" />
+    </component>
+    <component name="DivideComponent">
+        <implementation.java class="com.jnshu.service.impl.DivideImpl" />
+    </component>
+
+</composite>

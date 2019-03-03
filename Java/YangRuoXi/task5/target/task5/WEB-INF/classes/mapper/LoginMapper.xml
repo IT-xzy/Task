@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.task5.mapper.LoginMapper">
+
+    <resultMap id="login" type="com.jnshu.task5.beans.Login">
+        <id column="id" property="id"/>
+        <result column="login_name" property="loginName"/>
+        <result column="pwd" property="pwd"/>
+        <result column="qq" property="qq"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+    </resultMap>
+
+    <!-- public int insertLogin();-->
+    <insert id="insertLogin" parameterType="com.jnshu.task5.beans.Login">
+        insert into login(login_name,pwd,qq,email,phone,create_at) VALUES (#{loginName},#{pwd},#{qq},#{email},#{phone},#{createAt})
+    </insert>
+
+    <select id="selectLoginById" resultType="com.jnshu.task5.beans.Login" parameterType="java.util.Map">
+        select  login_name , pwd from login WHERE  id = #{id}
+    </select>
+
+    <!--Login selectLoginByName(String name);-->
+    <select id="selectLoginByName" resultType="com.jnshu.task5.beans.Login" parameterType="java.util.Map">
+        SELECT  pwd from login where login_name  = #{loginName}
+    </select>
+
+    <!--insertLoginNameAndPwd-->
+    <insert id="insertLoginNameAndPwd" parameterType="com.jnshu.task5.beans.Login" >
+        INSERT  into login (login_name, pwd,create_at) VALUES (#{loginName},#{pwd},#{createAt})
+    </insert>
+
+
+
+
+</mapper>

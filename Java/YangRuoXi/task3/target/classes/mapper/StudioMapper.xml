@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.clroom.mapper.StudioMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.clroom.beans.Studio" >
+    <constructor >
+      <idArg column="Id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="studio_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="studio_status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="create_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="update_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="editer_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="studio_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="studio_picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="studio_introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, studio_name, studio_status, create_time, update_time, editer_id, studio_type, 
+    studio_picture, studio_introduction
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from studio
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from studio
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.clroom.beans.Studio" >
+    insert into studio (Id, studio_name, studio_status, 
+      create_time, update_time, editer_id, 
+      studio_type, studio_picture, studio_introduction
+      )
+    values (#{id,jdbcType=BIGINT}, #{studioName,jdbcType=VARCHAR}, #{studioStatus,jdbcType=BIT}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{editerId,jdbcType=BIGINT}, 
+      #{studioType,jdbcType=INTEGER}, #{studioPicture,jdbcType=VARCHAR}, #{studioIntroduction,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.clroom.beans.Studio" >
+    insert into studio
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="studioName != null" >
+        studio_name,
+      </if>
+      <if test="studioStatus != null" >
+        studio_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="editerId != null" >
+        editer_id,
+      </if>
+      <if test="studioType != null" >
+        studio_type,
+      </if>
+      <if test="studioPicture != null" >
+        studio_picture,
+      </if>
+      <if test="studioIntroduction != null" >
+        studio_introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="studioName != null" >
+        #{studioName,jdbcType=VARCHAR},
+      </if>
+      <if test="studioStatus != null" >
+        #{studioStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="editerId != null" >
+        #{editerId,jdbcType=BIGINT},
+      </if>
+      <if test="studioType != null" >
+        #{studioType,jdbcType=INTEGER},
+      </if>
+      <if test="studioPicture != null" >
+        #{studioPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="studioIntroduction != null" >
+        #{studioIntroduction,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.clroom.beans.Studio" >
+    update studio
+    <set >
+      <if test="studioName != null" >
+        studio_name = #{studioName,jdbcType=VARCHAR},
+      </if>
+      <if test="studioStatus != null" >
+        studio_status = #{studioStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="editerId != null" >
+        editer_id = #{editerId,jdbcType=BIGINT},
+      </if>
+      <if test="studioType != null" >
+        studio_type = #{studioType,jdbcType=INTEGER},
+      </if>
+      <if test="studioPicture != null" >
+        studio_picture = #{studioPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="studioIntroduction != null" >
+        studio_introduction = #{studioIntroduction,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.clroom.beans.Studio" >
+    update studio
+    set studio_name = #{studioName,jdbcType=VARCHAR},
+      studio_status = #{studioStatus,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      editer_id = #{editerId,jdbcType=BIGINT},
+      studio_type = #{studioType,jdbcType=INTEGER},
+      studio_picture = #{studioPicture,jdbcType=VARCHAR},
+      studio_introduction = #{studioIntroduction,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.clroom.mapper.BannerMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.clroom.beans.Banner" >
+    <constructor >
+      <idArg column="Id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="banner_picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="editer_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="banner_status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="create_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="update_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, banner_picture, editer_id, url, banner_status, create_time, update_time, picture
+  </sql>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from banner
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from banner
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.clroom.beans.Banner" >
+    insert into banner (Id, banner_picture, editer_id, 
+      url, banner_status, create_time, 
+      update_time, picture)
+    values (#{id,jdbcType=BIGINT}, #{bannerPicture,jdbcType=VARCHAR}, #{editerId,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{bannerStatus,jdbcType=BIT}, #{createTime,jdbcType=BIGINT}, 
+      #{updateTime,jdbcType=BIGINT}, #{picture,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.clroom.beans.Banner" >
+    insert into banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="bannerPicture != null" >
+        banner_picture,
+      </if>
+      <if test="editerId != null" >
+        editer_id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="bannerStatus != null" >
+        banner_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bannerPicture != null" >
+        #{bannerPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="editerId != null" >
+        #{editerId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerStatus != null" >
+        #{bannerStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.clroom.beans.Banner" >
+    update banner
+    <set >
+      <if test="bannerPicture != null" >
+        banner_picture = #{bannerPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="editerId != null" >
+        editer_id = #{editerId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerStatus != null" >
+        banner_status = #{bannerStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.clroom.beans.Banner" >
+    update banner
+    set banner_picture = #{bannerPicture,jdbcType=VARCHAR},
+      editer_id = #{editerId,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      banner_status = #{bannerStatus,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      picture = #{picture,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
