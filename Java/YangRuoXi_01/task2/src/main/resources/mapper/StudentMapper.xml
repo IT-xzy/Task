@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jnshu.task2.mapper.StudentMapper">
+    <!--<select id="selectUserById"  resultType="list">-->
+    <!--select id,user_name userName, age from user where id = #{id}-->
+    <!--</select>-->
+
+    <!--<resultMap id="userMap" type="com.jnshu.task2.beans.User">-->
+    <!--<id property="id" column="id"/>-->
+    <!--<result property="name" column="name"/>-->
+    <!--<result property="age" column="age"/>-->
+
+    <!--</resultMap>-->
+
+    <!--public List<Student> selectStuAll();-->
+    <resultMap id="student" type="com.jnshu.task2.beans.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="qq" property="qq"/>
+        <result column="type" property="type"/>
+        <result column="school" property="school"/>
+        <result column="online_number" property="onlineNumber"/>
+        <result column="link" property="link"/>
+        <result column="wish" property="wish"/>
+        <result column="teacher" property="teacher"/>
+        <result column="where_konw" property="whereKonw"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+    </resultMap>
+
+    <select id="selectStuByPage" resultType="java.util.List">
+      SELECT id,name,qq,type,time,school,online_number,link,wish,teacher,where_konw,create_at,update_at
+      FROM  student
+      limit #{start},#{pageSize}
+    </select>
+
+    <select id="selectStuAll" resultMap="student">
+        select id,name,qq,type,time,school,online_number,link,wish,teacher,where_konw,create_at,update_at
+        FROM  student
+    </select>
+
+    <!--public User selectUserById(Integer id);-->
+    <select id="selectStuById"  resultMap="student" >
+        select id,name,qq,type,time,school,online_number,link,wish,teacher,where_konw,create_at,update_at FROM  student where id = #{id}
+    </select>
+
+    <select id="selectStuByName"  resultMap="student" >
+        select id,name,qq,type,time,school,online_number,link,wish,teacher,where_konw,create_at,update_at FROM  student where name = #{name}
+    </select>
+
+    <select id="selectStuByOnlineNumber"  resultMap="student" >
+        select id,name,qq,type,time,school,online_number,link,wish,teacher,where_konw,create_at,update_at FROM  student where online_number = #{onlineNumber}
+    </select>
+
+    <!--updateStuBy-->
+    <update id="updateStuTypeById" parameterType="com.jnshu.task2.beans.Student" >
+        UPDATE student SET
+        name  = #{name},
+        qq = #{qq},
+        type = #{type},
+        time = #{time},
+        school = #{school},
+        online_number = #{onlineNumber},
+        link = #{link},
+        wish = #{wish},
+        teacher = #{teacher},
+        where_konw = #{whereKonw},
+        create_at = #{createAt},
+        update_at = #{updateAt}
+        where id = #{id}
+    </update>
+
+    <update id="batchUpdate" parameterType="java.util.Map">
+        <foreach collection="list" separator=";" item="student">
+            UPDATE student SET
+            name  = #{name},
+            qq = #{qq},
+            type = #{type},
+            time = #{time},
+            school = #{school},
+            online_number = #{onlineNumber},
+            link = #{link},
+            wish = #{wish},
+            teacher = #{teacher},
+            where_konw = #{whereKonw},
+            create_at = #{createAt},
+            update_at = #{updateAt}
+            where id = #{id}
+        </foreach>
+    </update>
+
+    <!--public void addStu(Student student)-->
+    <insert id="addStu" parameterType="com.jnshu.task2.beans.Student">
+        INSERT  INTO student VALUES (#{id},#{name},#{qq},#{type},#{time},#{school},#{onlineNumber},#{link},#{wish},#{teacher},#{whereKonw},#{createAt},#{updateAt})
+    </insert>
+
+
+    <!--public void delStuById(Integer Id)-->
+    <delete id="delStuById" >
+        DELETE from student where id = #{id}
+    </delete>
+
+
+</mapper>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.clroom.mapper.UserMapper">
+
+    <resultMap id="user" type="com.jnshu.clroom.beans.User">
+        <id column="user_id" property="userId"/>
+        <result column="password" property="password"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_role" property="userRole"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_id" property="createId"/>
+        <result column="privileges" property="privileges"/>
+    </resultMap>
+
+    <!--private User addUser(User user);-->
+    <insert id="addUser" parameterType="com.jnshu.clroom.beans.User" >
+        INSERT INTO USER VALUES (#{userId},
+       #{userName},#{password},#{userRole},#{createTime},#{createId},#{privileges}
+        )
+
+            <!--insert into user-->
+            <!--<trim prefix="(" suffix=")" suffixOverrides="," >-->
+                <!--<if test="userId != null" >-->
+                    <!--user_id,-->
+                <!--</if>-->
+                <!--<if test="userName != null" >-->
+                    <!--user_name,-->
+                <!--</if>-->
+                <!--<if test="password != null" >-->
+                    <!--password,-->
+                <!--</if>-->
+                <!--<if test="userRole != null" >-->
+                    <!--user_role,-->
+                <!--</if>-->
+                <!--<if test="privileges != null" >-->
+                    <!--privileges-->
+                <!--</if>-->
+            <!--</trim>-->
+            <!--<trim prefix="values (" suffix=")" suffixOverrides="," >-->
+                <!--<if test="userId != null" >-->
+                    <!--#{userId},-->
+                <!--</if>-->
+                <!--<if test="userName != null" >-->
+                    <!--#{userName},-->
+                <!--</if>-->
+                <!--<if test="password != null" >-->
+                    <!--#{password},-->
+                <!--</if>-->
+                <!--<if test="userRole != null" >-->
+                    <!--#{userRole},-->
+                <!--</if>-->
+                <!--<if test="privileges != null" >-->
+                    <!--#{privileges},-->
+                <!--</if>-->
+            <!--</trim>-->
+    </insert>
+
+    <!--private User updateUser(Integer id, User user);-->
+    <update id="updateUserById" parameterType="com.jnshu.clroom.beans.User">
+        UPDATE  USER  SET
+        user_name = #{userName},
+        password = #{password},
+        user_role = #{userRole}
+        WHERE  user_id = #{userId};
+    </update>
+
+    <!--private User selectUser(Integer id);-->
+    <select id="selectUser" resultMap="user">
+      SELECT * from USER WHERE  user_id = #{userId};
+    </select>
+
+    <select id="selectAllUser" resultMap="user">
+        SELECT  * from USER
+    </select>
+    
+    <delete id="delectUserById" parameterType="com.jnshu.clroom.beans.User">
+        DELETE FROM USER WHERE user_id = #{userId}
+    </delete>
+
+
+</mapper>

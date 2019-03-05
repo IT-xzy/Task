@@ -1,0 +1,106 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app id="WebApp_ID" version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+    http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+  <!--设置UTF-8编码-->  <filter>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>utf-8</param-value>
+    </init-param>
+  </filter>
+  <!--登陆路径过滤器-->
+  <!--<filter>-->
+    <!--<filter-name>LoginFilter</filter-name>-->
+    <!--<filter-class>com.jnshu.task5.filter.LoginFilter</filter-class>-->
+  <!--</filter>-->
+  <!--&lt;!&ndash;映射过滤器&ndash;&gt;-->
+  <!--<filter-mapping>-->
+    <!--<filter-name>LoginFilter</filter-name>-->
+    <!--&lt;!&ndash;“/*”表示拦截所有的请求 &ndash;&gt;-->
+    <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+  <!--<servlet-mapping>-->
+         <!--<servlet-name>default</servlet-name>-->
+         <!--<url-pattern>/static/*</url-pattern>-->
+         <!--&lt;!&ndash;<url-pattern>*.css</url-pattern>&ndash;&gt;-->
+         <!--&lt;!&ndash;<url-pattern>/assets/*"</url-pattern>&ndash;&gt;-->
+         <!--&lt;!&ndash;<url-pattern>/images/*</url-pattern>&ndash;&gt;-->
+     <!--</servlet-mapping>-->
+  <listener>
+        <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>Tiles Dispatch Servlet</servlet-name>
+        <servlet-class>org.apache.tiles.web.util.TilesDispatchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Tiles Dispatch Servlet</servlet-name>
+        <url-pattern>*.tiles</url-pattern>
+    </servlet-mapping>
+
+  <!--配置Dispatchservlet前端控制器-->
+  <servlet>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcherServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!--设置文件路径-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:applicationContext.xml</param-value>
+  </context-param>
+  <!--设置监听器-->
+  <listener>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
+
+
+
+  <filter-mapping>
+    <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--RESTful过滤器-->
+  <filter>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>HiddenHttpMethodFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+<!--<jsp-config>-->
+  <!--<taglib>-->
+    <!--<taglib-uri>/tags</taglib-uri>-->
+    <!--<taglib-location>/WEB-INF/tld/datetag.tld</taglib-location>-->
+  <!--</taglib>-->
+<!--</jsp-config>-->
+
+  <!--配置spring配置文件-->
+
+  <!--<welcome-file-list>-->
+  <!--<welcome-file>index.jsp</welcome-file>-->
+  <!--</welcome-file-list>-->
+</web-app>

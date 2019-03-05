@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.task5.mapper.UserMapper">
+
+    <resultMap id="user" type="com.jnshu.task5.beans.User">
+        <id column="id" property="id"/>
+        <result column="img" property="img"/>
+        <result column="position" property="position"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="salary" property="salary"/>
+        <result column="crate_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+    </resultMap>
+
+
+    <!--private User addUser(User user);-->
+    <insert id="addUser" parameterType="com.jnshu.task5.beans.User" >
+        INSERT INTO USER VALUES (#{userId},
+        #{userName},#{password},#{userRole},#{createTime},#{createId},#{privileges}
+        )
+    </insert>
+
+    <!--private User updateUser(Integer id, User user);-->
+    <update id="updateUserById" parameterType="com.jnshu.task5.beans.User">
+        UPDATE  USER  SET
+        user_name = #{userName},
+        password = #{password},
+        user_role = #{userRole}
+        WHERE  user_id = #{userId};
+    </update>
+
+    <!--private User selectUser(Integer id);-->
+    <select id="selectUserById" resultMap="user">
+        SELECT * from USER WHERE  id = #{id};
+    </select>
+
+    <select id="selectAllUser" resultMap="user">
+        SELECT  * from USER
+    </select>
+
+    <delete id="delectUserById" parameterType="com.jnshu.task5.beans.User">
+        DELETE FROM USER WHERE user_id = #{userId}
+    </delete>
+
+    <!--List<User> selectUserBySalary();-->
+    <select id="selectUserBySalaryDESC" resultMap="user">
+        select img,position,NAME ,description,create_at
+        from user
+        ORDER  BY salary DESC
+    </select>
+
+
+</mapper>
