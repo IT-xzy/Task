@@ -1,0 +1,180 @@
+body {
+    background: #f0f0f0;
+}
+
+header {
+    @include flex(space-between);
+    @include wiht-rela(100%, 45px, fixed);
+    top: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    background: $clrone;
+
+    padding: {
+        right: 15px;
+        left: 15px;
+    }
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+
+    &>:nth-child(1) {
+        @include wiht(15px, 15px);
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+        transform: rotate(-135deg);
+        background: none;
+    }
+
+    span {
+        font-size: $lft;
+        line-height: 45px;
+        color: $clrtwo;
+    }
+
+    &>:nth-child(3) {
+        position: relative;
+        @include wiht(18px, 22.5px);
+        background: none;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 7.5px;
+            width: 2px;
+            height: 22.5px;
+            background: #fff;
+        }
+
+        &::before {
+            transform: rotate(-45deg);
+        }
+
+        &::after {
+            transform: rotate(45deg);
+        }
+    }
+}
+
+
+.d-none {
+    display: none;
+}
+
+.step {
+    margin: 60px 5px 80px;
+
+    .substep {
+        margin-bottom: 5px;
+        p {
+            text-align: center;
+        }
+
+        &>p {
+            position: relative;
+            margin-bottom: 5px;
+            border: 1px solid #c9c9c9;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 40px;
+            color: $clrone;
+            background: #f7f7f7;
+
+            &::after {
+                margin-top: -3px;
+                @include arrows(10px, $clrone, 135, right, 2.5%);
+            }
+        }
+
+        div {
+            position: relative;
+            padding: 20px 30px 10px 48px;
+            border: 1px solid #c9c9c9;
+            background: #f7f7f7;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: -13px;
+                left: 50%;
+                margin-left: -10px;
+                @include triangle(bottom, 15px, #f7f7f7, left, right, 10px);
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 18px;
+                @include wiht(1px, 100%);
+                background: #c9c9c9;
+            }
+
+            .murder::before {
+                content: '';
+                position: absolute;
+                left: -45px;
+                @include wiht(30px, 30px);
+                border: 1px solid #c9c9c9;
+                border-radius: 50%;
+                background: #f7f7f7 url(../image/vote-sprites.png) no-repeat -4px -4px;
+            }
+
+            .words::before {
+                content: '';
+                position: absolute;
+                left: -45px;
+                @include wiht(30px, 30px);
+                border: 1px solid #c9c9c9;
+                border-radius: 50%;
+                background: #f7f7f7 url(../image/vote-sprites.png) no-repeat -40px -4px;
+            }
+
+            .murder, .words, .speak, .vote {
+                position: relative;
+                margin-bottom: 10px;
+                font-size: 15px;
+                line-height: 35px;
+                color: $clrtwo;
+                background: $clrone;
+
+                i {
+                    position: absolute;
+                    top: 50%;
+                    left: -8px;
+                    margin-top: -5px;
+                    @include triangle(right, 8px, $clrone, top, bottom, 5px)
+                }
+            }
+
+        }
+    }
+
+}
+
+footer {
+    @include wiht-rela(100%, 73px, fixed);
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(41, 189, 224, .48);
+
+    // .judge {
+    //     @include wiht(100%, 43px);
+    //     font-size: 24px;
+    //     color: $clrtwo;
+    //     background: $clrtri;
+    // }
+
+    button {
+        width: 42.34%;
+        height: 40px;
+        margin: 0 3.82%;
+        border-radius: 5px;
+        font-size: initial;
+        color: $clrtwo;
+        background: $clrtri;
+    }
+}

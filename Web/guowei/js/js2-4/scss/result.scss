@@ -1,0 +1,89 @@
+@import "./reset";
+@import "./variate";
+@import "./mixins";
+body {
+    background: $clrone;
+}
+header {
+    @include flex(space-between);
+    @include posi1(fixed, top, 0);
+    @include wiht(100%, 45px);
+    padding: 10px;
+    @include bdb(rgba(255, 255, 255, .35));
+    box-sizing: border-box;
+    background: $clrone;
+    color: $clrtwo;
+    font-size: $lft;
+    z-index: 1;
+
+    &>:first-child {
+        @include wiht(26px, 21px);
+        background: url(../img/css-sprites.png) no-repeat -10px -133px;
+    }
+
+    &>:last-child {
+        @include wiht(20px, 20px);
+        background: url(../img/css-sprites.png) no-repeat -56px -133px;
+    }
+}
+
+main {
+    margin: 45px 0 65px;
+    background: $clrone;
+
+    &>:first-child {
+        padding: 12px 38px;
+        color: $clrtwo;
+        font-size: $mft;
+
+        div {
+            @include posi1(relative, left, 50%);
+            @include wiht(176px, 103px);
+            margin: 0 0 12px -88px;
+            background: url(../image/css-sprites.png) no-repeat -10px -10px;
+        }
+
+        p:not(:last-child) {
+            padding-top: 20px;
+            padding-bottom: 6px;
+        }
+
+        span {
+            display: inline-block;
+            width: 33.33%;
+        }
+
+    }
+
+    &>:nth-child(2) {
+        background: $clrtwo;
+
+        &>div {
+            padding: 0 38px 4px;
+            @include bdb(rgba(83, 83, 83, .2));
+
+            &>p{
+                padding-bottom: 8px;
+                color: #bebebe;
+                font-size: $mft;
+            }
+        }
+    }
+}
+
+footer {
+    @include flex(center);
+    @include posi1(fixed, bottom, 0);
+    @include wiht(100%, 65px);
+    background: $clrone;
+
+    button {
+        flex: 0 0 50%;
+        height: 43px;
+        margin: 0 12.5px;
+        border-radius: 5px;
+        background: #fbb435;
+    }
+
+
+}
