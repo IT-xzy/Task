@@ -1,0 +1,153 @@
+@import "./reset";
+@import "./variate";
+@import "./mixins";
+
+body {
+    background: $clrone;
+}
+
+header {
+    @include wiht-rela(100%, 45px, fixed);
+    top: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    text-align: center;
+    background: $clrone;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+
+    span {
+        font-size: $lft;
+        line-height: 45px;
+        color: $clrtwo;
+    }
+
+    &>:nth-child(2) {
+        position: absolute;
+        top: 50%;
+        right: 15px;
+        transform: translateY(-50%);
+        @include wiht(18px, 22.5px);
+        background: none;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 7.5px;
+            width: 2px;
+            height: 22.5px;
+            background: #fff;
+        }
+
+        &::before {
+            transform: rotate(-45deg);
+        }
+
+        &::after {
+            transform: rotate(45deg);
+        }
+    }
+}
+
+main {
+    margin: 140px 0 73px;
+
+    .clue {
+        @include posi1(fixed, top, 45px);
+        width: 100%;
+        padding-top: 5px;
+        background: $clrone;
+        z-index: 1;
+
+        p {
+            padding-left: 23px;
+        }
+
+
+        #clue1 {
+            position: relative;
+            height: 40px;
+            font-size: $mft;
+            line-height: 40px;
+            background: $rgbaff;
+
+            &::before {
+                content: '';
+                @include posi1(absolute, top, 100%);
+                left: 35px;
+                @include triangle(top, 6.5px, $rgbaff, right, left, 4px);
+            }
+        }
+
+        #clue2 {
+            color: $clrtwo;
+            font-size: $sft;
+            line-height: 36px;
+        }
+    }
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        
+        li {
+            position: relative;
+            width: 20%;
+            border: .5vw solid $clrtwo;
+            margin: 0 6.1% 8% 6.1%;
+            text-align: center;
+            background: $clrtri;
+
+            i {
+                display: none;
+                position: absolute;
+                left: 50%;
+                bottom: -6.5vw;
+                transform: translateX(-50%);
+                width: 4.69vw;
+                height: 4.69vw;
+                background-image: url(../image/css-sprites.png);
+                background-size: 1540% 1093.33%;
+                background-position: 76.852% 89.262%;
+            }
+
+            strong {
+                line-height: 14.5vw;
+            }
+
+            span {
+                display: block;
+                font-size: $sft;
+                line-height: 4.5vw;
+                color: $clrtwo;
+                background: rgba(26, 153, 183, 0.52);
+            }
+        }
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+
+footer {
+    @include wiht-rela(100%, 73px, fixed);
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(41, 189, 224, .48);
+
+    button {
+        width: 90%;
+        height: 40px;
+        margin: 0 5%;
+        border-radius: 5px;
+        font-size: 16px;
+        color: $clrtwo;
+        background: $clrtri;
+    }
+}

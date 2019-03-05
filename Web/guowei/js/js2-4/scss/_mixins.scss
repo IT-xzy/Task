@@ -1,0 +1,74 @@
+// 单个方向定位
+@mixin posi1($type, $trbl, $px) {
+    position: $type;
+    #{$trbl}: $px;
+}
+
+//宽高
+@mixin wiht($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+//宽高、相对定位
+@mixin wiht-rela($width, $height, $posi: relative) {
+    position: $posi;
+    @include wiht($width, $height);
+}
+//背景色、字体色
+@mixin bg-clr($bg, $clr) {
+    background: $bg;
+    color: $clr;
+}
+
+// 背景色、字体颜色、字体大小
+@mixin bg-clr-ft($bg, $clr, $ft) {
+    @include bg-clr($bg, $clr);
+    font-size: $ft;
+}
+
+//背景色、字体颜色、字体大小、行高
+@mixin bg-clr-ft-lht($bg, $clr, $ft, $lht) {
+    @include bg-clr-ft($bg, $clr, $ft);
+    line-height: $lht;
+}
+//箭头指示符
+@mixin arrows1($wiht: 8px, $color: $clrone, $rotate: 45, $lr:right, $distance: 2.5%) {
+    position: absolute;
+    top: 50%;
+    #{$lr}: $distance;
+    @include wiht($wiht, $wiht);
+
+    border: {
+        top: 2px solid $color;
+        right: 2px solid $color;
+    }
+
+    transform: translateY(-50%) rotate(#{$rotate}deg);
+}
+//伪元素箭头指示符
+@mixin arrows($wiht: 8px, $color: $clrone, $rotate: 45, $lr:right, $distance: 2.5%) {
+    content: '';
+  @include arrows1($wiht, $color, $rotate, $lr, $distance);
+}
+
+//三角指示符
+@mixin triangle($left, $px1, $col, $top, $bottom, $px) {
+    border: {
+        #{$left}: $px1 solid $col;
+        #{$top}: $px solid transparent;
+        #{$bottom}: $px solid transparent;
+    }
+}
+
+//flex垂直居中
+@mixin flex($center: center) {
+    display: flex;
+    justify-content: $center;
+    align-items: center;
+}
+
+// 下边框
+@mixin bdb($clr) {
+    border-bottom: 1px solid $clr;
+}

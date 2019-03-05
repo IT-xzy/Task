@@ -1,0 +1,162 @@
+body {
+    background: #f0f0f0;
+}
+
+header {
+    @include wiht-rela(100%, 45px, fixed);
+    top: 0;
+    z-index: 1;
+    background: $clrone;
+
+    button {
+        @include arrows1(15px, $clrtwo, -135, left, 20px);
+        background: none;
+    }
+}
+
+@media screen and (max-width: 426px) {
+    p {
+        font-size: 12px;
+    }
+}
+
+main {
+    padding: 45px 15px 0;
+
+
+    h2 {
+        margin: {
+            top: 10px;
+            bottom: 10px;
+        }
+
+        border-radius: 5px;
+        line-height: 50px;
+        text-align: center;
+        background: $clrtwo;
+        box-shadow: 1px 3px #d9d9d9;
+    }
+
+    .ratio {
+        display: flex;
+        height: 200px;
+        margin-bottom: 10px;
+        background: #fbfbfb;
+
+        p {
+            display: flex;
+            align-items: center;
+            @include wiht(50%, 44px);
+            padding: 15px 0 15px 20px;
+            line-height: 74px;
+        }
+
+        @media screen and (max-width: 426px) {
+            p {
+                font-size: 12px;
+            }
+        }
+
+        .icon-killer {
+            display: inline-block;
+            @include wiht(43px, 44px);
+            background: url(../image/sprites.png) no-repeat -10px -181px;
+        }
+
+        .icon-civilian {
+            display: inline-block;
+            @include wiht(43px, 44px);
+            background: url(../image/sprites.png) no-repeat -73px -181px;
+        }
+    }
+
+    .slider {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        height: 45px;
+        padding: 5px 15px;
+        margin-bottom: 5px;
+        background: $clrtwo;
+
+        .menus {
+            @include wiht(12px, 2px);
+            padding: 9px 4px;
+            border: 1px solid $clrtri;
+            background: content-box $clrtri;
+        }
+
+        .add {
+            @include wiht(12px, 2px);
+            padding: 9px 4px;
+            border: 1px solid $clrtri;
+            background: content-box $clrtri;
+
+            &::before {
+                content: '';
+                display: block;
+                @include wiht(12px, 2px);
+                background: $clrtri;
+                transform: rotate(90deg);
+            }
+        }
+
+        input[type=range] {
+            appearance: none;
+            @include wiht(75%, 3px);
+            outline: none;
+
+            &::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                margin-top: -7.5px;
+                @include wiht(30px, 18px);
+                background: url(../image/wire.png) no-repeat;
+            }
+
+            &::-webkit-slider-runnable-track {
+                height: 3px;
+            }
+        }
+    }
+
+    .hint-box {
+        @include flex();
+        height: 65px;
+        margin-bottom: 10px;
+        background: $clrtwo;
+
+        input[type=text] {
+            width: 26px;
+            border: none;
+            outline: none;
+            text-align: center;
+            background: #eae6e6;
+
+            &:focus {
+                margin: -1px;
+                border: 1px solid $clrtri;
+            }
+        }
+
+        span {
+            font-size: $sft;
+            color: $clrtri;
+        }
+    }
+}
+
+footer {
+    padding: {
+        right: 15px;
+        left: 15px;
+    }
+
+    button {
+        display: block;
+        @include wiht(100%, 40px);
+        font-size: $lft;
+        font-weight: 600;
+        color: $clrtwo;
+        background: $clrtri;
+    }
+}
