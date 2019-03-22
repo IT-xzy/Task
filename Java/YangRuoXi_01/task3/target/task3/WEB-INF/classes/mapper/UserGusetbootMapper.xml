@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.clroom.mapper.UserGusetbootMapper">
+  <resultMap id="BaseResultMap" type="com.jnshu.clroom.UserGusetboot">
+    <constructor>
+      <idArg column="Id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="guestbook" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="painting" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="banner" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="studio" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="track" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, guestbook, painting, banner, studio, track
+  </sql>
+  <select id="selectByExample" parameterType="com.jnshu.clroom.UserGusetbootExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_gusetbook
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jnshu.clroom.UserGusetbootExample">
+    delete from user_gusetbook
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.clroom.UserGusetboot">
+    insert into user_gusetbook (Id, guestbook, painting, 
+      banner, studio, track
+      )
+    values (#{id,jdbcType=INTEGER}, #{guestbook,jdbcType=VARCHAR}, #{painting,jdbcType=VARCHAR}, 
+      #{banner,jdbcType=VARCHAR}, #{studio,jdbcType=VARCHAR}, #{track,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.clroom.UserGusetboot">
+    insert into user_gusetbook
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="guestbook != null">
+        guestbook,
+      </if>
+      <if test="painting != null">
+        painting,
+      </if>
+      <if test="banner != null">
+        banner,
+      </if>
+      <if test="studio != null">
+        studio,
+      </if>
+      <if test="track != null">
+        track,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guestbook != null">
+        #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null">
+        #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null">
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null">
+        #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null">
+        #{track,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jnshu.clroom.UserGusetbootExample" resultType="java.lang.Integer">
+    select count(*) from user_gusetbook
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_gusetbook
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.guestbook != null">
+        guestbook = #{record.guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.painting != null">
+        painting = #{record.painting,jdbcType=VARCHAR},
+      </if>
+      <if test="record.banner != null">
+        banner = #{record.banner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studio != null">
+        studio = #{record.studio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.track != null">
+        track = #{record.track,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_gusetbook
+    set Id = #{record.id,jdbcType=INTEGER},
+      guestbook = #{record.guestbook,jdbcType=VARCHAR},
+      painting = #{record.painting,jdbcType=VARCHAR},
+      banner = #{record.banner,jdbcType=VARCHAR},
+      studio = #{record.studio,jdbcType=VARCHAR},
+      track = #{record.track,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.clroom.UserGusetboot">
+    update user_gusetbook
+    <set>
+      <if test="guestbook != null">
+        guestbook = #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null">
+        painting = #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null">
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null">
+        studio = #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null">
+        track = #{track,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.clroom.UserGusetboot">
+    update user_gusetbook
+    set guestbook = #{guestbook,jdbcType=VARCHAR},
+      painting = #{painting,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=VARCHAR},
+      studio = #{studio,jdbcType=VARCHAR},
+      track = #{track,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jnshu.clroom.UserGusetboot">
+    <constructor>
+      <idArg column="Id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="guestbook" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="painting" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="banner" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="studio" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="track" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    Id, guestbook, painting, banner, studio, track
+  </sql>
+  <select id="selectByExample" parameterType="com.jnshu.clroom.UserGusetbootExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_gusetbook
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jnshu.clroom.UserGusetbootExample">
+    delete from user_gusetbook
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.clroom.UserGusetboot">
+    insert into user_gusetbook (Id, guestbook, painting, 
+      banner, studio, track
+      )
+    values (#{id,jdbcType=INTEGER}, #{guestbook,jdbcType=VARCHAR}, #{painting,jdbcType=VARCHAR}, 
+      #{banner,jdbcType=VARCHAR}, #{studio,jdbcType=VARCHAR}, #{track,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.clroom.UserGusetboot">
+    insert into user_gusetbook
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="guestbook != null">
+        guestbook,
+      </if>
+      <if test="painting != null">
+        painting,
+      </if>
+      <if test="banner != null">
+        banner,
+      </if>
+      <if test="studio != null">
+        studio,
+      </if>
+      <if test="track != null">
+        track,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guestbook != null">
+        #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null">
+        #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null">
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null">
+        #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null">
+        #{track,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jnshu.clroom.UserGusetbootExample" resultType="java.lang.Integer">
+    select count(*) from user_gusetbook
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user_gusetbook
+    <set>
+      <if test="record.id != null">
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.guestbook != null">
+        guestbook = #{record.guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.painting != null">
+        painting = #{record.painting,jdbcType=VARCHAR},
+      </if>
+      <if test="record.banner != null">
+        banner = #{record.banner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studio != null">
+        studio = #{record.studio,jdbcType=VARCHAR},
+      </if>
+      <if test="record.track != null">
+        track = #{record.track,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user_gusetbook
+    set Id = #{record.id,jdbcType=INTEGER},
+      guestbook = #{record.guestbook,jdbcType=VARCHAR},
+      painting = #{record.painting,jdbcType=VARCHAR},
+      banner = #{record.banner,jdbcType=VARCHAR},
+      studio = #{record.studio,jdbcType=VARCHAR},
+      track = #{record.track,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.clroom.UserGusetboot">
+    update user_gusetbook
+    <set>
+      <if test="guestbook != null">
+        guestbook = #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null">
+        painting = #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null">
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null">
+        studio = #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null">
+        track = #{track,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.clroom.UserGusetboot">
+    update user_gusetbook
+    set guestbook = #{guestbook,jdbcType=VARCHAR},
+      painting = #{painting,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=VARCHAR},
+      studio = #{studio,jdbcType=VARCHAR},
+      track = #{track,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.jnshu.clroom.beans.UserGusetboot">
+    <constructor>
+      <idArg column="Id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="guestbook" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="painting" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="banner" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="studio" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="track" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, guestbook, painting, banner, studio, track
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_gusetbook
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.clroom.beans.UserGusetboot">
+    insert into user_gusetbook (Id, guestbook, painting, 
+      banner, studio, track
+      )
+    values (#{id,jdbcType=INTEGER}, #{guestbook,jdbcType=VARCHAR}, #{painting,jdbcType=VARCHAR}, 
+      #{banner,jdbcType=VARCHAR}, #{studio,jdbcType=VARCHAR}, #{track,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.clroom.beans.UserGusetboot">
+    insert into user_gusetbook
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="guestbook != null">
+        guestbook,
+      </if>
+      <if test="painting != null">
+        painting,
+      </if>
+      <if test="banner != null">
+        banner,
+      </if>
+      <if test="studio != null">
+        studio,
+      </if>
+      <if test="track != null">
+        track,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="guestbook != null">
+        #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null">
+        #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null">
+        #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null">
+        #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null">
+        #{track,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.clroom.beans.UserGusetboot">
+    update user_gusetbook
+    <set>
+      <if test="guestbook != null">
+        guestbook = #{guestbook,jdbcType=VARCHAR},
+      </if>
+      <if test="painting != null">
+        painting = #{painting,jdbcType=VARCHAR},
+      </if>
+      <if test="banner != null">
+        banner = #{banner,jdbcType=VARCHAR},
+      </if>
+      <if test="studio != null">
+        studio = #{studio,jdbcType=VARCHAR},
+      </if>
+      <if test="track != null">
+        track = #{track,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.clroom.beans.UserGusetboot">
+    update user_gusetbook
+    set guestbook = #{guestbook,jdbcType=VARCHAR},
+      painting = #{painting,jdbcType=VARCHAR},
+      banner = #{banner,jdbcType=VARCHAR},
+      studio = #{studio,jdbcType=VARCHAR},
+      track = #{track,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

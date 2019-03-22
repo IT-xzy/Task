@@ -1,0 +1,139 @@
+@import "./reset";
+@import "./variate";
+@import "./mixins";
+
+body {
+    background: #f0f0f0;
+    overflow: hidden;
+}
+
+//菜单栏
+.nav {
+    float: left;
+    @include wiht(70%, 100vh);
+    background: $clrtwo;
+    color: $clrone;
+    
+    li {
+        position: relative;
+        border-bottom: 1px solid $bdclr;
+        line-height: 44px;
+
+        i {
+            width: 20px;
+            margin: 0 15px;
+            border: 1px solid $clrone;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 14px;
+
+            &::after {
+                @include arrows();
+            }
+        }
+    }
+}
+
+.display {
+    display: none;
+}
+
+
+button {
+    border: none;
+    outline: none;
+    letter-spacing: 2px;
+}
+
+.container {
+    float: left;
+    width: 100%;
+    margin-right: -70%;
+
+    .header {
+        position: fixed;
+        @include wiht(100%, 45px);
+        background: $clrone;
+
+        .menu {
+            display: inline-block;
+            @include wiht(17px, 14px);
+            padding: 4px 0;
+            margin: 15.5px;
+
+            border: {
+                top: 2px solid $clrtwo;
+                bottom: 2px solid $clrtwo;
+            }
+
+            background: $clrtwo content-box;
+        }
+    }
+
+    .list {
+        padding: 58.5px 5.6% 0 5.6%;
+        letter-spacing: 2px;
+
+        .d-none::after {
+            display: none;
+        }
+
+        .lasttime {
+            position: relative;
+            width: 100%;
+            @include bg-clr-ft-lht($clrtwo, #9a9a9a, $lft, 56px);
+            border: 1px solid $bdclr;
+
+            &::after {
+                @include arrows(15px, #e7e7e7);
+            }
+        }
+
+        .listbot {
+            margin-top: 15px;
+            border: 1px solid $bdclr;
+            background: $clrtwo;
+            text-align: center;
+        }
+
+        .name {
+            margin-bottom: 15px;
+            border-bottom: 1px solid $clrtri;
+            color: $clrtri;
+            font-size: $lft;
+            line-height: 45px;
+        }
+
+        .edition {
+            width: 81%;
+            @include bg-clr-ft($clrone, $clrtwo, 16px);
+            line-height: 65px;
+        }
+
+        .count {
+            color: $clrfour;
+            font-size: $sft;
+            line-height: 39px;
+        }
+
+        .dot {
+            margin-top: -12px;
+
+            li {
+                display: inline-block;
+                @include wiht(9px, 9px);
+                margin: 0 3px;
+                border-radius: 50%;
+
+                &:not(:first-child) {
+                    background: #f0f0f0;
+                }
+
+                &:first-child {
+                    background: $clrone;
+                }
+            }
+        }
+    }
+}

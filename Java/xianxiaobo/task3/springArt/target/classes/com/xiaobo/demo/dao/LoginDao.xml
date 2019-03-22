@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 定义操作user表的sql映射文件userMapper.xml  -->
+<mapper namespace="com.xiaobo.demo.dao.LoginDao">
+    <select id="getAll" resultType="Login">
+        select * from user
+    </select>
+    <select id="getIdByUsername" resultType="Login">
+        select id,username from user where username = #{username};
+    </select>
+    <select id="checkUsernameExist" parameterType="String" resultType="Integer">
+        select 1 from user where username = #{username} limit 1
+    </select>
+    <insert id="postUser" parameterType="Login" useGeneratedKeys="true" keyProperty="id">
+        insert into user (username,password) values (#{username},#{password})
+    </insert>
+    <select id="getPasswordByUsername" resultType="String">
+        select password from user where username = #{username} limit 1
+    </select>
+</mapper>

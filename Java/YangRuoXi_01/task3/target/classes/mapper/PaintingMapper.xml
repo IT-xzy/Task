@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.clroom.mapper.PaintingMapper" >
+  <resultMap id="BaseResultMap" type="com.jnshu.clroom.beans.Painting" >
+    <constructor >
+      <idArg column="painting_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="painting_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="painting_status" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="create_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="update_time" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="editer_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="paintings_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="painting_introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="painting_picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="video_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="painting_detail_picture" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="introduction_article" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    painting_id, painting_name, painting_status, create_time, update_time, editer_id, 
+    paintings_id, painting_introduction, painting_picture, video_url, painting_detail_picture, 
+    introduction_article
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from painting
+    where painting_id = #{paintingId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from painting
+    where painting_id = #{paintingId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.clroom.beans.Painting" >
+    insert into painting (painting_id, painting_name, painting_status, 
+      create_time, update_time, editer_id, 
+      paintings_id, painting_introduction, painting_picture, 
+      video_url, painting_detail_picture, introduction_article
+      )
+    values (#{paintingId,jdbcType=BIGINT}, #{paintingName,jdbcType=VARCHAR}, #{paintingStatus,jdbcType=BIT}, 
+      #{createTime,jdbcType=BIGINT}, #{updateTime,jdbcType=BIGINT}, #{editerId,jdbcType=BIGINT}, 
+      #{paintingsId,jdbcType=BIGINT}, #{paintingIntroduction,jdbcType=VARCHAR}, #{paintingPicture,jdbcType=VARCHAR}, 
+      #{videoUrl,jdbcType=VARCHAR}, #{paintingDetailPicture,jdbcType=VARCHAR}, #{introductionArticle,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jnshu.clroom.beans.Painting" >
+    insert into painting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="paintingId != null" >
+        painting_id,
+      </if>
+      <if test="paintingName != null" >
+        painting_name,
+      </if>
+      <if test="paintingStatus != null" >
+        painting_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="editerId != null" >
+        editer_id,
+      </if>
+      <if test="paintingsId != null" >
+        paintings_id,
+      </if>
+      <if test="paintingIntroduction != null" >
+        painting_introduction,
+      </if>
+      <if test="paintingPicture != null" >
+        painting_picture,
+      </if>
+      <if test="videoUrl != null" >
+        video_url,
+      </if>
+      <if test="paintingDetailPicture != null" >
+        painting_detail_picture,
+      </if>
+      <if test="introductionArticle != null" >
+        introduction_article,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="paintingId != null" >
+        #{paintingId,jdbcType=BIGINT},
+      </if>
+      <if test="paintingName != null" >
+        #{paintingName,jdbcType=VARCHAR},
+      </if>
+      <if test="paintingStatus != null" >
+        #{paintingStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="editerId != null" >
+        #{editerId,jdbcType=BIGINT},
+      </if>
+      <if test="paintingsId != null" >
+        #{paintingsId,jdbcType=BIGINT},
+      </if>
+      <if test="paintingIntroduction != null" >
+        #{paintingIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="paintingPicture != null" >
+        #{paintingPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paintingDetailPicture != null" >
+        #{paintingDetailPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="introductionArticle != null" >
+        #{introductionArticle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.clroom.beans.Painting" >
+    update painting
+    <set >
+      <if test="paintingName != null" >
+        painting_name = #{paintingName,jdbcType=VARCHAR},
+      </if>
+      <if test="paintingStatus != null" >
+        painting_status = #{paintingStatus,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="editerId != null" >
+        editer_id = #{editerId,jdbcType=BIGINT},
+      </if>
+      <if test="paintingsId != null" >
+        paintings_id = #{paintingsId,jdbcType=BIGINT},
+      </if>
+      <if test="paintingIntroduction != null" >
+        painting_introduction = #{paintingIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="paintingPicture != null" >
+        painting_picture = #{paintingPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="videoUrl != null" >
+        video_url = #{videoUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="paintingDetailPicture != null" >
+        painting_detail_picture = #{paintingDetailPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="introductionArticle != null" >
+        introduction_article = #{introductionArticle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where painting_id = #{paintingId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.clroom.beans.Painting" >
+    update painting
+    set painting_name = #{paintingName,jdbcType=VARCHAR},
+      painting_status = #{paintingStatus,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      editer_id = #{editerId,jdbcType=BIGINT},
+      paintings_id = #{paintingsId,jdbcType=BIGINT},
+      painting_introduction = #{paintingIntroduction,jdbcType=VARCHAR},
+      painting_picture = #{paintingPicture,jdbcType=VARCHAR},
+      video_url = #{videoUrl,jdbcType=VARCHAR},
+      painting_detail_picture = #{paintingDetailPicture,jdbcType=VARCHAR},
+      introduction_article = #{introductionArticle,jdbcType=VARCHAR}
+    where painting_id = #{paintingId,jdbcType=BIGINT}
+  </update>
+</mapper>

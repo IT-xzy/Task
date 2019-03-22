@@ -1,0 +1,60 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <!--开启组件扫描,确定扫描的包-->
+    <context:component-scan base-package="com.jnshu"/>
+
+
+
+    <!--c3p0连接池-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://118.89.236.193:3306/jnshu?rewriteBatchedStatements=true"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="root"></property>
+        <!--&lt;!&ndash;当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default:3 &ndash;&gt;  -->
+        <property name="acquireIncrement" value="5"/>
+        <!--        &lt;!&ndash;初始化的连接数，取值应在minPoolSize与maxPoolSize之间。Default: 3&ndash;&gt;  -->
+        <property name="initialPoolSize" value="10"/>
+        <!--        &lt;!&ndash;连接池中保留的最小连接数&ndash;&gt;  -->
+        <property name="minPoolSize" value="5"/>
+        <!--        &lt;!&ndash;连接池中保留的最大连接数。Default:15 &ndash;&gt;  -->
+        <property name="maxPoolSize" value="20"/>
+        <!--        &lt;!&ndash;定义在从数据库获取新连接失败后重复尝试的次数。Default: 30 &ndash;&gt;  -->
+        <property name="acquireRetryAttempts" value="30"/>
+        <!--        &lt;!&ndash;两次连接中间隔时间，单位毫秒。Default: 1000 &ndash;&gt;  -->
+        <property name="acquireRetryDelay" value="1000"/>
+    </bean>
+    
+    <!--使用spring来管理mybatis中的SQLsessionfactury-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--找到mybatis中的配置文件-->
+        <property name="configLocation" value="mybatis-config.xml"/>
+        <!--核心配置文件-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--映射文件-->
+        <property name="mapperLocations" value="classpath:mapper/StudentMapper.xml"/>
+    </bean>
+    <bean   id="studentMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!--配置上述的sqlsessionfactory-->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+        <!--找到项目中的usermapper接口-->
+        <property name="mapperInterface" value="com.jnshu.mapper.StudentMapper"/>
+        <!--<property name="basePackage" value="com.jnshu.dao"/>-->
+    </bean>
+
+
+
+</beans>

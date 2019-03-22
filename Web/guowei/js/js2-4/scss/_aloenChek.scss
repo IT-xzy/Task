@@ -1,0 +1,139 @@
+body {
+    background: $clrone;
+}
+
+header {
+    @include flex(space-between);
+    @include wiht-rela(100%, 45px, fixed);
+    top: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    background: $clrone;
+
+    padding: {
+        right: 15px;
+        left: 15px;
+    }
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+
+    &>:nth-child(1) {
+        @include wiht(15px, 15px);
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+        transform: rotate(-135deg);
+        background: none;
+    }
+
+    span {
+        font-size: $lft;
+        line-height: 45px;
+        color: $clrtwo;
+    }
+
+    &>:nth-child(3) {
+        position: relative;
+        @include wiht(18px, 22.5px);
+        background: none;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 7.5px;
+            width: 2px;
+            height: 22.5px;
+            background: #fff;
+        }
+
+        &::before {
+            transform: rotate(-45deg);
+        }
+
+        &::after {
+            transform: rotate(45deg);
+        }
+    }
+}
+
+main {
+    height: 328px;
+    border: 3px solid $clrtwo;
+    margin: 87px 13.75%;
+    background: #ffedc5;
+
+    .on {
+        @include wiht(34px, 34px);
+        margin: -18px auto 0 auto;
+        border: 2px solid #ffedc5;
+        border-radius: 50%;
+        font-size: 20px;
+        text-align: center;
+        line-height: 34px;
+        color: #f56b81;
+        background: $clrtwo;
+    }
+
+    .draw {
+        @include wiht(151px, 151px);
+        margin: 71px auto 81px;
+        border-radius: 50%;
+        background: url(../image/sprites.png) no-repeat -10px -10px;
+    }
+
+    .status {
+        @include wiht(111px, 111px);
+        margin: 16px auto;
+        background: url(../image/sprites.png) no-repeat -181px -10px;
+    }
+
+    .name {
+        text-align: center;
+        color: $clrone;
+    }
+
+    .d-none {
+        display: none;
+    }
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 73px 0;
+
+    li {
+        width: 20%;
+        border: .5vw solid $clrtwo;
+        margin: 0 6.1% 8% 6.1%;
+        text-align: center;
+        background: $clrtri;
+
+        strong {
+            line-height: 14.5vw;
+        }
+
+        span {
+            display: block;
+            font-size: $sft;
+            line-height: 4.5vw;
+            color: $clrtwo;
+            background: rgba(26, 153, 183, 0.52);
+        }
+    }
+}
+
+footer {
+    @include wiht-rela(78%, 43px, fixed);
+    bottom: 0;
+    padding: 0 11% 30px;
+    background: $clrone;
+
+    button {
+        @include wiht(100%, 43px);
+        font-size: 24px;
+        color: $clrtwo;
+        background: $clrtri;
+    }
+}

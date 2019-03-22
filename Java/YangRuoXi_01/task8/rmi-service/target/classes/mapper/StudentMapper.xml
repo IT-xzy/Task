@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.rmi.mapper.StudentMapper">
+
+    <resultMap id="Student" type="com.jnshu.rmi.beans.Student">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="pwd" property="pwd"/>
+        <result property="phone" column="phone"/>
+        <result column="crate_at" property="createAt"/>
+    </resultMap>
+
+
+
+    <insert id="insertStudent" parameterType="com.jnshu.rmi.beans.Student" >
+        INSERT INTO student VALUES (#{userName},#{pwd},#{phone},#{createAt})
+    </insert>
+    <!--List<Student> selectAllStudent();-->
+    <select id="selectAllStudent"  resultType="com.jnshu.rmi.beans.Student">
+        select * FROM student
+    </select>
+
+    <!--Student selectStudentById(Long id);-->
+    <select id="selectStudentById"  resultType="Student">
+        select * from student where id = #{id}
+    </select>
+
+
+</mapper>
