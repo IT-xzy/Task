@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.WorkMapper">
+  <resultMap id="BaseResultMap" type="com.jnshu.pojo.Work">
+      <id column="id" property="id" jdbcType="BIGINT" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+      <result column="status" property="status" jdbcType="INTEGER" />
+      <result column="first_id" property="firstId" jdbcType="BIGINT" />
+      <result column="second_id" property="secondId" jdbcType="BIGINT" />
+      <result column="thumbnail" property="thumbnail" jdbcType="VARCHAR" />
+      <result column="url" property="url" jdbcType="VARCHAR" />
+      <result column="content" property="content" jdbcType="VARCHAR" />
+      <result column="picture" property="picture" jdbcType="VARCHAR" />
+      <result column="create_at" property="createAt" jdbcType="BIGINT" />
+      <result column="update_at" property="updateAt" jdbcType="BIGINT" />
+      <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+      <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, introduction, status, first_id, second_id, thumbnail, url, content, picture, 
+    create_at, create_by, update_at, update_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from work
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from work
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.pojo.Work">
+    insert into work (id, name, introduction, 
+      status, first_id, second_id, 
+      thumbnail, url, content, 
+      picture, create_at, create_by, 
+      update_at, update_by)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{firstId,jdbcType=BIGINT}, #{secondId,jdbcType=BIGINT},
+      #{thumbnail,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{picture,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{createBy,jdbcType=VARCHAR},
+      #{updateAt,jdbcType=BIGINT}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.pojo.Work">
+    update work
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="firstId != null">
+        first_id = #{firstId,jdbcType=BIGINT},
+      </if>
+      <if test="secondId != null">
+        second_id = #{secondId,jdbcType=BIGINT},
+      </if>
+      <if test="thumbnail != null">
+        thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.pojo.Work">
+    update work
+    set name = #{name,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      first_id = #{firstId,jdbcType=BIGINT},
+      second_id = #{secondId,jdbcType=BIGINT},
+      thumbnail = #{thumbnail,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByDynamic" resultMap="BaseResultMap">
+    select * from work
+    <where>
+      <if test="name != null" >
+        name like CONCAT('%','${name}','%')
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+</mapper>

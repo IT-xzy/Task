@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jnshu.dao.ReplyMapper">
+  <resultMap id="BaseResultMap" type="com.jnshu.pojo.Reply">
+      <id column="id" property="id" jdbcType="BIGINT" />
+      <result column="reply_name" property="replyName" jdbcType="VARCHAR" />
+      <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+      <result column="create_at" property="createAt" jdbcType="BIGINT" />
+      <result column="update_at" property="updateAt" jdbcType="BIGINT" />
+      <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+      <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, reply_name, reply_content, create_at, update_at, update_by, create_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from reply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from reply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.jnshu.pojo.Reply">
+    insert into reply (id, reply_name, reply_content, 
+      create_at, update_at, update_by, 
+      create_by)
+    values (#{id,jdbcType=BIGINT}, #{replyName,jdbcType=VARCHAR}, #{replyContent,jdbcType=VARCHAR},
+      #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, #{updateBy,jdbcType=VARCHAR},
+      #{createBy,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.jnshu.pojo.Reply">
+    update reply
+    <set>
+      <if test="reply_name != null">
+        reply_name = #{reply_name,jdbcType=VARCHAR},
+      </if>
+      <if test="reply_content != null">
+        reply_content = #{reply_content,jdbcType=VARCHAR},
+      </if>
+      <if test="create_at != null">
+        create_at = #{create_at,jdbcType=BIGINT},
+      </if>
+      <if test="update_at != null">
+        update_at = #{update_at,jdbcType=BIGINT},
+      </if>
+      <if test="update_by != null">
+        update_by = #{update_by,jdbcType=VARCHAR},
+      </if>
+      <if test="create_by != null">
+        create_by = #{create_by,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jnshu.pojo.Reply">
+    update reply
+    set reply_name = #{replyName,jdbcType=VARCHAR},
+      reply_content = #{replyContent,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByDynamic" resultMap="BaseResultMap" >
+    select * from reply
+    <where>
+      <if test="id != null" >
+        id = #{id,jdbcType=BIGINT}
+      </if>
+      <if test="replyName != null" >
+        and reply_name like CONCAT('%','${name}','%')
+      </if>
+    </where>
+  </select>
+</mapper>
