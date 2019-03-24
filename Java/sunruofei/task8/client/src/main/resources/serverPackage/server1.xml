@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+    <!-- 客户端2号 -->
+    <bean id="mail1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.ptteng.service.MailService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8887/mail"></property>
+    </bean>
+
+    <bean id="user1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.ptteng.service.UserService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8887/user"></property>
+    </bean>
+
+    <bean id="company1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.ptteng.service.CompanyService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8887/company"></property>
+    </bean>
+
+    <bean id="direction1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.ptteng.service.DirectionService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8887/direction"></property>
+    </bean>
+
+    <bean id="note1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.ptteng.service.NoteService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8887/note"></property>
+    </bean>
+
+    <bean id="student1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.ptteng.service.StudentService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8887/student"></property>
+    </bean>
+    <bean id="profession1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.ptteng.service.ProfessionService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8887/profession"></property>
+    </bean>
+
+</beans>
