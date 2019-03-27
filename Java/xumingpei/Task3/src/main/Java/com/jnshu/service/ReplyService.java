@@ -10,17 +10,19 @@ import java.util.List;
  * @date 2019/3/19 - 9:31
  */
 public interface ReplyService {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long replyId);
 
     int insert(Reply record);
 
     int insertSelective(Reply record);
 
-    Reply selectByPrimaryKey(Long id);
+    Reply selectByPrimaryKey(Long replyId);
 
     int updateByPrimaryKeySelective(Reply record);
 
     int updateByPrimaryKey(Reply record);
 
-    List<Reply> selectByDynamic(@Param("id")Long id, @Param("replyName")String replyName);
+    List<Reply> selectByDynamic(@Param("replyId")Long replyId, @Param("replyName")String replyName);
+
+    Reply selectmsgId(Long msgId);
 }

@@ -10,17 +10,19 @@ import java.util.List;
  * @date 2019/3/19 - 9:35
  */
 public interface WorkService {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Long workId);
 
     int insert(Work record);
 
     int insertSelective(Work record);
 
-    Work selectByPrimaryKey(Long id);
+    Work selectByPrimaryKey(Long workId);
 
     int updateByPrimaryKeySelective(Work record);
 
     int updateByPrimaryKey(Work record);
 
-    List<Work> selectByDynamic(@Param("name")String name, @Param("status")Integer status);
+    List<Work> selectByDynamic(@Param("name")String name, @Param("introduction")String introduction);
+
+    List<Work> selectsecondId(Long secondId);
 }

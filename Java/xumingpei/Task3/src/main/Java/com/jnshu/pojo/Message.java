@@ -1,7 +1,7 @@
 package com.jnshu.pojo;
 
 public class Message {
-    private Long id;
+    private Long msgId;
 
     private String name;
 
@@ -17,14 +17,23 @@ public class Message {
 
     private String createBy;
 
-    private String title;
+    private Long workId;
 
-    public Long getId() {
-        return id;
+
+    public Long getMsgId() {
+        return msgId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setMsgId(long msgId) {
+        this.msgId = msgId;
+    }
+
+    public Long getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(long workId) {
+        this.workId = workId;
     }
 
     public String getName() {
@@ -83,18 +92,11 @@ public class Message {
         this.createBy = createBy;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @Override
     public String toString() {
         return "Message{" +
-                "id=" + id +
+                "msgId=" + msgId +
                 ", name='" + name + '\'' +
                 ", content='" + content + '\'' +
                 ", status=" + status +
@@ -102,7 +104,7 @@ public class Message {
                 ", updateAt=" + updateAt +
                 ", updateBy='" + updateBy + '\'' +
                 ", createBy='" + createBy + '\'' +
-                ", title='" + title + '\'' +
+                ", workId='" + workId + '\'' +
                 '}';
     }
 }

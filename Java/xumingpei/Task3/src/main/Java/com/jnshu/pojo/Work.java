@@ -1,7 +1,7 @@
 package com.jnshu.pojo;
 
 public class Work {
-    private Long id;
+    private Long workId;
 
     private String name;
 
@@ -29,12 +29,12 @@ public class Work {
 
     private String updateBy;
 
-    public Long getId() {
-        return id;
+    public Long getWorkId() {
+        return workId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setWorkId(long workId) {
+        this.workId = workId;
     }
 
     public String getName() {
@@ -144,7 +144,7 @@ public class Work {
     @Override
     public String toString() {
         return "Work{" +
-                "id=" + id +
+                "workId=" + workId +
                 ", name='" + name + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", status=" + status +

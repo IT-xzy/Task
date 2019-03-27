@@ -3,12 +3,12 @@ package com.jnshu.controller;
 import com.jnshu.pojo.ResultBean;
 import com.jnshu.pojo.Studio;
 import com.jnshu.service.StudioService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * @author pipiretrak
@@ -16,7 +16,8 @@ import java.util.logging.Logger;
  */
 @Controller
 public class StudioController {
-    private static Logger logger = Logger.getLogger(String.valueOf(BannerController.class));
+    private static Logger logger = Logger.getLogger(StudioController.class);
+
     @Autowired
     StudioService studioService;
 
@@ -56,6 +57,7 @@ public class StudioController {
             resultBean.setCode(200);
             resultBean.setMsg("添加成功");
         }
+        logger.info("添加的数据："+record);
         return resultBean;
     }
 
@@ -73,6 +75,7 @@ public class StudioController {
             resultBean.setCode(200);
             resultBean.setMsg("修改成功");
         }
+        logger.info("更新的内容"+record);
         return resultBean;
     }
 
@@ -90,6 +93,7 @@ public class StudioController {
             resultBean.setCode(200);
             resultBean.setMsg("删除成功");
         }
+        logger.info("删除的ID"+id);
         return resultBean;
     }
 
@@ -109,6 +113,7 @@ public class StudioController {
             resultBean.setMsg("查询ID成功");
             resultBean.setData(record);
         }
+        logger.info("查询的ID"+id);
         return resultBean;
     }
 }

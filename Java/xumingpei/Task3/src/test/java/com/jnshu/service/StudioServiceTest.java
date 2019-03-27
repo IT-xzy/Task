@@ -1,10 +1,9 @@
 package com.jnshu.service;
 
 import com.jnshu.pojo.Studio;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,10 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:SpringMybatis.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class StudioServiceTest {
+    private static Logger logger = Logger.getLogger(StudioServiceTest.class);
+
     @Autowired
     StudioService studioService;
     Studio studio = new Studio();
-    private static Logger logger = LoggerFactory.getLogger(StudioServiceTest.class);
 
     @Test
     public void insert(){

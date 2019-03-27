@@ -1,10 +1,9 @@
 package com.jnshu.service;
 
 import com.jnshu.pojo.Work;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,10 +15,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:SpringMybatis.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class WorkServiceTest {
+    private static Logger logger = Logger.getLogger(WorkServiceTest.class);
+
     @Autowired
     WorkService workService;
     Work work = new Work();
-    private static Logger logger = LoggerFactory.getLogger(WorkServiceTest.class);
 
     @Test
     public void insert(){
@@ -56,7 +56,7 @@ public class WorkServiceTest {
         work.setUpdateAt(System.currentTimeMillis());
         work.setCreateBy("管理员");
         work.setUpdateBy("更改人");
-        work.setId(1);
+        work.setWorkId(2);
         logger.info(String.valueOf(workService.updateByPrimaryKey(work)));
     }
 

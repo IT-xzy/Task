@@ -1,11 +1,9 @@
 package com.jnshu.service;
 
-import com.jnshu.pojo.Message;
 import com.jnshu.pojo.Reply;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,10 +15,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:SpringMybatis.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ReplyServiceTest {
+    private static Logger logger = Logger.getLogger(ReplyServiceTest.class);
+
+
     @Autowired
     ReplyService replyService;
     Reply reply = new Reply();
-    private static Logger logger = LoggerFactory.getLogger(FirstWorkServiceTest.class);
 
     @Test
     public void insert(){
@@ -43,7 +43,7 @@ public class ReplyServiceTest {
         reply.setUpdateAt(System.currentTimeMillis());
         reply.setCreateBy("海清");
         reply.setUpdateBy("高愿");
-        reply.setId(2);
+        reply.setReplyId(2);
         logger.info(String.valueOf(replyService.updateByPrimaryKey(reply)));
     }
 

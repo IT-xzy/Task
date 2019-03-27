@@ -1,11 +1,11 @@
 package com.jnshu.pojo;
 
 public class SecondWork {
-    private Long id;
+    private Long secondId;
 
     private String name;
 
-    private Long firstName;
+    private Long firstId;
 
     private Integer status;
 
@@ -17,12 +17,12 @@ public class SecondWork {
 
     private String createBy;
 
-    public Long getId() {
-        return id;
+    public Long getSecondId() {
+        return secondId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSecondId(long secondId) {
+        this.secondId = secondId;
     }
 
     public String getName() {
@@ -33,12 +33,12 @@ public class SecondWork {
         this.name = name;
     }
 
-    public Long getFirstName() {
-        return firstName;
+    public Long getFirstId() {
+        return firstId;
     }
 
-    public void setFirstName(long firstName) {
-        this.firstName = firstName;
+    public void setFirstId(long firstId) {
+        this.firstId = firstId;
     }
 
     public Integer getStatus() {
@@ -84,9 +84,9 @@ public class SecondWork {
     @Override
     public String toString() {
         return "SecondWork{" +
-                "id=" + id +
+                "secondId=" + secondId +
                 ", name='" + name + '\'' +
-                ", firstName=" + firstName +
+                ", firstId=" + firstId +
                 ", status=" + status +
                 ", createAt=" + createAt +
                 ", updateAt=" + updateAt +

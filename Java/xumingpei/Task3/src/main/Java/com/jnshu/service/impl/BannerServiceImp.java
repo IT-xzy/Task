@@ -1,14 +1,14 @@
 package com.jnshu.service.impl;
 
-import com.jnshu.controller.BannerController;
+import com.jnshu.controller.ReplyController;
 import com.jnshu.dao.BannerMapper;
 import com.jnshu.pojo.Banner;
 import com.jnshu.service.BannerService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * @author pipiretrak
@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  */
 @Service
 public class BannerServiceImp implements BannerService {
+    private static Logger logger = Logger.getLogger(BannerServiceImp.class);
+
     @Autowired
     BannerMapper bannerMapper;
-    private static Logger logger = Logger.getLogger(String.valueOf(BannerServiceImp.class));
 
     @Override
     public int deleteByPrimaryKey(Long id) {
@@ -29,27 +30,37 @@ public class BannerServiceImp implements BannerService {
 
     @Override
     public int insert(Banner record) {
-        return bannerMapper.insert(record);
+        int Record = bannerMapper.insert(record);
+        logger.info("插入的数据"+record);
+        return Record;
     }
 
     @Override
     public int insertSelective(Banner record) {
-        return bannerMapper.insertSelective(record);
+        int Recond = bannerMapper.insertSelective(record);
+        logger.info("插入的数据"+record);
+        return Recond;
     }
 
     @Override
     public Banner selectByPrimaryKey(Long id) {
-        return bannerMapper.selectByPrimaryKey(id);
+        Banner banner = bannerMapper.selectByPrimaryKey(id);
+        logger.info("查询的ID"+id);
+        return banner;
     }
 
     @Override
     public int updateByPrimaryKeySelective(Banner record) {
-        return bannerMapper.updateByPrimaryKeySelective(record);
+        int Recond = bannerMapper.updateByPrimaryKeySelective(record);
+        logger.info("更新的数据："+record);
+        return Recond;
     }
 
     @Override
     public int updateByPrimaryKey(Banner record) {
-        return bannerMapper.updateByPrimaryKey(record);
+        int Recond = bannerMapper.updateByPrimaryKey(record);
+        logger.info("更新的数据："+record);
+        return Recond;
     }
 
     @Override

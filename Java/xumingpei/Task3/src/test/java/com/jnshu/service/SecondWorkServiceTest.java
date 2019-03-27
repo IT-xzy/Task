@@ -1,10 +1,9 @@
 package com.jnshu.service;
 
 import com.jnshu.pojo.SecondWork;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -16,16 +15,18 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:SpringMybatis.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SecondWorkServiceTest {
+    private static Logger logger = Logger.getLogger(SecondWorkServiceTest.class);
+
+
     @Autowired
     SecondWorkService secondWorkService;
     SecondWork secondWork = new SecondWork();
-    private static Logger logger = LoggerFactory.getLogger(SecondWorkServiceTest.class);
 
     @Test
     public void insert(){
 
         secondWork.setName("游客1");
-        secondWork.setFirstName(15648);
+        secondWork.setFirstId(1);
         secondWork.setStatus(1);
         secondWork.setCreateAt(System.currentTimeMillis());
         secondWork.setUpdateAt(System.currentTimeMillis());
@@ -38,13 +39,13 @@ public class SecondWorkServiceTest {
     public void update(){
 
         secondWork.setName("被更改的游客");
-        secondWork.setFirstName(2580);
+        secondWork.setFirstId(1);
         secondWork.setStatus(0);
         secondWork.setCreateAt(System.currentTimeMillis());
         secondWork.setUpdateAt(System.currentTimeMillis());
         secondWork.setCreateBy("管理员");
         secondWork.setUpdateBy("更改人");
-        secondWork.setId(1);
+        secondWork.setSecondId(1);
         logger.info(String.valueOf(secondWorkService.updateByPrimaryKey(secondWork)));
     }
 
