@@ -1,13 +1,12 @@
 package com.jnshu.service;
 
 import com.jnshu.pojo.Banner;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.logging.Logger;
 
 
 /**
@@ -17,22 +16,23 @@ import java.util.logging.Logger;
 @ContextConfiguration(locations = "classpath:SpringMybatis.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BannerServiceTest {
+    private static Logger logger = Logger.getLogger(BannerServiceTest.class);
     @Autowired
     BannerService bannerService;
     Banner banner = new Banner();
     long timeStmo= System.currentTimeMillis();
-    private static Logger logger = Logger.getLogger(String.valueOf(BannerServiceTest.class));
 
     @Test
     public void insert(){
 
         banner.setCover("cover1");
         banner.setUrl("www.ewq23.com");
-        banner.setStatus(123456);
+        banner.setStatus(1);
         banner.setCreateAt(timeStmo);
         banner.setUpdateAt(timeStmo);
         banner.setCreateBy("徐铭培");
         banner.setUpdateBy("海清");
+        banner.setWorkId(10);
         logger.info(String.valueOf(bannerService.insert(banner)));
     }
 

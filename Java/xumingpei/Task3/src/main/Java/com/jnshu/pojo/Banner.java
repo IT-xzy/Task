@@ -17,7 +17,15 @@ public class Banner {
 
     private String updateBy;
 
+    private Long workId;
 
+    public Long getWorkId() {
+        return workId;
+    }
+
+    public void setWorkId(long workId) {
+        this.workId = workId;
+    }
 
     public Banner() {
         super();
@@ -98,6 +106,7 @@ public class Banner {
                 ", updateAt=" + updateAt +
                 ", createBy='" + createBy + '\'' +
                 ", updateBy='" + updateBy + '\'' +
+                ", workId=" + workId +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package com.jnshu.pojo;
 
 public class Reply {
-    private Long id;
+    private Long replyId;
 
     private String replyName;
 
@@ -15,12 +15,22 @@ public class Reply {
 
     private String createBy;
 
-    public Long getId() {
-        return id;
+    private Long msgId;
+
+    public Long getReplyId() {
+        return replyId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setReplyId(long replyId) {
+        this.replyId = replyId;
+    }
+
+    public Long getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(long msgId) {
+        this.msgId = msgId;
     }
 
     public String getReplyName() {
@@ -74,13 +84,14 @@ public class Reply {
     @Override
     public String toString() {
         return "Reply{" +
-                "id=" + id +
+                "replyId=" + replyId +
                 ", replyName='" + replyName + '\'' +
                 ", replyContent='" + replyContent + '\'' +
                 ", createAt=" + createAt +
                 ", updateAt=" + updateAt +
                 ", updateBy='" + updateBy + '\'' +
                 ", createBy='" + createBy + '\'' +
+                ", msgId=" + msgId +
                 '}';
     }
 }

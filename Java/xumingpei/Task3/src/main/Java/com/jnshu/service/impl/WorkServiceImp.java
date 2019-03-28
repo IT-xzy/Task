@@ -1,8 +1,10 @@
 package com.jnshu.service.impl;
 
 import com.jnshu.dao.WorkMapper;
+import com.jnshu.pojo.SecondWork;
 import com.jnshu.pojo.Work;
 import com.jnshu.service.WorkService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,41 +16,64 @@ import java.util.List;
  */
 @Service
 public class WorkServiceImp implements WorkService {
+    private static Logger logger = Logger.getLogger(WorkServiceImp.class);
+
     @Autowired
     WorkMapper workMapper;
 
     @Override
-    public int deleteByPrimaryKey(Long id) {
-        return workMapper.deleteByPrimaryKey(id);
+    public int deleteByPrimaryKey(Long workId) {
+        int ID = workMapper.deleteByPrimaryKey(workId);
+        logger.info("删除的id："+workId);
+        return ID;
     }
 
     @Override
     public int insert(Work record) {
-        return workMapper.insert(record);
+        int Record = workMapper.insert(record);
+        logger.info("插入的数据"+record);
+        return Record;
     }
 
     @Override
     public int insertSelective(Work record) {
-        return workMapper.insertSelective(record);
+        int Recond = workMapper.insertSelective(record);
+        logger.info("插入的数据"+record);
+        return Recond;
     }
 
     @Override
-    public Work selectByPrimaryKey(Long id) {
-        return workMapper.selectByPrimaryKey(id);
+    public Work selectByPrimaryKey(Long workId) {
+        Work work = workMapper.selectByPrimaryKey(workId);
+        logger.info("查询的ID"+work);
+        return work;
     }
 
     @Override
     public int updateByPrimaryKeySelective(Work record) {
-        return workMapper.updateByPrimaryKeySelective(record);
+        int Recond = workMapper.updateByPrimaryKeySelective(record);
+        logger.info("更新的数据："+record);
+        return Recond;
     }
 
     @Override
     public int updateByPrimaryKey(Work record) {
-        return workMapper.updateByPrimaryKey(record);
+        int Recond = workMapper.updateByPrimaryKey(record);
+        logger.info("更新的数据："+record);
+        return Recond;
     }
 
     @Override
-    public List<Work> selectByDynamic(String name, Integer status) {
-        return workMapper.selectByDynamic(name,status);
+    public List<Work> selectByDynamic(String name, String introduction) {
+        List<Work> list=workMapper.selectByDynamic(name,introduction);
+        logger.info(list.toString());
+        return list;
+    }
+
+    @Override
+    public List<Work> selectsecondId(Long secondId) {
+        List<Work> list= workMapper.selectsecondId(secondId);
+        logger.info(list.toString());
+        return list;
     }
 }

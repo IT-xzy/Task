@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 @Aspect
 public class LogAspect {
     private static Logger logger = Logger.getLogger(String.valueOf(LogAspect.class));
+
     /**
      * 定义切点函数
      */
@@ -41,7 +42,6 @@ public class LogAspect {
         obj = proceedingJoinPoint.proceed();
         long end = System.currentTimeMillis();
         logger.info("开始执行"+className+"中的方法"+methodName+"执行时间"+(end-start)+"ms");
-
         return obj;
     }
 }

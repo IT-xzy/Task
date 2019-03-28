@@ -1,14 +1,16 @@
 package com.jnshu.controller;
 
+import com.jnshu.pojo.Message;
 import com.jnshu.pojo.ResultBean;
 import com.jnshu.pojo.Work;
+import com.jnshu.service.MessageService;
 import com.jnshu.service.WorkService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * @author pipiretrak
@@ -16,18 +18,22 @@ import java.util.logging.Logger;
  */
 @Controller
 public class WorkController {
-    private static Logger logger = Logger.getLogger(String.valueOf(BannerController.class));
+    private static Logger logger = Logger.getLogger(WorkController.class);
+
     @Autowired
     WorkService workService;
+
+    @Autowired
+    MessageService messageService;
 
     @ResponseBody
     @RequestMapping(value = "/work",method = RequestMethod.GET)
     public ResultBean selectByDynamic(@RequestParam(value = "name",required = false) String name,
-                                      @RequestParam(value = "status", required = false) Integer status){
-        logger.info(name+","+status);
+                                      @RequestParam(value = "introduction", required = false) String introduction){
+        logger.info(name+","+introduction);
         logger.info("-----查询被调用-----");
         ResultBean resultBean = new ResultBean();
-        List<Work> work = workService.selectByDynamic(name,status);
+        List<Work> work = workService.selectByDynamic(name,introduction);
         if (work == null || work.size() == 0){
             resultBean.setCode(-1);
             resultBean.setMsg("查询全部失败");
@@ -38,6 +44,26 @@ public class WorkController {
             resultBean.setData(work);
         }
         logger.info("：查询结果"+work);
+        return resultBean;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/work/{workId}", method = RequestMethod.GET)
+    public ResultBean getId(@PathVariable Long workId,@RequestParam(value = "status",required = false) String status){
+        logger.info("：获取传参id为："+workId);
+        ResultBean resultBean = new ResultBean();
+        List<Message> record = messageService.selectworkId(workId,status);
+        logger.info("结果"+record);
+        if (record == null){
+            resultBean.setCode(-1);
+            resultBean.setMsg("查询ID失败");
+
+        } else {
+            resultBean.setCode(200);
+            resultBean.setMsg("查询ID成功");
+            resultBean.setData(record);
+        }
+        logger.info("：查询结果"+workId);
         return resultBean;
     }
 
@@ -56,6 +82,7 @@ public class WorkController {
             resultBean.setCode(200);
             resultBean.setMsg("添加成功");
         }
+        logger.info("添加的数据："+record);
         return resultBean;
     }
 
@@ -73,6 +100,7 @@ public class WorkController {
             resultBean.setCode(200);
             resultBean.setMsg("修改成功");
         }
+        logger.info("更新的内容"+record);
         return resultBean;
     }
 
@@ -90,25 +118,9 @@ public class WorkController {
             resultBean.setCode(200);
             resultBean.setMsg("删除成功");
         }
+        logger.info("删除的ID"+id);
         return resultBean;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/work/{id}", method = RequestMethod.GET)
-    public ResultBean getId(@PathVariable Long id){
-        logger.info("：获取传参id为："+id);
-        ResultBean resultBean = new ResultBean();
-        Work record = workService.selectByPrimaryKey(id);
-        logger.info("结果"+record);
-        if (record == null){
-            resultBean.setCode(-1);
-            resultBean.setMsg("查询ID失败");
 
-        } else {
-            resultBean.setCode(200);
-            resultBean.setMsg("查询ID成功");
-            resultBean.setData(record);
-        }
-        return resultBean;
-    }
 }
