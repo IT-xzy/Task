@@ -23,6 +23,7 @@ public class JSTLDateUtils extends TagSupport {
     public void setParttern(String parttern ) {
         this.parttern =  parttern ;
     }
+    @Override
     public int doStartTag() throws JspException{
         String vv = String.valueOf(value);
         long time = Long.valueOf(vv);
@@ -38,7 +39,7 @@ public class JSTLDateUtils extends TagSupport {
         return super.doStartTag();
     }
     public static void main(String[] args) {
-        long a =1332744845078l;
+        long a =1332744845078L;
         long time = Long.valueOf(a);
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(time);
