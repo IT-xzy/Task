@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!--1、xmlns="http://www.springframework.org/schema/beans"
+   声明xml文件默认的命名空间，表示未使用其他命名空间的所有标签的默认命名空间。
+2、xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   声明XMLSchema 实例名称空间，并将xsi前缀与该名称空间绑定，这样模式处理器就可以识别xsi:schemaLocation属性。
+   XML Schema实例名称空间的前缀通常使用xsi。
+3、使用xsi:schemaLocation属性指定名称空间http://www.springframework.org/schema/beans
+   和模式位置http://www.springframework.org/schema/beans/spring-beans-3.0.xsd相关。
+4、添加注解后多的xmlns:context="http://www.springframework.org/schema/context"是添加了context的命名空间，关于Spring上下文的，包括加载资源文件！
+-->
+    <bean id="noteUtil" class="com.ptteng.utils.NoteUtil">
+        <!-- 构造函数方式注入的时候必须配置构造函数的参数 -->
+        <constructor-arg name="accountSid" value="8a216da86904c0600169514347ff22f6"></constructor-arg>
+        <constructor-arg name="accountToken" value="f83634d5fbea4df3b7e8ac7b34d227e9"></constructor-arg>
+        <constructor-arg name="serverIp" value="app.cloopen.com"></constructor-arg>
+        <constructor-arg name="serverPort" value="8883"></constructor-arg>
+        <constructor-arg name="appId" value="8a216da86904c06001695143484a22fc"></constructor-arg>
+        <constructor-arg name="templateId" value="1"></constructor-arg>
+        <constructor-arg name="time" value="2"></constructor-arg>
+    </bean>
+</beans>

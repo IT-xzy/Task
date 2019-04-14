@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:*.properties"/>
+
+    <!-- 配置包扫描器 -->
+    <context:component-scan base-package="com.ptteng"/>
+
+    <!-- 具体controller包的路径取决于你新建的java代码的controller层包  -->
+
+    <!-- 配置注解驱动-->
+    <mvc:annotation-driven/>
+    <!--静态资源访问-->
+    <mvc:default-servlet-handler/>
+    <!--配置静态资源映射-->
+    <mvc:resources location="/WEB-INF/jsp/one/images/" mapping="/images/**"/>
+
+    <mvc:resources location="/WEB-INF/jsp/one/css/" mapping="/css/**"/>
+
+    <mvc:resources location="/WEB-INF/jsp/one/js/" mapping="/js/**"/>
+
+    <!--放一个视图解析器，解析视图（所有的jsp文件），就是浏览器上看到的东西，解析我才能看见-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--tiles框架的视图解析器-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize" value="10240000"/>
+    </bean>
+    <bean id="MailUtil" class="com.ptteng.utils.MailUtil">
+        <constructor-arg name="url" value="http://api.sendcloud.net/apiv2/mail/send"></constructor-arg>
+        <constructor-arg name="apiUser" value="13659200628_test_QjUMoz"></constructor-arg>
+        <constructor-arg name="apiKey" value="6bcg7xODFL5sCNZ6"></constructor-arg>
+        <constructor-arg name="subject" value="您的验证邮件"></constructor-arg>
+    </bean>
+
+    <bean id="noteUtil" class="com.ptteng.utils.NoteUtil">
+        <!-- 构造函数方式注入的时候必须配置构造函数的参数 -->
+        <constructor-arg name="accountSid" value="8a216da86904c0600169514347ff22f6"></constructor-arg>
+        <constructor-arg name="accountToken" value="f83634d5fbea4df3b7e8ac7b34d227e9"></constructor-arg>
+        <constructor-arg name="serverIp" value="app.cloopen.com"></constructor-arg>
+        <constructor-arg name="serverPort" value="8883"></constructor-arg>
+        <constructor-arg name="appId" value="8a216da86904c06001695143484a22fc"></constructor-arg>
+        <constructor-arg name="templateId" value="1"></constructor-arg>
+        <constructor-arg name="time" value="2"></constructor-arg>
+    </bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <!-- 登录认证拦截器 -->
+        <mvc:interceptor>
+            <!--/** 表示所有url包括子url路径 -->
+            <mvc:mapping path="/u/**"/>
+            <bean class="com.ptteng.Interceptor.LoginInterceptor"/>
+            <!--设置拦截器路径-->
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+    <!--springMessage-->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <set>
+                <value>classpath:message</value>
+            </set>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
+    <!-- 客户端 -->
+
+    <bean id="Ali" class="com.ptteng.utils.AliUtil">
+        <constructor-arg name="endpoint" value="http://oss-cn-beijing.aliyuncs.com"></constructor-arg>
+        <constructor-arg name="accessKeyId" value="LTAIe00haO3zH3SR"></constructor-arg>
+        <constructor-arg name="accessKeySecret" value="GYJpO2NPHbfWKteZrvLC5smoEVIYpb"></constructor-arg>
+        <constructor-arg name="bucketName" value="sundamao"></constructor-arg>
+    </bean>
+
+    <bean id="tengXun" class="com.ptteng.utils.TengXunUtil">
+        <constructor-arg name="accessKey" value="AKIDVbYUCfnEKLLBSYt2OoKtDpdJ0OGy4sbg"></constructor-arg>
+        <constructor-arg name="secretKey" value="5C6A1d1CRZbRmrlTxC7lGvUkkx5DGRaZ"></constructor-arg>
+        <constructor-arg name="regionName" value="ap-chengdu"></constructor-arg>
+        <constructor-arg name="bucketName" value="sunxiaomao-1258817510"></constructor-arg>
+    </bean>
+
+
+</beans>

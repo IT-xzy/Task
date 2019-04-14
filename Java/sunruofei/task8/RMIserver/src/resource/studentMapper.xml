@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--映射文件，mapper.xml在mybatis.xml是专职处理sql的一个环节，各种映射和实现都在这里处理-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+-->
+<mapper namespace="com.ptteng.mapper.StudentMapper">
+    <select id="selectAll" resultType="com.ptteng.model.Student">
+       select * from student
+    </select>
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+-->
+<mapper namespace="com.jnshu.StudentMapper">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+    使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+    resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+    User类就是test表所对应的实体类
+    -->
+    <!--映射Dao接口里的方法,替代了实现类的作用-->
+
+    <select id="findById" resultType="com.jnshu.Student">
+        select * from student where id=#{id}
+    </select>
+
+    <select id="findAll" resultType="com.jnshu.Student" >
+        SELECT * FROM student
+    </select>
+    <!--keyProperty 和useGeneratedKeys是获取增长的主键id-->
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="com.jnshu.Student">
+        INSERT INTO student (name,qq,type,admission_date,graduate_school,student_number,daily_link,wish,instructor,information_source) VALUES (#{name},#{qq},#{type},#{admission_date},#{graduate_school},#{student_number},#{daily_link},#{wish},#{instructor},#{information_source})
+    </insert>
+    <update id="update" parameterType="com.jnshu.Student">
+        UPDATE student SET name=#{name},qq=#{qq},type=#{type},admission_date=#{admission_date} ,graduate_school=#{graduate_school},student_number=#{student_number},daily_link=#{daily_link},wish=#{wish},instructor=#{instructor},information_source=#{information_source}WHERE id=#{id}
+
+    </update>
+
+    <delete id="delete"  parameterType="int">
+        DELETE FROM student where id=#{id}
+    </delete>
+
+</mapper>

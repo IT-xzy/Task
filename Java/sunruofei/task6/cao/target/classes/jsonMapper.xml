@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+-->
+<mapper namespace="com.ptteng.dao.JsonMapper">
+    <insert id="insert"  useGeneratedKeys="true" keyProperty="id" parameterType="com.ptteng.entity.Json">
+        insert into json (id ,name , qq ,phone  ) VALUES (#{id} , #{name} , #{qq} , #{phone})
+    </insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from json where id = #{id}
+    </delete>
+    <update id="updateByPrimaryKey" parameterType="com.ptteng.entity.Json">
+        update json where set name = #{name} , qq = #{qq} , phone = #{phone}where id = #{id}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.ptteng.entity.Json">
+        select * from json where id = #{id}
+    </select>
+    <select id="selectAllIds"  resultType="java.lang.Long">
+        select id from json
+    </select>
+
+    <select id="selectByIdList" resultType="com.ptteng.entity.Json" parameterType="java.util.List">
+        select * from json where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <!--collection ：collection属性的值有三个分别是list、array、map三种，分别对应的参数类型为：
+    List、数组、map集合，我在上面传的参数为list集合，所以值为list
+
+    　　　　item ： 表示在迭代过程中每一个元素的别名
+
+    　　　　index ：表示在迭代过程中每次迭代到的位置（下标）
+
+    　　　　open ：前缀
+
+    　　　　close ：后缀
+
+    　　　　separator ：分隔符，表示迭代时每个元素之间以什么分隔-->
+
+
+
+
+</mapper>
