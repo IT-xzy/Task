@@ -12,7 +12,7 @@ public class JdbcTemplateTest {
     @Before
 //    给变量赋值，方法。这个可以多想想，很有用。
     public  void test(){
-        userDao=new UserDaoImpl();
+        userDao =new UserDaoImpl();
     }
 
 

@@ -3,9 +3,13 @@ package com.ptteng;
 import java.util.List;
 
 public interface UserDao {
-    public long insertUser(User user);
-    public List<User> findAll();
-    public List<User> findById(long id);
-    public boolean updateUser(User user);
-    public boolean deleteUser(long id);
+    long insertUser(User user);
+
+    List<User> findAll();
+
+    List<User> findById(long id);
+
+    boolean updateUser(User user);
+
+    boolean deleteUser(long id);
 }
