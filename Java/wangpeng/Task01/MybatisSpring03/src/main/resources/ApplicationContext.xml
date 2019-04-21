@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="cn.wp.service,cn.wp.dao,cn.wp.action"/>
+    <!-- 引入外置文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:db.properties"/>
+    </bean>
+
+    <bean id="contact" name="contact" class="cn.wp.entity.Contact"/>
+
+    <!--数据库连接池配置-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driverClassName}"/>
+        <property name="jdbcUrl" value="${url}"/>
+        <property name="user" value="${name}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!-- spring和MyBatis完美整合 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 自动扫描cn/wp/dao下的所有dao接口，并实现这些接口，可直接在程序中使用dao接口，不用再获取sqlsession对象 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--
+        basePackage 属性是映射器接口文件的包路径。
+                 你可以使用分号或逗号 作为分隔符设置多于一个的包路径
+        -->
+        <property name="basePackage" value="cn.wp.dao"/>
+        <!--
+                 因为会自动装配 SqlSessionFactory和SqlSessionTemplate
+                 所以没 有 必 要 去 指 定 SqlSessionFactory或 SqlSessionTemplate
+                 因此可省略不配置；
+                 但是,如果你使 用了一个 以上的 DataSource，那么自动装配可能会失效。
+                 这种 情况下，你可以使用sqlSessionFactoryBeanName或sqlSessionTemplateBeanName属性来设置正确的 bean名称来使用；
+        -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+</beans>
