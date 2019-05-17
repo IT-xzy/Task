@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wp.dao.BannerDao">
+    <resultMap id="BaseResultMap" type="cn.wp.model.Banner">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="picture" property="picture" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="TINYINT"/>
+        <result column="create_at" property="createAt" jdbcType="BIGINT"/>
+        <result column="update_at" property="updateAt" jdbcType="BIGINT"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, picture, url, state, create_at, update_at, create_by, update_by
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from banner
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from banner
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="cn.wp.model.Banner">
+    insert into banner (id, picture, url, 
+      state, create_at, update_at, 
+      create_by, update_by)
+    values (#{id,jdbcType=BIGINT}, #{picture,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.wp.model.Banner">
+        insert into banner
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="picture != null">
+                picture,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="picture != null">
+                #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=TINYINT},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.wp.model.Banner">
+        update banner
+        <set>
+            <if test="picture != null">
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=TINYINT},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.wp.model.Banner">
+    update banner
+    set picture = #{picture,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+         select * from banner
+  </select>
+
+    <select id="selectByDynamicCondition" resultMap="BaseResultMap" parameterType="cn.wp.model.Banner">
+        select * from banner
+        <if test="createBy != null">
+            , manager
+        </if>
+        where 1 = 1
+        <if test="createBy != null">
+            and banner.create_by = manager.id
+            and manager.name like CONCAT('%','${createBy}','%' )
+        </if>
+        <if test="state != null">
+            and banner.state = #{state}
+        </if>
+    </select>
+
+</mapper>

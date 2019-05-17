@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wp.dao.ModuleDao">
+    <resultMap id="BaseResultMap" type="cn.wp.model.Module">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="father_node_id" property="fatherNodeId" jdbcType="BIGINT"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="create_at" property="createAt" jdbcType="BIGINT"/>
+        <result column="update_at" property="updateAt" jdbcType="BIGINT"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, father_node_id, url, create_at, update_at, create_by, update_by
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from module
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from module
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="cn.wp.model.Module">
+    insert into module (id, name, father_node_id, 
+      url, create_at, update_at, 
+      create_by, update_by)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{fatherNodeId,jdbcType=BIGINT}, 
+      #{url,jdbcType=VARCHAR}, #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, 
+      #{createBy,jdbcType=BIGINT}, #{updateBy,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.wp.model.Module">
+        insert into module
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="fatherNodeId != null">
+                father_node_id,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fatherNodeId != null">
+                #{fatherNodeId,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.wp.model.Module">
+        update module
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="fatherNodeId != null">
+                father_node_id = #{fatherNodeId,jdbcType=BIGINT},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.wp.model.Module">
+    update module
+    set name = #{name,jdbcType=VARCHAR},
+      father_node_id = #{fatherNodeId,jdbcType=BIGINT},
+      url = #{url,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select * from module
+  </select>
+    <select id="selectByDynamicCondition" resultMap="BaseResultMap" parameterType="cn.wp.model.Module">
+        select * from module where 1 = 1
+        <if test="_parameter != null">
+            and name like CONCAT('%','${_parameter}','%' )
+        </if>
+    </select>
+</mapper>

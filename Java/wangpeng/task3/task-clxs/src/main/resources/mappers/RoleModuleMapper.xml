@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.wp.dao.RoleModuleDao">
+    <resultMap id="BaseResultMap" type="cn.wp.model.RoleModule">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_id" property="roleId" jdbcType="BIGINT"/>
+        <result column="module_id" property="moduleId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, role_id, module_id
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from role_module
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from role_module
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="cn.wp.model.RoleModule">
+    insert into role_module (id, role_id, module_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{moduleId,jdbcType=BIGINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="cn.wp.model.RoleModule">
+        insert into role_module
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="moduleId != null">
+                module_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="moduleId != null">
+                #{moduleId,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.wp.model.RoleModule">
+        update role_module
+        <set>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=BIGINT},
+            </if>
+            <if test="moduleId != null">
+                module_id = #{moduleId,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.wp.model.RoleModule">
+    update role_module
+    set role_id = #{roleId,jdbcType=BIGINT},
+      module_id = #{moduleId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select * from role_module
+  </select>
+    <select id="selectByDynamicCondition" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select * from role_module where 1 = 1
+        <if test="roleModuleId != null">
+            and id = #{roleModuleId}
+        </if>
+
+    </select>
+</mapper>
