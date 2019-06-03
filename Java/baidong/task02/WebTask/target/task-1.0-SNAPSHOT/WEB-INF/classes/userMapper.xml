@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ 让映射文件和DAO口对应，在底层实现该方法-->
+<mapper namespace="jnshu.dao.UserDao">
+
+
+    <!--    数据库的名字和实体类中的名字进行一一对应，当有这个映射关系的时候，语句中增删改查返回值就要用resultmap-->
+    <resultMap id="BaseResultMap" type="jnshu.model.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="admission_time" property="admissionTime" jdbcType="BIGINT"/>
+        <result column="graduated_school" property="graduatedSchool" jdbcType="VARCHAR"/>
+        <result column="daliy_link" property="daliyLink" jdbcType="VARCHAR"/>
+        <result column="volunte" property="volunte" jdbcType="VARCHAR"/>
+        <result column="brother" property="brother" jdbcType="VARCHAR"/>
+        <result column="source" property="source" jdbcType="VARCHAR"/>
+        <result column="create_at" property="createAt" jdbcType="BIGINT"/>
+        <result column="update_at" property="updateAt" jdbcType="BIGINT"/>
+    </resultMap>
+    <!--查找id的sql语句，id这个方法的名称，parameterType是输入类型，resultMap是输出类型。-->
+    <select id="findById" parameterType="int" resultMap="BaseResultMap">
+       select * from task00 where id=#{id}
+</select>
+    <!--查找id的sql语句，id这个方法的名称，resultMap是输出类型。-->
+    <select id="findAll" resultMap="BaseResultMap">
+       select * from task00
+</select>
+    <!--keyProperty 和useGeneratedKeys是获取增长的主键id：主键是id，，输入的类型是user-->
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="jnshu.model.User">
+       INSERT INTO task00 (name,type,admission_time,graduated_school,daliy_link,volunte,brother,source,create_at,update_at) VALUES (#{name},#{type},#{admissionTime},#{graduatedSchool},#{daliyLink},#{volunte},#{brother},#{source},#{createAt},#{updateAt})
+</insert>
+    <!--    修改-->
+    <update id="update" parameterType="jnshu.model.User">
+       UPDATE task00 SET name=#{name},type=#{type},admission_time=#{admissionTime},graduated_school=#{graduatedSchool},daliy_link=#{daliyLink},volunte=#{volunte},brother=#{brother},source=#{source},create_at=#{createAt},update_at=#{updateAt} WHERE id=#{id}
+
+</update>
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+       DELETE FROM task00 where id=#{id}
+</delete>
+    <select id="selectPage" resultMap="BaseResultMap">
+
+        <!--从第几条开始，每页多少个-->
+        select * from task00 limit #{startNum},#{pageSize}
+    </select>
+    <!--    查询符合该条件的数量-->
+    <select id="selectCount" resultType="int">
+         select count(*) from task00
+</select>
+</mapper>
