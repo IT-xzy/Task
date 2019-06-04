@@ -3,10 +3,12 @@ package jnshu.service.impl;
 import jnshu.dao.UserDao;
 import jnshu.model.User;
 import jnshu.service.UserService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @Service
 public class UserServiceImpl implements UserService {

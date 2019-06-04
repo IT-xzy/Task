@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-@Service
 public interface UserService {
     int add(User user);
     int update(User user);
