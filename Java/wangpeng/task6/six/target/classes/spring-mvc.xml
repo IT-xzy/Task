@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+    <context:component-scan base-package="cn.wp"></context:component-scan>
+
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 也可以将jdbc写成properties文件在此导入 -->
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:memcache.properties</value>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--注释配置,激活@Controller模式-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--加载静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <!--视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--数据源配置-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--mybatis与spring的整合，不需要mybatis自己的配置映射文件-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置连接数据库数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--配置Mapper文件所在位置-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--mybatis配置文件-->
+        <!--<property name="configLocation" value="classpath:mybatis.xml"></property>-->
+    </bean>
+
+    <!--mybatis与spring的整合，不需要mybatis自己的配置映射文件-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.wp.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--添加message bean-->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <set>
+                <value>classpath:message</value>
+            </set>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 自动扫描 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="cn.wp"/>
+    <!-- 启动对@Aspect注解的支持 -->
+    <!--通知spring使用cglib而不是jdk来生成代理方法，AOP可以拦截到Controller-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- spring 集成缓存服务器（memcached） -->
+    <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize" destroy-method="shutDown">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+        <property name="servers">
+            <list>
+                <value>${memcache.server}</value>
+            </list>
+        </property>
+        <property name="initConn">
+            <value>${memcache.initConn}</value>
+        </property>
+        <property name="minConn">
+            <value>${memcache.minConn}</value>
+        </property>
+        <property name="maxConn">
+            <value>${memcache.maxConn}</value>
+        </property>
+        <property name="maintSleep">
+            <value>${memcache.maintSleep}</value>
+        </property>
+        <property name="nagle">
+            <value>${memcache.nagle}</value>
+        </property>
+        <property name="socketTO">
+            <value>${memcache.socketTO}</value>
+        </property>
+    </bean>
+    <bean id="memCachedClient" class="com.danga.MemCached.MemCachedClient">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+    </bean>
+
+    <import resource="classpath:spring-redis.xml"/>
+
+</beans>
+
+
