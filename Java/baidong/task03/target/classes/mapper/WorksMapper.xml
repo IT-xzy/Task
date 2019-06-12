@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jnshu.mapper.WorksMapper">
+  <resultMap id="BaseResultMap" type="jnshu.model.Works">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="works_name" jdbcType="VARCHAR" property="worksName" />
+    <result column="short_introduction" jdbcType="VARCHAR" property="shortIntroduction" />
+    <result column="small_photo" jdbcType="VARCHAR" property="smallPhoto" />
+    <result column="video_link" jdbcType="VARCHAR" property="videoLink" />
+    <result column="works_photo" jdbcType="VARCHAR" property="worksPhoto" />
+    <result column="works_introduction" jdbcType="VARCHAR" property="worksIntroduction" />
+    <result column="first_name" jdbcType="BIGINT" property="firstName" />
+    <result column="second_name" jdbcType="BIGINT" property="secondName" />
+    <result column=" status" jdbcType="BIGINT" property="status" />
+    <result column="update_at" jdbcType="BIGINT" property="updateAt" />
+    <result column="create_at" jdbcType="BIGINT" property="createAt" />
+    <result column="update_by" jdbcType="BIGINT" property="updateBy" />
+    <result column="create_by" jdbcType="BIGINT" property="createBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, works_name, short_introduction, small_photo, video_link, works_photo, works_introduction, 
+    first_name, second_name, " status", update_at, create_at, update_by, create_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from works
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from works
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="jnshu.model.Works">
+    insert into works (id, works_name, short_introduction, 
+      small_photo, video_link, works_photo, 
+      works_introduction, first_name, second_name, 
+      " status", update_at, create_at, 
+      update_by, create_by)
+    values (#{id,jdbcType=BIGINT}, #{worksName,jdbcType=VARCHAR}, #{shortIntroduction,jdbcType=VARCHAR}, 
+      #{smallPhoto,jdbcType=VARCHAR}, #{videoLink,jdbcType=VARCHAR}, #{worksPhoto,jdbcType=VARCHAR}, 
+      #{worksIntroduction,jdbcType=VARCHAR}, #{firstName,jdbcType=BIGINT}, #{secondName,jdbcType=BIGINT}, 
+      #{status,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, #{createAt,jdbcType=BIGINT}, 
+      #{updateBy,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="jnshu.model.Works">
+    insert into works
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="worksName != null">
+        works_name,
+      </if>
+      <if test="shortIntroduction != null">
+        short_introduction,
+      </if>
+      <if test="smallPhoto != null">
+        small_photo,
+      </if>
+      <if test="videoLink != null">
+        video_link,
+      </if>
+      <if test="worksPhoto != null">
+        works_photo,
+      </if>
+      <if test="worksIntroduction != null">
+        works_introduction,
+      </if>
+      <if test="firstName != null">
+        first_name,
+      </if>
+      <if test="secondName != null">
+        second_name,
+      </if>
+      <if test="status != null">
+        " status",
+      </if>
+      <if test="updateAt != null">
+        update_at,
+      </if>
+      <if test="createAt != null">
+        create_at,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="worksName != null">
+        #{worksName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortIntroduction != null">
+        #{shortIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="smallPhoto != null">
+        #{smallPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLink != null">
+        #{videoLink,jdbcType=VARCHAR},
+      </if>
+      <if test="worksPhoto != null">
+        #{worksPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="worksIntroduction != null">
+        #{worksIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        #{firstName,jdbcType=BIGINT},
+      </if>
+      <if test="secondName != null">
+        #{secondName,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.Works">
+    update works
+    <set>
+      <if test="worksName != null">
+        works_name = #{worksName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortIntroduction != null">
+        short_introduction = #{shortIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="smallPhoto != null">
+        small_photo = #{smallPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="videoLink != null">
+        video_link = #{videoLink,jdbcType=VARCHAR},
+      </if>
+      <if test="worksPhoto != null">
+        works_photo = #{worksPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="worksIntroduction != null">
+        works_introduction = #{worksIntroduction,jdbcType=VARCHAR},
+      </if>
+      <if test="firstName != null">
+        first_name = #{firstName,jdbcType=BIGINT},
+      </if>
+      <if test="secondName != null">
+        second_name = #{secondName,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        " status" = #{status,jdbcType=BIGINT},
+      </if>
+      <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="jnshu.model.Works">
+    update works
+    set works_name = #{worksName,jdbcType=VARCHAR},
+      short_introduction = #{shortIntroduction,jdbcType=VARCHAR},
+      small_photo = #{smallPhoto,jdbcType=VARCHAR},
+      video_link = #{videoLink,jdbcType=VARCHAR},
+      works_photo = #{worksPhoto,jdbcType=VARCHAR},
+      works_introduction = #{worksIntroduction,jdbcType=VARCHAR},
+      first_name = #{firstName,jdbcType=BIGINT},
+      second_name = #{secondName,jdbcType=BIGINT},
+      " status" = #{status,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectByDynamicCondition" resultMap="BaseResultMap" parameterType="jnshu.model.WorkRoom">
+        select * from works where 1=1
+
+        <if test="works_name !=null">
+            and name like concat('%','${works_name}','%' )
+        </if>
+        <if test="status!=null">
+            and status =#{status}
+        </if>
+
+    </select>
+</mapper>
