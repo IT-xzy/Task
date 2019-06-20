@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jnshu.dao.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.jnshu.pojo.User" >
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, name, password, phone, email, img
+    </sql>
+
+    <insert id="insert" parameterType="com.jnshu.pojo.User" >
+        insert into user (id,name, password, phone, email)
+        values ( #{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+                 #{email,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="selectByName" resultMap="BaseResultMap">
+        select * from user where name = #{name,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByNameAndPassword" resultType="com.jnshu.pojo.User">
+        select name,password from user where name = #{name} and password = #{password}
+    </select>
+
+    <select id="selectByPhone" resultType="com.jnshu.pojo.User">
+        select * from user where phone = #{phone}
+    </select>
+
+    <select id="selectByEmail" resultType="com.jnshu.pojo.User">
+        select * from user where email = #{email}
+    </select>
+
+    <select id="selectById" resultType="com.jnshu.pojo.User">
+        select * from user where id = #{id}
+    </select>
+
+    <update id="updateByName" parameterType="com.jnshu.pojo.User">
+        update user
+        <set>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where name = #{name,jdbcType=VARCHAR}
+    </update>
+</mapper>

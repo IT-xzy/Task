@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" default-lazy-init="true">
+
+    <bean name="RMIJobService" class="com.jnshu.service.impl.JobServiceImp"/>
+    <bean name="RMIJob" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="RMIJobService"/>
+        <property name="serviceName" value="RMIJob"/>
+        <property name="serviceInterface" value="com.jnshu.service.JobService"/>
+        <property name="registryPort" value="2223"/>
+    </bean>
+
+    <bean name="RMIStudentServer" class="com.jnshu.service.impl.StudentServiceImp"/>
+    <bean name="RMIStudent" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="RMIStudentServer"/>
+        <property name="serviceName" value="RMIStudent"/>
+        <property name="serviceInterface" value="com.jnshu.service.StudentService"/>
+        <property name="registryPort" value="2223"/>
+    </bean>
+
+    <bean name="RMIUserService" class="com.jnshu.service.impl.UserServiceImp"/>
+    <bean name="RMIUser" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="service" ref="RMIUserService"/>
+        <property name="serviceName" value="RMIUser"/>
+        <property name="serviceInterface" value="com.jnshu.service.UserService"/>
+        <property name="registryPort" value="2223"/>
+    </bean>
+</beans>
