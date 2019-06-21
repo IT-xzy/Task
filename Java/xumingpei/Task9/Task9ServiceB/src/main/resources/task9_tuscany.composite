@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.jnshu.service"
+           xmlns:sample="http://com.jnshu.service"
+           name="task9_tuscany">
+
+    <component name="JobServiceComponent">
+        <implementation.spring location="spring-mybatis.xml"/>
+        <service name="JobService1">
+            <interface.java interface="com.jnshu.service.JobService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:2223/RMIJob"/>
+        </service>
+    </component>
+    <component name="StudentServiceComponent">
+        <implementation.spring location="spring-mybatis.xml"/>
+        <service name="StudentService1">
+            <interface.java interface="com.jnshu.service.StudentService"/>
+            <tuscany:binding.rmi uri="rmi://127.0.0.1:2223/RMIStudent"/>
+        </service>
+    </component>
+    <component name="UserServiceComponent">
+            <implementation.spring location="spring-mybatis.xml"/>
+            <service name="UserService1">
+                <interface.java interface="com.jnshu.service.UserService"/>
+                <tuscany:binding.rmi uri="rmi://127.0.0.1:2223/RMIUser"/>
+            </service>
+        </component>
+</composite>
