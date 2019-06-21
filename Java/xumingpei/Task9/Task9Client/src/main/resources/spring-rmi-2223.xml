@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+
+    <bean id="RMIClient" class="com.jnshu.tool.RMI.RMIClient">
+        <property name="jobService" ref="ClientJob"/>
+        <property name="studentService" ref="ClientStudent"/>
+        <property name="userService" ref="ClientUser"/>
+    </bean>
+
+    <!-- 客户端 -->
+    <bean id="ClientJob" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.JobService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:2223/RMIJob"></property>
+    </bean>
+
+    <bean id="ClientStudent" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.StudentService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:2223/RMIStudent"></property>
+    </bean>
+
+    <bean id="ClientUser" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.UserService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:2223/RMIUser"></property>
+    </bean>
+
+</beans>
