@@ -1,0 +1,82 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+            http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+
+    <display-name>Client</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!--加载spring配置文件-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring-mvc.xml</param-value>
+    </context-param>
+
+    <!--配置spring容器监听器-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--监听在线人数-->
+    <listener>
+        <listener-class>cn.wp.utils.Listener</listener-class>
+    </listener>
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
+    <!--org.springframework.web.filter.HiddenHttpMethodFilter:可以把 POST 请求转为 DELETE 或 put 请求 -->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+
+    <!--过滤器-->
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>MyFilter</filter-name>
+        <filter-class>cn.wp.utils.MyFilter</filter-class>
+    </filter>
+    <!--mapper元素用于设置一个 Filter 所负责拦截的资源。
+    一个Filter拦截的资源可通过两种方式来指定：
+    Servlet 名称和资源访问的请求路径-->
+    <filter-mapping>
+        <!--子元素用于设置filter的注册名称。
+        该值必须是在<filter>元素中声明过的过滤器的名字-->
+        <filter-name>MyFilter</filter-name>
+        <!--设置 filter 所拦截的请求路径(过滤器关联的URL样式)-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+
+    <!--配置DispatcherServlet前端控制器-->
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!--映射所有的HTTP请求到DispatcherServlet-->
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <taglib-location>/WEB-INF/dateTag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+</web-app>
