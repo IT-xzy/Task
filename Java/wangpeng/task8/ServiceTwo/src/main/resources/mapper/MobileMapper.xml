@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wp.dao.MobileDao">
+
+    <insert id="insertCodePhone" parameterType="cn.wp.model.Mobile">
+insert into mobile (phone,code,create_at) VALUES (#{phone},#{code},#{createAt})
+</insert>
+
+    <select id="selectTime" parameterType="cn.wp.model.Mobile" resultType="int">
+select count(*) from mobile where #{dayStart} &lt;= create_at and create_at &lt;= #{dayEnd} and phone = #{phone}
+</select>
+
+</mapper>
