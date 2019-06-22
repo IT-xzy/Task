@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:properties/*.properties"/>
+
+    <context:component-scan base-package="cn.wp"/>
+
+    <bean id="emailServiceImpl" class="cn.wp.service.impl.EmailServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="email" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--此处的name是决定helloWorld类中的那个参数，ref是指bean配置文件中的bean名称-->
+        <property name="service" ref="emailServiceImpl"/>
+        <property name="serviceName" value="email"></property>
+        <property name="serviceInterface" value="cn.wp.service.EmailService"></property>
+        <property name="registryPort" value="8888"></property>
+    </bean>
+
+    <bean id="userServiceImpl" class="cn.wp.service.impl.UserServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="user" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--此处的name是决定helloWorld类中的那个参数，ref是指bean配置文件中的bean名称-->
+        <property name="service" ref="userServiceImpl"/>
+        <property name="serviceName" value="user"></property>
+        <property name="serviceInterface" value="cn.wp.service.UserService"></property>
+        <property name="registryPort" value="8888"></property>
+    </bean>
+
+    <bean id="mobileServiceImpl" class="cn.wp.service.impl.MobileServiceImpl"></bean>
+    <bean id="mobile" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--此处的name是决定helloWorld类中的那个参数，ref是指bean配置文件中的bean名称-->
+        <property name="service" ref="mobileServiceImpl"/>
+        <property name="serviceName" value="mobile"></property>
+        <property name="serviceInterface" value="cn.wp.service.MobileService"></property>
+        <property name="registryPort" value="8888"></property>
+    </bean>
+
+    <bean id="studentServiceImpl" class="cn.wp.service.impl.StudentServiceImpl"></bean>
+    <bean id="student" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--此处的name是决定helloWorld类中的那个参数，ref是指bean配置文件中的bean名称-->
+        <property name="service" ref="studentServiceImpl"/>
+        <property name="serviceName" value="student"></property>
+        <property name="serviceInterface" value="cn.wp.service.StudentService"></property>
+        <property name="registryPort" value="8888"></property>
+    </bean>
+
+    <bean id="professionServiceImpl" class="cn.wp.service.impl.ProfessionServiceImpl"></bean>
+    <bean id="profession" class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <!--此处的name是决定helloWorld类中的那个参数，ref是指bean配置文件中的bean名称-->
+        <property name="service" ref="professionServiceImpl"/>
+        <property name="serviceName" value="profession"></property>
+        <property name="serviceInterface" value="cn.wp.service.ProfessionService"></property>
+        <property name="registryPort" value="8888"></property>
+    </bean>
+
+    <!--数据源配置-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--mybatis与spring的整合，不需要mybatis自己的配置映射文件-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置连接数据库数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--配置Mapper文件所在位置-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--mybatis打印sql语句-->
+        <property name="configLocation" value="classpath:mybatis/mybatis.xml"></property>
+    </bean>
+
+    <!--Dao接口所在包名，spring会扫描basePackage并自动装配-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.wp.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--service层扫描-->
+    <context:component-scan base-package="cn.wp.service"/>
+
+</beans>
