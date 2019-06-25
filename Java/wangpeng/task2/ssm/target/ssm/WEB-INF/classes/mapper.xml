@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wp.dao.StudentDao">
+
+    <select id="findById" parameterType="int" resultType="cn.wp.model.Student">
+            select * from student where id =#{Id}
+        </select>
+
+    <select id="findAll" resultType="cn.wp.model.Student">
+       SELECT * FROM student
+</select>
+
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="cn.wp.model.Student">
+            insert into student (id,name,qq,type,estimatedtime,school,manner,
+            number,daily,wish,counselor,source,create_at,update_at)
+             value (#{id},#{name},#{qq},#{type},#{estimatedtime},#{school},#{manner},#{number},
+             #{daily},#{wish},#{counselor},#{source},#{create_at},#{update_at})
+        </insert>
+
+    <update id="update" parameterType="cn.wp.model.Student">
+       UPDATE student SET name=#{name},qq=#{qq},type=#{type},
+       estimatedtime=#{estimatedtime},school=#{school},manner=#{manner},number=#{number},
+       daily=#{daily},wish=#{wish},counselor=#{counselor},source=#{source},
+       create_at=#{create_at},update_at=#{update_at} WHERE ID=#{id}
+</update>
+    <delete id="delete" parameterType="cn.wp.model.Student">
+       DELETE FROM student where id=#{Id}
+</delete>
+    <!--获取我想要的得到的数据（哪个页面里的数据）,我一共从数据库里要多少条-->
+    <select id="selectProductsPage" resultType="cn.wp.model.Student">
+-- select * from student limit 0,10
+    select * from student limit #{startNum},#{pageSize}
+    </select>
+    <!--总共有多少条-->
+    <select id="selectCount" resultType="int">
+    select count(*) from student
+    </select>
+</mapper>

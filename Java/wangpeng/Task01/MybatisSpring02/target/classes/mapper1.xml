@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wp.dao.DemoDao">
+
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="cn.wp.entity.Demo">
+            insert into Demo value (#{id},#{name},#{qq},#{school})
+        </insert>
+
+    <select id="findById" parameterType="int" resultType="cn.wp.entity.Demo">
+            select * from Demo where id =#{id}
+        </select>
+
+    <select id="findAll" resultType="cn.wp.entity.Demo">
+       select  * from Demo
+</select>
+</mapper>

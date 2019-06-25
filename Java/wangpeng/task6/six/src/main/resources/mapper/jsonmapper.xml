@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wp.dao.JsonDao">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="cn.wp.entity.Json">
+        insert into json (id ,name , qq ,phone  ) VALUES (#{id} , #{name} , #{qq} , #{phone})
+    </insert>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from json where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="cn.wp.entity.Json">
+        UPDATE json set name=#{name},qq=#{qq},phone=#{phone} WHERE id=#{id}
+    </update>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="cn.wp.entity.Json">
+        select * from json where id = #{id}
+    </select>
+
+    <select id="selectAllIds" resultType="java.lang.Long">
+        select id from json
+    </select>
+
+    <select id="selectByIdList" resultType="cn.wp.entity.Json" parameterType="java.util.List">
+        select * from json where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="selectAll" resultType="cn.wp.entity.Json">
+       SELECT * FROM json
+    </select>
+
+</mapper>

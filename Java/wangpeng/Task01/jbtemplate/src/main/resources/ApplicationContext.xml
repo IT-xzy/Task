@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--1.将连接池放入spring容器中-->
+    <bean name="datasoure" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+        <!--useSSL=true:打开ssl连接，去掉Establishing SSL警告-->
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/student?serverTimezone=Asia/Shanghai"></property>
+        <property name="user" value="root"></property>
+        <property name="password" value="1201"></property>
+    </bean>
+
+    <!--2.将JDBCTemplate注入到spring容器中-->
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="datasoure"></property>
+    </bean>
+
+    <!--3.将StudentDao注入到spring容器中-->
+    <bean name="StudentDao" class="cn.wp.service.StudentDaoImpl">
+        <property name="jTemplate" ref="jdbcTemplate"/>
+    </bean>
+</beans>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:*.properties"/>
+
+    <!-- 配置包扫描器 -->
+    <context:component-scan base-package="cn.wp"/>
+
+    <!-- 具体controller包的路径取决于你新建的java代码的controller层包  -->
+    <!--<context:component-scan base-package="cn.wp.controller"/>-->
+
+    <!-- 配置注解驱动-->
+    <mvc:annotation-driven/>
+    <!--静态资源访问-->
+    <mvc:default-servlet-handler/>
+    <!--配置静态资源映射-->
+    <mvc:resources location="/static/images/" mapping="/images/**"/>
+
+    <mvc:resources location="/static/css/" mapping="/css/**"/>
+
+    <mvc:resources location="/static/js/" mapping="/js/**"/>
+
+    <!--放一个视图解析器，解析视图（所有的jsp文件），就是浏览器上看到的东西，解析我才能看见-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--tiles框架的视图解析器-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1"/>
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <!-- 指定所上传文件的总大小,单位字节。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize" value="10240000"/>
+    </bean>
+
+    <bean id="emailUtil" class="cn.wp.utils.EmailUtil">
+        <constructor-arg name="url" value="http://api.sendcloud.net/apiv2/mail/send"></constructor-arg>
+        <constructor-arg name="apiUser" value="wangpengwpw_test_2MtxE7"></constructor-arg>
+        <constructor-arg name="apiKey" value="j2GuV0y6YIMmJvXf"></constructor-arg>
+        <constructor-arg name="subject" value="您的验证邮件"></constructor-arg>
+    </bean>
+
+    <bean id="smsUtil" class="cn.wp.utils.SmsUtil">
+        <!-- 构造函数方式注入的时候必须配置构造函数的参数 -->
+        <constructor-arg name="accountSid" value="8a216da86b2bc78f016b492f7ba612ab"></constructor-arg>
+        <constructor-arg name="accountToken" value="4d4b70d9e5b643e688bd7e7219f1cbb0"></constructor-arg>
+        <constructor-arg name="serverIp" value="app.cloopen.com"></constructor-arg>
+        <constructor-arg name="serverPort" value="8883"></constructor-arg>
+        <constructor-arg name="appId" value="8aaf07086b2bcfcf016b4b1a5bf8163f"></constructor-arg>
+        <constructor-arg name="templateId" value="1"></constructor-arg>
+        <constructor-arg name="time" value="5"></constructor-arg>
+    </bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <!-- 登录认证拦截器 -->
+        <mvc:interceptor>
+            <!--/** 表示所有url包括子url路径 -->
+            <mvc:mapping path="/u/**"/>
+            <bean class="cn.wp.interceptor.LoginInterceptor"/>
+            <!--设置拦截器路径-->
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+    <!--springMessage-->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <set>
+                <value>classpath:message</value>
+            </set>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
+    <!-- 云存储     -->
+    <bean id="Ali" class="cn.wp.utils.AliUtil">
+        <constructor-arg name="endpoint" value="http://oss-cn-beijing.aliyuncs.com"></constructor-arg>
+        <constructor-arg name="accessKeyId" value="LTAIorqiTz9CaG3E"></constructor-arg>
+        <constructor-arg name="accessKeySecret" value="vG7uSBNuxr5RP8KTN3Anu9SSXz1Z26"></constructor-arg>
+        <constructor-arg name="bucketName" value="wangpengwpw"></constructor-arg>
+    </bean>
+
+    <bean id="tengXun" class="cn.wp.utils.TengXunUtil">
+        <constructor-arg name="secretId" value="AKIDzCj02sqq447Thfx4kALZEgtqXUDi40sU"></constructor-arg>
+        <constructor-arg name="secretKey" value="X5XjfLRM4Wp2f290cynTxHL8fGdkjSwA"></constructor-arg>
+        <constructor-arg name="regionName" value="ap-chengdu"></constructor-arg>
+        <constructor-arg name="bucketName" value="wangpeng-1259443846"></constructor-arg>
+    </bean>
+
+    <!-- 自动扫描 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="cn.wp"/>
+    <!-- 启动对@Aspect注解的支持 -->
+    <!--通知spring使用cglib而不是jdk来生成代理方法，AOP可以拦截到Controller-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+</beans>

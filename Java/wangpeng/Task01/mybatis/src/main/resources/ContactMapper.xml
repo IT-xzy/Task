@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--namespace:命名空间，用于隔离sql-->
+<mapper namespace="test">
+
+    <!--id：statement的id或者叫做sql的id-->
+    <!--parameterType：声明输入参数的类型-->
+    <!--resultType：声明输出结果的类型，用来填写pojo的全路径-->
+    <!--#{}：输入参数的站位符，相当于jdbc的"?"-->
+    <!--注意表格contact的书写类型，不要加引号-->
+    <select id="queryContactById" parameterType="int" resultType="cn.wp.pojo.Contact">
+     select * from Contact where id =#{ID}
+  </select>
+
+    <!--如果返回多个结果，mybatis会自动把返回的结果放在list容器中-->
+    <!--resultType的配置和返回一个结果的配置一样-->
+    <!--根据Gender单个字段返回值查询模糊数据-->
+    <select id="queryContactByGender" parameterType="String" resultType="cn.wp.pojo.Contact">
+     select * from Contact where Gender like "%${value}%"
+  </select>
+
+    <!--添加用户数据-->
+    <insert id="addContact">
+  insert into Contact (ID,Name,Email,QQ,Gender) value (#{ID},#{Name},#{Email},#{QQ},#{Gender})
+</insert>
+
+    <!--更改用户数据-->
+    <update id="updateContact">
+  update Contact set Name=#{Name},Email=#{Email},QQ=#{QQ},Gender=#{Gender} where id=#{ID}
+</update>
+
+    <!--删除用户数据-->
+    <delete id="deleteContactById">
+  delete from Contact where id=#{ID}
+</delete>
+</mapper>

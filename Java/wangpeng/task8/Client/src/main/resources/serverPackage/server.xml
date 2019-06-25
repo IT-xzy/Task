@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--客户端一-->
+    <bean id="email" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="cn.wp.service.EmailService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/email"></property>
+    </bean>
+
+    <bean id="user" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="cn.wp.service.UserService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/user"></property>
+    </bean>
+
+    <bean id="mobile" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="cn.wp.service.MobileService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/mobile"></property>
+    </bean>
+
+    <bean id="student" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="cn.wp.service.StudentService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/student"></property>
+    </bean>
+
+    <bean id="profession" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="cn.wp.service.ProfessionService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8888/profession"></property>
+    </bean>
+
+</beans>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wp.dao.ContactDao" >
+
+    <select id="findById" parameterType="int" resultType="cn.wp.entity.Contact">
+            select * from Contact where id =#{ID}
+        </select>
+
+    <select id="findAll" resultType="cn.wp.entity.Contact">
+       SELECT * FROM Contact
+</select>
+
+    <insert id="add" keyProperty="id" useGeneratedKeys="true" parameterType="cn.wp.entity.Contact">
+            insert into Contact (ID,Name,Email,QQ,Gender) value (#{ID},#{Name},#{Email},#{QQ},#{Gender})
+        </insert>
+
+    <update id="update" parameterType="cn.wp.entity.Contact">
+       UPDATE Contact SET Name=#{Name},Email=#{email},QQ=#{QQ},Gender=#{Gender} WHERE ID=#{ID}
+
+</update>
+    <delete id="delete" parameterType="cn.wp.entity.Contact">
+       DELETE FROM Contact where id=#{ID}
+</delete>
+
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding= "UTF-8"?>
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <!-- 定义一个短名,可以随意取 -->
+    <short-name>date</short-name>
+
+    <!-- 配置成tld文件的位置，uri用于在jsp页面中引入自定义标签，需要特别一致 -->
+    <!--<uri>/WEB-INF/dateTag</uri>-->
+
+    <tag>
+        <!-- 标签在jsp中使用的名称 -->
+        <name>date</name>
+        <!-- 标签实现类 -->
+        <tag-class>cn.wp.tag.DateTag</tag-class>
+        <!--标签体-->
+        <body-content>JSP</body-content>
+
+        <!--标签属性的信息(现在没有) 如果有属性，在标签实现类中set/get-->
+        <attribute>
+            <!-- 参数名称 -->
+            <name>value</name>
+            <!-- 是否必传 -->
+            <required>true</required>
+            <!-- 是否可用jsp表达式 -->
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <!-- 你定义的标签的名称 -->
+        <name>wang</name>
+        <!-- 对应的标签处理程序：包名+类名 -->
+        <tag-class>cn.wp.tag.Test</tag-class>
+        <!-- 标签体内容的格式 -->
+        <body-content>JSP</body-content>
+    </tag>
+
+</taglib>
