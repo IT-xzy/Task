@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--和Usermapper进行映射-->
+<mapper namespace="com.jnshu.Mapper.UserMapper">
+    <!--结果集和实体类映射-->
+    <resultMap id="BaseResultMap" type="com.jnshu.Entity.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="career" jdbcType="VARCHAR" property="name"/>
+        <result column="email" jdbcType="VARCHAR" property="name"/>
+        <result column="createtime" jdbcType="BIGINT" property="createTime"/>
+    </resultMap>
+
+<!--sql语句-->
+    <insert id="insert" parameterType="cn.wp.model.User">
+   insert into user (name,password) VALUES (#{name},#{password})
+</insert>
+    <select id="selectByName" resultMap="BaseResultMap">
+   select * from user where name = #{name}
+</select>
+    <select id="selectByCondition" resultMap="BaseResultMap">
+   select * from user where name = #{name} and password = #{password}
+</select>
+    <select id="selectAll" resultMap="BaseResultMap">
+   select * from user
+</select>
+
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jnshu.mapper.FirstWorksMapper">
+    <resultMap id="BaseResultMap" type="jnshu.model.FirstWorks">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="first_name" jdbcType="VARCHAR" property="firstName"/>
+        <result column="status" jdbcType="BIGINT" property="status"/>
+        <result column="state_at" jdbcType="BIGINT" property="stateAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+        <result column="state_by" jdbcType="BIGINT" property="stateBy"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, first_name, status, state_at, update_at, state_by, update_by
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from first_works
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from first_works
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="jnshu.model.FirstWorks">
+    insert into first_works (id, first_name, status, 
+      state_at, update_at, state_by, 
+      update_by)
+    values (#{id,jdbcType=BIGINT}, #{firstName,jdbcType=VARCHAR}, #{status,jdbcType=BIGINT},
+      #{stateAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, #{stateBy,jdbcType=BIGINT},
+      #{updateBy,jdbcType=BIGINT})
+  </insert>
+    <insert id="insertSelective" parameterType="jnshu.model.FirstWorks">
+        insert into first_works
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="firstName != null">
+                first_name,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="stateAt != null">
+                state_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="stateBy != null">
+                state_by,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="firstName != null">
+                #{firstName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIGINT},
+            </if>
+            <if test="stateAt != null">
+                #{stateAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="stateBy != null">
+                #{stateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="jnshu.model.FirstWorks">
+        update first_works
+        <set>
+            <if test="firstName != null">
+                first_name = #{firstName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=BIGINT},
+            </if>
+            <if test="stateAt != null">
+                state_at = #{stateAt,jdbcType=BIGINT},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=BIGINT},
+            </if>
+            <if test="stateBy != null">
+                state_by = #{stateBy,jdbcType=BIGINT},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="jnshu.model.FirstWorks">
+    update first_works
+    set first_name = #{firstName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIGINT},
+      state_at = #{stateAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      state_by = #{stateBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByDynamicCondition" resultMap="BaseResultMap" parameterType="jnshu.model.FirstWorks">
+        select * from first_works
+        <where>
+            <if test="firstName!=null">
+                and first_name like concat('%','${firstName}','%' )
+            </if>
+            <if test="status!=null">
+                and status =#{status}
+            </if>
+        </where>
+    </select>
+
+</mapper>
