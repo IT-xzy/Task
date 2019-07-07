@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--和Usermapper进行映射-->
+<mapper namespace="com.jnshu.mapper.UserMapper">
+    <!--结果集和实体类映射-->
+    <resultMap id="BaseResultMap" type="com.jnshu.model.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+    </resultMap>
+
+    <!--sql语句-->
+    <insert id="insert" parameterType="com.jnshu.model.User">
+   insert into user (name,password,phone,code) VALUES (#{name},#{password},#{phone},#{code})
+</insert>
+    <select id="selectByName" resultMap="BaseResultMap">
+   select * from user where name = #{name}
+</select>
+    <select id="selectByCondition" resultMap="BaseResultMap">
+   select * from user where name = #{name} and password = #{password}
+</select>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+   select * from user where id = #{id}
+</select>
+    <select id="selectByPhone" resultMap="BaseResultMap">
+   select * from user where phone = #{phone} and code = #{code}
+</select>
+    <insert id="insertByPhone" >
+   insert into user (phone,code) VALUES (#{phone},#{code})
+</insert>
+</mapper>
