@@ -1,0 +1,25 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         id="WebApp_ID" version="3.0">
+  <display-name>Archetype Created Web Application</display-name>
+
+    <!-- 加载spring的配置文件-->
+    <!-- ContextLoaderListener监听器：监听Web容器，一旦启动，自动装配ApplicationContext的配置信息 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>com.jnshu.Begin</listener-class>
+    </listener>
+
+
+</web-app>
