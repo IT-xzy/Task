@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.UserMapper">
+
+    <resultMap id="resultMap" type="com.model.User">
+        <!-- 定义主键 ,非常重要。如果是多个字段,则定义多个id -->
+        <!-- property：主键在pojo中的属性名 -->
+        <!-- column：主键在数据库中的列名 -->
+        <id property="id" column="id"/>
+        <!-- 定义普通属性 -->
+        <result property="create_at" column="create_at"/>
+        <result property="update_at" column="update_at"/>
+        <result property="name" column="name"/>
+        <result property="qq" column="qq"/>
+        <result property="job" column="job"/>
+        <result property="start_time" column="start_time"/>
+        <result property="college" column="college"/>
+        <result property="number" column="number"/>
+        <result property="daily_url" column="daily_url"/>
+        <result property="wish" column="wish"/>
+        <result property="brother" column="brother"/>
+        <result property="referee" column="referee"/>
+        <result property="city" column="city"/>
+        <result property="review" column="review"/>
+    </resultMap>
+    <!--查找全表-->
+    <select id="findAll" resultMap="resultMap">
+        select * from stu
+    </select>
+    <!--模糊查找-->
+    <select id="selectByName" parameterType="string" resultType="user">
+        <bind name="name" value="'%' + name + '%'"></bind>
+        SELECT * FROM stu WHERE name LIKE #{name}
+    </select>
+    <!--通过ID查找-->
+    <select id="findById" resultMap="resultMap">
+        select * from stu where stu.id = #{id}
+    </select>
+
+    <!--条件查找-->
+    <select id="getUserByCondition" resultType="user">
+  	<![CDATA[
+        select * from stu where name = #{name} and number = #{number}
+        ]]>
+  </select>
+    <!--修改-->
+    <update id="update" parameterType="com.model.User">
+        update stu set name=#{name},qq=#{qq} where id=#{id}
+    </update>
+    <!--插入-->
+    <insert id="insert" parameterType="com.model.User" useGeneratedKeys="true" keyProperty="id">
+          insert into stu(id,createAt,updateAt,name,qq,job,startTime,college,number,dailyUrl,wish,brother,referee,city,review)
+             values(#{id},#{createAt},#{updateAt},#{name},#{qq},#{job},#{startTime},#{college},#{number},#{dailyUrl},#{wish},#{brother},#{referee},#{city},#{review})
+    </insert>
+    <!--删除-->
+    <delete id="delete" parameterType="com.model.User">
+         delete from stu where id = #{id}
+     </delete>
+
+
+</mapper>
