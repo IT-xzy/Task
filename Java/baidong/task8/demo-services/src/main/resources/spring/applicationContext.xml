@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="bannerServiceImpl" class="com.jnshu.service.impl.BannerServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="banner" class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="service" ref="bannerServiceImpl"/>
+        <property name="serviceName" value="banner"></property>
+        <property name="serviceInterface" value="com.jnshu.service.BannerService"></property>
+        <property name="registryPort" value="8085"></property>
+    </bean>
+
+    <bean id="careerbannerServiceImpl" class="com.jnshu.service.impl.CareerServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="career" class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="service" ref="careerbannerServiceImpl"/>
+        <property name="serviceName" value="career"></property>
+        <property name="serviceInterface" value="com.jnshu.service.CareerService"></property>
+        <property name="registryPort" value="8085"></property>
+    </bean>
+
+    <bean id="enterpriseServiceImpl" class="com.jnshu.service.impl.EnterpriseServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="enterprise" class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="service" ref="enterpriseServiceImpl"/>
+        <property name="serviceName" value="enterprise"></property>
+        <property name="serviceInterface" value="com.jnshu.service.EnterpriseService"></property>
+        <property name="registryPort" value="8085"></property>
+    </bean>
+
+    <bean id="modelServiceImpl" class="com.jnshu.service.impl.ModelServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="model" class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="service" ref="modelServiceImpl"/>
+        <property name="serviceName" value="model"></property>
+        <property name="serviceInterface" value="com.jnshu.service.ModelService"></property>
+        <property name="registryPort" value="8085"></property>
+    </bean>
+
+    <bean id="studentServiceImpl" class="com.jnshu.service.impl.StudentServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="student" class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="service" ref="studentServiceImpl"/>
+        <property name="serviceName" value="student"></property>
+        <property name="serviceInterface" value="com.jnshu.service.StudentService"></property>
+        <property name="registryPort" value="8085"></property>
+    </bean>
+
+    <bean id="userServiceImpl" class="com.jnshu.service.impl.UserServiceImpl"></bean>
+    <!-- 将一个类发布为一个RMI服务 -->
+    <bean id="user" class="org.springframework.remoting.rmi.RmiServiceExporter">
+
+        <property name="service" ref="userServiceImpl"/>
+        <property name="serviceName" value="user"></property>
+        <property name="serviceInterface" value="com.jnshu.service.UserService"></property>
+        <property name="registryPort" value="8085"></property>
+    </bean>
+
+    <!--&lt;!&ndash;AOP打印日志   扫描service层下的文件&ndash;&gt;-->
+    <!--    <context:component-scan base-package="jnshu.Aop">-->
+    <!--    </context:component-scan>-->
+    <!--    <aop:aspectj-autoproxy proxy-target-class="true"/>-->
+    <!-- 1.引入属性文件 -->
+    <context:property-placeholder location="classpath:spring/db.properties"/>
+
+    <!-- 2.自动扫描service包(自动注入) -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.jnshu"/>
+    <context:component-scan base-package="com.jnshu.mapper"/>
+    <!-- ========================================配置数据源========================================= -->
+    <!-- 3.配置C3P0数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <!--驱动类名 -->
+        <property name="driverClass" value="${db.driver}"/>
+        <!-- url -->
+        <property name="jdbcUrl" value="${db.url}"/>
+        <!-- 用户名 -->
+        <property name="user" value="${db.username}"/>
+        <!-- 密码 -->
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+    <!-- ========================================针对myBatis的配置项============================== -->
+    <!-- 4.配置sqlSessionFactory 进行spirng-mybatis的整合-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+        <!-- 将数据源引进来 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- sql映射文件路径mapper.xml -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+    </bean>
+
+
+    <!-- 5.配置扫描器  -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描com.demo.dao这个包以及它的子包下的所有映射接口类 -->
+        <property name="basePackage" value="com.jnshu.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <!--不要事务管理器-->
+</beans>

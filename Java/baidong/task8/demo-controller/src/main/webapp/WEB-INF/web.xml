@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/applicationContext.xml</param-value>
+    </context-param>
+
+
+    <!-- 使用ContextLoaderListener初始化Spring容器 -->
+    <!--若没有指定其他参数，默认查找的配置文件位置是：/WEB-INF/applicationContext.xml  -->
+    <listener>
+        <description>Spring容器加载监听器</description>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!--监听在线人数-->
+    <listener>
+        <listener-class>com.jnshu.Listener</listener-class>
+    </listener>
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
+
+    <!-- 配置springmvc核心控制器 -->
+    <!-- spring MVC servlet -->
+    <servlet>
+        <servlet-name>SpringMVC</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <description>spring MVC 配置文件路径</description>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <!-- 启动动优先级，越小越早加载 -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <!--  Servlet访问的路径映射，所有的访问都必须经过调度用的前置控制器 &ndash;&gt;-->
+    <servlet-mapping>
+        <servlet-name>SpringMVC</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <!-- 自定义TAG标签 -->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>/tags</taglib-uri>
+            <!-- tld文件所在的位置 -->
+            <taglib-location>/WEB-INF/dateTag.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+
+
+    <!--    过滤器-->
+    <filter>
+        <filter-name>MyFilter</filter-name>
+        <filter-class>com.jnshu.UserMyFilter</filter-class>
+    </filter>
+
+    <!--元素用于设置一个 Filter 所负责拦截的资源。
+    一个Filter拦截的资源可通过两种方式来指定：
+    Servlet 名称和资源访问的请求路径-->
+    <filter-mapping>
+        <!--子元素用于设置filter的注册名称。
+        该值必须是在<filter>元素中声明过的过滤器的名字-->
+        <filter-name>MyFilter</filter-name>
+        <!--设置 filter 所拦截的请求路径(过滤器关联的URL样式)-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
