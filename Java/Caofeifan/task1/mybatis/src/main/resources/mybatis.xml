@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--配置文件-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--配置-->
+<configuration>
+    <!--mybatis别名定义-->
+    <typeAliases>
+        <typeAlias alias="User" type="com.pojo.User"/>
+    </typeAliases>
+    <!--环境的配置-->
+    <environments default="development">
+        <environment id="development">
+            <!--事务处理器类型-->
+            <transactionManager type="JDBC"/>
+            <!--数据源类型-->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/student?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;rewriteBatchedStatements=true"/>
+                <property name="username" value="root"/>
+                <property name="password" value="CC188794496"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!-- mybatis的mapper文件，每个xml文件对应一个接口 -->
+    <mappers>
+        <!-- 注册UserDao文件，
+19       -->
+        <mapper class="com.dao.UserDao"/>
+    </mappers>
+    <!-- 配置log4j-->
+</configuration>
