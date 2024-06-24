@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:scan="http://www.springframework.org/schema/sca"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/sca http://www.osoa.org/xmlns/sca/1.0/spring-sca.xsd
+">
+
+    <context:component-scan base-package="com.jnshu"/>
+
+    <bean id="userService" class="com.jnshu.service.Impl.UserServiceImpl"/>
+
+    <!--  type里是service接口路径，target里是实现类在ioc容器中的id，就是上面bean的id -->
+    <scan:service name="userService" type="com.jnshu.service.UserService" target="userService"/>
+
+       <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+       <!-- 基本属性 url、user、password -->
+       <property name="url" value="jdbc:mysql://47.101.44.37:3306/task"/>
+       <property name="username" value="root"/>
+       <property name="password" value="111111Bd."/>
+       <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+       <!-- 配置初始化大小、最小、最大 -->
+       <property name="initialSize" value="3"/>
+       <property name="minIdle" value="3"/>
+       <property name="maxActive" value="20"/>
+
+       <!-- 配置获取连接等待超时的时间 -->
+       <property name="maxWait" value="60000"/>
+
+       <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+       <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+
+       <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+       <property name="minEvictableIdleTimeMillis" value="300000"/>
+
+       <property name="validationQuery" value="SELECT 1"/>
+       <property name="testWhileIdle" value="true"/>
+       <property name="testOnBorrow" value="false"/>
+       <property name="testOnReturn" value="false"/>
+
+       <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+       <property name="poolPreparedStatements" value="true"/>
+       <property name="maxPoolPreparedStatementPerConnectionSize" value="20"/>
+   </bean>
+
+   <!-- 让spring管理sqlSessionFactory -->
+   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+       <property name="dataSource" ref="dataSource"/>
+       <!--mapper文件位置-->
+       <property name="mapperLocations" value="classpath*:mapper/*.xml"/>
+   </bean>
+   <!--MapperScannerConfigurer将会扫描basePackage并自动装配-->
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+       <property name="basePackage" value="com.jnshu.mapper"/>
+   </bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 1.引入属性文件 -->
+<!--    <context:property-placeholder location="classpath:db.properties"/>-->
+
+<!--    &lt;!&ndash; 2.自动扫描service包(自动注入) &ndash;&gt;-->
+
+<!--    <context:component-scan base-package="com.jnshu"/>-->
+
+<!--    &lt;!&ndash; ========================================配置数据源========================================= &ndash;&gt;-->
+<!--    &lt;!&ndash; 3.配置C3P0数据源 &ndash;&gt;-->
+<!--    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"-->
+<!--          destroy-method="close">-->
+<!--        &lt;!&ndash;驱动类名 &ndash;&gt;-->
+<!--        <property name="driverClass" value="${db.driver}"/>-->
+<!--        &lt;!&ndash; url &ndash;&gt;-->
+<!--        <property name="jdbcUrl" value="${db.url}"/>-->
+<!--        &lt;!&ndash; 用户名 &ndash;&gt;-->
+<!--        <property name="user" value="${db.username}"/>-->
+<!--        &lt;!&ndash; 密码 &ndash;&gt;-->
+<!--        <property name="password" value="${db.password}"/>-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash; ========================================针对myBatis的配置项============================== &ndash;&gt;-->
+<!--    &lt;!&ndash; 4.配置sqlSessionFactory 进行spirng-mybatis的整合&ndash;&gt;-->
+<!--    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        &lt;!&ndash; 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 &ndash;&gt;-->
+<!--        &lt;!&ndash; 将数据源引进来 &ndash;&gt;-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--        &lt;!&ndash; sql映射文件路径mapper.xml &ndash;&gt;-->
+<!--        <property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+<!--        <property name="configLocation" value="classpath:mybatis-config.xml"></property>-->
+<!--    </bean>-->
+
+
+<!--    &lt;!&ndash; 5.配置扫描器  &ndash;&gt;-->
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        &lt;!&ndash; 扫描com.demo.dao这个包以及它的子包下的所有映射接口类 &ndash;&gt;-->
+<!--        <property name="basePackage" value="com.jnshu.mapper"/>-->
+<!--        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+<!--    </bean>-->
+
+
+<!--    &lt;!&ndash;不要事务管理器&ndash;&gt;-->
+</beans>

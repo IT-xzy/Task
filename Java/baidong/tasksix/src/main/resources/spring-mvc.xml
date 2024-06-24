@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		">
+
+    <context:component-scan base-package="jnshu"></context:component-scan>
+
+
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 也可以将jdbc写成properties文件在此导入 -->
+        <property name="locations">
+            <list>
+                <value>classpath:memcache.properties</value>
+                <value>classpath:redis.properties</value>
+                <value>classpath:db.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!-- 激活@controller模式-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+
+    <!--加载静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <!--放一个视图解析器，解析视图（所有的jsp文件），就是浏览器上看到的东西，解析我才能看见-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          id="internalResourceViewResolver">
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!-- 3.配置C3P0数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <!--驱动类名 -->
+        <property name="driverClass" value="${db.driver}"/>
+        <!-- url -->
+        <property name="jdbcUrl" value="${db.url}"/>
+        <!-- 用户名 -->
+        <property name="user" value="${db.username}"/>
+        <!-- 密码 -->
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+
+    <!-- ========================================针对myBatis的配置项============================== -->
+    <!-- 4.配置sqlSessionFactory 进行spirng-mybatis的整合-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 实例化sqlSessionFactory时需要使用上述配置好的数据源以及SQL映射文件 -->
+        <!-- 将数据源引进来 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- sql映射文件路径mapper.xml -->
+        <property name="mapperLocations" value="classpath:UserMapper.xml"/>
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
+    </bean>
+
+    <!-- 5.配置扫描器  -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描com.demo.dao这个包以及它的子包下的所有映射接口类 -->
+        <property name="basePackage" value="jnshu.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <set>
+                <value>classpath:message</value>
+            </set>
+        </property>
+        <property name="useCodeAsDefaultMessage" value="false"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="cacheSeconds" value="60"/>
+    </bean>
+
+
+    <!-- spring 集成缓存服务器（memcached） -->
+    <bean id="memcachedPool" class="com.danga.MemCached.SockIOPool"
+          factory-method="getInstance" init-method="initialize" destroy-method="shutDown">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+        <!--可以设置多个memcachePool服务器-->
+        <property name="servers">
+            <list>
+                <value>127.0.0.1:11211</value>
+            </list>
+        </property>
+        <!-- 每台服务器的初始连接 -->
+        <property name="initConn">
+            <value>10</value>
+        </property>
+        <!-- 每台服务器的最小连接 -->
+        <property name="minConn">
+            <value>5</value>
+        </property>
+        <!-- 每台服务器的最大连接 -->
+        <property name="maxConn">
+            <value>50</value>
+        </property>
+
+        <!--主线程睡眠时间-->
+        <property name="maintSleep">
+            <value>3000</value>
+        </property>
+
+        <!--Tcp/Socket 的参数, 如果是true在写数据时不会缓冲, 会立即发出-->
+        <property name="nagle">
+            <value>false</value>
+        </property>
+        <!--连接超时/阻塞读取时间的超时时间-->
+        <property name="socketTO">
+            <value>3000</value>
+        </property>
+    </bean>
+    <bean id="memCachedClient" class="com.danga.MemCached.MemCachedClient">
+        <constructor-arg>
+            <value>memCachedPool</value>
+        </constructor-arg>
+    </bean>
+        <import resource="classpath:spring-redis.xml"/>
+
+</beans>

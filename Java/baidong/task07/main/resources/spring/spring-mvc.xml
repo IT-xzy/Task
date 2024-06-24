@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+    <!--&lt;!&ndash;    扫描controller层下的文件&ndash;&gt;-->
+    <!--    <context:component-scan base-package="jnshu.Aop">-->
+    <!--    </context:component-scan>-->
+    <!--    <aop:aspectj-autoproxy proxy-target-class="true"/>-->
+    <!--      1.自动扫描包，实现支持注解的IOC-->
+    <!--     自动扫描该包，使springmvc认为包下用了@Controller注解的类是控制器-->
+    <context:component-scan base-package="com.jnshu.controller"/>
+
+
+    <!-- 2.配置注解的处理器映射器和处理器适配器 -->
+    <!-- <mvc:annotation-driven /> 是一种简写形式，完全可以手动配置替代这种简写形式，简写形式可以让初学者
+        快速应用默认配置方案。<mvc:annotation-driven /> 会自动注册DefaultAnnotationHandlerMapping与
+        AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的。 -->
+    <mvc:annotation-driven/>
+
+    <!-- 3.Spring MVC处理静态资源  -->
+    <!--    第一种方法-->
+    <!--        <mvc:default-servlet-handler/>-->
+    <!--    第二种方法-->
+    <!--    配置静态资源映射-->
+    <mvc:resources mapping="/imges/**" location="/WEB-INF/jsp/zero/images/"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/jsp/zero/css/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/jsp/zero/js/"/>
+    <!-- 4.配置内部视图解析器 -->
+    <!-- 对模型视图名称的解析,即在模型视图名称添加前后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- tiles整合 start-->
+    <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order="1">
+    </bean>
+    <bean id="tilesConfigurer"
+          class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <property name="definitions">
+            <list>
+                <value>/WEB-INF/tiles.xml</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+    <!--        <property name="messageConverters">-->
+    <!--          <list>-->
+    <!--            <ref bean="mappingJackson2HttpMessageConverter" />-->
+    <!--          </list>-->
+    <!--        </property>-->
+    <!--      </bean>-->
+
+
+    <bean id="mappingJackson2HttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/json;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--message信息-->
+    <!--    <bean id="messageSource"-->
+    <!--          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">-->
+    <!--        <property name="basenames">-->
+    <!--            <set>-->
+    <!--                <value>classpath:message</value>-->
+    <!--            </set>-->
+    <!--        </property>-->
+    <!--        <property name="useCodeAsDefaultMessage" value="false"/>-->
+    <!--        <property name="defaultEncoding" value="UTF-8"/>-->
+    <!--    </bean>-->
+
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，顺序执行 -->
+        <!-- 登录认证拦截器 -->
+        <mvc:interceptor>
+            <!--/** 表示所有url包括子url路径 -->
+            <mvc:mapping path="/a/u/**"/>
+            <bean class="com.jnshu.Interceptor.LoginInterceptor"/>
+            <!--设置拦截器路径-->
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <!--    如果一个路径只是为了转发页面，不做任何的业务处理，可以在mvc中配置，path是url。view-name是要转到的jsp-->
+    <!--    <mvc:view-controller path="/a/register" view-name="register"/>-->
+    <mvc:view-controller path="/login" view-name="login"/>
+    <!-- 多媒体文件解析器 -->
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 最大允许上传大小5MB -->
+        <property name="maxUploadSize" value="1024000"/>
+
+        <property name="defaultEncoding" value="UTF-8"></property>
+    </bean>
+</beans>

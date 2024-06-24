@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 客户端 -->
+    <bean id="banner" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.BannerService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8085/banner"></property>
+    </bean>
+    <bean id="career" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.CareerService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8085/career"></property>
+    </bean>
+    <bean id="enterprise" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.EnterpriseService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8085/enterprise"></property>
+    </bean>
+    <bean id="model" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.ModelService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8085/model"></property>
+    </bean>
+
+    <bean id="student" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.StudentService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8085/student"></property>
+    </bean>
+
+    <bean id="user" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="com.jnshu.service.UserService"></property>
+        <property name="serviceUrl" value="rmi://127.0.0.1:8085/user"></property>
+    </bean>
+</beans>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jnshu.mapper.LeaveCommentsMapper">
+    <resultMap id="BaseResultMap" type="jnshu.model.LeaveComments">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="works_title" jdbcType="BIGINT" property="worksTitle"/>
+        <result column="user_name" jdbcType="BIGINT" property="userName"/>
+        <result column="message_status" jdbcType="BIGINT" property="messageStatus"/>
+        <result column="message" jdbcType="VARCHAR" property="message"/>
+        <result column="answer" jdbcType="VARCHAR" property="answer"/>
+        <result column="create_at" jdbcType="BIGINT" property="createAt"/>
+        <result column="update_at" jdbcType="BIGINT" property="updateAt"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
+
+
+        <association property="works" javaType="jnshu.model.Works">
+            <id column="id" jdbcType="BIGINT" property="id"/>
+            <result column="works_name" jdbcType="VARCHAR" property="worksName"/>
+        </association>
+    </resultMap>
+<sql id="Base_Column_List">
+    id, works_title, user_name, message_status, message, answer, create_at, update_at, 
+    create_by, update_by
+  </sql>
+<select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+select
+<include refid="Base_Column_List"/>
+from leave_comments
+where id = #{id,jdbcType=BIGINT}
+</select>
+<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from leave_comments
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+<insert id="insert" parameterType="jnshu.model.LeaveComments">
+    insert into leave_comments (id, works_title, user_name, 
+      message_status, message, answer, 
+      create_at, update_at, create_by, 
+      update_by)
+    values (#{id,jdbcType=BIGINT}, #{worksTitle,jdbcType=BIGINT}, #{userName,jdbcType=BIGINT}, 
+      #{messageStatus,jdbcType=BIGINT}, #{message,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
+      #{createAt,jdbcType=BIGINT}, #{updateAt,jdbcType=BIGINT}, #{createBy,jdbcType=BIGINT}, 
+      #{updateBy,jdbcType=BIGINT})
+  </insert>
+<insert id="insertSelective" parameterType="jnshu.model.LeaveComments">
+insert into leave_comments
+<trim prefix="(" suffix=")" suffixOverrides=",">
+    <if test="id != null">
+        id,
+    </if>
+    <if test="worksTitle != null">
+        works_title,
+    </if>
+    <if test="userName != null">
+        user_name,
+    </if>
+    <if test="messageStatus != null">
+        message_status,
+    </if>
+    <if test="message != null">
+        message,
+    </if>
+    <if test="answer != null">
+        answer,
+    </if>
+    <if test="createAt != null">
+        create_at,
+    </if>
+    <if test="updateAt != null">
+        update_at,
+    </if>
+    <if test="createBy != null">
+        create_by,
+    </if>
+    <if test="updateBy != null">
+        update_by,
+    </if>
+</trim>
+<trim prefix="values (" suffix=")" suffixOverrides=",">
+    <if test="id != null">
+        #{id,jdbcType=BIGINT},
+    </if>
+    <if test="worksTitle != null">
+        #{worksTitle,jdbcType=BIGINT},
+    </if>
+    <if test="userName != null">
+        #{userName,jdbcType=BIGINT},
+    </if>
+    <if test="messageStatus != null">
+        #{messageStatus,jdbcType=BIGINT},
+    </if>
+    <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+    </if>
+    <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+    </if>
+    <if test="createAt != null">
+        #{createAt,jdbcType=BIGINT},
+    </if>
+    <if test="updateAt != null">
+        #{updateAt,jdbcType=BIGINT},
+    </if>
+    <if test="createBy != null">
+        #{createBy,jdbcType=BIGINT},
+    </if>
+    <if test="updateBy != null">
+        #{updateBy,jdbcType=BIGINT},
+    </if>
+</trim>
+</insert>
+<update id="updateByPrimaryKeySelective" parameterType="jnshu.model.LeaveComments">
+update leave_comments
+<set>
+    <if test="worksTitle != null">
+        works_title = #{worksTitle,jdbcType=BIGINT},
+    </if>
+    <if test="userName != null">
+        user_name = #{userName,jdbcType=BIGINT},
+    </if>
+    <if test="messageStatus != null">
+        message_status = #{messageStatus,jdbcType=BIGINT},
+    </if>
+    <if test="message != null">
+        message = #{message,jdbcType=VARCHAR},
+    </if>
+    <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+    </if>
+    <if test="createAt != null">
+        create_at = #{createAt,jdbcType=BIGINT},
+    </if>
+    <if test="updateAt != null">
+        update_at = #{updateAt,jdbcType=BIGINT},
+    </if>
+    <if test="createBy != null">
+        create_by = #{createBy,jdbcType=BIGINT},
+    </if>
+    <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=BIGINT},
+    </if>
+</set>
+where id = #{id,jdbcType=BIGINT}
+</update>
+<update id="updateByPrimaryKey" parameterType="jnshu.model.LeaveComments">
+    update leave_comments
+    set works_title = #{worksTitle,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=BIGINT},
+      message_status = #{messageStatus,jdbcType=BIGINT},
+      message = #{message,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=BIGINT},
+      update_at = #{updateAt,jdbcType=BIGINT},
+      create_by = #{createBy,jdbcType=BIGINT},
+      update_by = #{updateBy,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+<select id="selectByDynamicCondition" resultMap="BaseResultMap">
+SELECT leave_comments.id, leave_comments.works_title,leave_comments.user_name,
+leave_comments.message_status,leave_comments.message,leave_comments.answer,
+leave_comments.create_at,leave_comments.update_at,
+works.works_name
+FROM
+leave_comments
+INNER JOIN works ON leave_comments.create_by = works.id
+<where>
+    <if test="status!=null">
+        and leave_comments.status=#{status}
+    </if>
+    <if test="works_name !=null">
+        and works.works_name like CONCAT('%','${works_name}','%' )
+    </if>
+</where>
+</select>
+        </mapper>
